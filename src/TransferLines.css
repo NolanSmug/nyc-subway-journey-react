@@ -1,0 +1,15 @@
+/* TransferLines.css */
+.transfer-lines-container {
+    display: flex;
+    column-gap: 0.25em;
+}
+  
+.transfer-line-image {
+    height: 2rem;
+    width: 2rem;
+}
+
+.transfer-line-image:hover {
+    cursor: pointer;
+}
+  

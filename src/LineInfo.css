@@ -1,0 +1,12 @@
+.LineInfo-container {
+    display: flex;
+    align-items: center;
+}
+
+.LineInfo-container:hover {
+    cursor:default;
+}
+  
+.transfer-line-image {
+    height: 2rem;
+}

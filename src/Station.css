@@ -1,0 +1,45 @@
+.station-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color:rgb(27, 26, 26) ;
+    min-width: var(--station-min-width, 220px);
+    padding: 13px 1em 1em;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.station-container::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: white;
+  }
+
+
+.station-name {
+    color: white;
+    margin-bottom: 0.25em;
+    width: 100%;
+    margin-top: 0.25em;
+    font-size: 22px;
+}
+
+.station-name:hover {
+    cursor:default;
+}
+  
+.transfers-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.25em;
+}
+  
+  
+  
+
+  
