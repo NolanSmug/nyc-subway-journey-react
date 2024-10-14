@@ -9,7 +9,9 @@
     width: 2rem;
 }
 
-.transfer-line-image:hover {
+#current-station .transfer-line-image:hover {
     cursor: pointer;
+    transform: scale(1.06);
+    transition: transform 0.1s;
 }
-  
+

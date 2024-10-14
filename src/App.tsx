@@ -35,31 +35,35 @@ import IMG_Z from "./images/z.svg";
 import IMG_SIR from "./images/sir.svg";
 import Header from './Header';
 
-
 function App() {
   return (
     <div className="Game">
-        <div className="stationItem">
+      <div className="stations-container">
+        <div className="station-box" id="current-station">
           <Header text="Current Station" />
-          <Station
-            name={"14 St-Union Sq"}
-            transfers={[
-              <TransferLines transfers={[IMG_N, IMG_Q, IMG_R, IMG_W]} />,
-              <TransferLines transfers={[IMG_4, IMG_5, IMG_6, IMG_L]} />,
-            ]}
-          />
+          <div className="stationItem">
+            <Station
+              name={"14 St-Union Sq"}
+              transfers={[
+                <TransferLines transfers={[IMG_N, IMG_Q, IMG_R, IMG_W]} />,
+                <TransferLines transfers={[IMG_4, IMG_5, IMG_6, IMG_L]} />,
+              ]}
+            />
+          </div>
         </div>
-
-        <div className="stationItem">
-        <Header text="Destination Station" />
-          <Station
-            name={"Times Sq-42 St"}
-            transfers={[
-              <TransferLines transfers={[IMG_1, IMG_2, IMG_3, IMG_7]} />,
-              <TransferLines transfers={[IMG_N, IMG_Q, IMG_R, IMG_W]} />,
-              <TransferLines transfers={[IMG_S]} />,
-            ]}
-          />
+        <div className="station-box" id="destination-station">
+          <Header text="Destination Station" />
+          <div className="stationItem">
+            <Station
+              name={"Times Sq-42 St"}
+              transfers={[
+                <TransferLines transfers={[IMG_1, IMG_2, IMG_3, IMG_7]} />,
+                <TransferLines transfers={[IMG_N, IMG_Q, IMG_R, IMG_W]} />,
+                <TransferLines transfers={[IMG_S]} />,
+              ]}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
