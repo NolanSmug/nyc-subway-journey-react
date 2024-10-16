@@ -15,21 +15,12 @@
     width: 1.5rem;
     border-radius: 0.5em;
     padding: 0.5em;
+    background-color: var(--bg-color);
 }
 
 .button:hover {
     cursor: pointer;
-    background-color: lightgray;
-}
-
-.dark-mode .button {
-    background-color: #1e1e1e; 
-    padding: 0.5em;
-    color: white;           
-}
-
-.dark-mode .button:hover {
-    background-color: #555; 
+    background-color: var(--bg-color-3);
 }
 
 p {

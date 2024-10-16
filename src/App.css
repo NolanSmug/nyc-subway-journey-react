@@ -1,19 +1,18 @@
 :root {
   --bg-color: white;
+  --bg-color-2: white;
+  --bg-color-3: #ccc;
   --text-color: black;
-  --station-bg: white;
-  --station-border: #ccc;
-  --station-shadow: rgba(0, 0, 0, 0.1);
+  --box-shadow: rgba(0, 0, 0, 0.1);
 }
 
 .dark-mode {
   --bg-color: #1e1e1e;
+  --bg-color-2: #333;
+  --bg-color-3: #555;
   --text-color: white;
-  --station-bg: #333;
-  --station-border: #555;
-  --station-shadow: rgba(0, 0, 0, 0.3);
+  --box-shadow: rgba(0, 0, 0, 0.3);
 }
-
 
 html, body, #root {
   display: flex;
@@ -43,22 +42,21 @@ html, body {
 .stations-container {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 2em;
   width: 100%;
 }
 
 .station-box {
   flex: 1;
   width: 100%;
-  max-width: 300px; 
-  min-width: 300px; 
-  background-color: var(--station-bg);
-  border: 3px solid var(--station-border); 
-  border-radius: 15px; 
+  max-width: 26em; 
+  min-width: 20em; 
+  background-color: var(--bg-color-2);
+  border: 3px solid var(--bg-color-3); 
+  border-radius: 0.75em; 
   padding: 25px;
-  box-shadow: 0 6px 8px var(--station-shadow);
+  box-shadow: 0 0.5em 0.75em var(--box-shadow);
 }
-
 
 .station-item {
   display: flex;
@@ -66,26 +64,6 @@ html, body {
   align-items: center;
   margin: 15px 0; 
 }
-
-.dark-mode-toggle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.dark-mode {
-  background-color: #1e1e1e;
-  color: white;
-}
-
-.dark-mode .station-box {
-  background-color: #333;
-  border-color: #555;
-}
-
 
 .station-box h2 {
   font-size: 1.5em; 
@@ -99,4 +77,12 @@ html, body {
   width: 100%; 
 }
 
+.dark-mode-toggle-button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 

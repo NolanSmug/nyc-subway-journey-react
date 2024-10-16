@@ -93,7 +93,7 @@ function App() {
           </div>
         </div>
       </div>
-      <ActionButton className="dark-mode-toggle"  imageSrc={darkMode ? L_MODE : D_MODE} onClick={toggleDarkMode} />
+      <ActionButton className="dark-mode-toggle-button"  imageSrc={darkMode ? L_MODE : D_MODE} onClick={toggleDarkMode} />
         
     </div>
   );
