@@ -5,6 +5,15 @@ import Station from './Station';
 import Header from './Header';
 import ActionButton from './ActionButton';
 
+import R_ARROW_BLACK from "./images/right-arrow-b.svg"
+import R_ARROW_WHITE from "./images/right-arrow-w.svg"
+import L_MODE from "./images/light-mode-icon.svg"
+import D_MODE from "./images/dark-mode-icon.svg"
+import TRANSFER_WHITE from "./images/transfer-icon-w.svg"
+import TRANSFER_BLACK from "./images/transfer-icon-b.svg"
+import C_DIRECTION_WHITE from "./images/change-direction-icon-w.svg"
+import C_DIRECTION_BLACK from "./images/change-direction-icon-b.svg"
+
 import IMG_1 from "./images/1.svg";
 import IMG_2 from "./images/2.svg";
 import IMG_3 from "./images/3.svg";
@@ -35,17 +44,10 @@ import IMG_T from "./images/t.svg";
 import IMG_W from "./images/w.svg";
 import IMG_Z from "./images/z.svg";
 import IMG_SIR from "./images/sir.svg";
-import R_ARROW_BLACK from "./images/right-arrow-b.svg"
-import R_ARROW_WHITE from "./images/right-arrow-w.svg"
-import L_MODE from "./images/light-mode-icon.svg"
-import D_MODE from "./images/dark-mode-icon.svg"
-import TRANSFER_WHITE from "./images/transfer-icon-w.svg"
-import TRANSFER_BLACK from "./images/transfer-icon-b.svg"
 
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
-
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -58,7 +60,41 @@ function App() {
       document.body.classList.remove('dark-mode');
     }
   }, [darkMode]);
-  
+
+  const handleTransfer = () => {
+    console.log("Transfer button clicked");
+  };
+
+  const handleChangeDirection = () => {
+    console.log("Change Direction button clicked");
+  };
+
+  const handleAdvanceStation = () => {
+    console.log("Advance Station button clicked");
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      switch (event.key) {
+        case 't': // Key for Transfer
+          handleTransfer();
+          break;
+        case 'c': // Key for Change Direction
+          handleChangeDirection();
+          break;
+        case 'ArrowRight': // Key for Advance Station
+          handleAdvanceStation();
+          break;
+        default:
+          break;
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   return (
     <div className="Game">
       <div className="stations-container">
@@ -73,9 +109,10 @@ function App() {
               ]}
             />
           </div>
-          <div className='button-actions-container'>
-            <ActionButton imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK} label='Advance' />
-            <ActionButton imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK} label='Transfer' />
+          <div className='action-buttons-container'>
+            <ActionButton imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK} label='Transfer Lines' onClick={handleTransfer}/>
+            <ActionButton imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK} label='Change Direction' onClick={handleChangeDirection} />
+            <ActionButton imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK} label='Advance Station' onClick={handleAdvanceStation}/>
           </div>
         </div>
         

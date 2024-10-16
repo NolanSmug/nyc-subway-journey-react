@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    max-width: 5rem;
     background: none; 
     border: none;     
     outline: none;    
@@ -10,21 +12,25 @@
     color: inherit;   
 }
 
-.button {
-    height: 1.5rem;
-    width: 1.5rem;
+.icon {
+    height: 2rem;
+    width: 2rem;
     border-radius: 0.5em;
     padding: 0.5em;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-2);
+    border: 0.1em solid var(--bg-color-3);
 }
 
-.button:hover {
+.icon:hover {
     cursor: pointer;
     background-color: var(--bg-color-3);
 }
 
 p {
     margin-top: 0.25em;
-    font-size: x-small;
+    margin-bottom: 0.5em;
+    width: min-content;
+    font-size: small;
     font-weight:600;
+    word-wrap: break-word;
 }

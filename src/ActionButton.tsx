@@ -11,7 +11,7 @@ export interface ActionButtonProps {
 function ActionButton({ imageSrc, label, onClick, className }: ActionButtonProps) {
     return (
         <button className={`action-button-container ${className}`} onClick={onClick} type="button">
-            <img src={imageSrc} className="button" alt={label} />
+            <img src={imageSrc} className="icon" alt={label} />
             <p>{label}</p>
         </button>
     );

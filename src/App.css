@@ -11,7 +11,7 @@
   --bg-color-2: #333;
   --bg-color-3: #555;
   --text-color: white;
-  --box-shadow: rgba(0, 0, 0, 0.3);
+  --box-shadow: rgba(0, 0, 0, 0.5);
 }
 
 html, body, #root {
@@ -54,7 +54,7 @@ html, body {
   background-color: var(--bg-color-2);
   border: 3px solid var(--bg-color-3); 
   border-radius: 0.75em; 
-  padding: 25px;
+  padding: 1em 2em 0em 2em;
   box-shadow: 0 0.5em 0.75em var(--box-shadow);
 }
 
@@ -70,11 +70,10 @@ html, body {
   margin-bottom: 15px;
 }
 
-.button-actions-container {
+.action-buttons-container {
   margin-top: 2em;
   display: flex;
-  justify-content:flex-start; 
-  width: 100%; 
+  justify-content:space-around; 
 }
 
 .dark-mode-toggle-button {
