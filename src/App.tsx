@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import TransferLines from './TransferLines';
 import Station from './Station';
+import Header from './Header';
+import ActionButton from './ActionButton';
 
 import IMG_1 from "./images/1.svg";
 import IMG_2 from "./images/2.svg";
@@ -33,15 +35,36 @@ import IMG_T from "./images/t.svg";
 import IMG_W from "./images/w.svg";
 import IMG_Z from "./images/z.svg";
 import IMG_SIR from "./images/sir.svg";
-import Header from './Header';
+import R_ARROW_BLACK from "./images/right-arrow-b.svg"
+import R_ARROW_WHITE from "./images/right-arrow-w.svg"
+import L_MODE from "./images/light-mode-icon.svg"
+import D_MODE from "./images/dark-mode-icon.svg"
+import TRANSFER_WHITE from "./images/transfer-icon-w.svg"
+import TRANSFER_BLACK from "./images/transfer-icon-b.svg"
+
 
 function App() {
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+  
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
+  
   return (
     <div className="Game">
       <div className="stations-container">
         <div className="station-box" id="current-station">
           <Header text="Current Station" />
-          <div className="stationItem">
+          <div className="station-item">
             <Station
               name={"14 St-Union Sq"}
               transfers={[
@@ -50,10 +73,15 @@ function App() {
               ]}
             />
           </div>
+          <div className='button-actions-container'>
+            <ActionButton imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK} label='Advance' />
+            <ActionButton imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK} label='Transfer' />
+          </div>
         </div>
+        
         <div className="station-box" id="destination-station">
           <Header text="Destination Station" />
-          <div className="stationItem">
+          <div className="station-item">
             <Station
               name={"Times Sq-42 St"}
               transfers={[
@@ -65,6 +93,8 @@ function App() {
           </div>
         </div>
       </div>
+      <ActionButton className="dark-mode-toggle"  imageSrc={darkMode ? L_MODE : D_MODE} onClick={toggleDarkMode} />
+        
     </div>
   );
 }
