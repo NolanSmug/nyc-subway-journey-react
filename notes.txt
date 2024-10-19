@@ -1,0 +1,7 @@
+- Implement OOP backend (from C++)
+- CSV Files, each station needs a UNIQUE ID
+- 
+
+
+
+

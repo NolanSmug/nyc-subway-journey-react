@@ -1,0 +1,31 @@
+stop_id,stop_name,transfers,borough
+M23,Broad St,J Z,M
+M22,Fulton St,2 3 4 5 A C J Z,M
+M21,Chambers St,J Z,M
+M20,Canal St,6 N Q R W J Z,M
+M19,Bowery,J Z,M
+M18,Delancey St-Essex St,J Z F M,M
+M16,Marcy Av,J M Z,Bk
+M14,Hewes St,J M,Bk
+M13,Lorimer St,J M,Bk
+M12,Flushing Av,J M,Bk
+M11,Myrtle Av,J M Z,Bk
+J31,Kosciuszko St,J,Bk
+J30,Gates Av,J Z,Bk
+J29,Halsey St,J,Bk
+J28,Chauncey St,J Z,Bk
+J27,Broadway Junction,J Z,Bk
+J24,Alabama Av,J,Bk
+J23,Van Siclen Av,J Z,Bk
+J22,Cleveland St,J,Bk
+J21,Norwood Av,J Z,Bk
+J20,Crescent St,J Z,Bk
+J19,Cypress Hills,J,Bk
+J17,75 St-Elderts Ln,J Z,Q
+J16,85 St-Forest Pkwy,J,Q
+J15,Woodhaven Blvd,J Z,Q
+J14,104 St,J Z,Q
+J13,111 St,J,Q
+J12,121 St,J Z,Q
+G06,Sutphin Blvd-Archer Av-JFK Airport,E J Z,Q
+G05,Jamaica Center-Parsons/Archer,J Z,Q

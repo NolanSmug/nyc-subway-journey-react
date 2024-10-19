@@ -1,0 +1,46 @@
+stop_id,stop_name,transfers,borough
+D43,Coney Island-Stillwell Av,D F N Q,Bk
+D42,W 8 St-NY Aquarium,F Q,Bk
+F39,Neptune Av,F,Bk
+F38,Avenue X,F,Bk
+F36,Avenue U,F,Bk
+F35,Kings Hwy,F,Bk
+F34,Avenue P,F,Bk
+F33,Avenue N,F,Bk
+F32,Bay Pkwy,F,Bk
+F31,Avenue I,F,Bk
+F30,18 Av,F,Bk
+F29,Ditmas Av,F,Bk
+F27,Church Av,F G,Bk
+F26,Fort Hamilton Pkwy,F G,Bk
+F25,15 St-Prospect Park,F G,Bk
+F24,7 Av,F G,Bk
+F23,4 Av-9 St,R F G,Bk
+F22,Smith-9 Sts,F G,Bk
+F21,Carroll St,F G,Bk
+F20,Bergen St,F G,Bk
+A41,Jay St-MetroTech,A C F R W,Bk
+F18,York St,F,Bk
+F16,East Broadway,F,M
+F15,Delancey St-Essex St,J Z F M,M
+F14,2 Av,F,M
+D21,Bway-Lafayette St/Bleecker St,6 B D F M,M
+D20,W 4 St-Wash Sq,A C E B D F M,M
+D19,14 St (6th Av),1 2 3 F M L,M
+D18,23 St,F M,M
+D17,34 St-Herald Sq,B D F M N Q R W,M
+D16,42 St-Bryant Pk,B D F M 7,M
+D15,47-50 Sts-Rockefeller Ctr,B D F M,M
+B10,57 St,F,M
+B08,Lexington Av/63 St,F Q,M
+B06,Roosevelt Island,F,M
+B04,21 St-Queensbridge,F,Q
+G14,Jackson Hts-Roosevelt Av,7 E F M R,Q
+G08,Forest Hills-71 Av,E F M R,Q
+F07,75 Av,E F,Q
+F06,Kew Gardens-Union Tpke,E F,Q
+F05,Briarwood,E F,Q
+F04,Sutphin Blvd,F,Q
+F03,Parsons Blvd,F,Q
+F02,169 St,F,Q
+F01,Jamaica-179 St,F,Q

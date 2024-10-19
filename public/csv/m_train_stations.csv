@@ -1,0 +1,37 @@
+stop_id,stop_name,transfers,borough
+M01,Middle Village-Metropolitan Av,M,Q
+M04,Fresh Pond Rd,M,Q
+M05,Forest Av,M,Q
+M06,Seneca Av,M,Q
+M08,Myrtle-Wyckoff Avs,M,Bk
+M09,Knickerbocker Av,M,Bk
+M10,Central Av,M,Bk
+M11,Myrtle Av,J M Z,Bk
+M12,Flushing Av,J M,Bk
+M13,Lorimer St,J M,Bk
+M14,Hewes St,J M,Bk
+M16,Marcy Av,J M Z,Bk
+M18,Delancey St-Essex St,J Z F M,M
+D21,Bway-Lafayette St/Bleecker St,6 B D F M,M
+D20,W 4 St-Wash Sq,A C E B D F M,M
+D19,14 St (6th Av),1 2 3 F M L,M
+D18,23 St,F M,M
+D17,34 St-Herald Sq,B D F M N Q R W,M
+D16,42 St-Bryant Pk,B D F M 7,M
+D15,47-50 Sts-Rockefeller Ctr,B D F M,M
+F12,5 Av/53 St,E M,M
+F11,Lexington Av/53 St,E M 6,M
+F09,Court Sq-23 St,E M,Q
+G21,Queens Plaza,E M R,Q
+G20,36 St,M R,Q
+G19,Steinway St,M R,Q
+G18,46 St,M R,Q
+G16,Northern Blvd,M R,Q
+G15,65 St,M R,Q
+G14,Jackson Hts-Roosevelt Av,7 E F M R,Q
+G13,Elmhurst Av,M R,Q
+G12,Grand Av-Newtown,M R,Q
+G11,Woodhaven Blvd,M R,Q
+G10,63 Dr-Rego Park,M R,Q
+G09,67 Av,M R,Q
+G08,Forest Hills-71 Av,E F M R,Q

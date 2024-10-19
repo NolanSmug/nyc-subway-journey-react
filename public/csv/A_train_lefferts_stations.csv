@@ -1,0 +1,31 @@
+stop_id,stop_name,transfers,borough
+A65,Ozone Park-Lefferts Blvd,A,Q
+A64,111 St,A,Q
+A63,104 St,A,Q
+A61,Rockaway Blvd,A,Q
+A60,88 St,A,Q
+A59,80 St,A,Q
+A57,Grant Av,A,Bk
+A55,Euclid Av,A C,Bk
+A51,Broadway Junction,A C,Bk
+A48,Utica Av,A C,Bk
+A46,Nostrand Av,A C,Bk
+A42,Hoyt-Schermerhorn Sts,A C G,Bk
+A41,Jay St-MetroTech,A C F R W,Bk
+A40,High St,A C,Bk
+A38,Fulton St,2 3 4 5 A C J Z,M
+A36,Chambers St,A C,M
+A34,Canal St,A C E,M
+A32,W 4 St-Wash Sq,A C E B D F M,M
+A31,14 St (8th Av),A C E L,M
+A28,34 St-Penn Station,A C E 1 2 3,M
+A27,42 St-Port Authority Bus Terminal,A C E,M
+A24,59 St-Columbus Circle,A B C D 1,M
+A15,125 St,A B C D,M
+A12,145 St,A C B D,M
+A09,168 St,A C 1,M
+A07,175 St,A,M
+A06,181 St,A,M
+A05,190 St,A,M
+A03,Dyckman St,A,M
+A02,Inwood-207 St,A,M

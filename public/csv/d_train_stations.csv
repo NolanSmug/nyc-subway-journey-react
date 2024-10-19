@@ -1,0 +1,37 @@
+stop_id,stop_name,transfers,borough
+D43,Coney Island-Stillwell Av,D F N Q,Bk
+B23,Bay 50 St,D,Bk
+B22,25 Av,D,Bk
+B21,Bay Pkwy,D,Bk
+B20,20 Av,D,Bk
+B19,18 Av,D,Bk
+B18,79 St,D,Bk
+B17,71 St,D,Bk
+B16,62 St,D,Bk
+B15,55 St,D,Bk
+B14,50 St,D,Bk
+B13,Fort Hamilton Pkwy,D,Bk
+B12,9 Av,D,Bk
+R36,36 St,D N R,Bk
+R31,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+D22,Grand St,B D,M
+D21,Bway-Lafayette St/Bleecker St,6 B D F M,M
+D20,W 4 St-Wash Sq,A C E B D F M,M
+D17,34 St-Herald Sq,B D F M N Q R W,M
+D16,42 St-Bryant Pk,B D F M 7,M
+D15,47-50 Sts-Rockefeller Ctr,B D F M,M
+D14,7 Av,B D E,M
+A24,59 St-Columbus Circle,A B C D 1,M
+A15,125 St,A B C D,M
+D13,145 St,A C B D,M
+D12,155 St,B D,M
+D11,161 St-Yankee Stadium,B D,Bx
+D10,167 St,B D,Bx
+D09,170 St,B D,Bx
+D08,174-175 Sts,B D,Bx
+D07,Tremont Av,B D,Bx
+D06,182-183 Sts,B D,Bx
+D05,Fordham Rd,B D,Bx
+D04,Kingsbridge Rd,B D,Bx
+D03,Bedford Park Blvd,B D,Bx
+D01,Norwood-205 St,D,Bx

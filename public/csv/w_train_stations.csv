@@ -1,0 +1,23 @@
+stop_id,stop_name,transfers,borough
+W27,Whitehall St-South Ferry,R W,M
+W26,Rector St,R W,M
+W25,Cortlandt St,R W,M
+W24,City Hall,R W,M
+W23,Canal St,6 N Q R W J Z,M
+W22,Prince St,R W,M
+W21,8 St-NYU,R W,M
+W20,14 St-Union Sq,4 5 6 N Q R W L,M
+W19,23 St,R W,M
+W18,28 St,R W,M
+W17,34 St-Herald Sq,B D F M N Q R W,M
+W16,Times Sq-42 St,1 2 3 7 N Q R W S,M
+W15,49 St,N R W,M
+W14,57 St-7 Av,N Q R W,M
+W13,5 Av/59 St,N R W,M
+W12,Lexington Av/59 St,N R W 4 5 6,M
+QBP,Queensboro Plaza,7 N W,Q
+W05,36 Av,W,Q
+W04,Broadway,W,Q
+W03,30 Av,W,Q
+W02,Astoria Blvd,N W,Q
+W01,Astoria-Ditmars Blvd,N W,Q

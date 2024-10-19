@@ -1,0 +1,39 @@
+stop_id,stop_name,transfers,borough
+640,Brooklyn Bridge-City Hall,4 5 6 J Z,M
+639,Canal St,6 N Q R W J Z,M
+638,Spring St,6,M
+637,Bway-Lafayette St/Bleecker St,6 B D F M,M
+636,Astor Pl,6,M
+635,14 St-Union Sq,4 5 6 N Q R W L,M
+634,23 St,6,M
+633,28 St,6,M
+632,33 St,6,M
+631,Grand Central-42 St,4 5 6 7 S,M
+630,Lexington Av/53 St,E M 6,M
+629,Lexington Av/59 St,N R W 4 5 6,M
+628,68 St-Hunter College,6,M
+627,77 St,6,M
+626,86 St,4 5 6,M
+625,96 St,6,M
+624,103 St,6,M
+623,110 St,6,M
+622,116 St,6,M
+621,125 St,4 5 6,M
+619,3 Av-138 St,6,Bx
+618,Brook Av,6,Bx
+617,Cypress Av,6,Bx
+616,E 143 St-St Mary's St,6,Bx
+615,E 149 St,6,Bx
+614,Longwood Av,6,Bx
+613,Hunts Point Av,6,Bx
+612,Whitlock Av,6,Bx
+611,Elder Av,6,Bx
+610,Morrison Av-Soundview,6,Bx
+609,St Lawrence Av,6,Bx
+608,Parkchester,6,Bx
+607,Castle Hill Av,6,Bx
+606,Zerega Av,6,Bx
+604,Westchester Sq-E Tremont Av,6,Bx
+603,Middletown Rd,6,Bx
+602,Buhre Av,6,Bx
+601,Pelham Bay Park,6,Bx

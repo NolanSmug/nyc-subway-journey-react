@@ -1,0 +1,46 @@
+stop_id,stop_name,transfers,borough
+R45,Bay Ridge-95 St,R,Bk
+R44,86 St,R,Bk
+R43,77 St,R,Bk
+R42,Bay Ridge Av,R,Bk
+R41,59 St,N R,Bk
+R40,53 St,R N,Bk
+R39,45 St,R N,Bk
+R36,36 St,D N R,Bk
+R35,25 St,R,Bk
+R34,Prospect Av,R,Bk
+R33,4 Av-9 St,R F G,Bk
+R32,Union St,R,Bk
+R31,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+R30,DeKalb Av,B Q R W,Bk
+R29,Jay St-MetroTech,A C F R W,Bk
+R28,Court St,R,Bk
+R27,Whitehall St-South Ferry,R W,M
+R26,Rector St,R W,M
+R25,Cortlandt St,R W,M
+R24,City Hall,R W,M
+R23,Canal St,6 N Q R W J Z,M
+R22,Prince St,R W,M
+R21,8 St-NYU,R W,M
+R20,14 St-Union Sq,4 5 6 N Q R W L,M
+R19,23 St,R W,M
+R18,28 St,R W,M
+R17,34 St-Herald Sq,B D F M N Q R W,M
+R16,Times Sq-42 St,1 2 3 7 N Q R W S,M
+R15,49 St,N R W,M
+R14,57 St-7 Av,N Q R W,M
+R13,5 Av/59 St,N R W,M
+R11,Lexington Av/59 St,N R W 4 5 6,M
+G21,Queens Plaza,E M R,Q
+G20,36 St,M R,Q
+G19,Steinway St,M R,Q
+G18,46 St,M R,Q
+G16,Northern Blvd,M R,Q
+G15,65 St,M R,Q
+G14,Jackson Hts-Roosevelt Av,7 E F M R,Q
+G13,Elmhurst Av,M R,Q
+G12,Grand Av-Newtown,M R,Q
+G11,Woodhaven Blvd,M R,Q
+G10,63 Dr-Rego Park,M R,Q
+G09,67 Av,M R,Q
+G08,Forest Hills-71 Av,E F M R,Q

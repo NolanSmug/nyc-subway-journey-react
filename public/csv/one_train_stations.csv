@@ -1,0 +1,39 @@
+stop_id,stop_name,transfers,borough
+142,South Ferry,1,M
+139,Rector St,1,M
+138,WTC Cortlandt,1,M
+137,Chambers St,1 2 3,M
+136,Franklin St,1,M
+135,Canal St,1,M
+134,Houston St,1,M
+133,Christopher St-Sheridan Sq,1,M
+132,14 St (6th Av),1 2 3 F M L,M
+131,18 St,1,M
+130,23 St,1,M
+129,28 St,1,M
+128,34 St-Penn Station,A C E 1 2 3,M
+127,Times Sq-42 St,1 2 3 7 N Q R W S,M
+126,50 St,1,M
+125,59 St-Columbus Circle,A B C D 1,M
+124,66 St-Lincoln Center,1,M
+123,72 St,1 2 3,M
+122,79 St,1,M
+121,86 St,1,M
+120,96 St,1 2 3,M
+119,103 St,1,M
+118,Cathedral Pkwy (110 St),1,M
+117,116 St-Columbia University,1,M
+116,125 St,1,M
+115,137 St-City College,1,M
+114,145 St,1,M
+113,157 St,1,M
+112,168 St,A C 1,M
+111,181 St,1,M
+110,191 St,1,M
+109,Dyckman St,1,M
+108,207 St,1,M
+107,215 St,1,M
+106,Marble Hill-225 St,1,M
+104,231 St,1,Bx
+103,238 St,1,Bx
+101,Van Cortlandt Park-242 St,1,Bx

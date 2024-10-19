@@ -8,6 +8,7 @@
     position: relative;
     box-sizing: border-box;
     border-radius: 2px;
+    box-shadow: 0 0.5em 0.75em var(--box-shadow);
 }
 
 .station-container::before {

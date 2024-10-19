@@ -1,0 +1,29 @@
+stop_id,stop_name,transfers,borough
+250,Crown Hts-Utica Av,3 4,Bk
+239,Franklin Avenue/Botanic Garden,2 3 4 5 Sf,Bk
+235,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+234,Nevins St,2 3 4 5,Bk
+423,Borough Hall,4 5,Bk
+420,Bowling Green,4 5,M
+419,Wall St,4 5,M
+418,Fulton St,2 3 4 5 A C J Z,M
+640,Brooklyn Bridge-City Hall,4 5 6 J Z,M
+635,14 St-Union Sq,4 5 6 N Q R W L,M
+631,Grand Central-42 St,4 5 6 7 S,M
+629,Lextington Av/59 St,N R W 4 5 6,M
+626,86 St,4 5 6,M
+621,125 St,4 5 6,M
+416,138 St-Grand Concourse,4 5,Bx
+415,149 St-Grand Concourse,4,Bx
+414,161 St-Yankee Stadium,4,Bx
+413,167 St,4,Bx
+412,170 St,4,Bx
+411,Mt Eden Av,4,Bx
+410,176 St,4,Bx
+409,Burnside Av,4,Bx
+408,183 St,4,Bx
+407,Fordham Rd,4,Bx
+406,Kingsbridge Rd,4,Bx
+405,Bedford Park Blvd-Lehman College,4,Bx
+402,Mosholu Pkwy,4,Bx
+401,Woodlawn,4,Bx

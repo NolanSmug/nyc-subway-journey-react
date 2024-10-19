@@ -1,0 +1,22 @@
+stop_id,stop_name,transfers,borough
+F27,Church Av,F G,Bk
+F26,Fort Hamilton Pkwy,F G,Bk
+F25,15 St-Prospect Park,F G,Bk
+F24,7 Av,F G,Bk
+F23,4 Av-9 St,R F G,Bk
+F22,Smith-9 Sts,F G,Bk
+F21,Carroll St,F G,Bk
+F20,Bergen St,F G,Bk
+A42,Hoyt-Schermerhorn Sts,A C G,Bk
+G36,Fulton St,G,Bk
+G35,Clinton-Washington Avs,G,Bk
+G34,Classon Av,G,Bk
+G33,Bedford-Nostrand Avs,G,Bk
+G32,Myrtle-Willoughby Avs,G,Bk
+G31,Flushing Av,G,Bk
+G30,Broadway,G,Bk
+G29,Metropolitan Av,G,Bk
+G28,Nassau Av,G,Bk
+G26,Greenpoint Av,G,Bk
+G24,21 St,G,Q
+G22,Court Sq,7 E F G,Q

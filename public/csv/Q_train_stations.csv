@@ -1,0 +1,30 @@
+stop_id,stop_name,transfers,borough
+D43,Coney Island-Stillwell Av,D F N Q,Bk
+D42,W 8 St-NY Aquarium,F Q,Bk
+D41,Ocean Pkwy,Q,Bk
+D40,Brighton Beach,B Q,Bk
+D39,Sheepshead Bay,B Q,Bk
+D38,Neck Rd,Q,Bk
+D37,Avenue U,Q,Bk
+D35,Kings Hwy,B Q,Bk
+D34,Avenue M,Q,Bk
+D33,Avenue J,Q,Bk
+D32,Avenue H,Q,Bk
+D31,Newkirk Plaza,B Q,Bk
+D30,Cortelyou Rd,Q,Bk
+D29,Beverley Rd,Q,Bk
+D28,Church Av,B Q,Bk
+D27,Parkside Av,Q,Bk
+D26,Prospect Park,B Q Sf,Bk
+D25,7 Av,B Q,Bk
+D24,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+R30,DeKalb Av,B Q R W,Bk
+Q01,Canal St,6 N Q R W J Z,M
+R20,14 St-Union Sq,4 5 6 N Q R W L,M
+R17,34 St-Herald Sq,B D F M N Q R W,M
+R16,Times Sq-42 St,1 2 3 7 N Q R W S,M
+R14,57 St-7 Av,N Q R W,M
+B08,Lexington Av/63 St,F Q,M
+Q03,72 St,Q,M
+Q04,86 St,Q,M
+Q05,96 St,Q,M

@@ -1,0 +1,23 @@
+stop_id,stop_name,transfers,borough
+E01,World Trade Center,E,M
+A34,Canal St,A C E,M
+A33,Spring St,C E,M
+A32,W 4 St-Wash Sq,A C E B D F M,M
+A31,14 St (8th Av),A C E L,M
+A30,23 St,C E,M
+A28,34 St-Penn Station,A C E 1 2 3,M
+A27,42 St-Port Authority Bus Terminal,A C E,M
+A25,50 St,C E,M
+D14,7 Av,B D E,M
+F12,5 Av/53 St,E M,M
+F11,Lexington Av/53 St,E M 6,M
+F09,Court Sq-23 St,E M,Q
+G21,Queens Plaza,E M R,Q
+G14,Jackson Hts-Roosevelt Av,7 E F M R,Q
+G08,Forest Hills-71 Av,E F M R,Q
+F07,75 Av,E F,Q
+F06,Kew Gardens-Union Tpke,E F,Q
+F05,Briarwood,E F,Q
+G07,Jamaica-Van Wyck,E,Q
+G06,Sutphin Blvd-Archer Av-JFK Airport,E J Z,Q
+G05,Jamaica Center-Parsons/Archer,E,Q
