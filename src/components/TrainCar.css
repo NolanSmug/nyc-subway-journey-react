@@ -1,0 +1,98 @@
+/* Train.css */
+.train-container {
+    margin-bottom: 1em;
+}
+
+.train-car {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: var(--train-car-bg);
+    min-width: var(--station-min-width, 220px);
+    padding: 1em 1em 0em 1em;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 1em 1em 0.2em 0.2em;
+    box-shadow: 0 0.5em 0.75em var(--box-shadow);
+    gap: 0.3em;
+}
+
+.train-car::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 1px;
+    right: 1px;
+    height: 1px;
+    background-color: var(--train-car-border);
+}
+
+.windows {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3em;
+    padding-bottom: 1.2em;
+}
+
+.station-name {
+    color: white;
+    margin-bottom: 0.25em;
+    width: 100%;
+    margin-top: 0.25em;
+    font-size: 22px;
+}
+
+.station-name:hover {
+    cursor: default;
+}
+
+.station-alt-name {
+    color: white;
+    margin-bottom: 0.25em;
+    white-space: nowrap;
+    margin-top: 0.25em;
+    font-size: 22px;
+    word-wrap: normal !important;
+    margin-left: 0.15em;
+}
+
+.station-alt-name::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 3px;
+    height: 1px;
+    background-color: var(--train-car-border);
+}
+
+.transfers-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.25em;
+}
+
+/* Windows styling */
+.train-car .station-name,
+.train-car .station-alt-name,
+.train-car .transfer-lines-container img.transfer-line-image {
+    border: 1px solid var(--train-car-border);
+    padding: 0.3em;
+    border-radius: 0.1em;
+}
+
+.train-car .transfer-lines-container img.transfer-line-image {
+    padding: 0.25em;
+    border-radius: 0.1em;
+}
+
+.front-window {
+    border: 1px solid var(--train-car-border);
+    padding: 0.3em;
+    border-radius: 0.1em;
+}
+
+.front-window:before {
+    content: '\00a0\00a0\00a0\00a0\00a0\00a0';
+}

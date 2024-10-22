@@ -10,17 +10,22 @@ export enum Borough {
 }
 
 export class Station {
-    private id: string
-    private name: string
-    private transfers: LineName[]
-    private borough: Borough
+    private id: string = "000"
+    private name: string = "NULL_STATION"
+    private transfers: LineName[] = [LineName.NULL_TRAIN]
+    private borough: Borough = Borough.STATEN_ISLAND
 
     static allNycStations: Station[] = []
-    static initializeAllStations(): void {
+    static async initializeAllStations(): Promise<void> {
         if (this.allNycStations.length === 0) {
-            SubwayMap.createStations(LineName.NULL_TRAIN, this.allNycStations)
+            await SubwayMap.createStations(LineName.NULL_TRAIN, this.allNycStations)
+            console.log('All NYC stations initialized:', this.allNycStations)
+        } else {
+            console.log('All NYC stations already initialized.')
         }
     }
+
+    static NULL_STATION: Station = new Station("000", "NULL_STATION", [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
 
     constructor(id: string, name: string, transfers: LineName[], borough: Borough) {
         this.id = id
@@ -100,7 +105,7 @@ export class Station {
         return new Station('000', 'NULL_STATION', [LineName.NULL_TRAIN], Borough.MANHATTAN)
     }
 
-    public getRandomStation(stations: Station[]): Station {
+    static getRandomStation(stations: Station[]): Station {
         if (stations.length === 0) {
             throw new Error('Station vector is empty')
         }

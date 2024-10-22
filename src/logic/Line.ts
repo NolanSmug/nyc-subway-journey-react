@@ -37,4 +37,37 @@ export enum LineType {
 
 const TOTAL_NUM_LINES: number = 25
 
-export class Line {}
+export class Line {
+    static getRandomLine(): LineName {
+        const desiredLines: LineName[] = [
+            LineName.ONE_TRAIN,
+            LineName.TWO_TRAIN,
+            LineName.THREE_TRAIN,
+            LineName.FOUR_TRAIN,
+            LineName.FIVE_TRAIN,
+            LineName.SIX_TRAIN,
+            LineName.SEVEN_TRAIN,
+            LineName.A_TRAIN,
+            LineName.C_TRAIN,
+            LineName.E_TRAIN,
+            LineName.B_TRAIN,
+            LineName.D_TRAIN,
+            LineName.F_TRAIN,
+            LineName.M_TRAIN,
+            LineName.N_TRAIN,
+            LineName.Q_TRAIN,
+            LineName.R_TRAIN,
+            LineName.W_TRAIN,
+            LineName.J_TRAIN,
+            LineName.Z_TRAIN,
+            LineName.G_TRAIN,
+            LineName.L_TRAIN,
+            LineName.S_TRAIN,
+            LineName.S_TRAIN_SHUTTLE,
+            LineName.S_TRAIN_ROCKAWAY,
+        ]
+
+        const randomIndex = Math.floor(Math.random() * desiredLines.length)
+        return desiredLines[randomIndex]
+    }
+}

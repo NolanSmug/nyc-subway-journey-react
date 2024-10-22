@@ -2,7 +2,7 @@ import { LineName, LineType } from './Line'
 import { Station } from './StationManager'
 import { SubwayMap, updateStopsForLine } from './SubwayMap'
 
-enum Direction {
+export enum Direction {
     UPTOWN = 'Uptown',
     DOWNTOWN = 'Downtown',
     NULL_DIRECTION = '',
@@ -80,12 +80,12 @@ export class Train {
     private isAtEndOfLine: boolean = false
 
     constructor(
-        currentLine: LineName,
-        lineType: LineType,
-        direction: Direction,
-        uptownLabel: string,
-        downtownLabel: string,
-        scheduledStops: Station[]
+        currentLine: LineName = LineName.NULL_TRAIN,
+        lineType: LineType = LineType.NONE,
+        direction: Direction = Direction.NULL_DIRECTION,
+        uptownLabel: string = 'Uptown',
+        downtownLabel: string = 'Downtown',
+        scheduledStops: Station[] = [],
     ) {
         this.currentLine = currentLine
         this.lineType = lineType
@@ -100,7 +100,7 @@ export class Train {
         return this.currentLine
     }
 
-    public setLineName(newLineName: LineName) {
+    public setLine(newLineName: LineName) {
         this.currentLine = newLineName
     }
 
@@ -133,6 +133,14 @@ export class Train {
 
     public setDowntownLabel(newLabel: string) {
         this.downtownLabel = newLabel
+    }
+
+    public getUptownLabel(): string {
+        return this.uptownLabel
+    }
+
+    public getDowntownLabel(): string {
+        return this.downtownLabel
     }
 
     public getDirectionLabel(direction: Direction, line: LineName): string {
@@ -182,11 +190,9 @@ export class Train {
     }
 
     public setCurrentStation(station: Station) {
-        const reversedScheduledStops = [...this.scheduledStops].reverse()
-
-        for (let i = 0; i < reversedScheduledStops.length; i++) {
-            if (reversedScheduledStops[i].getId() == station.getId()) {
-                this.currentStationIndex = this.scheduledStops.length - i - 1
+        for (let i = 0; i < this.scheduledStops.length; i++) {
+            if (this.scheduledStops[i].getId() == station.getId()) {
+                this.currentStationIndex = i
                 break
             }
         }

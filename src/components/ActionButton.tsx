@@ -1,11 +1,11 @@
-import React from 'react';
-import './ActionButton.css';
+import React from 'react'
+import './ActionButton.css'
 
 export interface ActionButtonProps {
-    imageSrc: string;
-    label?: string;
-    onClick?: () => void;
-    className?: string;  // Add className prop
+    imageSrc: string
+    label?: string
+    onClick?: () => void
+    className?: string
 }
 
 function ActionButton({ imageSrc, label, onClick, className }: ActionButtonProps) {
@@ -14,7 +14,7 @@ function ActionButton({ imageSrc, label, onClick, className }: ActionButtonProps
             <img src={imageSrc} className="icon" alt={label} />
             <p>{label}</p>
         </button>
-    );
+    )
 }
 
-export default ActionButton;
+export default ActionButton

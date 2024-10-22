@@ -3,7 +3,7 @@
     display: flex;
     column-gap: 0.25em;
 }
-  
+
 .transfer-line-image {
     height: 2rem;
     width: 2rem;
@@ -14,4 +14,3 @@
     transform: scale(1.06);
     transition: transform 0.1s;
 }
-

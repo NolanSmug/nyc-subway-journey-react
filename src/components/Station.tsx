@@ -1,22 +1,25 @@
-import React, { ReactNode } from 'react';
-import "./Station.css";
+// Station.tsx
+import { ReactNode } from 'react'
+import './Station.css'
 
 export interface StationProps {
-  name: string;
-  transfers: JSX.Element[];
-  header?: ReactNode;
+    name: string
+    transfers?: JSX.Element[]
+    header?: ReactNode
+    children?: ReactNode
 }
 
-function Station({ name, transfers, header }: StationProps) {
-	return (
-		<>
-			{header}
-			<div className="station-container" data-name={name}>
-				<h2 className="station-name">{name}</h2>
-				<div className="transfers-container">{transfers}</div>
-			</div>
-		</>
-	);
-};
+function Station({ name, transfers, header, children }: StationProps) {
+    return (
+        <>
+            {header}
+            <div className="station-container">
+                <h2 className="station-name">{name}</h2>
+                <div className="transfers-container">{transfers}</div>
+                {children}
+            </div>
+        </>
+    )
+}
 
-export default Station;
+export default Station

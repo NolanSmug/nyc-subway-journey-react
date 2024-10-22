@@ -1,12 +1,12 @@
 export interface UpcomingStationsProps {
-    stations: string;
-    lineColor: string;
+    stations: string
+    lineColor: string
 }
 
-function UpcomingStations({stations, lineColor}:UpcomingStationsProps) {
+function UpcomingStations({ stations, lineColor }: UpcomingStationsProps) {
     return (
         <>
-        <h1 id={lineColor}>{stations}</h1>
+            <h1 id={lineColor}>{stations}</h1>
         </>
     )
-};
+}

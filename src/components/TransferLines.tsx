@@ -1,4 +1,4 @@
-// TransferLines.js
+// TransferLines.tsx
 import './TransferLines.css'
 
 interface TransferLinesProps {
