@@ -9,7 +9,6 @@ import { Station as StationClass } from './logic/StationManager'
 import { Game } from './logic/Game'
 import { getTransferImages } from './logic/TransferImageMap'
 import { LineName } from './logic/Line'
-import { Train } from './logic/TrainManager.ts'
 
 import R_ARROW_BLACK from './images/right-arrow-b.svg'
 import R_ARROW_WHITE from './images/right-arrow-w.svg'
@@ -31,7 +30,6 @@ function App() {
         const initializeGame = async () => {
             await StationClass.initializeAllStations()
             let newGame = new Game()
-            let train = new Train()
             await newGame.runGame()
             setGame(newGame)
             setCurrentStation(newGame.train.getCurrentStation() as StationClass)
@@ -66,7 +64,7 @@ function App() {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress)
         return () => window.removeEventListener('keydown', handleKeyPress)
-    }, [])
+    })
 
     const getTransferImageUrls = (input: StationClass | LineName | null | undefined): string[] => {
         if (!input) return []

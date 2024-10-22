@@ -13,7 +13,7 @@
     position: relative;
     box-sizing: border-box;
     border-radius: 1em 1em 0.2em 0.2em;
-    box-shadow: 0 0.5em 0.75em var(--box-shadow);
+    box-shadow: 0 0.5em 1em var(--box-shadow);
     gap: 0.3em;
 }
 

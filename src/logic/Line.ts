@@ -35,8 +35,6 @@ export enum LineType {
     LOCAL = 'Local',
 }
 
-const TOTAL_NUM_LINES: number = 25
-
 export class Line {
     static getRandomLine(): LineName {
         const desiredLines: LineName[] = [

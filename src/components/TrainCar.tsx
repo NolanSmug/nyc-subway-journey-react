@@ -31,7 +31,7 @@ function TrainCar({ name, transfers, header, children, altName }: TrainCarProps)
                     <Door />
                 </div>
                 <div className="windows">
-                    <h2 className="front-window"></h2>
+                    <div className="front-window"></div>
                 </div>
             </div>
         </div>
