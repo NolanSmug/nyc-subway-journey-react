@@ -1,6 +1,6 @@
 import { LineName, LineType } from './Line'
 import { Station } from './StationManager'
-import { SubwayMap, updateStopsForLine } from './SubwayMap'
+import { updateStopsForLine } from './SubwayMap'
 
 export enum Direction {
     UPTOWN = 'Uptown',
@@ -35,10 +35,11 @@ const lineDirections: Map<LineName, [string, string]> = new Map([
     [LineName.Z_TRAIN, ['Manhattan-bound', 'Queens-bound']],
     [LineName.S_TRAIN, ['Times Sq-bound', 'Grand Central-bound']],
     [LineName.S_TRAIN_SHUTTLE, ['Franklin Av-bound', 'Prospect Park-bound']],
-    [LineName.S_TRAIN_ROCKAWAY, ['Broad Channel-bound', 'Rockaway Park-Beach 116 St-bound']],
+    [LineName.S_TRAIN_ROCKAWAY, ['Broad Channel-bound', 'Rockaway Park-Beach-bound']],
 ])
 
 const lineTypes: Map<LineName, LineType> = new Map([
+    [LineName.NULL_TRAIN, LineType.NONE],
     [LineName.ONE_TRAIN, LineType.LOCAL],
     [LineName.TWO_TRAIN, LineType.EXPRESS],
     [LineName.THREE_TRAIN, LineType.EXPRESS],
@@ -123,7 +124,13 @@ export class Train {
     }
 
     public reverseDirection() {
-        this.direction = this.direction == Direction.DOWNTOWN ? Direction.UPTOWN : Direction.DOWNTOWN
+        this.setDirection(this.direction == Direction.DOWNTOWN ? Direction.UPTOWN : Direction.DOWNTOWN)
+    }
+
+    public getRandomDirection(): Direction {
+        const directions = [Direction.UPTOWN, Direction.DOWNTOWN];
+        const randomIndex = Math.floor(Math.random() * directions.length);
+        return directions[randomIndex];
     }
 
     // Labels
@@ -151,9 +158,10 @@ export class Train {
         return ''
     }
 
+
     // Scheduled Stops
-    public updateScheduledStops(line: LineName) {
-        updateStopsForLine(line, this.scheduledStops)
+    public async updateScheduledStops(line: LineName) {
+        await updateStopsForLine(line, this.scheduledStops);
     }
 
     public getScheduledStops(): Station[] {
@@ -198,9 +206,9 @@ export class Train {
         }
     }
 
-    public setCurrentStationByName(stationName: string) {
-        for (let i = 0; i < this.scheduledStops.length; i++) {
-            if (this.scheduledStops[i].getName() === stationName) {
+    public setCurrentStationByName(stationName: string, newScheduledStops: Station[]) {
+        for (let i = 0; i < newScheduledStops.length; i++) {
+            if (newScheduledStops[i].getName() == stationName) {
                 this.currentStationIndex = i
                 break
             }
@@ -220,10 +228,10 @@ export class Train {
         return false
     }
 
-    public transferToLine(newLine: LineName, currentStation: Station): boolean {
+    public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
-            this.updateScheduledStops(newLine)
-            this.setCurrentStationByName(currentStation.getName())
+            await this.updateScheduledStops(newLine);
+            this.setCurrentStationByName(currentStation.getName(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.getDirectionLabel(Direction.UPTOWN, newLine)
             this.downtownLabel = this.getDirectionLabel(Direction.DOWNTOWN, newLine)
@@ -234,7 +242,7 @@ export class Train {
     }
 
     // Action Logic
-    public updateTrainState() {
+    public async updateTrainState() {
         const lastStationIndex: number = this.scheduledStops.length - 1
 
         this.isAtRockawayBranch =

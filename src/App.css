@@ -3,10 +3,13 @@
     --bg-color-2: white;
     --bg-color-3: #ccc;
     --text-color: black;
-    --box-shadow: rgba(0, 0, 0, 0.1);
+    --train-text-color: rgba(255, 255, 255, 0.866);
+    --box-shadow: rgba(0, 0, 0, 0.189);
     --station-bg: rgb(27, 26, 26);
-    --train-car-bg: rgb(84, 83, 83);
+    --train-car-bg: rgb(143, 143, 143);
     --train-car-border: rgb(6, 6, 6);
+    --overlay-opacity: 1;
+    --transfer-opacity: 1;
 }
 
 .dark-mode {
@@ -14,7 +17,15 @@
     --bg-color-2: #333;
     --bg-color-3: #555;
     --text-color: white;
+    --train-text-color: white;
     --box-shadow: rgba(0, 0, 0, 0.5);
+    --train-car-bg: rgb(84, 83, 83);
+    --train-car-border: rgb(6, 6, 6);
+}
+
+.transfer-mode {
+    --overlay-opacity: 0.3;
+    --transfer-opacity: 1;
 }
 
 html,
@@ -49,6 +60,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 2em;
+    padding-top: 1em;
     width: 100%;
 }
 
@@ -63,6 +75,28 @@ body {
     padding: 1em 2em 0em 2em;
     box-shadow: 0 0.5em 0.75em var(--box-shadow);
 }
+
+.station-box.win-state {
+    box-shadow: 0 0.5em 1em rgba(90, 232, 149, 0.3), 
+                0 0 10em rgba(90, 232, 149, 0.2) !important;
+    border-color: rgba(90, 232, 149, 0.5) !important;
+    transition: box-shadow 0.5s ease, border-color 0.5s ease-in-out;
+}
+
+/* For dark mode */
+.dark-mode .station-box.win-state {
+    box-shadow: 0 0.5em 1em rgba(90, 232, 149, 0.2),
+                0 0 10em rgba(90, 232, 149, 0.15) !important;
+    border-color: rgba(90, 232, 149, 0.4) !important;
+    transition: box-shadow 0.5s ease, border-color 0.5s ease-in-out;
+}
+
+.train-car.win-state {
+    box-shadow: 0 0.5em 1em rgba(90, 232, 149, 0.3), 
+                0 0 5em rgba(90, 232, 149, 0.2);
+    border-radius: 1em 1em 0.2em 0.2em; /* Ensure this matches train-car */
+}
+
 
 .station-item {
     display: flex;
@@ -82,6 +116,12 @@ body {
     justify-content: space-around;
 }
 
+#destination-station {
+    margin-top: 2em;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .dark-mode-toggle-button {
     position: absolute;
     top: 1em;
@@ -89,4 +129,23 @@ body {
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+.dimmed-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.dimmed-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.not-dim {
+    z-index: 2;
 }

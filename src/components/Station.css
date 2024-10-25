@@ -12,6 +12,7 @@
     box-shadow: 0 0.5em 0.75em var(--box-shadow);
 }
 
+
 .station-container::before {
     content: '';
     position: absolute;
@@ -35,3 +36,4 @@
     flex-direction: column;
     row-gap: 0.25em;
 }
+

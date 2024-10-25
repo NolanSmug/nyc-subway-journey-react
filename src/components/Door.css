@@ -4,7 +4,7 @@
     border-left: 1px solid var(--train-car-border);
     border-right: 1px solid var(--train-car-border);
     padding: 0.3em;
-    border-radius: 0.05em;
+    border-radius: 0.1em;
     width: 2.25em;
     align-self: stretch;
     background-color: var(--train-car-bg);

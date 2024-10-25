@@ -9,7 +9,7 @@ interface HeaderProps {
 
 function Header({ text, img, beforeImgText, afterImgText }: HeaderProps) {
     return (
-        <div className="Header">
+        <div className="Header not-dim">
             <div className="headerText">
                 <h1>{text}</h1>
             </div>

@@ -21,10 +21,10 @@ function TrainCar({ name, transfers, header, children, altName }: TrainCarProps)
                     <Door />
                 </div>
                 <div className="windows">
-                    <h2 className="station-name">{name}</h2>
-                    <div className="transfers-container">{transfers}</div>
+                    <h2 className="train-direction not-dim">{name}</h2>
+                    <div className="transfers-container not-dim">{transfers}</div>
                     {children}
-                    <h2 className="station-alt-name">{altName}</h2>
+                    <h2 className="train-type not-dim">{altName}</h2>
                 </div>
                 <div className="doors">
                     <Door isLeft />

@@ -76,7 +76,7 @@ export class Station {
     }
 
     // Transfers
-    public getTransfers(): string[] {
+    public getTransfers(): LineName[] {
         return this.transfers
     }
 

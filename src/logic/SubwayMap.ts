@@ -130,6 +130,6 @@ function mapTransferString(transfer: string): LineName {
     }
 }
 
-export async function updateStopsForLine(line: LineName, subwayStations: Station[]) {
-    SubwayMap.createStations(line, subwayStations)
+export async function updateStopsForLine(line: LineName, subwayStations: Station[]): Promise<void> {
+    await SubwayMap.createStations(line, subwayStations);
 }
