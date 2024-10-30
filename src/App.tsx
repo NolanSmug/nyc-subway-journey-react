@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import './App.css'
+import React, { ReactElement, useEffect, useState } from 'react'
+import { Direction, Train } from './logic/TrainManager'
 import TransferLines from './components/TransferLines'
 import Station from './components/Station'
+import UpcomingStations from './components/UpcomingStations'
 import Header from './components/Header'
 import ActionButton from './components/ActionButton'
 import TrainCar from './components/TrainCar'
@@ -28,7 +30,7 @@ function App() {
     const [currentDirectionLabel, setCurrentDirectionLabel] = useState<string | null>(null)
     const [currentLine, setCurrentLine] = useState<LineName | null>(null)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
-    const [isGameWon, setIsGameWon] = useState(false)
+    const [isGameWon, setIsGameWon] = useState<boolean>(false)
     const [game, setGame] = useState<Game | null>(null)
 
     // dark mode
@@ -43,6 +45,7 @@ function App() {
         await newGame.runGame()
 
         setIsGameWon(false)
+        setIsTransferMode(false)
         setGame(newGame)
         setCurrentLine(newGame.train.getLineName())
         setCurrentDirectionLabel(newGame.train.getDirectionLabel(newGame.train.getDirection(), newGame.train.getLineName()))
@@ -54,8 +57,8 @@ function App() {
         const actions: { [key: string]: () => void } = {
             t: () => handleTrainAction('transfer'),
             c: () => handleTrainAction('changeDirection'),
-            ArrowRight: () => handleTrainAction('advanceStation'),
             d: () => setDarkMode((prev) => !prev),
+            ArrowRight: () => handleTrainAction('advanceStation'),
             Escape: () => setIsTransferMode(false),
         }
         actions[event.key]?.()
@@ -73,16 +76,9 @@ function App() {
 
         switch (action) {
             case 'refresh':
-                setIsTransferMode(false)
-                await game?.gameState.resetGameState()
-                await game?.runGame()
-                setCurrentStation(game?.train.getCurrentStation() as StationClass)
-                setDestinationStation(game?.gameState.destinationStation as StationClass)
-                setCurrentLine(game?.gameState.startingLine as LineName)
-                setCurrentDirectionLabel(
-                    game?.train.getDirectionLabel(game?.train.getDirection(), game?.train.getLineName()) || null
-                )
+                initializeGame()
                 break
+
             case 'advanceStation':
                 setIsTransferMode(false)
                 await game?.advanceStation()
@@ -100,6 +96,7 @@ function App() {
             case 'transfer':
                 setIsTransferMode(true)
                 break
+
             case 'changeDirection':
                 setIsTransferMode(false)
                 await game?.changeDirection()
@@ -147,6 +144,16 @@ function App() {
         setIsTransferMode(false)
     }
 
+    const renderUpcomingStations = async (): Promise<ReactElement> => {
+        return (
+            <UpcomingStations
+                stations={game?.train.getScheduledStops() as StationClass[]}
+                currentStation={currentStation as StationClass}
+                line={currentLine as LineName}
+            ></UpcomingStations>
+        )
+    }
+
     // starting the train and game
     useEffect(() => {
         initializeGame()
@@ -157,12 +164,32 @@ function App() {
         return () => window.removeEventListener('keydown', handleKeyPress)
     })
 
+    useEffect(() => {
+        if (currentStation) {
+            const currentElement = document.querySelector('.current-station')
+            if (currentElement) {
+                currentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+            }
+        }
+    }, [currentStation])
+
     return (
         <div className="Game">
             <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
+
+            <div className="upcoming-stations">
+                {game && currentStation && currentLine && (
+                    <UpcomingStations
+                        stations={game.train.getScheduledStops() as StationClass[]}
+                        currentStation={currentStation as StationClass}
+                        line={currentLine as LineName}
+                    />
+                )}
+            </div>
+
             <Header text="Current Line:"></Header>
             <div className={`train ${isGameWon ? 'win-state' : ''}`}>
-                <TrainCar name={currentDirectionLabel || ''} altName={game?.train.getLineType() + ' Train'}>
+                <TrainCar trainDirection={currentDirectionLabel || ''} trainType={game?.train.getLineType() + ' Train'}>
                     <div className="not-dim">
                         <TransferLines transfers={getTransferImageUrls(currentLine)} />
                     </div>

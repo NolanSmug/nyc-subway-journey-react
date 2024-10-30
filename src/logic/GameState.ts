@@ -44,11 +44,10 @@ export class GameState {
         this.startingStation = Station.getRandomStation(this.currentStations)
         do {
             this.destinationStation = Station.getRandomStation(Station.allNycStations)
+
         } while (this.startingStation === this.destinationStation)
 
         this.currentStation = this.startingStation
-
-        console.log(this)
     }
 
 }

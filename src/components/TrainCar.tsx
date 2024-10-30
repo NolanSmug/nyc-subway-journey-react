@@ -4,14 +4,14 @@ import './TrainCar.css'
 import Door from './Door'
 
 export interface TrainCarProps {
-    name?: string
-    altName: string
+    trainDirection?: string
+    trainType: string
     transfers?: JSX.Element[]
     header?: ReactNode
     children?: ReactNode
 }
 
-function TrainCar({ name, transfers, header, children, altName }: TrainCarProps) {
+function TrainCar({ trainDirection, transfers, header, children, trainType }: TrainCarProps) {
     return (
         <div className="train-container">
             {header}
@@ -21,10 +21,10 @@ function TrainCar({ name, transfers, header, children, altName }: TrainCarProps)
                     <Door />
                 </div>
                 <div className="windows">
-                    <h2 className="train-direction not-dim">{name}</h2>
+                    <h2 className="train-direction not-dim">{trainDirection}</h2>
                     <div className="transfers-container not-dim">{transfers}</div>
                     {children}
-                    <h2 className="train-type not-dim">{altName}</h2>
+                    <h2 className="train-type not-dim">{trainType}</h2>
                 </div>
                 <div className="doors">
                     <Door isLeft />

@@ -168,6 +168,19 @@ export class Train {
         return this.scheduledStops
     }
 
+    public getScheduledStopsBetween(index1: number, index2: number): Station[] {
+        const newScheduledStops: Station[] = [];
+        
+    
+        for (let i = index1; i <= index2; i++) {
+            if (this.scheduledStops[i]) { // Check if the station exists
+                newScheduledStops.push(this.scheduledStops[i]);
+            }
+        }
+    
+        return newScheduledStops;
+    }
+
     public addScheduledStop(newStop: Station) {
         this.scheduledStops.push(newStop)
     }
@@ -198,22 +211,25 @@ export class Train {
     }
 
     public setCurrentStation(station: Station) {
-        for (let i = 0; i < this.scheduledStops.length; i++) {
-            if (this.scheduledStops[i].getId() == station.getId()) {
-                this.currentStationIndex = i
-                break
-            }
-        }
+        this.currentStationIndex = this.scheduledStops.findIndex(
+            (stop) => stop.getId() === station.getId()
+        );
     }
+    
 
-    public setCurrentStationByName(stationName: string, newScheduledStops: Station[]) {
-        for (let i = 0; i < newScheduledStops.length; i++) {
-            if (newScheduledStops[i].getName() == stationName) {
-                this.currentStationIndex = i
-                break
-            }
-        }
+    public setCurrentStationIndexByName(stationName: string, newScheduledStops: Station[]) {
+        this.currentStationIndex = newScheduledStops.findIndex(
+            (station) => station.getName() === stationName
+        );
     }
+    
+
+    public static getCurrentStationIndexByName(stationName: string, scheduledStops: Station[]): number {
+        return scheduledStops.findIndex(
+            (station) => station.getName() === stationName
+        );
+    }
+    
 
     // Transfer Logic
     public isValidTransfer(newLine: LineName, currentStation: Station): boolean {
@@ -231,7 +247,7 @@ export class Train {
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
             await this.updateScheduledStops(newLine);
-            this.setCurrentStationByName(currentStation.getName(), this.scheduledStops)
+            this.setCurrentStationIndexByName(currentStation.getName(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.getDirectionLabel(Direction.UPTOWN, newLine)
             this.downtownLabel = this.getDirectionLabel(Direction.DOWNTOWN, newLine)
