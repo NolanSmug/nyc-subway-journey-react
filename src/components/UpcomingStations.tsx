@@ -1,7 +1,7 @@
 import { LineName } from '../logic/Line'
 import { Station as StationType } from '../logic/StationManager'
 import StationFragment from './StationFragment'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import './UpcomingStations.css'
 
 export interface UpcomingStationsProps {

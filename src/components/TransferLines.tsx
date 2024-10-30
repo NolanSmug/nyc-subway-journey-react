@@ -1,4 +1,3 @@
-import { LineName } from '../logic/Line'
 import './TransferLines.css'
 
 interface TransferLinesProps {

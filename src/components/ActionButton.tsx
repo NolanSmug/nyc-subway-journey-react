@@ -1,4 +1,3 @@
-import React from 'react'
 import './ActionButton.css'
 
 export interface ActionButtonProps {

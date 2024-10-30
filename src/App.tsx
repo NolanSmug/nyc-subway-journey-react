@@ -1,5 +1,5 @@
 import './App.css'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TransferLines from './components/TransferLines'
 import Station from './components/Station'
 import UpcomingStations from './components/UpcomingStations'

@@ -1,6 +1,5 @@
 import { GameState } from './GameState'
 import { LineName } from './Line'
-import { Station } from './StationManager'
 import { Train, Direction } from './TrainManager'
 
 export class Game {
