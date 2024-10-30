@@ -97,7 +97,7 @@ export class Train {
     }
 
     // LineName
-    public getLineName(): LineName {
+    public getLine(): LineName {
         return this.currentLine
     }
 
@@ -150,12 +150,16 @@ export class Train {
         return this.downtownLabel
     }
 
-    public getDirectionLabel(direction: Direction, line: LineName): string {
+    public findDirectionLabel(direction: Direction, line: LineName): string {
         const lineDirection = lineDirections.get(line)
         if (lineDirection) {
             return direction === Direction.DOWNTOWN ? lineDirection[0] : lineDirection[1]
         }
         return ''
+    }
+
+    public getDirectionLabel(): string {
+        return this.findDirectionLabel(this.direction, this.currentLine)
     }
 
 
@@ -249,8 +253,8 @@ export class Train {
             await this.updateScheduledStops(newLine);
             this.setCurrentStationIndexByName(currentStation.getName(), this.scheduledStops)
             this.currentLine = newLine
-            this.uptownLabel = this.getDirectionLabel(Direction.UPTOWN, newLine)
-            this.downtownLabel = this.getDirectionLabel(Direction.DOWNTOWN, newLine)
+            this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)
+            this.downtownLabel = this.findDirectionLabel(Direction.DOWNTOWN, newLine)
 
             return true
         }

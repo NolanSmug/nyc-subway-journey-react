@@ -26,7 +26,7 @@ export class Game {
     public async transferLines(newLine: LineName): Promise<void> {
         if (await this.train.transferToLine(newLine, this.gameState.currentStation)) {
             this.train.setLineType()
-            this.gameState.currentLine = this.train.getLineName()
+            this.gameState.currentLine = this.train.getLine()
             this.gameState.currentStation = this.train.getCurrentStation()
             this.gameState.currentDirection = this.train.getDirection()
             await this.train.updateTrainState() // If this is async
@@ -36,6 +36,7 @@ export class Game {
     public async changeDirection(): Promise<void> {
         if (this.train.getDirection() !== Direction.NULL_DIRECTION) {
             this.train.reverseDirection()
+            this.gameState.currentDirection = this.train.getDirection()
             this.gameState.currentStation = this.train.getCurrentStation()
         }
     }

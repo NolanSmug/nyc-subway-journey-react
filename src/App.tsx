@@ -27,7 +27,6 @@ function App() {
     const [currentStation, setCurrentStation] = useState<StationClass | null>(null)
     const [destinationStation, setDestinationStation] = useState<StationClass | null>(null)
     const [currentDirectionLabel, setCurrentDirectionLabel] = useState<string | null>(null)
-    const [currentLine, setCurrentLine] = useState<LineName | null>(null)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
     const [isGameWon, setIsGameWon] = useState<boolean>(false)
     const [game, setGame] = useState<Game | null>(null)
@@ -46,8 +45,7 @@ function App() {
         setIsGameWon(false)
         setIsTransferMode(false)
         setGame(newGame)
-        setCurrentLine(newGame.train.getLineName())
-        setCurrentDirectionLabel(newGame.train.getDirectionLabel(newGame.train.getDirection(), newGame.train.getLineName()))
+        setCurrentDirectionLabel(newGame.train.findDirectionLabel(newGame.train.getDirection(), newGame.train.getLine()))
         setCurrentStation(newGame.train.getCurrentStation() as StationClass)
         setDestinationStation(newGame.gameState.destinationStation as StationClass)
     }
@@ -57,7 +55,7 @@ function App() {
             t: () => handleTrainAction('transfer'),
             c: () => handleTrainAction('changeDirection'),
             r: () => handleTrainAction('refresh'),
-            ArrowRight: () => handleTrainAction('advanceStation'),
+            Enter: () => handleTrainAction('advanceStation'),
             Escape: () => setIsTransferMode(false),
             d: () => setDarkMode((prev) => !prev),
         }
@@ -101,7 +99,7 @@ function App() {
                 setIsTransferMode(false)
                 await game?.changeDirection()
                 setCurrentDirectionLabel(
-                    game?.train.getDirectionLabel(game?.train.getDirection(), game?.train.getLineName()) || null
+                    game?.train.findDirectionLabel(game?.train.getDirection(), game?.train.getLine()) || null
                 )
                 break
             default:
@@ -134,11 +132,10 @@ function App() {
     const transferLines = async (selectedLine: LineName): Promise<void> => {
         await game?.transferLines(selectedLine)
 
-        const newDirectionLabel =
-            game?.train.getDirectionLabel(game?.train.getDirection(), game?.train.getLineName()) || null
+        const newDirectionLabel = game?.train.findDirectionLabel(game?.train.getDirection(), game?.train.getLine()) || null
         const newStation = game?.train.getCurrentStation() as StationClass
 
-        setCurrentLine(selectedLine)
+        game?.train.setLine(selectedLine)
         setCurrentDirectionLabel(newDirectionLabel)
         setCurrentStation(newStation)
         setIsTransferMode(false)
@@ -168,11 +165,11 @@ function App() {
             <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
             <div className="upcoming-stations">
-                {game && currentStation && currentLine && (
+                {game && currentStation && game.train.getLine() && (
                     <UpcomingStations
                         stations={game.train.getScheduledStops() as StationClass[]}
                         currentStation={currentStation as StationClass}
-                        line={currentLine as LineName}
+                        line={game.train.getLine()}
                     />
                 )}
             </div>
@@ -181,7 +178,7 @@ function App() {
             <div className={`train ${isGameWon ? 'win-state' : ''}`}>
                 <TrainCar trainDirection={currentDirectionLabel || ''} trainType={game?.train.getLineType() + ' Train'}>
                     <div className="not-dim">
-                        <TransferLines transfers={getTransferImageUrls(currentLine)} />
+                        <TransferLines transfers={getTransferImageUrls(game?.train.getLine())} />
                     </div>
                 </TrainCar>
             </div>
