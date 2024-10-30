@@ -1,6 +1,5 @@
 import './App.css'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { Direction, Train } from './logic/TrainManager'
 import TransferLines from './components/TransferLines'
 import Station from './components/Station'
 import UpcomingStations from './components/UpcomingStations'
@@ -57,9 +56,10 @@ function App() {
         const actions: { [key: string]: () => void } = {
             t: () => handleTrainAction('transfer'),
             c: () => handleTrainAction('changeDirection'),
-            d: () => setDarkMode((prev) => !prev),
+            r: () => handleTrainAction('refresh'),
             ArrowRight: () => handleTrainAction('advanceStation'),
             Escape: () => setIsTransferMode(false),
+            d: () => setDarkMode((prev) => !prev),
         }
         actions[event.key]?.()
     }
@@ -142,16 +142,6 @@ function App() {
         setCurrentDirectionLabel(newDirectionLabel)
         setCurrentStation(newStation)
         setIsTransferMode(false)
-    }
-
-    const renderUpcomingStations = async (): Promise<ReactElement> => {
-        return (
-            <UpcomingStations
-                stations={game?.train.getScheduledStops() as StationClass[]}
-                currentStation={currentStation as StationClass}
-                line={currentLine as LineName}
-            ></UpcomingStations>
-        )
     }
 
     // starting the train and game

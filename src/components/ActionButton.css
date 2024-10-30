@@ -9,7 +9,8 @@
     outline: none;    
     cursor: pointer;   
     font: inherit;     
-    color: inherit;   
+    color: inherit; 
+    z-index: 2;  
 }
 
 .icon {

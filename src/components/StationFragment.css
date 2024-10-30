@@ -42,14 +42,15 @@
 
 .current-station .station-frag-name {
     font-weight: bold;
-    font-size:larger;
     text-decoration: underline;
 }
 
 .current-station .station-dot {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-width: 0.4rem;
     transition: 0.2s ease-in;
+    transition: 0.1s ease-out
 }
 
 .station-dot {
