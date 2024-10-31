@@ -89,7 +89,7 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
             t: () => handleTrainAction('transfer'),
             c: () => handleTrainAction('changeDirection'),
             r: () => handleTrainAction('refresh'),
-            Enter: () => handleTrainAction('advanceStation'),
+            ArrowRight: () => handleTrainAction('advanceStation'),
             Escape: () => isTransferMode(false),
         }
         actions[event.key]?.()

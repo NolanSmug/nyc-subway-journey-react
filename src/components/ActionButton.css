@@ -33,5 +33,6 @@ p {
     width: min-content;
     font-size: small;
     font-weight:600;
+    font-family: Inter, system-ui, sans-serif;
     word-wrap: break-word;
 }

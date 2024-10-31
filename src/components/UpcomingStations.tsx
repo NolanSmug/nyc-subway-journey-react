@@ -41,7 +41,7 @@ const lineColorMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: '#808183',
 }
 
-function lineToLineColor(lineName: LineName): string {
+export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
 

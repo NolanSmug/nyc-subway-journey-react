@@ -17,7 +17,6 @@ export class Game {
         await this.resetGameState() // fill gameState with new params
 
         this.train.setLine(this.gameState.startingLine)
-        this.train.setDirection(this.train.getRandomDirection())
         this.train.setScheduledStops(this.gameState.currentStations)
         this.train.setCurrentStation(this.gameState.startingStation)
         this.train.setLineType()

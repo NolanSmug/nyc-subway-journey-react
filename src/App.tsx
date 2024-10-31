@@ -8,8 +8,7 @@ import TrainCar from './components/TrainCar'
 import { Station as StationClass } from './logic/StationManager'
 import { Game } from './logic/Game'
 import { getTransferImageUrls } from './logic/TransferImageMap'
-import { LineName } from './logic/Line'
-import { Train } from './logic/TrainManager'
+import { Direction, Train } from './logic/TrainManager'
 import { GameState } from './logic/GameState'
 import GameStateUI from './components/GameStateUI'
 
@@ -17,16 +16,31 @@ import L_MODE from './images/light-mode-icon.svg'
 import D_MODE from './images/dark-mode-icon.svg'
 
 function App() {
-    const [darkMode, setDarkMode] = useState<boolean>(true)
     const [train, setTrain] = useState<Train | null>(null)
     const [gameState, setGameState] = useState<GameState | null>(null)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
     const [, forceRenderRefresh] = useState(false)
+    const [darkMode, setDarkMode] = useState<boolean>(true)
 
     // dark mode
     useEffect(() => {
         document.body.classList.toggle('dark-mode', darkMode)
     }, [darkMode])
+
+    // starting the train and game
+    useEffect(() => {
+        initializeGame()
+    }, [])
+
+    // station map smooth-scrolling to the train state current station
+    useEffect(() => {
+        if (train?.getCurrentStation()) {
+            const currentElement = document.querySelector('.current-station')
+            if (currentElement) {
+                currentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+            }
+        }
+    }, [train?.getCurrentStation()])
 
     const initializeGame = async () => {
         await StationClass.initializeAllStations()
@@ -46,20 +60,6 @@ function App() {
         }
     }
 
-    // starting the train and game
-    useEffect(() => {
-        initializeGame()
-    }, [])
-
-    useEffect(() => {
-        if (train?.getCurrentStation()) {
-            const currentElement = document.querySelector('.current-station')
-            if (currentElement) {
-                currentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-            }
-        }
-    }, [train?.getCurrentStation()])
-
     if (!train || !gameState) return <>Error</>
 
     return (
@@ -78,7 +78,17 @@ function App() {
 
             <Header text="Current Line:"></Header>
             <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
-                <TrainCar trainDirection={train.getDirectionLabel()} trainType={train.getLineType() + ' Train'}>
+                <TrainCar
+                    trainDirection={
+                        train.getDirection() == Direction.NULL_DIRECTION ? '[Toggle Direction]' : train.getDirectionLabel()
+                    }
+                    flipDirection={async () => {
+                        await train.reverseDirection()
+                        forceRenderRefresh((prev) => !prev)
+                    }}
+                    trainType={`${train.getLineType()} Train`}
+                    trainLine={train.getLine()}
+                >
                     <div className="not-dim">
                         <TransferLines transfers={getTransferImageUrls(train.getLine())} />
                     </div>
