@@ -1,5 +1,6 @@
-import { LineName } from './Line'
+import { Line, LineName } from './Line'
 import { Station } from './StationManager'
+import { SubwayMap } from './SubwayMap'
 
 
 export class GameState {
@@ -49,6 +50,20 @@ export class GameState {
             }
         }
         return false;
+    }
+
+    public async resetGameState(): Promise<void> {
+        this.startingLine = Line.getRandomLine()
+        this.isFirstTurn = true
+        this.isWon = false
+
+        await SubwayMap.createStations(this.startingLine, this.currentStations)
+
+        this.startingStation = Station.getRandomStation(this.currentStations)
+        do {
+            this.destinationStation = Station.getRandomStation(Station.allNycStations)
+
+        } while (this.startingStation === this.destinationStation)
     }
 
 }
