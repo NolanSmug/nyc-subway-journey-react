@@ -1,4 +1,3 @@
-// Train.tsx
 import { ReactNode } from 'react'
 import './TrainCar.css'
 import Door from './Door'

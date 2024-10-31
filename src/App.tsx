@@ -8,8 +8,10 @@ import ActionButton from './components/ActionButton'
 import TrainCar from './components/TrainCar'
 import { Station as StationClass } from './logic/StationManager'
 import { Game } from './logic/Game'
-import { getTransferImages } from './logic/TransferImageMap'
+import { getTransferImageUrls } from './logic/TransferImageMap'
 import { LineName } from './logic/Line'
+import { Train } from './logic/TrainManager'
+import { GameState } from './logic/GameState'
 
 import R_ARROW_BLACK from './images/right-arrow-b.svg'
 import R_ARROW_WHITE from './images/right-arrow-w.svg'
@@ -24,12 +26,10 @@ import REFRESH_WHITE from './images/refresh-icon-w.svg'
 
 function App() {
     const [darkMode, setDarkMode] = useState<boolean>(true)
-    const [currentStation, setCurrentStation] = useState<StationClass | null>(null)
-    const [destinationStation, setDestinationStation] = useState<StationClass | null>(null)
-    const [currentDirectionLabel, setCurrentDirectionLabel] = useState<string | null>(null)
+    const [train, setTrain] = useState<Train | null>(null)
+    const [gameState, setGameState] = useState<GameState | null>(null)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
-    const [isGameWon, setIsGameWon] = useState<boolean>(false)
-    const [game, setGame] = useState<Game | null>(null)
+    const [, forceRenderRefresh] = useState(false)
 
     // dark mode
     useEffect(() => {
@@ -42,12 +42,9 @@ function App() {
         let newGame = new Game()
         await newGame.runGame()
 
-        setIsGameWon(false)
         setIsTransferMode(false)
-        setGame(newGame)
-        setCurrentDirectionLabel(newGame.train.findDirectionLabel(newGame.train.getDirection(), newGame.train.getLine()))
-        setCurrentStation(newGame.train.getCurrentStation() as StationClass)
-        setDestinationStation(newGame.gameState.destinationStation as StationClass)
+        setTrain(newGame.train)
+        setGameState(newGame.gameState)
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -70,7 +67,8 @@ function App() {
     }
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
-        if (isGameWon) return
+        if (gameState?.isWon) return
+        if (action != 'transfer') setIsTransferMode(false)
 
         switch (action) {
             case 'refresh':
@@ -78,50 +76,31 @@ function App() {
                 break
 
             case 'advanceStation':
-                setIsTransferMode(false)
-                await game?.advanceStation()
-                setCurrentStation(game?.train.getCurrentStation() as StationClass)
+                await train?.advanceStation()
+                forceRenderRefresh((prev) => !prev)
 
-                const winState = await game?.checkWin()
+                const winState = await gameState?.checkWin(train?.getCurrentStation() as StationClass)
                 if (winState) {
-                    setIsGameWon(true)
                     setTimeout(() => {
                         initializeGame()
                     }, 5000)
                 }
-
                 break
+
             case 'transfer':
                 setIsTransferMode(true)
                 break
 
             case 'changeDirection':
-                setIsTransferMode(false)
-                await game?.changeDirection()
-                setCurrentDirectionLabel(
-                    game?.train.findDirectionLabel(game?.train.getDirection(), game?.train.getLine()) || null
-                )
+                await train?.reverseDirection()
+                forceRenderRefresh((prev) => !prev)
                 break
             default:
-            //
         }
-    }
-
-    const getTransferImageUrls = (input: StationClass | LineName | null | undefined): string[] => {
-        if (!input) {
-            return []
-        }
-        if (input instanceof StationClass) {
-            return getTransferImages(input.getTransfers() as LineName[])
-        }
-        if (typeof input === 'string') {
-            return getTransferImages([input as LineName])
-        }
-        return []
     }
 
     const getTransferLineClicked = async (transferIndex: number): Promise<void> => {
-        const transfers = game?.gameState.currentStation?.getTransfers()
+        const transfers = train?.getCurrentStation().getTransfers()
         const selectedLine = transfers?.[transferIndex]
 
         if (selectedLine !== undefined) {
@@ -130,14 +109,15 @@ function App() {
     }
 
     const transferLines = async (selectedLine: LineName): Promise<void> => {
-        await game?.transferLines(selectedLine)
+        if (await train?.transferToLine(selectedLine, train?.getCurrentStation())) {
+            train?.setLine(selectedLine)
+            train?.setLineType()
+            train?.setCurrentStation(train.getCurrentStation() as StationClass)
 
-        const newDirectionLabel = game?.train.findDirectionLabel(game?.train.getDirection(), game?.train.getLine()) || null
-        const newStation = game?.train.getCurrentStation() as StationClass
+            await train?.updateTrainState()
+        }
 
-        game?.train.setLine(selectedLine)
-        setCurrentDirectionLabel(newDirectionLabel)
-        setCurrentStation(newStation)
+        forceRenderRefresh((prev) => !prev)
         setIsTransferMode(false)
     }
 
@@ -152,93 +132,99 @@ function App() {
     })
 
     useEffect(() => {
-        if (currentStation) {
+        if (train?.getCurrentStation()) {
             const currentElement = document.querySelector('.current-station')
             if (currentElement) {
                 currentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
             }
         }
-    }, [currentStation])
+    }, [train?.getCurrentStation()])
 
-    return (
-        <div className="Game">
-            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
+    if (train && gameState) {
+        return (
+            <div className="Game">
+                <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-            <div className="upcoming-stations">
-                {game && currentStation && game.train.getLine() && (
-                    <UpcomingStations
-                        stations={game.train.getScheduledStops() as StationClass[]}
-                        currentStation={currentStation as StationClass}
-                        line={game.train.getLine()}
-                    />
-                )}
-            </div>
-
-            <Header text="Current Line:"></Header>
-            <div className={`train ${isGameWon ? 'win-state' : ''}`}>
-                <TrainCar trainDirection={currentDirectionLabel || ''} trainType={game?.train.getLineType() + ' Train'}>
-                    <div className="not-dim">
-                        <TransferLines transfers={getTransferImageUrls(game?.train.getLine())} />
-                    </div>
-                </TrainCar>
-            </div>
-            <div className="stations-container">
-                <div className="station-box" id="current-station">
-                    <Header text="Current Station" />
-                    <div className="station-item">
-                        <Station name={currentStation?.getName() || 'Loading...'}>
-                            <div className="not-dim">
-                                <TransferLines
-                                    onClick={getTransferLineClicked}
-                                    transfers={getTransferImageUrls(currentStation)}
-                                />
-                            </div>
-                        </Station>
-                    </div>
-                    <div className="action-buttons-container not-dim" id="starting-station">
-                        <ActionButton
-                            imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
-                            label="Transfer Lines"
-                            onClick={() => handleTrainAction('transfer')}
+                <div className="upcoming-stations">
+                    {train && train.getCurrentStation() && train.getLine() && (
+                        <UpcomingStations
+                            stations={train.getScheduledStops()}
+                            currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
+                            line={train.getLine()}
                         />
-                        <ActionButton
-                            imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
-                            label="Change Direction"
-                            onClick={() => handleTrainAction('changeDirection')}
-                        />
-                        <ActionButton
-                            imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
-                            label="Advance Station"
-                            onClick={() => handleTrainAction('advanceStation')}
-                        />
-                    </div>
-                </div>
-
-                <div className="station-box blanket">
-                    <Header text="Destination Station" />
-                    <div id="destination-station" className="station-item">
-                        <Station name={destinationStation?.getName() || 'Loading...'}>
-                            <TransferLines transfers={getTransferImageUrls(destinationStation)} />
-                        </Station>
-                    </div>
-                    {game?.gameState.isFirstTurn && (
-                        <div className="action-buttons-container" id="destination-station">
-                            <ActionButton
-                                imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
-                                label="Reset Game"
-                                onClick={() => handleTrainAction('refresh')}
-                            />
-                        </div>
                     )}
                 </div>
+
+                <Header text="Current Line:"></Header>
+                <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
+                    <TrainCar trainDirection={train.getDirectionLabel()} trainType={train.getLineType() + ' Train'}>
+                        <div className="not-dim">
+                            <TransferLines transfers={getTransferImageUrls(train.getLine())} />
+                        </div>
+                    </TrainCar>
+                </div>
+                <div className="stations-container">
+                    <div className="station-box" id="current-station">
+                        <Header text="Current Station" />
+                        <div className="station-item">
+                            <Station
+                                name={
+                                    train.getScheduledStops()[train.getCurrentStationIndex() || 0].getName() || 'Loading...'
+                                }
+                            >
+                                <div className="not-dim">
+                                    <TransferLines
+                                        onClick={getTransferLineClicked}
+                                        transfers={getTransferImageUrls(train.getCurrentStation())}
+                                    />
+                                </div>
+                            </Station>
+                        </div>
+                        <div className="action-buttons-container not-dim" id="starting-station">
+                            <ActionButton
+                                imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
+                                label="Transfer Lines"
+                                onClick={() => handleTrainAction('transfer')}
+                            />
+                            <ActionButton
+                                imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
+                                label="Change Direction"
+                                onClick={() => handleTrainAction('changeDirection')}
+                            />
+                            <ActionButton
+                                imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
+                                label="Advance Station"
+                                onClick={() => handleTrainAction('advanceStation')}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="station-box blanket">
+                        <Header text="Destination Station" />
+                        <div id="destination-station" className="station-item">
+                            <Station name={gameState.destinationStation.getName() || 'Loading...'}>
+                                <TransferLines transfers={getTransferImageUrls(gameState.destinationStation)} />
+                            </Station>
+                        </div>
+                        {gameState?.isFirstTurn && (
+                            <div className="action-buttons-container" id="destination-station">
+                                <ActionButton
+                                    imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
+                                    label="Reset Game"
+                                    onClick={() => handleTrainAction('refresh')}
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <ActionButton
+                    className="dark-mode-toggle-button"
+                    imageSrc={darkMode ? L_MODE : D_MODE}
+                    onClick={() => setDarkMode((prev) => !prev)}
+                />
             </div>
-            <ActionButton
-                className="dark-mode-toggle-button"
-                imageSrc={darkMode ? L_MODE : D_MODE}
-                onClick={() => setDarkMode((prev) => !prev)}
-            />
-        </div>
-    )
+        )
+    }
 }
 
 export default App

@@ -68,7 +68,7 @@ function UpcomingStations({ stations, currentStation, line }: UpcomingStationsPr
             const stationsWidth = stationsRef.current.scrollWidth
             lineDividerRef.current.style.width = `${stationsWidth}px`
         }
-    }, [stations.length]) // Re-run when stations length changes
+    }, [stations.length])
 
     if (!stations || stations.length === 0) {
         return null

@@ -28,9 +28,10 @@ import IMG_6 from '../images/6.svg'
 import IMG_6D from '../images/6d.svg'
 import IMG_7 from '../images/7.svg'
 import IMG_7D from '../images/7d.svg'
+import { Station } from './StationManager';
 
 const transferImageMap: { [key in LineName]: string } = {
-    [LineName.NULL_TRAIN]: '', // Add the correct image or leave blank
+    [LineName.NULL_TRAIN]: '', 
     [LineName.ONE_TRAIN]: IMG_1,
     [LineName.TWO_TRAIN]: IMG_2,
     [LineName.THREE_TRAIN]: IMG_3,
@@ -39,8 +40,8 @@ const transferImageMap: { [key in LineName]: string } = {
     [LineName.SIX_TRAIN]: IMG_6,
     [LineName.SEVEN_TRAIN]: IMG_7,
     [LineName.A_TRAIN]: IMG_A,
-    [LineName.A_ROCKAWAY_MOTT_TRAIN]: IMG_A, // Specify if you have an image
-    [LineName.A_LEFFERTS_TRAIN]: IMG_A, // Specify if you have an image
+    [LineName.A_ROCKAWAY_MOTT_TRAIN]: IMG_A,
+    [LineName.A_LEFFERTS_TRAIN]: IMG_A, 
     [LineName.C_TRAIN]: IMG_C,
     [LineName.E_TRAIN]: IMG_E,
     [LineName.B_TRAIN]: IMG_B,
@@ -56,9 +57,21 @@ const transferImageMap: { [key in LineName]: string } = {
     [LineName.G_TRAIN]: IMG_G,
     [LineName.L_TRAIN]: IMG_L,
     [LineName.S_TRAIN]: IMG_S,
-    [LineName.S_TRAIN_SHUTTLE]: IMG_SF, // Specify if you have an image
-    [LineName.S_TRAIN_ROCKAWAY]: IMG_SR, // Specify if you have an image
+    [LineName.S_TRAIN_SHUTTLE]: IMG_SF, 
+    [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 };
+
+export const getTransferImageUrls = (input: Station | LineName | null | undefined): string[] => {
+    if (!input) return []
+
+    if (input instanceof Station) {
+        return getTransferImages(input.getTransfers())
+    }
+    if (typeof input === 'string') {
+        return getTransferImages([input])
+    }
+    return []
+}
 
 export const getTransferImages = (transfers: LineName[]): string[] => {
     return transfers.map((transfer) => transferImageMap[transfer] || '');

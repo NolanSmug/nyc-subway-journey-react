@@ -1,4 +1,3 @@
-// Station.tsx
 import { ReactNode } from 'react'
 import './Station.css'
 

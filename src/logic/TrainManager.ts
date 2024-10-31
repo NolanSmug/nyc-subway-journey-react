@@ -123,7 +123,7 @@ export class Train {
         this.direction = newDirection
     }
 
-    public reverseDirection() {
+    public async reverseDirection() {
         this.setDirection(this.direction == Direction.DOWNTOWN ? Direction.UPTOWN : Direction.DOWNTOWN)
     }
 
@@ -162,7 +162,6 @@ export class Train {
         return this.findDirectionLabel(this.direction, this.currentLine)
     }
 
-
     // Scheduled Stops
     public async updateScheduledStops(line: LineName) {
         await updateStopsForLine(line, this.scheduledStops);
@@ -199,8 +198,10 @@ export class Train {
     }
 
     public getCurrentStationIndex(): number {
-        return this.currentStationIndex
+        return this.currentStationIndex ?? 0;  // Uses 0 if `currentStationIndex` is undefined
     }
+    
+    
 
     public setCurrentStationByIndex(stationIndex: number) {
         this.currentStationIndex = stationIndex
@@ -275,7 +276,7 @@ export class Train {
             !this.isAtRockawayBranch
     }
 
-    public advanceStation(): boolean {
+    public async advanceStation(): Promise<boolean> {
         let newStationIndex = this.currentStationIndex
 
         if (this.direction == Direction.UPTOWN) {

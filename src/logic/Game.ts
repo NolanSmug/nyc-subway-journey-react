@@ -1,5 +1,7 @@
 import { GameState } from './GameState'
-import { LineName } from './Line'
+import { Line } from './Line'
+import { Station } from './StationManager'
+import { SubwayMap } from './SubwayMap'
 import { Train, Direction } from './TrainManager'
 
 export class Game {
@@ -12,9 +14,8 @@ export class Game {
     }
 
     public async runGame(): Promise<void> {
-        await this.gameState.resetGameState()
+        await this.resetGameState() // fill gameState with new params
 
-        // Initialize the train
         this.train.setLine(this.gameState.startingLine)
         this.train.setDirection(this.train.getRandomDirection())
         this.train.setScheduledStops(this.gameState.currentStations)
@@ -23,52 +24,20 @@ export class Game {
         this.train.updateTrainState()
     }
 
-    public async transferLines(newLine: LineName): Promise<void> {
-        if (await this.train.transferToLine(newLine, this.gameState.currentStation)) {
-            this.train.setLineType()
-            this.gameState.currentLine = this.train.getLine()
-            this.gameState.currentStation = this.train.getCurrentStation()
-            this.gameState.currentDirection = this.train.getDirection()
-            await this.train.updateTrainState() // If this is async
-        }
+    async resetGameState(): Promise<void> {
+        this.gameState.startingLine = Line.getRandomLine()
+        this.gameState.isFirstTurn = true
+        this.gameState.isWon = false
+        this.train.setDirection(Direction.NULL_DIRECTION)
+
+        await SubwayMap.createStations(this.gameState.startingLine, this.gameState.currentStations)
+
+        this.gameState.startingStation = Station.getRandomStation(this.gameState.currentStations)
+        do {
+            this.gameState.destinationStation = Station.getRandomStation(Station.allNycStations)
+
+        } while (this.gameState.startingStation === this.gameState.destinationStation)
+
+        this.train.setCurrentStation(this.gameState.startingStation)
     }
-
-    public async changeDirection(): Promise<void> {
-        if (this.train.getDirection() !== Direction.NULL_DIRECTION) {
-            this.train.reverseDirection()
-            this.gameState.currentDirection = this.train.getDirection()
-            this.gameState.currentStation = this.train.getCurrentStation()
-        }
-    }
-
-    public async advanceStation(): Promise<void> {
-        if (this.train.advanceStation()) {
-            this.gameState.currentStation = this.train.getCurrentStation();
-        }
-    }
-
-    public async checkWin(): Promise<boolean> {
-        if (this.gameState.currentStation.equals(this.gameState.destinationStation)) {
-            console.log("WIN!")
-            const currentStationElement = document.getElementById('current-station');
-            const destinationStationElement = document.getElementById('destination-station');
-            const trainCarElement = document.getElementById('train');
-
-            if (currentStationElement && destinationStationElement?.parentElement) {
-                currentStationElement.classList.add('win-state');
-                destinationStationElement.parentElement.classList.add('win-state');
-                trainCarElement?.classList.add('win-state')
-
-                setTimeout(() => {
-                    currentStationElement.classList.remove('win-state');
-                    destinationStationElement.parentElement?.classList.remove('win-state');
-                    trainCarElement?.classList.remove('win-state')
-                }, 5000);
-
-                return true;
-            }
-        }
-        return false;
-    }
-    
 }

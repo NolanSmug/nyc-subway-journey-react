@@ -1,4 +1,3 @@
-// Door.tsx
 import React from 'react'
 import './Door.css'
 

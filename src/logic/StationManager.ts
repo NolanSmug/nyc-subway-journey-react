@@ -90,7 +90,7 @@ export class Station {
             }
             return false
         } else {
-            // No argument provided, check if more than one transfer exists
+            // check if more than one transfer exists
             return this.transfers.length > 1
         }
     }

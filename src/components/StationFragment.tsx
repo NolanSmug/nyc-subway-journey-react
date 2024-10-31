@@ -18,7 +18,6 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
 
     useEffect(() => {
         if (nameRef.current) {
-            // Check both string length and actual overflow
             const textLengthCheck = station.getName().length > 12
             const actualOverflowCheck = nameRef.current.scrollWidth > nameRef.current.clientWidth
             setIsOverflowing(textLengthCheck || actualOverflowCheck)

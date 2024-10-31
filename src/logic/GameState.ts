@@ -1,52 +1,54 @@
-import { Line, LineName } from './Line'
+import { LineName } from './Line'
 import { Station } from './StationManager'
-import { SubwayMap } from './SubwayMap'
-import { Direction } from './TrainManager'
+
 
 export class GameState {
     startingLine: LineName
     startingStation: Station 
     destinationStation: Station 
-    currentLine: LineName
-    currentDirection: Direction
-    currentStation: Station 
     currentStations: Station[]
     isFirstTurn: boolean
+    isWon: boolean
 
     constructor(
         startingLine: LineName = LineName.NULL_TRAIN,
         startingStation: Station = Station.NULL_STATION,
         destinationStation: Station = Station.NULL_STATION,
-        currentLine: LineName = LineName.NULL_TRAIN,
-        currentDirection: Direction = Direction.NULL_DIRECTION,
-        currentStation: Station = Station.NULL_STATION,
-        currentStations: Station[] = [Station.NULL_STATION],
-        isFirstTurn: boolean = true
+        currentStations: Station[] = [],
+        isFirstTurn: boolean = true,
+        isWon: boolean = false
     ) {
         this.startingLine = startingLine;
         this.startingStation = startingStation;
         this.destinationStation = destinationStation;
-        this.currentLine = currentLine;
-        this.currentDirection = currentDirection
-        this.currentStation = currentStation;
         this.currentStations = currentStations;
         this.isFirstTurn = isFirstTurn;
+        this.isWon = isWon;
     }
 
-    async resetGameState(): Promise<void> {
-        this.startingLine = Line.getRandomLine()
-        this.isFirstTurn = true
-        this.currentDirection = Direction.NULL_DIRECTION
+    public async checkWin(currentStation: Station): Promise<boolean> {
+        if (currentStation.equals(this.destinationStation)) {
+            const currentStationElement = document.getElementById('current-station');
+            const destinationStationElement = document.getElementById('destination-station');
+            const trainCarElement = document.getElementById('train');
 
-        await SubwayMap.createStations(this.startingLine, this.currentStations)
+            this.isWon = true
 
-        this.startingStation = Station.getRandomStation(this.currentStations)
-        do {
-            this.destinationStation = Station.getRandomStation(Station.allNycStations)
+            if (currentStationElement && destinationStationElement?.parentElement) {
+                currentStationElement.classList.add('win-state');
+                destinationStationElement.parentElement.classList.add('win-state');
+                trainCarElement?.classList.add('win-state')
 
-        } while (this.startingStation === this.destinationStation)
+                setTimeout(() => {
+                    currentStationElement.classList.remove('win-state');
+                    destinationStationElement.parentElement?.classList.remove('win-state');
+                    trainCarElement?.classList.remove('win-state')
+                }, 5000);
 
-        this.currentStation = this.startingStation
+                return true;
+            }
+        }
+        return false;
     }
 
 }
