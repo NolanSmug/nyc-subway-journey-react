@@ -49,14 +49,21 @@ h2 {
 }
 
 .train-direction:hover {
-    transform: scale(1.05);
     cursor: pointer;
 }
 
 .is-null-direction {
-    font-weight: 500;
-    font-family: 'Roboto Mono', monospace;
+    animation: pulse 1.5s ease-in-out infinite;
 }
+
+@keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
 
 .train-type {
     color: var(--train-text-color);

@@ -66,22 +66,18 @@ function App() {
         <div className="Game">
             <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-            <div className="upcoming-stations">
-                {train && train.getCurrentStation() && train.getLine() && (
-                    <UpcomingStations
-                        stations={train.getScheduledStops()}
-                        currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
-                        line={train.getLine()}
-                    />
-                )}
-            </div>
+            {train && train.getCurrentStation() && train.getLine() && (
+                <UpcomingStations
+                    stations={train.getScheduledStops()}
+                    currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
+                    line={train.getLine()}
+                />
+            )}
 
             <Header text="Current Line:"></Header>
             <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
                 <TrainCar
-                    trainDirection={
-                        train.getDirection() == Direction.NULL_DIRECTION ? '[Toggle Direction]' : train.getDirectionLabel()
-                    }
+                    trainDirection={train.getDirection() == Direction.NULL_DIRECTION ? 'Toggle Direction' : train.getDirectionLabel()}
                     flipDirection={async () => {
                         await train.reverseDirection()
                         forceRenderRefresh((prev) => !prev)

@@ -15,7 +15,7 @@ export interface TrainCarProps {
 }
 
 function TrainCar({ trainDirection, flipDirection, transfers, header, children, trainType, trainLine }: TrainCarProps) {
-    const isNullDirection: string = trainDirection == '[Toggle Direction]' ? 'is-null-direction' : ''
+    const isNullDirection: string = trainDirection == 'Toggle Direction' ? 'is-null-direction' : ''
     const lineColor = trainLine ? lineToLineColor(trainLine) : 'Null_Train'
     return (
         <div className="train-container">
@@ -31,7 +31,11 @@ function TrainCar({ trainDirection, flipDirection, transfers, header, children, 
                             flipDirection && flipDirection()
                         }}
                         className={`train-direction not-dim ${isNullDirection}`}
-                        style={isNullDirection ? { color: lineColor } : {}}
+                        style={
+                            isNullDirection
+                                ? { borderColor: lineColor, textDecoration: 'underline', textDecorationColor: lineColor }
+                                : {}
+                        }
                     >
                         {trainDirection}
                     </h2>
