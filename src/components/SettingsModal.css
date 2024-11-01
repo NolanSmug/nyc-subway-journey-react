@@ -1,0 +1,52 @@
+/* Simplified SettingsModal.css */
+.settings-umbrella {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    display: flex;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+.settings-trigger {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.settings-popup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    position: absolute;
+    bottom: 4.2em;
+    right: 0;
+    background: var(--station-bg);
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--bg-color-3);
+    width: 18em;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+.settings-popup.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.settings-popup-arrow {
+    position: absolute;
+    bottom: -0.5em;
+    right: 1.3em;
+    width: 0;
+    height: 0;
+    border-left: 0.6em solid transparent;
+    border-right: 0.6em solid transparent;
+    border-top: 0.6em solid var(--bg-color-2);
+}
+
+

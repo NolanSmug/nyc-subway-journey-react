@@ -4,7 +4,7 @@ import { Station, Borough } from './StationManager'
 export class SubwayMap {
     static getCsvFromLineName(line: LineName) {
         if (line == LineName.NULL_TRAIN) {
-            return '/csv/all_stations.csv' // Use root-relative path
+            return '/csv/all_stations.csv'
         }
         if (line == LineName.A_ROCKAWAY_MOTT_TRAIN) {
             return '/csv/A_train_rockaway-mott_stations.csv'

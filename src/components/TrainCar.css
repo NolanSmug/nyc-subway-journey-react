@@ -1,10 +1,10 @@
-/* Train.css */
 h2 {
     user-select: none;
+    font-size: 1.6em;
 }
 
 .train-container {
-    min-width:50em;
+    min-width: 50em;
 }
 
 .train-car {
@@ -44,11 +44,25 @@ h2 {
     margin-bottom: 0.25em;
     width: 100%;
     margin-top: 0.25em;
-    font-size: 22px;
+    transition: transform 0.1s;
 }
 
 .train-direction:hover {
-    cursor: default;
+    cursor: pointer;
+}
+
+.is-null-direction {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.07);
+    }
 }
 
 .train-type {
@@ -56,7 +70,6 @@ h2 {
     margin-bottom: 0.25em;
     white-space: nowrap;
     margin-top: 0.25em;
-    font-size: 22px;
     word-wrap: normal !important;
     margin-left: 0.15em;
 }
@@ -71,7 +84,7 @@ h2 {
     background-color: var(--train-car-border);
 }
 
-.transfers-container {
+.line-container {
     display: flex;
     flex-direction: column;
     row-gap: 0.25em;

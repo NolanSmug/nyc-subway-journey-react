@@ -41,9 +41,11 @@ const lineColorMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: '#808183',
 }
 
-function lineToLineColor(lineName: LineName): string {
+export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
+
+// TODO: Borough barrier
 
 function UpcomingStations({ stations, currentStation, line }: UpcomingStationsProps) {
     const lineColor = lineToLineColor(line)
@@ -68,7 +70,7 @@ function UpcomingStations({ stations, currentStation, line }: UpcomingStationsPr
             const stationsWidth = stationsRef.current.scrollWidth
             lineDividerRef.current.style.width = `${stationsWidth}px`
         }
-    }, [stations.length]) // Re-run when stations length changes
+    }, [stations.length])
 
     if (!stations || stations.length === 0) {
         return null
