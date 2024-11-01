@@ -22,14 +22,18 @@
     border: 0.1em solid var(--bg-color-3);
 }
 
+.small-button {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
 .icon:hover {
     cursor: pointer;
     background-color: var(--bg-color-3);
 }
 
-p {
-    margin-top: 0.25em;
-    margin-bottom: 0.5em;
+.label {
+    margin: 0;
     width: min-content;
     font-size: small;
     font-weight:600;

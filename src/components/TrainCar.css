@@ -1,11 +1,10 @@
-/* Train.css */
 h2 {
     user-select: none;
     font-size: 1.6em;
 }
 
 .train-container {
-    min-width:50em;
+    min-width: 50em;
 }
 
 .train-car {
@@ -57,13 +56,14 @@ h2 {
 }
 
 @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
+    0%,
+    100% {
+        transform: scale(1);
     }
     50% {
-      transform: scale(1.05);
+        transform: scale(1.07);
     }
-  }
+}
 
 .train-type {
     color: var(--train-text-color);

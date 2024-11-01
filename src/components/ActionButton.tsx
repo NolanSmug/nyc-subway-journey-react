@@ -5,13 +5,14 @@ export interface ActionButtonProps {
     label?: string
     onClick?: () => void
     className?: string
+    small?: boolean
 }
 
-function ActionButton({ imageSrc, label, onClick, className }: ActionButtonProps) {
+function ActionButton({ imageSrc, label, onClick, className, small }: ActionButtonProps) {
     return (
         <button className={`action-button-container ${className}`} onClick={onClick} type="button">
-            <img src={imageSrc} className="icon" alt={label} />
-            <p>{label}</p>
+            <img src={imageSrc} className={`icon ${small ? 'small-button' : ''}`} alt={label} />
+            <p className="label">{label}</p>
         </button>
     )
 }

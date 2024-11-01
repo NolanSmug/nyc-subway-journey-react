@@ -45,6 +45,8 @@ export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
 
+// TODO: Borough barrier
+
 function UpcomingStations({ stations, currentStation, line }: UpcomingStationsProps) {
     const lineColor = lineToLineColor(line)
     const stationsRef = useRef<HTMLDivElement>(null)

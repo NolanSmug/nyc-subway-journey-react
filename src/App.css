@@ -28,7 +28,6 @@
     --transfer-opacity: 1;
 }
 
-html,
 body,
 #root {
     display: flex;
@@ -39,10 +38,11 @@ body,
     overflow: hidden;
 }
 
-html,
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+    user-select: none;
 }
 
 .Game {

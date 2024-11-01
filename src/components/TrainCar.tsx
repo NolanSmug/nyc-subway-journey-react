@@ -33,7 +33,12 @@ function TrainCar({ trainDirection, flipDirection, transfers, header, children, 
                         className={`train-direction not-dim ${isNullDirection}`}
                         style={
                             isNullDirection
-                                ? { borderColor: lineColor, textDecoration: 'underline', textDecorationColor: lineColor }
+                                ? {
+                                      borderColor: lineColor,
+                                      textDecoration: 'underline',
+                                      textDecorationColor: lineColor,
+                                      textUnderlineOffset: '4px',
+                                  }
                                 : {}
                         }
                     >

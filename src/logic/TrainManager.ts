@@ -1,5 +1,5 @@
 import { LineName, LineType } from './Line'
-import { Station } from './StationManager'
+import { Borough, Station } from './StationManager'
 import { updateStopsForLine } from './SubwayMap'
 
 export enum Direction {
@@ -161,6 +161,7 @@ export class Train {
     public getDirectionLabel(): string {
         return this.findDirectionLabel(this.direction, this.currentLine)
     }
+    
 
     // Scheduled Stops
     public async updateScheduledStops(line: LineName) {

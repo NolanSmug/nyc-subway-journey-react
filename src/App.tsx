@@ -3,17 +3,20 @@ import React, { useEffect, useState } from 'react'
 import TransferLines from './components/TransferLines'
 import UpcomingStations from './components/UpcomingStations'
 import Header from './components/Header'
-import ActionButton from './components/ActionButton'
 import TrainCar from './components/TrainCar'
+import GameStateUI from './components/GameStateUI'
+import SettingsModal from './components/SettingsModal'
+import SettingsButton from './components/SettingsButton'
 import { Station as StationClass } from './logic/StationManager'
 import { Game } from './logic/Game'
 import { getTransferImageUrls } from './logic/TransferImageMap'
 import { Direction, Train } from './logic/TrainManager'
 import { GameState } from './logic/GameState'
-import GameStateUI from './components/GameStateUI'
 
 import L_MODE from './images/light-mode-icon.svg'
 import D_MODE from './images/dark-mode-icon.svg'
+import UPCOMING_STATIONS_BLACK from './images/upcoming-stations-icon-b.svg'
+import UPCOMING_STATIONS_WHITE from './images/upcoming-stations-icon-w.svg'
 
 function App() {
     const [train, setTrain] = useState<Train | null>(null)
@@ -21,11 +24,7 @@ function App() {
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
     const [, forceRenderRefresh] = useState(false)
     const [darkMode, setDarkMode] = useState<boolean>(true)
-
-    // dark mode
-    useEffect(() => {
-        document.body.classList.toggle('dark-mode', darkMode)
-    }, [darkMode])
+    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
 
     // starting the train and game
     useEffect(() => {
@@ -66,7 +65,7 @@ function App() {
         <div className="Game">
             <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-            {train && train.getCurrentStation() && train.getLine() && (
+            {train && train.getCurrentStation() && train.getLine() && upcomingStationsVisible && (
                 <UpcomingStations
                     stations={train.getScheduledStops()}
                     currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
@@ -77,7 +76,9 @@ function App() {
             <Header text="Current Line:"></Header>
             <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
                 <TrainCar
-                    trainDirection={train.getDirection() == Direction.NULL_DIRECTION ? 'Toggle Direction' : train.getDirectionLabel()}
+                    trainDirection={
+                        train.getDirection() == Direction.NULL_DIRECTION ? 'Toggle Direction' : train.getDirectionLabel()
+                    }
                     flipDirection={async () => {
                         await train.reverseDirection()
                         forceRenderRefresh((prev) => !prev)
@@ -98,10 +99,20 @@ function App() {
                 isTransferMode={setIsTransferMode}
                 forceRenderRefresh={forceRenderRefresh}
             />
-            <ActionButton
-                className="dark-mode-toggle-button"
-                imageSrc={darkMode ? L_MODE : D_MODE}
-                onClick={() => setDarkMode((prev) => !prev)}
+            <SettingsModal
+                darkMode={darkMode}
+                toggleActions={[
+                    <SettingsButton
+                        imgSrc={darkMode ? L_MODE : D_MODE}
+                        label="Theme"
+                        onClick={() => setDarkMode((prev) => !prev)}
+                    />,
+                    <SettingsButton
+                        imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
+                        label="Upcoming Stations"
+                        onClick={() => setUpcomingStationsVisible((prev) => !prev)}
+                    />,
+                ]}
             />
         </div>
     )
