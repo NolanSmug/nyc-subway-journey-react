@@ -39,7 +39,7 @@ function App() {
                 currentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
             }
         }
-    }, [train?.getCurrentStation()])
+    }, [train])
 
     const initializeGame = async () => {
         await StationClass.initializeAllStations()
@@ -77,7 +77,7 @@ function App() {
             <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
                 <TrainCar
                     trainDirection={
-                        train.getDirection() == Direction.NULL_DIRECTION ? 'Toggle Direction' : train.getDirectionLabel()
+                        train.getDirection() === Direction.NULL_DIRECTION ? 'Toggle Direction' : train.getDirectionLabel()
                     }
                     flipDirection={async () => {
                         await train.reverseDirection()
@@ -86,9 +86,7 @@ function App() {
                     trainType={`${train.getLineType()} Train`}
                     trainLine={train.getLine()}
                 >
-                    <div className="not-dim">
-                        <TransferLines transfers={getTransferImageUrls(train.getLine())} />
-                    </div>
+                    <TransferLines transfers={getTransferImageUrls(train.getLine())} notDim />
                 </TrainCar>
             </div>
             <GameStateUI
@@ -103,13 +101,13 @@ function App() {
                 darkMode={darkMode}
                 toggleActions={[
                     <SettingsButton
-                        imgSrc={darkMode ? L_MODE : D_MODE}
                         label="Theme"
+                        imgSrc={darkMode ? L_MODE : D_MODE}
                         onClick={() => setDarkMode((prev) => !prev)}
                     />,
                     <SettingsButton
-                        imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
                         label="Upcoming Stations"
+                        imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
                         onClick={() => setUpcomingStationsVisible((prev) => !prev)}
                     />,
                 ]}

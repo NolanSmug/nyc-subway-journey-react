@@ -3,13 +3,13 @@ import { Station, Borough } from './StationManager'
 
 export class SubwayMap {
     static getCsvFromLineName(line: LineName) {
-        if (line == LineName.NULL_TRAIN) {
+        if (line === LineName.NULL_TRAIN) {
             return '/csv/all_stations.csv'
         }
-        if (line == LineName.A_ROCKAWAY_MOTT_TRAIN) {
+        if (line === LineName.A_ROCKAWAY_MOTT_TRAIN) {
             return '/csv/A_train_rockaway-mott_stations.csv'
         }
-        if (line == LineName.A_LEFFERTS_TRAIN) {
+        if (line === LineName.A_LEFFERTS_TRAIN) {
             return '/csv/A_train_lefferts_stations.csv'
         }
 

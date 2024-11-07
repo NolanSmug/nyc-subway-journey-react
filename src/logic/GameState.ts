@@ -35,14 +35,14 @@ export class GameState {
 
             this.isWon = true
 
-            if (currentStationElement && destinationStationElement?.parentElement) {
+            if (currentStationElement && destinationStationElement) {
                 currentStationElement.classList.add('win-state');
-                destinationStationElement.parentElement.classList.add('win-state');
+                destinationStationElement.classList.add('win-state');
                 trainCarElement?.classList.add('win-state')
 
                 setTimeout(() => {
                     currentStationElement.classList.remove('win-state');
-                    destinationStationElement.parentElement?.classList.remove('win-state');
+                    destinationStationElement.classList.remove('win-state');
                     trainCarElement?.classList.remove('win-state')
                 }, 5000);
 

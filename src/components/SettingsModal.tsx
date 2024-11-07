@@ -1,5 +1,5 @@
 // SettingsModal.tsx
-import React, { useState, useEffect, ReactNode, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ActionButton from './ActionButton'
 import SettingsButton from './SettingsButton'
 import './SettingsModal.css'

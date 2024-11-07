@@ -15,7 +15,7 @@ function Header({ text, img, beforeImgText, afterImgText }: HeaderProps) {
             </div>
             <div className="img-text-container">
                 {beforeImgText && <p>{beforeImgText}</p>}
-                {img && <img src={img} alt="header image" className="lineImage" />}
+                {img && <img src={img} alt={text} className="lineImage" />}
                 {afterImgText && <p>{afterImgText}</p>}
             </div>
         </div>

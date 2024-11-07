@@ -41,7 +41,7 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
                 await train.advanceStation()
                 forceRenderRefresh((prev) => !prev)
 
-                const winState = await gameState?.checkWin(train.getCurrentStation())
+                const winState = await gameState.checkWin(train.getCurrentStation())
                 if (winState) {
                     setTimeout(() => {
                         initializeGame()
@@ -63,7 +63,7 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
 
     const getTransferLineClicked = async (transferIndex: number): Promise<void> => {
         const transfers = train.getCurrentStation().getTransfers()
-        const selectedLine = transfers?.[transferIndex]
+        const selectedLine = transfers[transferIndex]
 
         if (selectedLine !== undefined) {
             await transferLines(selectedLine)
@@ -133,9 +133,9 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
                 </div>
             </div>
 
-            <div className="station-box blanket">
+            <div className="station-box blanket" id="destination-station">
                 <Header text="Destination Station" />
-                <div id="destination-station" className="station-item">
+                <div className="station-item">
                     <Station name={gameState.destinationStation.getName()}>
                         <TransferLines transfers={getTransferImageUrls(gameState.destinationStation)} />
                     </Station>

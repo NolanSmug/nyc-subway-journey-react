@@ -1,5 +1,5 @@
 import { LineName, LineType } from './Line'
-import { Borough, Station } from './StationManager'
+import { Station } from './StationManager'
 import { updateStopsForLine } from './SubwayMap'
 
 export enum Direction {
@@ -86,7 +86,7 @@ export class Train {
         direction: Direction = Direction.NULL_DIRECTION,
         uptownLabel: string = 'Uptown',
         downtownLabel: string = 'Downtown',
-        scheduledStops: Station[] = [],
+        scheduledStops: Station[] = []
     ) {
         this.currentLine = currentLine
         this.lineType = lineType
@@ -124,13 +124,13 @@ export class Train {
     }
 
     public async reverseDirection() {
-        this.setDirection(this.direction == Direction.DOWNTOWN ? Direction.UPTOWN : Direction.DOWNTOWN)
+        this.setDirection(this.direction === Direction.DOWNTOWN ? Direction.UPTOWN : Direction.DOWNTOWN)
     }
 
     public getRandomDirection(): Direction {
-        const directions = [Direction.UPTOWN, Direction.DOWNTOWN];
-        const randomIndex = Math.floor(Math.random() * directions.length);
-        return directions[randomIndex];
+        const directions = [Direction.UPTOWN, Direction.DOWNTOWN]
+        const randomIndex = Math.floor(Math.random() * directions.length)
+        return directions[randomIndex]
     }
 
     // Labels
@@ -161,11 +161,10 @@ export class Train {
     public getDirectionLabel(): string {
         return this.findDirectionLabel(this.direction, this.currentLine)
     }
-    
 
     // Scheduled Stops
     public async updateScheduledStops(line: LineName) {
-        await updateStopsForLine(line, this.scheduledStops);
+        await updateStopsForLine(line, this.scheduledStops)
     }
 
     public getScheduledStops(): Station[] {
@@ -173,16 +172,16 @@ export class Train {
     }
 
     public getScheduledStopsBetween(index1: number, index2: number): Station[] {
-        const newScheduledStops: Station[] = [];
-        
-    
+        const newScheduledStops: Station[] = []
+
         for (let i = index1; i <= index2; i++) {
-            if (this.scheduledStops[i]) { // Check if the station exists
-                newScheduledStops.push(this.scheduledStops[i]);
+            if (this.scheduledStops[i]) {
+                // Check if the station exists
+                newScheduledStops.push(this.scheduledStops[i])
             }
         }
-    
-        return newScheduledStops;
+
+        return newScheduledStops
     }
 
     public addScheduledStop(newStop: Station) {
@@ -199,10 +198,8 @@ export class Train {
     }
 
     public getCurrentStationIndex(): number {
-        return this.currentStationIndex ?? 0;  // Uses 0 if `currentStationIndex` is undefined
+        return this.currentStationIndex ?? 0 // Uses 0 if `currentStationIndex` is undefined
     }
-    
-    
 
     public setCurrentStationByIndex(stationIndex: number) {
         this.currentStationIndex = stationIndex
@@ -217,32 +214,23 @@ export class Train {
     }
 
     public setCurrentStation(station: Station) {
-        this.currentStationIndex = this.scheduledStops.findIndex(
-            (stop) => stop.getId() === station.getId()
-        );
+        this.currentStationIndex = this.scheduledStops.findIndex((stop) => stop.getId() === station.getId())
     }
-    
 
     public setCurrentStationIndexByName(stationName: string, newScheduledStops: Station[]) {
-        this.currentStationIndex = newScheduledStops.findIndex(
-            (station) => station.getName() === stationName
-        );
+        this.currentStationIndex = newScheduledStops.findIndex((station) => station.getName() === stationName)
     }
-    
 
     public static getCurrentStationIndexByName(stationName: string, scheduledStops: Station[]): number {
-        return scheduledStops.findIndex(
-            (station) => station.getName() === stationName
-        );
+        return scheduledStops.findIndex((station) => station.getName() === stationName)
     }
-    
 
     // Transfer Logic
     public isValidTransfer(newLine: LineName, currentStation: Station): boolean {
         const transfers = currentStation.getTransfers()
 
         for (const transferLine of transfers) {
-            if (transferLine == newLine) {
+            if (transferLine === newLine) {
                 return true
             }
         }
@@ -252,7 +240,7 @@ export class Train {
 
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
-            await this.updateScheduledStops(newLine);
+            await this.updateScheduledStops(newLine)
             this.setCurrentStationIndexByName(currentStation.getName(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)
@@ -267,8 +255,7 @@ export class Train {
     public async updateTrainState() {
         const lastStationIndex: number = this.scheduledStops.length - 1
 
-        this.isAtRockawayBranch =
-            this.getCurrentStation().getName() == 'Rockaway Blvd' && this.direction == Direction.DOWNTOWN
+        this.isAtRockawayBranch = this.getCurrentStation().getName() === 'Rockaway Blvd' && this.direction === Direction.DOWNTOWN
 
         // this is a mess but trust it works (I don't remember how I did this)
         this.isAtEndOfLine =
@@ -280,9 +267,9 @@ export class Train {
     public async advanceStation(): Promise<boolean> {
         let newStationIndex = this.currentStationIndex
 
-        if (this.direction == Direction.UPTOWN) {
+        if (this.direction === Direction.UPTOWN) {
             newStationIndex++
-        } else if (this.direction == Direction.DOWNTOWN) {
+        } else if (this.direction === Direction.DOWNTOWN) {
             newStationIndex--
         } else {
             return false
@@ -301,9 +288,9 @@ export class Train {
 
         let newStationIndex = this.currentStationIndex
 
-        if (this.direction == Direction.UPTOWN) {
+        if (this.direction === Direction.UPTOWN) {
             newStationIndex += numStations
-        } else if (this.direction == Direction.DOWNTOWN) {
+        } else if (this.direction === Direction.DOWNTOWN) {
             newStationIndex -= numStations
         } else {
             return false
