@@ -6,8 +6,6 @@
 
 span {
     font-weight: 500;
-    font-stretch: semi-condensed;
     text-decoration: overline;
     padding: 0.4em 0.3em 0.3em 0.3em;
-    border-radius: 0.25em;
 }

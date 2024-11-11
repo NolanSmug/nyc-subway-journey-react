@@ -3,10 +3,11 @@ import './TrainCar.css'
 import Door from './Door'
 import { LineName } from '../logic/Line'
 import { lineToLineColor } from '../components/UpcomingStations'
+import { useUIContext } from '../contexts/UIContext'
 
 export interface TrainCarProps {
     trainDirection?: string
-    flipDirection?: () => Promise<void>
+    flipDirection: () => Promise<void>
     trainType: string
     trainLine?: LineName
     transfers?: JSX.Element[]
@@ -17,6 +18,7 @@ export interface TrainCarProps {
 function TrainCar({ trainDirection, flipDirection, transfers, header, children, trainType, trainLine }: TrainCarProps) {
     const isNullDirection: string = trainDirection === 'Toggle Direction' ? 'is-null-direction' : ''
     const lineColor = trainLine ? lineToLineColor(trainLine) : 'Null_Train'
+    const { forceRenderRefresh } = useUIContext()
     return (
         <div className="train-container">
             {header}
@@ -27,8 +29,9 @@ function TrainCar({ trainDirection, flipDirection, transfers, header, children, 
                 </div>
                 <div className="windows">
                     <h2
-                        onClick={() => {
-                            flipDirection && flipDirection()
+                        onClick={async () => {
+                            await flipDirection()
+                            forceRenderRefresh()
                         }}
                         className={`train-direction not-dim ${isNullDirection}`}
                         style={

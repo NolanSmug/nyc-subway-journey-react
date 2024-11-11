@@ -8,6 +8,7 @@ export interface UpcomingStationsProps {
     stations: StationType[]
     currentStation: StationType
     line: LineName
+    visible: boolean
 }
 
 const lineColorMap: { [key in LineName]: string } = {
@@ -47,7 +48,7 @@ export function lineToLineColor(lineName: LineName): string {
 
 // TODO: Borough barrier
 
-function UpcomingStations({ stations, currentStation, line }: UpcomingStationsProps) {
+function UpcomingStations({ stations, currentStation, line, visible }: UpcomingStationsProps) {
     const lineColor = lineToLineColor(line)
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
@@ -70,9 +71,9 @@ function UpcomingStations({ stations, currentStation, line }: UpcomingStationsPr
             const stationsWidth = stationsRef.current.scrollWidth
             lineDividerRef.current.style.width = `${stationsWidth}px`
         }
-    }, [stations.length])
+    }, [stations.length, visible])
 
-    if (!stations || stations.length === 0) {
+    if (!stations || stations.length === 0 || !visible) {
         return null
     }
 

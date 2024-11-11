@@ -23,7 +23,7 @@
     position: absolute;
     bottom: 4.2em;
     right: 0;
-    background: var(--station-bg);
+    background: var(--bg-color);
     padding: 1em;
     border-radius: 8px;
     border: 1px solid var(--bg-color-3);
