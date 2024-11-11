@@ -1,23 +1,21 @@
 import { ReactNode } from 'react'
 import './TrainCar.css'
 import Door from './Door'
-import { LineName } from '../logic/Line'
 import { lineToLineColor } from '../components/UpcomingStations'
 import { useUIContext } from '../contexts/UIContext'
+import { Direction, Train } from '../logic/TrainManager'
 
 export interface TrainCarProps {
-    trainDirection?: string
     flipDirection: () => Promise<void>
-    trainType: string
-    trainLine?: LineName
+    train: Train
     transfers?: JSX.Element[]
     header?: ReactNode
     children?: ReactNode
 }
 
-function TrainCar({ trainDirection, flipDirection, transfers, header, children, trainType, trainLine }: TrainCarProps) {
-    const isNullDirection: string = trainDirection === 'Toggle Direction' ? 'is-null-direction' : ''
-    const lineColor = trainLine ? lineToLineColor(trainLine) : 'Null_Train'
+function TrainCar({ train, flipDirection, transfers, header, children }: TrainCarProps) {
+    const isNullDirection: string = train.getDirection() === Direction.NULL_DIRECTION ? 'is-null-direction' : ''
+    const lineColor = train.getLine() ? lineToLineColor(train.getLine()) : 'Null_Train'
     const { forceRenderRefresh } = useUIContext()
     return (
         <div className="train-container">
@@ -27,6 +25,7 @@ function TrainCar({ trainDirection, flipDirection, transfers, header, children, 
                     <Door isLeft />
                     <Door />
                 </div>
+
                 <div className="windows">
                     <h2
                         onClick={async () => {
@@ -45,12 +44,13 @@ function TrainCar({ trainDirection, flipDirection, transfers, header, children, 
                                 : {}
                         }
                     >
-                        {trainDirection}
+                        {isNullDirection ? 'Toggle Direction' : train.getDirectionLabel()}
                     </h2>
                     <div className="line-container not-dim">{transfers}</div>
                     {children}
-                    <h2 className="train-type not-dim">{trainType}</h2>
+                    <h2 className="train-type not-dim">{train.getLineType()}</h2>
                 </div>
+
                 <div className="doors">
                     <Door isLeft />
                     <Door />

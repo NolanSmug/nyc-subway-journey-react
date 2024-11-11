@@ -17,7 +17,7 @@ import { useUIContext } from './contexts/UIContext'
 function App() {
     const [train, setTrain] = useState<Train | null>(null)
     const [gameState, setGameState] = useState<GameState | null>(null)
-    const { isTransferMode, setIsTransferMode, forceRenderRefresh, upcomingStationsVisible } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVisible } = useUIContext()
     const transferImages = useMemo(() => getTransferImageUrls(train?.getLine()), [train?.getLine()])
 
     const initializeGame = useCallback(async () => {
@@ -68,14 +68,10 @@ function App() {
             <Header text="Current Line:"></Header>
             <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
                 <TrainCar
-                    trainDirection={
-                        train.getDirection() === Direction.NULL_DIRECTION ? 'Toggle Direction' : train.getDirectionLabel()
-                    }
+                    train={train}
                     flipDirection={async () => {
                         await train.reverseDirection()
                     }}
-                    trainType={`${train.getLineType()} Train`}
-                    trainLine={train.getLine()}
                 >
                     <TransferLines transfers={transferImages} notDim />
                 </TrainCar>
