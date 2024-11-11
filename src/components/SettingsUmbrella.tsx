@@ -1,8 +1,7 @@
-// SettingsModal.tsx
 import React, { useState, useEffect, useRef } from 'react'
 import ActionButton from './ActionButton'
 import SettingsButton from './SettingsButton'
-import './SettingsModal.css'
+import './SettingsUmbrella.css'
 
 import GEAR_BLACK from '../images/settings-icon-b.svg'
 import GEAR_WHITE from '../images/settings-icon-w.svg'
@@ -53,7 +52,6 @@ const SettingsUmbrella = ({ toggleActions, darkMode }: SettingsUmbrellaProps) =>
                 {toggleActions?.map((action, index) => (
                     <div key={index}>{action}</div>
                 ))}
-
                 <div className="settings-popup-arrow" />
             </div>
         </div>

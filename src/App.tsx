@@ -5,7 +5,7 @@ import UpcomingStations from './components/UpcomingStations'
 import Header from './components/Header'
 import TrainCar from './components/TrainCar'
 import GameStateUI from './components/GameStateUI'
-import SettingsModal from './components/SettingsModal'
+import SettingsUmbrella from './components/SettingsUmbrella'
 import SettingsButton from './components/SettingsButton'
 import { Station as StationClass } from './logic/StationManager'
 import { Game } from './logic/Game'
@@ -36,7 +36,7 @@ function App() {
         if (train?.getCurrentStation()) {
             const currentElement = document.querySelector('.current-station')
             if (currentElement) {
-                currentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+                currentElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' })
             }
         }
     }, [train])
@@ -97,7 +97,7 @@ function App() {
                 isTransferMode={setIsTransferMode}
                 forceRenderRefresh={forceRenderRefresh}
             />
-            <SettingsModal
+            <SettingsUmbrella
                 darkMode={darkMode}
                 toggleActions={[
                     <SettingsButton
