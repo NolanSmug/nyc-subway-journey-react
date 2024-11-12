@@ -36,20 +36,20 @@ function App() {
         }
     }
 
+    // station map smooth-scrolling to the train state current station
+    useEffect(() => {
+        if (gameState?.currentStations && train?.getCurrentStation()) {
+            const currentElement = document.querySelector('.current-station')
+            if (currentElement) {
+                currentElement.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
+            }
+        }
+    }, [train])
+
     // starting the train and game
     useEffect(() => {
         initializeGame()
     }, [initializeGame])
-
-    // station map smooth-scrolling to the train state current station
-    useEffect(() => {
-        if (train?.getCurrentStation()) {
-            const currentElement = document.querySelector('.current-station')
-            if (currentElement) {
-                currentElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' })
-            }
-        }
-    }, [train])
 
     const line = train?.getLine()
     const transferImages = useMemo(() => getTransferImageUrls(line), [line])
@@ -64,6 +64,7 @@ function App() {
                 stations={train.getScheduledStops()}
                 currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
                 line={train.getLine()}
+                direction={train.getDirection()}
                 visible={upcomingStationsVisible}
             />
 

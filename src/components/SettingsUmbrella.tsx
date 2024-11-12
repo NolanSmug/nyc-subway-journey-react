@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import ActionButton from './ActionButton'
 import SettingsButton from './SettingsButton'
+import { useUIContext } from '../contexts/UIContext'
 import './SettingsUmbrella.css'
 
 import L_MODE from '../images/light-mode-icon.svg'
 import D_MODE from '../images/dark-mode-icon.svg'
-import UPCOMING_STATIONS_BLACK from '../images/upcoming-stations-icon-b.svg'
-import UPCOMING_STATIONS_WHITE from '../images/upcoming-stations-icon-w.svg'
-
 import GEAR_BLACK from '../images/settings-icon-b.svg'
 import GEAR_WHITE from '../images/settings-icon-w.svg'
-import { useUIContext } from '../contexts/UIContext'
+import UPCOMING_STATIONS_BLACK from '../images/upcoming-stations-icon-b.svg'
+import UPCOMING_STATIONS_WHITE from '../images/upcoming-stations-icon-w.svg'
 
 const SettingsUmbrella = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -18,7 +17,6 @@ const SettingsUmbrella = () => {
     const buttonRef = useRef<HTMLDivElement | null>(null)
 
     const { darkMode, setDarkMode, setUpcomingStationsVisible } = useUIContext()
-    console.log('darkMode in SettingsUmbrella:', darkMode) // Debugging line
 
     useEffect(() => {
         document.body.classList.toggle('dark-mode', darkMode)

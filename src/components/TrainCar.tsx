@@ -48,7 +48,7 @@ function TrainCar({ train, flipDirection, transfers, header, children }: TrainCa
                     </h2>
                     <div className="line-container not-dim">{transfers}</div>
                     {children}
-                    <h2 className="train-type not-dim">{train.getLineType()}</h2>
+                    <h2 className="train-type not-dim">{train.getLineType() + ' Train'}</h2>
                 </div>
 
                 <div className="doors">

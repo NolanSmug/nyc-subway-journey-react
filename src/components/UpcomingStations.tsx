@@ -2,12 +2,14 @@ import { LineName } from '../logic/Line'
 import { Station as StationType } from '../logic/StationManager'
 import StationFragment from './StationFragment'
 import { useEffect, useRef } from 'react'
+import { Direction } from '../logic/TrainManager'
 import './UpcomingStations.css'
 
 export interface UpcomingStationsProps {
     stations: StationType[]
     currentStation: StationType
     line: LineName
+    direction: Direction
     visible: boolean
 }
 
@@ -48,7 +50,7 @@ export function lineToLineColor(lineName: LineName): string {
 
 // TODO: Borough barrier
 
-function UpcomingStations({ stations, currentStation, line, visible }: UpcomingStationsProps) {
+function UpcomingStations({ stations, currentStation, line, direction, visible }: UpcomingStationsProps) {
     const lineColor = lineToLineColor(line)
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
@@ -76,6 +78,8 @@ function UpcomingStations({ stations, currentStation, line, visible }: UpcomingS
     if (!stations || stations.length === 0 || !visible) {
         return null
     }
+
+    const displayStations = direction === Direction.DOWNTOWN ? [...stations].reverse() : stations
 
     return (
         <div className="upcoming-stations-container">
