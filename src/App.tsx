@@ -9,7 +9,7 @@ import SettingsUmbrella from './components/SettingsUmbrella'
 
 import { Station as StationClass } from './logic/StationManager'
 import { Game } from './logic/Game'
-import { Direction, Train } from './logic/TrainManager'
+import { Train } from './logic/TrainManager'
 import { GameState } from './logic/GameState'
 import { getTransferImageUrls } from './logic/TransferImageMap'
 import { useUIContext } from './contexts/UIContext'
@@ -18,7 +18,6 @@ function App() {
     const [train, setTrain] = useState<Train | null>(null)
     const [gameState, setGameState] = useState<GameState | null>(null)
     const { isTransferMode, setIsTransferMode, upcomingStationsVisible } = useUIContext()
-    const transferImages = useMemo(() => getTransferImageUrls(train?.getLine()), [train?.getLine()])
 
     const initializeGame = useCallback(async () => {
         await StationClass.initializeAllStations()
@@ -51,6 +50,9 @@ function App() {
             }
         }
     }, [train])
+
+    const line = train?.getLine()
+    const transferImages = useMemo(() => getTransferImageUrls(line), [line])
 
     if (!train || !gameState) return <>Error</>
 
