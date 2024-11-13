@@ -44,7 +44,7 @@ function App() {
                 currentElement.scrollIntoView({ behavior: 'smooth', inline: 'center' })
             }
         }
-    }, [train])
+    }, [train, gameState?.currentStations])
 
     // starting the train and game
     useEffect(() => {
