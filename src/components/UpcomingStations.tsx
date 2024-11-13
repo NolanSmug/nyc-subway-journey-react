@@ -82,8 +82,6 @@ function UpcomingStations({ stations, currentStation, line, direction, visible }
         return null
     }
 
-    const displayStations = direction === Direction.DOWNTOWN ? [...stations].reverse() : stations
-
     return (
         <div className="upcoming-stations-container">
             <div className="stations" ref={stationsRef}>

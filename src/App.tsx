@@ -36,19 +36,6 @@ function App() {
         }
     }
 
-    // station map smooth-scrolling to the train state current station
-    // useEffect(() => {
-    //     if (gameState?.currentStations && train?.getCurrentStation()) {
-    //         const currentElement = document.querySelector('.current-station')
-    //         if (currentElement) {
-    //             currentElement.scrollIntoView({ behavior: 'smooth', inline: 'start' })
-    //             console.log(currentElement)
-    //         } else {
-    //             console.log('No current station element found.')
-    //         }
-    //     }
-    // }, [train, gameState?.currentStations])
-
     // starting the train and game
     useEffect(() => {
         initializeGame()
