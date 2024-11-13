@@ -71,7 +71,7 @@ function TrainCar({ train, flipDirection, transfers, header, children }: TrainCa
             <img
                 src={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                 className={`arrow ${train.getDirection() === Direction.UPTOWN ? 'show' : 'hide'}`}
-                alt="Left Arrow"
+                alt="Right Arrow"
             />
         </div>
     )
