@@ -100,7 +100,6 @@ A28,34 St-Penn Station,A C E 1 2 3,M
 R06,36 Av,N W,Q
 R36,36 St,D N R,Bk
 G20,36 St,M R,Q
-W08,36 St,D N R W,Bk
 R08,39 Av-Dutch Kills,N W,Q
 F23,4 Av-9 St,R F G,Bk
 R33,4 Av-9 St,R F G,Bk
@@ -121,7 +120,6 @@ B14,50 St,D,Bk
 126,50 St,1,M
 713,52 St,7,Q
 R40,53 St,R N,Bk
-W06,53 St,R W,Bk
 B15,55 St,D,Bk
 B10,57 St,F,M
 R14,57 St-7 Av,N Q R W,M
@@ -130,8 +128,7 @@ W05,59 St,N R,Bk
 A24,59 St-Columbus Circle,A B C D 1,M
 125,59 St-Columbus Circle,A B C D 1,M
 712,61 St-Woodside,7,Q
-B16,62 St,D,Bk
-W04,62 St-New Utrecht Av,N W,Bk
+B16,62 St,D N,Bk
 G10,63 Dr-Rego Park,M R,Q
 G15,65 St,M R,Q
 124,66 St-Lincoln Center,1,M
@@ -142,7 +139,6 @@ D25,7 Av,B Q,Bk
 D14,7 Av,B D E,M
 F24,7 Av,F G,Bk
 B17,71 St,D,Bk
-W03,71 St,D W,Bk
 A22,72 St,B C,M
 123,72 St,1 2 3,M
 Q03,72 St,Q,M
@@ -152,7 +148,6 @@ R43,77 St,R,Bk
 627,77 St,6,M
 B18,79 St,D,Bk
 122,79 St,1,M
-W02,79 St,D W,Bk
 N02,8 Av,N,Bk
 R21,8 St-NYU,R W,M
 A59,80 St,A,Q
@@ -165,7 +160,6 @@ N10,86 St,N,Bk
 121,86 St,1,M
 Q04,86 St,Q,M
 R44,86 St,R,Bk
-W01,86 St,D W,Bk
 A60,88 St,A,Q
 B12,9 Av,D,Bk
 708,90 St-Elmhurst Av,7,Q
@@ -199,7 +193,6 @@ B23,Bay 50 St,D,Bk
 B21,Bay Pkwy,D,Bk
 F32,Bay Pkwy,F,Bk
 N07,Bay Pkwy,N,Bk
-W00,Bay Pkwy,D W,Bk
 R42,Bay Ridge Av,R,Bk
 R45,Bay Ridge-95 St,R,Bk
 502,Baychester Av,5,Bx
@@ -283,9 +276,8 @@ J20,Crescent St,J Z,Bk
 250,Crown Hts-Utica Av,3 4,Bk
 617,Cypress Av,6,Bx
 J19,Cypress Hills,J,Bk
-R30,DeKalb Av,B Q R W,Bk
+R30,DeKalb Av,B Q R,Bk
 L16,DeKalb Av,L,Bk
-W11,DeKalb Av,B Q R W,Bk
 F15,Delancey St-Essex St,J Z F M,M
 M18,Delancey St-Essex St,J Z F M,M
 F29,Ditmas Av,F,Bk
@@ -357,9 +349,9 @@ G14,Jackson Hts-Roosevelt Av,7 E F M R,Q
 G05,Jamaica Center-Parsons/Archer,E,Q
 F01,Jamaica-179 St,F,Q
 G07,Jamaica-Van Wyck,E,Q
-A41,Jay St-MetroTech,A C F R W,Bk
-R29,Jay St-MetroTech,A C F R W,Bk
-W12,Jay St-MetroTech,A C F R W,Bk
+A41,Jay St-MetroTech,A C F R,Bk
+R29,Jay St-MetroTech,A C F R,Bk
+W12,Jay St-MetroTech,A C F R,Bk
 L15,Jefferson St,L,Bk
 707,Junction Blvd,7,Q
 254,Junius St,3,Bk
@@ -430,7 +422,6 @@ F03,Parsons Blvd,F,Q
 R22,Prince St,R W,M
 219,Prospect Av,2 5,Bx
 R34,Prospect Av,R,Bk
-W09,Prospect Av,R W,Bk
 D26,Prospect Park,B Q Sf,Bk
 G21,Queens Plaza,E M R,Q
 R09,Queensboro Plaza,7 N W,Q
@@ -468,7 +459,6 @@ R16,Times Sq-42 St,1 2 3 7 N Q R W S,M
 725,Times Sq-42 St,1 2 3 7 N Q R W S,M
 D07,Tremont Av,B D,Bx
 R32,Union St,R,Bk
-W10,Union St,R W,Bk
 A48,Utica Av,A C,Bk
 101,Van Cortlandt Park-242 St,1,Bx
 A53,Van Siclen Av,C,Bk
