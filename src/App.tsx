@@ -41,7 +41,7 @@ function App() {
         if (gameState?.currentStations && train?.getCurrentStation()) {
             const currentElement = document.querySelector('.current-station')
             if (currentElement) {
-                currentElement.scrollIntoView({ behavior: 'smooth', inline: 'nearest' })
+                currentElement.scrollIntoView({ behavior: 'smooth', inline: 'center' })
             }
         }
     }, [train])

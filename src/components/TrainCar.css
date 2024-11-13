@@ -4,7 +4,23 @@ h2 {
 }
 
 .train-container {
-    min-width: 50em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.arrow {
+    height: 2em;
+    width: 2em;
+}
+
+.show {
+    visibility: visible;
+}
+
+.hide {
+    visibility: hidden;
 }
 
 .train-car {
@@ -12,7 +28,7 @@ h2 {
     flex-direction: row;
     align-items: stretch;
     background-color: var(--train-car-bg);
-    min-width: var(--station-min-width, 220px);
+    min-width: 20em;
     padding: 1em 1em 0 1em;
     position: relative;
     box-sizing: border-box;
@@ -35,20 +51,29 @@ h2 {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 0.3em;
     padding-bottom: 1.2em;
+}
+
+.windows#train-info {
+    min-width: 33em;
 }
 
 .train-direction {
     color: var(--train-text-color);
     margin-bottom: 0.25em;
-    width: 100%;
+    width: fit-content;
     margin-top: 0.25em;
     transition: transform 0.1s;
+    text-align: center;
+    flex-grow: 0.5;
 }
 
 .train-direction:hover {
     cursor: pointer;
+    transform: scale(1.03);
+    transition: ease-in 0.1s;
 }
 
 .is-null-direction {
@@ -61,7 +86,7 @@ h2 {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.07);
+        transform: scale(1.05);
     }
 }
 
@@ -72,6 +97,8 @@ h2 {
     margin-top: 0.25em;
     word-wrap: normal !important;
     margin-left: 0.15em;
+    text-align: center;
+    flex-grow: 0.2;
 }
 
 .train-type::before {
@@ -84,10 +111,8 @@ h2 {
     background-color: var(--train-car-border);
 }
 
-.line-container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.25em;
+.train-car-line {
+    margin-left: 0.25em;
 }
 
 /* Windows styling */
@@ -100,7 +125,10 @@ h2 {
 }
 
 .train-car .transfer-lines-container img.transfer-line-image {
-    border-radius: 0.1em;
+    border-radius: 0.2em;
+    padding: 0.43em;
+    cursor:default;
+    transform:none;
 }
 
 .front-window {
