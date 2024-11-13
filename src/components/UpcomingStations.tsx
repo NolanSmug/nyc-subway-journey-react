@@ -61,7 +61,10 @@ function UpcomingStations({ stations, currentStation, line, direction, visible }
             const currentStationElement = stationsRef.current.querySelector('.current-station')
 
             if (currentStationElement) {
-                currentStationElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+                const timer = setTimeout(() => {
+                    currentStationElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' })
+                }, 0) // !DO NOT REMOVE! Absolutely no clue why this fixes occasional scrolling issues, but it does
+                return () => clearTimeout(timer)
             } else {
                 console.warn(`Current station with ID ${currentID} not found.`)
             }

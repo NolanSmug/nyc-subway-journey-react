@@ -1,7 +1,7 @@
 .upcoming-stations-container {
     position: relative;
     max-width: 100vw;
-
+    scroll-behavior:smooth;
     overflow-x: auto;
     overflow-y: hidden;
     display: flex;
