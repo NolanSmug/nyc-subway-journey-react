@@ -7,7 +7,7 @@ D28,Church Av,B Q,Bk
 D26,Prospect Park,B Q Sf,Bk
 D25,7 Av,B Q,Bk
 D24,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
-R30,DeKalb Av,B Q R W,Bk
+R30,DeKalb Av,B Q R,Bk
 D22,Grand St,B D,M
 D21,Bway-Lafayette St/Bleecker St,6 B D F M,M
 D20,W 4 St-Wash Sq,A C E B D F M,M
@@ -23,7 +23,7 @@ A19,96 St,B C,M
 A18,103 St,B C,M
 A17,Cathedral Pkwy (110 St),B C,M
 A16,116 St,B C,M
-A15,125 St,A B C D,M
+A15,125 St,A C B D,M
 A14,135 St,B C,M
 D13,145 St,A C B D,M
 D12,155 St,B D,M

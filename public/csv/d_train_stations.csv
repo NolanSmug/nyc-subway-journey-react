@@ -7,7 +7,7 @@ B20,20 Av,D,Bk
 B19,18 Av,D,Bk
 B18,79 St,D,Bk
 B17,71 St,D,Bk
-B16,62 St,D,Bk
+B16,62 St,D N,Bk
 B15,55 St,D,Bk
 B14,50 St,D,Bk
 B13,Fort Hamilton Pkwy,D,Bk
@@ -22,7 +22,7 @@ D16,42 St-Bryant Pk,B D F M 7,M
 D15,47-50 Sts-Rockefeller Ctr,B D F M,M
 D14,7 Av,B D E,M
 A24,59 St-Columbus Circle,A B C D 1,M
-A15,125 St,A B C D,M
+A15,125 St,A C B D,M
 D13,145 St,A C B D,M
 D12,155 St,B D,M
 D11,161 St-Yankee Stadium,B D,Bx

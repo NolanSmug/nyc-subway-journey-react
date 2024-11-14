@@ -17,20 +17,20 @@ import C_DIRECTION_BLACK from '../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
 import { useEffect } from 'react'
+import { useUIContext } from '../contexts/UIContext'
 
 interface GameStateUIProps {
     train: Train
     gameState: GameState
     initializeGame: () => Promise<void>
-    darkMode: boolean
-    isTransferMode: React.Dispatch<React.SetStateAction<boolean>>
-    forceRenderRefresh: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMode, forceRenderRefresh }: GameStateUIProps) {
+function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
+    const { darkMode, setIsTransferMode, forceRenderRefresh } = useUIContext()
+
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
-        if (action !== 'transfer') isTransferMode(false)
+        if (action !== 'transfer') setIsTransferMode(false)
 
         switch (action) {
             case 'refresh':
@@ -39,7 +39,7 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
 
             case 'advanceStation':
                 await train.advanceStation()
-                forceRenderRefresh((prev) => !prev)
+                forceRenderRefresh()
 
                 const winState = await gameState.checkWin(train.getCurrentStation())
                 if (winState) {
@@ -50,12 +50,12 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
                 break
 
             case 'transfer':
-                isTransferMode(true)
+                setIsTransferMode(true)
                 break
 
             case 'changeDirection':
                 await train.reverseDirection()
-                forceRenderRefresh((prev) => !prev)
+                forceRenderRefresh()
                 break
             default:
         }
@@ -80,8 +80,8 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
 
             await train.updateTrainState()
         }
-        forceRenderRefresh((prev: any) => !prev)
-        isTransferMode(false)
+        forceRenderRefresh()
+        setIsTransferMode(false)
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -90,7 +90,7 @@ function GameStateUI({ train, gameState, initializeGame, darkMode, isTransferMod
             c: () => handleTrainAction('changeDirection'),
             r: () => handleTrainAction('refresh'),
             ArrowRight: () => handleTrainAction('advanceStation'),
-            Escape: () => isTransferMode(false),
+            Escape: () => setIsTransferMode(false),
         }
         actions[event.key]?.()
     }

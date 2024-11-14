@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
 import ActionButton from './ActionButton'
 import SettingsButton from './SettingsButton'
+import { useUIContext } from '../contexts/UIContext'
 import './SettingsUmbrella.css'
 
+import L_MODE from '../images/light-mode-icon.svg'
+import D_MODE from '../images/dark-mode-icon.svg'
 import GEAR_BLACK from '../images/settings-icon-b.svg'
 import GEAR_WHITE from '../images/settings-icon-w.svg'
+import UPCOMING_STATIONS_BLACK from '../images/upcoming-stations-icon-b.svg'
+import UPCOMING_STATIONS_WHITE from '../images/upcoming-stations-icon-w.svg'
 
-export interface SettingsUmbrellaProps {
-    toggleActions: React.ReactElement<typeof SettingsButton>[]
-    darkMode: boolean
-}
-
-const SettingsUmbrella = ({ toggleActions, darkMode }: SettingsUmbrellaProps) => {
+const SettingsUmbrella = () => {
     const [isOpen, setIsOpen] = useState(false)
     const popupRef = useRef<HTMLDivElement | null>(null)
     const buttonRef = useRef<HTMLDivElement | null>(null)
+
+    const { darkMode, setDarkMode, setUpcomingStationsVisible, forceRenderRefresh } = useUIContext()
 
     useEffect(() => {
         document.body.classList.toggle('dark-mode', darkMode)
@@ -49,9 +51,15 @@ const SettingsUmbrella = ({ toggleActions, darkMode }: SettingsUmbrellaProps) =>
             </div>
 
             <div ref={popupRef} className={`settings-popup ${isOpen ? 'visible' : 'hidden'}`}>
-                {toggleActions?.map((action, index) => (
-                    <div key={index}>{action}</div>
-                ))}
+                <SettingsButton label="Theme" imgSrc={darkMode ? L_MODE : D_MODE} onClick={() => setDarkMode((prev) => !prev)} />
+                <SettingsButton
+                    label="Upcoming Stations"
+                    imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
+                    onClick={() => {
+                        setUpcomingStationsVisible((prev) => !prev)
+                        forceRenderRefresh()
+                    }}
+                />
                 <div className="settings-popup-arrow" />
             </div>
         </div>

@@ -2,12 +2,15 @@ import { LineName } from '../logic/Line'
 import { Station as StationType } from '../logic/StationManager'
 import StationFragment from './StationFragment'
 import { useEffect, useRef } from 'react'
+import { Direction } from '../logic/TrainManager'
 import './UpcomingStations.css'
 
 export interface UpcomingStationsProps {
     stations: StationType[]
     currentStation: StationType
     line: LineName
+    direction: Direction
+    visible: boolean
 }
 
 const lineColorMap: { [key in LineName]: string } = {
@@ -47,7 +50,7 @@ export function lineToLineColor(lineName: LineName): string {
 
 // TODO: Borough barrier
 
-function UpcomingStations({ stations, currentStation, line }: UpcomingStationsProps) {
+function UpcomingStations({ stations, currentStation, line, visible }: UpcomingStationsProps) {
     const lineColor = lineToLineColor(line)
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
@@ -57,23 +60,19 @@ function UpcomingStations({ stations, currentStation, line }: UpcomingStationsPr
         if (stationsRef.current && stations.length > 0) {
             const currentStationElement = stationsRef.current.querySelector('.current-station')
 
-            if (currentStationElement) {
-                currentStationElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-            } else {
-                console.warn(`Current station with ID ${currentID} not found.`)
-            }
+            scrollToCurrentStation(currentStationElement!)
         }
     }, [currentStation, stations.length, currentID])
 
     useEffect(() => {
         if (stationsRef.current && lineDividerRef.current) {
-            const stationsWidth = stationsRef.current.scrollWidth
+            const stationsWidth = stationsRef.current.scrollWidth // get width of the upcoming stations component
             lineDividerRef.current.style.width = `${stationsWidth}px`
         }
     }, [stations.length])
 
-    if (!stations || stations.length === 0) {
-        return null
+    if (!stations || stations.length === 0 || !visible) {
+        return <div style={{ display: 'none' }} />
     }
 
     return (
@@ -92,6 +91,19 @@ function UpcomingStations({ stations, currentStation, line }: UpcomingStationsPr
             <div ref={lineDividerRef} className="line-divider" style={{ backgroundColor: lineColor }} />
         </div>
     )
+}
+
+function scrollToCurrentStation(currentStationElement: Element): () => void {
+    if (currentStationElement) {
+        const timer = setTimeout(() => {
+            currentStationElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' })
+        }, 0) // !DO NOT REMOVE! no idea why "0ms delay" fixes occasional scrolling issues, but it does
+        return () => clearTimeout(timer)
+    } else {
+        console.warn(`Current station not found.`)
+    }
+    console.warn(`Current station not found.`)
+    return () => {}
 }
 
 export default UpcomingStations
