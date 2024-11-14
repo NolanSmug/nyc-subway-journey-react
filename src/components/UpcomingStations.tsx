@@ -66,10 +66,12 @@ function UpcomingStations({ stations, currentStation, line, visible }: UpcomingS
 
     useEffect(() => {
         if (stationsRef.current && lineDividerRef.current) {
-            const stationsWidth = stationsRef.current.scrollWidth // get width of the upcoming stations component
-            lineDividerRef.current.style.width = `${stationsWidth}px`
+            const stationsWidth = stationsRef.current.scrollWidth
+            if (stationsWidth > 0) {
+                lineDividerRef.current.style.width = `${stationsWidth}px`
+            }
         }
-    }, [stations.length])
+    }, [stations.length, visible])
 
     if (!stations || stations.length === 0 || !visible) {
         return <div style={{ display: 'none' }} />
@@ -96,7 +98,7 @@ function UpcomingStations({ stations, currentStation, line, visible }: UpcomingS
 function scrollToCurrentStation(currentStationElement: Element): () => void {
     if (currentStationElement) {
         const timer = setTimeout(() => {
-            currentStationElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' })
+            currentStationElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'end' })
         }, 0) // !DO NOT REMOVE! no idea why "0ms delay" fixes occasional scrolling issues, but it does
         return () => clearTimeout(timer)
     } else {
