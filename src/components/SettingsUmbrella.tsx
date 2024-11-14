@@ -16,7 +16,7 @@ const SettingsUmbrella = () => {
     const popupRef = useRef<HTMLDivElement | null>(null)
     const buttonRef = useRef<HTMLDivElement | null>(null)
 
-    const { darkMode, setDarkMode, setUpcomingStationsVisible } = useUIContext()
+    const { darkMode, setDarkMode, setUpcomingStationsVisible, forceRenderRefresh } = useUIContext()
 
     useEffect(() => {
         document.body.classList.toggle('dark-mode', darkMode)
@@ -55,7 +55,10 @@ const SettingsUmbrella = () => {
                 <SettingsButton
                     label="Upcoming Stations"
                     imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
-                    onClick={() => setUpcomingStationsVisible((prev) => !prev)}
+                    onClick={() => {
+                        setUpcomingStationsVisible((prev) => !prev)
+                        forceRenderRefresh()
+                    }}
                 />
                 <div className="settings-popup-arrow" />
             </div>

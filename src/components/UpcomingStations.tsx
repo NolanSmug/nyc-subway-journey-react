@@ -50,7 +50,7 @@ export function lineToLineColor(lineName: LineName): string {
 
 // TODO: Borough barrier
 
-function UpcomingStations({ stations, currentStation, line, direction, visible }: UpcomingStationsProps) {
+function UpcomingStations({ stations, currentStation, line, visible }: UpcomingStationsProps) {
     const lineColor = lineToLineColor(line)
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
@@ -60,26 +60,19 @@ function UpcomingStations({ stations, currentStation, line, direction, visible }
         if (stationsRef.current && stations.length > 0) {
             const currentStationElement = stationsRef.current.querySelector('.current-station')
 
-            if (currentStationElement) {
-                const timer = setTimeout(() => {
-                    currentStationElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' })
-                }, 0) // !DO NOT REMOVE! Absolutely no clue why this fixes occasional scrolling issues, but it does
-                return () => clearTimeout(timer)
-            } else {
-                console.warn(`Current station with ID ${currentID} not found.`)
-            }
+            scrollToCurrentStation(currentStationElement!)
         }
     }, [currentStation, stations.length, currentID])
 
     useEffect(() => {
         if (stationsRef.current && lineDividerRef.current) {
-            const stationsWidth = stationsRef.current.scrollWidth
+            const stationsWidth = stationsRef.current.scrollWidth // get width of the upcoming stations component
             lineDividerRef.current.style.width = `${stationsWidth}px`
         }
-    }, [stations.length, visible])
+    }, [stations.length])
 
     if (!stations || stations.length === 0 || !visible) {
-        return null
+        return <div style={{ display: 'none' }} />
     }
 
     return (
@@ -98,6 +91,19 @@ function UpcomingStations({ stations, currentStation, line, direction, visible }
             <div ref={lineDividerRef} className="line-divider" style={{ backgroundColor: lineColor }} />
         </div>
     )
+}
+
+function scrollToCurrentStation(currentStationElement: Element): () => void {
+    if (currentStationElement) {
+        const timer = setTimeout(() => {
+            currentStationElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' })
+        }, 0) // !DO NOT REMOVE! no idea why "0ms delay" fixes occasional scrolling issues, but it does
+        return () => clearTimeout(timer)
+    } else {
+        console.warn(`Current station not found.`)
+    }
+    console.warn(`Current station not found.`)
+    return () => {}
 }
 
 export default UpcomingStations

@@ -13,12 +13,11 @@ import L_ARROW_WHITE from '../images/left-arrow-w.svg'
 export interface TrainCarProps {
     flipDirection: () => Promise<void>
     train: Train
-    transfers?: JSX.Element[]
     header?: ReactNode
     children?: ReactNode
 }
 
-function TrainCar({ train, flipDirection, transfers, header, children }: TrainCarProps) {
+function TrainCar({ train, flipDirection, header, children }: TrainCarProps) {
     const isNullDirection: string = train.getDirection() === Direction.NULL_DIRECTION ? 'is-null-direction' : ''
     const lineColor = train.getLine() ? lineToLineColor(train.getLine()) : 'Null_Train'
     const { forceRenderRefresh, darkMode } = useUIContext()
