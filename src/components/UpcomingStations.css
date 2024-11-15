@@ -17,6 +17,7 @@
     align-content: flex-end;
     position: relative;
     height: 20em;
+    column-gap: 1px;
     z-index: 1;
     margin-bottom: 1.5em;
 }

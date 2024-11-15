@@ -127,8 +127,8 @@ h2 {
 .train-car .transfer-lines-container img.transfer-line-image {
     border-radius: 0.2em;
     padding: 0.43em;
-    cursor:default;
-    transform:none;
+    cursor: default;
+    transform: none;
 }
 
 .front-window {

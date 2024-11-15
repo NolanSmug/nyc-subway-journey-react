@@ -4,9 +4,9 @@
     align-items: center;
     position: relative;
     max-width: 100vm;
-    min-width: 4rem;
     max-height: 100%;
 }
+
 
 .station-frag-content {
     display: flex;
@@ -22,6 +22,13 @@
     left: 3em;
 }
 
+.upcoming-stations-vertical-container .station-frag-container .station-frag-content {
+    transform: rotate(0deg); /* vertical list requires no rotate */
+    top: 2em;
+    left: 6em;
+    margin-bottom:0;
+}
+
 .station-frag-content.overflow .station-frag-name {
     transform: translateX(0.8em);
     margin-left: 1.5em;
@@ -34,10 +41,11 @@
 .station-frag-name {
     font-size: 0.75rem;
     white-space: nowrap;
-    overflow: scroll; /* Change to hidden if you use ellipsis */
+    overflow: scroll;
     scrollbar-width:none; /* Firefox */
     -ms-overflow-style: none; /* Chrome */
     max-width: 16ch;
+
 }
 
 .current-station .station-frag-name {
@@ -45,7 +53,7 @@
     text-decoration: underline;
 }
 
-.current-station .station-dot {
+:not(> .stations-vertical) .current-station .station-dot {
     width: 1.25rem;
     height: 1.25rem;
     border-width: 0.4rem;
@@ -53,7 +61,19 @@
     transition: 0.1s ease-out
 }
 
-.station-dot {
+.stations-vertical .station-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: white;
+    border-radius: 50%;
+    border-width: 0.15rem;
+    border-style: solid;
+    position: static;
+    transform: translate(-50%, 50%);
+    z-index: 2;
+}
+
+:not(> .stations-vertical) .station-dot {
     width: 0.75rem;
     height: 0.75rem;
     background-color: white;
