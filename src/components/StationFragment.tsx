@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import TransferLines from './TransferLines'
 import { getTransferImages } from '../logic/TransferImageMap'
 import { Station } from '../logic/StationManager'
@@ -13,16 +13,7 @@ export interface StationFragmentProps {
 }
 
 const StationFragment: React.FC<StationFragmentProps> = ({ station, className, transfers, lineColor }) => {
-    const nameRef = useRef<HTMLHeadingElement | null>(null)
-    const [isOverflowing, setIsOverflowing] = useState(station.getName().length > 12)
-
-    useEffect(() => {
-        if (nameRef.current) {
-            const textLengthCheck = station.getName().length > 12
-            const actualOverflowCheck = nameRef.current.scrollWidth > nameRef.current.clientWidth
-            setIsOverflowing(textLengthCheck || actualOverflowCheck)
-        }
-    }, [station])
+    const [isOverflowing] = useState(station.getName().length > 12)
 
     return (
         <div className={`station-frag-container ${isOverflowing ? 'overflow' : ''} ${className}`}>
