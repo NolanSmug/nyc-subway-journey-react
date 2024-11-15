@@ -26,12 +26,7 @@ const SettingsUmbrella = () => {
         const handleClickOutside = (event: MouseEvent) => {
             if (!(event.target instanceof Node)) return
 
-            if (
-                popupRef.current &&
-                !popupRef.current.contains(event.target as Node) &&
-                buttonRef.current &&
-                !buttonRef.current.contains(event.target as Node)
-            ) {
+            if (isOpen && !popupRef.current?.contains(event.target)) {
                 setIsOpen(false)
             }
         }
