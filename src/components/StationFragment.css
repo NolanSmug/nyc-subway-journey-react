@@ -53,14 +53,6 @@
     text-decoration: underline;
 }
 
-:not(> .stations-vertical) .current-station .station-dot {
-    width: 1.25rem;
-    height: 1.25rem;
-    border-width: 0.4rem;
-    transition: 0.2s ease-in;
-    transition: 0.1s ease-out
-}
-
 .stations-vertical .station-dot {
     width: 0.75rem;
     height: 0.75rem;
@@ -73,7 +65,15 @@
     z-index: 2;
 }
 
-:not(> .stations-vertical) .station-dot {
+:not(.stations-vertical) .current-station .station-dot {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-width: 0.4rem;
+    transition: 0.2s ease-in;
+    transition: 0.1s ease-out
+}
+
+:not(.stations-vertical) .station-dot {
     width: 0.75rem;
     height: 0.75rem;
     background-color: white;
