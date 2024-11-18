@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import './TrainCar.css'
 import Door from './Door'
-import { lineToLineColor } from '../components/UpcomingStations'
 import { useUIContext } from '../contexts/UIContext'
 import { Direction, Train } from '../logic/TrainManager'
 
@@ -19,8 +18,7 @@ export interface TrainCarProps {
 
 function TrainCar({ train, flipDirection, header, children }: TrainCarProps) {
     const isNullDirection: string = train.getDirection() === Direction.NULL_DIRECTION ? 'is-null-direction' : ''
-    const lineColor = train.getLine() ? lineToLineColor(train.getLine()) : 'Null_Train'
-    const { forceRenderRefresh, darkMode } = useUIContext()
+    const { forceRenderRefresh, currentLineColor, darkMode } = useUIContext()
     return (
         <div className="train-container">
             <img
@@ -45,9 +43,9 @@ function TrainCar({ train, flipDirection, header, children }: TrainCarProps) {
                         style={
                             isNullDirection
                                 ? {
-                                      borderColor: lineColor,
+                                      borderColor: currentLineColor,
                                       textDecoration: 'underline',
-                                      textDecorationColor: lineColor,
+                                      textDecorationColor: currentLineColor,
                                       textUnderlineOffset: '4px',
                                   }
                                 : {}

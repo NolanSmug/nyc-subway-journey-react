@@ -1,7 +1,7 @@
 import './App.css'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import TransferLines from './components/TransferLines'
-import UpcomingStations from './components/UpcomingStations'
+import UpcomingStations, { lineToLineColor } from './components/UpcomingStations'
 import Header from './components/Header'
 import TrainCar from './components/TrainCar'
 import GameStateUI from './components/GameStateUI'
@@ -18,7 +18,8 @@ import { useUIContext } from './contexts/UIContext'
 function App() {
     const [train, setTrain] = useState<Train | null>(null)
     const [gameState, setGameState] = useState<GameState | null>(null)
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, upcomingStationsVertical } = useUIContext()
+    const { isTransferMode, setIsTransferMode, setCurrentLineColor, upcomingStationsVisible, upcomingStationsVertical } =
+        useUIContext()
 
     const initializeGame = useCallback(async () => {
         await StationClass.initializeAllStations()
@@ -28,6 +29,7 @@ function App() {
         setIsTransferMode(false)
         setTrain(newGame.train)
         setGameState(newGame.gameState)
+        setCurrentLineColor(lineToLineColor(newGame.train.getLine()))
     }, [setIsTransferMode, setTrain, setGameState])
 
     const handleClickAway = (e: React.MouseEvent) => {
@@ -56,7 +58,6 @@ function App() {
                     <UpcomingStations
                         stations={train.getScheduledStops()}
                         currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
-                        line={train.getLine()}
                         direction={train.getDirection()}
                         visible={upcomingStationsVisible}
                     />
@@ -83,7 +84,6 @@ function App() {
                     <UpcomingStationsVertical
                         stations={train.getScheduledStops()}
                         currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
-                        line={train.getLine()}
                         direction={train.getDirection()}
                         visible={upcomingStationsVisible}
                     />

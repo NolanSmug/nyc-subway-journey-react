@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react'
-import { lineToLineColor, UpcomingStationsProps } from './UpcomingStations'
+import { UpcomingStationsProps } from './UpcomingStations'
 import StationFragment from './StationFragment'
 
 import './UpcomingStationsVertical.css'
+import { useUIContext } from '../contexts/UIContext'
 
-function UpcomingStationsVertical({ stations, currentStation, line, visible }: UpcomingStationsProps) {
-    const lineColor = lineToLineColor(line)
+function UpcomingStationsVertical({ stations, currentStation, visible }: UpcomingStationsProps) {
+    const { currentLineColor } = useUIContext()
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
     const currentID = currentStation.getId()
@@ -32,14 +33,14 @@ function UpcomingStationsVertical({ stations, currentStation, line, visible }: U
 
     return (
         <div className="upcoming-stations-vertical-container">
-            <div ref={lineDividerRef} className="line-divider-vertical" style={{ backgroundColor: lineColor }} />
+            <div ref={lineDividerRef} className="line-divider-vertical" style={{ backgroundColor: currentLineColor }} />
             <div className="stations-vertical" ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragment
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        lineColor={lineColor}
+                        lineColor={currentLineColor}
                         className={currentID === station.getId() ? 'current-station-vertical' : ''}
                     />
                 ))}

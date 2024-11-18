@@ -267,9 +267,9 @@ D30,Cortelyou Rd,Q,Bk
 R25,Cortlandt St,R W,M
 W18,Cortlandt St,R W,M
 W16,Cortlandt St,R W,M
-G22,Court Sq,7 E F G,Q
-719,Court Sq,7 E F G,Q
-F09,Court Sq-23 St,E M,Q
+G22,Court Sq,7 E M G,Q
+719,Court Sq,7 E M G,Q
+F09,Court Sq-23 St,7 E M G,Q
 R28,Court St,R,Bk
 W13,Court St,R W,M
 J20,Crescent St,J Z,Bk

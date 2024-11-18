@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 interface UIContextProps {
     isTransferMode: boolean
     setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
+    currentLineColor: string
+    setCurrentLineColor: React.Dispatch<React.SetStateAction<string>>
     forceRenderRefresh: () => void
     darkMode: boolean
     setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,10 +19,11 @@ const UIContext = createContext<UIContextProps | undefined>(undefined)
 // Provides values/state variables related to the user interface
 export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
+    const [currentLineColor, setCurrentLineColor] = useState<string>('')
     const [, forceRenderRefresh] = useState(false)
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
-    const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(true)
+    const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(false)
 
     const triggerRenderRefresh = () => forceRenderRefresh((prev) => !prev)
 
@@ -29,6 +32,8 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
             value={{
                 isTransferMode,
                 setIsTransferMode,
+                currentLineColor,
+                setCurrentLineColor,
                 forceRenderRefresh: triggerRenderRefresh,
                 darkMode,
                 setDarkMode,

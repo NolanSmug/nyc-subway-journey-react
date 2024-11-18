@@ -16,8 +16,9 @@ import C_DIRECTION_WHITE from '../images/change-direction-icon-w.svg'
 import C_DIRECTION_BLACK from '../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useUIContext } from '../contexts/UIContext'
+import { lineToLineColor } from './UpcomingStations'
 
 interface GameStateUIProps {
     train: Train
@@ -26,11 +27,12 @@ interface GameStateUIProps {
 }
 
 function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
-    const { darkMode, setIsTransferMode, forceRenderRefresh } = useUIContext()
-
+    const { darkMode, setIsTransferMode, setCurrentLineColor, forceRenderRefresh } = useUIContext()
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
         if (action !== 'transfer') setIsTransferMode(false)
+
+        setCurrentLineColor(lineToLineColor(train.getLine()))
 
         switch (action) {
             case 'refresh':
@@ -82,6 +84,7 @@ function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
         }
         forceRenderRefresh()
         setIsTransferMode(false)
+        setCurrentLineColor(lineToLineColor(selectedLine))
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
