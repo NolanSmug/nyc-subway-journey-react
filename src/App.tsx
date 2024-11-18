@@ -6,6 +6,7 @@ import Header from './components/Header'
 import TrainCar from './components/TrainCar'
 import GameStateUI from './components/GameStateUI'
 import SettingsUmbrella from './components/SettingsUmbrella'
+import UpcomingStationsVertical from './components/UpcomingStationsVertical'
 
 import { Station as StationClass } from './logic/StationManager'
 import { Game } from './logic/Game'
@@ -17,7 +18,7 @@ import { useUIContext } from './contexts/UIContext'
 function App() {
     const [train, setTrain] = useState<Train | null>(null)
     const [gameState, setGameState] = useState<GameState | null>(null)
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, upcomingStationsVertical } = useUIContext()
 
     const initializeGame = useCallback(async () => {
         await StationClass.initializeAllStations()
@@ -47,33 +48,48 @@ function App() {
     if (!train || !gameState) return <>Error</>
 
     return (
-        <div className="Game">
-            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
+        <>
+            <div className="Game">
+                <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-            <UpcomingStations
-                stations={train.getScheduledStops()}
-                currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
-                line={train.getLine()}
-                direction={train.getDirection()}
-                visible={upcomingStationsVisible}
-            />
+                {!upcomingStationsVertical && (
+                    <UpcomingStations
+                        stations={train.getScheduledStops()}
+                        currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
+                        line={train.getLine()}
+                        direction={train.getDirection()}
+                        visible={upcomingStationsVisible}
+                    />
+                )}
 
-            <Header text="Current Line:"></Header>
-            <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
-                <TrainCar
-                    train={train}
-                    flipDirection={async () => {
-                        await train.reverseDirection()
-                    }}
-                >
-                    <TransferLines transfers={transferImages} notDim />
-                </TrainCar>
+                <Header text="Current Line:"></Header>
+                <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
+                    <TrainCar
+                        train={train}
+                        flipDirection={async () => {
+                            await train.reverseDirection()
+                        }}
+                    >
+                        <TransferLines transfers={transferImages} notDim />
+                    </TrainCar>
+                </div>
+
+                <GameStateUI train={train} gameState={gameState} initializeGame={initializeGame} />
+
+                <SettingsUmbrella />
             </div>
-
-            <GameStateUI train={train} gameState={gameState} initializeGame={initializeGame} />
-
-            <SettingsUmbrella />
-        </div>
+            {upcomingStationsVertical && (
+                <div className="upcoming-stations-vertical">
+                    <UpcomingStationsVertical
+                        stations={train.getScheduledStops()}
+                        currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
+                        line={train.getLine()}
+                        direction={train.getDirection()}
+                        visible={upcomingStationsVisible}
+                    />
+                </div>
+            )}
+        </>
     )
 }
 

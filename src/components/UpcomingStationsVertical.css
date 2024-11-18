@@ -1,0 +1,34 @@
+.upcoming-stations-vertical-container {
+    position: relative;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    overflow-y: visible;
+    display: flex;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: 90vh;
+    width: 30em;
+}
+
+.stations-vertical {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column-reverse;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 5em;
+}
+
+.line-divider-vertical {
+    position:absolute;
+    height: 0.3rem;
+    z-index: 0;
+    left: 6.65em;
+    transform: translateX(-50%) rotate(90deg);
+    top: 25vh;
+}
+
+.current-station {
+    font-weight: bold;
+}

@@ -26,7 +26,7 @@
     padding: 1em;
     border-radius: 8px;
     border: 1px solid var(--bg-color-3);
-    width: 18em;
+    width: 15em;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.2s ease-in;

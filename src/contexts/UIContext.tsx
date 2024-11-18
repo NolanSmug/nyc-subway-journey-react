@@ -8,6 +8,8 @@ interface UIContextProps {
     setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
     upcomingStationsVisible: boolean
     setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
+    upcomingStationsVertical: boolean
+    setUpcomingStationsVertical: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const UIContext = createContext<UIContextProps | undefined>(undefined)
@@ -18,6 +20,7 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [, forceRenderRefresh] = useState(false)
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
+    const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(true)
 
     const triggerRenderRefresh = () => forceRenderRefresh((prev) => !prev)
 
@@ -31,6 +34,8 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
                 setDarkMode,
                 upcomingStationsVisible,
                 setUpcomingStationsVisible,
+                upcomingStationsVertical,
+                setUpcomingStationsVertical,
             }}
         >
             {children}

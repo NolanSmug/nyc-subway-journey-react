@@ -49,13 +49,23 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: 100%;
     max-width: 1400px;
     padding: 2em;
     box-sizing: border-box;
     margin-bottom: 4em;
+    position: relative; /* Added to keep content centered in relation to other elements */
 }
+
+.upcoming-stations-vertical {
+    width: 20%;  /* Take up 30% of the width (adjust as needed) */
+    padding: 1em;
+    margin-right: 10em;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
 
 .dark-mode-toggle-button {
     position: absolute;
