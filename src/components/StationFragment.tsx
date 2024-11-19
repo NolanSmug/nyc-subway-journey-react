@@ -18,9 +18,11 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
     return (
         <div className={`station-frag-container ${isOverflowing ? 'overflow' : ''} ${className}`}>
             <div className={`station-frag-content ${isOverflowing ? 'overflow' : ''} ${className}`}>
-                <h2 className="station-frag-name">{station.getName()}</h2>
-                <div className="transfer-lines">
-                    <TransferLines small transfers={getTransferImages(transfers)} />
+                <div className="station-info">
+                    <h2 className="station-frag-name">{station.getName()}</h2>
+                    <div className="transfer-lines">
+                        <TransferLines small transfers={getTransferImages(transfers)} />
+                    </div>
                 </div>
             </div>
             <div className="station-dot" style={{ borderColor: lineColor }} />

@@ -27,7 +27,8 @@ interface GameStateUIProps {
 }
 
 function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
-    const { darkMode, setIsTransferMode, setCurrentLineColor, forceRenderRefresh } = useUIContext()
+    const { darkMode, setIsTransferMode, setCurrentLineColor, numAdvanceStations, advancedMode, forceRenderRefresh } =
+        useUIContext()
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
         if (action !== 'transfer') setIsTransferMode(false)
@@ -40,7 +41,11 @@ function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
                 break
 
             case 'advanceStation':
-                await train.advanceStation()
+                if (numAdvanceStations > 1) {
+                    await train.advanceStationInc(numAdvanceStations)
+                } else {
+                    await train.advanceStation()
+                }
                 forceRenderRefresh()
 
                 const winState = await gameState.checkWin(train.getCurrentStation())
@@ -130,8 +135,9 @@ function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
                     />
                     <ActionButton
                         imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
-                        label="Advance Station"
+                        label={`Advance Station${numAdvanceStations > 1 ? 's' : ''}`}
                         onClick={() => handleTrainAction('advanceStation')}
+                        additionalInput={advancedMode}
                     />
                 </div>
             </div>

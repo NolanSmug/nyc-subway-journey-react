@@ -9,7 +9,7 @@
 
 .station-frag-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
@@ -21,12 +21,19 @@
     left: 3em;
 }
 
+.station-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .station-frag-content.overflow .station-frag-name,
 .station-frag-content.overflow .transfer-lines {
     transform: translateX(0.8em);
 }
 
-.station-frag-content.overflow .station-frag-name {
+ .station-frag-content.overflow .station-frag-name {
     margin-left: 1.5em;
 }
 
@@ -85,6 +92,14 @@ STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS
     position: static;
     transform: translate(-50%, 50%);
     z-index: 2;
+    position: relative;
+}
+
+
+
+.current-station-vertical {
+    transition: ease-in-out 0.1s;
+    width: max-content;
 }
 
 /* TODO: figure out visual change for the current station  */
@@ -92,3 +107,4 @@ STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS
     width: 0.75rem;
     height: 0.75rem;
 }
+

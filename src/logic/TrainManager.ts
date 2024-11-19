@@ -283,7 +283,7 @@ export class Train {
         return true
     }
 
-    public advanceStationInc(numStations: number): boolean {
+    public async advanceStationInc(numStations: number): Promise<boolean> {
         if (numStations <= 0) return false
 
         let newStationIndex = this.currentStationIndex

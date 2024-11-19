@@ -7,12 +7,18 @@ h2 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1em;
+    gap: 0.75em;
 }
 
 .arrow {
     height: 2em;
     width: 2em;
+}
+
+.arrow-vertical {
+    height: 2em;
+    width: 2em;
+    transform: rotate(-90deg);
 }
 
 .show {

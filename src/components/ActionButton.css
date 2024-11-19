@@ -1,3 +1,10 @@
+.action-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
 .action-button-container {
     display: flex;
     flex-direction: column;
@@ -39,4 +46,35 @@
     font-weight:600;
     font-family: Inter, system-ui, sans-serif;
     word-wrap: break-word;
+}
+
+.additional-input {
+    font-size: x-large;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    border: solid, 0.5em, var(--bg-color-2);
+    border-radius: 0.25em;
+    background-color: var(--bg-color);
+    caret-color: var(--text-color);
+    letter-spacing: 0.25px;
+    line-height: 0.7em;
+}
+
+input[type=number]:focus-visible {
+    outline: solid 0.1em var(--bg-color-3);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+  /* -moz-appearance: textfield; */
 }

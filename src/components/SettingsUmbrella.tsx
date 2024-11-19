@@ -11,6 +11,13 @@ import GEAR_WHITE from '../images/settings-icon-w.svg'
 import UPCOMING_STATIONS_BLACK from '../images/upcoming-stations-icon-b.svg'
 import UPCOMING_STATIONS_WHITE from '../images/upcoming-stations-icon-w.svg'
 
+import UPCOMING_STATIONS_VERTICAL_BLACK from '../images/upcoming-stations-vertical-icon-b.svg'
+import UPCOMING_STATIONS_VERTICAL_WHITE from '../images/upcoming-stations-vertical-icon-w.svg'
+import UPCOMING_STATIONS_HORIZONTAL_BLACK from '../images/upcoming-stations-horizontal-icon-b.svg'
+import UPCOMING_STATIONS_HORIZONTAL_WHITE from '../images/upcoming-stations-horizontal-icon-w.svg'
+import CONDUCTOR_MODE_BLACK from '../images/conductor-mode-icon-b.svg'
+import CONDUCTOR_MODE_WHITE from '../images/conductor-mode-icon-w.svg'
+
 const SettingsUmbrella = () => {
     const [isOpen, setIsOpen] = useState(false)
     const popupRef = useRef<HTMLDivElement | null>(null)
@@ -22,7 +29,9 @@ const SettingsUmbrella = () => {
         upcomingStationsVisible,
         setUpcomingStationsVisible,
         forceRenderRefresh,
+        upcomingStationsVertical,
         setUpcomingStationsVertical,
+        setAdvancedMode,
     } = useUIContext()
 
     useEffect(() => {
@@ -63,12 +72,27 @@ const SettingsUmbrella = () => {
                     }}
                 />
                 <SettingsButton
-                    label="Upcoming Stations Format"
-                    imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
+                    label="Upcoming Stations Layout"
+                    imgSrc={
+                        upcomingStationsVertical
+                            ? darkMode
+                                ? UPCOMING_STATIONS_HORIZONTAL_WHITE
+                                : UPCOMING_STATIONS_HORIZONTAL_BLACK
+                            : darkMode
+                            ? UPCOMING_STATIONS_VERTICAL_WHITE
+                            : UPCOMING_STATIONS_VERTICAL_BLACK
+                    }
                     onClick={() => {
                         if (upcomingStationsVisible) {
                             setUpcomingStationsVertical((prev) => !prev)
                         }
+                    }}
+                />
+                <SettingsButton
+                    label="Conductor Mode"
+                    imgSrc={darkMode ? CONDUCTOR_MODE_WHITE : CONDUCTOR_MODE_BLACK}
+                    onClick={() => {
+                        setAdvancedMode((prev) => !prev)
                     }}
                 />
                 <div className="settings-popup-arrow" />
