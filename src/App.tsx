@@ -26,7 +26,7 @@ function App() {
 
     useEffect(() => {
         initializeGame()
-    }, [])
+    }, [initializeGame])
 
     const line = train?.getLine()
     const transferImages = useMemo(() => getTransferImageUrls(line), [line])

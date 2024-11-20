@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react'
 import { Train } from '../logic/TrainManager'
 import { GameState } from '../logic/GameState'
 import { Station as StationClass } from '../logic/StationManager'
