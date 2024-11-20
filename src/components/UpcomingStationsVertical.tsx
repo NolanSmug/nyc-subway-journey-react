@@ -4,9 +4,14 @@ import StationFragment from './StationFragment'
 
 import './UpcomingStationsVertical.css'
 import { useUIContext } from '../contexts/UIContext'
+import { useGameContext } from '../contexts/GameContext'
 
-function UpcomingStationsVertical({ stations, currentStation, visible }: UpcomingStationsProps) {
+function UpcomingStationsVertical({ visible }: UpcomingStationsProps) {
     const { currentLineColor } = useUIContext()
+    const { train, gameState } = useGameContext()
+
+    const stations = train.getScheduledStops()
+    const currentStation = gameState.currentStations[train.getCurrentStationIndex()]
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
     const currentID = currentStation.getId()

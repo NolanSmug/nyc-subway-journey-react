@@ -1,9 +1,7 @@
-import { GameState } from '../logic/GameState'
-import { Train } from '../logic/TrainManager'
+import './GameStateUI.css'
 import { LineName } from '../logic/Line'
 import { getTransferImageUrls } from '../logic/TransferImageMap'
 import ActionButton from './ActionButton'
-import './GameStateUI.css'
 import Header from './Header'
 import Station from './Station'
 import TransferLines from './TransferLines'
@@ -16,19 +14,16 @@ import C_DIRECTION_WHITE from '../images/change-direction-icon-w.svg'
 import C_DIRECTION_BLACK from '../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useUIContext } from '../contexts/UIContext'
 import { lineToLineColor } from './UpcomingStations'
+import { useGameContext } from '../contexts/GameContext'
 
-interface GameStateUIProps {
-    train: Train
-    gameState: GameState
-    initializeGame: () => Promise<void>
-}
-
-function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
+function GameStateUI() {
     const { darkMode, setIsTransferMode, setCurrentLineColor, numAdvanceStations, advancedMode, forceRenderRefresh } =
         useUIContext()
+    const { train, gameState, initializeGame } = useGameContext()
+
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
         if (action !== 'transfer') setIsTransferMode(false)
