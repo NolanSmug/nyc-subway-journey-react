@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import './TrainCar.css'
 import Door from './Door'
-import { lineToLineColor } from '../components/UpcomingStations'
 import { useUIContext } from '../contexts/UIContext'
 import { Direction, Train } from '../logic/TrainManager'
 
@@ -19,13 +18,16 @@ export interface TrainCarProps {
 
 function TrainCar({ train, flipDirection, header, children }: TrainCarProps) {
     const isNullDirection: string = train.getDirection() === Direction.NULL_DIRECTION ? 'is-null-direction' : ''
-    const lineColor = train.getLine() ? lineToLineColor(train.getLine()) : 'Null_Train'
-    const { forceRenderRefresh, darkMode } = useUIContext()
+    const { forceRenderRefresh, currentLineColor, upcomingStationsVertical, darkMode } = useUIContext()
+
+    const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
+    const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
+
     return (
         <div className="train-container">
             <img
-                src={darkMode ? L_ARROW_WHITE : L_ARROW_BLACK}
-                className={`arrow ${train.getDirection() === Direction.DOWNTOWN ? 'show' : 'hide'}`}
+                src={DOWNTOWN_DIRECTION_ICON}
+                className={`arrow ${train.getDirection() === Direction.DOWNTOWN && !upcomingStationsVertical ? 'show' : 'hide'}`}
                 alt="Left Arrow"
             />
             {header}
@@ -45,9 +47,9 @@ function TrainCar({ train, flipDirection, header, children }: TrainCarProps) {
                         style={
                             isNullDirection
                                 ? {
-                                      borderColor: lineColor,
+                                      borderColor: currentLineColor,
                                       textDecoration: 'underline',
-                                      textDecorationColor: lineColor,
+                                      textDecorationColor: currentLineColor,
                                       textUnderlineOffset: '4px',
                                   }
                                 : {}
@@ -68,10 +70,17 @@ function TrainCar({ train, flipDirection, header, children }: TrainCarProps) {
                 </div>
             </div>
             <img
-                src={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
-                className={`arrow ${train.getDirection() === Direction.UPTOWN ? 'show' : 'hide'}`}
+                src={UPTOWN_DIRECTION_ICON}
+                className={`arrow ${train.getDirection() === Direction.UPTOWN && !upcomingStationsVertical ? 'show' : 'hide'}`}
                 alt="Right Arrow"
             />
+            {upcomingStationsVertical && !isNullDirection && (
+                <img
+                    src={train.getDirection() === Direction.UPTOWN ? UPTOWN_DIRECTION_ICON : DOWNTOWN_DIRECTION_ICON}
+                    className="arrow-vertical"
+                    alt="Up/Down Arrow"
+                />
+            )}
         </div>
     )
 }

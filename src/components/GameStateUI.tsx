@@ -1,9 +1,7 @@
-import { GameState } from '../logic/GameState'
-import { Train } from '../logic/TrainManager'
+import './GameStateUI.css'
 import { LineName } from '../logic/Line'
 import { getTransferImageUrls } from '../logic/TransferImageMap'
 import ActionButton from './ActionButton'
-import './GameStateUI.css'
 import Header from './Header'
 import Station from './Station'
 import TransferLines from './TransferLines'
@@ -18,19 +16,19 @@ import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
 import { useEffect } from 'react'
 import { useUIContext } from '../contexts/UIContext'
+import { lineToLineColor } from './UpcomingStations'
+import { useGameContext } from '../contexts/GameContext'
 
-interface GameStateUIProps {
-    train: Train
-    gameState: GameState
-    initializeGame: () => Promise<void>
-}
-
-function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
-    const { darkMode, setIsTransferMode, forceRenderRefresh } = useUIContext()
+function GameStateUI() {
+    const { darkMode, setIsTransferMode, setCurrentLineColor, numAdvanceStations, advancedMode, forceRenderRefresh } =
+        useUIContext()
+    const { train, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
         if (action !== 'transfer') setIsTransferMode(false)
+
+        setCurrentLineColor(lineToLineColor(train.getLine()))
 
         switch (action) {
             case 'refresh':
@@ -38,7 +36,11 @@ function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
                 break
 
             case 'advanceStation':
-                await train.advanceStation()
+                if (numAdvanceStations > 1) {
+                    await train.advanceStationInc(numAdvanceStations)
+                } else {
+                    await train.advanceStation()
+                }
                 forceRenderRefresh()
 
                 const winState = await gameState.checkWin(train.getCurrentStation())
@@ -82,6 +84,7 @@ function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
         }
         forceRenderRefresh()
         setIsTransferMode(false)
+        setCurrentLineColor(lineToLineColor(selectedLine))
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -127,8 +130,9 @@ function GameStateUI({ train, gameState, initializeGame }: GameStateUIProps) {
                     />
                     <ActionButton
                         imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
-                        label="Advance Station"
+                        label={`Advance Station${numAdvanceStations > 1 ? 's' : ''}`}
                         onClick={() => handleTrainAction('advanceStation')}
+                        additionalInput={advancedMode}
                     />
                 </div>
             </div>

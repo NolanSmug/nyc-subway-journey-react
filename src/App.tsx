@@ -1,33 +1,21 @@
 import './App.css'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import TransferLines from './components/TransferLines'
 import UpcomingStations from './components/UpcomingStations'
 import Header from './components/Header'
 import TrainCar from './components/TrainCar'
 import GameStateUI from './components/GameStateUI'
 import SettingsUmbrella from './components/SettingsUmbrella'
+import UpcomingStationsVertical from './components/UpcomingStationsVertical'
 
-import { Station as StationClass } from './logic/StationManager'
-import { Game } from './logic/Game'
-import { Train } from './logic/TrainManager'
-import { GameState } from './logic/GameState'
 import { getTransferImageUrls } from './logic/TransferImageMap'
 import { useUIContext } from './contexts/UIContext'
+import { useGameContext } from './contexts/GameContext'
+import { LineName } from './logic/Line'
 
 function App() {
-    const [train, setTrain] = useState<Train | null>(null)
-    const [gameState, setGameState] = useState<GameState | null>(null)
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible } = useUIContext()
-
-    const initializeGame = useCallback(async () => {
-        await StationClass.initializeAllStations()
-        let newGame = new Game()
-        await newGame.runGame()
-
-        setIsTransferMode(false)
-        setTrain(newGame.train)
-        setGameState(newGame.gameState)
-    }, [setIsTransferMode, setTrain, setGameState])
+    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, upcomingStationsVertical } = useUIContext()
+    const { train, gameState, initializeGame } = useGameContext()
 
     const handleClickAway = (e: React.MouseEvent) => {
         const transferLinesContainer = document.querySelector('.transfer-lines-container')
@@ -36,7 +24,6 @@ function App() {
         }
     }
 
-    // starting the train and game
     useEffect(() => {
         initializeGame()
     }, [initializeGame])
@@ -44,36 +31,39 @@ function App() {
     const line = train?.getLine()
     const transferImages = useMemo(() => getTransferImageUrls(line), [line])
 
-    if (!train || !gameState) return <>Error</>
+    if (train.getLine() === LineName.NULL_TRAIN || gameState.currentStations.length === 0) return <>Error</>
 
     return (
-        <div className="Game">
-            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
+        <>
+            <div className="Game">
+                <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-            <UpcomingStations
-                stations={train.getScheduledStops()}
-                currentStation={gameState.currentStations[train.getCurrentStationIndex()]}
-                line={train.getLine()}
-                direction={train.getDirection()}
-                visible={upcomingStationsVisible}
-            />
+                {!upcomingStationsVertical && gameState.currentStations.length > 0 && (
+                    <UpcomingStations visible={upcomingStationsVisible} />
+                )}
 
-            <Header text="Current Line:"></Header>
-            <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
-                <TrainCar
-                    train={train}
-                    flipDirection={async () => {
-                        await train.reverseDirection()
-                    }}
-                >
-                    <TransferLines transfers={transferImages} notDim />
-                </TrainCar>
+                <Header text="Current Line:"></Header>
+                <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
+                    <TrainCar
+                        train={train}
+                        flipDirection={async () => {
+                            await train.reverseDirection()
+                        }}
+                    >
+                        <TransferLines transfers={transferImages} notDim />
+                    </TrainCar>
+                </div>
+
+                <GameStateUI />
+
+                <SettingsUmbrella />
             </div>
-
-            <GameStateUI train={train} gameState={gameState} initializeGame={initializeGame} />
-
-            <SettingsUmbrella />
-        </div>
+            {upcomingStationsVertical && (
+                <div className="upcoming-stations-vertical">
+                    <UpcomingStationsVertical visible={upcomingStationsVisible} />
+                </div>
+            )}
+        </>
     )
 }
 

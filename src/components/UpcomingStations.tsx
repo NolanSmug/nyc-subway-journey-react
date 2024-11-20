@@ -4,12 +4,10 @@ import StationFragment from './StationFragment'
 import { useEffect, useRef } from 'react'
 import { Direction } from '../logic/TrainManager'
 import './UpcomingStations.css'
+import { useUIContext } from '../contexts/UIContext'
+import { useGameContext } from '../contexts/GameContext'
 
 export interface UpcomingStationsProps {
-    stations: StationType[]
-    currentStation: StationType
-    line: LineName
-    direction: Direction
     visible: boolean
 }
 
@@ -50,8 +48,12 @@ export function lineToLineColor(lineName: LineName): string {
 
 // TODO: Borough barrier
 
-function UpcomingStations({ stations, currentStation, line, visible }: UpcomingStationsProps) {
-    const lineColor = lineToLineColor(line)
+function UpcomingStations({ visible }: UpcomingStationsProps) {
+    const { currentLineColor } = useUIContext()
+    const { train, gameState } = useGameContext()
+    const stations = train.getScheduledStops()
+    const currentStation = gameState.currentStations[train.getCurrentStationIndex()]
+
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
     const currentID = currentStation.getId()
@@ -85,12 +87,12 @@ function UpcomingStations({ stations, currentStation, line, visible }: UpcomingS
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        lineColor={lineColor}
+                        lineColor={currentLineColor}
                         className={currentID === station.getId() ? 'current-station' : ''}
                     />
                 ))}
             </div>
-            <div ref={lineDividerRef} className="line-divider" style={{ backgroundColor: lineColor }} />
+            <div ref={lineDividerRef} className="line-divider" style={{ backgroundColor: currentLineColor }} />
         </div>
     )
 }

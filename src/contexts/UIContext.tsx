@@ -1,23 +1,35 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
 interface UIContextProps {
-    isTransferMode: boolean
-    setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
-    forceRenderRefresh: () => void
     darkMode: boolean
-    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
+    advancedMode: boolean
+    isTransferMode: boolean
+    currentLineColor: string
     upcomingStationsVisible: boolean
+    upcomingStationsVertical: boolean
+    numAdvanceStations: number
+    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
+    setAdvancedMode: React.Dispatch<React.SetStateAction<boolean>>
+    setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
+    setCurrentLineColor: React.Dispatch<React.SetStateAction<string>>
     setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
+    setUpcomingStationsVertical: React.Dispatch<React.SetStateAction<boolean>>
+    setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
+    forceRenderRefresh: () => void
 }
 
 const UIContext = createContext<UIContextProps | undefined>(undefined)
 
 // Provides values/state variables related to the user interface
 export const UIProvider = ({ children }: { children: ReactNode }) => {
-    const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
-    const [, forceRenderRefresh] = useState(false)
     const [darkMode, setDarkMode] = useState<boolean>(true)
+    const [advancedMode, setAdvancedMode] = useState<boolean>(false)
+    const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
+    const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(false)
+    const [currentLineColor, setCurrentLineColor] = useState<string>('')
+    const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
+    const [, forceRenderRefresh] = useState(false)
 
     const triggerRenderRefresh = () => forceRenderRefresh((prev) => !prev)
 
@@ -26,11 +38,19 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
             value={{
                 isTransferMode,
                 setIsTransferMode,
+                currentLineColor,
+                setCurrentLineColor,
                 forceRenderRefresh: triggerRenderRefresh,
                 darkMode,
                 setDarkMode,
+                advancedMode,
+                setAdvancedMode,
                 upcomingStationsVisible,
                 setUpcomingStationsVisible,
+                upcomingStationsVertical,
+                setUpcomingStationsVertical,
+                setNumAdvanceStations,
+                numAdvanceStations,
             }}
         >
             {children}
