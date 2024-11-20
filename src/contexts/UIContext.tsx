@@ -25,7 +25,7 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [advancedMode, setAdvancedMode] = useState<boolean>(false)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
-    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
+    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(false)
     const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(false)
     const [currentLineColor, setCurrentLineColor] = useState<string>('')
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)

@@ -14,7 +14,7 @@ import { useGameContext } from './contexts/GameContext'
 import { LineName } from './logic/Line'
 
 function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, upcomingStationsVertical } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVertical } = useUIContext()
     const { train, gameState, initializeGame } = useGameContext()
 
     const handleClickAway = (e: React.MouseEvent) => {
@@ -38,14 +38,11 @@ function App() {
             <div className="Game">
                 <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-                {!upcomingStationsVertical && gameState.currentStations.length > 0 && (
-                    <UpcomingStations visible={upcomingStationsVisible} />
-                )}
+                {!upcomingStationsVertical && gameState.currentStations.length > 0 && <UpcomingStations />}
 
                 <Header text="Current Line:"></Header>
                 <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
                     <TrainCar
-                        train={train}
                         flipDirection={async () => {
                             await train.reverseDirection()
                         }}
@@ -60,7 +57,7 @@ function App() {
             </div>
             {upcomingStationsVertical && (
                 <div className="upcoming-stations-vertical">
-                    <UpcomingStationsVertical visible={upcomingStationsVisible} />
+                    <UpcomingStationsVertical />
                 </div>
             )}
         </>

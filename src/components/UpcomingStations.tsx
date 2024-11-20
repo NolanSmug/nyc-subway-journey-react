@@ -1,15 +1,9 @@
+import './UpcomingStations.css'
 import { LineName } from '../logic/Line'
-import { Station as StationType } from '../logic/StationManager'
 import StationFragment from './StationFragment'
 import { useEffect, useRef } from 'react'
-import { Direction } from '../logic/TrainManager'
-import './UpcomingStations.css'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
-
-export interface UpcomingStationsProps {
-    visible: boolean
-}
 
 const lineColorMap: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: '',
@@ -48,8 +42,8 @@ export function lineToLineColor(lineName: LineName): string {
 
 // TODO: Borough barrier
 
-function UpcomingStations({ visible }: UpcomingStationsProps) {
-    const { currentLineColor } = useUIContext()
+function UpcomingStations() {
+    const { currentLineColor, upcomingStationsVisible: visible } = useUIContext()
     const { train, gameState } = useGameContext()
     const stations = train.getScheduledStops()
     const currentStation = gameState.currentStations[train.getCurrentStationIndex()]

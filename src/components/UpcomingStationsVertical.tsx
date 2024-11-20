@@ -1,13 +1,11 @@
-import { useEffect, useRef } from 'react'
-import { UpcomingStationsProps } from './UpcomingStations'
-import StationFragment from './StationFragment'
-
 import './UpcomingStationsVertical.css'
+import { useEffect, useRef } from 'react'
+import StationFragment from './StationFragment'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 
-function UpcomingStationsVertical({ visible }: UpcomingStationsProps) {
-    const { currentLineColor } = useUIContext()
+function UpcomingStationsVertical() {
+    const { currentLineColor, upcomingStationsVisible: visible } = useUIContext()
     const { train, gameState } = useGameContext()
 
     const stations = train.getScheduledStops()

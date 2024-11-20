@@ -8,17 +8,19 @@ import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
 import L_ARROW_BLACK from '../images/left-arrow-b.svg'
 import L_ARROW_WHITE from '../images/left-arrow-w.svg'
+import { useGameContext } from '../contexts/GameContext'
 
 export interface TrainCarProps {
     flipDirection: () => Promise<void>
-    train: Train
     header?: ReactNode
     children?: ReactNode
 }
 
-function TrainCar({ train, flipDirection, header, children }: TrainCarProps) {
-    const isNullDirection: string = train.getDirection() === Direction.NULL_DIRECTION ? 'is-null-direction' : ''
+function TrainCar({ flipDirection, header, children }: TrainCarProps) {
     const { forceRenderRefresh, currentLineColor, upcomingStationsVertical, darkMode } = useUIContext()
+    const { train } = useGameContext()
+
+    const isNullDirection: string = train.getDirection() === Direction.NULL_DIRECTION ? 'is-null-direction' : ''
 
     const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
