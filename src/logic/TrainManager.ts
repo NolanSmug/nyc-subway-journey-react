@@ -131,8 +131,9 @@ export class Train {
         return this.direction === Direction.NULL_DIRECTION
     }
 
-    public async reverseDirection() {
+    public reverseDirection(): Train {
         this.setDirection(this.direction === Direction.DOWNTOWN ? Direction.UPTOWN : Direction.DOWNTOWN)
+        return this
     }
 
     public getRandomDirection(): Direction {
@@ -171,7 +172,7 @@ export class Train {
     }
 
     // Scheduled Stops
-    public async updateScheduledStops(line: LineName) {
+    public async updateScheduledStops(line: LineName): Promise<void> {
         await updateStopsForLine(line, this.scheduledStops)
     }
 
@@ -192,11 +193,11 @@ export class Train {
         return newScheduledStops
     }
 
-    public addScheduledStop(newStop: Station) {
+    public addScheduledStop(newStop: Station): void {
         this.scheduledStops.push(newStop)
     }
 
-    public setScheduledStops(newScheduledStops: Station[]) {
+    public setScheduledStops(newScheduledStops: Station[]): void {
         this.scheduledStops = newScheduledStops
     }
 
@@ -209,7 +210,7 @@ export class Train {
         return this.currentStationIndex ?? 0 // Uses 0 if `currentStationIndex` is undefined
     }
 
-    public setCurrentStationByIndex(stationIndex: number) {
+    public setCurrentStationByIndex(stationIndex: number): void {
         this.currentStationIndex = stationIndex
     }
 
@@ -217,7 +218,7 @@ export class Train {
         return this.isAtEndOfLine
     }
 
-    public isAtRockawayBranchJunction() {
+    public isAtRockawayBranchJunction(): boolean {
         return this.isAtRockawayBranch
     }
 
@@ -260,7 +261,7 @@ export class Train {
     }
 
     // Action Logic
-    public async updateTrainState() {
+    public updateTrainState(): void {
         const lastStationIndex: number = this.scheduledStops.length - 1
 
         this.isAtRockawayBranch = this.getCurrentStation().getName() === 'Rockaway Blvd' && this.direction === Direction.DOWNTOWN
@@ -272,7 +273,7 @@ export class Train {
             !this.isAtRockawayBranch
     }
 
-    public async advanceStation(): Promise<boolean> {
+    public advanceStation(): boolean {
         let newStationIndex = this.currentStationIndex
 
         if (this.direction === Direction.UPTOWN) {
@@ -280,7 +281,7 @@ export class Train {
         } else if (this.direction === Direction.DOWNTOWN) {
             newStationIndex--
         } else {
-            return false
+            return false // Null Direction
         }
 
         if (newStationIndex < 0 || newStationIndex >= this.scheduledStops.length) {
@@ -291,7 +292,7 @@ export class Train {
         return true
     }
 
-    public async advanceStationInc(numStations: number): Promise<boolean> {
+    public advanceStationInc(numStations: number): boolean {
         if (numStations <= 0) return false
 
         let newStationIndex = this.currentStationIndex
@@ -301,7 +302,7 @@ export class Train {
         } else if (this.direction === Direction.DOWNTOWN) {
             newStationIndex -= numStations
         } else {
-            return false
+            return false // Null Direction
         }
 
         if (newStationIndex < 0 || newStationIndex >= this.scheduledStops.length) {

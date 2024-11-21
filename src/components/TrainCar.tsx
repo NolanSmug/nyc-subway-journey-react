@@ -40,8 +40,8 @@ function TrainCar({ header, children }: TrainCarProps) {
 
                 <div className="windows" id="train-info">
                     <h2
-                        onClick={async () => {
-                            await train.reverseDirection()
+                        onClick={() => {
+                            train.reverseDirection()
                             forceRenderRefresh()
                         }}
                         className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}

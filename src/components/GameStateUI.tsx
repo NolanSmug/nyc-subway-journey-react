@@ -22,7 +22,7 @@ import { useGameContext } from '../contexts/GameContext'
 function GameStateUI() {
     const { darkMode, setIsTransferMode, setCurrentLineColor, numAdvanceStations, advancedMode, forceRenderRefresh } =
         useUIContext()
-    const { train, gameState, initializeGame } = useGameContext()
+    const { train, setTrain, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
@@ -37,9 +37,9 @@ function GameStateUI() {
 
             case 'advanceStation':
                 if (numAdvanceStations > 1) {
-                    await train.advanceStationInc(numAdvanceStations)
+                    train.advanceStationInc(numAdvanceStations)
                 } else {
-                    await train.advanceStation()
+                    train.advanceStation()
                 }
                 forceRenderRefresh()
 
@@ -56,10 +56,11 @@ function GameStateUI() {
                 break
 
             case 'changeDirection':
-                await train.reverseDirection()
+                train.reverseDirection()
                 forceRenderRefresh()
                 break
             default:
+                return
         }
     }
 
@@ -80,8 +81,9 @@ function GameStateUI() {
             train.setLineType()
             train.setCurrentStation(train.getCurrentStation())
 
-            await train.updateTrainState()
+            train.updateTrainState()
         }
+        setTrain(train)
         forceRenderRefresh()
         setIsTransferMode(false)
         setCurrentLineColor(lineToLineColor(selectedLine))

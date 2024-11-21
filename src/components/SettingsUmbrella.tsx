@@ -28,7 +28,6 @@ const SettingsUmbrella = () => {
         setDarkMode,
         upcomingStationsVisible,
         setUpcomingStationsVisible,
-        forceRenderRefresh,
         upcomingStationsVertical,
         setUpcomingStationsVertical,
         setAdvancedMode,
@@ -68,7 +67,6 @@ const SettingsUmbrella = () => {
                     imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
                     onClick={() => {
                         setUpcomingStationsVisible((prev) => !prev)
-                        forceRenderRefresh()
                     }}
                 />
                 <SettingsButton
