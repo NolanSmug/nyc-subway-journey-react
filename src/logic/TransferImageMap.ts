@@ -61,7 +61,7 @@ const transferImageMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 };
 
-export const getTransferImageUrls = (input: Station | LineName | null | undefined): string[] => {
+export const getTransferImageSvg = (input: Station | LineName | null | undefined): string[] => {
     if (!input) return []
 
     if (input instanceof Station) {

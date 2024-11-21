@@ -66,4 +66,8 @@ export class GameState {
         } while (this.startingStation === this.destinationStation)
     }
 
+    public isEmpty(): boolean {
+        return this.currentStations.length === 0
+    }
+
 }

@@ -1,6 +1,6 @@
 import './GameStateUI.css'
 import { LineName } from '../logic/Line'
-import { getTransferImageUrls } from '../logic/TransferImageMap'
+import { getTransferImageSvg } from '../logic/TransferImageMap'
 import ActionButton from './ActionButton'
 import Header from './Header'
 import Station from './Station'
@@ -112,7 +112,7 @@ function GameStateUI() {
                         <div className="not-dim">
                             <TransferLines
                                 onClick={getTransferLineClicked}
-                                transfers={getTransferImageUrls(train.getCurrentStation())}
+                                transfers={getTransferImageSvg(train.getCurrentStation())}
                             />
                         </div>
                     </Station>
@@ -141,7 +141,7 @@ function GameStateUI() {
                 <Header text="Destination Station" />
                 <div className="station-item">
                     <Station name={gameState.destinationStation.getName()}>
-                        <TransferLines transfers={getTransferImageUrls(gameState.destinationStation)} />
+                        <TransferLines transfers={getTransferImageSvg(gameState.destinationStation)} />
                     </Station>
                 </div>
                 {gameState?.isFirstTurn && (

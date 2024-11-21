@@ -105,6 +105,10 @@ export class Train {
         this.currentLine = newLineName
     }
 
+    public isLineNull(): boolean {
+        return this.currentLine === LineName.NULL_TRAIN
+    }
+
     // LineType
     public setLineType() {
         this.lineType = lineTypes.get(this.currentLine) ?? LineType.NONE
@@ -121,6 +125,10 @@ export class Train {
 
     public setDirection(newDirection: Direction) {
         this.direction = newDirection
+    }
+
+    public isNullDirection(): boolean {
+        return this.direction === Direction.NULL_DIRECTION
     }
 
     public async reverseDirection() {

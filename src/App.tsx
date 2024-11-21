@@ -1,6 +1,6 @@
 import './App.css'
 import React, { useEffect, useMemo } from 'react'
-import TransferLines from './components/TransferLines'
+import { default as Line } from './components/TransferLines'
 import UpcomingStations from './components/UpcomingStations'
 import Header from './components/Header'
 import TrainCar from './components/TrainCar'
@@ -8,10 +8,9 @@ import GameStateUI from './components/GameStateUI'
 import SettingsUmbrella from './components/SettingsUmbrella'
 import UpcomingStationsVertical from './components/UpcomingStationsVertical'
 
-import { getTransferImageUrls } from './logic/TransferImageMap'
+import { getTransferImageSvg } from './logic/TransferImageMap'
 import { useUIContext } from './contexts/UIContext'
 import { useGameContext } from './contexts/GameContext'
-import { LineName } from './logic/Line'
 
 function App() {
     const { isTransferMode, setIsTransferMode, upcomingStationsVertical } = useUIContext()
@@ -29,25 +28,21 @@ function App() {
     }, [initializeGame])
 
     const line = train?.getLine()
-    const transferImages = useMemo(() => getTransferImageUrls(line), [line])
+    const currentLineSvg = useMemo(() => getTransferImageSvg(line), [line])
 
-    if (train.getLine() === LineName.NULL_TRAIN || gameState.currentStations.length === 0) return <>Error</>
+    if (train.isLineNull() || gameState.isEmpty()) return <>Error</>
 
     return (
         <>
             <div className="Game">
                 <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-                {!upcomingStationsVertical && gameState.currentStations.length > 0 && <UpcomingStations />}
+                {!upcomingStationsVertical && <UpcomingStations />}
 
                 <Header text="Current Line:"></Header>
                 <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
-                    <TrainCar
-                        flipDirection={async () => {
-                            await train.reverseDirection()
-                        }}
-                    >
-                        <TransferLines transfers={transferImages} notDim />
+                    <TrainCar>
+                        <Line transfers={currentLineSvg} notDim />
                     </TrainCar>
                 </div>
 

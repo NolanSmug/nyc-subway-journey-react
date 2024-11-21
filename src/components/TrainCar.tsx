@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import './TrainCar.css'
 import Door from './Door'
 import { useUIContext } from '../contexts/UIContext'
-import { Direction, Train } from '../logic/TrainManager'
+import { Direction } from '../logic/TrainManager'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
@@ -11,16 +11,15 @@ import L_ARROW_WHITE from '../images/left-arrow-w.svg'
 import { useGameContext } from '../contexts/GameContext'
 
 export interface TrainCarProps {
-    flipDirection: () => Promise<void>
     header?: ReactNode
     children?: ReactNode
 }
 
-function TrainCar({ flipDirection, header, children }: TrainCarProps) {
+function TrainCar({ header, children }: TrainCarProps) {
     const { forceRenderRefresh, currentLineColor, upcomingStationsVertical, darkMode } = useUIContext()
     const { train } = useGameContext()
 
-    const isNullDirection: string = train.getDirection() === Direction.NULL_DIRECTION ? 'is-null-direction' : ''
+    const isNullDirection: boolean = train.isNullDirection()
 
     const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
@@ -42,10 +41,10 @@ function TrainCar({ flipDirection, header, children }: TrainCarProps) {
                 <div className="windows" id="train-info">
                     <h2
                         onClick={async () => {
-                            await flipDirection()
+                            await train.reverseDirection()
                             forceRenderRefresh()
                         }}
-                        className={`train-direction not-dim ${isNullDirection}`}
+                        className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}
                         style={
                             isNullDirection
                                 ? {
