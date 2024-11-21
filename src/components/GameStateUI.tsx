@@ -20,9 +20,8 @@ import { lineToLineColor } from './UpcomingStations'
 import { useGameContext } from '../contexts/GameContext'
 
 function GameStateUI() {
-    const { darkMode, setIsTransferMode, setCurrentLineColor, numAdvanceStations, advancedMode, forceRenderRefresh } =
-        useUIContext()
-    const { train, setTrain, gameState, initializeGame } = useGameContext()
+    const { darkMode, setIsTransferMode, setCurrentLineColor, numAdvanceStations, advancedMode } = useUIContext()
+    const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
@@ -37,11 +36,10 @@ function GameStateUI() {
 
             case 'advanceStation':
                 if (numAdvanceStations > 1) {
-                    train.advanceStationInc(numAdvanceStations)
+                    updateTrainObject({ ...train.advanceStationInc(numAdvanceStations) })
                 } else {
-                    train.advanceStation()
+                    updateTrainObject({ ...train.advanceStation() })
                 }
-                forceRenderRefresh()
 
                 const winState = await gameState.checkWin(train.getCurrentStation())
                 if (winState) {
@@ -56,8 +54,7 @@ function GameStateUI() {
                 break
 
             case 'changeDirection':
-                train.reverseDirection()
-                forceRenderRefresh()
+                updateTrainObject({ ...train.reverseDirection() })
                 break
             default:
                 return
@@ -80,11 +77,8 @@ function GameStateUI() {
             train.setLine(selectedLine)
             train.setLineType()
             train.setCurrentStation(train.getCurrentStation())
-
-            train.updateTrainState()
         }
-        setTrain(train)
-        forceRenderRefresh()
+        updateTrainObject({ ...train.updateTrainState() })
         setIsTransferMode(false)
         setCurrentLineColor(lineToLineColor(selectedLine))
     }

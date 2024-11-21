@@ -15,7 +15,6 @@ interface UIContextProps {
     setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
     setUpcomingStationsVertical: React.Dispatch<React.SetStateAction<boolean>>
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
-    forceRenderRefresh: () => void
 }
 
 const UIContext = createContext<UIContextProps | undefined>(undefined)
@@ -29,9 +28,6 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(false)
     const [currentLineColor, setCurrentLineColor] = useState<string>('')
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
-    const [, forceRenderRefresh] = useState(false)
-
-    const triggerRenderRefresh = () => forceRenderRefresh((prev) => !prev)
 
     return (
         <UIContext.Provider
@@ -40,7 +36,6 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
                 setIsTransferMode,
                 currentLineColor,
                 setCurrentLineColor,
-                forceRenderRefresh: triggerRenderRefresh,
                 darkMode,
                 setDarkMode,
                 advancedMode,

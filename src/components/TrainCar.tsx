@@ -16,8 +16,8 @@ export interface TrainCarProps {
 }
 
 function TrainCar({ header, children }: TrainCarProps) {
-    const { forceRenderRefresh, currentLineColor, upcomingStationsVertical, darkMode } = useUIContext()
-    const { train } = useGameContext()
+    const { currentLineColor, upcomingStationsVertical, darkMode } = useUIContext()
+    const { train, updateTrainObject } = useGameContext()
 
     const isNullDirection: boolean = train.isNullDirection()
 
@@ -41,8 +41,7 @@ function TrainCar({ header, children }: TrainCarProps) {
                 <div className="windows" id="train-info">
                     <h2
                         onClick={() => {
-                            train.reverseDirection()
-                            forceRenderRefresh()
+                            updateTrainObject({ ...train.reverseDirection() })
                         }}
                         className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}
                         style={

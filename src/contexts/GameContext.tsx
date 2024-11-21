@@ -9,6 +9,7 @@ import { lineToLineColor } from '../components/UpcomingStations'
 interface GameContextProps {
     train: Train
     gameState: GameState
+    updateTrainObject: (updates: Partial<Train>) => void
     setTrain: React.Dispatch<React.SetStateAction<Train>>
     setGameState: React.Dispatch<React.SetStateAction<GameState>>
     initializeGame: () => Promise<void>
@@ -23,7 +24,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     const { setIsTransferMode, setCurrentLineColor } = useUIContext()
 
     const initializeGame = useCallback(async () => {
-        //unsure is useCallback is necessary
         try {
             await StationClass.initializeAllStations()
             let newGame = new Game()
@@ -39,8 +39,19 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         }
     }, [setIsTransferMode, setTrain, setGameState, setCurrentLineColor])
 
+    // this function is used for ensuring we re-render after train object actions
+    const updateTrainObject = useCallback((updates: Partial<Train>) => {
+        // "reset" train object
+        setTrain((currentTrain) => {
+            const newTrain = new Train()
+            Object.assign(newTrain, currentTrain) // copy the current train
+            Object.assign(newTrain, updates) // push the updates
+            return newTrain
+        })
+    }, [])
+
     return (
-        <GameContext.Provider value={{ train, setTrain, gameState, setGameState, initializeGame }}>
+        <GameContext.Provider value={{ train, updateTrainObject, setTrain, gameState, setGameState, initializeGame }}>
             {children}
         </GameContext.Provider>
     )

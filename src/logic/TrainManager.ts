@@ -261,7 +261,7 @@ export class Train {
     }
 
     // Action Logic
-    public updateTrainState(): void {
+    public updateTrainState(): Train {
         const lastStationIndex: number = this.scheduledStops.length - 1
 
         this.isAtRockawayBranch = this.getCurrentStation().getName() === 'Rockaway Blvd' && this.direction === Direction.DOWNTOWN
@@ -271,9 +271,11 @@ export class Train {
             ((this.currentStationIndex === 0 && this.direction === Direction.DOWNTOWN) ||
                 (this.currentStationIndex === lastStationIndex && this.direction === Direction.UPTOWN)) &&
             !this.isAtRockawayBranch
+        
+        return this
     }
 
-    public advanceStation(): boolean {
+    public advanceStation(): Train {
         let newStationIndex = this.currentStationIndex
 
         if (this.direction === Direction.UPTOWN) {
@@ -281,19 +283,19 @@ export class Train {
         } else if (this.direction === Direction.DOWNTOWN) {
             newStationIndex--
         } else {
-            return false // Null Direction
+            return this // Null Direction
         }
 
         if (newStationIndex < 0 || newStationIndex >= this.scheduledStops.length) {
-            return false // Out of bounds
+            return this // Out of bounds
         }
 
         this.setCurrentStationByIndex(newStationIndex)
-        return true
+        return this
     }
 
-    public advanceStationInc(numStations: number): boolean {
-        if (numStations <= 0) return false
+    public advanceStationInc(numStations: number): Train {
+        if (numStations <= 0) return this
 
         let newStationIndex = this.currentStationIndex
 
@@ -302,14 +304,14 @@ export class Train {
         } else if (this.direction === Direction.DOWNTOWN) {
             newStationIndex -= numStations
         } else {
-            return false // Null Direction
+            return this // Null Direction
         }
 
         if (newStationIndex < 0 || newStationIndex >= this.scheduledStops.length) {
-            return false // Out of bounds
+            return this // Out of bounds
         }
 
         this.setCurrentStationByIndex(newStationIndex)
-        return true
+        return this
     }
 }

@@ -1,12 +1,12 @@
 import './App.css'
 import React, { useEffect, useMemo } from 'react'
-import { default as Line } from './components/TransferLines'
 import UpcomingStations from './components/UpcomingStations'
 import Header from './components/Header'
 import TrainCar from './components/TrainCar'
 import GameStateUI from './components/GameStateUI'
 import SettingsUmbrella from './components/SettingsUmbrella'
 import UpcomingStationsVertical from './components/UpcomingStationsVertical'
+import { default as Line } from './components/TransferLines'
 
 import { getTransferImageSvg } from './logic/TransferImageMap'
 import { useUIContext } from './contexts/UIContext'
