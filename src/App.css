@@ -31,6 +31,7 @@
 body,
 #root {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -59,6 +60,22 @@ body {
     transition: transform 0.2s linear;
     overflow-y: none;
     overflow-x: visible;
+}
+
+.umbrella-menus {
+    display: flex;          
+    flex-direction: row;    
+    gap: 1em;            
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    z-index: 10;   
+}
+
+.shortcuts-umbrella {
+    top: 2em;
+    left: 2em;
+    position: fixed;
 }
 
 .upcoming-stations-vertical {

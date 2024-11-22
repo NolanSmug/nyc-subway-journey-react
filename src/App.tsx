@@ -4,13 +4,19 @@ import UpcomingStations from './components/UpcomingStations'
 import Header from './components/Header'
 import TrainCar from './components/TrainCar'
 import GameStateUI from './components/GameStateUI'
-import SettingsUmbrella from './components/SettingsUmbrella'
+import UmbrellaButton from './components/UmbrellaButton'
+import SettingsMenu from './components/SettingsMenu'
 import UpcomingStationsVertical from './components/UpcomingStationsVertical'
 import { default as Line } from './components/TransferLines'
 
 import { getTransferImageSvg } from './logic/TransferImageMap'
 import { useUIContext } from './contexts/UIContext'
 import { useGameContext } from './contexts/GameContext'
+
+import GEAR_BLACK from './images/settings-icon-b.svg'
+import GEAR_WHITE from './images/settings-icon-w.svg'
+import KEYBOARD_BLACK from './images/keyboard-icon-b.svg'
+import KEYBOARD_WHITE from './images/keyboard-icon-w.svg'
 
 function App() {
     const { isTransferMode, setIsTransferMode, upcomingStationsVertical } = useUIContext()
@@ -53,7 +59,29 @@ function App() {
 
                 <GameStateUI />
             </div>
-            <SettingsUmbrella />
+            <div className="umbrella-menus">
+                <div className="settings-umbrella">
+                    <UmbrellaButton
+                        openingButtonWhite={GEAR_WHITE}
+                        openingButtonBlack={GEAR_BLACK}
+                        umbrellaContent={<SettingsMenu />}
+                    />
+                </div>
+                <div className="shortcuts-umbrella">
+                    <UmbrellaButton
+                        openingButtonWhite={KEYBOARD_WHITE}
+                        openingButtonBlack={KEYBOARD_BLACK}
+                        umbrellaContent={
+                            <>
+                                <kbd>c</kbd>
+                                <kbd>d</kbd>
+                            </>
+                        }
+                        below
+                    />
+                </div>
+            </div>
+
             {upcomingStationsVertical && (
                 <div className="upcoming-stations-vertical">
                     <UpcomingStationsVertical />

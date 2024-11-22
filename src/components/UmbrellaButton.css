@@ -1,32 +1,17 @@
-.settings-umbrella {
-    position: fixed;
-    bottom: 2em;
-    right: 2em;
-    display: flex;
-    align-items: flex-end;
-    z-index: 1000;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: row;
-}
-
-.settings-trigger {
-    border-radius: 50%;
+.umbrella-button {
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
 
-.settings-popup {
+.umbrella-content {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
     position: absolute;
-    bottom: 4.2em;
-    right: 0;
+    top: -440%; /* Move it above the button */
+    right: 0.1em;
     background: var(--bg-color);
     padding: 1em;
     border-radius: 8px;
@@ -35,20 +20,39 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.2s ease-in;
+    z-index: 10; /* Ensure it appears above other elements */
 }
 
-.settings-popup.visible {
+.umbrella-content.below {
+    top: 115%;
+    width: min-content;
+    left: 0.2em;
+}
+
+.umbrella-content.visible {
+    height:fit-content;
     visibility: visible;
     opacity: 1;
 }
 
-.settings-popup-arrow {
+.umbrella-content.hidden {
+    display: none;
+}
+
+.popup-arrow {
     position: absolute;
-    bottom: -0.5em;
-    right: 1.3em;
+    top: 13.75em;
+    right: 1.2em;
     width: 0;
     height: 0;
     border-left: 0.6em solid transparent;
     border-right: 0.6em solid transparent;
     border-top: 0.6em solid var(--bg-color-2);
 }
+
+.below .popup-arrow {
+    transform: rotate(180deg);
+    top: -0.6em;
+    right: 2.3em;
+}
+
