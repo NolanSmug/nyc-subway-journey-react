@@ -109,6 +109,10 @@ export class Train {
         return this.currentLine === LineName.NULL_TRAIN
     }
 
+    public isShuttle(): boolean {
+        return this.currentLine === LineName.S_TRAIN || this.currentLine === LineName.S_TRAIN_ROCKAWAY || this.currentLine === LineName.S_TRAIN_SHUTTLE
+    }
+
     // LineType
     public setLineType() {
         this.lineType = lineTypes.get(this.currentLine) ?? LineType.NONE

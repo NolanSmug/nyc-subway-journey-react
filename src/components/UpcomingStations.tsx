@@ -43,7 +43,7 @@ export function lineToLineColor(lineName: LineName): string {
 // TODO: Borough barrier
 
 function UpcomingStations() {
-    const { currentLineColor, upcomingStationsVisible: visible } = useUIContext()
+    const { upcomingStationsVisible: visible } = useUIContext()
     const { train, gameState } = useGameContext()
     const stations = train.getScheduledStops()
     const currentStation = gameState.currentStations[train.getCurrentStationIndex()]
@@ -81,12 +81,11 @@ function UpcomingStations() {
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        lineColor={currentLineColor}
                         className={currentID === station.getId() ? 'current-station' : ''}
                     />
                 ))}
             </div>
-            <div ref={lineDividerRef} className="line-divider" style={{ backgroundColor: currentLineColor }} />
+            <div ref={lineDividerRef} className="line-divider" />
         </div>
     )
 }

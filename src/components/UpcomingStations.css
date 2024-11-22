@@ -23,6 +23,7 @@
 }
 
 .line-divider {
+    background-color: var(--line-color);
     position: absolute;
     height: 0.3rem;
     bottom: 1.4em;

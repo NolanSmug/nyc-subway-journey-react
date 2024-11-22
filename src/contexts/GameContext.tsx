@@ -4,7 +4,6 @@ import { GameState } from '../logic/GameState'
 import { Station as StationClass } from '../logic/StationManager'
 import { Game } from '../logic/Game'
 import { useUIContext } from './UIContext'
-import { lineToLineColor } from '../components/UpcomingStations'
 
 interface GameContextProps {
     train: Train
@@ -21,7 +20,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     const [train, setTrain] = useState<Train>(new Train())
     const [gameState, setGameState] = useState<GameState>(new GameState())
 
-    const { setIsTransferMode, setCurrentLineColor } = useUIContext()
+    const { setIsTransferMode } = useUIContext()
 
     const initializeGame = useCallback(async () => {
         try {
@@ -32,12 +31,11 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
             setIsTransferMode(false)
             setTrain(newGame.train)
             setGameState(newGame.gameState)
-            setCurrentLineColor(lineToLineColor(newGame.train.getLine()))
             console.log('initialized!')
         } catch (error) {
             console.error('Error initializing game:', error)
         }
-    }, [setIsTransferMode, setTrain, setGameState, setCurrentLineColor])
+    }, [setIsTransferMode, setTrain, setGameState])
 
     // this function is used for ensuring we re-render after train object actions
     const updateTrainObject = useCallback((updates: Partial<Train>) => {

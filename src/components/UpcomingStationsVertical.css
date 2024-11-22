@@ -17,11 +17,11 @@
     align-items: center;
     position: relative;
     z-index: 1;
-    margin-top: 5em;
 }
 
 .line-divider-vertical {
-    position:absolute;
+    background-color: var(--line-color);
+    position: absolute;
     height: 0.3rem;
     z-index: 0;
     left: 6.65em;

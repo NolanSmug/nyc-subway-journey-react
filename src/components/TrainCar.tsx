@@ -16,7 +16,7 @@ export interface TrainCarProps {
 }
 
 function TrainCar({ header, children }: TrainCarProps) {
-    const { currentLineColor, upcomingStationsVertical, darkMode } = useUIContext()
+    const { upcomingStationsVertical, darkMode } = useUIContext()
     const { train, updateTrainObject } = useGameContext()
 
     const isNullDirection: boolean = train.isNullDirection()
@@ -47,9 +47,9 @@ function TrainCar({ header, children }: TrainCarProps) {
                         style={
                             isNullDirection
                                 ? {
-                                      borderColor: currentLineColor,
+                                      borderColor: 'var(--line-color)',
                                       textDecoration: 'underline',
-                                      textDecorationColor: currentLineColor,
+                                      textDecorationColor: 'var(--line-color)',
                                       textUnderlineOffset: '4px',
                                   }
                                 : {}

@@ -9,10 +9,9 @@ export interface StationFragmentProps {
     station: Station
     className?: string
     transfers: LineName[]
-    lineColor: string
 }
 
-const StationFragment: React.FC<StationFragmentProps> = ({ station, className, transfers, lineColor }) => {
+const StationFragment: React.FC<StationFragmentProps> = ({ station, className, transfers }) => {
     const [isOverflowing] = useState(station.getName().length > 12)
 
     return (
@@ -25,7 +24,7 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
                     </div>
                 </div>
             </div>
-            <div className="station-dot" style={{ borderColor: lineColor }} />
+            <div className="station-dot" />
         </div>
     )
 }

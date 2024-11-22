@@ -5,7 +5,7 @@ import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 
 function UpcomingStationsVertical() {
-    const { currentLineColor, upcomingStationsVisible: visible } = useUIContext()
+    const { upcomingStationsVisible: visible } = useUIContext()
     const { train, gameState } = useGameContext()
 
     const stations = train.getScheduledStops()
@@ -14,19 +14,19 @@ function UpcomingStationsVertical() {
     const lineDividerRef = useRef<HTMLDivElement>(null)
     const currentID = currentStation.getId()
 
+    // scroll to the current station
     useEffect(() => {
         if (stationsRef.current && stations.length > 0) {
             const currentStationElement = stationsRef.current.querySelector('.current-station-vertical')
-
             scrollToCurrentStation(currentStationElement!)
         }
     }, [currentStation, stations.length, currentID])
 
+    // adjust the line length
     useEffect(() => {
-        if (stationsRef.current && lineDividerRef.current) {
-            if (stations.length > 0) {
-                lineDividerRef.current.style.width = `${stations.length * 6}em`
-            }
+        if (stationsRef.current && lineDividerRef.current && stations.length > 0) {
+            lineDividerRef.current.style.width = train.isShuttle() ? `${stations.length * 5}em` : `${stations.length * 6}em`
+            lineDividerRef.current.style.top = train.isShuttle() ? '5em' : ''
         }
     }, [stations.length, visible])
 
@@ -36,14 +36,13 @@ function UpcomingStationsVertical() {
 
     return (
         <div className="upcoming-stations-vertical-container">
-            <div ref={lineDividerRef} className="line-divider-vertical" style={{ backgroundColor: currentLineColor }} />
+            <div ref={lineDividerRef} className="line-divider-vertical" />
             <div className="stations-vertical" ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragment
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        lineColor={currentLineColor}
                         className={currentID === station.getId() ? 'current-station-vertical' : ''}
                     />
                 ))}

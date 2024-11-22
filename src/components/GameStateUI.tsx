@@ -14,20 +14,18 @@ import C_DIRECTION_WHITE from '../images/change-direction-icon-w.svg'
 import C_DIRECTION_BLACK from '../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useUIContext } from '../contexts/UIContext'
 import { lineToLineColor } from './UpcomingStations'
 import { useGameContext } from '../contexts/GameContext'
 
 function GameStateUI() {
-    const { darkMode, setIsTransferMode, setCurrentLineColor, numAdvanceStations, advancedMode } = useUIContext()
+    const { darkMode, setIsTransferMode, numAdvanceStations, advancedMode } = useUIContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState?.isWon || train === null || gameState === null) return
         if (action !== 'transfer') setIsTransferMode(false)
-
-        setCurrentLineColor(lineToLineColor(train.getLine()))
 
         switch (action) {
             case 'refresh':
@@ -66,11 +64,11 @@ function GameStateUI() {
         const selectedLine = transfers[transferIndex]
 
         if (selectedLine !== undefined) {
-            await transferLines(selectedLine)
+            await transferTo(selectedLine)
         }
     }
 
-    const transferLines = async (selectedLine: LineName): Promise<void> => {
+    const transferTo = async (selectedLine: LineName): Promise<void> => {
         if (train == null) return
 
         if (await train.transferToLine(selectedLine, train.getCurrentStation())) {
@@ -80,7 +78,6 @@ function GameStateUI() {
         }
         updateTrainObject({ ...train.updateTrainState() })
         setIsTransferMode(false)
-        setCurrentLineColor(lineToLineColor(selectedLine))
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -99,12 +96,17 @@ function GameStateUI() {
         return () => window.removeEventListener('keydown', handleKeyPress)
     })
 
+    const currentLine = useMemo(() => train.getLine(), [train])
+    useEffect(() => {
+        document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
+    }, [currentLine])
+
     return (
         <div className="stations-container">
             <div className="station-box" id="current-station">
                 <Header text="Current Station" />
                 <div className="station-item">
-                    <Station name={train.getScheduledStops()[train.getCurrentStationIndex()].getName()}>
+                    <Station name={train.getCurrentStation().getName()}>
                         <div className="not-dim">
                             <TransferLines
                                 onClick={getTransferLineClicked}
