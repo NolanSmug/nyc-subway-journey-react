@@ -4,6 +4,8 @@
     gap: 2em;
     padding-top: 1em;
     width: 100%;
+    transition: transform 0.5s linear; /* Smooth animation */
+
 }
 
 .station-box {

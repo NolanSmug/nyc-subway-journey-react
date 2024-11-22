@@ -34,7 +34,12 @@ function App() {
 
     return (
         <>
-            <div className="Game">
+            <div
+                className="Game"
+                style={{
+                    transform: upcomingStationsVertical ? 'translateY(-8em)' : '',
+                }}
+            >
                 <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
                 {!upcomingStationsVertical && <UpcomingStations />}
@@ -47,9 +52,8 @@ function App() {
                 </div>
 
                 <GameStateUI />
-
-                <SettingsUmbrella />
             </div>
+            <SettingsUmbrella />
             {upcomingStationsVertical && (
                 <div className="upcoming-stations-vertical">
                     <UpcomingStationsVertical />

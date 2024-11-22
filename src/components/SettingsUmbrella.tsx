@@ -48,7 +48,7 @@ const SettingsUmbrella = () => {
 
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [])
+    }, [isOpen])
 
     return (
         <div className="settings-umbrella">

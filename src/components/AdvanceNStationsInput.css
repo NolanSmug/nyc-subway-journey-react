@@ -12,6 +12,7 @@
     caret-color: var(--text-color);
     letter-spacing: 0.25px;
     line-height: 0.7em;
+    
 }
 
 input[type=number]:focus-visible {
