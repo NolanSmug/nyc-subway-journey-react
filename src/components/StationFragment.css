@@ -2,16 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
     max-width: 100vm;
     max-height: 100%;
 }
 
 .station-frag-content {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 0.5rem;
     margin-bottom: 1.5rem;
     width: fit-content;
     transform: rotate(-45deg);
@@ -23,7 +18,6 @@
 
 .station-info {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 0.5rem;
 }
@@ -67,9 +61,11 @@
     margin-left: 1.5em;
 }
 
+
 /* 
 STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS 
 */
+
 .upcoming-stations-vertical-container .station-frag-container .station-frag-content {
     transform: rotate(0deg); /* vertical list requires no rotate */
     top: 2em;
@@ -77,32 +73,7 @@ STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS
     margin-bottom: 0;
 }
 
-.stations-vertical .station-dot {
-    width: 0.75rem;
-    height: 0.75rem;
-    background-color: white;
-    border-color: var(--line-color);
-    border-radius: 50%;
-    border-width: 0.15rem;
-    border-style: solid;
-    position: static;
-    transform: translate(-50%, 50%);
-    z-index: 2;
-    position: relative;
-}
-
-.current-station-vertical {
-    transition: ease-in-out 0.1s;
-    width: max-content;
-}
-
 /* TODO: figure out visual change for the current station  */
-.current-station-vertical .station-dot {
-    transition: ease-in-out 0.1s;
-    width: 0.75rem;
-    height: 0.75rem;
-}
-
 .current-station-vertical .station-dot::after {
     content: '';
     position: absolute;
@@ -127,6 +98,6 @@ STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS
 
 .current-station-vertical .station-frag-name {
     color: var(--line-color);
-    filter: brightness(140%) saturate(75%);
-    opacity: 0.8;
+    filter: brightness(140%) saturate(85%);
+    opacity: 0.9;
 }

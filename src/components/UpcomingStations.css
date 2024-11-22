@@ -11,11 +11,8 @@
 
 .stations {
     display: flex;
-    flex-direction: row;
     align-items: flex-end;
     align-self: flex-end;
-    align-content: flex-end;
-    position: relative;
     height: 20em;
     column-gap: 1px;
     z-index: 1;

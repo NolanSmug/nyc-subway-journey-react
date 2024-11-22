@@ -59,10 +59,9 @@ body {
 }
 
 .upcoming-stations-vertical {
-    width: 20%;  /* Take up 30% of the width (adjust as needed) */
-    padding: 1em;
-    margin-right: 10em;
-    box-sizing: border-box;
+    position: relative;
+    right: 18em;
+    width: 0;
     z-index: 0;
 }
 

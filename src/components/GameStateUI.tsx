@@ -22,9 +22,10 @@ import { useGameContext } from '../contexts/GameContext'
 function GameStateUI() {
     const { darkMode, setIsTransferMode, numAdvanceStations, advancedMode } = useUIContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
+    const currentStation = train.getCurrentStation()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
-        if (gameState?.isWon || train === null || gameState === null) return
+        if (gameState.isWon || train === null || gameState === null) return
         if (action !== 'transfer') setIsTransferMode(false)
 
         switch (action) {
@@ -39,11 +40,11 @@ function GameStateUI() {
                     updateTrainObject({ ...train.advanceStation() })
                 }
 
-                const winState = await gameState.checkWin(train.getCurrentStation())
+                const winState = await gameState.checkWin(currentStation)
                 if (winState) {
                     setTimeout(() => {
                         initializeGame()
-                    }, 5000)
+                    }, 4000)
                 }
                 break
 
@@ -60,7 +61,7 @@ function GameStateUI() {
     }
 
     const getTransferLineClicked = async (transferIndex: number): Promise<void> => {
-        const transfers = train.getCurrentStation().getTransfers()
+        const transfers = currentStation.getTransfers()
         const selectedLine = transfers[transferIndex]
 
         if (selectedLine !== undefined) {
@@ -71,10 +72,10 @@ function GameStateUI() {
     const transferTo = async (selectedLine: LineName): Promise<void> => {
         if (train == null) return
 
-        if (await train.transferToLine(selectedLine, train.getCurrentStation())) {
+        if (await train.transferToLine(selectedLine, currentStation)) {
             train.setLine(selectedLine)
             train.setLineType()
-            train.setCurrentStation(train.getCurrentStation())
+            train.setCurrentStation(currentStation)
         }
         updateTrainObject({ ...train.updateTrainState() })
         setIsTransferMode(false)
@@ -106,12 +107,9 @@ function GameStateUI() {
             <div className="station-box" id="current-station">
                 <Header text="Current Station" />
                 <div className="station-item">
-                    <Station name={train.getCurrentStation().getName()}>
+                    <Station name={currentStation.getName()}>
                         <div className="not-dim">
-                            <TransferLines
-                                onClick={getTransferLineClicked}
-                                transfers={getTransferImageSvg(train.getCurrentStation())}
-                            />
+                            <TransferLines onClick={getTransferLineClicked} transfers={getTransferImageSvg(currentStation)} />
                         </div>
                     </Station>
                 </div>
@@ -142,7 +140,7 @@ function GameStateUI() {
                         <TransferLines transfers={getTransferImageSvg(gameState.destinationStation)} />
                     </Station>
                 </div>
-                {gameState?.isFirstTurn && (
+                {gameState.isFirstTurn && (
                     <div className="action-buttons-container" id="destination-station">
                         <ActionButton
                             imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
