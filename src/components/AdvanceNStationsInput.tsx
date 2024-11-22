@@ -17,7 +17,9 @@ function AdvanceNStationsInput() {
         <input
             type="number"
             defaultValue={1}
-            onChange={(e) => setNumAdvanceStations(parseInt(e.target.value))} // update numAdvanceStations
+            onChange={(e) => {
+                setNumAdvanceStations(parseInt(e.target.value))
+            }}
             className="additional-input"
             placeholder="1"
             min={1}

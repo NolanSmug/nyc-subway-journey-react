@@ -17,6 +17,8 @@ import UPCOMING_STATIONS_HORIZONTAL_BLACK from '../images/upcoming-stations-hori
 import UPCOMING_STATIONS_HORIZONTAL_WHITE from '../images/upcoming-stations-horizontal-icon-w.svg'
 import CONDUCTOR_MODE_BLACK from '../images/conductor-mode-icon-b.svg'
 import CONDUCTOR_MODE_WHITE from '../images/conductor-mode-icon-w.svg'
+import RIDER_MODE_BLACK from '../images/rider-mode-icon-b.svg'
+import RIDER_MODE_WHITE from '../images/rider-mode-icon-w.svg'
 
 const SettingsUmbrella = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -30,6 +32,7 @@ const SettingsUmbrella = () => {
         setUpcomingStationsVisible,
         upcomingStationsVertical,
         setUpcomingStationsVertical,
+        advancedMode,
         setAdvancedMode,
     } = useUIContext()
 
@@ -87,8 +90,16 @@ const SettingsUmbrella = () => {
                     }}
                 />
                 <SettingsButton
-                    label="Conductor Mode"
-                    imgSrc={darkMode ? CONDUCTOR_MODE_WHITE : CONDUCTOR_MODE_BLACK}
+                    label={!advancedMode ? 'Conductor Mode' : 'Rider Mode'}
+                    imgSrc={
+                        advancedMode
+                            ? darkMode
+                                ? RIDER_MODE_WHITE
+                                : RIDER_MODE_BLACK
+                            : darkMode
+                            ? CONDUCTOR_MODE_WHITE
+                            : CONDUCTOR_MODE_BLACK
+                    }
                     onClick={() => {
                         setAdvancedMode((prev) => !prev)
                     }}

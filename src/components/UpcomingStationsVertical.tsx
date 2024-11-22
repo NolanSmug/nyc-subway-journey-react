@@ -16,7 +16,7 @@ function UpcomingStationsVertical() {
 
     // scroll to the current station
     useEffect(() => {
-        if (stationsRef.current && stations.length > 0) {
+        if (stationsRef.current && stations.length > 0 && train.getCurrentStationIndex() > 5) {
             const currentStationElement = stationsRef.current.querySelector('.current-station-vertical')
             scrollToCurrentStation(currentStationElement!)
         }
@@ -28,7 +28,7 @@ function UpcomingStationsVertical() {
             lineDividerRef.current.style.width = train.isShuttle() ? `${stations.length * 5}em` : `${stations.length * 6}em`
             lineDividerRef.current.style.top = train.isShuttle() ? '5em' : ''
         }
-    }, [stations.length, visible])
+    }, [stations.length, visible, train])
 
     if (!stations || stations.length === 0 || !visible) {
         return <div style={{ display: 'none' }} />

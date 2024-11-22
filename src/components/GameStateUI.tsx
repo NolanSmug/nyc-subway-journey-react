@@ -22,7 +22,7 @@ import { useGameContext } from '../contexts/GameContext'
 function GameStateUI() {
     const { darkMode, setIsTransferMode, numAdvanceStations, advancedMode } = useUIContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
-    const currentStation = train.getCurrentStation()
+    const currentStation = gameState.currentStations[train.getCurrentStationIndex()]
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState.isWon || train === null || gameState === null) return
@@ -82,6 +82,9 @@ function GameStateUI() {
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
+        if (document.activeElement instanceof HTMLInputElement) {
+            return
+        }
         const actions: { [key: string]: () => void } = {
             t: () => handleTrainAction('transfer'),
             c: () => handleTrainAction('changeDirection'),
@@ -129,6 +132,7 @@ function GameStateUI() {
                         label={`Advance Station${numAdvanceStations > 1 ? 's' : ''}`}
                         onClick={() => handleTrainAction('advanceStation')}
                         additionalInput={advancedMode}
+                        className="advance-station-button"
                     />
                 </div>
             </div>

@@ -44,7 +44,7 @@ export class GameState {
                     currentStationElement.classList.remove('win-state');
                     destinationStationElement.classList.remove('win-state');
                     trainCarElement?.classList.remove('win-state')
-                }, 5000);
+                }, 4000);
 
                 return true;
             }
