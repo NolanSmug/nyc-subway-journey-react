@@ -20,5 +20,4 @@ export class Game {
         this.train.setCurrentStation(this.gameState.startingStation)
         this.train.updateTrainState()
     }
-
 }

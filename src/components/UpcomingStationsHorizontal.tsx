@@ -1,4 +1,4 @@
-import './UpcomingStations.css'
+import './UpcomingStationsHorizontal.css'
 import { LineName } from '../logic/Line'
 import StationFragment from './StationFragment'
 import { useEffect, useRef } from 'react'
@@ -42,11 +42,11 @@ export function lineToLineColor(lineName: LineName): string {
 
 // TODO: Borough barrier
 
-function UpcomingStations() {
+function UpcomingStationsHorizontal() {
     const { upcomingStationsVisible: visible } = useUIContext()
-    const { train, gameState } = useGameContext()
+    const { train } = useGameContext()
     const stations = train.getScheduledStops()
-    const currentStation = gameState.currentStations[train.getCurrentStationIndex()]
+    const currentStation = train.getCurrentStation()
 
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
@@ -55,7 +55,6 @@ function UpcomingStations() {
     useEffect(() => {
         if (stationsRef.current && stations.length > 0) {
             const currentStationElement = stationsRef.current.querySelector('.current-station')
-
             scrollToCurrentStation(currentStationElement!)
         }
     }, [currentStation, stations.length, currentID])
@@ -74,8 +73,8 @@ function UpcomingStations() {
     }
 
     return (
-        <div className="upcoming-stations-container">
-            <div className="stations" ref={stationsRef}>
+        <div className="upcoming-stations-horizontal-container">
+            <div className="stations-horizontal" ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragment
                         key={station.getId() || index}
@@ -103,4 +102,4 @@ function scrollToCurrentStation(currentStationElement: Element): () => void {
     return () => {}
 }
 
-export default UpcomingStations
+export default UpcomingStationsHorizontal

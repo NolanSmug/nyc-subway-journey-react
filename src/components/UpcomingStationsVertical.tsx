@@ -1,24 +1,26 @@
 import './UpcomingStationsVertical.css'
-import { useEffect, useRef } from 'react'
 import StationFragment from './StationFragment'
+import { useEffect, useRef } from 'react'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 
 function UpcomingStationsVertical() {
     const { upcomingStationsVisible: visible } = useUIContext()
-    const { train, gameState } = useGameContext()
+    const { train } = useGameContext()
 
     const stations = train.getScheduledStops()
-    const currentStation = gameState.currentStations[train.getCurrentStationIndex()]
+    const currentStation = train.getCurrentStation()
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
     const currentID = currentStation.getId()
 
     // scroll to the current station
     useEffect(() => {
-        if (stationsRef.current && stations.length > 0 && train.getCurrentStationIndex() > 5) {
-            const currentStationElement = stationsRef.current.querySelector('.current-station-vertical')
-            scrollToCurrentStation(currentStationElement!)
+        if (stationsRef.current && stations.length > 0) {
+            const currentStationElement: Element | null = stationsRef.current.querySelector('.current-station-vertical')
+            const isBelowCenteredScroll: boolean = train.getCurrentStationIndex() < 7
+
+            scrollToCurrentStation(currentStationElement!, isBelowCenteredScroll)
         }
     }, [currentStation, stations.length, currentID])
 
@@ -51,10 +53,10 @@ function UpcomingStationsVertical() {
     )
 }
 
-function scrollToCurrentStation(currentStationElement: Element): () => void {
+function scrollToCurrentStation(currentStationElement: Element, isLowIndex: boolean): () => void {
     if (currentStationElement) {
         const timer = setTimeout(() => {
-            currentStationElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            currentStationElement.scrollIntoView({ behavior: 'smooth', block: isLowIndex ? 'nearest' : 'center' })
         }, 0) // !DO NOT REMOVE! no idea why "0ms delay" fixes occasional scrolling issues, but it does
         return () => clearTimeout(timer)
     } else {

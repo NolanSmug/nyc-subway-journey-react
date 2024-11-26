@@ -1,15 +1,12 @@
 import './App.css'
-import React, { useEffect, useMemo } from 'react'
-import UpcomingStations from './components/UpcomingStations'
-import Header from './components/Header'
-import TrainCar from './components/TrainCar'
+import React, { useEffect } from 'react'
 import GameStateUI from './components/GameStateUI'
 import UmbrellaButton from './components/UmbrellaButton'
 import SettingsMenu from './components/SettingsMenu'
 import UpcomingStationsVertical from './components/UpcomingStationsVertical'
-import { default as Line } from './components/TransferLines'
+import UpcomingStationsHorizontal from './components/UpcomingStationsHorizontal'
+import KeyShortcutMenu from './components/KeyShortcutMenu'
 
-import { getTransferImageSvg } from './logic/TransferImageMap'
 import { useUIContext } from './contexts/UIContext'
 import { useGameContext } from './contexts/GameContext'
 
@@ -33,32 +30,18 @@ function App() {
         initializeGame()
     }, [initializeGame])
 
-    const line = train?.getLine()
-    const currentLineSvg = useMemo(() => getTransferImageSvg(line), [line])
-
     if (train.isLineNull() || gameState.isEmpty()) return <>Error</>
 
     return (
         <>
-            <div
-                className="Game"
-                style={{
-                    transform: upcomingStationsVertical ? 'translateY(-8em)' : '',
-                }}
-            >
+            <div className="Game">
                 <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
 
-                {!upcomingStationsVertical && <UpcomingStations />}
-
-                <Header text="Current Line:"></Header>
-                <div className={`train ${gameState.isWon ? 'win-state' : ''}`}>
-                    <TrainCar>
-                        <Line transfers={currentLineSvg} notDim />
-                    </TrainCar>
-                </div>
+                {!upcomingStationsVertical && <UpcomingStationsHorizontal />}
 
                 <GameStateUI />
             </div>
+
             <div className="umbrella-menus">
                 <div className="settings-umbrella">
                     <UmbrellaButton
@@ -71,12 +54,7 @@ function App() {
                     <UmbrellaButton
                         openingButtonWhite={KEYBOARD_WHITE}
                         openingButtonBlack={KEYBOARD_BLACK}
-                        umbrellaContent={
-                            <>
-                                <kbd>c</kbd>
-                                <kbd>d</kbd>
-                            </>
-                        }
+                        umbrellaContent={<KeyShortcutMenu />}
                         below
                     />
                 </div>

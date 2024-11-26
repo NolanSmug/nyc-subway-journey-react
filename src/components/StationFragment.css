@@ -61,11 +61,10 @@
     margin-left: 1.5em;
 }
 
-
 /* 
-STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS 
+    StationFragment is reused in VerticalUpcomingStations
+    Below are styling modifications for such
 */
-
 .upcoming-stations-vertical-container .station-frag-container .station-frag-content {
     transform: rotate(0deg); /* vertical list requires no rotate */
     top: 2em;
@@ -73,7 +72,6 @@ STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS
     margin-bottom: 0;
 }
 
-/* TODO: figure out visual change for the current station  */
 .current-station-vertical .station-dot::after {
     content: '';
     position: absolute;
@@ -86,14 +84,6 @@ STYLING MODIFICATIONS FOR VERTICAL UPCOMING STATIONS
     border-radius: 50%;
     opacity: 0.4;
     z-index: -1;
-}
-
-.current-station .station-frag-name,
-.current-station-vertical .station-frag-name {
-    text-decoration: underline;
-    text-decoration-color: var(--line-color);
-    text-underline-offset: 2px;
-    text-decoration-thickness: 3px;
 }
 
 .current-station-vertical .station-frag-name {

@@ -7,12 +7,13 @@ import { Direction } from '../logic/TrainManager'
 
 function AdvanceNStationsInput() {
     const { setNumAdvanceStations } = useUIContext()
-    const { train, gameState } = useGameContext()
+    const { train } = useGameContext()
 
     const currentMaxNumber: number =
         train.getDirection() === Direction.DOWNTOWN
             ? train.getCurrentStationIndex()
-            : gameState.currentStations.length - train.getCurrentStationIndex() - 1
+            : train.getScheduledStops().length - train.getCurrentStationIndex() - 1
+
     return (
         <input
             type="number"

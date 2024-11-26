@@ -1,0 +1,28 @@
+.shortcut {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    justify-content: space-between;
+}
+
+kbd {
+    height: fit-content;
+    padding: 1px;
+    min-width: 1em;
+    box-shadow: 1.5px 1.5px #8b8b8b;
+    font-family: 'Helvetica', 'sans-serif';
+    font-weight: 600;
+}
+
+kbd::hover {
+    cursor: pointer;
+}
+
+#key-label {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: small;
+    width: max-content;
+    min-width: 12ch;
+    padding: 0.4em 0.3em 0.3em 0.3em;
+}

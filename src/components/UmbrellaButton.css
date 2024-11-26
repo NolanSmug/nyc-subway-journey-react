@@ -30,7 +30,7 @@
 }
 
 .umbrella-content.visible {
-    height:fit-content;
+    height: fit-content;
     visibility: visible;
     opacity: 1;
 }
@@ -53,6 +53,5 @@
 .below .popup-arrow {
     transform: rotate(180deg);
     top: -0.6em;
-    right: 2.3em;
+    right: 10.3em;
 }
-
