@@ -8,14 +8,16 @@
 You are placed into a random NYC subway station. Your objective is to reach another randomly given station by utilizing your knowledge of the NYC subway system. 
 
 1. **Initialization:**
-- The user is given a random `starting station`, `destination station` and `starting line` within the subway system. (see [all_stations.csv](./public/csv/all_stations.csv))
+- The user is given a random `starting station`, `destination station` and `starting line`. (see [all_stations.csv](./public/csv/all_stations.csv))
 - They must select a `starting direction` by either clicking the text on the subway car or the `Change Direction` button. Advancing the train will not work until a direction is chosen.
      > If you want, you may transfer to a different line before selecting a direction.
 - You are now able to `Advance` and `Transfer`  
 <br>
+
 2. **Gameplay:**
 - The game displays your `current station` and `destination station`.  
 <br>
+
 3. **Buttons:**
 -  `Advance Station` – Advance 1 station (see `conductor mode` to control this value)
 -  `Change Direction` – Reverses your current direction. Each line has specific `UPTOWN` and `DOWNTOWN` labels.
