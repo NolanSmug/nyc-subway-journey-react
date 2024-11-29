@@ -64,7 +64,7 @@ function App() {
             </div>
 
             {upcomingStationsVertical && (
-                <div className="upcoming-stations-vertical">
+                <div className="upcoming-stations-vertical not-dim">
                     <UpcomingStationsVertical />
                 </div>
             )}

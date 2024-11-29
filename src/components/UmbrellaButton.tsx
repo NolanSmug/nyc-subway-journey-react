@@ -26,7 +26,14 @@ const UmbrellaButton = ({ openingButtonWhite, openingButtonBlack, umbrellaConten
         const handleClickOutside = (event: MouseEvent) => {
             if (!(event.target instanceof Node)) return
 
-            if (isOpen && !popupRef.current?.contains(event.target)) {
+            // Conditional for handling the popup closing logic (forget this exists when you come back)
+            if (
+                isOpen &&
+                popupRef.current &&
+                !popupRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
                 setIsOpen(false)
             }
         }
@@ -35,17 +42,21 @@ const UmbrellaButton = ({ openingButtonWhite, openingButtonBlack, umbrellaConten
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isOpen])
 
+    const togglePopup = () => {
+        setIsOpen((prev) => !prev)
+    }
+
     return (
         <>
             <div ref={buttonRef}>
                 <ActionButton
                     className="umbrella-button"
                     imageSrc={darkMode ? openingButtonWhite : openingButtonBlack}
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={togglePopup}
                 />
             </div>
 
-            <div ref={popupRef} className={`umbrella-content ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : ''}`}>
+            <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : ''}`}>
                 {umbrellaContent}
                 <div className="popup-arrow" />
             </div>
