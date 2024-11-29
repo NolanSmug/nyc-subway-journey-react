@@ -13,7 +13,10 @@ const KeyShortcutMenu: React.FC<KeyShortcutMenuProps> = () => {
             <KeyShortcut shortcutKey="c" label="Change Direction" />
             <KeyShortcut shortcutKey="r" label="Refresh" />
             <KeyShortcut shortcutKey="Esc" label="Exit Transfer" />
-            <KeyShortcut shortcutKey="l" label="Layout" isCommand />
+            <KeyShortcut shortcutKey="l" label="Toggle Layout" isCommand />
+            <KeyShortcut shortcutKey="d" label="Light/Dark Mode" isCommand />
+            <KeyShortcut shortcutKey="u" label="Stations Hide/Show" isCommand />
+            <KeyShortcut shortcutKey="c" label="Conductor/Rider Mode" isCommand />
         </>
     )
 }

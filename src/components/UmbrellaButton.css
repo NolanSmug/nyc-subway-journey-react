@@ -10,7 +10,7 @@
     flex-direction: column;
     gap: 0.5em;
     position: absolute;
-    top: -470%; /* Move it above the button */
+    top: -670%; /* Move it above the button */
     background: var(--bg-color);
     padding: 1em;
     border-radius: 8px;
@@ -39,13 +39,13 @@
 
 .popup-arrow {
     position: absolute;
-    top: 14.8em;
+    top: 21.3em;
     left: 1.2em;
     width: 0;
     height: 0;
     border-left: 0.6em solid transparent;
     border-right: 0.6em solid transparent;
-    border-top: 0.6em solid var(--bg-color-2);
+    border-top: 0.6em solid var(--bg-color-3);
 }
 
 .below .popup-arrow {

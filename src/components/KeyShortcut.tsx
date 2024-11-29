@@ -13,7 +13,7 @@ function KeyShortcut({ shortcutKey, label, isCommand }: KeyShortcutProps) {
             <p>
                 {isCommand && (
                     <>
-                        <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> +{' '}
+                        <kbd>Shift</kbd> +{' '}
                     </>
                 )}
                 <kbd>{shortcutKey}</kbd>

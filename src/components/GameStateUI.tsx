@@ -22,7 +22,16 @@ import { lineToLineColor } from './UpcomingStationsHorizontal'
 import { useGameContext } from '../contexts/GameContext'
 
 function GameStateUI() {
-    const { darkMode, setIsTransferMode, numAdvanceStations, conductorMode, upcomingStationsVertical } = useUIContext()
+    const {
+        darkMode,
+        setIsTransferMode,
+        numAdvanceStations,
+        conductorMode,
+        setUpcomingStationsVertical,
+        setDarkMode,
+        setConductorMode,
+        setUpcomingStationsVisible,
+    } = useUIContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
@@ -86,22 +95,45 @@ function GameStateUI() {
 
     const handleKeyPress = (event: KeyboardEvent) => {
         if (document.activeElement instanceof HTMLInputElement) {
+            return // Ignore key presses inside input fields
+        }
+
+        // Mapping for key combinations
+        const comboKeyActions: { [combo: string]: () => void } = {
+            'Shift+L': () => setUpcomingStationsVertical((prev) => !prev),
+            'Shift+D': () => setDarkMode((prev) => !prev),
+            'Shift+U': () => setUpcomingStationsVisible((prev) => !prev),
+            'Shift+C': () => setConductorMode((prev) => !prev),
+        }
+
+        // Check for combo keys
+        const keyCombo = `${event.shiftKey ? 'Shift+' : ''}${event.key}`
+        if (comboKeyActions[keyCombo]) {
+            event.preventDefault() // Prevent default browser behavior
+            event.stopPropagation() // Stop event propagation
+            event.stopImmediatePropagation() // Ensure no further event handling
+            comboKeyActions[keyCombo]()
             return
         }
-        const actions: { [key: string]: () => void } = {
+
+        // Mapping for single-key actions
+        const singleKeyActions: { [key: string]: () => void } = {
             t: () => handleTrainAction('transfer'),
             c: () => handleTrainAction('changeDirection'),
             r: () => handleTrainAction('refresh'),
             ArrowRight: () => handleTrainAction('advanceStation'),
             Escape: () => setIsTransferMode(false),
         }
-        actions[event.key]?.()
+
+        // Handle single-key actions
+        singleKeyActions[event.key]?.()
     }
 
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyPress)
-        return () => window.removeEventListener('keydown', handleKeyPress)
-    })
+        const listener = (event: KeyboardEvent) => handleKeyPress(event)
+        window.addEventListener('keydown', listener, true) // Use capture phase for priority
+        return () => window.removeEventListener('keydown', listener, true)
+    }, [])
 
     const currentLine = useMemo(() => train.getLine(), [train])
     const currentLineSvg = useMemo(() => getTransferImageSvg(currentLine), [currentLine])
