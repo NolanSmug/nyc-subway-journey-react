@@ -16,7 +16,7 @@ import KEYBOARD_BLACK from './images/keyboard-icon-b.svg'
 import KEYBOARD_WHITE from './images/keyboard-icon-w.svg'
 
 function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVertical } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVertical, conductorMode } = useUIContext()
     const { train, gameState, initializeGame } = useGameContext()
 
     const handleClickAway = (e: React.MouseEvent) => {
@@ -34,12 +34,13 @@ function App() {
 
     return (
         <>
+            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
             <div className="Game">
-                <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
-
                 {!upcomingStationsVertical && <UpcomingStationsHorizontal />}
 
-                <GameStateUI />
+                <div className={`game-state-ui${upcomingStationsVertical ? ' shifted-up' : ''}`}>
+                    <GameStateUI />
+                </div>
             </div>
 
             <div className="umbrella-menus">
@@ -48,16 +49,18 @@ function App() {
                         openingButtonWhite={GEAR_WHITE}
                         openingButtonBlack={GEAR_BLACK}
                         umbrellaContent={<SettingsMenu />}
-                    />
-                </div>
-                <div className="shortcuts-umbrella">
-                    <UmbrellaButton
-                        openingButtonWhite={KEYBOARD_WHITE}
-                        openingButtonBlack={KEYBOARD_BLACK}
-                        umbrellaContent={<KeyShortcutMenu />}
                         below
                     />
                 </div>
+                {conductorMode && (
+                    <div className="shortcuts-umbrella">
+                        <UmbrellaButton
+                            openingButtonWhite={KEYBOARD_WHITE}
+                            openingButtonBlack={KEYBOARD_BLACK}
+                            umbrellaContent={<KeyShortcutMenu />}
+                        />
+                    </div>
+                )}
             </div>
 
             {upcomingStationsVertical && (

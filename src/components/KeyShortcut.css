@@ -5,16 +5,22 @@
     justify-content: space-between;
 }
 
+p {
+    width: min-content;
+    margin: 0;
+}
+
 kbd {
     height: fit-content;
     padding: 1px;
     min-width: 1em;
     box-shadow: 1.5px 1.5px #8b8b8b;
     font-family: 'Helvetica', 'sans-serif';
-    font-weight: 600;
+    font-variant: small-caps;
+    font-weight: 550;
 }
 
-kbd::hover {
+kbd:hover {
     cursor: pointer;
 }
 

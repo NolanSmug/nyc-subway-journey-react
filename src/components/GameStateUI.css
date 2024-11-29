@@ -1,11 +1,3 @@
-.game-state-ui {
-    transition: transform 0.2s ease;
-}
-
-.game-state-ui.shifted-up {
-    transform: translateY(-8em);
-}
-
 .stations-container {
     display: flex;
     justify-content: center;
@@ -66,3 +58,5 @@
     display: flex;
     justify-content: flex-end;
 }
+
+

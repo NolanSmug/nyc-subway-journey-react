@@ -3,16 +3,22 @@ import './KeyShortcut.css'
 export interface KeyShortcutProps {
     shortcutKey: string
     label: string
-    isSpecial?: boolean
+    isCommand?: boolean
 }
 
-function KeyShortcut({ shortcutKey, label, isSpecial }: KeyShortcutProps) {
+function KeyShortcut({ shortcutKey, label, isCommand }: KeyShortcutProps) {
     return (
         <div className="shortcut">
             <span id="key-label">{label}</span>
-            <kbd title={isSpecial ? shortcutKey : undefined}>{shortcutKey}</kbd>
+            <p>
+                {isCommand && (
+                    <>
+                        <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> +{' '}
+                    </>
+                )}
+                <kbd>{shortcutKey}</kbd>
+            </p>
         </div>
     )
 }
-
 export default KeyShortcut

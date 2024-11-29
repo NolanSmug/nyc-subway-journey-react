@@ -22,7 +22,7 @@ import { lineToLineColor } from './UpcomingStationsHorizontal'
 import { useGameContext } from '../contexts/GameContext'
 
 function GameStateUI() {
-    const { darkMode, setIsTransferMode, numAdvanceStations, advancedMode, upcomingStationsVertical } = useUIContext()
+    const { darkMode, setIsTransferMode, numAdvanceStations, conductorMode, upcomingStationsVertical } = useUIContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
@@ -110,7 +110,7 @@ function GameStateUI() {
     }, [currentLine])
 
     return (
-        <div className={`game-state-ui${upcomingStationsVertical ? ' shifted-up' : ''}`}>
+        <>
             <Header text="Current Line:"></Header>
             <div className={`${gameState.isWon ? 'win-state' : ''}`}>
                 <TrainCar>
@@ -146,7 +146,7 @@ function GameStateUI() {
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                             label={`Advance Station${numAdvanceStations > 1 ? 's' : ''}`}
                             onClick={() => handleTrainAction('advanceStation')}
-                            additionalInput={advancedMode}
+                            additionalInput={conductorMode}
                             className="advance-station-button"
                         />
                     </div>
@@ -170,7 +170,7 @@ function GameStateUI() {
                     )}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -27,8 +27,8 @@ const SettingsMenu = () => {
         setUpcomingStationsVisible,
         upcomingStationsVertical,
         setUpcomingStationsVertical,
-        advancedMode,
-        setAdvancedMode,
+        conductorMode,
+        setConductorMode: setAdvancedMode,
     } = useUIContext()
 
     return (
@@ -59,9 +59,9 @@ const SettingsMenu = () => {
                 }}
             />
             <SettingsButton
-                label={!advancedMode ? 'Conductor Mode' : 'Rider Mode'}
+                label={!conductorMode ? 'Conductor Mode' : 'Rider Mode'}
                 imgSrc={
-                    advancedMode
+                    conductorMode
                         ? darkMode
                             ? RIDER_MODE_WHITE
                             : RIDER_MODE_BLACK

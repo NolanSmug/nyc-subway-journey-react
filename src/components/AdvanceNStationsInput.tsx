@@ -28,7 +28,9 @@ function AdvanceNStationsInput() {
             onInput={(e) => {
                 const input = e.currentTarget
                 const value = parseInt(input.value)
-                if (value > currentMaxNumber) {
+                if (value.toString() == '') {
+                    input.style.backgroundColor = '#b71d1d7b'
+                } else if (value > currentMaxNumber || value <= 0 || isInt(value)) {
                     input.style.backgroundColor = '#b71d1d7b'
                 } else {
                     input.style.backgroundColor = ''
@@ -36,6 +38,13 @@ function AdvanceNStationsInput() {
             }}
         />
     )
+
+    function isInt(num: number) {
+        if (num.toString() == '') {
+            return false
+        }
+        return num.toString().includes('.')
+    }
 }
 
 export default AdvanceNStationsInput
