@@ -37,7 +37,7 @@ function UpcomingStationsVertical() {
     }
 
     return (
-        <div className="upcoming-stations-vertical-container">
+        <div className="upcoming-stations-vertical-container not-dim">
             <div ref={lineDividerRef} className="line-divider-vertical" />
             <div className="stations-vertical" ref={stationsRef}>
                 {stations.map((station, index) => (

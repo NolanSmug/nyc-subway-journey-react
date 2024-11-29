@@ -73,7 +73,7 @@ function UpcomingStationsHorizontal() {
     }
 
     return (
-        <div className="upcoming-stations-horizontal-container">
+        <div className="upcoming-stations-horizontal-container not-dim">
             <div className="stations-horizontal" ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragment
