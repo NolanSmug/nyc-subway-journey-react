@@ -1,5 +1,16 @@
 # NYC Subway Journey Game React App
 
+
+- [NYC Subway Journey Game React App](#nyc-subway-journey-game-react-app)
+    - [Screenshots](#screenshots)
+  - [How to Play](#how-to-play)
+    - [Initialization](#initialization)
+    - [Gameplay](#gameplay)
+    - [Configuration Settings](#configuration-settings)
+    - [Conductor Mode](#conductor-mode)
+    - [Keyboard Shortcuts](#keyboard-shortcuts)
+
+
 ### Screenshots
 | ![image 1](./src/images/cover-screenshot-1.png) | ![image 2](./src/images/cover-screenshot-2.png) |
 | ----------------------------------------------- | ----------------------------------------------- |
