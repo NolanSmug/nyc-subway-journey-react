@@ -1,6 +1,4 @@
 import './GameStateUI.css'
-import { LineName } from '../logic/Line'
-import { getTransferImageSvg } from '../logic/TransferImageMap'
 import ActionButton from './ActionButton'
 import Header from './Header'
 import Station from './Station'
@@ -18,7 +16,9 @@ import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
 import { useEffect, useMemo } from 'react'
 import { useUIContext } from '../contexts/UIContext'
-import { lineToLineColor } from './UpcomingStationsHorizontal'
+import { LineName } from '../logic/Line'
+import { getTransferImageSvg } from '../logic/TransferImageMap'
+import { lineToLineColor } from '../logic/TransferImageMap'
 import { useGameContext } from '../contexts/GameContext'
 
 function GameStateUI() {
@@ -110,8 +110,6 @@ function GameStateUI() {
         const keyCombo = `${event.shiftKey ? 'Shift+' : ''}${event.key}`
         if (comboKeyActions[keyCombo]) {
             event.preventDefault() // Prevent default browser behavior
-            event.stopPropagation() // Stop event propagation
-            event.stopImmediatePropagation() // Ensure no further event handling
             comboKeyActions[keyCombo]()
             return
         }
@@ -130,10 +128,9 @@ function GameStateUI() {
     }
 
     useEffect(() => {
-        const listener = (event: KeyboardEvent) => handleKeyPress(event)
-        window.addEventListener('keydown', listener, true) // Use capture phase for priority
-        return () => window.removeEventListener('keydown', listener, true)
-    }, [])
+        window.addEventListener('keydown', handleKeyPress)
+        return () => window.removeEventListener('keydown', handleKeyPress)
+    })
 
     const currentLine = useMemo(() => train.getLine(), [train])
     const currentLineSvg = useMemo(() => getTransferImageSvg(currentLine), [currentLine])

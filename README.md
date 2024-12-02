@@ -21,9 +21,15 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 3. **Buttons:**
 -  `Advance Station` – Advance 1 station (see `conductor mode` to control this value)
 -  `Change Direction` – Reverses your current direction. Each line has specific `UPTOWN` and `DOWNTOWN` labels.
--  `Transfer` –  Click on a subway line at your `current station` to switch to that line and continue your journey in the same direction.
+-  `Transfer Lines` –  Click on a subway line at your `current station` to switch to that line and continue your journey in the same direction.
     > **Note:** Using this button is optional. You can directly click on a subway line at the current station to switch to it as well.
-- `Refresh` – Refreshes the current game with new starting and destination stations.
+- `Refresh` – Refreshes the current game with new starting and destination stations.  
+<br>
+4. **Configure Settings:**
+- `Theme` – Toggle light/dark mode
+- `Upcoming Stations` – Toggle upcoming stations visibility
+- `Upcoming Stations Layout` – Set the upcoming stations view to vertical or horizontal
+- `Conductor Mode` – Enable conductor mode (default is rider mode)
 
 
 
