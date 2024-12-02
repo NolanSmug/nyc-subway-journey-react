@@ -35,6 +35,7 @@ You are placed into a random NYC subway station. Your objective is to reach anot
       > **Note:** Using this button is optional. You can directly click on a subway line icon at the current station to switch to it as well.
   - `Refresh` – Refreshes the current game with new starting and destination stations.  
 <br>
+
 1. **Goal:**
 - Successfully navigate from your starting station to your destination station by advancing through stations and transferring train lines as needed. Be mindful of your `current direction` throughout as well.
   
