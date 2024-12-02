@@ -96,9 +96,8 @@ body {
 
 .upcoming-stations-vertical {
     position: relative;
-    right: 18em;
+    right: 10em;
     width: 0;
-    z-index: 0;
 }
 
 .dark-mode-toggle-button {
