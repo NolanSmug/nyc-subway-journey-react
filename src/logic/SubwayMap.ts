@@ -1,5 +1,5 @@
-import { LineName } from './Line'
-import { Station, Borough } from './StationManager'
+import { LineName, Borough } from './EnumManager'
+import { Station } from './StationManager'
 
 export class SubwayMap {
     static getCsvFromLineName(line: LineName) {
@@ -131,5 +131,5 @@ function mapTransferString(transfer: string): LineName {
 }
 
 export async function updateStopsForLine(line: LineName, subwayStations: Station[]): Promise<void> {
-    await SubwayMap.createStations(line, subwayStations);
+    await SubwayMap.createStations(line, subwayStations)
 }

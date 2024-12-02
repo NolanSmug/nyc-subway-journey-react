@@ -1,13 +1,5 @@
-import { LineName } from './Line'
+import { LineName, Borough } from './EnumManager'
 import { SubwayMap } from './SubwayMap'
-
-export enum Borough {
-    MANHATTAN = 'Manhattan',
-    BROOKLYN = 'Brooklyn',
-    QUEENS = 'Queens',
-    BRONX = 'Bronx',
-    STATEN_ISLAND = 'Staten Island',
-}
 
 export class Station {
     private id: string = "000"

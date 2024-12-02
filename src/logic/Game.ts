@@ -1,5 +1,6 @@
 import { GameState } from './GameState'
-import { Train, Direction } from './TrainManager'
+import { Train } from './TrainManager'
+import {Direction} from './EnumManager'
 
 export class Game {
     public gameState: GameState

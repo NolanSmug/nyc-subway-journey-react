@@ -4,6 +4,7 @@
     align-items: flex-start;
     background-color: var(--station-bg);
     min-width: var(--station-min-width, 220px);
+    max-width: fit-content;
     padding: 13px 1em 1em;
     position: relative;
     box-sizing: border-box;

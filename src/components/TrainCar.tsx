@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import './TrainCar.css'
 import Door from './Door'
 import { useUIContext } from '../contexts/UIContext'
-import { Direction } from '../logic/TrainManager'
+import { Direction } from '../logic/EnumManager'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'

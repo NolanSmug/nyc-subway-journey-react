@@ -1,4 +1,4 @@
-import { LineName } from './Line';
+import { LineName } from './EnumManager';
 import IMG_A from '../images/a.svg'
 import IMG_B from '../images/b.svg'
 import IMG_C from '../images/c.svg'

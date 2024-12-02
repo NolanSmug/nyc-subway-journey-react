@@ -1,5 +1,5 @@
 import './UpcomingStationsHorizontal.css'
-import { LineName } from '../logic/Line'
+import { LineName } from '../logic/EnumManager'
 import StationFragment from './StationFragment'
 import { useEffect, useRef } from 'react'
 import { useUIContext } from '../contexts/UIContext'

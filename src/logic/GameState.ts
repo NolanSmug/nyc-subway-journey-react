@@ -1,4 +1,4 @@
-import { Line, LineName } from './Line'
+import { LineName, getRandomLine } from './EnumManager'
 import { Station } from './StationManager'
 import { SubwayMap } from './SubwayMap'
 
@@ -52,7 +52,7 @@ export class GameState {
     }
 
     public async resetGameState(): Promise<void> {
-        this.startingLine = Line.getRandomLine()
+        this.startingLine = getRandomLine()
         this.isFirstTurn = true
         this.isWon = false
 

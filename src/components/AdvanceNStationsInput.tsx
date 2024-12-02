@@ -3,7 +3,7 @@ import { useUIContext } from '../contexts/UIContext'
 
 import './AdvanceNStationsInput.css'
 import { useGameContext } from '../contexts/GameContext'
-import { Direction } from '../logic/TrainManager'
+import { Direction } from '../logic/EnumManager'
 
 function AdvanceNStationsInput() {
     const { numAdvanceStations, setNumAdvanceStations } = useUIContext()

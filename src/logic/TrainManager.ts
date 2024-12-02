@@ -1,71 +1,8 @@
-import { LineName, LineType } from './Line'
+import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, lineTypes } from './EnumManager'
 import { Station } from './StationManager'
 import { updateStopsForLine } from './SubwayMap'
 
-export enum Direction {
-    UPTOWN = 'Uptown',
-    DOWNTOWN = 'Downtown',
-    NULL_DIRECTION = '',
-}
 
-const lineDirections: Map<LineName, [string, string]> = new Map([
-    [LineName.ONE_TRAIN, ['Downtown', 'Uptown']],
-    [LineName.TWO_TRAIN, ['Brooklyn-bound', 'Bronx-bound']],
-    [LineName.THREE_TRAIN, ['Brooklyn-bound', 'Bronx-bound']],
-    [LineName.FOUR_TRAIN, ['Brooklyn-bound', 'Bronx-bound']],
-    [LineName.FIVE_TRAIN, ['Brooklyn-bound', 'Bronx-bound']],
-    [LineName.SIX_TRAIN, ['Brooklyn-Bridge-bound', 'Bronx-bound']],
-    [LineName.SEVEN_TRAIN, ['Manhattan-bound', 'Queens-bound']],
-    [LineName.A_TRAIN, ['Downtown', 'Uptown']],
-    [LineName.A_ROCKAWAY_MOTT_TRAIN, ['Far Rockaway-Mott Av', 'Inwood 207-St']],
-    [LineName.A_LEFFERTS_TRAIN, ['Ozone Park-Lefferts Blvd', 'Inwood 207-St']],
-    [LineName.B_TRAIN, ['Brooklyn-bound', 'Manhattan-bound']],
-    [LineName.C_TRAIN, ['Brooklyn-bound', 'Manhattan-bound']],
-    [LineName.D_TRAIN, ['Brooklyn-bound', 'Bronx-bound']],
-    [LineName.E_TRAIN, ['Downtown', 'Queens-bound']],
-    [LineName.F_TRAIN, ['Brooklyn-bound', 'Queens-bound']],
-    [LineName.G_TRAIN, ['Church Av-bound', 'Court Sq-bound']],
-    [LineName.J_TRAIN, ['Manhattan-bound', 'Queens-bound']],
-    [LineName.L_TRAIN, ['Canarsie-Rockaway Pkwy-bound', '8 Av-bound']],
-    [LineName.M_TRAIN, ['Brooklyn-bound', 'Queens-bound']],
-    [LineName.N_TRAIN, ['Brooklyn-bound', 'Queens-bound']],
-    [LineName.Q_TRAIN, ['Brooklyn-bound', 'Manhattan-bound']],
-    [LineName.R_TRAIN, ['Brooklyn-bound', 'Manhattan-bound']],
-    [LineName.W_TRAIN, ['Manhattan-bound', 'Queens-bound']],
-    [LineName.Z_TRAIN, ['Manhattan-bound', 'Queens-bound']],
-    [LineName.S_TRAIN, ['Times Sq-bound', 'Grand Central-bound']],
-    [LineName.S_TRAIN_SHUTTLE, ['Franklin Av-bound', 'Prospect Park-bound']],
-    [LineName.S_TRAIN_ROCKAWAY, ['Broad Channel-bound', 'Rockaway Park-Beach-bound']],
-])
-
-const lineTypes: Map<LineName, LineType> = new Map([
-    [LineName.NULL_TRAIN, LineType.NONE],
-    [LineName.ONE_TRAIN, LineType.LOCAL],
-    [LineName.TWO_TRAIN, LineType.EXPRESS],
-    [LineName.THREE_TRAIN, LineType.EXPRESS],
-    [LineName.FOUR_TRAIN, LineType.EXPRESS],
-    [LineName.FIVE_TRAIN, LineType.EXPRESS],
-    [LineName.SIX_TRAIN, LineType.LOCAL],
-    [LineName.SEVEN_TRAIN, LineType.LOCAL],
-    [LineName.A_TRAIN, LineType.EXPRESS],
-    [LineName.B_TRAIN, LineType.EXPRESS],
-    [LineName.C_TRAIN, LineType.LOCAL],
-    [LineName.D_TRAIN, LineType.EXPRESS],
-    [LineName.E_TRAIN, LineType.EXPRESS],
-    [LineName.F_TRAIN, LineType.LOCAL],
-    [LineName.G_TRAIN, LineType.LOCAL],
-    [LineName.J_TRAIN, LineType.LOCAL],
-    [LineName.L_TRAIN, LineType.LOCAL],
-    [LineName.M_TRAIN, LineType.LOCAL],
-    [LineName.N_TRAIN, LineType.EXPRESS],
-    [LineName.Q_TRAIN, LineType.EXPRESS],
-    [LineName.R_TRAIN, LineType.LOCAL],
-    [LineName.W_TRAIN, LineType.LOCAL],
-    [LineName.Z_TRAIN, LineType.LOCAL],
-    [LineName.S_TRAIN, LineType.NONE],
-    [LineName.S_TRAIN_SHUTTLE, LineType.NONE],
-    [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
-])
 
 export class Train {
     private currentLine: LineName
@@ -110,7 +47,11 @@ export class Train {
     }
 
     public isShuttle(): boolean {
-        return this.currentLine === LineName.S_TRAIN || this.currentLine === LineName.S_TRAIN_ROCKAWAY || this.currentLine === LineName.S_TRAIN_SHUTTLE
+        return (
+            this.currentLine === LineName.S_TRAIN ||
+            this.currentLine === LineName.S_TRAIN_ROCKAWAY ||
+            this.currentLine === LineName.S_TRAIN_SHUTTLE
+        )
     }
 
     // LineType
@@ -163,16 +104,30 @@ export class Train {
         return this.downtownLabel
     }
 
-    public findDirectionLabel(direction: Direction, line: LineName): string {
-        const lineDirection = lineDirections.get(line)
-        if (lineDirection) {
-            return direction === Direction.DOWNTOWN ? lineDirection[0] : lineDirection[1]
+    public findDirectionLabel(direction: Direction, line: LineName, currentBorough?: Borough): string {
+        const detailedLineDirection = lineDirectionsDetailed.get(line)
+
+        if (detailedLineDirection) {
+            if (currentBorough && detailedLineDirection.boroughSpecificLabels?.[currentBorough]) {
+                const boroughSpecificLabels = detailedLineDirection.boroughSpecificLabels[currentBorough]
+                const boroughSpecificDirection = boroughSpecificLabels?.[direction]
+
+                if (boroughSpecificDirection) return boroughSpecificDirection
+            }
+            // fallback to default directions
+            else if (detailedLineDirection.defaultDirectionLabels) {
+                return direction === Direction.DOWNTOWN
+                    ? detailedLineDirection.defaultDirectionLabels[0]
+                    : detailedLineDirection.defaultDirectionLabels[1]
+            }
         }
+
         return ''
     }
 
     public getDirectionLabel(): string {
-        return this.findDirectionLabel(this.direction, this.currentLine)
+        const currentBorough = this.scheduledStops[this.getCurrentStationIndex()].getBorough()
+        return this.findDirectionLabel(this.direction, this.currentLine, currentBorough)
     }
 
     // Scheduled Stops
@@ -275,7 +230,7 @@ export class Train {
             ((this.currentStationIndex === 0 && this.direction === Direction.DOWNTOWN) ||
                 (this.currentStationIndex === lastStationIndex && this.direction === Direction.UPTOWN)) &&
             !this.isAtRockawayBranch
-        
+
         return this
     }
 
