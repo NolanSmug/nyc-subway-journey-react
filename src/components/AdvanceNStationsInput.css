@@ -2,7 +2,7 @@
     font-size: x-large;
     font-weight: 600;
     text-align: center;
-    color: white;
+    color: var(--text-color);
     width: 2rem;
     height: 2rem;
     margin: 0;

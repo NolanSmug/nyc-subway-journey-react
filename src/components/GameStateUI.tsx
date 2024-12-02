@@ -32,6 +32,7 @@ function GameStateUI() {
         setDarkMode,
         setConductorMode,
         setUpcomingStationsVisible,
+        upcomingStationsVisible,
     } = useUIContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
@@ -102,7 +103,7 @@ function GameStateUI() {
 
         // Mapping for key combinations
         const comboKeyActions: { [combo: string]: () => void } = {
-            'Shift+L': () => setUpcomingStationsVertical((prev) => !prev),
+            'Shift+L': () => upcomingStationsVisible && setUpcomingStationsVertical((prev) => !prev), // only allow layout change when upcoming stations are visible
             'Shift+D': () => setDarkMode((prev) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev) => !prev),
             'Shift+C': () => setConductorMode((prev) => !prev),
@@ -125,7 +126,7 @@ function GameStateUI() {
             Escape: () => setIsTransferMode(false),
             '-': () => setNumAdvanceStations(numAdvanceStations > 1 ? (prev) => prev - 1 : () => 1),
             '+': () => setNumAdvanceStations((prev) => prev + 1),
-            '=': () => setNumAdvanceStations((prev) => prev + 1), // Handle "+" from "=" without Shift
+            '=': () => setNumAdvanceStations((prev) => prev + 1), // Handle "+" from "=" without Shift key
         }
 
         // Handle single-key actions

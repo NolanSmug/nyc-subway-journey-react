@@ -65,7 +65,7 @@ body {
 .game-state-ui {
     position: relative;
     top: 0;
-    transition: top ease 0.1s;
+    transition: top ease 0.2s;
 }
 
 .game-state-ui.shifted-up {
