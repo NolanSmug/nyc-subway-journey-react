@@ -31,7 +31,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
             setIsTransferMode(false)
             setTrain(newGame.train)
             setGameState(newGame.gameState)
-            console.log('initialized!')
         } catch (error) {
             console.error('Error initializing game:', error)
         }

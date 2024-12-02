@@ -6,7 +6,7 @@ import { useGameContext } from '../contexts/GameContext'
 import { Direction } from '../logic/TrainManager'
 
 function AdvanceNStationsInput() {
-    const { setNumAdvanceStations } = useUIContext()
+    const { numAdvanceStations, setNumAdvanceStations } = useUIContext()
     const { train } = useGameContext()
 
     const currentMaxNumber: number =
@@ -14,37 +14,31 @@ function AdvanceNStationsInput() {
             ? train.getCurrentStationIndex()
             : train.getScheduledStops().length - train.getCurrentStationIndex() - 1
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = e.target.value
+        const parsedValue = parseInt(rawValue)
+
+        // allow empty and invalid values temporarily (so it's editable)
+        if (rawValue === '' || isNaN(parsedValue)) {
+            setNumAdvanceStations(0)
+            return
+        }
+        if (parsedValue >= 1 && parsedValue <= currentMaxNumber) {
+            setNumAdvanceStations(parsedValue)
+        }
+    }
+
     return (
         <input
             type="number"
-            defaultValue={1}
-            onChange={(e) => {
-                setNumAdvanceStations(parseInt(e.target.value))
-            }}
+            value={numAdvanceStations || ''}
+            onChange={handleInputChange}
             className="additional-input"
             placeholder="1"
             min={1}
             max={currentMaxNumber}
-            onInput={(e) => {
-                const input = e.currentTarget
-                const value = parseInt(input.value)
-                if (value.toString() == '') {
-                    input.style.backgroundColor = '#b71d1d7b'
-                } else if (value > currentMaxNumber || value <= 0 || isInt(value)) {
-                    input.style.backgroundColor = '#b71d1d7b'
-                } else {
-                    input.style.backgroundColor = ''
-                }
-            }}
         />
     )
-
-    function isInt(num: number) {
-        if (num.toString() == '') {
-            return false
-        }
-        return num.toString().includes('.')
-    }
 }
 
 export default AdvanceNStationsInput

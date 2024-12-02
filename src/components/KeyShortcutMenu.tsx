@@ -17,6 +17,8 @@ const KeyShortcutMenu: React.FC<KeyShortcutMenuProps> = () => {
             <KeyShortcut shortcutKey="d" label="Light/Dark Mode" isCommand />
             <KeyShortcut shortcutKey="u" label="Stations Hide/Show" isCommand />
             <KeyShortcut shortcutKey="c" label="Conductor/Rider Mode" isCommand />
+            <KeyShortcut shortcutKey="+" label="Increase Advance Count" />
+            <KeyShortcut shortcutKey="-" label="Decrease Advance Count" />
         </>
     )
 }

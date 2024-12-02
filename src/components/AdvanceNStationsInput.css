@@ -19,6 +19,23 @@ input[type=number]:focus-visible {
     outline: solid 0.1em var(--bg-color-3);
 }
 
+.additional-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.5rem;
+}
+
+.additional-input:invalid {
+  border-color: #b71d1d;
+  background-color: #b71d1d7b;
+}
+
+.additional-input:valid {
+  border-color: var(--line-color);
+  background-color: var(--bg-color); 
+}
+
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

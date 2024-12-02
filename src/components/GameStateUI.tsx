@@ -26,6 +26,7 @@ function GameStateUI() {
         darkMode,
         setIsTransferMode,
         numAdvanceStations,
+        setNumAdvanceStations,
         conductorMode,
         setUpcomingStationsVertical,
         setDarkMode,
@@ -41,6 +42,7 @@ function GameStateUI() {
         switch (action) {
             case 'refresh':
                 await initializeGame()
+                setNumAdvanceStations(1)
                 break
 
             case 'advanceStation':
@@ -121,6 +123,9 @@ function GameStateUI() {
             r: () => handleTrainAction('refresh'),
             ArrowRight: () => handleTrainAction('advanceStation'),
             Escape: () => setIsTransferMode(false),
+            '-': () => setNumAdvanceStations(numAdvanceStations > 1 ? (prev) => prev - 1 : () => 1),
+            '+': () => setNumAdvanceStations((prev) => prev + 1),
+            '=': () => setNumAdvanceStations((prev) => prev + 1), // Handle "+" from "=" without Shift
         }
 
         // Handle single-key actions
