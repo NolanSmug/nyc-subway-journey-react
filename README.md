@@ -1,8 +1,10 @@
 # NYC Subway Journey Game React App
 
 ### Screenshots
-<img src='./src/images/cover-screenshot-1.png'>
-<img src='./src/images/cover-screenshot-2.png'>
+<img src='./src/images/cover-screenshot-1.png' style='max-width: 100%; max-height: 200px; border-radius: 10px;' />
+<img src='./src/images/cover-screenshot-2.png' style='max-width: 300px; max-height: 100%; border-radius: 10px;' />
+
+
 
 ## How to Play
 You are placed into a random NYC subway station. Your objective is to reach another randomly given station by utilizing your knowledge of the NYC subway system. 
@@ -21,7 +23,6 @@ You are placed into a random NYC subway station. Your objective is to reach anot
      > If you want, you may transfer to a different line before selecting a direction.
 3. **Ready to Move:**
 - Once a direction is selected, you are able to `Advance` and `Transfer`. 
-<br>
 
 ### Gameplay
 
