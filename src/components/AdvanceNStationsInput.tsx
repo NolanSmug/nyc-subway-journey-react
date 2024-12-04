@@ -9,21 +9,21 @@ function AdvanceNStationsInput() {
     const { numAdvanceStations, setNumAdvanceStations } = useUIContext()
     const { train } = useGameContext()
 
-    const currentMaxNumber: number =
+    let currentMaxNumber: number =
         train.getDirection() === Direction.DOWNTOWN
             ? train.getCurrentStationIndex()
             : train.getScheduledStops().length - train.getCurrentStationIndex() - 1
 
+    if (train.isNullDirection()) currentMaxNumber = NaN
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const rawValue = e.target.value
-        const parsedValue = parseInt(rawValue)
+        const rawValue: string = e.target.value
+        const parsedValue: number = parseInt(rawValue)
 
         // allow empty and invalid values temporarily (so it's editable)
         if (rawValue === '' || isNaN(parsedValue)) {
             setNumAdvanceStations(0)
-            return
-        }
-        if (parsedValue >= 1 && parsedValue <= currentMaxNumber) {
+        } else {
             setNumAdvanceStations(parsedValue)
         }
     }

@@ -42,7 +42,6 @@ function GameStateUI() {
         switch (action) {
             case 'refresh':
                 await initializeGame()
-                setNumAdvanceStations(1)
                 break
 
             case 'advanceStation':
