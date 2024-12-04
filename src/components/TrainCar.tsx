@@ -1,87 +1,79 @@
-import { ReactNode } from 'react'
+import { useEffect, useMemo } from 'react'
 import './TrainCar.css'
+
+import Header from './Header'
 import Door from './Door'
+import TrainInfo from '../components/TrainInfo'
+
+import { getTransferImageSvg, lineToLineColor } from '../logic/TransferImageMap'
 import { useUIContext } from '../contexts/UIContext'
+import { useGameContext } from '../contexts/GameContext'
 import { Direction } from '../logic/EnumManager'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
 import L_ARROW_BLACK from '../images/left-arrow-b.svg'
 import L_ARROW_WHITE from '../images/left-arrow-w.svg'
-import { useGameContext } from '../contexts/GameContext'
 
-export interface TrainCarProps {
-    header?: ReactNode
-    children?: ReactNode
-}
-
-function TrainCar({ header, children }: TrainCarProps) {
+function TrainCar() {
     const { upcomingStationsVertical, darkMode } = useUIContext()
-    const { train, updateTrainObject } = useGameContext()
-
-    const isNullDirection: boolean = train.isNullDirection()
+    const { train } = useGameContext()
 
     const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
 
+    const currentLine = useMemo(() => train.getLine(), [train])
+    const currentLineSvg = useMemo(() => getTransferImageSvg(currentLine), [currentLine])[0]
+    useEffect(() => {
+        document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
+    }, [currentLine])
+
     return (
-        <div className="train-container">
-            <img
-                src={DOWNTOWN_DIRECTION_ICON}
-                className={`arrow ${train.getDirection() === Direction.DOWNTOWN && !upcomingStationsVertical ? 'show' : 'hide'}`}
-                alt="Left Arrow"
-            />
-            {header}
-            <div className="train-car">
-                <div className="doors">
-                    <Door isLeft />
-                    <Door />
-                </div>
-
-                <div className="windows" id="train-info">
-                    <h2
-                        onClick={() => {
-                            updateTrainObject({ ...train.reverseDirection() })
-                        }}
-                        className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}
-                        style={
-                            isNullDirection
-                                ? {
-                                      borderColor: 'var(--line-color)',
-                                      textDecoration: 'underline',
-                                      textDecorationColor: 'var(--line-color)',
-                                      textUnderlineOffset: '4px',
-                                  }
-                                : {}
-                        }
-                    >
-                        {isNullDirection ? 'Toggle Direction' : train.getDirectionLabel()}
-                    </h2>
-                    <div className="train-car-line not-dim">{children}</div>
-                    <h2 className="train-type not-dim">{train.getLineType() + ' Train'}</h2>
-                </div>
-
-                <div className="doors">
-                    <Door isLeft />
-                    <Door />
-                </div>
-                <div className="windows">
-                    <div className="front-window"></div>
-                </div>
-            </div>
-            <img
-                src={UPTOWN_DIRECTION_ICON}
-                className={`arrow ${train.getDirection() === Direction.UPTOWN && !upcomingStationsVertical ? 'show' : 'hide'}`}
-                alt="Right Arrow"
-            />
-            {upcomingStationsVertical && !isNullDirection && (
+        <>
+            <Header text="Current Line:"></Header>
+            <div className="train-container">
                 <img
-                    src={train.getDirection() === Direction.UPTOWN ? UPTOWN_DIRECTION_ICON : DOWNTOWN_DIRECTION_ICON}
-                    className="arrow-vertical"
-                    alt="Up/Down Arrow"
+                    src={DOWNTOWN_DIRECTION_ICON}
+                    className={`arrow ${
+                        train.getDirection() === Direction.DOWNTOWN && !upcomingStationsVertical ? 'show' : 'hide'
+                    }`}
+                    alt="Left Arrow"
                 />
-            )}
-        </div>
+
+                <div className="train-car">
+                    <div className="doors">
+                        <Door isLeft />
+                        <Door />
+                    </div>
+
+                    <div className="windows" id="train-info">
+                        <TrainInfo isNullDirection={train.isNullDirection()} currentLineSvg={currentLineSvg} />
+                    </div>
+
+                    <div className="doors">
+                        <Door isLeft />
+                        <Door />
+                    </div>
+                    <div className="windows">
+                        <div className="front-window"></div>
+                    </div>
+                </div>
+                <img
+                    src={UPTOWN_DIRECTION_ICON}
+                    className={`arrow ${
+                        train.getDirection() === Direction.UPTOWN && !upcomingStationsVertical ? 'show' : 'hide'
+                    }`}
+                    alt="Right Arrow"
+                />
+                {upcomingStationsVertical && !train.isNullDirection() && (
+                    <img
+                        src={train.getDirection() === Direction.UPTOWN ? UPTOWN_DIRECTION_ICON : DOWNTOWN_DIRECTION_ICON}
+                        className="arrow-vertical"
+                        alt="Up/Down Arrow"
+                    />
+                )}
+            </div>
+        </>
     )
 }
 

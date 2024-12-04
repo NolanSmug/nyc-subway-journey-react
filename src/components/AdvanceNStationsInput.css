@@ -6,43 +6,36 @@
     width: 2rem;
     height: 2rem;
     margin: 0;
-    border: solid, 0.5em, var(--bg-color-2);
+    border: 1px solid var(--bg-color-2);
     border-radius: 0.25em;
     background-color: var(--bg-color);
     caret-color: var(--text-color);
     letter-spacing: 0.25px;
     line-height: 0.7em;
-    
+    z-index: 5;
 }
 
-input[type=number]:focus-visible {
+input[type='number']:focus-visible {
     outline: solid 0.1em var(--bg-color-3);
 }
 
-.additional-input {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1.5rem;
-}
-
 .additional-input:invalid {
-  border-color: #b71d1d;
-  background-color: #b71d1d7b;
+    border-color: #b71d1d;
+    background-color: #b71d1d7b;
 }
 
 .additional-input:valid {
-  border-color: var(--line-color);
-  background-color: var(--bg-color); 
+    border-color: var(--line-color);
+    background-color: var(--bg-color);
 }
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-input[type=number] {
-  appearance: textfield;
-  /* -moz-appearance: textfield; */
+input[type='number'] {
+    appearance: textfield;
+    /* -moz-appearance: textfield; */
 }

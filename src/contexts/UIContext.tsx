@@ -24,7 +24,7 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
     const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(true)
-    const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
+    const [numAdvanceStations, setNumAdvanceStations] = useState<number>(NaN)
 
     return (
         <UIContext.Provider

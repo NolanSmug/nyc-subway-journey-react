@@ -67,49 +67,8 @@ h2 {
     min-width: 33em;
 }
 
-.train-direction {
-    color: var(--train-text-color);
-    margin-bottom: 0.25em;
-    width: fit-content;
-    margin-top: 0.25em;
-    transition: transform 0.1s;
-    text-align: center;
-    flex-grow: 0.5;
-}
-
-.train-direction:hover {
-    cursor: pointer;
-    transform: scale(1.03);
-    transition: ease-in 0.1s;
-}
-
 .is-null-direction {
     animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-.train-type {
-    color: var(--train-text-color);
-    margin-bottom: 0.25em;
-    white-space: nowrap;
-    margin-top: 0.25em;
-    word-wrap: normal !important;
-    margin-left: 0.15em;
-    text-align: center;
-    flex-grow: 0.2;
-}
-
-.train-car-line {
-    margin-left: 0.25em;
 }
 
 /* Windows styling */
