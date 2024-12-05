@@ -60,7 +60,7 @@ export function scrollToCurrentStation(currentStationElement: Element | null, is
             currentStationElement.scrollIntoView({
                 behavior: 'smooth',
                 block: isLowIndex ? 'nearest' : 'center',
-                inline: isLowIndex ? undefined : 'center',
+                inline: isLowIndex ? undefined : 'end',
             })
         }, 0) // !DO NOT REMOVE! no idea why "0ms delay" fixes occasional scrolling issues, but it does
         return () => clearTimeout(timer)

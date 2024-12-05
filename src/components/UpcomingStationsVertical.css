@@ -2,7 +2,7 @@
     position: relative;
     scroll-behavior: smooth;
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: auto;
     display: flex;
     scrollbar-width: none;
     -ms-overflow-style: none;
