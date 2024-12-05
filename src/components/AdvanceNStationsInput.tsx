@@ -1,12 +1,12 @@
 import React from 'react'
-import { useUIContext } from '../contexts/UIContext'
 
 import './AdvanceNStationsInput.css'
 import { useGameContext } from '../contexts/GameContext'
 import { Direction } from '../logic/EnumManager'
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 function AdvanceNStationsInput() {
-    const { numAdvanceStations, setNumAdvanceStations } = useUIContext()
+    const { numAdvanceStations, setNumAdvanceStations } = useSettingsContext()
     const { train } = useGameContext()
 
     let currentMaxNumber: number =

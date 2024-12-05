@@ -9,9 +9,10 @@ export interface UmbrellaButtonProps {
     openingButtonBlack: string
     umbrellaContent: ReactNode
     below?: boolean
+    visible?: boolean
 }
 
-const UmbrellaButton = ({ openingButtonWhite, openingButtonBlack, umbrellaContent, below }: UmbrellaButtonProps) => {
+const UmbrellaButton = ({ openingButtonWhite, openingButtonBlack, umbrellaContent, below, visible }: UmbrellaButtonProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const popupRef = useRef<HTMLDivElement | null>(null)
     const buttonRef = useRef<HTMLDivElement | null>(null)
@@ -45,6 +46,8 @@ const UmbrellaButton = ({ openingButtonWhite, openingButtonBlack, umbrellaConten
     const togglePopup = () => {
         setIsOpen((prev) => !prev)
     }
+
+    if (!visible) return null
 
     return (
         <>

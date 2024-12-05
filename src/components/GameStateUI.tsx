@@ -19,20 +19,18 @@ import { useUIContext } from '../contexts/UIContext'
 import { LineName } from '../logic/EnumManager'
 import { getTransferImageSvg } from '../logic/TransferImageMap'
 import { useGameContext } from '../contexts/GameContext'
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 function GameStateUI() {
     const {
         darkMode,
         setIsTransferMode,
-        numAdvanceStations,
-        setNumAdvanceStations,
-        conductorMode,
         setUpcomingStationsVertical,
         setDarkMode,
-        setConductorMode,
         setUpcomingStationsVisible,
         upcomingStationsVisible,
     } = useUIContext()
+    const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode } = useSettingsContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {

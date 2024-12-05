@@ -18,6 +18,7 @@ import CONDUCTOR_MODE_BLACK from '../images/conductor-mode-icon-b.svg'
 import CONDUCTOR_MODE_WHITE from '../images/conductor-mode-icon-w.svg'
 import RIDER_MODE_BLACK from '../images/rider-mode-icon-b.svg'
 import RIDER_MODE_WHITE from '../images/rider-mode-icon-w.svg'
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 const SettingsMenu = () => {
     const {
@@ -27,9 +28,8 @@ const SettingsMenu = () => {
         setUpcomingStationsVisible,
         upcomingStationsVertical,
         setUpcomingStationsVertical,
-        conductorMode,
-        setConductorMode: setAdvancedMode,
     } = useUIContext()
+    const { conductorMode, setConductorMode } = useSettingsContext()
 
     return (
         <>
@@ -70,7 +70,7 @@ const SettingsMenu = () => {
                         : CONDUCTOR_MODE_BLACK
                 }
                 onClick={() => {
-                    setAdvancedMode((prev) => !prev)
+                    setConductorMode((prev) => !prev)
                 }}
             />
         </>

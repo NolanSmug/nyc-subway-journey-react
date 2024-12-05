@@ -14,9 +14,11 @@ import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/keyboard-icon-b.svg'
 import KEYBOARD_WHITE from './images/keyboard-icon-w.svg'
+import { useSettingsContext } from './contexts/SettingsContext'
 
 function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVertical, conductorMode } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVertical } = useUIContext()
+    const { conductorMode } = useSettingsContext()
     const { train, gameState, initializeGame } = useGameContext()
 
     const handleClickAway = (e: React.MouseEvent) => {
@@ -50,17 +52,17 @@ function App() {
                         openingButtonBlack={GEAR_BLACK}
                         umbrellaContent={<SettingsMenu />}
                         below
+                        visible
                     />
                 </div>
-                {conductorMode && (
-                    <div className="shortcuts-umbrella">
-                        <UmbrellaButton
-                            openingButtonWhite={KEYBOARD_WHITE}
-                            openingButtonBlack={KEYBOARD_BLACK}
-                            umbrellaContent={<KeyShortcutMenu />}
-                        />
-                    </div>
-                )}
+                <div className="shortcuts-umbrella">
+                    <UmbrellaButton
+                        openingButtonWhite={KEYBOARD_WHITE}
+                        openingButtonBlack={KEYBOARD_BLACK}
+                        umbrellaContent={<KeyShortcutMenu />}
+                        visible={conductorMode}
+                    />
+                </div>
             </div>
 
             {upcomingStationsVertical && (
