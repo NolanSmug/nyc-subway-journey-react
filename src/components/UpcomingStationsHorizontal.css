@@ -7,6 +7,12 @@
     display: flex;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.upcoming-stations-horizontal-container.hidden {
+    opacity: 0;
 }
 
 .stations-horizontal {

@@ -33,12 +33,12 @@ function UpcomingStationsHorizontal() {
         }
     }, [stations.length, visible])
 
-    if (!stations || stations.length === 0 || !visible) {
+    if (!stations || stations.length === 0) {
         return <div style={{ display: 'none' }} />
     }
 
     return (
-        <div className="upcoming-stations-horizontal-container not-dim">
+        <div className={`upcoming-stations-horizontal-container not-dim ${!visible ? 'hidden' : ''}`}>
             <div className="stations-horizontal" ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragment

@@ -9,6 +9,12 @@
     height: 90vh;
     width: 30em;
     scroll-padding-bottom: 1em;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.upcoming-stations-vertical-container.hidden {
+    opacity: 0;
 }
 
 .stations-vertical {

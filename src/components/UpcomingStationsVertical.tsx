@@ -35,12 +35,12 @@ function UpcomingStationsVertical() {
         }
     }, [train, stations.length, visible])
 
-    if (!stations || stations.length === 0 || !visible) {
+    if (!stations || stations.length === 0) {
         return <div style={{ display: 'none' }} />
     }
 
     return (
-        <div className="upcoming-stations-vertical-container not-dim">
+        <div className={`upcoming-stations-vertical-container not-dim ${!visible ? 'hidden' : ''}`}>
             <div ref={lineDividerRef} className="line-divider-vertical" />
             <div className="stations-vertical" ref={stationsRef}>
                 {stations.map((station, index) => (
