@@ -59,8 +59,16 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 ### Conductor Mode
 Think of conductor mode as a sort of a professional feature mode. When enabled, users are able to:  
 
-1. Advance an inputted number of stations
-2. View _keyboard shortcuts_ for all buttons
+1. Advance an input number of stations (+ reset to 1 button)
+2. Configure the "default" `starting direction` upon completing a transfer (or resetting the game)
+   - `Uptown`
+   - `Select Direction`
+   - `Downtown`
+3. View all available _keyboard shortcuts_
+
+<img src='./src/images/conductor-mode-screenshot.png' style='border-radius: 0.5em'>
+
+> The 'Uptown' text fades shortly after each toggle click.
 
 ### Keyboard Shortcuts
 - `→` Advance Station

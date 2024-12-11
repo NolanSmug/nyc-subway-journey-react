@@ -70,6 +70,7 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
                 onClick={handleClick}
                 role="switch"
                 aria-label="Direction toggle"
+                aria-checked={state !== Direction.NULL_DIRECTION}
             >
                 <span
                     className={`direction-label ${

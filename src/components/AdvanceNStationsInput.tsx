@@ -46,6 +46,7 @@ function AdvanceNStationsInput({ visible }: { visible: boolean }) {
             />
             <img
                 src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
+                alt="Reset Input"
                 className="reset-button"
                 onClick={() => setNumAdvanceStations(1)}
             />

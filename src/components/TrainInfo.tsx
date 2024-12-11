@@ -2,6 +2,7 @@ import { useGameContext } from '../contexts/GameContext'
 import { default as Line } from '../components/TransferLines'
 
 import './TrainInfo.css'
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 export interface TrainInfoProps {
     isNullDirection: boolean
@@ -10,12 +11,15 @@ export interface TrainInfoProps {
 
 export function TrainInfo({ isNullDirection, currentLineSvg }: TrainInfoProps) {
     const { train, updateTrainObject } = useGameContext()
+    const { defaultDirectionToggle } = useSettingsContext()
 
     return (
         <>
             <h2
                 onClick={() => {
-                    updateTrainObject({ ...train.reverseDirection() })
+                    defaultDirectionToggle
+                        ? updateTrainObject(train.setDirection(defaultDirectionToggle))
+                        : updateTrainObject({ ...train.reverseDirection() })
                 }}
                 className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}
                 style={

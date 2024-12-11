@@ -24,7 +24,7 @@ function UpcomingStationsVertical() {
 
             scrollToCurrentStation(currentStationElement, isBelowCenteredScroll)
         }
-    }, [currentStation, stations.length, currentID])
+    }, [train, currentStation, stations.length, currentID])
 
     // adjust the line length
     // note: we need custom values for shuttle lines only for this vertical layout. DO NOT TOUCH
