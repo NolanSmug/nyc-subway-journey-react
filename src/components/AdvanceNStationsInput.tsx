@@ -31,8 +31,10 @@ function AdvanceNStationsInput({ visible }: { visible: boolean }) {
         }
     }
 
+    if (!visible) return null
+
     return (
-        <div className={`additional-input-container ${!visible ? 'hide-additional-input' : ''}`}>
+        <div className="additional-input-container">
             <input
                 type="number"
                 value={numAdvanceStations || ''}

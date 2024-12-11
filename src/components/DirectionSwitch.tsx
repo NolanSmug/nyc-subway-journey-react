@@ -60,8 +60,10 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
         onChange(newState)
     }
 
+    if (!visible) return null
+
     return (
-        <div className={`direction-switch-container ${!visible ? 'hide-direction-switch' : ''}`}>
+        <div className="direction-switch-container">
             <div
                 className="tri-state-toggle"
                 data-state={state}
