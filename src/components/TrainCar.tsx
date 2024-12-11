@@ -30,11 +30,6 @@ function TrainCar() {
         document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
     }, [currentLine])
 
-    // only "save" default direction toggle if default direction toggle has been set
-    useMemo(() => {
-        if (conductorMode) train.setDirection(defaultDirectionToggle)
-    }, [conductorMode])
-
     return (
         <>
             <Header text="Current Line:"></Header>

@@ -12,8 +12,8 @@ import { useGameContext } from './contexts/GameContext'
 
 import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
-import KEYBOARD_BLACK from './images/keyboard-icon-b.svg'
-import KEYBOARD_WHITE from './images/keyboard-icon-w.svg'
+import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
+import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
 import { useSettingsContext } from './contexts/SettingsContext'
 
 function App() {

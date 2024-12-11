@@ -3,12 +3,11 @@
     justify-content: center;
     gap: 2em;
     padding-top: 1em;
-    width: 100%;
 }
 
 .station-box {
-    flex: 1;
-    width: 100%;
+    flex: 1 1;
+    width: max-content;
     max-width: 28em;
     min-width: 20em;
     background-color: var(--bg-color-2);

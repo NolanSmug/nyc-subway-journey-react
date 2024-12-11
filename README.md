@@ -60,7 +60,7 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 Think of conductor mode as a sort of a professional feature mode. When enabled, users are able to:  
 
 1. Advance an input number of stations (+ reset to 1 button)
-2. Configure the "default" `starting direction` upon completing a transfer (or resetting the game)
+2. Configure the "default" `starting direction` upon completing a transfer
    - `Uptown`
    - `Select Direction`
    - `Downtown`
