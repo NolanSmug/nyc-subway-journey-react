@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './DirectionSwitch.css'
 import { Direction } from '../logic/EnumManager'
 
@@ -27,10 +27,32 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
                     'direction-label ' + (state === Direction.NULL_DIRECTION ? 'Null' : state) + ' direction-label-hidden'
             }
         }, 500)
+
+        const handleClickOutside = (event: MouseEvent | KeyboardEvent) => {
+            if (!(event.target instanceof Node)) return
+            if (tooltipRef.current && !tooltipRef.current.contains(event.target)) setTooltipHidden(true)
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        document.addEventListener('keydown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [state])
 
+    // start out with labels open
+    useMemo(() => {
+        if (visible) {
+            setTooltipHidden(false)
+            if (labelRef.current) {
+                labelRef.current.classList.remove('direction-label-hidden')
+            }
+        }
+    }, [setTooltipHidden, visible])
+
     const toggleTooltip = () => {
-        setTooltipHidden((divv) => !divv)
+        setTooltipHidden((prev) => !prev)
+        if (labelRef.current) {
+            setTooltipHidden(true)
+        }
     }
 
     const handleClick = () => {
