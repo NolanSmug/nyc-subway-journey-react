@@ -7,12 +7,8 @@
     gap: 0.25em;
     z-index: 11;
     opacity: 1;
-    transition: opacity 0.5s ease-in-out;
 }
 
-.hide-direction-switch {
-    opacity: 0;
-}
 
 .tri-state-toggle {
     width: 1em;
