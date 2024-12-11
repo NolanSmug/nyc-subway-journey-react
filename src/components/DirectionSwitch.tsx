@@ -50,9 +50,6 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
 
     const toggleTooltip = () => {
         setTooltipHidden((prev) => !prev)
-        if (labelRef.current) {
-            setTooltipHidden(true)
-        }
     }
 
     const handleClick = () => {
