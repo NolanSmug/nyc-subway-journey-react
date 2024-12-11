@@ -68,8 +68,9 @@ export class Train {
         return this.direction
     }
 
-    public setDirection(newDirection: Direction) {
+    public setDirection(newDirection: Direction): Train {
         this.direction = newDirection
+        return this
     }
 
     public isNullDirection(): boolean {

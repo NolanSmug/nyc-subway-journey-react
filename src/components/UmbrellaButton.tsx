@@ -47,23 +47,19 @@ const UmbrellaButton = ({ openingButtonWhite, openingButtonBlack, umbrellaConten
         setIsOpen((prev) => !prev)
     }
 
-    if (!visible) return null
-
     return (
-        <>
-            <div ref={buttonRef}>
-                <ActionButton
-                    className="umbrella-button"
-                    imageSrc={darkMode ? openingButtonWhite : openingButtonBlack}
-                    onClick={togglePopup}
-                />
-            </div>
+        <div
+            ref={buttonRef}
+            className={`${!visible ? 'hide-umbrella-button' : ''}`}
+            style={{ transition: 'opacity 0.5s ease-in-out' }} // do not touch
+        >
+            <ActionButton className="" imageSrc={darkMode ? openingButtonWhite : openingButtonBlack} onClick={togglePopup} />
 
             <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : ''}`}>
                 {umbrellaContent}
                 <div className="popup-arrow" />
             </div>
-        </>
+        </div>
     )
 }
 

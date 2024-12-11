@@ -3,6 +3,13 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hide-umbrella-button {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .umbrella-content {
@@ -10,26 +17,24 @@
     flex-direction: column;
     gap: 0.5em;
     position: absolute;
-    top: -800%; /* Move it above the button */
+    top: -800%;
     background: var(--bg-color);
     padding: 1em;
     border-radius: 8px;
     border: 1px solid var(--bg-color-3);
     width: 17em;
-    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
     opacity: 0;
-    transition: opacity 0.2s ease-in;
-    z-index: 10; /* Ensure it appears above other elements */
 }
 
 .umbrella-content.visible {
     height: fit-content;
-    visibility: visible;
     opacity: 0.85;
 }
 
 .umbrella-content.hidden {
-    display: none;
+    opacity: 0;
 }
 
 .umbrella-content.below {

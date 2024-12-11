@@ -516,6 +516,10 @@ export const lineDirectionsDetailed: Map<LineName, LineDirectionDetails> = new M
         LineName.Z_TRAIN,
         {
             boroughSpecificLabels: {
+                [Borough.QUEENS]: {
+                    [Direction.DOWNTOWN]: 'Brooklyn-bound',
+                    [Direction.UPTOWN]: 'Jamaica Center-bound',
+                },
                 [Borough.MANHATTAN]: {
                     [Direction.DOWNTOWN]: 'Brooklyn-bound',
                     [Direction.UPTOWN]: 'Uptown',

@@ -16,10 +16,12 @@ import C_DIRECTION_BLACK from '../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
 import { useUIContext } from '../contexts/UIContext'
-import { LineName } from '../logic/EnumManager'
+import { Direction, LineName } from '../logic/EnumManager'
 import { getTransferImageSvg } from '../logic/TransferImageMap'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
+import { DirectionSwitch } from './DirectionSwitch'
+import AdvanceNStationsInput from './AdvanceNStationsInput'
 
 function GameStateUI() {
     const {
@@ -30,7 +32,14 @@ function GameStateUI() {
         setUpcomingStationsVisible,
         upcomingStationsVisible,
     } = useUIContext()
-    const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode } = useSettingsContext()
+    const {
+        numAdvanceStations,
+        setNumAdvanceStations,
+        conductorMode,
+        setConductorMode,
+        defaultDirectionToggle,
+        setDefaultDirectionToggle,
+    } = useSettingsContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
@@ -75,6 +84,7 @@ function GameStateUI() {
             train.setLine(selectedLine)
             train.setLineType()
             train.setCurrentStation(train.getCurrentStation())
+            train.setDirection(defaultDirectionToggle)
             train.updateTrainState()
         }
         updateTrainObject({ ...train })
@@ -159,12 +169,21 @@ function GameStateUI() {
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label="Change Direction"
                             onClick={() => handleTrainAction('changeDirection')}
+                            additionalInput={
+                                <DirectionSwitch
+                                    state={defaultDirectionToggle}
+                                    onChange={(newDirection: Direction) => {
+                                        setDefaultDirectionToggle(newDirection)
+                                    }}
+                                    visible={conductorMode}
+                                />
+                            }
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                             label={`Advance Station${numAdvanceStations > 1 ? 's' : ''}`}
                             onClick={() => handleTrainAction('advanceStation')}
-                            additionalInput={conductorMode}
+                            additionalInput={<AdvanceNStationsInput visible={conductorMode} />}
                             className="advance-station-button"
                         />
                     </div>
@@ -177,15 +196,13 @@ function GameStateUI() {
                             <TransferLines transfers={getTransferImageSvg(gameState.destinationStation)} />
                         </Station>
                     </div>
-                    {gameState.isFirstTurn && (
-                        <div className="action-buttons-container" id="destination-station">
-                            <ActionButton
-                                imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
-                                label="Reset Game"
-                                onClick={() => handleTrainAction('refresh')}
-                            />
-                        </div>
-                    )}
+                    <div className="action-buttons-container" id="destination-station">
+                        <ActionButton
+                            imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
+                            label="Reset Game"
+                            onClick={() => handleTrainAction('refresh')}
+                        />
+                    </div>
                 </div>
             </div>
         </>

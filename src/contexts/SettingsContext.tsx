@@ -1,10 +1,13 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
+import { Direction } from '../logic/EnumManager'
 
 interface SettingsContextProps {
     conductorMode: boolean
     numAdvanceStations: number
+    defaultDirectionToggle: Direction
     setConductorMode: React.Dispatch<React.SetStateAction<boolean>>
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
+    setDefaultDirectionToggle: React.Dispatch<React.SetStateAction<Direction>>
 }
 
 const SettingsContext = createContext<SettingsContextProps | undefined>(undefined)
@@ -12,6 +15,7 @@ const SettingsContext = createContext<SettingsContextProps | undefined>(undefine
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [conductorMode, setConductorMode] = useState<boolean>(false)
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(NaN)
+    const [defaultDirectionToggle, setDefaultDirectionToggle] = useState<Direction>(Direction.NULL_DIRECTION)
 
     return (
         <SettingsContext.Provider
@@ -20,6 +24,8 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
                 setConductorMode,
                 numAdvanceStations,
                 setNumAdvanceStations,
+                defaultDirectionToggle,
+                setDefaultDirectionToggle,
             }}
         >
             {children}
