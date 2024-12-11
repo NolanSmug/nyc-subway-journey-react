@@ -1,4 +1,3 @@
-import './App.css'
 import React, { useEffect } from 'react'
 import GameStateUI from './components/GameStateUI'
 import UmbrellaButton from './components/UmbrellaButton'
@@ -7,14 +6,15 @@ import UpcomingStationsVertical from './components/UpcomingStationsVertical'
 import UpcomingStationsHorizontal from './components/UpcomingStationsHorizontal'
 import KeyShortcutMenu from './components/KeyShortcutMenu'
 
+import './App.css'
 import { useUIContext } from './contexts/UIContext'
 import { useGameContext } from './contexts/GameContext'
+import { useSettingsContext } from './contexts/SettingsContext'
 
 import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
-import { useSettingsContext } from './contexts/SettingsContext'
 
 function App() {
     const { isTransferMode, setIsTransferMode, upcomingStationsVertical } = useUIContext()

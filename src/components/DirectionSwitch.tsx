@@ -93,7 +93,7 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
                     <div>Configure the default starting direction after transferring lines </div>
                     <div>
                         <u id={tooltipHidden ? '' : 'tooltip-click'} onClick={tooltipHidden ? undefined : toggleTooltip}>
-                            Click to hide/show
+                            Click to hide
                         </u>
                     </div>
                 </div>

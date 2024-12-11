@@ -9,11 +9,10 @@ import TrainCar from './TrainCar'
 import AdvanceNStationsInput from './AdvanceNStationsInput'
 
 import { useUIContext } from '../contexts/UIContext'
-import { Direction, LineName } from '../logic/EnumManager'
+import { LineName } from '../logic/EnumManager'
 import { getTransferImageSvg } from '../logic/TransferImageMap'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
-import { DirectionSwitch } from './DirectionSwitch'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
@@ -33,14 +32,8 @@ function GameStateUI() {
         setUpcomingStationsVisible,
         upcomingStationsVisible,
     } = useUIContext()
-    const {
-        numAdvanceStations,
-        setNumAdvanceStations,
-        conductorMode,
-        setConductorMode,
-        defaultDirectionToggle,
-        setDefaultDirectionToggle,
-    } = useSettingsContext()
+    const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode, defaultDirectionToggle } =
+        useSettingsContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
@@ -170,15 +163,6 @@ function GameStateUI() {
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label="Change Direction"
                             onClick={() => handleTrainAction('changeDirection')}
-                            additionalInput={
-                                <DirectionSwitch
-                                    state={defaultDirectionToggle}
-                                    onChange={(newDirection: Direction) => {
-                                        setDefaultDirectionToggle(newDirection)
-                                    }}
-                                    visible={conductorMode}
-                                />
-                            }
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}

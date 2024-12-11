@@ -13,7 +13,7 @@
     width: 1em;
     height: 4em;
     background-color: var(--bg-color-3);
-    border-radius: 0.5em;
+    border-radius: 0.4em;
     position: relative;
     cursor: pointer;
 }
@@ -23,10 +23,9 @@
     position: absolute;
     width: 1em;
     height: 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.747);
     border-radius: 25%;
     transition: top 0.3s;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .tri-state-toggle[data-state='']::after {
@@ -34,7 +33,7 @@
 }
 
 .tri-state-toggle[data-state='Downtown']::after {
-    top: 2.5em;
+    top: 2.55em;
 }
 
 .tri-state-toggle[data-state='Uptown']::after {

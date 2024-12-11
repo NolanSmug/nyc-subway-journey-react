@@ -44,14 +44,13 @@ function AdvanceNStationsInput({ visible }: { visible: boolean }) {
                 min={1}
                 max={currentMaxNumber}
             />
-            {numAdvanceStations != 1 && (
-                <img
-                    src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
-                    alt="Reset Input"
-                    className="reset-button"
-                    onClick={() => setNumAdvanceStations(1)}
-                />
-            )}
+            <img
+                src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
+                alt="Reset Input"
+                className="reset-input-button"
+                onClick={() => setNumAdvanceStations(1)}
+                style={{ opacity: numAdvanceStations == 1 ? 0 : 1 }}
+            />
         </div>
     )
 }
