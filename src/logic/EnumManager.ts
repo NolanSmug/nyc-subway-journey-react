@@ -126,7 +126,7 @@ export const lineDirectionsDetailed: Map<LineName, LineDirectionDetails> = new M
     [
         LineName.ONE_TRAIN,
         {
-            defaultDirectionLabels: ['Uptown', 'Downtown'],
+            defaultDirectionLabels: ['Downtown', 'Uptown'],
         },
     ],
     [

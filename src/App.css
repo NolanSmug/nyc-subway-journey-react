@@ -92,8 +92,8 @@ body {
 
 .shortcuts-umbrella {
     position: fixed;
-    bottom: 2em;
     left: 2em;
+    bottom: -24em;
     opacity: 1;
 }
 
