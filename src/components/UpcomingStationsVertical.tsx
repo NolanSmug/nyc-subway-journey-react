@@ -1,6 +1,7 @@
-import './UpcomingStationsVertical.css'
-import StationFragment from './StationFragment'
 import { useEffect, useRef } from 'react'
+import StationFragment from './StationFragment'
+
+import './UpcomingStationsVertical.css'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { scrollToCurrentStation } from './UpcomingStationsHorizontal'

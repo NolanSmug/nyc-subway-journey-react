@@ -1,8 +1,8 @@
-import { useGameContext } from '../contexts/GameContext'
 import { default as Line } from '../components/TransferLines'
 
 import './TrainInfo.css'
 import { useSettingsContext } from '../contexts/SettingsContext'
+import { useGameContext } from '../contexts/GameContext'
 
 export interface TrainInfoProps {
     isNullDirection: boolean

@@ -6,6 +6,14 @@ import Header from './Header'
 import Station from './Station'
 import TransferLines from './TransferLines'
 import TrainCar from './TrainCar'
+import AdvanceNStationsInput from './AdvanceNStationsInput'
+
+import { useUIContext } from '../contexts/UIContext'
+import { Direction, LineName } from '../logic/EnumManager'
+import { getTransferImageSvg } from '../logic/TransferImageMap'
+import { useGameContext } from '../contexts/GameContext'
+import { useSettingsContext } from '../contexts/SettingsContext'
+import { DirectionSwitch } from './DirectionSwitch'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
@@ -15,13 +23,6 @@ import C_DIRECTION_WHITE from '../images/change-direction-icon-w.svg'
 import C_DIRECTION_BLACK from '../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
-import { useUIContext } from '../contexts/UIContext'
-import { Direction, LineName } from '../logic/EnumManager'
-import { getTransferImageSvg } from '../logic/TransferImageMap'
-import { useGameContext } from '../contexts/GameContext'
-import { useSettingsContext } from '../contexts/SettingsContext'
-import { DirectionSwitch } from './DirectionSwitch'
-import AdvanceNStationsInput from './AdvanceNStationsInput'
 
 function GameStateUI() {
     const {

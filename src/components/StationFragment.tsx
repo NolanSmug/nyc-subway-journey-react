@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import TransferLines from './TransferLines'
+
+import './StationFragment.css'
 import { getTransferImages } from '../logic/TransferImageMap'
 import { Station } from '../logic/StationManager'
 import { LineName } from '../logic/EnumManager'
-import './StationFragment.css'
 
 export interface StationFragmentProps {
     station: Station

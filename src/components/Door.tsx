@@ -5,7 +5,7 @@ interface DoorProps {
     isLeft?: boolean
 }
 
-const Door: React.FC<DoorProps> = ({ isLeft }) => {
+const Door = ({ isLeft }: DoorProps) => {
     return <div className={`door ${isLeft ? 'door-left' : ''}`}></div>
 }
 

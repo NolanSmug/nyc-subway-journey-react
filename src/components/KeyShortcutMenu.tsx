@@ -3,9 +3,7 @@ import KeyShortcut from './KeyShortcut'
 
 import './KeyShortcutMenu.css'
 
-interface KeyShortcutMenuProps {}
-
-const KeyShortcutMenu: React.FC<KeyShortcutMenuProps> = () => {
+const KeyShortcutMenu = () => {
     return (
         <>
             <KeyShortcut shortcutKey="→" label="Advance Station" />

@@ -1,11 +1,11 @@
 import './AdvanceNStationsInput.css'
-import { useGameContext } from '../contexts/GameContext'
 import { Direction } from '../logic/EnumManager'
+import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
+import { useUIContext } from '../contexts/UIContext'
 
 import RESET_INPUT_B from '../images/reset-input-black.svg'
 import RESET_INPUT_W from '../images/reset-input-white.svg'
-import { useUIContext } from '../contexts/UIContext'
 
 function AdvanceNStationsInput({ visible }: { visible: boolean }) {
     const { darkMode } = useUIContext()
@@ -44,12 +44,14 @@ function AdvanceNStationsInput({ visible }: { visible: boolean }) {
                 min={1}
                 max={currentMaxNumber}
             />
-            <img
-                src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
-                alt="Reset Input"
-                className="reset-button"
-                onClick={() => setNumAdvanceStations(1)}
-            />
+            {numAdvanceStations != 1 && (
+                <img
+                    src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
+                    alt="Reset Input"
+                    className="reset-button"
+                    onClick={() => setNumAdvanceStations(1)}
+                />
+            )}
         </div>
     )
 }

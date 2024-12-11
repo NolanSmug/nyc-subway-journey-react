@@ -1,15 +1,13 @@
 import * as React from 'react'
 import SettingsButton from './SettingsButton'
-import { useUIContext } from '../contexts/UIContext'
 
-import './UmbrellaButton.css'
+import { useSettingsContext } from '../contexts/SettingsContext'
+import { useUIContext } from '../contexts/UIContext'
 
 import L_MODE from '../images/light-mode-icon.svg'
 import D_MODE from '../images/dark-mode-icon.svg'
-
 import UPCOMING_STATIONS_BLACK from '../images/upcoming-stations-icon-b.svg'
 import UPCOMING_STATIONS_WHITE from '../images/upcoming-stations-icon-w.svg'
-
 import UPCOMING_STATIONS_VERTICAL_BLACK from '../images/upcoming-stations-vertical-icon-b.svg'
 import UPCOMING_STATIONS_VERTICAL_WHITE from '../images/upcoming-stations-vertical-icon-w.svg'
 import UPCOMING_STATIONS_HORIZONTAL_BLACK from '../images/upcoming-stations-horizontal-icon-b.svg'
@@ -18,7 +16,6 @@ import CONDUCTOR_MODE_BLACK from '../images/conductor-mode-icon-b.svg'
 import CONDUCTOR_MODE_WHITE from '../images/conductor-mode-icon-w.svg'
 import RIDER_MODE_BLACK from '../images/rider-mode-icon-b.svg'
 import RIDER_MODE_WHITE from '../images/rider-mode-icon-w.svg'
-import { useSettingsContext } from '../contexts/SettingsContext'
 
 const SettingsMenu = () => {
     const {
