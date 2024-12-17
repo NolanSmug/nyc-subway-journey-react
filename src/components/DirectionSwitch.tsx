@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import './DirectionSwitch.css'
 import { Direction } from '../logic/EnumManager'
@@ -14,44 +14,20 @@ interface DirectionSwitchProps {
 }
 
 export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchProps) {
-    const [tooltipHidden, setTooltipHidden] = useState(true)
     const labelRef = useRef<HTMLSpanElement | null>(null)
-    const tooltipRef = useRef<HTMLDivElement>(null)
 
     const { darkMode } = useUIContext()
     const infoIcon = darkMode ? INFO_ICON_W : INFO_ICON_B
 
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             if (labelRef.current) {
-                labelRef.current.className =
-                    'direction-label ' + (state === Direction.NULL_DIRECTION ? 'Null' : state) + ' direction-label-hidden'
+                labelRef.current.classList.add('direction-label-hidden')
             }
         }, 500)
 
-        const handleClickOutside = (event: MouseEvent | KeyboardEvent) => {
-            if (!(event.target instanceof Node)) return
-            if (tooltipRef.current && !tooltipRef.current.contains(event.target)) setTooltipHidden(true)
-        }
-
-        document.addEventListener('mousedown', handleClickOutside)
-        document.addEventListener('keydown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [state])
-
-    // start out with labels open
-    useMemo(() => {
-        if (visible) {
-            setTooltipHidden(false)
-            if (labelRef.current) {
-                labelRef.current.classList.remove('direction-label-hidden')
-            }
-        }
-    }, [setTooltipHidden, visible])
-
-    const toggleTooltip = () => {
-        setTooltipHidden((prev) => !prev)
-    }
+        return () => clearTimeout(timer)
+    }, [state, visible]) // want to run on initial render too
 
     const handleClick = () => {
         let newState = Direction.NULL_DIRECTION
@@ -65,7 +41,7 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
 
     return (
         <div className="direction-switch-container">
-            <div
+            <button
                 className="tri-state-toggle"
                 data-state={state}
                 onClick={handleClick}
@@ -81,22 +57,10 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
                 >
                     {state === Direction.UPTOWN ? 'Uptown' : state === Direction.DOWNTOWN ? 'Downtown' : 'Choose Direction'}
                 </span>
-            </div>
+            </button>
             <div className="info-icon-container">
-                <img
-                    src={infoIcon}
-                    alt="Information"
-                    className="info-icon"
-                    onClick={toggleTooltip} // Toggle tooltip visibility when clicking the icon
-                />
-                <div ref={tooltipRef} className={`tooltip ${tooltipHidden ? 'tooltip-hidden' : ''}`}>
-                    <div>Configure the default starting direction after transferring lines </div>
-                    <div>
-                        <u id={tooltipHidden ? '' : 'tooltip-click'} onClick={tooltipHidden ? undefined : toggleTooltip}>
-                            Click to hide
-                        </u>
-                    </div>
-                </div>
+                <img src={infoIcon} alt="Information" className="info-icon" />
+                <div className="tooltip">Configure the default starting direction after transferring lines</div>
             </div>
         </div>
     )

@@ -13,19 +13,17 @@ import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
 import L_ARROW_BLACK from '../images/left-arrow-b.svg'
 import L_ARROW_WHITE from '../images/left-arrow-w.svg'
-import DirectionSwitch from './DirectionSwitch'
-import { useSettingsContext } from '../contexts/SettingsContext'
 
 function TrainCar() {
     const { upcomingStationsVertical, darkMode } = useUIContext()
     const { train } = useGameContext()
-    const { defaultDirectionToggle, setDefaultDirectionToggle, conductorMode } = useSettingsContext()
 
     const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
 
     const currentLine = useMemo(() => train.getLine(), [train])
     const currentLineSvg = useMemo(() => getTransferImageSvg(currentLine), [currentLine])[0]
+
     useEffect(() => {
         document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
     }, [currentLine])
@@ -43,14 +41,6 @@ function TrainCar() {
                 />
 
                 <div className="train-car">
-                    <DirectionSwitch
-                        state={defaultDirectionToggle}
-                        onChange={(newDirection: Direction) => {
-                            setDefaultDirectionToggle(newDirection)
-                        }}
-                        visible={conductorMode}
-                    />
-
                     <div className="doors">
                         <Door isLeft />
                         <Door />

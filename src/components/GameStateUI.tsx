@@ -7,9 +7,10 @@ import Station from './Station'
 import TransferLines from './TransferLines'
 import TrainCar from './TrainCar'
 import AdvanceNStationsInput from './AdvanceNStationsInput'
+import DirectionSwitch from './DirectionSwitch'
 
 import { useUIContext } from '../contexts/UIContext'
-import { LineName } from '../logic/EnumManager'
+import { Direction, LineName } from '../logic/EnumManager'
 import { getTransferImageSvg } from '../logic/TransferImageMap'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
@@ -32,8 +33,14 @@ function GameStateUI() {
         setUpcomingStationsVisible,
         upcomingStationsVisible,
     } = useUIContext()
-    const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode, defaultDirectionToggle } =
-        useSettingsContext()
+    const {
+        numAdvanceStations,
+        setNumAdvanceStations,
+        conductorMode,
+        setConductorMode,
+        defaultDirectionToggle,
+        setDefaultDirectionToggle,
+    } = useSettingsContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
@@ -78,7 +85,7 @@ function GameStateUI() {
             train.setLine(selectedLine)
             train.setLineType()
             train.setCurrentStation(train.getCurrentStation())
-            train.setDirection(defaultDirectionToggle)
+            if (conductorMode) train.setDirection(defaultDirectionToggle)
             train.updateTrainState()
         }
         updateTrainObject({ ...train })
@@ -163,6 +170,15 @@ function GameStateUI() {
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label="Change Direction"
                             onClick={() => handleTrainAction('changeDirection')}
+                            additionalInput={
+                                <DirectionSwitch
+                                    state={defaultDirectionToggle}
+                                    onChange={(newDirection: Direction) => {
+                                        setDefaultDirectionToggle(newDirection)
+                                    }}
+                                    visible={conductorMode}
+                                />
+                            }
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}

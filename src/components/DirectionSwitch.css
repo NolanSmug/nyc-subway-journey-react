@@ -10,6 +10,7 @@
 }
 
 .tri-state-toggle {
+    all: unset;
     width: 1em;
     height: 4em;
     background-color: var(--bg-color-3);
@@ -43,7 +44,10 @@
 .info-icon {
     width: 1.25em;
     height: 1.25em;
-    cursor: pointer;
+}
+
+.info-icon:hover + .tooltip {
+    opacity: 1;
 }
 
 .tooltip {
@@ -51,34 +55,16 @@
     background-color: var(--bg-color-3);
     color: var(--text-color);
     text-align: center;
+    font-size:small;
     border-radius: 5px;
     padding: 0.25em;
     position: absolute;
-    top: 6em;
+    top: 7em;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
-    pointer-events: auto;
     transition: opacity 0.5s ease-in-out;
     z-index: 12;
-}
-
-.tooltip.tooltip-hidden {
-    opacity: 0 !important;
-    pointer-events: none;
-}
-
-.tooltip:not(.tooltip-hidden) {
-    pointer-events: auto;
-}
-
-#tooltip-click {
-    cursor: pointer;
-}
-
-.info-icon-container .tooltip {
-    opacity: 0.5;
-    pointer-events: auto;
 }
 
 .direction-label {
@@ -87,7 +73,6 @@
     padding: 1px 3px;
     font-weight: bold;
     border-radius: 3px;
-    border: solid 2px var(--line-color);
     background-color: var(--bg-color-3-opacity);
     font-size: 0.9rem;
     pointer-events: none;
@@ -96,6 +81,12 @@
     white-space: nowrap;
     transition: top 0.3s;
     z-index: 11;
+}
+
+.direction-label-hidden {
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .direction-label.Uptown {
@@ -108,12 +99,6 @@
 
 .direction-label.Null {
     top: 1.5em;
-}
-
-.direction-label-hidden {
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: auto;
 }
 
 .tri-state-toggle:hover .direction-label:not(.direction-label-hidden) {

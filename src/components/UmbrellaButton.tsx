@@ -51,7 +51,7 @@ const UmbrellaButton = ({ openingButtonWhite, openingButtonBlack, umbrellaConten
 
     return (
         <div ref={buttonRef}>
-            <ActionButton className="" imageSrc={darkMode ? openingButtonWhite : openingButtonBlack} onClick={togglePopup} />
+            <ActionButton imageSrc={darkMode ? openingButtonWhite : openingButtonBlack} onClick={togglePopup} />
 
             <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : ''}`}>
                 {umbrellaContent}
