@@ -118,7 +118,7 @@ function GameStateUI() {
         if (comboKeyActions[keyCombo]) {
             event.preventDefault() // Prevent default browser behavior
             comboKeyActions[keyCombo]()
-            return // don't look for single key actions
+            return // don't check for single key actions
         }
 
         // Mapping for single-key actions
