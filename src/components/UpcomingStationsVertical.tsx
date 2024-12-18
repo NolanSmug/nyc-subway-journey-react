@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import StationFragment from './StationFragment'
+import StationFragmentVertical from './StationFragmentVertical'
 
 import './UpcomingStationsVertical.css'
 import { useUIContext } from '../contexts/UIContext'
@@ -42,10 +42,9 @@ function UpcomingStationsVertical() {
 
     return (
         <div className={`upcoming-stations-vertical-container not-dim ${!visible ? 'hidden' : ''}`}>
-            <div ref={lineDividerRef} className="line-divider-vertical" />
             <div className="stations-vertical" ref={stationsRef}>
                 {stations.map((station, index) => (
-                    <StationFragment
+                    <StationFragmentVertical
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}

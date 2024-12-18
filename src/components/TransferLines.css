@@ -30,6 +30,10 @@
     min-width: 6rem;
 }
 
+.transfer-lines-container.wide {
+    min-width: 16rem;
+}
+
 .transfer-line-image:hover {
     transform: scale(1.08);
     cursor: pointer;

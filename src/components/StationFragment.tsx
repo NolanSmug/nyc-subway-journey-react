@@ -13,12 +13,12 @@ export interface StationFragmentProps {
 }
 
 const StationFragment: React.FC<StationFragmentProps> = ({ station, className, transfers }) => {
-    const [isOverflowing] = useState(station.getName().length > 12)
+    const [isOverflowing] = useState(station.getName().length > 16)
 
     return (
         <div className={`station-frag-container ${isOverflowing ? 'overflow' : ''} ${className}`}>
             <div className={`station-frag-content ${isOverflowing ? 'overflow' : ''} ${className}`}>
-                <div className="station-info">
+                <div className="station-frag-info">
                     <h2 className="station-frag-name">{station.getName()}</h2>
                     <div className="transfer-lines">
                         <TransferLines small transfers={getTransferImages(transfers)} />

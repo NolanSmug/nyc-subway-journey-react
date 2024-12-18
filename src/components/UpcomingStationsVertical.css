@@ -7,7 +7,6 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 90vh;
-    width: 30em;
     scroll-padding-bottom: 1em;
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
@@ -23,7 +22,8 @@
     flex-direction: column-reverse;
     align-items: center;
     position: relative;
-    z-index: 1;
+    gap: 1.5em;
+    width: 20em;
 }
 
 .line-divider-vertical {

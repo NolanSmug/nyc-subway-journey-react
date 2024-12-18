@@ -1,0 +1,62 @@
+.station-frag-vertical-container {
+    display: flex;
+    max-width: 100vm;
+    max-height: 100%;
+}
+
+.station-frag-vertical-content {
+    display: flex;
+    margin-bottom: 0;
+    width: 15em;
+}
+
+.station-frag-vertical-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.station-frag-vertical-name {
+    font-size: 0.75rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Chrome */
+    max-width: max-content;
+}
+
+.station-dot-container {
+    position: relative; /* Establish stacking context */
+    z-index: 0; /* Default stacking context */
+}
+
+.station-dot-vertical {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--dot-color);
+    border-color: var(--line-color);
+    border-radius: 50%;
+    border-width: 0.15rem;
+    border-style: solid;
+    position: relative;
+    z-index: 10; /* Ensure dot is above the pseudo-element */
+    transform: translate(-50%, 50%);
+}
+
+.station-dot-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 4px;
+    height: 4em;
+    background-color: var(--line-color);
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Push behind the container */
+}
+
+
+
+.current-station-vertical .station-frag-name {
+    color: var(--line-color);
+}

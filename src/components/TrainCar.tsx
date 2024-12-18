@@ -4,7 +4,7 @@ import Door from './Door'
 import TrainInfo from '../components/TrainInfo'
 
 import './TrainCar.css'
-import { Direction } from '../logic/EnumManager'
+import { Direction, lineTypeToDotColor } from '../logic/EnumManager'
 import { getTransferImageSvg, lineToLineColor } from '../logic/TransferImageMap'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
@@ -21,12 +21,15 @@ function TrainCar() {
     const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
 
+    // useMemo on functions that get from maps to mitigate re-rendering
     const currentLine = useMemo(() => train.getLine(), [train])
+    const currentLineType = useMemo(() => train.getLineType(), [train])
     const currentLineSvg = useMemo(() => getTransferImageSvg(currentLine), [currentLine])[0]
 
     useEffect(() => {
         document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
-    }, [currentLine])
+        document.documentElement.style.setProperty('--dot-color', lineTypeToDotColor(currentLineType))
+    }, [currentLine, currentLineType])
 
     return (
         <>

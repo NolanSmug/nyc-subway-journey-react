@@ -111,6 +111,16 @@ export const lineTypes: Map<LineName, LineType> = new Map([
     [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
 ])
 
+const lineTypeDotColorMap: {[key in LineType]: string} = {
+    [LineType.LOCAL]: '#222',
+    [LineType.NONE]: '#fff',
+    [LineType.EXPRESS]: '#fff',
+}
+
+export function lineTypeToDotColor(lineType: LineType): string {
+    return lineTypeDotColorMap[lineType]
+}
+
 interface LineDirectionDetails {
     defaultDirectionLabels?: [string, string]
     boroughSpecificLabels?:

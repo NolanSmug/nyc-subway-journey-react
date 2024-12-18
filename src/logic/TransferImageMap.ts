@@ -109,8 +109,13 @@ const lineColorMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: '#808183',
 }
 
+
+
 export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
+
+
+
 
 export default transferImageMap;

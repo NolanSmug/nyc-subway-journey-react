@@ -3,13 +3,14 @@ import './TransferLines.css'
 interface TransferLinesProps {
     transfers: string[]
     small?: boolean
+    wide?: boolean
     notDim?: boolean
     getTransferLineClicked?: (index: number) => Promise<void> | void
 }
 
-function TransferLines({ transfers, small, notDim, getTransferLineClicked }: TransferLinesProps) {
+function TransferLines({ transfers, small, wide, notDim, getTransferLineClicked }: TransferLinesProps) {
     return (
-        <div className={`transfer-lines-container ${small ? 'small' : ''} ${notDim ? 'not-dim' : ''}`}>
+        <div className={`transfer-lines-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${notDim ? 'not-dim' : ''}`}>
             {transfers.map((imageSrc, index) => (
                 <img
                     key={index}

@@ -16,7 +16,7 @@
     left: 3em;
 }
 
-.station-info {
+.station-frag-info {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -34,7 +34,7 @@
 .station-dot {
     width: 0.75rem;
     height: 0.75rem;
-    background-color: white;
+    background-color: var(--dot-color);
     border-color: var(--line-color);
     border-radius: 50%;
     border-width: 0.15rem;
