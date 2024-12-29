@@ -115,7 +115,7 @@ export class Train {
 
                 if (boroughSpecificDirection) return boroughSpecificDirection
             }
-            // fallback to default directions
+            // fallback to default directions if borough specific not found
             else if (detailedLineDirection.defaultDirectionLabels) {
                 return direction === Direction.DOWNTOWN
                     ? detailedLineDirection.defaultDirectionLabels[0]

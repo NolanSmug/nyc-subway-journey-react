@@ -185,7 +185,6 @@ function GameStateUI() {
                             label={`Advance Station${numAdvanceStations > 1 ? 's' : ''}`}
                             onClick={() => handleTrainAction('advanceStation')}
                             additionalInput={<AdvanceNStationsInput visible={conductorMode} />}
-                            className="advance-station-button"
                         />
                     </div>
                 </div>

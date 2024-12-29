@@ -3,15 +3,16 @@ import { default as Line } from '../components/TransferLines'
 import './TrainInfo.css'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import { useGameContext } from '../contexts/GameContext'
+import { TrainLineInfo } from './TrainCar'
+import { Direction } from '../logic/EnumManager'
 
-export interface TrainInfoProps {
-    isNullDirection: boolean
-    currentLineSvg: string
-}
+export interface TrainInfoProps extends TrainLineInfo {}
 
-export function TrainInfo({ isNullDirection, currentLineSvg }: TrainInfoProps) {
+export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType }: TrainInfoProps) {
     const { train, updateTrainObject } = useGameContext()
     const { defaultDirectionToggle } = useSettingsContext()
+
+    const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 
     return (
         <>
@@ -33,12 +34,12 @@ export function TrainInfo({ isNullDirection, currentLineSvg }: TrainInfoProps) {
                         : {}
                 }
             >
-                {isNullDirection ? 'Toggle Direction' : train.getDirectionLabel()}
+                {isNullDirection ? 'Toggle Direction' : directionLabel}
             </h2>
             <div className="train-car-line">
-                <Line transfers={[currentLineSvg]} notDim />
+                <Line transfers={[currentLineSVG]} notDim />
             </div>
-            <h2 className="train-type not-dim">{train.getLineType() + ' Train'}</h2>
+            <h2 className="train-type not-dim">{lineType + ' Train'}</h2>
         </>
     )
 }

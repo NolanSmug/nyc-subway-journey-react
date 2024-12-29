@@ -40,7 +40,7 @@ function App() {
             <div className="Game">
                 {!upcomingStationsVertical && <UpcomingStationsHorizontal />}
 
-                <div className={`game-state-ui${upcomingStationsVertical ? ' shifted-up' : ''}`}>
+                <div className={`game-state-ui ${upcomingStationsVertical ? ' shifted-up' : ''}`}>
                     <GameStateUI />
                 </div>
             </div>

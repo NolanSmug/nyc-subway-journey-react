@@ -58,7 +58,7 @@ export function getRandomLine(): LineName {
         LineName.S_TRAIN_ROCKAWAY,
     ]
 
-    return lines[Math.floor(Math.random() * lines.length)];
+    return lines[Math.floor(Math.random() * lines.length)]
 }
 
 export enum Borough {
@@ -68,7 +68,6 @@ export enum Borough {
     BRONX = 'Bronx',
     STATEN_ISLAND = 'Staten Island',
 }
-
 
 export enum Direction {
     UPTOWN = 'Uptown',
@@ -111,25 +110,13 @@ export const lineTypes: Map<LineName, LineType> = new Map([
     [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
 ])
 
-const lineTypeDotColorMap: {[key in LineType]: string} = {
-    [LineType.LOCAL]: '#222',
-    [LineType.NONE]: '#fff',
-    [LineType.EXPRESS]: '#fff',
-}
-
-export function lineTypeToDotColor(lineType: LineType): string {
-    return lineTypeDotColorMap[lineType]
-}
-
 interface LineDirectionDetails {
     defaultDirectionLabels?: [string, string]
-    boroughSpecificLabels?:
-        | {
-              [borough in Borough]?: {
-                  [direction: string]: string
-              }
-          }
-        | undefined
+    boroughSpecificLabels?: {
+        [borough in Borough]?: {
+            [direction in Direction]?: string
+        }
+    }
 }
 
 export const lineDirectionsDetailed: Map<LineName, LineDirectionDetails> = new Map([

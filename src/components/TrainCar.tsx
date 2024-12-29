@@ -4,7 +4,7 @@ import Door from './Door'
 import TrainInfo from '../components/TrainInfo'
 
 import './TrainCar.css'
-import { Direction, lineTypeToDotColor } from '../logic/EnumManager'
+import { Direction, LineType, LineName } from '../logic/EnumManager'
 import { getTransferImageSvg, lineToLineColor } from '../logic/TransferImageMap'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
@@ -13,6 +13,14 @@ import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
 import L_ARROW_BLACK from '../images/left-arrow-b.svg'
 import L_ARROW_WHITE from '../images/left-arrow-w.svg'
+
+export interface TrainLineInfo {
+    direction: Direction
+    directionLabel: string
+    currentLine: LineName
+    currentLineSVG: string
+    lineType: LineType
+}
 
 function TrainCar() {
     const { upcomingStationsVertical, darkMode } = useUIContext()
@@ -26,9 +34,17 @@ function TrainCar() {
     const currentLineType = useMemo(() => train.getLineType(), [train])
     const currentLineSvg = useMemo(() => getTransferImageSvg(currentLine), [currentLine])[0]
 
+    const trainInfo: TrainLineInfo = {
+        direction: train.getDirection(),
+        directionLabel: train.getDirectionLabel(),
+        currentLine: currentLine,
+        currentLineSVG: currentLineSvg,
+        lineType: currentLineType,
+    }
+
     useEffect(() => {
         document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
-        document.documentElement.style.setProperty('--dot-color', lineTypeToDotColor(currentLineType))
+        document.documentElement.style.setProperty('--dot-color', currentLineType === LineType.LOCAL ? '#222' : '#fff')
     }, [currentLine, currentLineType])
 
     return (
@@ -50,7 +66,7 @@ function TrainCar() {
                     </div>
 
                     <div className="windows" id="train-info">
-                        <TrainInfo isNullDirection={train.isNullDirection()} currentLineSvg={currentLineSvg} />
+                        <TrainInfo {...trainInfo} />
                     </div>
 
                     <div className="doors">
