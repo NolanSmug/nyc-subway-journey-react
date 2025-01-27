@@ -48,8 +48,7 @@ function App() {
             <div className="umbrella-menus">
                 <div className="settings-umbrella">
                     <UmbrellaButton
-                        openingButtonWhite={GEAR_WHITE}
-                        openingButtonBlack={GEAR_BLACK}
+                        openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
                         umbrellaContent={<SettingsMenu />}
                         below
                         visible
@@ -57,8 +56,7 @@ function App() {
                 </div>
                 <div className="shortcuts-umbrella">
                     <UmbrellaButton
-                        openingButtonWhite={KEYBOARD_WHITE}
-                        openingButtonBlack={KEYBOARD_BLACK}
+                        openingButtonsW_B={[KEYBOARD_WHITE, KEYBOARD_BLACK]}
                         umbrellaContent={<KeyShortcutMenu />}
                         visible={conductorMode}
                     />
