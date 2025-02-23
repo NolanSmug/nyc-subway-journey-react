@@ -1,4 +1,3 @@
-# .github/workflows/gh-pages.yml
 name: Deploy to GitHub Pages
 
 on:
@@ -10,14 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      - name: Force Yarn 3.6.4
+        run: |
+          corepack enable
+          corepack prepare yarn@3.6.4 --activate
+          yarn set version 3.6.4
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build
         run: yarn build
@@ -28,4 +35,4 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: nolansmug/nolansmug.github.io
           publish_dir: ./build
-          keep_files: false  # Clean previous builds
+          keep_files: false
