@@ -10,29 +10,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  
+          fetch-depth: 0 
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: yarn
 
-      - name: Force Yarn 3.6.4
-        run: |
-          corepack enable
-          corepack prepare yarn@3.6.4 --activate
-          yarn set version 3.6.4
-
-      - name: Install dependencies
+      - name: Install Dependencies
         run: yarn install --immutable
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: 1
 
       - name: Build
         run: yarn build
 
-      - name: Deploy to Pages Repo
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: nolansmug/nolansmug.github.io
           publish_dir: ./build
-          keep_files: false
