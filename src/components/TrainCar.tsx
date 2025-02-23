@@ -49,7 +49,7 @@ function TrainCar() {
 
     return (
         <>
-            <Header text="Current Line:"></Header>
+            <Header text="Current Line"></Header>
             <div className="train-container">
                 <img
                     src={DOWNTOWN_DIRECTION_ICON}
