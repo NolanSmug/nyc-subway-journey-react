@@ -39,4 +39,5 @@ jobs:
           external_repository: nolansmug/nolansmug.github.io
           publish_dir: ./build
           publish_branch: main
+          force_orphan: true
           keep_files: false
