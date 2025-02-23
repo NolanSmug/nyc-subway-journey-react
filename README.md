@@ -22,7 +22,8 @@
 | -----------------------------------------------------------| ---------------------------------------------------------- |
 
 
-## Play [online](https://nolansmug.github.io/)
+## Play <a href="https://nolansmug.github.io/" target="_blank">online</a>
+
 - Currently hosted on GitHub Pages
 
 
