@@ -3,24 +3,30 @@
 
 - [NYC Subway Journey Game React App](#nyc-subway-journey-game-react-app)
     - [Screenshots](#screenshots)
-  - [Running the Project](#running-the-project)
+  - [Play online](#play-online)
+  - [Running the project locally with Docker](#running-the-project-locally-with-docker)
     - [1. Clone the repository:](#1-clone-the-repository)
     - [2. Build the Docker image:](#2-build-the-docker-image)
     - [3. Run the Docker container:](#3-run-the-docker-container)
     - [4. Open the application:](#4-open-the-application)
-  - [How to Play](#how-to-play)
+  - [How to play](#how-to-play)
     - [Initialization](#initialization)
     - [Gameplay](#gameplay)
-    - [Configuration Settings](#configuration-settings)
-    - [Conductor Mode](#conductor-mode)
-    - [Keyboard Shortcuts](#keyboard-shortcuts)
+    - [Configuration settings](#configuration-settings)
+    - [Conductor mode](#conductor-mode)
+    - [Keyboard shortcuts](#keyboard-shortcuts)
 
 
 ### Screenshots
 | ![cover screenshot 1](./src/images/cover-screenshot-1.png) | ![cover screenshot 2](./src/images/cover-screenshot-2.png) |
 | -----------------------------------------------------------| ---------------------------------------------------------- |
 
-## Running the Project
+
+## Play [online](https://nolansmug.github.io/)
+- Currently hosted on GitHub Pages
+
+
+## Running the project locally with Docker
 
 > Make sure you have Docker [installed](https://www.docker.com/get-started)
 ### 1. Clone the repository:
@@ -44,7 +50,7 @@
 
 > If the app doesn't load, make sure Docker is [installed](https://www.docker.com/get-started) and running.
 
-## How to Play
+## How to play
 You are placed into a random NYC subway station. Your objective is to reach another randomly given station by utilizing your knowledge of the NYC subway system.
 
 ### Initialization
@@ -78,14 +84,14 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 2. **Goal:**
 - Successfully navigate from your starting station to your destination station by advancing through stations and transferring train lines as needed. Be mindful of your `current direction` throughout as well.
   
-### Configuration Settings
+### Configuration settings
 - **`Theme`** – Toggle light/dark mode
 - **`Upcoming Stations`** – Toggle upcoming stations visibility
 - **`Upcoming Stations Layout`** – Set the upcoming stations view to vertical or horizontal
 - **`Conductor Mode`** – Enable conductor mode (default is rider mode)
 
 
-### Conductor Mode
+### Conductor mode
 Think of conductor mode as a sort of a professional feature mode. When enabled, users are able to:  
 
 1. Advance an input number of stations (with "reset to 1" button)
@@ -100,7 +106,7 @@ Think of conductor mode as a sort of a professional feature mode. When enabled, 
 
 > The 'Uptown' text fades shortly after each toggle click.
 
-### Keyboard Shortcuts
+### Keyboard shortcuts
 - `→` Advance Station
 - `t` Transfer Lines
 - `c` Change Direction
