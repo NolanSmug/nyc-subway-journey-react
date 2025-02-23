@@ -17,22 +17,12 @@ jobs:
         with:
           node-version: 20
           cache: yarn
-          cache-dependency-path: |
-            yarn.lock
-            .yarn/cache
-
-      - name: Prepare Corepack
-        run: mkdir -p node_modules/.bin
-
-      - name: Corepack Setup
-        run: corepack enable --install-directory ./node_modules/.bin
+          cache-dependency-path: yarn.lock
 
       - name: Install Dependencies
         run: yarn install --immutable --mode=skip-build
         env:
           YARN_ENABLE_GLOBAL_CACHE: 1
-          YARN_ENABLE_IMMUTABLE_INSTALLS: 1
-          YARN_ENABLE_PROGRESS_BARS: 0
 
       - name: Build
         run: yarn build
@@ -44,5 +34,4 @@ jobs:
           external_repository: nolansmug/nolansmug.github.io
           publish_dir: ./build
           publish_branch: main
-          force_orphan: true
           keep_files: false
