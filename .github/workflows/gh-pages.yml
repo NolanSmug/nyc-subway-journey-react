@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1  # Shallow clone for faster checkout
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -21,6 +21,9 @@ jobs:
             yarn.lock
             .yarn/cache
 
+      - name: Prepare Corepack
+        run: mkdir -p node_modules/.bin
+
       - name: Corepack Setup
         run: corepack enable --install-directory ./node_modules/.bin
 
@@ -29,7 +32,7 @@ jobs:
         env:
           YARN_ENABLE_GLOBAL_CACHE: 1
           YARN_ENABLE_IMMUTABLE_INSTALLS: 1
-          YARN_ENABLE_PROGRESS_BARS: 0  # Disable progress bars for CI
+          YARN_ENABLE_PROGRESS_BARS: 0
 
       - name: Build
         run: yarn build
