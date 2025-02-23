@@ -11,12 +11,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          cache: yarn
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20 
+          cache: yarn
 
       - name: Ensure Yarn 3.6.4
         run: corepack enable
