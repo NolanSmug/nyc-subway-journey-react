@@ -15,8 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: yarn
+          node-version: 20 
 
       - name: Ensure Yarn 3.6.4
         run: corepack enable
