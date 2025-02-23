@@ -12,20 +12,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Nuke Yarn 1.x
-        run: |
-          npm uninstall -g yarn
-          sudo apt-get remove cmdtest -y
-          sudo rm -rf $(which yarn)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
 
-      - name: Force Yarn Modern
-        run: |
-          corepack enable
-          corepack prepare yarn@3.6.4 --activate
-          yarn set version 3.6.4
+      - name: Ensure Yarn 3.6.4
+        run: corepack enable
 
       - name: Install Dependencies
         run: yarn install --immutable
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: 1
 
       - name: Build
         run: yarn build
@@ -36,5 +35,5 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: nolansmug/nolansmug.github.io
           publish_dir: ./build
-          publish_branch: main  # 👈 Critical addition
+          publish_branch: main
           keep_files: false

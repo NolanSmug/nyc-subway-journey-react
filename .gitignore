@@ -23,7 +23,6 @@ gtfs_subway/
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
-!.yarn/yarn.lock
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
