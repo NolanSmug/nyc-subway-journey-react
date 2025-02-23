@@ -10,24 +10,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1  # Shallow clone for faster checkout
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 
+          node-version: 20
           cache: yarn
+          cache-dependency-path: |
+            yarn.lock
+            .yarn/cache
 
-      - name: Ensure Yarn 3.6.4
-        run: corepack enable
+      - name: Corepack Setup
+        run: corepack enable --install-directory ./node_modules/.bin
 
       - name: Install Dependencies
-        run: |
-          corepack enable
-          yarn install --immutable
+        run: yarn install --immutable --mode=skip-build
         env:
           YARN_ENABLE_GLOBAL_CACHE: 1
           YARN_ENABLE_IMMUTABLE_INSTALLS: 1
+          YARN_ENABLE_PROGRESS_BARS: 0  # Disable progress bars for CI
 
       - name: Build
         run: yarn build
