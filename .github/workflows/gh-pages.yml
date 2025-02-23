@@ -36,3 +36,5 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: nolansmug/nolansmug.github.io
           publish_dir: ./build
+          publish_branch: main  # 👈 Critical addition
+          keep_files: false
