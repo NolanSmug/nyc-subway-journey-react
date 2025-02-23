@@ -7,15 +7,15 @@ export class SubwayMap {
             return '/csv/all_stations.csv'
         }
         if (line === LineName.A_ROCKAWAY_MOTT_TRAIN) {
-            return '/csv/A_train_rockaway-mott_stations.csv'
+            return '/csv/a_train_rockaway-mott_stations.csv'
         }
         if (line === LineName.A_LEFFERTS_TRAIN) {
-            return '/csv/A_train_lefferts_stations.csv'
+            return '/csv/a_train_lefferts_stations.csv'
         }
 
         const filePath: string = `/csv/${line.toLowerCase()}_stations.csv`
 
-        // console.log(filePath)
+        console.log(filePath)
         return filePath
     }
 

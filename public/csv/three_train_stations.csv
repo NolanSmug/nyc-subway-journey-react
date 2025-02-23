@@ -1,4 +1,4 @@
-stop_id,name,transfers,borough
+stop_id,stop_name,transfers,borough
 257,New Lots Av,3,Bk
 256,Van Siclen Av,3,Bk
 255,Pennsylvania Av,3,Bk

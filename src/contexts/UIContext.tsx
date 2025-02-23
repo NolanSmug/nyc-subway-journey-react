@@ -20,7 +20,7 @@ const UIContext = createContext<UIContextProps | undefined>(undefined)
 export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
-    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
+    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(false)
     const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(true)
 
     return (

@@ -62,7 +62,6 @@ const transferImageMap: { [key in LineName]: string } = {
 };
 
 export const getTransferImageSvg = (input: Station | LineName | null | undefined): string[] => {
-    console.log('getTransferImageSvg')
     if (!input) return []
 
     if (input instanceof Station) {
@@ -75,7 +74,6 @@ export const getTransferImageSvg = (input: Station | LineName | null | undefined
 }
 
 export const getTransferImages = (transfers: LineName[]): string[] => {
-    console.log('getTransferImage')
     return transfers.map((transfer) => transferImageMap[transfer] || '');
 };
 
@@ -112,7 +110,6 @@ const lineColorMap: { [key in LineName]: string } = {
 }
 
 export function lineToLineColor(lineName: LineName): string {
-    console.log('lineToLineColor')
     return lineColorMap[lineName]
 }
 
