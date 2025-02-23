@@ -150,7 +150,7 @@ function GameStateUI() {
 
             <div className="stations-container">
                 <div className="station-box" id="current-station">
-                    <Header text="Current Station" />
+                    <Header text="Current Station::" />
                     <div className="station-item">
                         <Station name={train.getCurrentStation().getName()}>
                             <TransferLines
