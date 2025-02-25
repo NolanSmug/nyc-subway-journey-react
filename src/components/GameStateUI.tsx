@@ -150,7 +150,7 @@ function GameStateUI() {
 
             <div className="stations-container">
                 <div className="station-box" id="current-station">
-                    <Header text="Current Station:" />
+                    <Header text="Current station" />
                     <div className="station-item">
                         <Station name={train.getCurrentStation().getName()}>
                             <TransferLines
@@ -163,12 +163,12 @@ function GameStateUI() {
                     <div className="action-buttons-container" id="starting-station">
                         <ActionButton
                             imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
-                            label="Transfer Lines"
+                            label="Transfer lines"
                             onClick={() => handleTrainAction('transfer')}
                         />
                         <ActionButton
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
-                            label="Change Direction"
+                            label="Change direction"
                             onClick={() => handleTrainAction('changeDirection')}
                             additionalInput={
                                 <DirectionSwitch
@@ -182,7 +182,7 @@ function GameStateUI() {
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
-                            label={`Advance Station${numAdvanceStations > 1 ? 's' : ''}`}
+                            label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
                             onClick={() => handleTrainAction('advanceStation')}
                             additionalInput={<AdvanceNStationsInput visible={conductorMode} />}
                         />
@@ -190,7 +190,7 @@ function GameStateUI() {
                 </div>
 
                 <div className="station-box" id="destination-station">
-                    <Header text="Destination Station" />
+                    <Header text="Destination station" />
                     <div className="station-item">
                         <Station name={gameState.destinationStation.getName()}>
                             <TransferLines transfers={getTransferImageSvg(gameState.destinationStation)} />
@@ -199,7 +199,7 @@ function GameStateUI() {
                     <div className="action-buttons-container" id="destination-station">
                         <ActionButton
                             imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
-                            label="Reset Game"
+                            label="Reset game"
                             onClick={() => handleTrainAction('refresh')}
                         />
                     </div>

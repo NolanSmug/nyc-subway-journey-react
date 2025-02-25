@@ -32,14 +32,14 @@ const SettingsMenu = () => {
         <>
             <SettingsButton label="Theme" imgSrc={darkMode ? L_MODE : D_MODE} onClick={() => setDarkMode((prev) => !prev)} />
             <SettingsButton
-                label="Upcoming Stations"
+                label="Upcoming stations"
                 imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
                 onClick={() => {
                     setUpcomingStationsVisible((prev) => !prev)
                 }}
             />
             <SettingsButton
-                label="Upcoming Stations Layout"
+                label="Upcoming stations layout"
                 imgSrc={
                     upcomingStationsVertical
                         ? darkMode
@@ -56,7 +56,7 @@ const SettingsMenu = () => {
                 }}
             />
             <SettingsButton
-                label={!conductorMode ? 'Conductor Mode' : 'Rider Mode'}
+                label={!conductorMode ? 'Conductor mode' : 'Rider mode'}
                 imgSrc={
                     conductorMode
                         ? darkMode
