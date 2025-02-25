@@ -6,16 +6,16 @@ D31,Newkirk Plaza,B Q,Bk
 D28,Church Av,B Q,Bk
 D26,Prospect Park,B Q Sf,Bk
 D25,7 Av,B Q,Bk
-D24,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+AAB,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
 R30,DeKalb Av,B Q R,Bk
 D22,Grand St,B D,M
-D21,Bway-Lafayette St/Bleecker St,6 B D F M,M
-D20,W 4 St-Wash Sq,A C E B D F M,M
-D17,34 St-Herald Sq,B D F M N Q R W,M
-D16,42 St-Bryant Pk,B D F M 7,M
+BWL,Bway-Lafayette St/Bleecker St,6 B D F M,M
+A32,W 4 St-Wash Sq,A C E B D F M,M
+HSQ,34 St-Herald Sq,B D F M N Q R W,M
+BRY,42 St-Bryant Pk,B D F M 7,M
 D15,47-50 Sts-Rockefeller Ctr,B D F M,M
 D14,7 Av,B D E,M
-A24,59 St-Columbus Circle,A B C D 1,M
+CLC,59 St-Columbus Circle,A B C D 1,M
 A22,72 St,B C,M
 A21,81 St-Museum of Natural History,B C,M
 A20,86 St,B C,M
@@ -25,9 +25,9 @@ A17,Cathedral Pkwy (110 St),B C,M
 A16,116 St,B C,M
 A15,125 St,A C B D,M
 A14,135 St,B C,M
-D13,145 St,A C B D,M
+A12,145 St,A C B D,M
 D12,155 St,B D,M
-D11,161 St-Yankee Stadium,B D,Bx
+NYY,161 St-Yankee Stadium,B D 4,Bx
 D10,167 St,B D,Bx
 D09,170 St,B D,Bx
 D08,174-175 Sts,B D,Bx

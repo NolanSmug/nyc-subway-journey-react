@@ -9,21 +9,21 @@ stop_id,stop_name,transfers,borough
 250,Crown Hts-Utica Av,3 4,Bk
 249,Kingston Av,3,Bk
 248,Nostrand Av,3,Bk
-239,Franklin Avenue/Botanic Garden,2 3 4 5 Sf,Bk
+BOT,Franklin Avenue-Medgar Evers College,2 3 4 5 Sf,Bk
 238,Eastern Pkwy-Brooklyn Museum,2 3,Bk
 237,Grand Army Plaza,2 3,Bk
 236,Bergen St,2 3,Bk
-235,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+AAB,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
 234,Nevins St,2 3 4 5,Bk
 233,Hoyt St,2 3,Bk
-232,Borough Hall,2 3 4 5,Bk
+BOR,Borough Hall,2 3 4 5 R,Bk
 231,Clark St,2 3,Bk
 230,Wall St,2 3,M
-229,Fulton St,2 3 4 5 A C J Z,M
+FUL,Fulton St,2 3 4 5 A C J Z,M
 228,Park Place,2 3,M
 137,Chambers St,1 2 3,M
 132,14 St (6th Av),1 2 3 F M L,M
-128,34 St-Penn Station,A C E 1 2 3,M
+PEN,34 St-Penn Station,A C E 1 2 3,M
 127,Times Sq-42 St,1 2 3 7 N Q R W S,M
 123,72 St,1 2 3,M
 120,96 St,1 2 3,M

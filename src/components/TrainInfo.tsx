@@ -34,12 +34,12 @@ export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType 
                         : {}
                 }
             >
-                {isNullDirection ? 'Toggle Direction' : directionLabel}
+                {isNullDirection ? 'TOGGLE DIRECTION' : directionLabel}
             </h2>
             <div className="train-car-line">
                 <Line transfers={[currentLineSVG]} notDim />
             </div>
-            <h2 className="train-type not-dim">{lineType + ' Train'}</h2>
+            <h2 className="train-type not-dim">{lineType + ' train'}</h2>
         </>
     )
 }

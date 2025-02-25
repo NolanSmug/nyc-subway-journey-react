@@ -55,12 +55,17 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
                     }`}
                     ref={labelRef}
                 >
-                    {state === Direction.UPTOWN ? 'Uptown' : state === Direction.DOWNTOWN ? 'Downtown' : 'Choose Direction'}
+                    {state === Direction.UPTOWN ? 'Uptown' : state === Direction.DOWNTOWN ? 'Downtown' : 'Choose direction'}
                 </span>
             </button>
             <div className="info-icon-container">
                 <img src={infoIcon} alt="Information" className="info-icon" />
-                <div className="tooltip">Configure the default starting direction after transferring lines</div>
+                <div className="tooltip">
+                    Configure the default starting direction{' '}
+                    <i>
+                        <u>after transferring lines</u>
+                    </i>
+                </div>
             </div>
         </div>
     )

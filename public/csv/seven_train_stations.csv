@@ -1,12 +1,12 @@
 stop_id,stop_name,transfers,borough
 726,34 St-Hudson Yards,7,M
-725,Times Sq-42 St,1 2 3 7 N Q R W S,M
-724,42 St-Bryant Pk,B D F M 7,M
-723,Grand Central-42 St,4 5 6 7 S,M
+127,Times Sq-42 St,1 2 3 7 N Q R W S,M
+BRY,42 St-Bryant Pk,B D F M 7,M
+GRC,Grand Central-42 St,4 5 6 7 S,M
 721,Vernon Blvd-Jackson Av,7,Q
 720,Hunters Point Av,7,Q
-719,Court Sq-23 St,7 E M G,Q
-718,Queensboro Plaza,7 N W,Q
+CSQ,Court Sq,7 E M G,Q
+QBP,Queensboro Plaza,7 N W,Q
 716,33 St-Rawson St,7,Q
 715,40 St-Lowery St,7,Q
 714,46 St-Bliss St,7,Q

@@ -186,12 +186,12 @@ export class Train {
         this.currentStationIndex = this.scheduledStops.findIndex((stop) => stop.getId() === station.getId())
     }
 
-    public setCurrentStationIndexByName(stationName: string, newScheduledStops: Station[]) {
-        this.currentStationIndex = newScheduledStops.findIndex((station) => station.getName() === stationName)
+    public setCurrentStationIndexByID(stationID: string, newScheduledStops: Station[]) {
+        this.currentStationIndex = newScheduledStops.findIndex((station) => station.getId() === stationID)
     }
 
-    public static getCurrentStationIndexByName(stationName: string, scheduledStops: Station[]): number {
-        return scheduledStops.findIndex((station) => station.getName() === stationName)
+    public static getCurrentStationIndexByID(stationID: string, scheduledStops: Station[]): number {
+        return scheduledStops.findIndex((station) => station.getId() === stationID)
     }
 
     // Transfer Logic
@@ -210,7 +210,7 @@ export class Train {
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
             await this.updateScheduledStops(newLine)
-            this.setCurrentStationIndexByName(currentStation.getName(), this.scheduledStops)
+            this.setCurrentStationIndexByID(currentStation.getId(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)
             this.downtownLabel = this.findDirectionLabel(Direction.DOWNTOWN, newLine)

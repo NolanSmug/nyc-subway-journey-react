@@ -11,16 +11,16 @@ N03,Fort Hamilton Pkwy,N,Bk
 N02,8 Av,N,Bk
 R41,59 St,N R,Bk
 R36,36 St,D N R,Bk
-R31,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
-Q01,Canal St,6 N Q R W J Z,M
-R20,14 St-Union Sq,4 5 6 N Q R W L,M
-R17,34 St-Herald Sq,B D F M N Q R W,M
-R16,Times Sq-42 St,1 2 3 7 N Q R W S,M
+AAB,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+CAN,Canal St,6 N Q R W J Z,M
+USQ,14 St-Union Sq,4 5 6 N Q R W L,M
+HSQ,34 St-Herald Sq,B D F M N Q R W,M
+127,Times Sq-42 St,1 2 3 7 N Q R W S,M
 R15,49 St,N R W,M
 R14,57 St-7 Av,N Q R W,M
 R13,5 Av/59 St,N R W,M
 R11,Lexington Av/59 St,N R W 4 5 6,M
-R09,Queensboro Plaza,7 N W,Q
+QBP,Queensboro Plaza,7 N W,Q
 R08,39 Av-Dutch Kills,N W,Q
 R06,36 Av,N W,Q
 R05,Broadway,N W,Q

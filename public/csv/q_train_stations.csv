@@ -17,12 +17,12 @@ D28,Church Av,B Q,Bk
 D27,Parkside Av,Q,Bk
 D26,Prospect Park,B Q Sf,Bk
 D25,7 Av,B Q,Bk
-D24,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+AAB,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
 R30,DeKalb Av,B Q R,Bk
-Q01,Canal St,6 N Q R W J Z,M
-R20,14 St-Union Sq,4 5 6 N Q R W L,M
-R17,34 St-Herald Sq,B D F M N Q R W,M
-R16,Times Sq-42 St,1 2 3 7 N Q R W S,M
+CAN,Canal St,6 N Q R W J Z,M
+USQ,14 St-Union Sq,4 5 6 N Q R W L,M
+HSQ,34 St-Herald Sq,B D F M N Q R W,M
+127,Times Sq-42 St,1 2 3 7 N Q R W S,M
 R14,57 St-7 Av,N Q R W,M
 B08,Lexington Av/63 St,F Q,M
 Q03,72 St,Q,M

@@ -1,16 +1,16 @@
 stop_id,stop_name,transfers,borough
-640,Brooklyn Bridge-City Hall,4 5 6,M
-639,Canal St,6 N Q R W J Z,M
+640,Brooklyn Bridge-City Hall,4 5 6 J Z,M
+CAN,Canal St,6 N Q R W J Z,M
 638,Spring St,6,M
-637,Bway-Lafayette St/Bleecker St,6 B D F M,M
+BWL,Bleeker St,6 B D F M,M
 636,Astor Pl,6,M
-635,14 St-Union Sq,4 5 6 N Q R W L,M
+USQ,14 St-Union Sq,4 5 6 N Q R W L,M
 634,23 St,6,M
 633,28 St,6,M
 632,33 St,6,M
-631,Grand Central-42 St,4 5 6 7 S,M
-630,Lexington Av/53 St,E M 6,M
-629,Lexington Av/59 St,N R W 4 5 6,M
+GRC,Grand Central-42 St,4 5 6 7 S,M
+F11,Lexington Av/53 St,E M 6,M
+R11,Lexington Av/59 St,N R W 4 5 6,M
 628,68 St-Hunter College,6,M
 627,77 St,6,M
 626,86 St,4 5 6,M

@@ -6,16 +6,16 @@ import './KeyShortcutMenu.css'
 const KeyShortcutMenu = () => {
     return (
         <>
-            <KeyShortcut shortcutKey="→" label="Advance Station" />
-            <KeyShortcut shortcutKey="t" label="Transfer Lines" />
-            <KeyShortcut shortcutKey="c" label="Change Direction" />
+            <KeyShortcut shortcutKey="→" label="Advance station" />
+            <KeyShortcut shortcutKey="t" label="Transfer lines" />
+            <KeyShortcut shortcutKey="c" label="Change direction" />
             <KeyShortcut shortcutKey="r" label="Refresh" />
-            <KeyShortcut shortcutKey="Esc" label="Exit Transfer" />
-            <KeyShortcut shortcutKey="l" label="Toggle Layout" isCommand />
-            <KeyShortcut shortcutKey="d" label="Light/Dark Mode" isCommand />
-            <KeyShortcut shortcutKey="u" label="Stations Hide/Show" isCommand />
-            <KeyShortcut shortcutKey="c" label="Conductor/Rider Mode" isCommand />
-            <KeyShortcut shortcutKey="+" label="Increase Advance Count" />
+            <KeyShortcut shortcutKey="Esc" label="Exit transfer" />
+            <KeyShortcut shortcutKey="l" label="Toggle layout" isCommand />
+            <KeyShortcut shortcutKey="d" label="Light/dark mode" isCommand />
+            <KeyShortcut shortcutKey="u" label="Stations hide/show" isCommand />
+            <KeyShortcut shortcutKey="c" label="Conductor/rider mode" isCommand />
+            <KeyShortcut shortcutKey="+" label="Increase advance count" />
             <KeyShortcut shortcutKey="-" label="Decrease Advance Count" />
         </>
     )
