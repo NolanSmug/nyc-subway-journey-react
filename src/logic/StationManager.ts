@@ -28,7 +28,7 @@ export class Station {
 
     // Operators
     public equals(rhs: Station): boolean {
-        return this.name === rhs.name && this.transfersEqual(rhs.transfers)
+        return this.id === rhs.id && this.transfersEqual(rhs.transfers)
     }
 
     public notEquals(rhs: Station): boolean {
@@ -70,21 +70,6 @@ export class Station {
     // Transfers
     public getTransfers(): LineName[] {
         return this.transfers
-    }
-
-    public hasTransferLine(requestedLine?: LineName): boolean {
-        if (requestedLine) {
-            // Check if the requested line exists in transfers
-            for (const line of this.transfers) {
-                if (line === requestedLine) {
-                    return true
-                }
-            }
-            return false
-        } else {
-            // check if more than one transfer exists
-            return this.transfers.length > 1
-        }
     }
 
     public getStationByID(stationID: string) {

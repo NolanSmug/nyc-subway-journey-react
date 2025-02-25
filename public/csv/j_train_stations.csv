@@ -1,10 +1,10 @@
 stop_id,stop_name,transfers,borough
 M23,Broad St,J Z,M
-M22,Fulton St,2 3 4 5 A C J Z,M
+FUL,Fulton St,2 3 4 5 A C J Z,M
 M21,Chambers St,J Z,M
-M20,Canal St,6 N Q R W J Z,M
+CAN,Canal St,6 N Q R W J Z,M
 M19,Bowery,J Z,M
-M18,Delancey St-Essex St,J Z F M,M
+ESX,Delancey St-Essex St,J Z F M,M
 M16,Marcy Av,J M Z,Bk
 M14,Hewes St,J M,Bk
 M13,Lorimer St,J M,Bk

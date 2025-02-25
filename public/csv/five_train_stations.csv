@@ -6,21 +6,21 @@ stop_id,stop_name,transfers,borough
 243,Winthrop St,2 5,Bk
 242,Sterling St,2 5,Bk
 241,President St-Medgar Evers College,2 5,Bk
-239,Franklin Avenue/Botanic Garden,2 3 4 5 Sf,Bk
-235,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
+BOT,Franklin Avenue-Medgar Evers College,2 3 4 5 Sf,Bk
+AAB,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
 234,Nevins St,2 3 4 5,Bk
-423,Borough Hall,2 3 4 5,Bk
+BOR,Borough Hall,2 3 4 5 R,Bk
 420,Bowling Green,4 5,M
 419,Wall St,4 5,M
-418,Fulton St,2 3 4 5 A C J Z,M
+FUL,Fulton St,2 3 4 5 A C J Z,M
 640,Brooklyn Bridge-City Hall,4 5 6 J Z,M
-635,14 St-Union Sq,4 5 6 N Q R W L,M
-631,Grand Central-42 St,4 5 6 7 S,M
-629,Lexington Av/59 St,N R W 4 5 6,M
+USQ,14 St-Union Sq,4 5 6 N Q R W L,M
+GRC,Grand Central-42 St,4 5 6 7 S,M
+R11,Lexington Av/59 St,N R W 4 5 6,M
 626,86 St,4 5 6,M
 621,125 St,4 5 6,M
 416,138 St-Grand Concourse,4 5,Bx
-222,149 St-Grand Concourse,2 5,Bx
+222,149 St-Grand Concourse,2 4 5,Bx
 221,3 Av-149 St,2 5,Bx
 220,Jackson Av,2 5,Bx
 219,Prospect Av,2 5,Bx
@@ -41,6 +41,5 @@ stop_id,stop_name,transfers,borough
 204,Nereid Av,2 5,Bx
 505,Morris Park,5,Bx
 504,Pelham Pkwy,5,Bx
-503,Gun Hill Rd,2 5,Bx
 502,Baychester Av,5,Bx
 501,Eastchester-Dyre Av,5,Bx
