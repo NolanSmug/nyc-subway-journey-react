@@ -160,7 +160,7 @@ function GameStateUI() {
                             />
                         </Station>
                     </div>
-                    <div className="action-buttons-container" id="starting-station">
+                    <div className={`action-buttons-container ${conductorMode ? 'conductor' : ''}`} id="starting-station">
                         <ActionButton
                             imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
                             label="Transfer lines"
@@ -170,15 +170,6 @@ function GameStateUI() {
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label="Change direction"
                             onClick={() => handleTrainAction('changeDirection')}
-                            additionalInput={
-                                <DirectionSwitch
-                                    state={defaultDirectionToggle}
-                                    onChange={(newDirection: Direction) => {
-                                        setDefaultDirectionToggle(newDirection)
-                                    }}
-                                    visible={conductorMode}
-                                />
-                            }
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}

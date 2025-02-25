@@ -52,10 +52,19 @@
     justify-content: space-around;
 }
 
+.action-buttons-container.conductor {
+    gap: 3em;
+    margin-left: 3em;
+}
+
 .action-buttons-container#destination-station {
     margin-top: 2em;
     display: flex;
     justify-content: flex-end;
 }
 
-
+.conductor-mode-buttons-container {
+    display: flex;
+    column-gap: 1em;
+    padding-left: 0.5em;
+}
