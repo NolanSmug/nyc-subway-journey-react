@@ -175,18 +175,7 @@ function GameStateUI() {
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                             label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
                             onClick={() => handleTrainAction('advanceStation')}
-                            additionalInput={
-                                <div className="conductor-mode-buttons-container">
-                                    <DirectionSwitch
-                                        state={defaultDirectionToggle}
-                                        onChange={(newDirection: Direction) => {
-                                            setDefaultDirectionToggle(newDirection)
-                                        }}
-                                        visible={conductorMode}
-                                    />
-                                    <AdvanceNStationsInput visible={conductorMode} />
-                                </div>
-                            }
+                            additionalInput={<AdvanceNStationsInput visible={conductorMode} />}
                         />
                     </div>
                 </div>

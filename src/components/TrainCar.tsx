@@ -13,6 +13,8 @@ import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
 import L_ARROW_BLACK from '../images/left-arrow-b.svg'
 import L_ARROW_WHITE from '../images/left-arrow-w.svg'
+import { useSettingsContext } from '../contexts/SettingsContext'
+import DirectionSwitch from './DirectionSwitch'
 
 export interface TrainLineInfo {
     direction: Direction
@@ -25,6 +27,7 @@ export interface TrainLineInfo {
 function TrainCar() {
     const { upcomingStationsVertical, darkMode } = useUIContext()
     const { train } = useGameContext()
+    const { conductorMode, defaultDirectionToggle, setDefaultDirectionToggle } = useSettingsContext()
 
     const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
@@ -60,6 +63,13 @@ function TrainCar() {
                 />
 
                 <div className="train-car">
+                    <DirectionSwitch
+                        state={defaultDirectionToggle}
+                        onChange={(newDirection: Direction) => {
+                            setDefaultDirectionToggle(newDirection)
+                        }}
+                        visible={conductorMode}
+                    />
                     <div className="doors">
                         <Door isLeft />
                         <Door />
@@ -73,8 +83,9 @@ function TrainCar() {
                         <Door isLeft />
                         <Door />
                     </div>
+
                     <div className="windows">
-                        <div className="front-window"></div>
+                        <div className="front-window"> </div>
                     </div>
                 </div>
                 <img
