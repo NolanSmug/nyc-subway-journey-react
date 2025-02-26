@@ -2,13 +2,10 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 
 interface UIContextProps {
     darkMode: boolean
-
     isTransferMode: boolean
     upcomingStationsVisible: boolean
     upcomingStationsVertical: boolean
-
     setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
-
     setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
     setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
     setUpcomingStationsVertical: React.Dispatch<React.SetStateAction<boolean>>
@@ -20,7 +17,7 @@ const UIContext = createContext<UIContextProps | undefined>(undefined)
 export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
-    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(false)
+    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
     const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(true)
 
     return (
