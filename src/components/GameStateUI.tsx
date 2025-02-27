@@ -7,10 +7,9 @@ import Station from './Station'
 import TransferLines from './TransferLines'
 import TrainCar from './TrainCar'
 import AdvanceNStationsInput from './AdvanceNStationsInput'
-import DirectionSwitch from './DirectionSwitch'
 
 import { useUIContext } from '../contexts/UIContext'
-import { Direction, LineName } from '../logic/EnumManager'
+import { LineName } from '../logic/EnumManager'
 import { getTransferImageSvg } from '../logic/TransferImageMap'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
@@ -33,14 +32,8 @@ function GameStateUI() {
         setUpcomingStationsVisible,
         upcomingStationsVisible,
     } = useUIContext()
-    const {
-        numAdvanceStations,
-        setNumAdvanceStations,
-        conductorMode,
-        setConductorMode,
-        defaultDirectionToggle,
-        setDefaultDirectionToggle,
-    } = useSettingsContext()
+    const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode, defaultDirectionToggle } =
+        useSettingsContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
@@ -133,7 +126,7 @@ function GameStateUI() {
             '=': () => setNumAdvanceStations((prev) => prev + 1), // Handle "+" from "=" without Shift key
         }
 
-        // Handle single-key actions
+        // Handle single-key action
         singleKeyActions[event.key]?.()
     }
 

@@ -7,7 +7,7 @@ A60,88 St,A,Q
 A59,80 St,A,Q
 A57,Grant Av,A,Bk
 A55,Euclid Av,A C,Bk
-A51,Broadway Junction,A C,Bk
+BWJ,Broadway Junction,A C J Z L,Bk
 A48,Utica Av,A C,Bk
 A46,Nostrand Av,A C,Bk
 A42,Hoyt-Schermerhorn Sts,A C G,Bk
@@ -17,10 +17,10 @@ FUL,Fulton St,2 3 4 5 A C J Z,M
 A36,Chambers St,A C,M
 A34,Canal St,A C E,M
 A32,W 4 St-Wash Sq,A C E B D F M,M
-L01,14 St (8th Av),A C E L,M
+L01,14 St-8 Av,A C E L,M
 PEN,34 St-Penn Station,A C E 1 2 3,M
-A27,42 St-Port Authority Bus Terminal,A C E,M
-CLC,59 St-Columbus Circle,A B C D 1,M
+127,42 St-Port Authority Bus Terminal,1 2 3 7 A C E N Q R W S,M
+CBC,59 St-Columbus Circle,A B C D 1,M
 A15,125 St,A C B D,M
 A12,145 St,A C B D,M
 A09,168 St,A C 1,M

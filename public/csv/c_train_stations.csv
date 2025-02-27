@@ -3,7 +3,7 @@ A55,Euclid Av,A C,Bk
 A54,Shepherd Av,C,Bk
 A53,Van Siclen Av,C,Bk
 A52,Liberty Av,C,Bk
-A51,Broadway Junction,A C,Bk
+BWJ,Broadway Junction,A C J Z L,Bk
 A50,Rockaway Av,C,Bk
 A49,Ralph Av,C,Bk
 A48,Utica Av,A C,Bk
@@ -20,12 +20,12 @@ A36,Chambers St,A C,M
 A34,Canal St,A C E,M
 A33,Spring St,C E,M
 A32,W 4 St-Wash Sq,A C E B D F M,M
-L01,14 St (8th Av),A C E L,M
+L01,14 St-8 Av,A C E L,M
 A30,23 St,C E,M
 PEN,34 St-Penn Station,A C E 1 2 3,M
-A27,42 St-Port Authority Bus Terminal,A C E,M
+127,42 St-Port Authority Bus Terminal,1 2 3 7 A C E N Q R W S,M
 A25,50 St,C E,M
-CLC,59 St-Columbus Circle,A B C D 1,M
+CBC,59 St-Columbus Circle,A B C D 1,M
 A22,72 St,B C,M
 A21,81 St-Museum of Natural History,B C,M
 A20,86 St,B C,M

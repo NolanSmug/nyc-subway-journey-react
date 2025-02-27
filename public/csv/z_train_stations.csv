@@ -1,7 +1,7 @@
 stop_id,stop_name,transfers,borough
 M23,Broad St,J Z,M
 FUL,Fulton St,2 3 4 5 A C J Z,M
-640,Chambers St,4 5 6 J Z,M
+BRB,Chambers St,4 5 6 J Z,M
 CAN,Canal St,6 N Q R W J Z,M
 M19,Bowery,J Z,M
 ESX,Delancey St-Essex St,J Z F M,M
@@ -9,7 +9,7 @@ M16,Marcy Av,J M Z,Bk
 M11,Myrtle Av,J M Z,Bk
 J30,Gates Av,J Z,Bk
 J28,Chauncey St,J Z,Bk
-J27,Broadway Junction,J Z,Bk
+BWJ,Broadway Junction,A C J Z L,Bk
 J23,Van Siclen Av,J Z,Bk
 J21,Norwood Av,J Z,Bk
 J20,Crescent St,J Z,Bk

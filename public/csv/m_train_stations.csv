@@ -1,6 +1,6 @@
 stop_id,stop_name,transfers,borough
 M01,Middle Village-Metropolitan Av,M,Q
-M04,Fresh Pond Rd,M,Q
+M04,Fresh Pond Road,M,Q
 M05,Forest Av,M,Q
 M06,Seneca Av,M,Q
 M08,Myrtle-Wyckoff Avs,M,Bk
@@ -12,9 +12,9 @@ M13,Lorimer St,J M,Bk
 M14,Hewes St,J M,Bk
 M16,Marcy Av,J M Z,Bk
 ESX,Delancey St-Essex St,J Z F M,M
-BWL,Bway-Lafayette St/Bleecker St,6 B D F M,M
+BWL,Broadway-Lafayette St,6 B D F M,M
 A32,W 4 St-Wash Sq,A C E B D F M,M
-132,14 St (6th Av),1 2 3 F M L,M
+132,14 St-6 Av,1 2 3 F M L,M
 D18,23 St,F M,M
 HSQ,34 St-Herald Sq,B D F M N Q R W,M
 BRY,42 St-Bryant Pk,B D F M 7,M

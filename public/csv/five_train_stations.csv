@@ -13,7 +13,7 @@ BOR,Borough Hall,2 3 4 5 R,Bk
 420,Bowling Green,4 5,M
 419,Wall St,4 5,M
 FUL,Fulton St,2 3 4 5 A C J Z,M
-640,Brooklyn Bridge-City Hall,4 5 6 J Z,M
+BRB,Brooklyn Bridge-City Hall,4 5 6 J Z,M
 USQ,14 St-Union Sq,4 5 6 N Q R W L,M
 GRC,Grand Central-42 St,4 5 6 7 S,M
 R11,Lexington Av/59 St,N R W 4 5 6,M
@@ -34,7 +34,7 @@ R11,Lexington Av/59 St,N R W 4 5 6,M
 211,Pelham Pkwy,2 5,Bx
 210,Allerton Av,2 5,Bx
 209,Burke Av,2 5,Bx
-208,Gun Hill Rd,2 5,Bx
+208,Gun Hill Road,2 5,Bx
 207,219 St,2 5,Bx
 206,225 St,2 5,Bx
 205,233 St,2 5,Bx

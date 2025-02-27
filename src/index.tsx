@@ -8,13 +8,13 @@ import { SettingsProvider } from './contexts/SettingsContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 root.render(
-    <React.StrictMode>
-        <UIProvider>
-            <GameProvider>
-                <SettingsProvider>
+    <UIProvider>
+        <GameProvider>
+            <SettingsProvider>
+                <React.StrictMode>
                     <App />
-                </SettingsProvider>
-            </GameProvider>
-        </UIProvider>
-    </React.StrictMode>
+                </React.StrictMode>
+            </SettingsProvider>
+        </GameProvider>
+    </UIProvider>
 )

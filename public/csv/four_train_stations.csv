@@ -7,7 +7,7 @@ BOR,Borough Hall,2 3 4 5 R,Bk
 420,Bowling Green,4 5,M
 419,Wall St,4 5,M
 FUL,Fulton St,2 3 4 5 A C J Z,M
-640,Brooklyn Bridge-City Hall,4 5 6 J Z,M
+BRB,Brooklyn Bridge-City Hall,4 5 6 J Z,M
 USQ,14 St-Union Sq,4 5 6 N Q R W L,M
 GRC,Grand Central-42 St,4 5 6 7 S,M
 R11,Lexington Av/59 St,N R W 4 5 6,M
@@ -18,12 +18,12 @@ R11,Lexington Av/59 St,N R W 4 5 6,M
 NYY,161 St-Yankee Stadium,B D 4,Bx
 413,167 St,4,Bx
 412,170 St,4,Bx
-411,Mt Eden Av,4,Bx
+411,Mount Eden Avenue,4,Bx
 410,176 St,4,Bx
 409,Burnside Av,4,Bx
 408,183 St,4,Bx
-407,Fordham Rd,4,Bx
+407,Fordham Road,4,Bx
 406,Kingsbridge Rd,4,Bx
-405,Bedford Park Blvd-Lehman College,4,Bx
+405,Bedford Park Boulevard-Lehman College,4,Bx
 402,Mosholu Pkwy,4,Bx
 401,Woodlawn,4,Bx

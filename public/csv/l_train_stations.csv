@@ -1,11 +1,11 @@
 stop_id,stop_name,transfers,borough
-L29,Canarsie-Rockaway Pkwy,L,Bk
+L29,Canarsie-Rockaway Parkway,L,Bk
 L28,East 105 St,L,Bk
 L27,New Lots Av,L,Bk
 L26,Livonia Av,L,Bk
 L25,Sutter Av,L,Bk
 L24,Atlantic Av,L,Bk
-L22,Broadway Junction,L,Bk
+BWJ,Broadway Junction,A C J Z L,Bk
 L21,Bushwick Av-Aberdeen St,L,Bk
 L20,Wilson Av,L,Bk
 L19,Halsey St,L,Q
@@ -21,5 +21,5 @@ L08,Bedford Av,L,Bk
 L06,1 Av,L,M
 L05,3 Av,L,M
 USQ,14 St-Union Sq,4 5 6 N Q R W L,M
-132,14 St (6th Av),1 2 3 F M L,M
-L01,14 St (8th Av),A C E L,M
+132,14 St-6 Av,1 2 3 F M L,M
+L01,14 St-8 Av,A C E L,M

@@ -9,13 +9,13 @@ D25,7 Av,B Q,Bk
 AAB,Atlantic Av-Barclays Ctr,2 3 4 5 B Q D N R,Bk
 R30,DeKalb Av,B Q R,Bk
 D22,Grand St,B D,M
-BWL,Bway-Lafayette St/Bleecker St,6 B D F M,M
+BWL,Broadway-Lafayette St,6 B D F M,M
 A32,W 4 St-Wash Sq,A C E B D F M,M
 HSQ,34 St-Herald Sq,B D F M N Q R W,M
 BRY,42 St-Bryant Pk,B D F M 7,M
 D15,47-50 Sts-Rockefeller Ctr,B D F M,M
 D14,7 Av,B D E,M
-CLC,59 St-Columbus Circle,A B C D 1,M
+CBC,59 St-Columbus Circle,A B C D 1,M
 A22,72 St,B C,M
 A21,81 St-Museum of Natural History,B C,M
 A20,86 St,B C,M
@@ -33,6 +33,6 @@ D09,170 St,B D,Bx
 D08,174-175 Sts,B D,Bx
 D07,Tremont Av,B D,Bx
 D06,182-183 Sts,B D,Bx
-D05,Fordham Rd,B D,Bx
+D05,Fordham Road,B D,Bx
 D04,Kingsbridge Rd,B D,Bx
-D03,Bedford Park Blvd,B D,Bx
+D03,Bedford Park Boulevard,B D,Bx

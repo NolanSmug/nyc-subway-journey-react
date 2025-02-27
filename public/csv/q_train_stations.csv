@@ -11,8 +11,8 @@ D34,Avenue M,Q,Bk
 D33,Avenue J,Q,Bk
 D32,Avenue H,Q,Bk
 D31,Newkirk Plaza,B Q,Bk
-D30,Cortelyou Rd,Q,Bk
-D29,Beverley Rd,Q,Bk
+D30,Cortelyou Road,Q,Bk
+D29,Beverley Road,Q,Bk
 D28,Church Av,B Q,Bk
 D27,Parkside Av,Q,Bk
 D26,Prospect Park,B Q Sf,Bk
@@ -22,7 +22,7 @@ R30,DeKalb Av,B Q R,Bk
 CAN,Canal St,6 N Q R W J Z,M
 USQ,14 St-Union Sq,4 5 6 N Q R W L,M
 HSQ,34 St-Herald Sq,B D F M N Q R W,M
-127,Times Sq-42 St,1 2 3 7 N Q R W S,M
+127,Times Sq-42 St,1 2 3 7 A C E N Q R W S,M
 R14,57 St-7 Av,N Q R W,M
 B08,Lexington Av/63 St,F Q,M
 Q03,72 St,Q,M
