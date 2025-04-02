@@ -68,7 +68,7 @@ cd nyc-subway-journey-react
 
 #### 2. Install dependencies and run project
 - **Npm**
-  > Make sure you have `npm` [installed](https://www.npmjs.com/get-npm)  
+  > Make sure you have `npm` [installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
   ```bash
   npm install
   npm run start
