@@ -2,7 +2,9 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { Direction } from '../logic/EnumManager'
 
 interface SettingsContextProps {
+    // This looks like another game mode, should not be in the settings menu
     conductorMode: boolean
+    // I can't figure out what this does which means the user def cannot
     numAdvanceStations: number
     defaultDirectionToggle: Direction
     setConductorMode: React.Dispatch<React.SetStateAction<boolean>>

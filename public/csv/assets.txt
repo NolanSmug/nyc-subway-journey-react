@@ -1,0 +1,1 @@
+I think convention is make an assets folder under public

@@ -46,6 +46,9 @@ function TrainCar() {
     }
 
     useEffect(() => {
+        // Are you procedurally generating css rn? Dude either use classes or put in the react dom.
+        //
+        // I would not guess to look here
         document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
         document.documentElement.style.setProperty('--dot-color', currentLineType === LineType.LOCAL ? '#222' : '#fff')
     }, [currentLine, currentLineType])

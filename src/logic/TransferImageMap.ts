@@ -61,16 +61,18 @@ const transferImageMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 };
 
-export const getTransferImageSvg = (input: Station | LineName | null | undefined): string[] => {
-    if (!input) return []
-
+// By allowing null | undefined, you're telling typescript that you expect null and undefined
+// values. You do not expect these values. These are errors which indicate problems
+// in your program and you want your tools to help you identify them.
+//
+export const getTransferImageSvg = (input: Station | LineName): string[] => {
     if (input instanceof Station) {
         return getTransferImages(input.getTransfers())
     }
     if (typeof input === 'string') {
         return getTransferImages([input])
     }
-    return []
+    throw new Error("The caller is wrong and needs to be fixed. " + input + " is not an acceptable value.")
 }
 
 export const getTransferImages = (transfers: LineName[]): string[] => {
@@ -78,6 +80,11 @@ export const getTransferImages = (transfers: LineName[]): string[] => {
 };
 
 
+// My ide tells me it's a map, the type says it's a map,
+// the name is two nouns, lines need to have colors,
+// we know its a map. Also consts are UPPER_CASE
+//
+// const LINE_COLOR
 const lineColorMap: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: '',
     [LineName.ONE_TRAIN]: '#EE352E',
@@ -107,8 +114,10 @@ const lineColorMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN]: '#808183',
     [LineName.S_TRAIN_SHUTTLE]: '#808183',
     [LineName.S_TRAIN_ROCKAWAY]: '#808183',
-}
+} as const
+// This will make it a type error to change the map
 
+// This function is called exactly once, just inline the constant
 export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
