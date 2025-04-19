@@ -1,6 +1,8 @@
 import { LineName, Borough } from './EnumManager'
 import { SubwayMap } from './SubwayMap'
 
+
+
 export class Station {
     private id: string = "000"
     private name: string = "NULL_STATION"
@@ -8,6 +10,8 @@ export class Station {
     private borough: Borough = Borough.STATEN_ISLAND
 
     static allNycStations: Station[] = []
+    // This class Station represents a station. Loading this metadata is unrelated 
+    // to the task of representing a station and should be put somewhere else.
     static async initializeAllStations(): Promise<void> {
         if (this.allNycStations.length === 0) {
             await SubwayMap.createStations(LineName.NULL_TRAIN, this.allNycStations)
@@ -17,6 +21,9 @@ export class Station {
         }
     }
 
+    // So your saying that the null station doesn't have a line name, exists on staten island?
+    // And you're saying that it does have an id, and that id is "000"?
+    // JUST USE NULL
     static NULL_STATION: Station = new Station("000", "NULL_STATION", [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
 
     constructor(id: string, name: string, transfers: LineName[], borough: Borough) {

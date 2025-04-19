@@ -1,4 +1,10 @@
+// This file is named "EnumManger" but does not contain a class called EnumManager
+// The file name should communicate what information is here
+
+
+// +1 point for using an enum here
 export enum LineName {
+    // -1 for creating another representation of null
     NULL_TRAIN = 'Null_Train',
     ONE_TRAIN = 'One_Train',
     TWO_TRAIN = 'Two_Train',
@@ -30,38 +36,21 @@ export enum LineName {
 }
 
 export function getRandomLine(): LineName {
-    const lines: LineName[] = [
-        LineName.ONE_TRAIN,
-        LineName.TWO_TRAIN,
-        LineName.THREE_TRAIN,
-        LineName.FOUR_TRAIN,
-        LineName.FIVE_TRAIN,
-        LineName.SIX_TRAIN,
-        LineName.SEVEN_TRAIN,
-        LineName.A_TRAIN,
-        LineName.C_TRAIN,
-        LineName.E_TRAIN,
-        LineName.B_TRAIN,
-        LineName.D_TRAIN,
-        LineName.F_TRAIN,
-        LineName.M_TRAIN,
-        LineName.N_TRAIN,
-        LineName.Q_TRAIN,
-        LineName.R_TRAIN,
-        LineName.W_TRAIN,
-        LineName.J_TRAIN,
-        LineName.Z_TRAIN,
-        LineName.G_TRAIN,
-        LineName.L_TRAIN,
-        LineName.S_TRAIN,
-        LineName.S_TRAIN_SHUTTLE,
-        LineName.S_TRAIN_ROCKAWAY,
-    ]
-
-    return lines[Math.floor(Math.random() * lines.length)]
+    // Don't write out everything twice
+    // Enums get compiled to POJS, use either this or Object.keys, idk what's right
+    //
+    // I might be allocating memory for no reason here
+    const lines = [...Object.values(LineName)]
+    return lines[Math.random() % lines.length]
 }
 
 export enum Borough {
+    // Idk if this is real, but is this going to store string values and
+    // do string comparison at runtime? If you were building an api I would
+    // buy string values for enum values but here it is only an implementation
+    // detail and doesn't matter at all from what I can tell.
+    // It might be more performant (and DRYer) to use numbers, or better yet
+    // use nothing and let Typescript make the decision.
     MANHATTAN = 'Manhattan',
     BROOKLYN = 'Brooklyn',
     QUEENS = 'Queens',
@@ -72,16 +61,33 @@ export enum Borough {
 export enum Direction {
     UPTOWN = 'Uptown',
     DOWNTOWN = 'Downtown',
+    // Dude I'm suprised typescript lets you do '' enums this without bitching
+    // -1 
     NULL_DIRECTION = '',
 }
 
 export enum LineType {
+    // None should not be a value option here because None is in the
+    // truest sense *not* a LineType. Use null (or better yet, don't store junk
+    // values at all)
+    //
+    // -1
     NONE = '',
     EXPRESS = 'Express',
     LOCAL = 'Local',
 }
 
 export const lineTypes: Map<LineName, LineType> = new Map([
+    // -1 for taking the time to represent the fact
+    // that a line which is not a line does not have a line type.
+    //
+    // Also -1 for including a complete list of lines in 3 separate places.
+    // This is just waiting for you to forget to update something.
+    //
+    // Just scrolled down and saw you do it a 4th time. I need you to pick one
+    // representation for all the options and then compute the needed auxillary
+    // data structures at runtime.
+    //
     [LineName.NULL_TRAIN, LineType.NONE],
     [LineName.ONE_TRAIN, LineType.LOCAL],
     [LineName.TWO_TRAIN, LineType.EXPRESS],

@@ -6,6 +6,7 @@ import { Game } from '../logic/Game'
 import { useUIContext } from './UIContext'
 
 interface GameContextProps {
+    // 
     train: Train
     gameState: GameState
     updateTrainObject: (updates: Partial<Train>) => void

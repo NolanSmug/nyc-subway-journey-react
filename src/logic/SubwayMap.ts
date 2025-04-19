@@ -1,6 +1,11 @@
 import { LineName, Borough } from './EnumManager'
 import { Station } from './StationManager'
 
+// It looks like you're using Singleton pattern here?
+// But if this was singleton, why is there no shared state?
+//
+// This looks like a place where having global state would simplify things?
+//
 export class SubwayMap {
     static getCsvFromLineName(line: LineName) {
         if (line === LineName.NULL_TRAIN) {
@@ -69,6 +74,7 @@ function boroughStringToEnum(borough: string): Borough {
         case 'si':
             return Borough.STATEN_ISLAND
         default:
+            // Yeah!
             throw new Error('Unknown borough')
     }
 }
@@ -126,6 +132,7 @@ function mapTransferString(transfer: string): LineName {
         case 'Sr':
             return LineName.S_TRAIN_ROCKAWAY
         default:
+            throw new Error("Fuck you buddy")
             return LineName.NULL_TRAIN // if the transfer is unrecognized
     }
 }
