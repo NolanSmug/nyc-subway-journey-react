@@ -36,6 +36,8 @@ function GameStateUI() {
         useSettingsContext()
     const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
 
+    // Have multiple functions, this function literally takes a 
+    // function name and then calls it for you
     const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
         if (gameState.isWon || train === null || gameState === null) return
         if (action !== 'transfer') setIsTransferMode(false)

@@ -6,6 +6,8 @@ import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { scrollToCurrentStation } from './UpcomingStationsHorizontal'
 
+// I bet you could could recycle more code between this and the Horizontal version. 
+
 function UpcomingStationsVertical() {
     const { upcomingStationsVisible: visible } = useUIContext()
     const { train } = useGameContext()
