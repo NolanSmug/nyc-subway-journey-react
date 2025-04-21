@@ -16,8 +16,8 @@ R14,57 St-7 Av,N Q R W,M
 R13,5 Av/59 St,N R W,M
 R11,Lexington Av/59 St,N R W 4 5 6,M
 QBP,Queensboro Plaza,7 N W,Q
-W05,36 Av,W,Q
-W04,Broadway,W,Q
-W03,30 Av,W,Q
+R06,36 Av,N W,Q
+R05,Broadway,N W,Q
+R04,30 Av,N W,Q
 R03,Astoria Blvd,N W,Q
 R01,Astoria-Ditmars Blvd,N W,Q

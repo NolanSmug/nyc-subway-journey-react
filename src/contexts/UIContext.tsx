@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useMemo } from "react"
 
 interface UIContextProps {
     darkMode: boolean
@@ -18,30 +18,55 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
-    const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(true)
+    const [upcomingStationsVertical, setUpcomingStationsVertical] = useState<boolean>(false)
+
+    const value = useMemo(
+        () => ({
+            darkMode,
+            isTransferMode,
+            upcomingStationsVisible,
+            upcomingStationsVertical,
+            setDarkMode,
+            setIsTransferMode,
+            setUpcomingStationsVisible,
+            setUpcomingStationsVertical,
+            toggleDarkMode: () => setDarkMode((prev) => !prev),
+            toggleTransferMode: () => setIsTransferMode((prev) => !prev),
+            toggleUpcomingStationsVisible: () => setUpcomingStationsVisible((prev) => !prev),
+            toggleUpcomingStationsVertical: () => setUpcomingStationsVertical((prev) => !prev),
+        }),
+        [darkMode, isTransferMode, upcomingStationsVisible, upcomingStationsVertical]
+    )
+
 
     return (
         <UIContext.Provider
-            value={{
-                isTransferMode,
-                setIsTransferMode,
-                darkMode,
-                setDarkMode,
-                upcomingStationsVisible,
-                setUpcomingStationsVisible,
-                upcomingStationsVertical,
-                setUpcomingStationsVertical,
-            }}
+            value={value}
         >
             {children}
         </UIContext.Provider>
+        // <UIContext.Provider
+        //     value={{
+        //         isTransferMode,
+        //         setIsTransferMode,
+        //         darkMode,
+        //         setDarkMode,
+        //         upcomingStationsVisible,
+        //         setUpcomingStationsVisible,
+        //         upcomingStationsVertical,
+        //         setUpcomingStationsVertical,
+        //     }}
+        // >
+        //     {children}
+        // </UIContext.Provider>
+
     )
 }
 
 export const useUIContext = () => {
     const context = useContext(UIContext)
     if (context === undefined) {
-        throw new Error('useUIContext must be used within a UIProvider')
+        throw new Error("useUIContext must be used within a UIProvider")
     }
     return context
 }
