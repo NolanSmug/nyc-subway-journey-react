@@ -1,4 +1,4 @@
-import { LineName } from './EnumManager';
+import { LineName } from './EnumManager'
 import IMG_A from '../images/a.svg'
 import IMG_B from '../images/b.svg'
 import IMG_C from '../images/c.svg'
@@ -28,10 +28,10 @@ import IMG_6 from '../images/6.svg'
 // import IMG_6D from '../images/6d.svg'
 import IMG_7 from '../images/7.svg'
 // import IMG_7D from '../images/7d.svg'
-import { Station } from './StationManager';
+import { Station } from './StationManager'
 
 const transferImageMap: { [key in LineName]: string } = {
-    [LineName.NULL_TRAIN]: '', 
+    [LineName.NULL_TRAIN]: '',
     [LineName.ONE_TRAIN]: IMG_1,
     [LineName.TWO_TRAIN]: IMG_2,
     [LineName.THREE_TRAIN]: IMG_3,
@@ -41,7 +41,7 @@ const transferImageMap: { [key in LineName]: string } = {
     [LineName.SEVEN_TRAIN]: IMG_7,
     [LineName.A_TRAIN]: IMG_A,
     [LineName.A_ROCKAWAY_MOTT_TRAIN]: IMG_A,
-    [LineName.A_LEFFERTS_TRAIN]: IMG_A, 
+    [LineName.A_LEFFERTS_TRAIN]: IMG_A,
     [LineName.C_TRAIN]: IMG_C,
     [LineName.E_TRAIN]: IMG_E,
     [LineName.B_TRAIN]: IMG_B,
@@ -57,9 +57,9 @@ const transferImageMap: { [key in LineName]: string } = {
     [LineName.G_TRAIN]: IMG_G,
     [LineName.L_TRAIN]: IMG_L,
     [LineName.S_TRAIN]: IMG_S,
-    [LineName.S_TRAIN_SHUTTLE]: IMG_SF, 
+    [LineName.S_TRAIN_SHUTTLE]: IMG_SF,
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
-};
+}
 
 export const getTransferImageSvg = (input: Station | LineName | null | undefined): string[] => {
     if (!input) return []
@@ -74,9 +74,8 @@ export const getTransferImageSvg = (input: Station | LineName | null | undefined
 }
 
 export const getTransferImages = (transfers: LineName[]): string[] => {
-    return transfers.map((transfer) => transferImageMap[transfer] || '');
-};
-
+    return transfers.map((transfer) => transferImageMap[transfer] || '')
+}
 
 const lineColorMap: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: '',
@@ -113,4 +112,4 @@ export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
 
-export default transferImageMap;
+export default transferImageMap

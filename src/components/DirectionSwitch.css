@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.25em;
-    z-index: 11;
+    z-index: 5;
     opacity: 1;
 }
 
@@ -46,7 +46,7 @@
     height: 1.25em;
 }
 
-.info-icon:hover + .tooltip {
+.info-icon:hover+.tooltip {
     opacity: 1;
 }
 

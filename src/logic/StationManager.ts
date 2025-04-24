@@ -2,8 +2,8 @@ import { LineName, Borough } from './EnumManager'
 import { SubwayMap } from './SubwayMap'
 
 export class Station {
-    private id: string = "000"
-    private name: string = "NULL_STATION"
+    private id: string = '000'
+    private name: string = 'NULL_STATION'
     private transfers: LineName[] = [LineName.NULL_TRAIN]
     private borough: Borough = Borough.STATEN_ISLAND
 
@@ -17,7 +17,7 @@ export class Station {
         }
     }
 
-    static NULL_STATION: Station = new Station("000", "NULL_STATION", [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
+    static NULL_STATION: Station = new Station('000', 'NULL_STATION', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
 
     constructor(id: string, name: string, transfers: LineName[], borough: Borough) {
         this.id = id
@@ -42,6 +42,9 @@ export class Station {
 
     // ID
     public getId(): string {
+        if (this.id === '000' || this.id === '' || this.id === null || this.id === undefined) {
+            throw new Error('station id not found in data files, please contact developer')
+        }
         return this.id
     }
 
@@ -72,7 +75,7 @@ export class Station {
         return this.transfers
     }
 
-    public getStationByID(stationID: string) {
+    public static getStationByID(stationID: string) {
         for (const station of Station.allNycStations) {
             if (station.id === stationID) {
                 return station

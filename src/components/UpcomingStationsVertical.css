@@ -9,11 +9,7 @@
     height: 90vh;
     scroll-padding-bottom: 1em;
     opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.upcoming-stations-vertical-container.hidden {
-    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .stations-vertical {
@@ -32,6 +28,7 @@
     height: 0.3rem;
     z-index: 0;
     left: 6.65em;
-    transform: translateX(-50%) rotate(90deg); /* rotate (obvi) */
+    transform: translateX(-50%) rotate(90deg);
+    /* rotate (obvi) */
     top: 25vh;
 }

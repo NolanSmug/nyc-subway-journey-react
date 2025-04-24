@@ -9,10 +9,10 @@ import TrainCar from './TrainCar'
 import AdvanceNStationsInput from './AdvanceNStationsInput'
 
 import { useUIContext } from '../contexts/UIContext'
-import { LineName } from '../logic/EnumManager'
-import { getTransferImageSvg } from '../logic/TransferImageMap'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
+import { LineName } from '../logic/EnumManager'
+import { getTransferImageSvg } from '../logic/TransferImageMap'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
@@ -24,55 +24,56 @@ import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
 
 function GameStateUI() {
-    const {
-        darkMode,
-        setIsTransferMode,
-        setUpcomingStationsVertical,
-        setDarkMode,
-        setUpcomingStationsVisible,
-        upcomingStationsVisible,
-    } = useUIContext()
+    const { darkMode, setIsTransferMode, setUpcomingStationsVisible, toggleUpcomingStationsLayout, setDarkMode } = useUIContext()
     const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode, defaultDirectionToggle } =
         useSettingsContext()
-    const { train, updateTrainObject, gameState, initializeGame } = useGameContext()
+    const { train, updateTrainObject, setGameState, gameState, initializeGame } = useGameContext()
 
-    const handleTrainAction = async (action: 'transfer' | 'changeDirection' | 'advanceStation' | 'refresh') => {
-        if (gameState.isWon || train === null || gameState === null) return
-        if (action !== 'transfer') setIsTransferMode(false)
+    // TRAIN ACTIONS
+    const refreshGameAction = async () => {
+        await initializeGame()
+    }
 
-        switch (action) {
-            case 'refresh':
-                await initializeGame()
-                break
+    const advanceStationAction = () => {
+        if (!repOK()) throw new Error('repOK failed on advanceaction')
 
-            case 'advanceStation':
-                if (numAdvanceStations > 1) {
-                    updateTrainObject({ ...train.advanceStationInc(numAdvanceStations) })
-                } else {
-                    updateTrainObject({ ...train.advanceStation() })
-                }
+        setIsTransferMode(false)
+        if (numAdvanceStations > 1 && conductorMode) {
+            updateTrainObject({ ...train.advanceStationInc(numAdvanceStations) })
+        } else {
+            updateTrainObject({ ...train.advanceStation() })
+        }
 
-                const winState = await gameState.checkWin(train.getCurrentStation())
-                if (winState) {
-                    setTimeout(() => {
-                        initializeGame()
-                    }, 4000)
-                }
-                break
+        checkForWin()
+    }
 
-            case 'transfer':
-                setIsTransferMode(true)
-                break
+    const transferAction = () => {
+        if (!repOK()) throw new Error('repOK failed on transfer action')
+        setIsTransferMode((prev) => prev ? false : true) // if already in transfer mode, exit
+    }
 
-            case 'changeDirection':
-                updateTrainObject({ ...train.reverseDirection() })
-                break
+    const changeDirectionAction = () => {
+        if (!repOK()) throw new Error('repOK failed on change direction action')
+        setIsTransferMode(false)
+        updateTrainObject({ ...train.reverseDirection() })
+    }
 
-            default:
-                return
+    // TRAIN ACTION CHECKS
+    function repOK(): boolean {
+        if (gameState.isWon || train === null || gameState === null) {
+            return false
+        }
+        return true
+    }
+
+    const checkForWin = () => {
+        const winState = gameState.checkWin(train.getCurrentStation())
+        if (winState) {
+            setGameState(gameState.setIsWon(true))
         }
     }
 
+    // UI/UX -> TRANSFER FUNCTIONALITY
     const transferTo = async (selectedLine: LineName): Promise<void> => {
         if (await train.transferToLine(selectedLine, train.getCurrentStation())) {
             train.setLine(selectedLine)
@@ -100,7 +101,7 @@ function GameStateUI() {
 
         // Mapping for key commands
         const comboKeyActions: { [combo: string]: () => void } = {
-            'Shift+L': () => upcomingStationsVisible && setUpcomingStationsVertical((prev) => !prev), // only allow layout change when upcoming stations are visible
+            'Shift+L': () => toggleUpcomingStationsLayout(),
             'Shift+D': () => setDarkMode((prev) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev) => !prev),
             'Shift+C': () => setConductorMode((prev) => !prev),
@@ -116,10 +117,10 @@ function GameStateUI() {
 
         // Mapping for single-key actions
         const singleKeyActions: { [key: string]: () => void } = {
-            t: () => handleTrainAction('transfer'),
-            c: () => handleTrainAction('changeDirection'),
-            r: () => handleTrainAction('refresh'),
-            ArrowRight: () => handleTrainAction('advanceStation'),
+            t: () => transferAction(),
+            c: () => changeDirectionAction(),
+            r: () => refreshGameAction(),
+            ArrowRight: () => advanceStationAction(),
             Escape: () => setIsTransferMode(false),
             '-': () => setNumAdvanceStations(numAdvanceStations > 1 ? (prev) => prev - 1 : () => 1),
             '+': () => setNumAdvanceStations((prev) => prev + 1),
@@ -142,7 +143,7 @@ function GameStateUI() {
             </div>
 
             <div className="stations-container">
-                <div className="station-box" id="current-station">
+                <div className={`station-box ${gameState.isWon ? 'win-state' : ''}`} id="current-station">
                     <Header text="Current station" />
                     <div className="station-item">
                         <Station name={train.getCurrentStation().getName()}>
@@ -157,23 +158,23 @@ function GameStateUI() {
                         <ActionButton
                             imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
                             label="Transfer lines"
-                            onClick={() => handleTrainAction('transfer')}
+                            onMouseDown={() => transferAction()}
                         />
                         <ActionButton
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label="Change direction"
-                            onClick={() => handleTrainAction('changeDirection')}
+                            onMouseDown={() => changeDirectionAction()}
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                             label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
-                            onClick={() => handleTrainAction('advanceStation')}
-                            additionalInput={<AdvanceNStationsInput visible={conductorMode} />}
+                            onMouseDown={() => advanceStationAction()}
+                            additionalInput={<AdvanceNStationsInput />}
                         />
                     </div>
                 </div>
 
-                <div className="station-box" id="destination-station">
+                <div className={`station-box ${gameState.isWon ? 'win-state' : ''}`} id="destination-station">
                     <Header text="Destination station" />
                     <div className="station-item">
                         <Station name={gameState.destinationStation.getName()}>
@@ -184,7 +185,7 @@ function GameStateUI() {
                         <ActionButton
                             imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
                             label="Reset game"
-                            onClick={() => handleTrainAction('refresh')}
+                            onMouseDown={() => refreshGameAction()}
                         />
                     </div>
                 </div>

@@ -16,10 +16,22 @@ h2 {
     width: 2em;
 }
 
-.arrow-vertical {
+.arrow-up {
     height: 2em;
     width: 2em;
     transform: rotate(-90deg);
+}
+
+.arrow-down {
+    height: 2em;
+    width: 2em;
+    transform: rotate(90deg);
+}
+
+.arrow-left {
+    height: 2em;
+    width: 2em;
+    transform: rotate(180deg);
 }
 
 .show {

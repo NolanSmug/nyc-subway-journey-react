@@ -40,13 +40,13 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
     if (!visible) return null
 
     return (
-        <div className="direction-switch-container">
+        <div className='direction-switch-container'>
             <button
-                className="tri-state-toggle"
+                className='tri-state-toggle'
                 data-state={state}
-                onClick={handleClick}
-                role="switch"
-                aria-label="Direction toggle"
+                onMouseDown={handleClick}
+                role='switch'
+                aria-label='Direction toggle'
                 aria-checked={state !== Direction.NULL_DIRECTION}
             >
                 <span
@@ -58,9 +58,9 @@ export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchPro
                     {state === Direction.UPTOWN ? 'Uptown' : state === Direction.DOWNTOWN ? 'Downtown' : 'Choose direction'}
                 </span>
             </button>
-            <div className="info-icon-container">
-                <img src={infoIcon} alt="Information" className="info-icon" />
-                <div className="tooltip">
+            <div className='info-icon-container'>
+                <img src={infoIcon} alt='Information' className='info-icon' />
+                <div className='tooltip'>
                     Configure the default starting direction{' '}
                     <i>
                         <u>after transferring lines</u>

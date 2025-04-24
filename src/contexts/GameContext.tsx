@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useCallback, useMemo } from 'react'
 import { Train } from '../logic/TrainManager'
 import { GameState } from '../logic/GameState'
 import { Station as StationClass } from '../logic/StationManager'
@@ -42,16 +42,24 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         setTrain((currentTrain) => {
             const newTrain = new Train()
             Object.assign(newTrain, currentTrain) // copy the current train
-            Object.assign(newTrain, updates) // push the updates
+            Object.assign(newTrain, updates) // push the new copied train
             return newTrain
         })
     }, [])
 
-    return (
-        <GameContext.Provider value={{ train, updateTrainObject, setTrain, gameState, setGameState, initializeGame }}>
-            {children}
-        </GameContext.Provider>
+    const value = useMemo(
+        () => ({
+            train,
+            gameState,
+            updateTrainObject,
+            setTrain,
+            setGameState,
+            initializeGame,
+        }),
+        [train, gameState, updateTrainObject, setTrain, setGameState, initializeGame]
     )
+
+    return <GameContext.Provider value={value}>{children}</GameContext.Provider>
 }
 
 export const useGameContext = () => {

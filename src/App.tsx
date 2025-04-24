@@ -5,6 +5,8 @@ import SettingsMenu from './components/SettingsMenu'
 import UpcomingStationsVertical from './components/UpcomingStationsVertical'
 import UpcomingStationsHorizontal from './components/UpcomingStationsHorizontal'
 import KeyShortcutMenu from './components/KeyShortcutMenu'
+import OptimalRouteUI from './components/OptimalRouteUI'
+import SubwayMap from './components/SubwayMap'
 
 import './App.css'
 import { useUIContext } from './contexts/UIContext'
@@ -17,7 +19,7 @@ import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
 
 function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVertical } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout } = useUIContext()
     const { conductorMode } = useSettingsContext()
     const { train, gameState, initializeGame } = useGameContext()
 
@@ -32,21 +34,35 @@ function App() {
         initializeGame()
     }, [initializeGame])
 
-    if (train.isLineNull() || gameState.isEmpty()) return <>Error</>
+    if (train.isLineNull() || gameState.isEmpty())
+        return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
+
+    // console.log(gameState.isWon)
 
     return (
         <>
-            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onClick={handleClickAway} />
-            <div className="Game">
-                {!upcomingStationsVertical && <UpcomingStationsHorizontal />}
+            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onMouseDown={handleClickAway} />
 
-                <div className={`game-state-ui ${upcomingStationsVertical ? ' shifted-up' : ''}`}>
-                    <GameStateUI />
+            <div className='Game'>
+                {gameState.isWon && <OptimalRouteUI />}
+                {!gameState.isWon && upcomingStationsVisible && isHorizontalLayout() && (
+                    <UpcomingStationsHorizontal
+                        stations={train.getScheduledStops()}
+                        currentStationID={train.getCurrentStation().getId()}
+                        currentStationIndex={train.getCurrentStationIndex()}
+                    />
+                )}
+                <div
+                    className={`game-state-ui ${
+                        isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''
+                    }`}
+                >
+                    {!gameState.isWon && <GameStateUI />}
                 </div>
             </div>
 
-            <div className="umbrella-menus">
-                <div className="settings-umbrella">
+            <div className='umbrella-menus'>
+                <div className='settings-umbrella'>
                     <UmbrellaButton
                         openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
                         umbrellaContent={<SettingsMenu />}
@@ -54,18 +70,27 @@ function App() {
                         visible
                     />
                 </div>
-                <div className="shortcuts-umbrella">
+                <div className='shortcuts-umbrella'>
                     <UmbrellaButton
                         openingButtonsW_B={[KEYBOARD_WHITE, KEYBOARD_BLACK]}
                         umbrellaContent={<KeyShortcutMenu />}
                         visible={conductorMode}
                     />
+                    {/* <UmbrellaButton
+                        openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
+                        umbrellaContent={<SubwayMap />}
+                        visible={!conductorMode}
+                    /> */}
                 </div>
             </div>
 
-            {upcomingStationsVertical && (
-                <div className="upcoming-stations-vertical">
-                    <UpcomingStationsVertical />
+            {!gameState.isWon && upcomingStationsVisible && isVerticalLayout() && (
+                <div className='upcoming-stations-vertical'>
+                    <UpcomingStationsVertical
+                        stations={train.getScheduledStops()}
+                        currentStationID={train.getCurrentStation().getId()}
+                        currentStationIndex={train.getCurrentStationIndex()}
+                    />
                 </div>
             )}
         </>

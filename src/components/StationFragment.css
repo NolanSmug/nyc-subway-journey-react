@@ -2,18 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100vm;
-    max-height: 100%;
+    /* keeps dot and label centered */
+    overflow: visible;
+    /* don’t clip anything */
 }
 
 .station-frag-content {
     margin-bottom: 1.5rem;
-    width: fit-content;
-    transform: rotate(-45deg);
+    /* width: fit-content; */
+    transform: rotate(-38deg);
     position: relative;
     /* RELATIVE TO DOT POSITION: */
     bottom: 2em;
     left: 3em;
+    width: auto;
+    transform-origin: bottom;
+    margin-bottom: 1.2em;
 }
 
 .station-frag-info {
@@ -25,10 +29,12 @@
 .station-frag-name {
     font-size: 0.75rem;
     white-space: nowrap;
-    overflow: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Chrome */
-    max-width: 16ch;
+    overflow: visible;
+    max-width: none;
+    /* overflow: scroll; */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
 }
 
 .station-dot {
@@ -54,11 +60,20 @@
 
 .station-frag-content.overflow .station-frag-name,
 .station-frag-content.overflow .transfer-lines {
-    transform: translateX(0.8em);
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
-.station-frag-content.overflow .station-frag-name {
-    margin-left: 1.5em;
+.station-frag-content.extra-overflow .station-frag-name,
+.station-frag-content.extra-overflow .transfer-lines {
+    white-space: normal;
+    overflow-wrap: break-word;
+    transform: translateX(1em);
+}
+
+.station-frag-container.current-station .station-frag-content.overflow, .station-frag-container.current-station .station-frag-content.extra-overflow {
+    margin-bottom: 0.5em;
+    /* less margin when it's current station to reduce distance */
 }
 
 /* 
@@ -66,9 +81,9 @@
     Below are styling modifications for such
 */
 .upcoming-stations-vertical-container .station-frag-container .station-frag-content {
-    transform: rotate(0deg); /* vertical list requires no rotate */
+    transform: rotate(0deg);
+    /* vertical list requires no rotate */
     top: 2em;
     left: 6em;
     margin-bottom: 0;
 }
-

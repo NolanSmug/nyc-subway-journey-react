@@ -11,9 +11,9 @@ root.render(
     <UIProvider>
         <GameProvider>
             <SettingsProvider>
-                <React.StrictMode>
-                    <App />
-                </React.StrictMode>
+                {/* <React.StrictMode> */}
+                <App />
+                {/* </React.StrictMode> */}
             </SettingsProvider>
         </GameProvider>
     </UIProvider>

@@ -18,13 +18,14 @@
 }
 
 .station-frag-vertical-name {
-    font-size: 1rem;
+    font-size: 1.02rem;
     margin: 0;
-    white-space: nowrap;
     overflow: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Chrome */
-    max-width: max-content;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Chrome */
+    max-width: 28ch;
 }
 
 .station-dot-container {
@@ -37,7 +38,7 @@
     position: absolute;
     top: 50%;
     width: 4px;
-    height: 5em;
+    height: 6em;
     background-color: var(--line-color);
     transform: translate(-50%, -50%);
 }
@@ -73,15 +74,16 @@
     opacity: 1;
 }
 
-.current-station-vertical .station-frag-vertical-name{
-    font-size:1.05rem;
+.current-station-vertical .station-frag-vertical-name {
+    font-size: 1.04rem;
+    white-space: wrap;
     color: var(--line-color);
     filter: brightness(140%) saturate(85%);
     opacity: 0.9;
     transition: font-size linear 0.1s
 }
 
-.current-station-vertical .station-frag-vertical-info{
+.current-station-vertical .station-frag-vertical-info {
     position: relative;
     left: 0.25em;
     transition: left ease 0.3s

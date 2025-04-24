@@ -30,35 +30,13 @@ export enum LineName {
 }
 
 export function getRandomLine(): LineName {
-    const lines: LineName[] = [
-        LineName.ONE_TRAIN,
-        LineName.TWO_TRAIN,
-        LineName.THREE_TRAIN,
-        LineName.FOUR_TRAIN,
-        LineName.FIVE_TRAIN,
-        LineName.SIX_TRAIN,
-        LineName.SEVEN_TRAIN,
-        LineName.A_TRAIN,
-        LineName.C_TRAIN,
-        LineName.E_TRAIN,
-        LineName.B_TRAIN,
-        LineName.D_TRAIN,
-        LineName.F_TRAIN,
-        LineName.M_TRAIN,
-        LineName.N_TRAIN,
-        LineName.Q_TRAIN,
-        LineName.R_TRAIN,
-        LineName.W_TRAIN,
-        LineName.J_TRAIN,
-        LineName.Z_TRAIN,
-        LineName.G_TRAIN,
-        LineName.L_TRAIN,
-        LineName.S_TRAIN,
-        LineName.S_TRAIN_SHUTTLE,
-        LineName.S_TRAIN_ROCKAWAY,
-    ]
+    const lines = Object.values(LineName)
+    let randomLine = LineName.NULL_TRAIN
+    do {
+        randomLine = lines[Math.floor(Math.random() * lines.length)]
+    } while (randomLine === LineName.NULL_TRAIN)
 
-    return lines[Math.floor(Math.random() * lines.length)]
+    return randomLine
 }
 
 export enum Borough {
@@ -109,6 +87,10 @@ export const lineTypes: Map<LineName, LineType> = new Map([
     [LineName.S_TRAIN_SHUTTLE, LineType.NONE],
     [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
 ])
+
+export function getLineType(line: LineName): LineType {
+    return lineTypes.get(line) ?? LineType.NONE
+}
 
 interface LineDirectionDetails {
     defaultDirectionLabels?: [string, string]

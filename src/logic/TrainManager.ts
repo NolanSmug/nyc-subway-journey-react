@@ -2,8 +2,6 @@ import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, lineTyp
 import { Station } from './StationManager'
 import { updateStopsForLine } from './SubwayMap'
 
-
-
 export class Train {
     private currentLine: LineName
     private lineType: LineType
@@ -163,6 +161,9 @@ export class Train {
 
     // Current Stations
     public getCurrentStation(): Station {
+        if (this.scheduledStops.length === 0) {
+            throw new Error('No scheduled stops found in dataset. Please contact developer')
+        }
         return this.scheduledStops[this.currentStationIndex]
     }
 
@@ -183,7 +184,13 @@ export class Train {
     }
 
     public setCurrentStation(station: Station) {
-        this.currentStationIndex = this.scheduledStops.findIndex((stop) => stop.getId() === station.getId())
+        const index: number = this.scheduledStops.findIndex((stop) => stop.getId() === station.getId())
+
+        if (index === -1) {
+            throw new Error('Station not found in dataset. Please contact developer')
+        } else {
+            this.currentStationIndex = index
+        }
     }
 
     public setCurrentStationIndexByID(stationID: string, newScheduledStops: Station[]) {

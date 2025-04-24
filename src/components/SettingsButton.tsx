@@ -9,9 +9,9 @@ export interface SettingsButtonProps {
 
 function SettingsButton({ imgSrc, label, onClick }: SettingsButtonProps) {
     return (
-        <div className="settings-row">
-            <span id="setting-label">{label}</span>
-            <ActionButton imageSrc={imgSrc} onClick={onClick} small></ActionButton>
+        <div className='settings-row'>
+            <span id='setting-label'>{label}</span>
+            <ActionButton imageSrc={imgSrc} onMouseDown={onClick} small></ActionButton>
         </div>
     )
 }

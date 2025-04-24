@@ -8,8 +8,8 @@ export interface KeyShortcutProps {
 
 function KeyShortcut({ shortcutKey, label, isCommand }: KeyShortcutProps) {
     return (
-        <div className="shortcut">
-            <span id="key-label">{label}</span>
+        <div className='shortcut'>
+            <span id='key-label'>{label}</span>
             <p>
                 {isCommand && (
                     <>

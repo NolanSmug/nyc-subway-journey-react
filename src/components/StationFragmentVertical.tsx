@@ -19,10 +19,10 @@ const StationFragmentVertical: React.FC<StationFragmentVerticalProps> = ({ stati
                 <div className={`station-dot-vertical`}></div>
             </div>
 
-            <div className="station-frag-vertical-content">
+            <div className='station-frag-vertical-content'>
                 <div className={`station-frag-vertical-info`}>
                     <h2 className={`station-frag-vertical-name`}>{station.getName()}</h2>
-                    <div className="transfer-lines">
+                    <div className='transfer-lines'>
                         <TransferLines small wide transfers={getTransferImages(transfers)} />
                     </div>
                 </div>

@@ -17,10 +17,11 @@ export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType 
     return (
         <>
             <h2
-                onClick={() => {
-                    defaultDirectionToggle
-                        ? updateTrainObject(train.setDirection(defaultDirectionToggle))
-                        : updateTrainObject({ ...train.reverseDirection() })
+                onMouseDown={() => {
+                    // defaultDirectionToggle
+                    //     ? updateTrainObject(train.setDirection(defaultDirectionToggle))
+                    //     : updateTrainObject({ ...train.reverseDirection() })
+                    updateTrainObject({ ...train.reverseDirection() })
                 }}
                 className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}
                 style={
@@ -36,10 +37,10 @@ export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType 
             >
                 {isNullDirection ? 'TOGGLE DIRECTION' : directionLabel}
             </h2>
-            <div className="train-car-line">
+            <div className='train-car-line'>
                 <Line transfers={[currentLineSVG]} notDim />
             </div>
-            <h2 className="train-type not-dim">{lineType + ' train'}</h2>
+            <h2 className='train-type not-dim'>{lineType + ' train'}</h2>
         </>
     )
 }

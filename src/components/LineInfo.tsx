@@ -10,9 +10,9 @@ interface LineInfoProps {
 function LineInfo({ direction, line, type }: LineInfoProps) {
     return (
         <>
-            <div className="LineInfo-container">
+            <div className='LineInfo-container'>
                 <h2>{direction}&nbsp;&nbsp;</h2>
-                <img src={line} alt={`${line}`} className="transfer-line-image" />
+                <img src={line} alt={`${line}`} className='transfer-line-image' />
                 <h2>&nbsp;&nbsp;{type} train</h2>{' '}
             </div>
         </>

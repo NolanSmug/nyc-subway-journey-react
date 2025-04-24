@@ -4,18 +4,21 @@ import './ActionButton.css'
 export interface ActionButtonProps {
     imageSrc: string
     label?: string
-    onClick?: () => void
+    onMouseDown?: () => void
     small?: boolean
     additionalInput?: React.ReactNode
 }
 
-function ActionButton({ imageSrc, label, onClick, small, additionalInput }: ActionButtonProps) {
+function ActionButton({ imageSrc, label, onMouseDown, small, additionalInput }: ActionButtonProps) {
     return (
-        <div className="action-button">
-            <button className={`action-button-container`} type="button">
-                <img src={imageSrc} className={`icon ${small ? 'small-button' : ''}`} alt={label} onClick={onClick} />
-                <p className="label">{label}</p>
-            </button>
+        <div className='action-button-wrapper'>
+            <div className='action-button-container'>
+                <button className='action-button' type='button'>
+                    <img src={imageSrc} className={`icon ${small ? 'small-button' : ''}`} alt={label} onMouseDown={onMouseDown} />
+                </button>
+                
+                {label && <p className='label'>{label}</p>}
+            </div>
             {additionalInput}
         </div>
     )

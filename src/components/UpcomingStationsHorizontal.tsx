@@ -2,19 +2,17 @@ import { useEffect, useRef } from 'react'
 import StationFragment from './StationFragment'
 
 import './UpcomingStationsHorizontal.css'
-import { useUIContext } from '../contexts/UIContext'
-import { useGameContext } from '../contexts/GameContext'
+import { Station } from '../logic/StationManager'
 
 // TODO: Borough barrier
 
-function UpcomingStationsHorizontal() {
-    const { upcomingStationsVisible: visible } = useUIContext()
-    const { train } = useGameContext()
+export interface UpcomingStationsProps {
+    stations: Station[]
+    currentStationID: string
+    currentStationIndex?: number
+}
 
-    const stations = train.getScheduledStops()
-    const currentStation = train.getCurrentStation()
-    const currentID = currentStation.getId()
-
+function UpcomingStationsHorizontal({ stations, currentStationID, currentStationIndex }: UpcomingStationsProps) {
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
 
@@ -23,7 +21,7 @@ function UpcomingStationsHorizontal() {
             const currentStationElement = stationsRef.current.querySelector('.current-station')
             scrollToCurrentStation(currentStationElement)
         }
-    }, [currentStation, stations.length, currentID])
+    }, [currentStationIndex, stations.length, currentStationID])
 
     useEffect(() => {
         if (stationsRef.current && lineDividerRef.current) {
@@ -32,21 +30,21 @@ function UpcomingStationsHorizontal() {
                 lineDividerRef.current.style.width = `${stationsWidth}px`
             }
         }
-    }, [stations.length, visible])
+    }, [stations.length])
 
     if (!stations || stations.length === 0) {
         return <div style={{ display: 'none' }} />
     }
 
     return (
-        <div className={`upcoming-stations-horizontal-container not-dim ${!visible ? 'hidden' : ''}`}>
+        <div className="upcoming-stations-horizontal-container not-dim">
             <div className="stations-horizontal" ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragment
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        className={currentID === station.getId() ? 'current-station' : ''}
+                        className={currentStationID === station.getId() ? 'current-station' : ''}
                     />
                 ))}
             </div>

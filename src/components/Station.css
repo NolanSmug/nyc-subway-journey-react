@@ -32,6 +32,11 @@
     letter-spacing: 0.03em;
 }
 
+.shrink-station-name {
+    font-size: 18px;
+}
+
+
 .transfers-container {
     display: flex;
     flex-direction: column;

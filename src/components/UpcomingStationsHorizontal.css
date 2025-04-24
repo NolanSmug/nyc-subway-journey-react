@@ -11,10 +11,6 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.upcoming-stations-horizontal-container.hidden {
-    opacity: 0;
-}
-
 .stations-horizontal {
     display: flex;
     align-items: flex-end;
@@ -23,6 +19,7 @@
     column-gap: 1px;
     z-index: 1;
     margin-bottom: 1.5em;
+    overflow: visible;
 }
 
 .line-divider {

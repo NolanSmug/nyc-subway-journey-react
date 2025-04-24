@@ -6,14 +6,34 @@
 .transfer-line-image {
     height: 2rem;
     width: 2rem;
-    transition: transform 0.1s;
     opacity: 1;
+
+    --hover-scale: 1;
+    --active-scale: 1;
+
+    transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    transition: transform 0.1s ease-out;
+}
+
+#current-station .transfer-line-image:active {
+    transform: scale(0.95) 
 }
 
 #current-station .transfer-line-image:hover {
+    --hover-scale: 1.05;
     cursor: pointer;
-    transform: scale(1.2);
-    transition: ease-in-out 0.1s;
+    transition: transform ease-in-out 0.1s;
+}
+
+
+#current-station .transfer-line-image.jiggle-animation {
+    animation: jiggle 0.5s ease-in-out infinite;
+}
+
+
+#destination-station .transfer-line-image:hover {
+    transform: none !important;
+    cursor: default;
 }
 
 .small {
@@ -34,12 +54,25 @@
     min-width: 16rem;
 }
 
-.transfer-line-image:hover {
-    transform: scale(1.08);
-    cursor: pointer;
-}
+/* tedious, but necessary to keep animation "smooth" */
+@keyframes jiggle {
+    0% {
+        transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
 
-#destination-station .transfer-line-image:hover {
-    transform: none !important;
-    cursor: default;
+    25% {
+        transform: translateY(1px) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+
+    50% {
+        transform: translateY(-1px) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+
+    75% {
+        transform: translateY(1px) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+
+    100% {
+        transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
 }

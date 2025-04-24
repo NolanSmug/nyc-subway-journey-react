@@ -1,0 +1,438 @@
+stop_id,stop_name,borough
+L06,1 Av,Manhattan
+119,103 St,Manhattan
+624,103 St,Manhattan
+A18,103 St,Manhattan
+706,103 St-Corona Plaza,Queens
+J14,104 St,Queens
+A63,104 St,Queens
+623,110 St,Manhattan
+705,111 St,Queens
+J13,111 St,Queens
+A64,111 St,Queens
+226,116 St,Manhattan
+622,116 St,Manhattan
+A16,116 St,Manhattan
+117,116 St-Columbia University,Manhattan
+J12,121 St,Queens
+116,125 St,Manhattan
+225,125 St,Manhattan
+621,125 St,Manhattan
+A15,125 St,Manhattan
+224,135 St,Manhattan
+A14,135 St,Manhattan
+115,137 St-City College,Manhattan
+619,138 St-3 Av,Bronx
+416,138 St-Grand Concourse,Bronx
+USQ,14 St-Union Sq,Manhattan
+A12,145 St,Manhattan
+114,145 St,Manhattan
+301,Harlem-148 St,Manhattan
+222,149 St-Grand Concourse,Bronx
+F25,15 St-Prospect Park,Brooklyn
+A11,155 St,Manhattan
+D12,155 St,Manhattan
+113,157 St,Manhattan
+NYY,161 St-Yankee Stadium,Bronx
+A10,163 St-Amsterdam Av,Manhattan
+413,167 St,Bronx
+D10,167 St,Bronx
+A09,168 St-Washington Hts,Manhattan
+F02,169 St,Queens
+412,170 St,Bronx
+D09,170 St,Bronx
+215,174 St,Bronx
+D08,174-175 Sts,Bronx
+A07,175 St,Manhattan
+410,176 St,Bronx
+F01,Jamaica-179 St,Queens
+B19,18 Av,Brooklyn
+F30,18 Av,Brooklyn
+N05,18 Av,Brooklyn
+131,18 St,Manhattan
+111,181 St,Manhattan
+A06,181 St,Manhattan
+D06,182-183 Sts,Bronx
+408,183 St,Bronx
+A05,190 St,Manhattan
+110,191 St,Manhattan
+F14,2 Av,Manhattan
+B20,20 Av,Brooklyn
+N06,20 Av,Brooklyn
+D01,Norwood-205 St,Bronx
+108,207 St,Manhattan
+A02,Inwood-207 St,Manhattan
+B04,21 St-Queensbridge,Queens
+G24,21 St,Queens
+107,215 St,Manhattan
+207,219 St,Bronx
+206,225 St,Bronx
+106,Marble Hill-225 St,Bronx
+130,23 St,Manhattan
+634,23 St,Manhattan
+A30,23 St,Manhattan
+D18,23 St,Manhattan
+R19,23 St,Manhattan
+CSQ,Court Square,Queens
+CSQ,Court Sq-23 St,Queens
+104,231 St,Bronx
+205,233 St,Bronx
+103,238 St,Bronx
+201,Wakefield-241 St,Bronx
+101,Van Cortlandt Park-242 St,Bronx
+B22,25 Av,Brooklyn
+R35,25 St,Brooklyn
+129,28 St,Manhattan
+633,28 St,Manhattan
+R18,28 St,Manhattan
+L05,3 Av,Manhattan
+221,3 Av-149 St,Bronx
+R04,30 Av,Queens
+632,33 St,Manhattan
+716,33 St-Rawson St,Queens
+HSQ,34 St-Herald Sq,Manhattan
+726,34 St-Hudson Yards, Manhattan
+PEN,34 St-Penn Station,Manhattan
+G20,36 St,Queens
+R36,36 St,Brooklyn
+R06,36-Washington Av,Queens
+R08,39 Av-Dutch Kills,Queens
+4A9,4 Av-9 St,Brooklyn
+715,40 St-Lowery St,Queens
+BRY,42 St-Bryant Pk,Manhattan
+A27,42 St-Port Authority Bus Terminal,Manhattan
+127,Times Sq-42 St,Manhattan
+R39,45 St,Brooklyn
+G18,46 St,Queens
+714,46 St-Bliss St,Queens
+D15,47-50 Sts-Rockefeller Ctr,Manhattan
+R15,49 St,Manhattan
+F12,5 Av/53 St,Manhattan
+R13,5 Av/59 St,Manhattan
+126,50 St,Manhattan
+A25,50 St,Manhattan
+B14,50 St,Brooklyn
+LEX,51 St,Manhattan
+713,52 St,Queens
+R40,53 St,Brooklyn
+B15,55 St,Brooklyn
+B10,57 St,Manhattan
+R14,57 St-7 Av,Manhattan
+R11,59 St,Manhattan
+R41,59 St,Brooklyn
+CBC,59 St-Columbus Circle,Manhattan
+132,14 St-6 Av,Manhattan
+712,61 St-Woodside,Queens
+B16,62 St,Brooklyn
+G10,63 Dr-Rego Park,Queens
+G15,65 St,Queens
+124,66 St-Lincoln Center,Manhattan
+G09,67 Av,Queens
+628,68 St-Hunter College,Manhattan
+711,69 St,Queens
+D14,7 Av,Manhattan
+D25,7 Av,Brooklyn
+F24,7 Av,Brooklyn
+B17,71 St,Brooklyn
+G08,Forest Hills-71 Av,Queens
+123,72 St,Manhattan
+A22,72 St,Manhattan
+Q03,72 St,Manhattan
+710,Jackson Hts-Roosevelt Av,Queens
+F07,75 Av,Queens
+627,77 St,Manhattan
+R43,77 St,Brooklyn
+122,79 St,Manhattan
+B18,79 St,Brooklyn
+L01,14 St-8 Av,Manhattan
+N02,8 Av,Brooklyn
+NYU,8 St-NYU,Manhattan
+A59,80 St,Queens
+A21,81 St-Museum of Natural History,Manhattan
+709,82 St-Jackson Hts,Queens
+121,86 St,Manhattan
+626,86 St,Manhattan
+A20,86 St,Manhattan
+N10,86 St,Brooklyn
+Q04,86 St,Manhattan
+R44,86 St,Brooklyn
+A60,88 St,Queens
+B12,9 Av,Brooklyn
+708,90 St-Elmhurst Av,Queens
+R45,Bay Ridge-95 St,Brooklyn
+120,96 St,Manhattan
+625,96 St,Manhattan
+A19,96 St,Manhattan
+Q05,96 St,Manhattan
+J24,Alabama Av,Brooklyn
+210,Allerton Av,Bronx
+AQR,Aqueduct-N Conduit Av,Queens
+636,Astor Place,Manhattan
+R03,Astoria Blvd,Queens
+L24,Atlantic Av,Brooklyn
+AAB,Atlantic Av-Barclays Ctr,Brooklyn
+D32,Avenue H,Brooklyn
+F31,Avenue I,Brooklyn
+D33,Avenue J,Brooklyn
+D34,Avenue M,Brooklyn
+F33,Avenue N,Brooklyn
+F34,Avenue P,Brooklyn
+D37,Avenue U,Brooklyn
+F36,Avenue U,Brooklyn
+N09,Avenue U,Brooklyn
+F38,Avenue X,Brooklyn
+B23,Bay 50 St,Brooklyn
+B21,Bay Parkway,Brooklyn
+F32,Bay Parkway,Brooklyn
+N07,Bay Parkway,Brooklyn
+R42,Bay Ridge Av,Brooklyn
+502,Baychester Av,Bronx
+H14,Beach 105 St,Queens
+H10,Beach 25 St,Queens
+H09,Beach 36 St,Queens
+H08,Beach 44 St,Queens
+H07,Beach 60 St,Queens
+H06,Beach 67 St,Queens
+H12,Beach 90 St,Queens
+H13,Beach 98 St,Queens
+L08,Bedford Av,Brooklyn
+405,Bedford Park Boulevard-Lehman College,Bronx
+D03,Bedford Park Boulevard,Bronx
+G33,Bedford-Nostrand Avs,Brooklyn
+236,Bergen St,Brooklyn
+F20,Bergen St,Brooklyn
+245,Beverly Rd,Brooklyn
+D29,Beverley Road,Brooklyn
+BWL,Bleeker St,Manhattan
+BOR,Borough Hall,Brooklyn
+M19,Bowery,Manhattan
+420,Bowling Green,Manhattan
+D40,Brighton Beach,Brooklyn
+H04,Broad Channel,Queens
+M23,Broad St,Manhattan
+G30,Broadway,Brooklyn
+R05,Broadway,Queens
+BWJ,Broadway Junction,Brooklyn
+212,Bronx Park East,Bronx
+618,Brook Av,Bronx
+BRB,Brooklyn Bridge-City Hall,Manhattan
+602,Buhre Av,Bronx
+209,Burke Av,Bronx
+409,Burnside Av,Bronx
+L21,Bushwick Av-Aberdeen St,Brooklyn
+BWL,Broadway-Lafayette St,Manhattan
+135,Canal St,Manhattan
+CAN,Canal St,Manhattan
+A34,Canal St,Manhattan
+F21,Carroll St,Brooklyn
+607,Castle Hill Av,Bronx
+A17,Cathedral Pkwy (110 St),Manhattan
+118,Cathedral Pkwy (110 St),Manhattan
+M10,Central Av,Brooklyn
+227,Central Park North (110 St),Manhattan
+137,Chambers St,Manhattan
+A36,Chambers St,Manhattan
+J28,Chauncey St,Brooklyn
+133,Christopher St-Sheridan Sq,Manhattan
+244,Church Av,Brooklyn
+D28,Church Av,Brooklyn
+F27,Church Av,Brooklyn
+R24,City Hall,Manhattan
+231,Clark St,Brooklyn
+G34,Classon Av,Brooklyn
+J22,Cleveland St,Brooklyn
+A44,Clinton-Washington Avs,Brooklyn
+G35,Clinton-Washington Avs,Brooklyn
+D30,Cortelyou Road,Brooklyn
+138,WTC Cortlandt,Manhattan
+R25,Cortlandt St,Manhattan
+CSQ,Court Square,Queens
+CSQ,Court Sq-23 St,Queens
+BOR,Court St,Brooklyn
+J20,Crescent St,Brooklyn
+617,Cypress Av,Bronx
+J19,Cypress Hills,Brooklyn
+L16,DeKalb Av,Brooklyn
+R30,DeKalb Av,Brooklyn
+ESX,Delancey St-Essex St,Manhattan
+R01,Astoria-Ditmars Blvd,Queens
+F29,Ditmas Av,Brooklyn
+109,Dyckman St,Manhattan
+A03,Dyckman St,Manhattan
+501,Eastchester-Dyre Av,Bronx
+238,Eastern Pkwy-Brooklyn Museum,Brooklyn
+L28,East 105 St,Brooklyn
+616,E 143 St-St Mary's St,Bronx
+615,E 149 St,Bronx
+213,E 180 St,Bronx
+F16,East Broadway,Manhattan
+214,West Farms Sq-E Tremont Av,Bronx
+611,Elder Av,Bronx
+J17,75 St-Elderts Ln,Queens
+G13,Elmhurst Av,Queens
+A55,Euclid Av,Brooklyn
+H11,Far Rockaway-Mott Av,Queens
+247,Flatbush Av-Brooklyn College,Brooklyn
+G31,Flushing Av,Brooklyn
+M12,Flushing Av,Brooklyn
+407,Fordham Road,Bronx
+D05,Fordham Road,Bronx
+M05,Forest Av,Queens
+J16,85 St-Forest Pkwy,Queens
+B13,Fort Hamilton Parkway,Brooklyn
+F26,Fort Hamilton Parkway,Brooklyn
+N03,Fort Hamilton Parkway,Brooklyn
+S01,Franklin Avenue,Brooklyn
+BOT,Franklin Avenue/Botanic Garden,Brooklyn
+BOT,Franklin Avenue-Medgar Evers College,Brooklyn
+136,Franklin St,Manhattan
+216,Freeman St,Bronx
+M04,Fresh Pond Road,Queens
+G36,Fulton St,Brooklyn
+FUL,Fulton St,Manhattan
+J30,Gates Av,Brooklyn
+L11,Graham Av,Brooklyn
+237,Grand Army Plaza,Brooklyn
+G12,Grand Av-Newtown,Queens
+GRC,Grand Central-42 St,Manhattan
+D22,Grand St,Manhattan
+L12,Grand St,Brooklyn
+A57,Grant Av,Brooklyn
+G26,Greenpoint Av,Brooklyn
+208,Gun Hill Road,Bronx
+J29,Halsey St,Brooklyn
+L19,Halsey St,Brooklyn
+M14,Hewes St,Brooklyn
+A40,High St,Brooklyn
+134,Houston St,Manhattan
+H03,Howard Beach-JFK Airport,Queens
+233,Hoyt St,Brooklyn
+A42,Hoyt-Schermerhorn Sts,Brooklyn
+720,Hunters Point Av,Queens
+613,Hunts Point Av,Bronx
+218,Intervale Av,Bronx
+220,Jackson Av,Bronx
+G05,Jamaica Center-Parsons/Archer,Queens
+G07,Jamaica-Van Wyck,Queens
+JAY,Jay St-MetroTech,Brooklyn
+L15,Jefferson St,Brooklyn
+707,Junction Blvd,Queens
+254,Junius St,Brooklyn
+D35,Kings Hwy,Brooklyn
+F35,Kings Hwy,Brooklyn
+N08,Kings Hwy,Brooklyn
+406,Kingsbridge Rd,Bronx
+D04,Kingsbridge Rd,Bronx
+249,Kingston Av,Brooklyn
+A47,Kingston-Throop Avs,Brooklyn
+M09,Knickerbocker Av,Brooklyn
+J31,Kosciuszko St,Brooklyn
+A43,Lafayette Av,Brooklyn
+A65,Ozone Park-Lefferts Blvd,Queens
+LEX,Lexington Av/53 St,Manhattan
+R11,Lexington Av/59 St,Manhattan
+B08,Lexington Av/63 St,Manhattan
+A52,Liberty Av,Brooklyn
+L26,Livonia Av,Brooklyn
+614,Longwood Av,Bronx
+L10,Lorimer St,Brooklyn
+M13,Lorimer St,Brooklyn
+701,Flushing-Main St,Queens
+M16,Marcy Av,Brooklyn
+G29,Metropolitan Av,Brooklyn
+M01,Middle Village-Metropolitan Av,Queens
+603,Middletown Rd,Bronx
+L13,Montrose Av,Brooklyn
+L14,Morgan Av,Brooklyn
+505,Morris Park,Bronx
+610,Morrison Av-Soundview,Bronx
+402,Mosholu Pkwy,Bronx
+411,Mount Eden Avenue,Bronx
+L17,Myrtle-Wyckoff Avs,Brooklyn
+M11,Myrtle Av,Brooklyn
+G32,Myrtle-Willoughby Avs,Brooklyn
+G28,Nassau Av,Brooklyn
+D38,Neck Rd,Brooklyn
+F39,Neptune Av,Brooklyn
+204,Nereid Av,Bronx
+234,Nevins St,Brooklyn
+257,New Lots Av,Brooklyn
+L27,New Lots Av,Brooklyn
+N04,New Utrecht Av,Brooklyn
+246,Newkirk Av-Little Haiti,Brooklyn
+D31,Newkirk Plaza,Brooklyn
+G16,Northern Blvd,Queens
+J21,Norwood Av,Brooklyn
+248,Nostrand Av,Brooklyn
+A46,Nostrand Av,Brooklyn
+D41,Ocean Pkwy,Brooklyn
+228,Park Place,Manhattan
+S03,Park Place,Brooklyn
+608,Parkchester,Bronx
+D27,Parkside Av,Brooklyn
+F03,Parsons Blvd,Queens
+601,Pelham Bay Park,Bronx
+211,Pelham Pkwy,Bronx
+504,Pelham Pkwy,Bronx
+255,Pennsylvania Av,Brooklyn
+241,President St-Medgar Evers College,Brooklyn
+R22,Prince St,Manhattan
+219,Prospect Av,Bronx
+R34,Prospect Av,Brooklyn
+D26,Prospect Park,Brooklyn
+G21,Queens Plaza,Queens
+QBP,Queensboro Plaza,Queens
+A49,Ralph Av,Brooklyn
+139,Rector St,Manhattan
+R26,Rector St,Manhattan
+253,Rockaway Av,Brooklyn
+A50,Rockaway Av,Brooklyn
+A61,Rockaway Blvd,Queens
+H15,Rockaway Park-Beach 116 St,Queens
+L29,Canarsie-Rockaway Parkway,Brooklyn
+710,Jackson Hts-Roosevelt Av,Queens
+B06,Roosevelt Island,Manhattan
+252,Saratoga Av,Brooklyn
+M06,Seneca Av,Queens
+D39,Sheepshead Bay,Brooklyn
+A54,Shepherd Av,Brooklyn
+217,Simpson St,Bronx
+F22,Smith-9 Sts,Brooklyn
+R27,South Ferry,Manhattan
+638,Spring St,Manhattan
+A33,Spring St,Manhattan
+609,St Lawrence Av,Bronx
+G19,Steinway St,Queens
+242,Sterling St,Brooklyn
+D43,Coney Island-Stillwell Av,Brooklyn
+F04,Suthpin Boulevard,Queens
+G06,Sutphin Blvd-Archer Av-JFK Airport,Queens
+L25,Sutter Av,Brooklyn
+251,Sutter Av-Rutland Rd,Brooklyn
+D07,Tremont Av,Bronx
+R32,Union St,Brooklyn
+F06,Kew Gardens-Union Tpke,Queens
+250,Crown Hts-Utica Av,Brooklyn
+A48,Utica Av,Brooklyn
+256,Van Siclen Av,Brooklyn
+A53,Van Siclen Av,Brooklyn
+J23,Van Siclen Av,Brooklyn
+F05,Briarwood,Queens
+721,Vernon Blvd-Jackson Av,Queens
+230,Wall St,Manhattan
+419,Wall St,Manhattan
+A32,West 4 St-Washington Sq,Manhattan
+D42,W 8 St-NY Aquarium,Brooklyn
+604,Westchester Sq-E Tremont Av,Bronx
+R27,Whitehall St-South Ferry,Manhattan
+612,Whitlock Av,Bronx
+702,Mets-Willets Point,Queens
+L20,Wilson Av,Brooklyn
+243,Winthrop St,Brooklyn
+G11,Woodhaven Blvd,Queens
+J15,Woodhaven Blvd,Queens
+401,Woodlawn,Bronx
+E01,World Trade Center,Manhattan
+M08,Myrtle-Wyckoff Avs,Brooklyn
+F18,York St,Brooklyn
+606,Zerega Av,Bronx

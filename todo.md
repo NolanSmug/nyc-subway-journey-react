@@ -9,3 +9,5 @@
 ## Hard Mode
 - Features:
   - Hide transfer lines
+
+`AWS Free Tier` - EC2 server

@@ -50,12 +50,21 @@ const UmbrellaButton = ({ openingButtonsW_B, umbrellaContent, below, visible }: 
 
     return (
         <div ref={buttonRef}>
-            <ActionButton imageSrc={darkMode ? openingButtonsW_B[0] : openingButtonsW_B[1]} onClick={togglePopup} />
+            <ActionButton imageSrc={darkMode ? openingButtonsW_B[0] : openingButtonsW_B[1]} onMouseDown={togglePopup} />
 
-            <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : ''}`}>
+            {/* <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? "visible" : "hidden"} ${below ? "below" : ""}`}>
                 {umbrellaContent}
                 <div className="popup-arrow" />
-            </div>
+            </div> */}
+            {isOpen && visible && (
+                <div
+                    ref={popupRef}
+                    className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : 'above'}`}
+                >
+                    {umbrellaContent}
+                    <div className='popup-arrow' />
+                </div>
+            )}
         </div>
     )
 }

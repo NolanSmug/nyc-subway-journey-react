@@ -7,9 +7,8 @@
 
 .station-box {
     flex: 1 1;
-    width: max-content;
-    max-width: 28em;
-    min-width: 20em;
+    width: 26em;
+    max-width: 26em;
     background-color: var(--bg-color-2);
     border: 3px solid var(--bg-color-3);
     border-radius: 0.75em;
@@ -35,36 +34,31 @@
     border-radius: 1em 1em 0.2em 0.2em;
 }
 
+.conductor-mode-buttons-container {
+    display: flex;
+    column-gap: 1em;
+    padding-left: 0.5em;
+}
+
+.station-box h2 {
+    margin-bottom: 15px;
+}
+
 .station-item {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.station-box h2 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-}
-
 .action-buttons-container {
-    margin-top: 2em;
+    width: 100%;
     display: flex;
     justify-content: space-around;
-}
-
-.action-buttons-container.conductor {
-    gap: 3em;
-    margin-left: 3em;
+    margin-top: 2em;
 }
 
 .action-buttons-container#destination-station {
     margin-top: 2em;
     display: flex;
     justify-content: flex-end;
-}
-
-.conductor-mode-buttons-container {
-    display: flex;
-    column-gap: 1em;
-    padding-left: 0.5em;
 }

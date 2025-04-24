@@ -15,7 +15,7 @@ export class SubwayMap {
 
         const filePath: string = `/csv/${line.toLowerCase()}_stations.csv`
 
-        console.log(filePath)
+        // console.log(filePath)
         return filePath
     }
 

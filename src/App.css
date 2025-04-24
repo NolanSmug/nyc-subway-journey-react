@@ -66,11 +66,13 @@ body {
 .game-state-ui {
     position: relative;
     top: 0;
-    transition: top ease 0.2s;
+    left: 0;
+    transition: top ease 0.2s, left ease 0.2s;
 }
 
-.game-state-ui.shifted-up {
-    top: -8em;
+.game-state-ui.is-vertical-layout {
+    top: -6em;
+    left: -4em;
 }
 
 .umbrella-menus {
@@ -91,14 +93,14 @@ body {
 
 .shortcuts-umbrella {
     position: fixed;
+    bottom: 2em;
     left: 2em;
-    bottom: -24em;
     opacity: 1;
 }
 
 .upcoming-stations-vertical {
     position: fixed;
-    right: 0;
+    left: 80%;
     transition: opacity 0.2s ease-in-out;
     z-index: 10;
 }
@@ -129,7 +131,7 @@ body {
 }
 
 .not-dim {
-    position: relative;
+    /* position: relative; */
     z-index: 10;
     opacity: 1;
 }

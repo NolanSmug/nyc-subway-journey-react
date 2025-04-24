@@ -1,16 +1,17 @@
-import './AdvanceNStationsInput.css'
 import { Direction } from '../logic/EnumManager'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import { useUIContext } from '../contexts/UIContext'
 
+import './AdvanceNStationsInput.css'
+
 import RESET_INPUT_B from '../images/reset-input-black.svg'
 import RESET_INPUT_W from '../images/reset-input-white.svg'
 
-function AdvanceNStationsInput({ visible }: { visible: boolean }) {
+function AdvanceNStationsInput() {
     const { darkMode } = useUIContext()
     const { train } = useGameContext()
-    const { numAdvanceStations, setNumAdvanceStations } = useSettingsContext()
+    const { numAdvanceStations, setNumAdvanceStations, conductorMode: visible } = useSettingsContext()
 
     let currentMaxNumber: number =
         train.getDirection() === Direction.DOWNTOWN
@@ -34,21 +35,21 @@ function AdvanceNStationsInput({ visible }: { visible: boolean }) {
     if (!visible) return null
 
     return (
-        <div className="additional-input-container">
+        <div className='additional-input-container'>
             <input
-                type="number"
+                type='number'
                 value={numAdvanceStations || ''}
                 onChange={handleInputChange}
-                className="additional-input"
-                placeholder="1"
+                className='additional-input'
+                placeholder='1'
                 min={1}
                 max={currentMaxNumber}
             />
             <img
                 src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
-                alt="Reset Input"
-                className="reset-input-button"
-                onClick={() => setNumAdvanceStations(1)}
+                alt='Reset Input'
+                className='reset-input-button'
+                onMouseDown={() => setNumAdvanceStations(1)}
                 style={{ opacity: numAdvanceStations == 1 ? 0 : 1 }}
             />
         </div>

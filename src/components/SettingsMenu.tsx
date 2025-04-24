@@ -18,30 +18,22 @@ import RIDER_MODE_BLACK from '../images/rider-mode-icon-b.svg'
 import RIDER_MODE_WHITE from '../images/rider-mode-icon-w.svg'
 
 const SettingsMenu = () => {
-    const {
-        darkMode,
-        setDarkMode,
-        upcomingStationsVisible,
-        setUpcomingStationsVisible,
-        upcomingStationsVertical,
-        setUpcomingStationsVertical,
-    } = useUIContext()
+    const { darkMode, setDarkMode, isHorizontalLayout, toggleUpcomingStationsLayout, setUpcomingStationsVisible } =
+        useUIContext()
     const { conductorMode, setConductorMode } = useSettingsContext()
 
     return (
         <>
-            <SettingsButton label="Theme" imgSrc={darkMode ? L_MODE : D_MODE} onClick={() => setDarkMode((prev) => !prev)} />
+            <SettingsButton label='Theme' imgSrc={darkMode ? L_MODE : D_MODE} onClick={() => setDarkMode((prev) => !prev)} />
             <SettingsButton
-                label="Upcoming stations"
+                label='Upcoming stations'
                 imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
-                onClick={() => {
-                    setUpcomingStationsVisible((prev) => !prev)
-                }}
+                onClick={() => setUpcomingStationsVisible((prev) => !prev)}
             />
             <SettingsButton
-                label="Upcoming stations layout"
+                label='Upcoming stations layout'
                 imgSrc={
-                    upcomingStationsVertical
+                    isHorizontalLayout()
                         ? darkMode
                             ? UPCOMING_STATIONS_HORIZONTAL_WHITE
                             : UPCOMING_STATIONS_HORIZONTAL_BLACK
@@ -49,11 +41,7 @@ const SettingsMenu = () => {
                         ? UPCOMING_STATIONS_VERTICAL_WHITE
                         : UPCOMING_STATIONS_VERTICAL_BLACK
                 }
-                onClick={() => {
-                    if (upcomingStationsVisible) {
-                        setUpcomingStationsVertical((prev) => !prev)
-                    }
-                }}
+                onClick={() => toggleUpcomingStationsLayout()}
             />
             <SettingsButton
                 label={!conductorMode ? 'Conductor mode' : 'Rider mode'}

@@ -1,3 +1,4 @@
+import { useUIContext } from '../contexts/UIContext'
 import './TransferLines.css'
 
 interface TransferLinesProps {
@@ -9,15 +10,18 @@ interface TransferLinesProps {
 }
 
 function TransferLines({ transfers, small, wide, notDim, getTransferLineClicked }: TransferLinesProps) {
+    const { isTransferMode } = useUIContext()
+
     return (
         <div className={`transfer-lines-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${notDim ? 'not-dim' : ''}`}>
             {transfers.map((imageSrc, index) => (
                 <img
                     key={index}
                     src={imageSrc}
-                    className={`${small ? 'small' : 'transfer-line-image'}`}
-                    onClick={() => getTransferLineClicked?.(index)}
+                    className={`${small ? 'small' : 'transfer-line-image'} ${isTransferMode ? 'jiggle-animation' : ''}`}
+                    onMouseDown={() => getTransferLineClicked?.(index)}
                     alt={transfers[index]}
+                    style={{ animationDelay: `${index * 0.1}s` }} // delay for image jiggle animation
                 />
             ))}
         </div>

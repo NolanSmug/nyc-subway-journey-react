@@ -7,6 +7,7 @@
         "nth-check": "2.0.1",
         "react": "^18.0.0",
         "react-dom": "^18.3.1",
+        "react-modal": "^3.16.3",
         "react-scripts": "^5.0.1",
         "typescript": "^4.9.5"
     },
@@ -32,6 +33,7 @@
         "@types/body-parser": "^1.19.5",
         "@types/react": "^18.0.0",
         "@types/react-dom": "^18.3.1",
+        "@types/react-modal": "^3.16.3",
         "nth-check": "2.0.1"
     },
     "packageManager": "yarn@3.6.4"

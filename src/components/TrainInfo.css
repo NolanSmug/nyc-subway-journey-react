@@ -10,8 +10,12 @@
 
 .train-direction:hover {
     cursor: pointer;
-    transform: scale(1.03);
-    transition: ease-in 0.1s;
+    transform: scale(1.02);
+    transition: transform ease-in 0.1s;
+}
+
+.train-direction:active {
+    transform: scale(0.98);
 }
 
 .train-type {
@@ -30,10 +34,12 @@
 }
 
 @keyframes pulse {
+
     0%,
     100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.05);
     }

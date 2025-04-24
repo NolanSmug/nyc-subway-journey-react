@@ -11,8 +11,6 @@ import { useGameContext } from '../contexts/GameContext'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
-import L_ARROW_BLACK from '../images/left-arrow-b.svg'
-import L_ARROW_WHITE from '../images/left-arrow-w.svg'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import DirectionSwitch from './DirectionSwitch'
 
@@ -25,12 +23,11 @@ export interface TrainLineInfo {
 }
 
 function TrainCar() {
-    const { upcomingStationsVertical, darkMode } = useUIContext()
+    const { isHorizontalLayout, isVerticalLayout, darkMode } = useUIContext()
     const { train } = useGameContext()
     const { conductorMode, defaultDirectionToggle, setDefaultDirectionToggle } = useSettingsContext()
 
-    const UPTOWN_DIRECTION_ICON = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
-    const DOWNTOWN_DIRECTION_ICON = darkMode ? L_ARROW_WHITE : L_ARROW_BLACK
+    let ARROW = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
 
     // useMemo on functions that get from maps to mitigate re-rendering
     const currentLine = useMemo(() => train.getLine(), [train])
@@ -50,19 +47,41 @@ function TrainCar() {
         document.documentElement.style.setProperty('--dot-color', currentLineType === LineType.LOCAL ? '#222' : '#fff')
     }, [currentLine, currentLineType])
 
+    let arrowDirection: string = ''
+
+    function updateArrowDirection(): void {
+        // debugger
+        if (isVerticalLayout()) {
+            arrowDirection = train.getDirection() === Direction.DOWNTOWN ? 'down' : 'up'
+        } else {
+            arrowDirection = train.getDirection() === Direction.DOWNTOWN ? 'left' : 'right'
+        }
+    }
+
+    useEffect(() => {
+        updateArrowDirection()
+    }, [updateArrowDirection])
+
+    if (arrowDirection === '') {
+        updateArrowDirection()
+    }
+
     return (
         <>
-            <Header text="Current Line"></Header>
-            <div className="train-container">
+            <Header text='Current Line'></Header>
+            <div className='train-container'>
                 <img
-                    src={DOWNTOWN_DIRECTION_ICON}
-                    className={`arrow ${
-                        train.getDirection() === Direction.DOWNTOWN && !upcomingStationsVertical ? 'show' : 'hide'
+                    src={ARROW}
+                    className={`arrow arrow-${arrowDirection} ${
+                        train.getDirection() === Direction.DOWNTOWN &&
+                        isHorizontalLayout()
+                            ? 'show'
+                            : 'hide'
                     }`}
-                    alt="Left Arrow"
+                    alt='Left Arrow'
                 />
 
-                <div className="train-car">
+                <div className='train-car'>
                     <DirectionSwitch
                         state={defaultDirectionToggle}
                         onChange={(newDirection: Direction) => {
@@ -70,37 +89,39 @@ function TrainCar() {
                         }}
                         visible={conductorMode}
                     />
-                    <div className="doors">
+                    <div className='doors'>
                         <Door isLeft />
                         <Door />
                     </div>
 
-                    <div className="windows" id="train-info">
+                    <div className='windows' id='train-info'>
                         <TrainInfo {...trainInfo} />
                     </div>
 
-                    <div className="doors">
+                    <div className='doors'>
                         <Door isLeft />
                         <Door />
                     </div>
 
-                    <div className="windows">
-                        <div className="front-window"> </div>
+                    <div className='windows'>
+                        <div className='front-window'> </div>
                     </div>
                 </div>
-                <img
-                    src={UPTOWN_DIRECTION_ICON}
-                    className={`arrow ${
-                        train.getDirection() === Direction.UPTOWN && !upcomingStationsVertical ? 'show' : 'hide'
-                    }`}
-                    alt="Right Arrow"
-                />
-                {upcomingStationsVertical && !train.isNullDirection() && (
+
+                {isHorizontalLayout() && !train.isNullDirection() && (
                     <img
-                        src={train.getDirection() === Direction.UPTOWN ? UPTOWN_DIRECTION_ICON : DOWNTOWN_DIRECTION_ICON}
-                        className="arrow-vertical"
-                        alt="Up/Down Arrow"
+                        src={ARROW}
+                        className={`arrow arrow-${arrowDirection} ${
+                            train.getDirection() === Direction.UPTOWN &&
+                            isHorizontalLayout()
+                                ? 'show'
+                                : 'hide'
+                        }`}
+                        alt='Right Arrow'
                     />
+                )}
+                {isVerticalLayout() && !train.isNullDirection() && (
+                    <img src={ARROW} className={`arrow arrow-${arrowDirection}`} alt='Up/Down Arrow' />
                 )}
             </div>
         </>

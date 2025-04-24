@@ -16,18 +16,14 @@ kbd {
     min-width: 1em;
     box-shadow: 1.5px 1.5px #8b8b8b;
     font-family: 'Helvetica', 'sans-serif';
-    font-variant: small-caps;
+    font-size: medium;
     font-weight: 550;
-}
-
-kbd:hover {
-    cursor: pointer;
 }
 
 #key-label {
     text-decoration: none;
     font-weight: 500;
-    font-size: small;
+    font-size: medium;
     width: max-content;
     min-width: 12ch;
     padding: 0.4em 0.3em 0.3em 0.3em;
