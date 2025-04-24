@@ -9150,15 +9150,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nth-check@npm:2.0.1":
-  version: 2.0.1
-  resolution: "nth-check@npm:2.0.1"
-  dependencies:
-    boolbase: ^1.0.0
-  checksum: 5386d035c48438ff304fe687704d93886397349d1bed136de97aeae464caba10e8ffac55a04b215b86b3bc8897f33e0a5aa1045a9d8b2f251ae61b2a3ad3e450
-  languageName: node
-  linkType: hard
-
 "nth-check@npm:^1.0.2":
   version: 1.0.2
   resolution: "nth-check@npm:1.0.2"
@@ -9193,7 +9184,6 @@ __metadata:
     "@types/react-dom": ^18.3.1
     "@types/react-modal": ^3.16.3
     body-parser: ^1.20.3
-    nth-check: 2.0.1
     react: ^18.0.0
     react-dom: ^18.3.1
     react-modal: ^3.16.3
