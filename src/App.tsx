@@ -6,7 +6,7 @@ import UpcomingStationsVertical from './components/UpcomingStationsVertical'
 import UpcomingStationsHorizontal from './components/UpcomingStationsHorizontal'
 import KeyShortcutMenu from './components/KeyShortcutMenu'
 import OptimalRouteUI from './components/OptimalRouteUI'
-import SubwayMap from './components/SubwayMap'
+// import SubwayMap from './components/SubwayMap'
 
 import './App.css'
 import { useUIContext } from './contexts/UIContext'
