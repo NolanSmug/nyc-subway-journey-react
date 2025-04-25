@@ -26,3 +26,5 @@ gtfs_subway/
 yarn-debug.log*
 yarn-error.log*
 npm-debug.log*
+
+src/components/SubwayMap.*
