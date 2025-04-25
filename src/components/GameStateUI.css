@@ -58,7 +58,6 @@
 }
 
 .action-buttons-container#destination-station {
-    margin-top: 2em;
     display: flex;
     justify-content: flex-end;
 }

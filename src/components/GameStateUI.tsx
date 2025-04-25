@@ -144,7 +144,7 @@ function GameStateUI() {
 
             <div className="stations-container">
                 <div className={`station-box ${gameState.isWon ? 'win-state' : ''}`} id="current-station">
-                    <Header text="Current station" />
+                    <Header text="Current station"/>
                     <div className="station-item">
                         <Station name={train.getCurrentStation().getName()}>
                             <TransferLines
