@@ -13,6 +13,7 @@ function Header({ text, img, beforeImgText, afterImgText }: HeaderProps) {
             <div className='headerText'>
                 <h1>{text}</h1>
             </div>
+            
             <div className='img-text-container'>
                 {beforeImgText && <p>{beforeImgText}</p>}
                 {img && <img src={img} alt={text} className='lineImage' />}
