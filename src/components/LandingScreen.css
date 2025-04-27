@@ -1,0 +1,155 @@
+.landing-screen-container {
+    position: fixed;
+    z-index: 100;
+    animation: fadeIn 0.6s ease;
+    border: solid var(--text-color);
+    border-radius: 0.5em;
+}
+
+.landing-screen-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-color-2);
+    color: var(--text-color);
+    padding: 4em;
+    text-align: center;
+}
+
+.landing-screen-content h1 {
+    margin-bottom: 0.5em;
+    font-size: xx-large;
+}
+
+.landing-screen-content p {
+    font-size: large;
+    margin-bottom: 2em;
+    width: 25em;
+}
+
+.jiggly-title {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.jiggly-letter {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    animation: jiggle 0.6s ease-in-out infinite, colorCycle 5s steps(1) infinite;
+    animation-delay: calc(var(--delay, 0s)), calc(var(--color-delay, 0s));
+}
+
+.jiggly-letter::after {
+    content: '';
+    display: block;
+    width: 0.1em;
+    height: 0.1em;
+    border-radius: 50%;
+    background: none;
+    border: 0.05em solid transparent;
+    margin-top: -0.15em;
+
+}
+
+.jiggly-letter.wheel::after {
+    border-color: var(--text-color);
+}
+
+
+
+@keyframes trainGlide {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(0.5em);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes jiggle {
+    0% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(1px);
+    }
+
+    50% {
+        transform: translateY(-1px);
+    }
+
+    75% {
+        transform: translateY(1px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes colorCycle {
+    0%, 9% {
+        color: #EE352E;
+    }
+
+    10%, 19% {
+        color: #00933C;
+    }
+
+    20%, 29% {
+        color: #B933AD;
+    }
+
+    30%, 39% {
+        color: #0039A6;
+    }
+
+    40%, 49% {
+        color: #FF6319;
+    }
+
+    50%, 59% {
+        color: #FCCC0A;
+    }
+
+    60%, 69% {
+        color: #996633;
+    }
+
+    70%, 79% {
+        color: #6CBE45;
+    }
+
+    80%, 89% {
+        color: #A7A9AC;
+    }
+
+    90%, 99% {
+        color: #808183;
+    }
+
+    100% {
+        color: #EE352E;
+    }
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

@@ -17,6 +17,8 @@ interface UIContextProps {
     toggleUpcomingStationsLayout: () => void
     isVerticalLayout: () => boolean
     isHorizontalLayout: () => boolean
+    isLandingPage: boolean
+    setIsLandingPage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const UIContext = createContext<UIContextProps | undefined>(undefined)
@@ -29,6 +31,7 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(
         UpcomingStationsLayout.HORIZONTAL
     )
+    const [isLandingPage, setIsLandingPage] = useState<boolean>(true)
 
     function toggleUpcomingStationsLayout(): void {
         if (upcomingStationsVisible) {
@@ -64,8 +67,17 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
             toggleUpcomingStationsLayout,
             isVerticalLayout: () => isVerticalLayout(),
             isHorizontalLayout: () => isHorizontalLayout(),
+            isLandingPage,
+            setIsLandingPage,
         }),
-        [darkMode, isTransferMode, upcomingStationsVisible, upcomingStationsLayout]
+        [
+            darkMode,
+            isTransferMode,
+            upcomingStationsVisible,
+            upcomingStationsLayout,
+            isLandingPage,
+            setIsLandingPage,
+        ]
     )
 
     return (

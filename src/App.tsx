@@ -17,9 +17,10 @@ import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
+import LandingScreen from './components/LandingScreen'
 
 function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isLandingPage } = useUIContext()
     const { conductorMode } = useSettingsContext()
     const { train, gameState, initializeGame } = useGameContext()
 
@@ -41,8 +42,12 @@ function App() {
 
     return (
         <>
-            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} onMouseDown={handleClickAway} />
+            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} style={isLandingPage ? { opacity: '20%' } : {}} onMouseDown={handleClickAway} />
 
+            {isLandingPage && (
+                <LandingScreen />
+            )}
+            
             <div className='Game'>
                 {gameState.isWon && <OptimalRouteUI />}
                 {!gameState.isWon && upcomingStationsVisible && isHorizontalLayout() && (
@@ -52,11 +57,7 @@ function App() {
                         currentStationIndex={train.getCurrentStationIndex()}
                     />
                 )}
-                <div
-                    className={`game-state-ui ${
-                        isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''
-                    }`}
-                >
+                <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
                     {!gameState.isWon && <GameStateUI />}
                 </div>
             </div>

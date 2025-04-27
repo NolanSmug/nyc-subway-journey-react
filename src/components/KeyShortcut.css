@@ -5,7 +5,7 @@
     justify-content: space-between;
 }
 
-p {
+.shortcut-key {
     width: min-content;
     margin: 0;
 }

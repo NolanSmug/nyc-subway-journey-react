@@ -64,3 +64,21 @@
     font-family: Helvetica, system-ui, sans-serif;
     word-wrap: break-word;
 }
+
+.button-text {
+    font-weight: 600;
+    font-size: 1.2rem;
+    font-family: Helvetica, system-ui, sans-serif;
+    white-space: nowrap;
+}
+
+.no-image-wrapper {
+    border: 0.1em solid var(--bg-color-3);
+    border-radius: 0.5em;
+    padding: 0.5em 2em;
+    background-color: var(--bg-color-2);
+}
+
+.no-image-wrapper:hover {
+    background-color: var(--bg-color-3);
+}
