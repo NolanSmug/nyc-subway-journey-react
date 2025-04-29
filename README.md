@@ -18,7 +18,6 @@
     - [Configuration settings](#configuration-settings)
     - [Conductor mode](#conductor-mode)
     - [Keyboard shortcuts](#keyboard-shortcuts)
-  - [](#)
 
 
 ### Screenshots
@@ -151,5 +150,7 @@ Think of conductor mode as a sort of a professional feature mode. When enabled, 
 - `Shift` + `C` – Toggle **Conductor mode**
 
 <br><br>
+
 ---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
