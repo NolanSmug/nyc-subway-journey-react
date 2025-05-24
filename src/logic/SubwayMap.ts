@@ -19,7 +19,7 @@ export class SubwayMap {
         return filePath
     }
 
-    static async createStations(line: LineName, subwayStations: Station[]) {
+    static async getAllLineStations(line: LineName): Promise<Station[]> {
         const filePath = this.getCsvFromLineName(line)
 
         const response = await fetch(filePath)
@@ -27,32 +27,29 @@ export class SubwayMap {
             throw new Error(`Failed to load CSV file for line: ${line}`)
         }
 
-        const csv = await response.text()
-        const lines = csv.split('\n')
+        const csv: string = await response.text()
+        const rows = csv.split('\n')
+        const subwayStations: Station[] = []
 
-        lines.shift() // Remove header
-        subwayStations.length = 0 // Clear the array
+        rows.shift() // Remove header
 
-        lines.forEach((line, index) => {
-            const columns = line.split(',')
+        rows.forEach((row, index) => {
+            const columns: string[] = row.split(',')
             if (columns.length < 4) {
-                console.error(`Invalid row at index ${index}: ${line}`)
+                console.error(`Invalid row at index ${index}: ${row}`)
                 return // Skip invalid rows
             }
 
             const [id, name, transfersString, boroughString] = columns
 
-            if (!transfersString || !boroughString) {
-                console.error(`Missing data at index ${index}: ${line}`)
-                return
-            }
-
-            const transfers = transfersString.trim().split(' ').map(mapTransferString)
-            const borough = boroughStringToEnum(boroughString.trim())
-            const station = new Station(id.trim(), name.trim(), transfers, borough)
+            const transfers: LineName[] = transfersString.trim().split(' ').map(mapTransferString) // "B Q" -> [B_Train, Q_Train]
+            const borough: Borough = boroughStringToEnum(boroughString.trim())
+            const station: Station = new Station(id.trim(), name.trim(), transfers, borough)
 
             subwayStations.push(station)
         })
+        
+        return subwayStations
     }
 }
 
@@ -130,6 +127,6 @@ function mapTransferString(transfer: string): LineName {
     }
 }
 
-export async function updateStopsForLine(line: LineName, subwayStations: Station[]): Promise<void> {
-    await SubwayMap.createStations(line, subwayStations)
+export async function getStationsForLine(line: LineName): Promise<Station[]> {
+    return Promise.resolve(SubwayMap.getAllLineStations(line)) // needs to be async because createStations() reads from a file
 }

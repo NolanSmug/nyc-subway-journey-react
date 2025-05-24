@@ -20,12 +20,13 @@ import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
 import LandingScreen from './components/LandingScreen'
 
 function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isLandingPage } = useUIContext()
+    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isLandingPage } =
+        useUIContext()
     const { conductorMode } = useSettingsContext()
     const { train, gameState, initializeGame } = useGameContext()
 
     const handleClickAway = (e: React.MouseEvent) => {
-        const transferLinesContainer = document.querySelector('.transfer-lines-container')
+        const transferLinesContainer = document.querySelector('.line-svgs-container')
         if (transferLinesContainer && !transferLinesContainer.contains(e.target as Node)) {
             setIsTransferMode(false)
         }
@@ -42,12 +43,14 @@ function App() {
 
     return (
         <>
-            <div className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`} style={isLandingPage ? { opacity: '20%' } : {}} onMouseDown={handleClickAway} />
+            <div
+                className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`}
+                style={isLandingPage ? { opacity: '20%' } : {}}
+                onMouseDown={handleClickAway}
+            />
 
-            {isLandingPage && (
-                <LandingScreen />
-            )}
-            
+            {isLandingPage && <LandingScreen />}
+
             <div className='Game'>
                 {gameState.isWon && <OptimalRouteUI />}
                 {!gameState.isWon && upcomingStationsVisible && isHorizontalLayout() && (

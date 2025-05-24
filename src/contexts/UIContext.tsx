@@ -31,7 +31,7 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(
         UpcomingStationsLayout.HORIZONTAL
     )
-    const [isLandingPage, setIsLandingPage] = useState<boolean>(true)
+    const [isLandingPage, setIsLandingPage] = useState<boolean>(process.env.REACT_APP_USE_DEV_API === 'true' ? false : true)
 
     function toggleUpcomingStationsLayout(): void {
         if (upcomingStationsVisible) {

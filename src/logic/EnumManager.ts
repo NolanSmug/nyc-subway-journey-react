@@ -92,6 +92,18 @@ export function getLineType(line: LineName): LineType {
     return lineTypes.get(line) ?? LineType.NONE
 }
 
+export function lineArrayEquals(arrayA: LineName[], arrayB: LineName[]): boolean {
+    if (arrayA.length != arrayB.length) return false;
+
+    for (let i = 0; i < arrayA.length; i++) {
+        if (arrayA[i] !== arrayB[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 interface LineDirectionDetails {
     defaultDirectionLabels?: [string, string]
     boroughSpecificLabels?: {

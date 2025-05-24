@@ -6,29 +6,29 @@ import LoadingSpinner from './LoadingSpinner'
 import './OptimalRouteUI.css'
 import { useGameContext } from '../contexts/GameContext'
 import { useUIContext } from '../contexts/UIContext'
-import { LineName } from '../logic/EnumManager'
-import { getTransferImageSvg } from '../logic/TransferImageMap'
+import { LineName, lineArrayEquals } from '../logic/EnumManager'
+import { getLineSVGs, lineToLineColor } from '../logic/LineSVGsMap'
 import { getLineType, LineType } from '../logic/EnumManager'
 
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
+import LineSVGs from './LineSVGs'
 
 interface StationData {
     id: string
     name: string
-    line: LineName
+    lines: LineName[]
     color: string
 }
 
-// FOR TESTING LOADING SPINNER
-//
-// async function fetchWithDelay(start: string, dest: string) {
-//     await new Promise((r) => setTimeout(r, 13_000))
-//     return fetchShortestPath(start, dest)
-// }
-
 async function fetchShortestPath(start: string, dest: string): Promise<StationData[]> {
-    const response = await fetch(`https://routeapi-gevj.onrender.com/route/${start}/${dest}`, {
+    const baseURL =
+        process.env.REACT_APP_USE_DEV_API === 'true'
+            ? process.env.REACT_APP_OPTIMAL_ROUTE_DEV_API
+            : process.env.REACT_APP_OPTIMAL_ROUTE_PROD_API
+    const endpoint: string = `${baseURL}/${start}/${dest}`
+
+    const response = await fetch(endpoint, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     })
@@ -45,17 +45,28 @@ async function fetchShortestPath(start: string, dest: string): Promise<StationDa
 
 function getTransfersIndexes(stationData: StationData[]): number[] {
     let indexes_with_transfer: number[] = []
-    let prev_line: LineName = LineName.NULL_TRAIN
+    let prev_lines: LineName[] = [LineName.NULL_TRAIN]
 
-    /* Don't check last station, which always has a Null_train */
+    // Don't check last station, which always has a Null_train
     for (let i = 0; i < stationData.length - 1; i++) {
-        if (stationData[i].line !== prev_line) {
+        if (!lineArrayEquals(stationData[i].lines, prev_lines)) {
+            // if lines changed...
             indexes_with_transfer.push(i)
-            prev_line = stationData[i].line
+            prev_lines = stationData[i].lines
         }
     }
 
     return indexes_with_transfer
+}
+
+function hasMultiColoredLines(lines: LineName[]): boolean {
+    for (let i = 0; i < lines.length; i++) {
+        if (lineToLineColor(lines[i]) !== lineToLineColor(lines[0])) {
+            return true
+        }
+    }
+
+    return false
 }
 
 function OptimalRouteUI() {
@@ -70,25 +81,46 @@ function OptimalRouteUI() {
         return getLineType(line) === LineType.EXPRESS ? '#fff' : '#222'
     }
 
-    const getDotBorderColor = (line: LineName) => {
-        return getLineType(line) === LineType.EXPRESS ? 'express' : 'local'
+    function getMutliColorLineDivider(lines: LineName[]): string {
+        const uniqueColors = Array.from(new Set(lines.map(lineToLineColor))) // use Set object to get unique colors
+
+        if (uniqueColors.length === 1) {
+            return uniqueColors[0]
+        }
+
+        if (uniqueColors.length === 2) {
+            return `linear-gradient(to bottom, 
+                ${uniqueColors[0]} 0%, 
+                ${uniqueColors[0]} 50%, 
+                ${uniqueColors[1]} 50%, 
+                ${uniqueColors[1]} 100%)`
+        }
+
+        if (uniqueColors.length === 3) {
+            return `linear-gradient(to bottom, 
+                ${uniqueColors[0]} 0%, ${uniqueColors[0]} 33.33%,
+                ${uniqueColors[1]} 33.33%, ${uniqueColors[1]} 66.66%,
+                ${uniqueColors[2]} 66.66%, ${uniqueColors[2]} 100%)`
+        }
+
+        return `linear-gradient(to bottom, ${uniqueColors.join(', ')})` // fallback to actual gradient if > 3, but pretty rare if not impossible
     }
 
     useEffect(() => {
-        if (!gameState.isWon) return
+        if (!gameState.isWon || stationData.length > 0) return
         ;(async () => {
             setLoadingVisible(true)
             try {
                 const [startID, destID] = await gameState.getStartDestStationIDs()
                 const data = await fetchShortestPath(startID, destID)
-                // const data = await fetchShortestPath(startID, destID)
 
                 const stationsData: StationData[] = data.map((station: StationData) => ({
                     id: station.id,
                     name: station.name,
-                    line: station.line,
+                    lines: station.lines,
                     color: station.color,
                 }))
+
                 setStationData(stationsData)
             } catch (error) {
                 console.error('Error fetching optimal route:', error)
@@ -99,7 +131,7 @@ function OptimalRouteUI() {
     }, [gameState.isWon])
 
     useEffect(() => {
-        if (stationData.length > 0) {
+        if (stationData.length > 0 && transferIndexes.length === 0) {
             const indexes = getTransfersIndexes(stationData)
             setTransferIndexes(indexes)
         }
@@ -122,37 +154,33 @@ function OptimalRouteUI() {
                         <div key={index} className='optimal-station-container'>
                             <div className='transfer-lines-wrapper'>
                                 {transferIndexes.includes(index) ? (
-                                    <img
-                                        src={getTransferImageSvg(station.line)[0]}
-                                        alt={station.line}
-                                        className='transfer-line-image optimal-transfer-line-image'
-                                    ></img>
+                                    <LineSVGs transfers={getLineSVGs(station.lines)} wide={station.lines.length > 3} />
                                 ) : (
-                                    <div className='transfer-placeholder' /> // We need a placeholder for dots with no transfer svg
+                                    <div className='transfer-placeholder' /> // we need a placeholder for dots with no transfer svg
                                 )}
                             </div>
 
                             <div className='station-with-line'>
                                 <div
                                     // dynamically setting the coloring of station dots depending on if current line is express/local
-                                    className={`optimal-station-dot ${
-                                        station.line === LineName.NULL_TRAIN
-                                            ? getDotBorderColor(stationData[index - 1].line)
-                                            : getDotBorderColor(station.line)
-                                    }`}
+                                    className={`optimal-station-dot`}
                                     style={{
-                                        backgroundColor:
-                                            station.line === LineName.NULL_TRAIN
-                                                ? getDotColor(stationData[index - 1].line) // if is the last station's dot, set dot color to prev dot color
-                                                : getDotColor(station.line), // else set dot color properly
+                                        backgroundColor: station.lines.includes(LineName.NULL_TRAIN)
+                                            ? getDotColor(stationData[index - 1].lines[0]) // if is the last station's dot, set dot color to prev dot color
+                                            : getDotColor(station.lines[0]), // else set dot color properly
+                                        borderColor: station.lines.includes(LineName.NULL_TRAIN)
+                                            ? stationData[index - 1].color // same logic here as in backgroundColor
+                                            : station.color,
                                     }}
                                 />
                                 <div
                                     className='line-divider-custom'
                                     style={{
-                                        width: `${station.name.length * 11}px`,
-                                        backgroundColor: station.color,
-                                        borderColor: station.color,
+                                        width: `${station.name.length * 12}px`,
+                                        background: hasMultiColoredLines(station.lines)
+                                            ? getMutliColorLineDivider(station.lines)
+                                            : station.color,
+                                        height: `${hasMultiColoredLines(station.lines) ? '0.7rem' : '0.5rem'}`,
                                     }}
                                 />
                             </div>

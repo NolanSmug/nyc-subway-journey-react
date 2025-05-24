@@ -4,7 +4,7 @@ import './GameStateUI.css'
 import ActionButton from './ActionButton'
 import Header from './Header'
 import Station from './Station'
-import TransferLines from './TransferLines'
+import LineSVGs from './LineSVGs'
 import TrainCar from './TrainCar'
 import AdvanceNStationsInput from './AdvanceNStationsInput'
 
@@ -12,7 +12,7 @@ import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import { LineName } from '../logic/EnumManager'
-import { getTransferImageSvg } from '../logic/TransferImageMap'
+import { getLineSVG } from '../logic/LineSVGsMap'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
@@ -69,7 +69,7 @@ function GameStateUI() {
     const checkForWin = () => {
         const winState = gameState.checkWin(train.getCurrentStation())
         if (winState) {
-            setGameState(gameState.setIsWon(true))
+            setGameState(gameState)
         }
     }
 
@@ -77,7 +77,6 @@ function GameStateUI() {
     const transferTo = async (selectedLine: LineName): Promise<void> => {
         if (await train.transferToLine(selectedLine, train.getCurrentStation())) {
             train.setLine(selectedLine)
-            train.setLineType()
             train.setCurrentStation(train.getCurrentStation())
             if (conductorMode) train.setDirection(defaultDirectionToggle)
             train.updateTrainState()
@@ -147,9 +146,9 @@ function GameStateUI() {
                     <Header text="Current station"/>
                     <div className="station-item">
                         <Station name={train.getCurrentStation().getName()}>
-                            <TransferLines
-                                getTransferLineClicked={getTransferLineClicked}
-                                transfers={getTransferImageSvg(train.getCurrentStation())}
+                            <LineSVGs
+                                getSVGClicked={getTransferLineClicked}
+                                transfers={getLineSVG(train.getCurrentStation())}
                                 notDim
                             />
                         </Station>
@@ -178,7 +177,7 @@ function GameStateUI() {
                     <Header text="Destination station" />
                     <div className="station-item">
                         <Station name={gameState.destinationStation.getName()}>
-                            <TransferLines transfers={getTransferImageSvg(gameState.destinationStation)} />
+                            <LineSVGs transfers={getLineSVG(gameState.destinationStation)} />
                         </Station>
                     </div>
                     <div className="action-buttons-container" id="destination-station">

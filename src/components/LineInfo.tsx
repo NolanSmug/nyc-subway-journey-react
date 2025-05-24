@@ -12,7 +12,7 @@ function LineInfo({ direction, line, type }: LineInfoProps) {
         <>
             <div className='LineInfo-container'>
                 <h2>{direction}&nbsp;&nbsp;</h2>
-                <img src={line} alt={`${line}`} className='transfer-line-image' />
+                <img src={line} alt={`${line}`} className='line-svg-image' />
                 <h2>&nbsp;&nbsp;{type} train</h2>{' '}
             </div>
         </>

@@ -2,7 +2,6 @@
     position: fixed;
     z-index: 100;
     animation: fadeIn 0.6s ease;
-    border: solid var(--text-color);
     border-radius: 0.5em;
 }
 

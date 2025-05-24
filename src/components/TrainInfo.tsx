@@ -1,4 +1,4 @@
-import { default as Line } from '../components/TransferLines'
+import { default as Line } from './LineSVGs'
 
 import './TrainInfo.css'
 import { useSettingsContext } from '../contexts/SettingsContext'
@@ -10,7 +10,6 @@ export interface TrainInfoProps extends TrainLineInfo {}
 
 export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType }: TrainInfoProps) {
     const { train, updateTrainObject } = useGameContext()
-    const { defaultDirectionToggle } = useSettingsContext()
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 

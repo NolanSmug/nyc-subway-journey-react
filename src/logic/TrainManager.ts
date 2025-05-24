@@ -1,10 +1,9 @@
-import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, lineTypes } from './EnumManager'
+import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, getLineType } from './EnumManager'
 import { Station } from './StationManager'
-import { updateStopsForLine } from './SubwayMap'
+import { getStationsForLine } from './SubwayMap'
 
 export class Train {
     private currentLine: LineName
-    private lineType: LineType
     private direction: Direction
     private uptownLabel: string
     private downtownLabel: string
@@ -17,14 +16,12 @@ export class Train {
 
     constructor(
         currentLine: LineName = LineName.NULL_TRAIN,
-        lineType: LineType = LineType.NONE,
         direction: Direction = Direction.NULL_DIRECTION,
         uptownLabel: string = 'Uptown',
         downtownLabel: string = 'Downtown',
         scheduledStops: Station[] = []
     ) {
         this.currentLine = currentLine
-        this.lineType = lineType
         this.direction = direction
         this.uptownLabel = uptownLabel
         this.downtownLabel = downtownLabel
@@ -53,12 +50,8 @@ export class Train {
     }
 
     // LineType
-    public setLineType() {
-        this.lineType = lineTypes.get(this.currentLine) ?? LineType.NONE
-    }
-
     public getLineType(): LineType {
-        return lineTypes.get(this.currentLine) ?? LineType.NONE
+        return getLineType(this.currentLine)
     }
 
     // Direction
@@ -130,10 +123,6 @@ export class Train {
     }
 
     // Scheduled Stops
-    public async updateScheduledStops(line: LineName): Promise<void> {
-        await updateStopsForLine(line, this.scheduledStops)
-    }
-
     public getScheduledStops(): Station[] {
         return this.scheduledStops
     }
@@ -216,7 +205,7 @@ export class Train {
 
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
-            await this.updateScheduledStops(newLine)
+            this.setScheduledStops(await getStationsForLine(newLine)) 
             this.setCurrentStationIndexByID(currentStation.getId(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)
@@ -228,7 +217,7 @@ export class Train {
     }
 
     // Action Logic
-    public updateTrainState(): Train {
+    public updateTrainState() {
         const lastStationIndex: number = this.scheduledStops.length - 1
 
         this.isAtRockawayBranch = this.getCurrentStation().getName() === 'Rockaway Blvd' && this.direction === Direction.DOWNTOWN
@@ -238,8 +227,6 @@ export class Train {
             ((this.currentStationIndex === 0 && this.direction === Direction.DOWNTOWN) ||
                 (this.currentStationIndex === lastStationIndex && this.direction === Direction.UPTOWN)) &&
             !this.isAtRockawayBranch
-
-        return this
     }
 
     public advanceStation(): Train {

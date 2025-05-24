@@ -1,8 +1,8 @@
 import React from 'react'
-import TransferLines from './TransferLines'
+import LineSVGs from './LineSVGs'
 
 import './StationFragment.css'
-import { getTransferImages } from '../logic/TransferImageMap'
+import { getLineSVGs } from '../logic/LineSVGsMap'
 import { Station } from '../logic/StationManager'
 import { LineName } from '../logic/EnumManager'
 
@@ -30,7 +30,7 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
                 <div className='station-frag-info'>
                     <h2 className='station-frag-name'>{station.getName()}</h2>
                     <div className='transfer-lines'>
-                        <TransferLines small transfers={getTransferImages(transfers)} />
+                        <LineSVGs small transfers={getLineSVGs(transfers)} />
                     </div>
                 </div>
             </div>

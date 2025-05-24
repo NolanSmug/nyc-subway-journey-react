@@ -86,13 +86,13 @@ h2 {
 /* Windows styling */
 .train-car .train-direction,
 .train-car .train-type,
-.train-car .transfer-lines-container img.transfer-line-image {
+.train-car .line-svgs-container img.line-svg-image {
     border: 1px solid var(--train-car-border);
     padding: 0.3em;
     border-radius: 0.1em;
 }
 
-.train-car .transfer-lines-container img.transfer-line-image {
+.train-car .line-svgs-container img.line-svg-image {
     border-radius: 0.2em;
     padding: 0.43em;
     cursor: default;

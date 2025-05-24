@@ -4,8 +4,8 @@ import Door from './Door'
 import TrainInfo from '../components/TrainInfo'
 
 import './TrainCar.css'
-import { Direction, LineType, LineName } from '../logic/EnumManager'
-import { getTransferImageSvg, lineToLineColor } from '../logic/TransferImageMap'
+import { Direction, LineType, LineName, getLineType } from '../logic/EnumManager'
+import { getLineSVG, lineToLineColor } from '../logic/LineSVGsMap'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 
@@ -31,8 +31,8 @@ function TrainCar() {
 
     // useMemo on functions that get from maps to mitigate re-rendering
     const currentLine = useMemo(() => train.getLine(), [train])
-    const currentLineType = useMemo(() => train.getLineType(), [train])
-    const currentLineSvg = useMemo(() => getTransferImageSvg(currentLine), [currentLine])[0]
+    const currentLineType = useMemo(() => getLineType(currentLine), [currentLine])
+    const currentLineSvg = useMemo(() => getLineSVG(currentLine), [currentLine])[0]
 
     const trainInfo: TrainLineInfo = {
         direction: train.getDirection(),

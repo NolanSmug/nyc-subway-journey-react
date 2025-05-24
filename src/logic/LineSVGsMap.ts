@@ -30,7 +30,7 @@ import IMG_7 from '../images/7.svg'
 // import IMG_7D from '../images/7d.svg'
 import { Station } from './StationManager'
 
-const transferImageMap: { [key in LineName]: string } = {
+const lineSVGsMap: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: '',
     [LineName.ONE_TRAIN]: IMG_1,
     [LineName.TWO_TRAIN]: IMG_2,
@@ -61,20 +61,20 @@ const transferImageMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 }
 
-export const getTransferImageSvg = (input: Station | LineName | null | undefined): string[] => {
+export const getLineSVG = (input: Station | LineName | null | undefined): string[] => {
     if (!input) return []
 
     if (input instanceof Station) {
-        return getTransferImages(input.getTransfers())
+        return getLineSVGs(input.getTransfers())
     }
     if (typeof input === 'string') {
-        return getTransferImages([input])
+        return getLineSVGs([input])
     }
     return []
 }
 
-export const getTransferImages = (transfers: LineName[]): string[] => {
-    return transfers.map((transfer) => transferImageMap[transfer] || '')
+export const getLineSVGs = (transfers: LineName[]): string[] => {
+    return transfers.map((transfer) => lineSVGsMap[transfer] || '')
 }
 
 const lineColorMap: { [key in LineName]: string } = {
@@ -112,4 +112,4 @@ export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
 
-export default transferImageMap
+export default lineSVGsMap

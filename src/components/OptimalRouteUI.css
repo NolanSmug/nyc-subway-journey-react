@@ -46,12 +46,12 @@
 
 .transfer-placeholder {
     height: 2.5em;
-    width: 100%;
+    /* width: 100%; */
     visibility: hidden;
     /* keeps layout space, but doesn't render */
 }
 
-.optimal-transfer-line-image {
+.optimal-line-svg-image {
     position: relative;
     right: 4px;
 }
@@ -71,19 +71,12 @@
     background-color: var(--dot-color);
     border-color: #fff;
     border-radius: 50%;
-    border-width: 0.15rem;
+    border-width: 0.3rem;
     border-style: solid;
     position: relative;
     z-index: 2;
 }
 
-.optimal-station-dot.local {
-    border-color: #fff;
-}
-
-.optimal-station-dot.express {
-    border-color: #000;
-}
 
 
 .line-divider-custom {

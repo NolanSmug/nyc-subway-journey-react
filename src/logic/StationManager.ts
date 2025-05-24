@@ -10,7 +10,7 @@ export class Station {
     static allNycStations: Station[] = []
     static async initializeAllStations(): Promise<void> {
         if (this.allNycStations.length === 0) {
-            await SubwayMap.createStations(LineName.NULL_TRAIN, this.allNycStations)
+            this.allNycStations = await SubwayMap.getAllLineStations(LineName.NULL_TRAIN)
             console.log('All NYC stations initialized:', this.allNycStations)
         } else {
             console.log('All NYC stations already initialized.')

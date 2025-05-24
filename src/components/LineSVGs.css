@@ -1,9 +1,9 @@
-.transfer-lines-container {
+.line-svgs-container {
     display: flex;
     column-gap: 0.25em;
 }
 
-.transfer-line-image {
+.line-svg-image {
     height: 2rem;
     width: 2rem;
     opacity: 1;
@@ -15,23 +15,23 @@
     transition: transform 0.1s ease-out;
 }
 
-#current-station .transfer-line-image:active {
+#current-station .line-svg-image:active {
     transform: scale(0.95) 
 }
 
-#current-station .transfer-line-image:hover {
+#current-station .line-svg-image:hover {
     --hover-scale: 1.05;
     cursor: pointer;
     transition: transform ease-in-out 0.1s;
 }
 
 
-#current-station .transfer-line-image.jiggle-animation {
+#current-station .line-svg-image.jiggle-animation {
     animation: jiggle 0.5s ease-in-out infinite;
 }
 
 
-#destination-station .transfer-line-image:hover {
+#destination-station .line-svg-image:hover {
     transform: none !important;
     cursor: default;
 }
@@ -42,7 +42,7 @@
     opacity: 1;
 }
 
-.transfer-lines-container.small {
+.line-svgs-container.small {
     display: flex;
     column-gap: 0.15em;
     flex-wrap: wrap;
@@ -50,7 +50,7 @@
     min-width: 6rem;
 }
 
-.transfer-lines-container.wide {
+.line-svgs-container.wide {
     min-width: 16rem;
 }
 
