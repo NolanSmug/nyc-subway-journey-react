@@ -4,7 +4,7 @@ import './TrainInfo.css'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import { useGameContext } from '../contexts/GameContext'
 import { TrainLineInfo } from './TrainCar'
-import { Direction } from '../logic/EnumManager'
+import { Direction } from '../logic/LineManager'
 
 export interface TrainInfoProps extends TrainLineInfo {}
 

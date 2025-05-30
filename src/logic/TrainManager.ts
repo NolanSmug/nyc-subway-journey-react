@@ -1,4 +1,4 @@
-import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, getLineType } from './EnumManager'
+import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, getLineType } from './LineManager'
 import { Station } from './StationManager'
 import { getStationsForLine } from './SubwayMap'
 

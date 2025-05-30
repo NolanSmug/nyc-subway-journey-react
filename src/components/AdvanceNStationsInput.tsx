@@ -1,4 +1,4 @@
-import { Direction } from '../logic/EnumManager'
+import { Direction } from '../logic/LineManager'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import { useUIContext } from '../contexts/UIContext'

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
-import { Direction } from '../logic/EnumManager'
+import { Direction } from '../logic/LineManager'
 
 interface SettingsContextProps {
     conductorMode: boolean

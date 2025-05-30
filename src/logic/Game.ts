@@ -1,7 +1,7 @@
 import { GameState } from './GameState'
 import { Train } from './TrainManager'
-import { Direction } from './EnumManager'
-import { getStationsForLine, SubwayMap } from './SubwayMap'
+import { Direction } from './LineManager'
+import { getStationsForLine } from './SubwayMap'
 
 export class Game {
     public gameState: GameState

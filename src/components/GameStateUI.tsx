@@ -11,7 +11,7 @@ import AdvanceNStationsInput from './AdvanceNStationsInput'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
-import { LineName } from '../logic/EnumManager'
+import { LineName } from '../logic/LineManager'
 import { getLineSVG } from '../logic/LineSVGsMap'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'

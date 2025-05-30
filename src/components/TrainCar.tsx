@@ -4,7 +4,7 @@ import Door from './Door'
 import TrainInfo from '../components/TrainInfo'
 
 import './TrainCar.css'
-import { Direction, LineType, LineName, getLineType } from '../logic/EnumManager'
+import { Direction, LineType, LineName, getLineType } from '../logic/LineManager'
 import { getLineSVG, lineToLineColor } from '../logic/LineSVGsMap'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'

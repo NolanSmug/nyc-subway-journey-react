@@ -1,4 +1,4 @@
-import { LineName, getRandomLine } from './EnumManager'
+import { LineName, getRandomLine } from './LineManager'
 import { Station } from './StationManager'
 import { getStationsForLine } from './SubwayMap'
 
@@ -41,7 +41,7 @@ export class GameState {
         this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine))
         do {
             this.destinationStation = Station.getRandomStation(Station.allNycStations)
-        } while (this.startingStation === this.destinationStation)
+        } while (this.startingStation.equals(this.destinationStation))
     }
 
     public isEmpty(): boolean {

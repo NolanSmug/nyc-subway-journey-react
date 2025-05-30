@@ -1,5 +1,5 @@
 import './LineInfo.css'
-import { LineType } from '../logic/EnumManager'
+import { LineType } from '../logic/LineManager'
 
 interface LineInfoProps {
     direction: string

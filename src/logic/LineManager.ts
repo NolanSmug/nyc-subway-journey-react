@@ -29,16 +29,6 @@ export enum LineName {
     S_TRAIN_ROCKAWAY = 'S_Train_Rockaway',
 }
 
-export function getRandomLine(): LineName {
-    const lines = Object.values(LineName)
-    let randomLine = LineName.NULL_TRAIN
-    do {
-        randomLine = lines[Math.floor(Math.random() * lines.length)]
-    } while (randomLine === LineName.NULL_TRAIN)
-
-    return randomLine
-}
-
 export enum Borough {
     MANHATTAN = 'Manhattan',
     BROOKLYN = 'Brooklyn',
@@ -88,20 +78,30 @@ export const lineTypes: Map<LineName, LineType> = new Map([
     [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
 ])
 
-export function getLineType(line: LineName): LineType {
-    return lineTypes.get(line) ?? LineType.NONE
+export function getRandomLine(): LineName {
+    const lines = Object.values(LineName)
+    let randomLine = LineName.NULL_TRAIN
+    do {
+        randomLine = lines[Math.floor(Math.random() * lines.length)]
+    } while (randomLine === LineName.NULL_TRAIN)
+
+    return randomLine
 }
 
 export function lineArrayEquals(arrayA: LineName[], arrayB: LineName[]): boolean {
-    if (arrayA.length != arrayB.length) return false;
+    if (arrayA.length != arrayB.length) return false
 
     for (let i = 0; i < arrayA.length; i++) {
         if (arrayA[i] !== arrayB[i]) {
-            return false;
+            return false
         }
     }
 
-    return true;
+    return true
+}
+
+export function getLineType(line: LineName): LineType {
+    return lineTypes.get(line) ?? LineType.NONE
 }
 
 interface LineDirectionDetails {

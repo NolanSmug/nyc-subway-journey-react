@@ -4,7 +4,7 @@ import LineSVGs from './LineSVGs'
 import './StationFragment.css'
 import { getLineSVGs } from '../logic/LineSVGsMap'
 import { Station } from '../logic/StationManager'
-import { LineName } from '../logic/EnumManager'
+import { LineName } from '../logic/LineManager'
 
 export interface StationFragmentProps {
     station: Station

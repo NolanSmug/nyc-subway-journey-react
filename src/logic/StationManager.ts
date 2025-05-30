@@ -1,4 +1,4 @@
-import { LineName, Borough } from './EnumManager'
+import { LineName, Borough } from './LineManager'
 import { SubwayMap } from './SubwayMap'
 
 export class Station {
