@@ -2,25 +2,29 @@ import { useUIContext } from '../contexts/UIContext'
 import './LineSVGs.css'
 
 interface LineSVGsProps {
-    transfers: string[]
-    small?: boolean
-    wide?: boolean
+    svgPaths: string[]
+    small?: boolean // for smaller images like in upcoming stations view
+    wide?: boolean // allow more svgs per row
+    grouped?: boolean // group svgs as one, 2 per row
+    numLines?: number // if we want to keep the lines centered
     notDim?: boolean
-    getSVGClicked?: (index: number) => Promise<void> | void
+    onTransferSelect?: (index: number) => void | undefined
 }
 
-function LineSVGs({ transfers, small, wide, notDim, getSVGClicked }: LineSVGsProps) {
+function LineSVGs({ svgPaths, small, wide, grouped, numLines, notDim, onTransferSelect }: LineSVGsProps) {
     const { isTransferMode } = useUIContext()
 
     return (
-        <div className={`line-svgs-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${notDim ? 'not-dim' : ''}`}>
-            {transfers.map((imageSrc, index) => (
+        <div
+            className={`line-svgs-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''} ${notDim ? 'not-dim' : ''} ${numLines} `}
+        >
+            {svgPaths.map((imageSrc, index) => (
                 <img
                     key={index}
                     src={imageSrc}
                     className={`${small ? 'small' : 'line-svg-image'} ${isTransferMode ? 'jiggle-animation' : ''}`}
-                    onMouseDown={() => getSVGClicked?.(index)}
-                    alt={transfers[index]}
+                    onMouseDown={() => onTransferSelect && onTransferSelect(index)}
+                    alt={svgPaths[index]}
                     style={{ animationDelay: `${index * 0.1}s` }} // delay for image jiggle animation
                 />
             ))}

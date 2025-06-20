@@ -30,7 +30,7 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
                 <div className='station-frag-info'>
                     <h2 className='station-frag-name'>{station.getName()}</h2>
                     <div className='transfer-lines'>
-                        <LineSVGs small transfers={getLineSVGs(transfers)} />
+                        <LineSVGs small svgPaths={getLineSVGs(transfers)} />
                     </div>
                 </div>
             </div>

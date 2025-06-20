@@ -19,10 +19,6 @@ const UmbrellaButton = ({ openingButtonsW_B, umbrellaContent, below, visible }: 
     const { darkMode } = useUIContext()
 
     useEffect(() => {
-        document.body.classList.toggle('dark-mode', darkMode)
-    }, [darkMode])
-
-    useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (!(event.target instanceof Node)) return
 

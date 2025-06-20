@@ -61,7 +61,7 @@ const lineSVGsMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 }
 
-export const getLineSVG = (input: Station | LineName | null | undefined): string[] => {
+export const getLineSVG = (input: Station | LineName | undefined): string[] => {
     if (!input) return []
 
     if (input instanceof Station) {
@@ -110,6 +110,51 @@ const lineColorMap: { [key in LineName]: string } = {
 
 export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
+}
+
+export function groupLines(lines: LineName[], stationID: string, currentLine: LineName): LineName[][] {
+    const GROUPS: LineName[][] = [
+        [LineName.ONE_TRAIN, LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.SEVEN_TRAIN],
+        [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN, LineName.SIX_TRAIN],
+        [LineName.A_TRAIN, LineName.C_TRAIN, LineName.E_TRAIN],
+        [LineName.B_TRAIN, LineName.D_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN],
+        [LineName.N_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN],
+        [LineName.J_TRAIN, LineName.Z_TRAIN],
+        [LineName.G_TRAIN],
+        [LineName.L_TRAIN],
+        [LineName.S_TRAIN, LineName.S_TRAIN_SHUTTLE, LineName.S_TRAIN_ROCKAWAY],
+    ]
+
+    let result: LineName[][] = GROUPS.map((group) => group.filter((line) => lines.includes(line))).filter(
+        (filteredGroup) => filteredGroup.length > 0
+    )
+
+    if (stationID) {
+        result = getSpecificStationGroup(stationID, result, currentLine)
+    }
+
+    return result
+}
+
+function getSpecificStationGroup(stationID: string, prevResult: LineName[][], currentLine: LineName): LineName[][] {
+    switch (stationID) {
+        case 'AAB':
+            return [
+                [LineName.TWO_TRAIN, LineName.THREE_TRAIN].filter((line) => line != currentLine),
+                [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN].filter((line) => line != currentLine),
+                [LineName.D_TRAIN, LineName.N_TRAIN, LineName.R_TRAIN].filter((line) => line != currentLine),
+                [LineName.B_TRAIN, LineName.Q_TRAIN].filter((line) => line != currentLine),
+            ]
+        case 'JAY':
+            return [
+                [LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN].filter((line) => line != currentLine),
+                [LineName.R_TRAIN].filter((line) => line != currentLine),
+            ]
+        case 'R30':
+            return [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN].filter((line) => line != currentLine)]
+    }
+
+    return prevResult
 }
 
 export default lineSVGsMap

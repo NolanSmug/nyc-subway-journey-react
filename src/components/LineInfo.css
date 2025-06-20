@@ -10,3 +10,7 @@
 .line-svg-image {
     height: 2rem;
 }
+
+.line-svg-image>.flipped-layout {
+    transform: scaleY(1);
+}

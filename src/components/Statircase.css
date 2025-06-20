@@ -1,0 +1,20 @@
+.staircase-container {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+.staircase {
+    border-width: 1px 0px 1px 1px;
+    border-color: var(--text-color);
+    border-style: solid;
+    padding: 0.3em;
+    border-radius: 0.1em;
+    width: 5em;
+    height: 4em;
+}
+
+
+.staircase.right {
+    border-right: 1px solid var(--text-color);
+}

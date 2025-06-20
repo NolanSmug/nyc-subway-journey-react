@@ -22,7 +22,7 @@
 .umbrella-content.visible {
     height: fit-content;
     width: max-content;
-    /* opacity: 0.85; */
+    opacity: 0.85;
 }
 
 .umbrella-content.hidden {

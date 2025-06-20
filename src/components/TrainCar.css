@@ -34,6 +34,12 @@ h2 {
     transform: rotate(180deg);
 }
 
+.arrow-left:hover,
+.arrow-up:hover,
+.arrow-down:hover {
+    transform: rotate(180deg) scale(1.05);
+}
+
 .show {
     visibility: visible;
 }
@@ -66,6 +72,16 @@ h2 {
     background-color: var(--train-car-border);
 }
 
+.doors {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    padding: 0 1em;
+    gap: 0;
+    align-self: stretch;
+    padding-top: 0.5em;
+}
+
 .windows {
     display: flex;
     flex-direction: row;
@@ -96,7 +112,7 @@ h2 {
     border-radius: 0.2em;
     padding: 0.43em;
     cursor: default;
-    transform: none;
+    /* transform: none; */
 }
 
 .front-window {

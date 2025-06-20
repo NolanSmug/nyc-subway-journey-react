@@ -23,7 +23,7 @@ const StationFragmentVertical: React.FC<StationFragmentVerticalProps> = ({ stati
                 <div className={`station-frag-vertical-info`}>
                     <h2 className={`station-frag-vertical-name`}>{station.getName()}</h2>
                     <div className='transfer-lines'>
-                        <LineSVGs small wide transfers={getLineSVGs(transfers)} />
+                        <LineSVGs small wide svgPaths={getLineSVGs(transfers)} />
                     </div>
                 </div>
             </div>

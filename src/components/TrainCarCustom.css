@@ -1,0 +1,62 @@
+.train-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* PLATFORM EDGES (please stand away) */
+.train-wrapper.uptown::after, .train-wrapper.downtown::after {
+    content: "";
+    position: absolute;
+    left: 3.25em;
+    width: 90%;
+    height: 24px;
+    background:
+        radial-gradient(circle, rgb(242, 242, 168) 40%, transparent 41%) repeat,
+        rgba(0, 0, 0, 0.05);
+    background-size: 3px 3px;
+    background-position: center;
+    z-index: 0;
+    border-radius: 2px;
+}
+
+.train-wrapper.uptown::after {
+    bottom: 0;
+    border-top: 2px solid rgb(249, 203, 165)
+}
+
+.train-wrapper.downtown::after {
+    top: 0;
+    border-bottom: 2px solid rgb(249, 203, 165)
+}
+
+.train-wrapper.uptown {
+    padding-bottom: 32px;
+}
+
+.train-wrapper.downtown {
+    padding-top: 32px;
+}
+
+.train-advance-button {
+    width: 5em;
+}
+
+.train-car.flipped-layout {
+    transform: scaleY(-1);
+    border-radius: 1em 1em 0.2em 0.2em;
+}
+
+.train-car.flipped-layout * {
+    transform: scaleY(-1);
+}
+
+.train-car.flipped-layout #train-info {
+    transform: none;
+}
+
+.train-car.flipped-layout .doors {
+    padding-top: 0em;
+    padding-bottom: 0.5em;
+}

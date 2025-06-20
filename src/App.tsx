@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import GameStateUI from './components/GameStateUI'
+import ConductorModeUI from './components/ConductorModeUI'
 import UmbrellaButton from './components/UmbrellaButton'
 import SettingsMenu from './components/SettingsMenu'
 import UpcomingStationsVertical from './components/UpcomingStationsVertical'
@@ -18,6 +18,7 @@ import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
 import LandingScreen from './components/LandingScreen'
+import RiderModeUI from './components/RiderModeUI'
 
 function App() {
     const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isLandingPage } =
@@ -40,11 +41,10 @@ function App() {
         return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
 
     // console.log(gameState.isWon)
-
     return (
         <>
             <div
-                className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`}
+                className={`${conductorMode ? 'dimmed-overlay' : ''} ${isTransferMode ? 'active' : ''}`}
                 style={isLandingPage ? { opacity: '20%' } : {}}
                 onMouseDown={handleClickAway}
             />
@@ -61,7 +61,8 @@ function App() {
                     />
                 )}
                 <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
-                    {!gameState.isWon && <GameStateUI />}
+                    {!gameState.isWon && conductorMode && <ConductorModeUI />}
+                    {!gameState.isWon && !conductorMode && <RiderModeUI />}
                 </div>
             </div>
 

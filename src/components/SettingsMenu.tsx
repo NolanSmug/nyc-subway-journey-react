@@ -18,8 +18,7 @@ import RIDER_MODE_BLACK from '../images/rider-mode-icon-b.svg'
 import RIDER_MODE_WHITE from '../images/rider-mode-icon-w.svg'
 
 const SettingsMenu = () => {
-    const { darkMode, setDarkMode, isHorizontalLayout, toggleUpcomingStationsLayout, setUpcomingStationsVisible } =
-        useUIContext()
+    const { darkMode, setDarkMode, isHorizontalLayout, toggleUpcomingStationsLayout, setUpcomingStationsVisible } = useUIContext()
     const { conductorMode, setConductorMode } = useSettingsContext()
 
     return (
@@ -38,8 +37,8 @@ const SettingsMenu = () => {
                             ? UPCOMING_STATIONS_HORIZONTAL_WHITE
                             : UPCOMING_STATIONS_HORIZONTAL_BLACK
                         : darkMode
-                        ? UPCOMING_STATIONS_VERTICAL_WHITE
-                        : UPCOMING_STATIONS_VERTICAL_BLACK
+                          ? UPCOMING_STATIONS_VERTICAL_WHITE
+                          : UPCOMING_STATIONS_VERTICAL_BLACK
                 }
                 onClick={() => toggleUpcomingStationsLayout()}
             />
@@ -51,8 +50,8 @@ const SettingsMenu = () => {
                             ? RIDER_MODE_WHITE
                             : RIDER_MODE_BLACK
                         : darkMode
-                        ? CONDUCTOR_MODE_WHITE
-                        : CONDUCTOR_MODE_BLACK
+                          ? CONDUCTOR_MODE_WHITE
+                          : CONDUCTOR_MODE_BLACK
                 }
                 onClick={() => {
                     setConductorMode((prev) => !prev)

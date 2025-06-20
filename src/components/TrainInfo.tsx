@@ -1,14 +1,13 @@
 import { default as Line } from './LineSVGs'
 
 import './TrainInfo.css'
-import { useSettingsContext } from '../contexts/SettingsContext'
 import { useGameContext } from '../contexts/GameContext'
 import { TrainLineInfo } from './TrainCar'
 import { Direction } from '../logic/LineManager'
 
 export interface TrainInfoProps extends TrainLineInfo {}
 
-export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType }: TrainInfoProps) {
+export function TrainInfo({ direction, directionLabel, lineSVG, lineType }: TrainInfoProps, noButton?: boolean) {
     const { train, updateTrainObject } = useGameContext()
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
@@ -16,12 +15,13 @@ export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType 
     return (
         <>
             <h2
-                onMouseDown={() => {
-                    // defaultDirectionToggle
-                    //     ? updateTrainObject(train.setDirection(defaultDirectionToggle))
-                    //     : updateTrainObject({ ...train.reverseDirection() })
-                    updateTrainObject({ ...train.reverseDirection() })
-                }}
+                {...(noButton
+                    ? null
+                    : {
+                          onMouseDown: () => {
+                              updateTrainObject({ ...train.reverseDirection() })
+                          },
+                      })}
                 className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}
                 style={
                     isNullDirection
@@ -37,7 +37,7 @@ export function TrainInfo({ direction, directionLabel, currentLineSVG, lineType 
                 {isNullDirection ? 'TOGGLE DIRECTION' : directionLabel}
             </h2>
             <div className='train-car-line'>
-                <Line transfers={[currentLineSVG]} notDim />
+                <Line svgPaths={[lineSVG]} notDim />
             </div>
             <h2 className='train-type not-dim'>{lineType + ' train'}</h2>
         </>

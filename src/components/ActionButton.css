@@ -3,7 +3,6 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-    max-width: 5rem;
 }
 
 .action-button-container {
@@ -16,7 +15,7 @@
     color: inherit;
     z-index: 2;
     opacity: 1;
-    max-width: 5rem;
+    max-width: 9rem;
     align-items: center;
 }
 
@@ -52,9 +51,6 @@
     transform: scale(1.05)
 }
 
-.label:hover {
-    cursor: default;
-}
 
 .label {
     margin: 0.5em 0 0 0;

@@ -154,7 +154,7 @@ function OptimalRouteUI() {
                         <div key={index} className='optimal-station-container'>
                             <div className='transfer-lines-wrapper'>
                                 {transferIndexes.includes(index) ? (
-                                    <LineSVGs transfers={getLineSVGs(station.lines)} wide={station.lines.length > 3} />
+                                    <LineSVGs svgPaths={getLineSVGs(station.lines)} wide={station.lines.length > 3} />
                                 ) : (
                                     <div className='transfer-placeholder' /> // we need a placeholder for dots with no transfer svg
                                 )}

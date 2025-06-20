@@ -1,24 +1,26 @@
 import { useEffect, useMemo } from 'react'
-import Header from './Header'
+
 import Door from './Door'
+import Header from './Header'
 import TrainInfo from '../components/TrainInfo'
+import DirectionSwitch from './DirectionSwitch'
 
 import './TrainCar.css'
+import { useGameContext } from '../contexts/GameContext'
+import { useSettingsContext } from '../contexts/SettingsContext'
+import { useUIContext } from '../contexts/UIContext'
+
 import { Direction, LineType, LineName, getLineType } from '../logic/LineManager'
 import { getLineSVG, lineToLineColor } from '../logic/LineSVGsMap'
-import { useUIContext } from '../contexts/UIContext'
-import { useGameContext } from '../contexts/GameContext'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
-import { useSettingsContext } from '../contexts/SettingsContext'
-import DirectionSwitch from './DirectionSwitch'
 
 export interface TrainLineInfo {
     direction: Direction
     directionLabel: string
-    currentLine: LineName
-    currentLineSVG: string
+    line: LineName
+    lineSVG: string
     lineType: LineType
 }
 
@@ -30,22 +32,22 @@ function TrainCar() {
     let ARROW = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
 
     // useMemo on functions that get from maps to mitigate re-rendering
-    const currentLine = useMemo(() => train.getLine(), [train])
-    const currentLineType = useMemo(() => getLineType(currentLine), [currentLine])
-    const currentLineSvg = useMemo(() => getLineSVG(currentLine), [currentLine])[0]
+    const line = useMemo(() => train.getLine(), [train])
+    const lineType = useMemo(() => getLineType(line), [line])
+    const lineSVG = useMemo(() => getLineSVG(line), [line])[0]
 
     const trainInfo: TrainLineInfo = {
         direction: train.getDirection(),
         directionLabel: train.getDirectionLabel(),
-        currentLine: currentLine,
-        currentLineSVG: currentLineSvg,
-        lineType: currentLineType,
+        line: line,
+        lineSVG: lineSVG,
+        lineType: lineType,
     }
 
     useEffect(() => {
-        document.documentElement.style.setProperty('--line-color', lineToLineColor(currentLine))
-        document.documentElement.style.setProperty('--dot-color', currentLineType === LineType.LOCAL ? '#222' : '#fff')
-    }, [currentLine, currentLineType])
+        document.documentElement.style.setProperty('--line-color', lineToLineColor(line))
+        document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
+    }, [line, lineType])
 
     let arrowDirection: string = ''
 
@@ -73,10 +75,7 @@ function TrainCar() {
                 <img
                     src={ARROW}
                     className={`arrow arrow-${arrowDirection} ${
-                        train.getDirection() === Direction.DOWNTOWN &&
-                        isHorizontalLayout()
-                            ? 'show'
-                            : 'hide'
+                        train.getDirection() === Direction.DOWNTOWN && isHorizontalLayout() ? 'show' : 'hide'
                     }`}
                     alt='Left Arrow'
                 />
@@ -112,10 +111,7 @@ function TrainCar() {
                     <img
                         src={ARROW}
                         className={`arrow arrow-${arrowDirection} ${
-                            train.getDirection() === Direction.UPTOWN &&
-                            isHorizontalLayout()
-                                ? 'show'
-                                : 'hide'
+                            train.getDirection() === Direction.UPTOWN && isHorizontalLayout() ? 'show' : 'hide'
                         }`}
                         alt='Right Arrow'
                     />
