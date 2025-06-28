@@ -37,6 +37,13 @@
     -ms-overflow-style: none;
 }
 
+.chrome .station-frag-name {
+    font-size: 0.7rem;
+}
+
+
+
+
 .station-dot {
     width: 0.75rem;
     height: 0.75rem;
@@ -56,6 +63,11 @@
     border-width: 0.4rem;
     transition: 0.2s ease-in;
     transition: 0.1s ease-out;
+}
+
+.chrome .current-station .station-dot {
+    width: 1rem;
+    height: 1rem;
 }
 
 .station-frag-content.overflow .station-frag-name,

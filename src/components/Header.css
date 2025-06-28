@@ -1,4 +1,4 @@
-.Header {
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,6 +6,10 @@
     margin-top: 0.2rem;
 }
 
-.Header:hover {
+.chrome .header {
+    margin-top: 0.05rem;
+}
+
+.header:hover {
     cursor: default;
 }

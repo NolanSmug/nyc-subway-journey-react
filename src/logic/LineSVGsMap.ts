@@ -61,6 +61,21 @@ const lineSVGsMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 }
 
+const GROUPS: LineName[][] = [
+    [LineName.ONE_TRAIN, LineName.TWO_TRAIN, LineName.THREE_TRAIN],
+    [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN, LineName.SIX_TRAIN],
+    [LineName.SEVEN_TRAIN],
+    [LineName.A_TRAIN, LineName.C_TRAIN, LineName.E_TRAIN],
+    [LineName.B_TRAIN, LineName.D_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN],
+    [LineName.N_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN],
+    [LineName.J_TRAIN, LineName.Z_TRAIN],
+    [LineName.G_TRAIN],
+    [LineName.L_TRAIN],
+    [LineName.S_TRAIN, LineName.S_TRAIN_SHUTTLE, LineName.S_TRAIN_ROCKAWAY],
+]
+
+const UNIQUE_GROUPED_STATION_IDS: string[] = ['AAB', 'JAY', 'R30']
+
 export const getLineSVG = (input: Station | LineName | undefined): string[] => {
     if (!input) return []
 
@@ -113,27 +128,19 @@ export function lineToLineColor(lineName: LineName): string {
 }
 
 export function groupLines(lines: LineName[], stationID: string, currentLine: LineName): LineName[][] {
-    const GROUPS: LineName[][] = [
-        [LineName.ONE_TRAIN, LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.SEVEN_TRAIN],
-        [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN, LineName.SIX_TRAIN],
-        [LineName.A_TRAIN, LineName.C_TRAIN, LineName.E_TRAIN],
-        [LineName.B_TRAIN, LineName.D_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN],
-        [LineName.N_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN],
-        [LineName.J_TRAIN, LineName.Z_TRAIN],
-        [LineName.G_TRAIN],
-        [LineName.L_TRAIN],
-        [LineName.S_TRAIN, LineName.S_TRAIN_SHUTTLE, LineName.S_TRAIN_ROCKAWAY],
-    ]
-
     let result: LineName[][] = GROUPS.map((group) => group.filter((line) => lines.includes(line))).filter(
         (filteredGroup) => filteredGroup.length > 0
     )
 
-    if (stationID) {
+    if (UNIQUE_GROUPED_STATION_IDS.includes(stationID)) {
         result = getSpecificStationGroup(stationID, result, currentLine)
     }
 
     return result
+}
+
+export function getCorrespondingGroup(line: LineName) {
+    return GROUPS.find((group) => group.includes(line))
 }
 
 function getSpecificStationGroup(stationID: string, prevResult: LineName[][], currentLine: LineName): LineName[][] {

@@ -5,9 +5,7 @@ import { Train } from '../logic/TrainManager'
 type UseTrainActionsParams = {
     train: Train
     gameState: GameState
-    numAdvanceStations: number
     conductorMode: boolean
-    setIsTransferMode: (b: boolean) => void
     updateTrainObject: (t: Partial<Train>) => void
     setGameState: (gs: GameState) => void
 }
@@ -15,9 +13,7 @@ type UseTrainActionsParams = {
 export default function useTrainActions({
     train,
     gameState,
-    numAdvanceStations,
     conductorMode,
-    setIsTransferMode,
     updateTrainObject,
     setGameState,
 }: UseTrainActionsParams) {
@@ -28,19 +24,23 @@ export default function useTrainActions({
         }
     }, [gameState, train, setGameState])
 
-    const advanceStation = useCallback(() => {
-        if (!train) throw new Error('repOK failed on advanceaction')
+    // ADVANCING STATIONS
+    const advanceStation = useCallback(
+        (numAdvanceStations: number) => {
+            if (!train) throw new Error('repOK failed on advanceaction')
 
-        setIsTransferMode(false)
-        if (numAdvanceStations > 1 && conductorMode) {
-            updateTrainObject({ ...train.advanceStationInc(numAdvanceStations) })
-        } else {
-            updateTrainObject({ ...train.advanceStation() })
-        }
+            if (numAdvanceStations > 1 && conductorMode) {
+                updateTrainObject({ ...train.advanceStationInc(numAdvanceStations) })
+            } else {
+                updateTrainObject({ ...train.advanceStation() })
+            }
 
-        checkForWin()
-    }, [train, numAdvanceStations, conductorMode, setIsTransferMode, updateTrainObject, checkForWin])
+            checkForWin()
+        },
+        [train, conductorMode, updateTrainObject, checkForWin]
+    )
 
+    // TRANSFERRING LINES
     const transfer = useCallback(
         async (transferIndex: number) => {
             if (transferIndex === undefined) {
@@ -57,16 +57,15 @@ export default function useTrainActions({
                 train.updateTrainState()
             }
             updateTrainObject({ ...train })
-            setIsTransferMode(false)
         },
-        [train, setIsTransferMode, updateTrainObject]
+        [train, updateTrainObject]
     )
 
+    // CHANGING DIRECTION
     const changeDirection = useCallback(() => {
         if (!train) throw new Error('repOK failed on change direction action')
-        setIsTransferMode(false)
         updateTrainObject({ ...train.reverseDirection() })
-    }, [train, setIsTransferMode, updateTrainObject])
+    }, [train, updateTrainObject])
 
     return {
         advanceStation,

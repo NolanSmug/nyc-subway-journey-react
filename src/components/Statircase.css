@@ -2,6 +2,20 @@
     display: flex;
     flex-direction: row;
     align-content: space-between;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 1s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.staircase-container.hidden {
+    opacity: 0;
+}
+
+.staircase-container.mirrored {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
 }
 
 .staircase {
@@ -12,6 +26,62 @@
     border-radius: 0.1em;
     width: 5em;
     height: 4em;
+    left: 0;
+
+    transition: width 1s ease;
+    opacity: 1;
+}
+
+/* --- MIRRORED LOGIC --- */
+.staircase.mirrored {
+    position: relative;
+    height: 4em;
+    width: 52em;
+
+    transform: translateX(5em) rotate(180deg);
+    margin-right: 6em;
+    flex-shrink: 0;
+}
+
+.staircase.mirrored>.steps {
+    flex-direction: row;
+}
+
+/* ---------------------- */
+
+.steps {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 6px;
+    align-items: center;
+}
+
+.step.first {
+    background-color: white;
+    height: 4.5em;
+    bottom: 3px;
+}
+
+.step {
+    display: block;
+    position: relative;
+    bottom: 4px;
+    height: 4.4em;
+    width: 0.5px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.step.middle {
+    background-color: rgba(255, 255, 255, 0.700);
+}
+
+.step.smaller {
+    background-color: rgba(255, 255, 255, 0.500);
+    bottom: 3.5px;
+}
+
+.step.last {
+    background-color: rgba(255, 255, 255, 0.400);
 }
 
 

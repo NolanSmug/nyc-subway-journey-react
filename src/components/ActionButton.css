@@ -5,6 +5,11 @@
     text-align: center;
 }
 
+.action-button-wrapper.hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .action-button-container {
     display: flex;
     flex-direction: column;

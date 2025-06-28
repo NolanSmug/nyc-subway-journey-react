@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGameContext } from './contexts/GameContext'
 import TrainCarCustom from './components/TrainCarCustom'
 import Staircase from './components/Staircase'
 import { Direction, LineName } from './logic/LineManager'
-import { groupLines } from './logic/LineSVGsMap'
+import { groupLines, getCorrespondingGroup } from './logic/LineSVGsMap'
 
 import './PassengerPlatformView.css'
 import ActionButton from './components/ActionButton'
@@ -11,19 +11,32 @@ import ActionButton from './components/ActionButton'
 function PassengerPlatformView() {
     const { train, updateTrainObject } = useGameContext()
 
+    const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
+    const [selectedGroupIndex, setSelectedGroupIndex] = useState<number | null>(null)
+
     const transfers: LineName[] = train
         .getCurrentStation()
         .getTransfers()
         .filter((transfer) => transfer != train.getLine()) // filter out current line from transfer options
 
-    const groupedTransfers = groupLines(transfers, train.getCurrentStation().getId(), train.getLine())
+    // sort transfers array into proper line groupings
+    const groupedTransfers: LineName[][] = groupLines(transfers, train.getCurrentStation().getId(), train.getLine())
 
     return (
         <>
             <div className='platform-container'>
                 <div className='transfer-stairs-left'>
                     {groupedTransfers.map((transfers, index) => (
-                        <Staircase key={index} lines={transfers} />
+                        <Staircase
+                            key={index}
+                            lines={transfers}
+                            onSelection={() => {
+                                setInTransferTunnel((prev) => !prev)
+                                setSelectedGroupIndex(index)
+                            }}
+                            tunnelLayout={inTransferTunnel && selectedGroupIndex === index}
+                            hidden={inTransferTunnel && selectedGroupIndex !== index}
+                        />
                     ))}
                 </div>
 
@@ -32,12 +45,13 @@ function PassengerPlatformView() {
                         line={train.getLine()}
                         direction={Direction.UPTOWN}
                         active={train.getDirection() === Direction.UPTOWN}
+                        hidden={inTransferTunnel}
                     />
                     <ActionButton
                         label='board uptown train'
                         noImage
                         onMouseDown={() => updateTrainObject({ ...train.setDirection(Direction.UPTOWN) })}
-                        visible={train.getDirection() === Direction.DOWNTOWN || train.isNullDirection()}
+                        hidden={inTransferTunnel || train.getDirection() === Direction.UPTOWN}
                         wrapperClassName='uptown-button-offset'
                     />
 
@@ -47,13 +61,14 @@ function PassengerPlatformView() {
                         label='board downtown train'
                         noImage
                         onMouseDown={() => updateTrainObject({ ...train.setDirection(Direction.DOWNTOWN) })}
-                        visible={train.getDirection() === Direction.UPTOWN || train.isNullDirection()}
+                        hidden={inTransferTunnel || train.getDirection() === Direction.DOWNTOWN}
                         wrapperClassName='downtown-button-offset'
                     />
                     <TrainCarCustom
                         line={train.getLine()}
                         direction={Direction.DOWNTOWN}
                         active={train.getDirection() === Direction.DOWNTOWN}
+                        hidden={inTransferTunnel}
                     />
                 </div>
             </div>

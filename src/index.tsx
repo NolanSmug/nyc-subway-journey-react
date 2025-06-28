@@ -6,7 +6,12 @@ import { UIProvider } from './contexts/UIContext'
 import { GameProvider } from './contexts/GameContext'
 import { SettingsProvider } from './contexts/SettingsContext'
 
+import useBrowserCSS from './hooks/useBrowserCSS'
+
 const root = ReactDOM.createRoot(document.getElementById('root')!)
+
+document.body.classList.add(useBrowserCSS())
+
 root.render(
     <UIProvider>
         <GameProvider>

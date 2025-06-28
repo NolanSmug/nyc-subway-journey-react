@@ -8,15 +8,16 @@ interface LineSVGsProps {
     grouped?: boolean // group svgs as one, 2 per row
     numLines?: number // if we want to keep the lines centered
     notDim?: boolean
+    className?: String
     onTransferSelect?: (index: number) => void | undefined
 }
 
-function LineSVGs({ svgPaths, small, wide, grouped, numLines, notDim, onTransferSelect }: LineSVGsProps) {
+function LineSVGs({ svgPaths, small, wide, grouped, numLines, notDim, className, onTransferSelect }: LineSVGsProps) {
     const { isTransferMode } = useUIContext()
 
     return (
         <div
-            className={`line-svgs-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''} ${notDim ? 'not-dim' : ''} ${numLines} `}
+            className={`line-svgs-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''} ${notDim ? 'not-dim' : ''} ${numLines ? `num-lines-${numLines}` : ''} ${className}`}
         >
             {svgPaths.map((imageSrc, index) => (
                 <img

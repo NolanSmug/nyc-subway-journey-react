@@ -39,9 +39,7 @@ function ConductorModeUI() {
     const { advanceStation, transfer, changeDirection } = useTrainActions({
         train,
         gameState,
-        numAdvanceStations,
         conductorMode,
-        setIsTransferMode,
         updateTrainObject,
         setGameState,
     })
@@ -57,7 +55,7 @@ function ConductorModeUI() {
             t: () => setIsTransferMode((prev) => !prev),
             c: changeDirection,
             r: refreshGameAction,
-            ArrowRight: advanceStation,
+            ArrowRight: () => advanceStation(numAdvanceStations),
             Escape: () => setIsTransferMode(false),
             '-': () => setNumAdvanceStations((prev) => Math.max(1, prev - 1)),
             '+': () => setNumAdvanceStations((prev) => prev + 1),
@@ -79,7 +77,7 @@ function ConductorModeUI() {
                             <LineSVGs
                                 svgPaths={getLineSVG(train.getCurrentStation())}
                                 onTransferSelect={(index) => {
-                                    transfer(index).catch(console.error)
+                                    setIsTransferMode(false), transfer(index).catch(console.error)
                                 }}
                                 notDim
                             />
@@ -94,12 +92,12 @@ function ConductorModeUI() {
                         <ActionButton
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label='Change direction'
-                            onMouseDown={() => changeDirection()}
+                            onMouseDown={() => (setIsTransferMode(false), changeDirection())}
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                             label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
-                            onMouseDown={() => advanceStation()}
+                            onMouseDown={() => (setIsTransferMode(false), advanceStation(numAdvanceStations))}
                             additionalInput={<AdvanceNStationsInput />}
                         />
                     </div>

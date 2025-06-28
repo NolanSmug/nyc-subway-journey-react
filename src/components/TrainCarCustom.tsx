@@ -23,19 +23,18 @@ interface TrainCarStaticProps {
     line: LineName
     direction: Direction
     active: boolean
+    hidden?: boolean
 }
 
-function TrainCarCustom({ line, direction, active }: TrainCarStaticProps) {
-    const { darkMode, setIsTransferMode } = useUIContext()
-    const { numAdvanceStations, conductorMode, defaultDirectionToggle } = useSettingsContext()
+function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps) {
+    const { darkMode } = useUIContext()
+    const { numAdvanceStations, conductorMode } = useSettingsContext()
     const { train, updateTrainObject, setGameState, gameState } = useGameContext()
 
-    const { advanceStation, transfer, changeDirection } = useTrainActions({
+    const { advanceStation } = useTrainActions({
         train,
         gameState,
-        numAdvanceStations,
         conductorMode,
-        setIsTransferMode,
         updateTrainObject,
         setGameState,
     })
@@ -67,15 +66,17 @@ function TrainCarCustom({ line, direction, active }: TrainCarStaticProps) {
     let isUptown = useMemo(() => direction === Direction.UPTOWN, [direction])
 
     return (
-        <div className={`train-wrapper ${isDowntown ? 'downtown' : 'uptown'}`}>
-            <div className='train-container' style={active ? { opacity: 1 } : { opacity: 0.5 }}>
+        <div
+            className={`train-wrapper ${isDowntown ? 'downtown' : 'uptown'} ${active ? '' : 'inactive'} ${hidden ? 'hidden' : ''}`}
+        >
+            <div className={`train-container `}>
                 <div className='train-advance-button'>
                     {isDowntown && active && (
                         <ActionButton
                             imageSrc={ARROW}
                             className='arrow-left'
                             label='Advance'
-                            onMouseDown={() => advanceStation()}
+                            onMouseDown={() => advanceStation(numAdvanceStations)}
                         />
                     )}
                 </div>
@@ -106,7 +107,7 @@ function TrainCarCustom({ line, direction, active }: TrainCarStaticProps) {
                             imageSrc={ARROW}
                             className='arrow-right'
                             label='Advance'
-                            onMouseDown={() => advanceStation()}
+                            onMouseDown={() => advanceStation(numAdvanceStations)}
                         />
                     )}
                 </div>

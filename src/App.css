@@ -68,6 +68,7 @@ body {
     top: 0;
     left: 0;
     transition: top ease 0.2s, left ease 0.2s;
+    gap: 1em;
 }
 
 .game-state-ui.is-vertical-layout {

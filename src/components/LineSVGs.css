@@ -1,6 +1,17 @@
 .line-svgs-container {
     display: flex;
     column-gap: 0.25em;
+    opacity: 1;
+}
+
+.mirrored .line-svgs-container {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.mirrored .line-svgs-container.show-flipped {
+    opacity: 1;
+    transition: opacity 0.5s ease, transform ease-in-out 0.1s;
 }
 
 .line-svgs-container.small {
@@ -37,23 +48,28 @@
     width: 5rem;
     transform: scale(1);
     transition: transform ease-in-out 0.1s;
+    flex-shrink: 0;
+    /* ESSENTIAL */
 }
 
-.line-svgs-container.grouped.\31 {
+.line-svgs-container.grouped.num-lines-1 {
     align-items: center;
     justify-content: center;
 }
 
-.line-svgs-container.grouped.\32 {
+.line-svgs-container.grouped.num-lines-2 {
     align-items: center;
 }
 
-.line-svgs-container.grouped.\33 {
+.line-svgs-container.grouped.num-lines-3 {
     flex-wrap: nowrap;
     align-items: center;
     position: relative;
+    width: 4.95em;
+}
+
+.staircase-container:not(.mirrored) .line-svgs-container.grouped.num-lines-3 {
     right: 2.3em;
-    width: 4.7em;
 }
 
 .line-svgs-container.grouped:hover {

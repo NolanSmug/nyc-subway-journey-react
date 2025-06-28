@@ -8,16 +8,14 @@ import useKeyShortcuts from '../hooks/useKeyShortcuts'
 import setUITheme from '../hooks/setUITheme'
 
 function RiderModeUI() {
-    const { darkMode, setIsTransferMode, setUpcomingStationsVisible, setDarkMode } = useUIContext()
+    const { darkMode, setUpcomingStationsVisible, setDarkMode } = useUIContext()
     const { numAdvanceStations, conductorMode, setConductorMode } = useSettingsContext()
     const { train, updateTrainObject, setGameState, gameState, initializeGame } = useGameContext()
 
     const { advanceStation, changeDirection } = useTrainActions({
         train,
         gameState,
-        numAdvanceStations,
         conductorMode,
-        setIsTransferMode,
         updateTrainObject,
         setGameState,
     })
@@ -35,7 +33,7 @@ function RiderModeUI() {
         singleKeys: {
             c: changeDirection,
             r: refreshGameAction,
-            ArrowRight: advanceStation,
+            ArrowRight: () => advanceStation(numAdvanceStations),
         },
     })
 

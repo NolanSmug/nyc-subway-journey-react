@@ -6,7 +6,7 @@ interface HeaderProps {
 
 function Header({ text }: HeaderProps) {
     return (
-        <div className='Header not-dim'>
+        <div className='header not-dim'>
             <h1>{text}</h1>
         </div>
     )

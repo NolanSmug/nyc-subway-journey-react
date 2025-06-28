@@ -7,7 +7,7 @@ export interface ActionButtonProps {
     wrapperClassName?: string
     label?: string
     onMouseDown?: () => void
-    visible?: boolean
+    hidden?: boolean
     noImage?: boolean
     small?: boolean
     additionalInput?: React.ReactNode
@@ -20,14 +20,14 @@ function ActionButton({
     label,
     noImage,
     onMouseDown,
-    visible,
+    hidden,
     small,
     additionalInput,
 }: ActionButtonProps) {
-    if (visible !== undefined && visible === false) return null
-
     return (
-        <div className={`action-button-wrapper ${noImage ? 'no-image-wrapper' : ''} ${wrapperClassName || ''}`}>
+        <div
+            className={`action-button-wrapper ${noImage ? 'no-image-wrapper' : ''} ${wrapperClassName || ''} ${hidden ? 'hidden' : ''}`}
+        >
             <div className='action-button-container'>
                 <button className='action-button' type='button' onMouseDown={onMouseDown}>
                     {noImage ? (
