@@ -1,13 +1,14 @@
-import { default as Line } from './LineSVGs'
-
 import './TrainInfo.css'
-import { useGameContext } from '../contexts/GameContext'
+
 import { TrainLineInfo } from './TrainCar'
+
+import { default as Line } from './LineSVGs'
 import { Direction } from '../logic/LineManager'
+import { useGameContext } from '../contexts/GameContext'
 
 export interface TrainInfoProps extends TrainLineInfo {}
 
-export function TrainInfo({ direction, directionLabel, lineSVG, lineType }: TrainInfoProps, noButton?: boolean) {
+export function TrainInfo({ direction, directionLabel, lineSVG, lineType, reverseButton }: TrainInfoProps) {
     const { train, updateTrainObject } = useGameContext()
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
@@ -15,14 +16,14 @@ export function TrainInfo({ direction, directionLabel, lineSVG, lineType }: Trai
     return (
         <>
             <h2
-                {...(noButton
-                    ? null
-                    : {
+                className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''} ${reverseButton ? '' : 'no-reverse-action'}`}
+                {...(reverseButton
+                    ? {
                           onMouseDown: () => {
                               updateTrainObject({ ...train.reverseDirection() })
                           },
-                      })}
-                className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''}`}
+                      }
+                    : null)}
                 style={
                     isNullDirection
                         ? {

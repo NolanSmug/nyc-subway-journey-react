@@ -44,14 +44,14 @@ function App() {
     return (
         <>
             <div
-                className={`${conductorMode ? 'dimmed-overlay' : ''} ${isTransferMode ? 'active' : ''}`}
+                className={`${conductorMode ? 'dimmed-overlay' : ''} dimmed-overlay ${isTransferMode ? 'active' : ''}`}
                 style={isLandingPage ? { opacity: '20%' } : {}}
                 onMouseDown={handleClickAway}
             />
 
             {isLandingPage && <LandingScreen />}
 
-            <div className='Game'>
+            <div className='Game' style={conductorMode ? {} : { paddingBottom: '0' }}>
                 {gameState.isWon && <OptimalRouteUI />}
                 {!gameState.isWon && upcomingStationsVisible && isHorizontalLayout() && (
                     <UpcomingStationsHorizontal

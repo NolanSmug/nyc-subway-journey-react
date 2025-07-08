@@ -4,44 +4,9 @@
     opacity: 1;
 }
 
-.mirrored .line-svgs-container {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
+/* -------------- CONTAINER MODIFICATIONS -------------- */
 
-.mirrored .line-svgs-container.show-flipped {
-    opacity: 1;
-    transition: opacity 0.5s ease, transform ease-in-out 0.1s;
-}
-
-.line-svgs-container.small {
-    column-gap: 0.15em;
-    flex-wrap: wrap;
-    row-gap: 0.15em;
-    min-width: 6rem;
-}
-
-.small {
-    height: 1rem;
-    width: 1rem;
-}
-
-.line-svg-image {
-    height: 2rem;
-    width: 2rem;
-    opacity: 1;
-
-    --hover-scale: 1;
-    --active-scale: 1;
-
-    transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
-    transition: transform 0.1s ease-out;
-}
-
-.line-svgs-container.wide {
-    min-width: 16rem;
-}
-
+/* --- grouped --- */
 .line-svgs-container.grouped {
     flex-wrap: wrap;
     row-gap: 0.25em;
@@ -72,28 +37,73 @@
     right: 2.3em;
 }
 
-.line-svgs-container.grouped:hover {
+.line-svgs-container.grouped:not(.selectable):hover {
     cursor: pointer;
     transform: scale(1.25);
 }
 
-#current-station .line-svg-image:active {
-    transform: scale(0.95)
+/* --- wide --- */
+.line-svgs-container.wide {
+    min-width: 16rem;
 }
 
-#current-station .line-svg-image:hover {
-    --hover-scale: 1.05;
+/* --- small --- */
+.line-svgs-container.small {
+    column-gap: 0.15em;
+    flex-wrap: wrap;
+    row-gap: 0.15em;
+    min-width: 6rem;
+}
+
+/* --- mirrored (staircase tunnel stuff) --- */
+.mirrored .line-svgs-container {
+    opacity: 0;
+    /* transition: opacity 0.5s ease; */
+}
+
+.mirrored .line-svgs-container.show-flipped {
+    opacity: 1;
+    transition: opacity 0.5s ease, transform ease-in-out 0.1s;
+}
+
+/* --- vertical (not used yet) --- */
+.line-svgs-container.vertical {
+    flex-direction: column;
+    row-gap: 0.25em;
+}
+
+/* ----------------------------------------------------- */
+
+.line-svg-image {
+    height: 2rem;
+    width: 2rem;
+    opacity: 1;
+
+    --hover-scale: 1;
+    --active-scale: 1;
+
+    transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    transition: transform 0.1s ease-out;
+}
+
+.selectable .line-svg-image:active {
+    --active-scale: 0.90;
+}
+
+
+.selectable .line-svg-image:hover {
+    --hover-scale: 1.10;
     cursor: pointer;
     transition: transform ease-in-out 0.1s;
 }
 
-#current-station .line-svg-image.jiggle-animation {
+.selectable .line-svg-image.jiggle-animation {
     animation: jiggle 0.5s ease-in-out infinite;
 }
 
-#destination-station .line-svg-image:hover {
-    transform: none !important;
-    cursor: default;
+.small {
+    height: 1rem;
+    width: 1rem;
 }
 
 

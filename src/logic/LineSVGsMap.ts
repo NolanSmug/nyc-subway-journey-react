@@ -74,7 +74,7 @@ const GROUPS: LineName[][] = [
     [LineName.S_TRAIN, LineName.S_TRAIN_SHUTTLE, LineName.S_TRAIN_ROCKAWAY],
 ]
 
-const UNIQUE_GROUPED_STATION_IDS: string[] = ['AAB', 'JAY', 'R30']
+const UNIQUE_GROUPED_STATION_IDS: string[] = ['AAB', 'JAY', 'R30', 'CSQ', 'LEX']
 
 export const getLineSVG = (input: Station | LineName | undefined): string[] => {
     if (!input) return []
@@ -127,38 +127,41 @@ export function lineToLineColor(lineName: LineName): string {
     return lineColorMap[lineName]
 }
 
-export function groupLines(lines: LineName[], stationID: string, currentLine: LineName): LineName[][] {
+export function groupLines(lines: LineName[], stationID: string): LineName[][] {
     let result: LineName[][] = GROUPS.map((group) => group.filter((line) => lines.includes(line))).filter(
         (filteredGroup) => filteredGroup.length > 0
     )
 
     if (UNIQUE_GROUPED_STATION_IDS.includes(stationID)) {
-        result = getSpecificStationGroup(stationID, result, currentLine)
+        result = getSpecificStationGroup(stationID, result)
     }
 
     return result
 }
 
-export function getCorrespondingGroup(line: LineName) {
-    return GROUPS.find((group) => group.includes(line))
+export function getCorrespondingGroup(line: LineName, groups: LineName[][]): LineName[] {
+    if (!groups) groups = GROUPS
+
+    return groups.find((group) => group.includes(line)) ?? []
 }
 
-function getSpecificStationGroup(stationID: string, prevResult: LineName[][], currentLine: LineName): LineName[][] {
+function getSpecificStationGroup(stationID: string, prevResult: LineName[][]): LineName[][] {
     switch (stationID) {
         case 'AAB':
             return [
-                [LineName.TWO_TRAIN, LineName.THREE_TRAIN].filter((line) => line != currentLine),
-                [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN].filter((line) => line != currentLine),
-                [LineName.D_TRAIN, LineName.N_TRAIN, LineName.R_TRAIN].filter((line) => line != currentLine),
-                [LineName.B_TRAIN, LineName.Q_TRAIN].filter((line) => line != currentLine),
+                [LineName.TWO_TRAIN, LineName.THREE_TRAIN],
+                [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN],
+                [LineName.D_TRAIN, LineName.N_TRAIN, LineName.R_TRAIN],
+                [LineName.B_TRAIN, LineName.Q_TRAIN],
             ]
         case 'JAY':
-            return [
-                [LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN].filter((line) => line != currentLine),
-                [LineName.R_TRAIN].filter((line) => line != currentLine),
-            ]
+            return [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN], [LineName.R_TRAIN]]
         case 'R30':
-            return [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN].filter((line) => line != currentLine)]
+            return [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN]]
+        case 'LEX':
+            return [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SIX_TRAIN]]
+        case 'CSQ':
+            return [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]]
     }
 
     return prevResult

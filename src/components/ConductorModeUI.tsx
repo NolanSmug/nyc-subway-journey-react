@@ -80,6 +80,7 @@ function ConductorModeUI() {
                                     setIsTransferMode(false), transfer(index).catch(console.error)
                                 }}
                                 notDim
+                                selectable
                             />
                         </Station>
                     </div>

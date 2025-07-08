@@ -3,9 +3,11 @@ import StationFragmentVertical from './StationFragmentVertical'
 
 import './UpcomingStationsVertical.css'
 import { scrollToCurrentStation, UpcomingStationsProps } from './UpcomingStationsHorizontal'
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 function UpcomingStationsVertical({ stations, currentStationID, currentStationIndex }: UpcomingStationsProps) {
     const stationsRef = useRef<HTMLDivElement>(null)
+    const { conductorMode } = useSettingsContext()
 
     // scroll to the current station
     useEffect(() => {
@@ -22,8 +24,8 @@ function UpcomingStationsVertical({ stations, currentStationID, currentStationIn
     }
 
     return (
-        <div className="upcoming-stations-vertical-container not-dim">
-            <div className="stations-vertical" ref={stationsRef}>
+        <div className='upcoming-stations-vertical-container not-dim'>
+            <div className='stations-vertical' ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragmentVertical
                         key={station.getId() || index}

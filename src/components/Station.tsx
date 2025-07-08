@@ -4,20 +4,23 @@ import './Station.css'
 export interface StationProps {
     name: string
     header?: ReactNode
+    noLines?: boolean
+    hidden?: boolean
+    isDestination?: boolean
     children?: ReactNode
 }
 
-function Station({ name, header, children }: StationProps) {
-    const isGreaterThan20Chars = name.length > 18 || children!.toString().length > 10
+function Station({ name, header, noLines, hidden, isDestination, children }: StationProps) {
+    const isGreaterThan20Chars = (!noLines && name.length > 18) || (children && children.toString().length > 10)
 
     return (
-        <>
+        <div className={`station-wrapper ${hidden ? 'hidden' : ''} ${noLines && !isDestination ? 'no-lines' : ''}`}>
             {header}
-            <div className='station-container'>
+            <div className={`station-container`}>
                 <h2 className={`station-name ${isGreaterThan20Chars ? 'shrink-station-name' : ''}`}>{name}</h2>
-                {children}
+                {children && children}
             </div>
-        </>
+        </div>
     )
 }
 

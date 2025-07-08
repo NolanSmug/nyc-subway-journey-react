@@ -1,20 +1,22 @@
+import './Statircase.css'
 import { useEffect, useState } from 'react'
-import { LineName } from '../logic/LineManager'
-import { getLineSVGs } from '../logic/LineSVGsMap'
 import LineSVGs from './LineSVGs'
 
-import './Statircase.css'
+import { LineName } from '../logic/LineManager'
+import { useUIContext } from '../contexts/UIContext'
+import { getLineSVGs } from '../logic/LineSVGsMap'
 
 export interface StaircaseProps {
     lines: LineName[]
     tunnelLayout?: boolean
     hidden?: boolean
-    onSelection?: (index: number) => void | undefined
+    onSelection?: (line: LineName) => void | undefined
 }
 
 function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps) {
     if (lines.length === 0) return null
 
+    const { setIsTransferMode } = useUIContext()
     const [tunnelLinesVisible, setTunnelLinesVisible] = useState(false)
 
     // DELAY LINE SVGs VISIBILITY DURING TRANSITION
@@ -24,6 +26,7 @@ function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps)
 
             const timeout = setTimeout(() => {
                 setTunnelLinesVisible(true)
+                setIsTransferMode(lines.length > 1) // if we have a line selection, enable transfer UI overlay
             }, 1000)
             return () => clearTimeout(timeout)
         } else {
@@ -37,8 +40,10 @@ function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps)
                 svgPaths={getLineSVGs(lines)}
                 grouped
                 numLines={lines.length}
-                onTransferSelect={onSelection}
+                onTransferSelect={(index: number) => (onSelection && onSelection(lines[index])) || setIsTransferMode(false)}
                 className={tunnelLinesVisible ? 'show-flipped' : ''}
+                selectable={tunnelLinesVisible}
+                notDim
             />
             <div className={`staircase ${tunnelLayout ? 'mirrored' : ''}`}>
                 <div className='steps'>

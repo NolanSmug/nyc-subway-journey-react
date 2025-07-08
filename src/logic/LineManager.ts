@@ -79,8 +79,8 @@ export const lineTypes: Map<LineName, LineType> = new Map([
 ])
 
 export function getRandomLine(): LineName {
-    const lines = Object.values(LineName)
-    let randomLine = LineName.NULL_TRAIN
+    const lines: LineName[] = Object.values(LineName)
+    let randomLine: LineName = LineName.NULL_TRAIN
     do {
         randomLine = lines[Math.floor(Math.random() * lines.length)]
     } while (randomLine === LineName.NULL_TRAIN)

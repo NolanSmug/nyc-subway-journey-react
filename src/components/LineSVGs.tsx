@@ -5,19 +5,35 @@ interface LineSVGsProps {
     svgPaths: string[]
     small?: boolean // for smaller images like in upcoming stations view
     wide?: boolean // allow more svgs per row
+    vertical?: boolean // use column flex-direction
     grouped?: boolean // group svgs as one, 2 per row
+    selectable?: boolean
     numLines?: number // if we want to keep the lines centered
     notDim?: boolean
     className?: String
     onTransferSelect?: (index: number) => void | undefined
 }
 
-function LineSVGs({ svgPaths, small, wide, grouped, numLines, notDim, className, onTransferSelect }: LineSVGsProps) {
+function LineSVGs({
+    svgPaths,
+    small,
+    wide,
+    vertical,
+    grouped,
+    selectable,
+    numLines,
+    notDim,
+    className,
+    onTransferSelect,
+}: LineSVGsProps) {
     const { isTransferMode } = useUIContext()
 
     return (
         <div
-            className={`line-svgs-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''} ${notDim ? 'not-dim' : ''} ${numLines ? `num-lines-${numLines}` : ''} ${className}`}
+            className={`line-svgs-container 
+                ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''}  
+                 ${className} ${selectable ? 'selectable' : ''} ${notDim ? 'not-dim' : ''} 
+                ${numLines ? `num-lines-${numLines}` : ''} ${vertical ? 'vertical' : ''}`}
         >
             {svgPaths.map((imageSrc, index) => (
                 <img

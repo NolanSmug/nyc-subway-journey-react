@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { GameState } from '../logic/GameState'
 import { Train } from '../logic/TrainManager'
+import { LineName } from '../logic/LineManager'
 
 type UseTrainActionsParams = {
     train: Train
@@ -41,22 +42,29 @@ export default function useTrainActions({
     )
 
     // TRANSFERRING LINES
-    const transfer = useCallback(
-        async (transferIndex: number) => {
-            if (transferIndex === undefined) {
-                console.log('No transfer index found')
+    const transfer: {
+        // can either transfer by index, or specific line
+        (index: number): Promise<void>
+        (line: LineName): Promise<void>
+    } = useCallback(
+        async (transferInput: number | LineName) => {
+            let selectedLine: LineName | undefined
+
+            if (typeof transferInput === 'number') {
+                selectedLine = train.getCurrentStation().getTransfers()[transferInput]
+            } else {
+                selectedLine = transferInput
+            }
+
+            if (!selectedLine) {
+                console.error(`${selectedLine} not found at ${train.getCurrentStation()}`)
                 return
             }
 
-            const selectedLine = train.getCurrentStation().getTransfers()[transferIndex]
-
+            // DO THE TRANSFER
             if (await train.transferToLine(selectedLine, train.getCurrentStation())) {
-                train.setLine(selectedLine)
-                train.setCurrentStation(train.getCurrentStation())
-                // if (conductorMode) train.setDirection(defaultDirectionToggle)
-                train.updateTrainState()
+                updateTrainObject({ ...train })
             }
-            updateTrainObject({ ...train })
         },
         [train, updateTrainObject]
     )

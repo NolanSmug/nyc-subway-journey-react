@@ -22,6 +22,7 @@ export interface TrainLineInfo {
     line: LineName
     lineSVG: string
     lineType: LineType
+    reverseButton?: boolean
 }
 
 function TrainCar() {
@@ -29,7 +30,8 @@ function TrainCar() {
     const { train } = useGameContext()
     const { conductorMode, defaultDirectionToggle, setDefaultDirectionToggle } = useSettingsContext()
 
-    let ARROW = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
+    let ARROW: string = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
+    let arrowDirection: string = ''
 
     // useMemo on functions that get from maps to mitigate re-rendering
     const line = useMemo(() => train.getLine(), [train])
@@ -42,6 +44,7 @@ function TrainCar() {
         line: line,
         lineSVG: lineSVG,
         lineType: lineType,
+        reverseButton: true,
     }
 
     useEffect(() => {
@@ -49,10 +52,7 @@ function TrainCar() {
         document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
     }, [line, lineType])
 
-    let arrowDirection: string = ''
-
     function updateArrowDirection(): void {
-        // debugger
         if (isVerticalLayout()) {
             arrowDirection = train.getDirection() === Direction.DOWNTOWN ? 'down' : 'up'
         } else {

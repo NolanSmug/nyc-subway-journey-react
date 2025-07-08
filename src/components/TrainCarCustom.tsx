@@ -1,23 +1,22 @@
+import './TrainCar.css'
+import './TrainCarCustom.css'
+
 import { useEffect, useMemo } from 'react'
+import TrainInfo from './TrainInfo'
+import Door from './Door'
+import ActionButton from './ActionButton'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
 import { Direction, LineName, LineType } from '../logic/LineManager'
+
+import useTrainActions from '../hooks/useTrainActions'
+import { TrainLineInfo } from './TrainCar'
 import { getLineType } from '../logic/LineManager'
 import { getLineSVG, lineToLineColor } from '../logic/LineSVGsMap'
-
-import './TrainCar.css'
-import './TrainCarCustom.css'
-import Door from './Door'
-import ActionButton from './ActionButton'
-import TrainInfo from './TrainInfo'
-import { TrainLineInfo } from './TrainCar'
-
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
-
-import useTrainActions from '../hooks/useTrainActions'
 
 interface TrainCarStaticProps {
     line: LineName
@@ -53,6 +52,7 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
         line: line,
         lineSVG: lineSVG,
         lineType: lineType,
+        reverseButton: false,
     }
 
     let ARROW = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
@@ -74,7 +74,7 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
                     {isDowntown && active && (
                         <ActionButton
                             imageSrc={ARROW}
-                            className='arrow-left'
+                            imageClassName='arrow-left'
                             label='Advance'
                             onMouseDown={() => advanceStation(numAdvanceStations)}
                         />
@@ -105,7 +105,7 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
                     {isUptown && active && (
                         <ActionButton
                             imageSrc={ARROW}
-                            className='arrow-right'
+                            imageClassName='arrow-right'
                             label='Advance'
                             onMouseDown={() => advanceStation(numAdvanceStations)}
                         />

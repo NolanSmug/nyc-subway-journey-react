@@ -3,7 +3,7 @@ import './ActionButton.css'
 
 export interface ActionButtonProps {
     imageSrc?: string
-    className?: string
+    imageClassName?: string
     wrapperClassName?: string
     label?: string
     onMouseDown?: () => void
@@ -15,7 +15,7 @@ export interface ActionButtonProps {
 
 function ActionButton({
     imageSrc,
-    className,
+    imageClassName,
     wrapperClassName,
     label,
     noImage,
@@ -35,8 +35,8 @@ function ActionButton({
                     ) : (
                         <img
                             src={imageSrc}
-                            style={className === 'arrow-left' ? { transform: 'rotate(180deg)' } : undefined}
-                            className={`icon ${small ? 'small-button' : ''} ${className || ''}`}
+                            style={imageClassName === 'arrow-left' ? { transform: 'rotate(180deg)' } : undefined}
+                            className={`icon ${small ? 'small-button' : ''} ${imageClassName || ''}`}
                             alt={label}
                         />
                     )}

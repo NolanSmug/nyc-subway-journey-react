@@ -1,4 +1,4 @@
-import PassengerPlatformView from '../PassengerPlatformView'
+import PassengerPlatformView from './PassengerPlatformView'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'

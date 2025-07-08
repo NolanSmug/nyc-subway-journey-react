@@ -4,10 +4,14 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: position 0.5s ease;
 }
 
 .platform {
-    min-height: 20em;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    min-height: 17em;
     width: 60vw;
 }
 
@@ -25,6 +29,15 @@
     justify-items: center;
     gap: 1em;
     width: 10em;
+}
+
+.destination-station-right {
+    position: absolute;
+    left: 99%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 20em;
 }
 
 .train-cars-container {

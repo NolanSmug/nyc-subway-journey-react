@@ -18,6 +18,11 @@
     transform: scale(0.98);
 }
 
+.train-direction.no-reverse-action {
+    pointer-events: none;
+    /* transform: none; */
+}
+
 .train-type {
     color: var(--train-text-color);
     margin-bottom: 0.25em;
