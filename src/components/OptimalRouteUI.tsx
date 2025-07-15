@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
+import './OptimalRouteUI.css'
+
 import ActionButton from './ActionButton'
 import LoadingSpinner from './LoadingSpinner'
 
-import './OptimalRouteUI.css'
 import { useGameContext } from '../contexts/GameContext'
 import { useUIContext } from '../contexts/UIContext'
 import { LineName, lineArrayEquals } from '../logic/LineManager'

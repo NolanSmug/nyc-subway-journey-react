@@ -17,27 +17,21 @@ h2 {
 }
 
 .arrow-up {
-    height: 2em;
-    width: 2em;
     transform: rotate(-90deg);
 }
 
 .arrow-down {
-    height: 2em;
-    width: 2em;
     transform: rotate(90deg);
 }
 
 .arrow-left {
-    height: 2em;
-    width: 2em;
     transform: rotate(180deg);
 }
 
 .arrow-left:hover,
 .arrow-up:hover,
 .arrow-down:hover {
-    transform: rotate(180deg) scale(1.05);
+    transform: scale(1.05);
 }
 
 .show {
@@ -53,6 +47,7 @@ h2 {
     flex-direction: row;
     align-items: stretch;
     background-color: var(--train-car-bg);
+    max-width: 100%;
     min-width: 20em;
     padding: 1em 1em 0 1em;
     position: relative;
@@ -76,10 +71,9 @@ h2 {
     display: flex;
     flex-direction: row;
     flex: 1;
-    padding: 0 1em;
+    padding: 0.5em 1em 0 1em;
     gap: 0;
     align-self: stretch;
-    padding-top: 0.5em;
 }
 
 .windows {
@@ -92,12 +86,13 @@ h2 {
 }
 
 .windows#train-info {
-    min-width: 33em;
+    width: 34em;
+    overflow: visible;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.is-null-direction {
-    animation: pulse 1.5s ease-in-out infinite;
-}
+
 
 /* Windows styling */
 .train-car .train-direction,
@@ -123,4 +118,8 @@ h2 {
 
 .front-window:before {
     content: '\00a0\00a0\00a0\00a0\00a0\00a0';
+}
+
+.is-null-direction {
+    animation: pulse 1.5s ease-in-out infinite;
 }

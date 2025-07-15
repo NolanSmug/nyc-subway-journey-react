@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import StationFragment from './StationFragment'
-
 import './UpcomingStationsHorizontal.css'
+
+import StationFragment from './StationFragment'
 import { Station } from '../logic/StationManager'
 
 // TODO: Borough barrier
@@ -37,8 +37,8 @@ function UpcomingStationsHorizontal({ stations, currentStationID, currentStation
     }
 
     return (
-        <div className="upcoming-stations-horizontal-container not-dim">
-            <div className="stations-horizontal" ref={stationsRef}>
+        <div className='upcoming-stations-horizontal-container not-dim'>
+            <div className='stations-horizontal' ref={stationsRef}>
                 {stations.map((station, index) => (
                     <StationFragment
                         key={station.getId() || index}
@@ -48,7 +48,7 @@ function UpcomingStationsHorizontal({ stations, currentStationID, currentStation
                     />
                 ))}
             </div>
-            <div ref={lineDividerRef} className="line-divider" />
+            <div ref={lineDividerRef} className='line-divider' />
         </div>
     )
 }

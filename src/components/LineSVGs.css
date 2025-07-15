@@ -33,7 +33,7 @@
     width: 4.95em;
 }
 
-.staircase-container:not(.mirrored) .line-svgs-container.grouped.num-lines-3 {
+.staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped.num-lines-3 {
     right: 2.3em;
 }
 
@@ -55,13 +55,12 @@
     min-width: 6rem;
 }
 
-/* --- mirrored (staircase tunnel stuff) --- */
-.mirrored .line-svgs-container {
+/* --- (staircase tunnel stuff) --- */
+.tunnel-expanded .line-svgs-container {
     opacity: 0;
-    /* transition: opacity 0.5s ease; */
 }
 
-.mirrored .line-svgs-container.show-flipped {
+.tunnel-expanded .line-svgs-container.show-flipped {
     opacity: 1;
     transition: opacity 0.5s ease, transform ease-in-out 0.1s;
 }

@@ -1,13 +1,11 @@
 import { useEffect, useRef } from 'react'
-import StationFragmentVertical from './StationFragmentVertical'
-
 import './UpcomingStationsVertical.css'
+
+import StationFragmentVertical from './StationFragmentVertical'
 import { scrollToCurrentStation, UpcomingStationsProps } from './UpcomingStationsHorizontal'
-import { useSettingsContext } from '../contexts/SettingsContext'
 
 function UpcomingStationsVertical({ stations, currentStationID, currentStationIndex }: UpcomingStationsProps) {
     const stationsRef = useRef<HTMLDivElement>(null)
-    const { conductorMode } = useSettingsContext()
 
     // scroll to the current station
     useEffect(() => {

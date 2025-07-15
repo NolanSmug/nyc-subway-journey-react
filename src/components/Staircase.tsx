@@ -13,6 +13,8 @@ export interface StaircaseProps {
     onSelection?: (line: LineName) => void | undefined
 }
 
+// for use ref position: .getBoundingClientRect()
+
 function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps) {
     if (lines.length === 0) return null
 
@@ -35,7 +37,7 @@ function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps)
     }, [tunnelLayout])
 
     return (
-        <div className={`staircase-container ${tunnelLayout ? 'mirrored' : ''} ${hidden ? 'hidden' : ''}`}>
+        <div className={`staircase-container ${tunnelLayout ? 'tunnel-expanded' : ''} ${hidden ? 'hidden' : ''}`}>
             <LineSVGs
                 svgPaths={getLineSVGs(lines)}
                 grouped
@@ -45,7 +47,7 @@ function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps)
                 selectable={tunnelLinesVisible}
                 notDim
             />
-            <div className={`staircase ${tunnelLayout ? 'mirrored' : ''}`}>
+            <div className={`staircase ${tunnelLayout ? 'tunnel-expanded' : ''}`}>
                 <div className='steps'>
                     <div className='step first'></div>
                     <div className='step'></div>

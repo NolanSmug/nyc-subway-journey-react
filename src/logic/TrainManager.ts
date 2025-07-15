@@ -205,7 +205,7 @@ export class Train {
 
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
-            this.setScheduledStops(await getStationsForLine(newLine)) 
+            this.setScheduledStops(await getStationsForLine(newLine))
             this.setCurrentStationIndexByID(currentStation.getId(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)

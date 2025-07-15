@@ -1,5 +1,6 @@
-import { useUIContext } from '../contexts/UIContext'
 import './LineSVGs.css'
+
+import { useUIContext } from '../contexts/UIContext'
 
 interface LineSVGsProps {
     svgPaths: string[]
