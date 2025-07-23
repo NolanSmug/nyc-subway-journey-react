@@ -4,6 +4,8 @@
     align-items: center;
     z-index: 2;
     opacity: 1;
+
+    transition: opacity 0.5s ease-out;
 }
 
 .accordion-wrapper.hidden {

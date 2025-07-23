@@ -14,7 +14,7 @@ export interface SamePlatformTransfersProps {
 
 function SamePlatformTransfers({ lines, hidden, onSelection }: SamePlatformTransfersProps) {
     return (
-        <div className={`accordion-wrapper ${hidden || lines.length === 0 ? 'hidden' : ''}`}>
+        <div className={`accordion-wrapper ${hidden ? 'hidden' : ''}`}>
             <h3>Same platform transfer</h3>
             <div className={`accordion-svgs-container`}>
                 <LineSVGs

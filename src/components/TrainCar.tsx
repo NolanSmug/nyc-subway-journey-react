@@ -30,16 +30,30 @@ function TrainCar() {
     const { train } = useGameContext()
     const { conductorMode, defaultDirectionToggle, setDefaultDirectionToggle } = useSettingsContext()
 
-    let ARROW: string = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
-    let arrowDirection: string = ''
+    const direction = train.getDirection()
 
     // useMemo on functions that get from maps to mitigate re-rendering
     const line = useMemo(() => train.getLine(), [train])
     const lineType = useMemo(() => getLineType(line), [line])
-    const lineSVG = useMemo(() => getLineSVG(line), [line])[0]
+    const lineSVG = useMemo(() => getLineSVG(line), [line])
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--line-color', lineToLineColor(line))
+        document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
+    }, [line, lineType])
+
+    // arrow direction logic (yes I am using one image for it and rotating with css classes. who cares it's cool to save a few KBs when you can)
+    let ARROW_SVG: string = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
+    const arrowDirection = useMemo(() => {
+        if (isVerticalLayout()) {
+            return direction === Direction.DOWNTOWN ? 'down' : 'up'
+        } else {
+            return direction === Direction.DOWNTOWN ? 'left' : 'right'
+        }
+    }, [direction, isVerticalLayout])
 
     const trainInfo: TrainLineInfo = {
-        direction: train.getDirection(),
+        direction: direction,
         directionLabel: train.getDirectionLabel(),
         line: line,
         lineSVG: lineSVG,
@@ -47,35 +61,14 @@ function TrainCar() {
         reverseButton: true,
     }
 
-    useEffect(() => {
-        document.documentElement.style.setProperty('--line-color', lineToLineColor(line))
-        document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
-    }, [line, lineType])
-
-    function updateArrowDirection(): void {
-        if (isVerticalLayout()) {
-            arrowDirection = train.getDirection() === Direction.DOWNTOWN ? 'down' : 'up'
-        } else {
-            arrowDirection = train.getDirection() === Direction.DOWNTOWN ? 'left' : 'right'
-        }
-    }
-
-    useEffect(() => {
-        updateArrowDirection()
-    }, [updateArrowDirection])
-
-    if (arrowDirection === '') {
-        updateArrowDirection()
-    }
-
     return (
         <>
             <Header text='Current Line'></Header>
             <div className='train-container'>
                 <img
-                    src={ARROW}
+                    src={ARROW_SVG}
                     className={`arrow arrow-${arrowDirection} ${
-                        train.getDirection() === Direction.DOWNTOWN && isHorizontalLayout() ? 'show' : 'hide'
+                        direction === Direction.DOWNTOWN && isHorizontalLayout() ? 'show' : 'hide'
                     }`}
                     alt='Left Arrow'
                 />
@@ -109,15 +102,15 @@ function TrainCar() {
 
                 {isHorizontalLayout() && !train.isNullDirection() && (
                     <img
-                        src={ARROW}
+                        src={ARROW_SVG}
                         className={`arrow arrow-${arrowDirection} ${
-                            train.getDirection() === Direction.UPTOWN && isHorizontalLayout() ? 'show' : 'hide'
+                            direction === Direction.UPTOWN && isHorizontalLayout() ? 'show' : 'hide'
                         }`}
                         alt='Right Arrow'
                     />
                 )}
                 {isVerticalLayout() && !train.isNullDirection() && (
-                    <img src={ARROW} className={`arrow arrow-${arrowDirection}`} alt='Up/Down Arrow' />
+                    <img src={ARROW_SVG} className={`arrow arrow-${arrowDirection}`} alt='Up/Down Arrow' />
                 )}
             </div>
         </>

@@ -68,12 +68,7 @@ function App() {
 
             <div className='umbrella-menus'>
                 <div className='settings-umbrella'>
-                    <UmbrellaButton
-                        openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
-                        umbrellaContent={<SettingsMenu />}
-                        below
-                        visible
-                    />
+                    <UmbrellaButton openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]} umbrellaContent={<SettingsMenu />} below visible />
                 </div>
                 <div className='shortcuts-umbrella'>
                     <UmbrellaButton

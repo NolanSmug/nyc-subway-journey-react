@@ -9,7 +9,7 @@ import AdvanceNStationsInput from './AdvanceNStationsInput'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
-import { getLineSVG } from '../logic/LineSVGsMap'
+import { getLineSVGs } from '../logic/LineSVGsMap'
 
 import useTrainActions from '../hooks/useTrainActions'
 import useKeyShortcuts from '../hooks/useKeyShortcuts'
@@ -26,8 +26,7 @@ import REFRESH_WHITE from '../images/refresh-icon-w.svg'
 
 function ConductorModeUI() {
     const { darkMode, setIsTransferMode, setUpcomingStationsVisible, toggleUpcomingStationsLayout, setDarkMode } = useUIContext()
-    const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode, defaultDirectionToggle } =
-        useSettingsContext()
+    const { numAdvanceStations, setNumAdvanceStations, conductorMode, setConductorMode, defaultDirectionToggle } = useSettingsContext()
     const { train, updateTrainObject, setGameState, gameState, initializeGame } = useGameContext()
 
     setUITheme(darkMode)
@@ -75,7 +74,7 @@ function ConductorModeUI() {
                     <div className='station-item'>
                         <Station name={train.getCurrentStation().getName()}>
                             <LineSVGs
-                                svgPaths={getLineSVG(train.getCurrentStation())}
+                                svgPaths={getLineSVGs(train.getCurrentStation().getTransfers())}
                                 onTransferSelect={(index) => {
                                     setIsTransferMode(false), transfer(index).catch(console.error)
                                 }}
@@ -108,7 +107,7 @@ function ConductorModeUI() {
                     <Header text='Destination station' />
                     <div className='station-item'>
                         <Station name={gameState.destinationStation.getName()}>
-                            <LineSVGs svgPaths={getLineSVG(gameState.destinationStation)} />
+                            <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} />
                         </Station>
                     </div>
                     <div className='action-buttons-container' id='destination-station'>

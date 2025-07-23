@@ -1,4 +1,4 @@
-import { LineName } from './LineManager'
+import { lineArrayEquals, LineName } from './LineManager'
 import IMG_A from '../images/a.svg'
 import IMG_B from '../images/b.svg'
 import IMG_C from '../images/c.svg'
@@ -61,16 +61,12 @@ const lineSVGsMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 }
 
-export const getLineSVG = (input: Station | LineName | undefined): string[] => {
-    if (!input) return []
-
-    if (input instanceof Station) {
-        return getLineSVGs(input.getTransfers())
+export const getLineSVG = (input: LineName): string => {
+    if (lineSVGsMap[input]) {
+        return lineSVGsMap[input]
+    } else {
+        return ''
     }
-    if (typeof input === 'string') {
-        return getLineSVGs([input])
-    }
-    return []
 }
 
 export const getLineSVGs = (transfers: LineName[]): string[] => {
@@ -138,12 +134,19 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
         [LineName.J_TRAIN, LineName.Z_TRAIN],
         [LineName.SIX_TRAIN],
     ],
-    710: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]],
+    WTC: [
+        [LineName.TWO_TRAIN, LineName.THREE_TRAIN],
+        [LineName.A_TRAIN, LineName.C_TRAIN],
+        [LineName.E_TRAIN],
+        [LineName.R_TRAIN, LineName.W_TRAIN],
+    ],
     JAY: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN], [LineName.R_TRAIN]],
     R30: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN]],
     CSQ: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]],
     LEX: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SIX_TRAIN]],
     D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]],
+    710: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]],
+    '4A9': [[LineName.F_TRAIN, LineName.G_TRAIN], [LineName.R_TRAIN]],
 }
 
 export function groupLines(lines: LineName[], stationID: string): LineName[][] {
@@ -153,6 +156,10 @@ export function groupLines(lines: LineName[], stationID: string): LineName[][] {
 
     if (stationID in UNIQUE_STATION_GROUPS) {
         return UNIQUE_STATION_GROUPS[stationID]
+    }
+    // also handle F, G train pairing
+    if (lineArrayEquals(lines, [LineName.F_TRAIN, LineName.G_TRAIN])) {
+        return [[LineName.F_TRAIN, LineName.G_TRAIN]]
     }
 
     return result

@@ -44,7 +44,7 @@
 
 /* --- wide --- */
 .line-svgs-container.wide {
-    min-width: 16rem;
+    min-width: 16rem !important;
 }
 
 /* --- small --- */
@@ -103,6 +103,10 @@
 .small {
     height: 1rem;
     width: 1rem;
+}
+
+.chrome .line-svg-image {
+    zoom: 0.9;
 }
 
 

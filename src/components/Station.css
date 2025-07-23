@@ -59,5 +59,6 @@
 .no-lines>.station-container {
     box-shadow: none;
     min-width: 25em;
-    padding: 0.25em 5em 0 0.5em;
+    padding: 0.25em 0.5em 0 0.5em;
+    border: double 2px var(--line-color);
 }

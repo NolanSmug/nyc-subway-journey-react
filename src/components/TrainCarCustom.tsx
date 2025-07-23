@@ -38,14 +38,15 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
         setGameState,
     })
 
+    // if we were to call just train.getDirectionLabel()
     const directionLabel = useMemo(
         () => train.findDirectionLabel(direction, train.getLine(), train.getCurrentStation().getBorough()),
-        [train]
+        [direction, train, train.getLine(), train.getCurrentStation().getBorough()]
     )
 
     // build TrainLineInfo object
     const lineType = useMemo(() => getLineType(line), [line])
-    const lineSVG = useMemo(() => getLineSVG(line), [line])[0]
+    const lineSVG = useMemo(() => getLineSVG(line), [line])
     const trainInfo: TrainLineInfo = {
         direction: direction,
         directionLabel: directionLabel,
@@ -62,13 +63,11 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
         document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
     }, [line, lineType])
 
-    let isDowntown = useMemo(() => direction === Direction.DOWNTOWN, [direction])
-    let isUptown = useMemo(() => direction === Direction.UPTOWN, [direction])
+    const isDowntown = useMemo(() => direction === Direction.DOWNTOWN, [direction])
+    const isUptown = useMemo(() => direction === Direction.UPTOWN, [direction])
 
     return (
-        <div
-            className={`train-wrapper ${isDowntown ? 'downtown' : 'uptown'} ${active ? '' : 'inactive'} ${hidden ? 'hidden' : ''}`}
-        >
+        <div className={`train-wrapper ${isDowntown ? 'downtown' : 'uptown'} ${active ? '' : 'inactive'} ${hidden ? 'hidden' : ''}`}>
             <div className={`train-container `}>
                 <div className='train-advance-button'>
                     {isDowntown && active && (

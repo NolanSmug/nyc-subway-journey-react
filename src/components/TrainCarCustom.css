@@ -7,6 +7,11 @@
     transition: opacity 0.25s ease-in
 }
 
+/* another chrome-specific spacing adjustment (I still refuse to surrender my Firefox) */
+.chrome .train-wrapper {
+    zoom: 0.9;
+}
+
 .train-wrapper.uptown {
     padding-bottom: 32px;
 }

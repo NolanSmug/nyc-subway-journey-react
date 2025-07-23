@@ -222,7 +222,7 @@ M10,Central Av,M,Bk
 227,Central Park North (110 St),2 3,M
 BRB,Brooklyn Bridge-City Hall,4 5 6 J Z,M
 137,Chambers St,1 2 3,M
-A36,Chambers St,A C,M
+WTC,Chambers St,2 3 A C E R W,M
 J28,Chauncey St,J Z,Bk
 133,Christopher St-Sheridan Sq,1,M
 D28,Church Av,B Q,Bk
@@ -236,7 +236,7 @@ A44,Clinton-Washington Avs,C,Bk
 G35,Clinton-Washington Avs,G,Bk
 D43,Coney Island-Stillwell Av,D F N Q,Bk
 D30,Cortelyou Road,Q,Bk
-R25,Cortlandt St,R W,M
+WTC,Cortlandt St,2 3 A C E R W,M
 CSQ,Court Sq-23 St,7 E M G,Q
 BOR,Court St,2 3 4 5 R,Bk
 J20,Crescent St,J Z,Bk
@@ -364,7 +364,7 @@ A46,Nostrand Av,A C,Bk
 D41,Ocean Pkwy,Q,Bk
 A65,Ozone Park-Lefferts Blvd,A,Q
 S03,Park Place,Sf,Bk
-228,Park Place,2 3,M
+WTC,Park Place,2 3 A C E R W,M
 608,Parkchester,6,Bx
 D27,Parkside Av,Q,Bk
 F03,Parsons Blvd,F,Q
@@ -426,7 +426,7 @@ L20,Wilson Av,L,Bk
 J15,Woodhaven Blvd,J Z,Q
 G11,Woodhaven Blvd,M R,Q
 401,Woodlawn,4,Bx
-E01,World Trade Center,E,M
+WTC,World Trade Center,2 3 A C E R W,M
 138,WTC Cortlandt,1,M
 F18,York St,F,Bk
 606,Zerega Av,6,Bx

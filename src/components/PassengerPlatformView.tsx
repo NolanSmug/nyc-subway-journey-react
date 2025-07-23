@@ -12,7 +12,7 @@ import useTrainActions from '../hooks/useTrainActions'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import { useGameContext } from '../contexts/GameContext'
 import { Direction, LineName } from '../logic/LineManager'
-import { groupLines, getCorrespondingGroup, getLineSVG } from '../logic/LineSVGsMap'
+import { groupLines, getCorrespondingGroup, getLineSVGs } from '../logic/LineSVGsMap'
 
 function PassengerPlatformView() {
     const { train, gameState, setGameState, updateTrainObject } = useGameContext()
@@ -25,38 +25,50 @@ function PassengerPlatformView() {
     const transfers: LineName[] = train.getCurrentStation().getTransfers()
     const currentLine = useMemo(() => train.getLine(), [train])
 
-    // sort transfers array into proper line groupings
-    const groupedTransfers = useMemo(() => groupLines(transfers, stationID), [stationID])
-
-    const currentPlatformGroup = useMemo(
+    const groupedTransfers: LineName[][] = useMemo(() => groupLines(transfers, stationID), [stationID]) // sort transfers array into proper line groupings
+    const currentPlatformGroup: LineName[] = useMemo(
+        // lines that share the current train line's platform
         () => getCorrespondingGroup(currentLine, groupedTransfers),
         [currentLine, groupedTransfers]
-    ) // these are the lines that share the current train line's platform
-
-    const otherPlatformGroups = useMemo(
+    )
+    const otherPlatformGroups: LineName[][] = useMemo(
+        // all other lines at the station
         () => groupedTransfers.filter((g) => !g.includes(currentLine)),
         [groupedTransfers, currentLine]
-    ) // all other lines at the station
+    )
+    const hasSamePlatformTransfers: boolean = useMemo(() => currentPlatformGroup.length > 1, [currentPlatformGroup])
 
     const { transfer } = useTrainActions({ train, gameState, conductorMode, updateTrainObject, setGameState })
 
     function selectTransferInTunnel(line: LineName): void {
-        setInTransferTunnel((prev) => !prev)
-
         if (inTransferTunnel && line) {
             transfer(line)
+            setTimeout(() => {
+                // need to do this to fix a state race condition
+                setInTransferTunnel(false)
+            }, 25)
+        } else {
+            setInTransferTunnel(true)
         }
     }
 
     return (
         <>
             <div className='platform-wrapper'>
-                <div className='transfer-tunnels'>
-                    <SamePlatformTransfers
-                        lines={currentPlatformGroup.filter((line) => line !== train.getLine())}
-                        hidden={inTransferTunnel}
-                        onSelection={(line) => transfer(line)}
-                    />
+                <div
+                    // TODO: maybe give SamePlatformTransfers its own container, so that it ALWAYS has only 2 possible positions
+                    className={`transfer-tunnels 
+                    ${hasSamePlatformTransfers ? 'has-platform-transfers' : ''} 
+                    ${otherPlatformGroups.length > 0 ? 'has-other-platform-transfers' : ''} 
+                    ${train.getDirection().toLowerCase()} `}
+                >
+                    {hasSamePlatformTransfers && (
+                        <SamePlatformTransfers
+                            lines={currentPlatformGroup.filter((line) => line !== train.getLine())}
+                            hidden={inTransferTunnel}
+                            onSelection={(line) => transfer(line)}
+                        />
+                    )}
                     {otherPlatformGroups.map((transfers, index) => (
                         <Staircase
                             key={index}
@@ -72,11 +84,7 @@ function PassengerPlatformView() {
                 </div>
 
                 <div className='platform-container'>
-                    <Station
-                        name={train.getCurrentStation().getName()}
-                        hidden={train.getDirection() === Direction.DOWNTOWN}
-                        noLines
-                    />
+                    <Station name={train.getCurrentStation().getName()} hidden={train.getDirection() === Direction.DOWNTOWN} noLines />
                     <TrainCarCustom
                         line={train.getLine()}
                         direction={Direction.UPTOWN}
@@ -115,7 +123,7 @@ function PassengerPlatformView() {
                 <div className='destination-station-rider-mode' id='destination-station'>
                     <h2>Destination Station</h2>
                     <Station name={gameState.destinationStation.getName()} noLines isDestination>
-                        <LineSVGs svgPaths={getLineSVG(gameState.destinationStation)} />
+                        <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} />
                     </Station>
                 </div>
             </div>

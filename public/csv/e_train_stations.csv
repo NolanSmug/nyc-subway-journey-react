@@ -1,5 +1,5 @@
 stop_id,stop_name,transfers,borough
-E01,World Trade Center,E,M
+WTC,World Trade Center,2 3 A C E R W,M
 A34,Canal St,A C E,M
 A33,Spring St,C E,M
 A32,W 4 St-Wash Sq,A C E B D F M,M

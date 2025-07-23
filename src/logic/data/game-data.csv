@@ -231,7 +231,7 @@ A17,Cathedral Pkwy (110 St),Manhattan
 M10,Central Av,Brooklyn
 227,Central Park North (110 St),Manhattan
 137,Chambers St,Manhattan
-A36,Chambers St,Manhattan
+WTC,Chambers St,Manhattan
 J28,Chauncey St,Brooklyn
 133,Christopher St-Sheridan Sq,Manhattan
 244,Church Av,Brooklyn
@@ -245,7 +245,7 @@ A44,Clinton-Washington Avs,Brooklyn
 G35,Clinton-Washington Avs,Brooklyn
 D30,Cortelyou Road,Brooklyn
 138,WTC Cortlandt,Manhattan
-R25,Cortlandt St,Manhattan
+WTC,Cortlandt St,Manhattan
 CSQ,Court Square,Queens
 CSQ,Court Sq-23 St,Queens
 BOR,Court St,Brooklyn
@@ -366,7 +366,7 @@ J21,Norwood Av,Brooklyn
 248,Nostrand Av,Brooklyn
 A46,Nostrand Av,Brooklyn
 D41,Ocean Pkwy,Brooklyn
-228,Park Place,Manhattan
+WTC,Park Place,Manhattan
 S03,Park Place,Brooklyn
 608,Parkchester,Bronx
 D27,Parkside Av,Brooklyn
@@ -432,7 +432,7 @@ L20,Wilson Av,Brooklyn
 G11,Woodhaven Blvd,Queens
 J15,Woodhaven Blvd,Queens
 401,Woodlawn,Bronx
-E01,World Trade Center,Manhattan
+WTC,World Trade Center,Manhattan
 M08,Myrtle-Wyckoff Avs,Brooklyn
 F18,York St,Brooklyn
 606,Zerega Av,Bronx
