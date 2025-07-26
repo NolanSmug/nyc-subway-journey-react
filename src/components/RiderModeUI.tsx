@@ -5,7 +5,7 @@ import { useSettingsContext } from '../contexts/SettingsContext'
 
 import useTrainActions from '../hooks/useTrainActions'
 import useKeyShortcuts from '../hooks/useKeyShortcuts'
-import setUITheme from '../hooks/setUITheme'
+import { setUITheme } from '../hooks/useCSSProperties'
 
 function RiderModeUI() {
     const { darkMode, setUpcomingStationsVisible, setDarkMode } = useUIContext()

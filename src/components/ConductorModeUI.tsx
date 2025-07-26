@@ -13,7 +13,7 @@ import { getLineSVGs } from '../logic/LineSVGsMap'
 
 import useTrainActions from '../hooks/useTrainActions'
 import useKeyShortcuts from '../hooks/useKeyShortcuts'
-import setUITheme from '../hooks/setUITheme'
+import { setUITheme } from '../hooks/useCSSProperties'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'

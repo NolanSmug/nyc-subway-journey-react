@@ -56,11 +56,7 @@ function PassengerPlatformView() {
         <>
             <div className='platform-wrapper'>
                 <div
-                    // TODO: maybe give SamePlatformTransfers its own container, so that it ALWAYS has only 2 possible positions
-                    className={`transfer-tunnels 
-                    ${hasSamePlatformTransfers ? 'has-platform-transfers' : ''} 
-                    ${otherPlatformGroups.length > 0 ? 'has-other-platform-transfers' : ''} 
-                    ${train.getDirection().toLowerCase()} `}
+                    className={`transfer-tunnels ${hasSamePlatformTransfers ? 'platform-transfers' : ''} ${otherPlatformGroups.length > 0 ? 'has-other-platform-transfers' : ''} ${train.getDirection().toLowerCase()} `}
                 >
                     {hasSamePlatformTransfers && (
                         <SamePlatformTransfers

@@ -22,14 +22,18 @@
     flex-direction: column;
     gap: 1em;
     width: 10em;
+
+    top: auto;
+    bottom: auto;
+    transition: top 0.2s ease, bottom 0.2s ease;
 }
 
-.transfer-tunnels.has-platform-transfers.uptown:not(.has-other-platform-transfers) {
+.transfer-tunnels.platform-transfers.uptown:not(.has-other-platform-transfers) {
     top: 14%;
 }
 
-.transfer-tunnels.has-platform-transfers.downtown:not(.has-other-platform-transfers) {
-    bottom: 14%;
+.transfer-tunnels.platform-transfers.downtown:not(.has-other-platform-transfers) {
+    top: 70.5%;
 }
 
 

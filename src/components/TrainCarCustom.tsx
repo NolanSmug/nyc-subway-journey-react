@@ -8,12 +8,13 @@ import ActionButton from './ActionButton'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
-import { Direction, LineName, LineType } from '../logic/LineManager'
+import { Direction, LineName } from '../logic/LineManager'
 
 import useTrainActions from '../hooks/useTrainActions'
+import { configureLineStyles } from '../hooks/useCSSProperties'
 import { TrainLineInfo } from './TrainCar'
 import { getLineType } from '../logic/LineManager'
-import { getLineSVG, lineToLineColor } from '../logic/LineSVGsMap'
+import { getLineSVG } from '../logic/LineSVGsMap'
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
@@ -58,13 +59,10 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
 
     let ARROW = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
 
-    useEffect(() => {
-        document.documentElement.style.setProperty('--line-color', lineToLineColor(line))
-        document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
-    }, [line, lineType])
-
     const isDowntown = useMemo(() => direction === Direction.DOWNTOWN, [direction])
     const isUptown = useMemo(() => direction === Direction.UPTOWN, [direction])
+
+    configureLineStyles(line, lineType)
 
     return (
         <div className={`train-wrapper ${isDowntown ? 'downtown' : 'uptown'} ${active ? '' : 'inactive'} ${hidden ? 'hidden' : ''}`}>

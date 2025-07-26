@@ -10,8 +10,10 @@ import { useGameContext } from '../contexts/GameContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 import { useUIContext } from '../contexts/UIContext'
 
+import { configureLineStyles } from '../hooks/useCSSProperties'
+
 import { Direction, LineType, LineName, getLineType } from '../logic/LineManager'
-import { getLineSVG, lineToLineColor } from '../logic/LineSVGsMap'
+import { getLineSVG } from '../logic/LineSVGsMap'
 
 import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
@@ -37,11 +39,6 @@ function TrainCar() {
     const lineType = useMemo(() => getLineType(line), [line])
     const lineSVG = useMemo(() => getLineSVG(line), [line])
 
-    useEffect(() => {
-        document.documentElement.style.setProperty('--line-color', lineToLineColor(line))
-        document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
-    }, [line, lineType])
-
     // arrow direction logic (yes I am using one image for it and rotating with css classes. who cares it's cool to save a few KBs when you can)
     let ARROW_SVG: string = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const arrowDirection = useMemo(() => {
@@ -60,6 +57,8 @@ function TrainCar() {
         lineType: lineType,
         reverseButton: true,
     }
+
+    configureLineStyles(line, lineType)
 
     return (
         <>
