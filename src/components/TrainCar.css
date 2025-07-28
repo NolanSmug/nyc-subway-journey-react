@@ -67,6 +67,12 @@ h2 {
     background-color: var(--train-car-border);
 }
 
+.train-car.win-display {
+    box-shadow: 0 0.5em 0.75em rgba(90, 232, 149, 0.3), 0 0 5em rgba(90, 232, 149, 0.2);
+    border-radius: 1em 1em 0.2em 0.2em;
+    margin-bottom: 2em;
+}
+
 .doors {
     display: flex;
     flex-direction: row;

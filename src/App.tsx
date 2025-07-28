@@ -40,7 +40,6 @@ function App() {
     if (train.isLineNull() || gameState.isEmpty())
         return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
 
-    // console.log(gameState.isWon)
     return (
         <>
             <div

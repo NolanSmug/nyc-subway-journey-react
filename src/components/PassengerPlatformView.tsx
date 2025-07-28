@@ -47,6 +47,7 @@ function PassengerPlatformView() {
                 // need to do this to fix a state race condition
                 setInTransferTunnel(false)
             }, 25)
+            train.setDirection(Direction.NULL_DIRECTION)
         } else {
             setInTransferTunnel(true)
         }

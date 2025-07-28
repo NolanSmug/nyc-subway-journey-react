@@ -13,7 +13,12 @@ import { getLineType, LineType } from '../logic/LineManager'
 
 import REFRESH_BLACK from '../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../images/refresh-icon-w.svg'
+import OPTIMAL_BLACK from '../images/optimal-route-icon-b.svg'
+import OPTIMAL_WHITE from '../images/optimal-route-icon-w.svg'
 import LineSVGs from './LineSVGs'
+import Header from './Header'
+import TrainCar from './TrainCar'
+import Station from './Station'
 
 interface StationData {
     id: string
@@ -77,6 +82,7 @@ function OptimalRouteUI() {
     const [stationData, setStationData] = useState<StationData[]>([])
     const [transferIndexes, setTransferIndexes] = useState<number[]>([])
     const [loadingVisible, setLoadingVisible] = useState(false)
+    const [isRequested, setIsRequested] = useState(false)
 
     const getDotColor = (line: LineName) => {
         return getLineType(line) === LineType.EXPRESS ? '#fff' : '#222'
@@ -138,6 +144,32 @@ function OptimalRouteUI() {
         }
     }, [stationData])
 
+    if (!isRequested) {
+        return (
+            <>
+                <Header text='You win!' />
+                <Station name={gameState.destinationStation.getName()}>
+                    <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} notDim />
+                </Station>
+                <TrainCar forWinDisplay />
+                <div className='optimal-route-request-container'>
+                    <ActionButton
+                        imageSrc={darkMode ? OPTIMAL_WHITE : OPTIMAL_BLACK}
+                        label='Show optimal route'
+                        onMouseDown={() => setIsRequested(true)}
+                    />
+                    <ActionButton
+                        imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
+                        label='Reset game'
+                        onMouseDown={() => {
+                            initializeGame()
+                        }}
+                    />
+                </div>
+            </>
+        )
+    }
+
     return (
         <>
             <h1>Optimal route</h1>
@@ -145,8 +177,7 @@ function OptimalRouteUI() {
                 <LoadingSpinner
                     visible={loadingVisible}
                     text='Fetching the optimal route for the first time in your session may take
-                    longer than expected. Subsequent optimal route displays will be faster,
-                    assuming the server was pinged in the past 15 minutes. Please
+                    longer than expected. Subsequent optimal route displays will be faster. Please
                     contact the developer if any other issues occur.'
                     textDelaySecs={5}
                 />

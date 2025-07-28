@@ -27,7 +27,7 @@ export interface TrainLineInfo {
     reverseButton?: boolean
 }
 
-function TrainCar() {
+function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     const { isHorizontalLayout, isVerticalLayout, darkMode } = useUIContext()
     const { train } = useGameContext()
     const { conductorMode, defaultDirectionToggle, setDefaultDirectionToggle } = useSettingsContext()
@@ -62,17 +62,19 @@ function TrainCar() {
 
     return (
         <>
-            <Header text='Current Line'></Header>
+            {!forWinDisplay && <Header text={'Current line'}></Header>}
             <div className='train-container'>
-                <img
-                    src={ARROW_SVG}
-                    className={`arrow arrow-${arrowDirection} ${
-                        direction === Direction.DOWNTOWN && isHorizontalLayout() ? 'show' : 'hide'
-                    }`}
-                    alt='Left Arrow'
-                />
+                {!forWinDisplay && (
+                    <img
+                        src={ARROW_SVG}
+                        className={`arrow arrow-${arrowDirection} ${
+                            direction === Direction.DOWNTOWN && isHorizontalLayout() ? 'show' : 'hide'
+                        }`}
+                        alt='Left Arrow'
+                    />
+                )}
 
-                <div className='train-car'>
+                <div className={`train-car ${forWinDisplay ? 'win-display' : ''}`}>
                     <DirectionSwitch
                         state={defaultDirectionToggle}
                         onChange={(newDirection: Direction) => {
@@ -86,7 +88,7 @@ function TrainCar() {
                     </div>
 
                     <div className='windows' id='train-info'>
-                        <TrainInfo {...trainInfo} />
+                        <TrainInfo {...trainInfo} reverseButton={!forWinDisplay} />
                     </div>
 
                     <div className='doors'>
@@ -99,7 +101,7 @@ function TrainCar() {
                     </div>
                 </div>
 
-                {isHorizontalLayout() && !train.isNullDirection() && (
+                {isHorizontalLayout() && !train.isNullDirection() && !forWinDisplay && (
                     <img
                         src={ARROW_SVG}
                         className={`arrow arrow-${arrowDirection} ${
@@ -108,7 +110,7 @@ function TrainCar() {
                         alt='Right Arrow'
                     />
                 )}
-                {isVerticalLayout() && !train.isNullDirection() && (
+                {isVerticalLayout() && !train.isNullDirection() && !forWinDisplay && (
                     <img src={ARROW_SVG} className={`arrow arrow-${arrowDirection}`} alt='Up/Down Arrow' />
                 )}
             </div>

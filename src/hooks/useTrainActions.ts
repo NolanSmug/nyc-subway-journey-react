@@ -11,17 +11,10 @@ type UseTrainActionsParams = {
     setGameState: (gs: GameState) => void
 }
 
-export default function useTrainActions({
-    train,
-    gameState,
-    conductorMode,
-    updateTrainObject,
-    setGameState,
-}: UseTrainActionsParams) {
+export default function useTrainActions({ train, gameState, conductorMode, updateTrainObject, setGameState }: UseTrainActionsParams) {
     const checkForWin = useCallback(() => {
-        const winState = gameState.checkWin(train.getCurrentStation())
-        if (winState) {
-            setGameState(gameState)
+        if (train.getCurrentStation().equals(gameState.destinationStation)) {
+            setGameState(Object.assign(new GameState(), { ...gameState, isWon: true }))
         }
     }, [gameState, train, setGameState])
 
