@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import './Door.css'
 import { useUIContext } from '../contexts/UIContext'
-import usePassengerActions, { PassengerState } from '../hooks/usePassengerActions'
+import usePassengerActions, { PassengerAction, PassengerState } from '../hooks/usePassengerActions'
 import { Direction } from '../logic/LineManager'
 
 interface DoorProps {
@@ -19,7 +19,7 @@ const Door = ({ isLeft, hasPassenger, direction }: DoorProps) => {
         return { setPassengerPosition, setPassengerState }
     }, [setPassengerPosition, setPassengerState])
 
-    const { boardTrain } = usePassengerActions({
+    const { walkPassenger } = usePassengerActions({
         setPassengerPosition: passengerActions.setPassengerPosition,
         setPassengerState: passengerActions.setPassengerState,
     })
@@ -29,9 +29,9 @@ const Door = ({ isLeft, hasPassenger, direction }: DoorProps) => {
         if (hasPassenger && doorRef.current) {
             const toPassengerState: PassengerState =
                 direction === Direction.DOWNTOWN ? PassengerState.DOWNTOWN_TRAIN : PassengerState.UPTOWN_TRAIN
-            boardTrain(doorRef.current, toPassengerState)
+            walkPassenger(PassengerAction.BOARD_TRAIN, toPassengerState, doorRef.current)
         }
-    }, [hasPassenger, direction, boardTrain])
+    }, [hasPassenger, direction, walkPassenger])
 
     return (
         <div

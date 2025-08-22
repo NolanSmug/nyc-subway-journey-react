@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { setPassengerWalkingDuration } from './useCSSProperties'
+import { configurePassengerTransition } from './useCSSProperties'
 
 export type PassengerPosition = {
     x: number
-    y: number
+    y?: number
 }
 
 export enum PassengerState {
@@ -31,47 +31,43 @@ type UsePassengerActionsParams = {
     setPassengerState: (state: PassengerState) => void
 }
 export default function usePassengerActions({ setPassengerPosition, setPassengerState }: UsePassengerActionsParams) {
-    const boardTrain = useCallback(
-        (doorElement: HTMLDivElement, toPassengerState: PassengerState) => {
-            const doorRect: DOMRect = doorElement.getBoundingClientRect()
+    const walkPassenger = useCallback(
+        (passengerAction: PassengerAction, toPassengerState: PassengerState, doorElement?: HTMLDivElement) => {
             const platformContainer: DOMRect | undefined = document.querySelector('.platform-container')?.getBoundingClientRect()
-            const walkingTime: number | undefined = PASSENGER_WALK_DURATIONS.get(PassengerAction.BOARD_TRAIN)
+            const doorRect: DOMRect | undefined = doorElement?.getBoundingClientRect() || undefined
+            const walkingTime: number | undefined = PASSENGER_WALK_DURATIONS.get(passengerAction)
+
             if (platformContainer) {
-                setPassengerWalkingDuration(walkingTime)
+                configurePassengerTransition(walkingTime)
                 setPassengerState(PassengerState.WALKING)
-                setPassengerPosition({
-                    x: -311,
-                    y: doorRect.top + doorRect.height / 2 - platformContainer.top,
-                })
-                const walkingDelay = setTimeout(
-                    () => setPassengerState(toPassengerState),
-                    PASSENGER_WALK_DURATIONS.get(PassengerAction.BOARD_TRAIN)
-                )
-                return () => clearTimeout(walkingDelay)
-            }
-        },
-        [setPassengerPosition, setPassengerState]
-    )
-    const deboardTrain = useCallback(
-        (toPassengerState: PassengerState) => {
-            const platformContainer: DOMRect | undefined = document.querySelector('.platform-container')?.getBoundingClientRect()
-            const walkingTime: number | undefined = PASSENGER_WALK_DURATIONS.get(PassengerAction.DEBOARD_TRAIN)
-            if (platformContainer) {
-                setPassengerWalkingDuration(walkingTime)
-                setPassengerState(PassengerState.TRANSFER_PLATFORM)
-                setPassengerPosition({
-                    x: -311,
-                    y: platformContainer.height / 2, // center of platform
-                })
+
+                switch (passengerAction) {
+                    case PassengerAction.BOARD_TRAIN:
+                        setPassengerPosition({
+                            x: -311,
+                            y: doorRect && doorRect.top + doorRect.height / 2 - platformContainer.top,
+                        })
+                        break
+                    case PassengerAction.DEBOARD_TRAIN:
+                        setPassengerPosition({
+                            x: -311,
+                            y: platformContainer.height / 2, // center of platform
+                        })
+                        break
+                    default:
+                        setPassengerPosition(CENTER_PLATFORM_POS)
+                        break
+                }
+
                 const walkingDelay = setTimeout(() => setPassengerState(toPassengerState), walkingTime)
                 return () => clearTimeout(walkingDelay)
             }
         },
-        [setPassengerPosition]
+
+        [setPassengerPosition, setPassengerState]
     )
 
     return {
-        boardTrain,
-        deboardTrain,
+        walkPassenger,
     }
 }

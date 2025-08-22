@@ -15,7 +15,7 @@ export function configureLineStyles(line: LineName, lineType: LineType) {
     }, [line, lineType])
 }
 
-export function setPassengerWalkingDuration(duration: number | undefined) {
+export function configurePassengerTransition(duration: number | undefined) {
     if (!duration) return
 
     const durationString: string = duration.toString() + 'ms'

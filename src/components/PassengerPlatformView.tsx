@@ -10,7 +10,7 @@ import LineSVGs from './LineSVGs'
 import Passenger from './Passenger'
 
 import useTrainActions from '../hooks/useTrainActions'
-import usePassengerActions, { PassengerState } from '../hooks/usePassengerActions'
+import usePassengerActions, { PassengerAction, PassengerState } from '../hooks/usePassengerActions'
 
 import { useUIContext } from '../contexts/UIContext'
 import { useGameContext } from '../contexts/GameContext'
@@ -55,7 +55,7 @@ function PassengerPlatformView() {
     const passengerIsWalking: boolean = useMemo(() => passengerState == PassengerState.WALKING, [passengerState])
 
     const { transfer } = useTrainActions({ train, gameState, conductorMode, updateTrainObject, setGameState, passengerIsWalking })
-    const { deboardTrain } = usePassengerActions({ setPassengerPosition, setPassengerState })
+    const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
 
     function selectStaircaseLine(line: LineName, index: number): void {
         if (inTransferTunnel && line) {
@@ -118,7 +118,10 @@ function PassengerPlatformView() {
                     <ActionButton
                         label={hasSamePlatformTransfers && !hasOtherPlatformTransfers ? 'deboard' : 'transfer'}
                         noImage
-                        onMouseDown={() => (deboardTrain(PassengerState.TRANSFER_PLATFORM), train.setDirection(Direction.NULL_DIRECTION))}
+                        onMouseDown={() => (
+                            walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM),
+                            train.setDirection(Direction.NULL_DIRECTION)
+                        )}
                         hidden={hideTransferButton}
                     />
                 </div>
