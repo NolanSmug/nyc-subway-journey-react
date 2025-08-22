@@ -15,13 +15,14 @@ export interface SamePlatformTransfersProps {
 function SamePlatformTransfers({ lines, hidden, onSelection }: SamePlatformTransfersProps) {
     return (
         <div className={`accordion-wrapper ${hidden ? 'hidden' : ''}`}>
-            <h3>Same platform transfer</h3>
+            <h3 style={{ margin: 0 }}>Same platform transfer</h3>
             <div className={`accordion-svgs-container`}>
                 <LineSVGs
                     svgPaths={getLineSVGs(lines)}
                     onTransferSelect={(index) => {
                         onSelection(lines[index])
                     }}
+                    numLines={lines.length}
                     selectable
                 ></LineSVGs>
             </div>

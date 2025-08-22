@@ -43,7 +43,7 @@ function App() {
     return (
         <>
             <div
-                className={`${conductorMode ? 'dimmed-overlay' : ''} dimmed-overlay ${isTransferMode ? 'active' : ''}`}
+                className={`dimmed-overlay ${isTransferMode ? 'active' : ''}`}
                 style={isLandingPage ? { opacity: '20%' } : {}}
                 onMouseDown={handleClickAway}
             />

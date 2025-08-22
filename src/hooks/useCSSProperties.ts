@@ -14,3 +14,10 @@ export function configureLineStyles(line: LineName, lineType: LineType) {
         document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
     }, [line, lineType])
 }
+
+export function setPassengerWalkingDuration(duration: number | undefined) {
+    if (!duration) return
+
+    const durationString: string = duration.toString() + 'ms'
+    document.documentElement.style.setProperty('--walking-duration', durationString)
+}

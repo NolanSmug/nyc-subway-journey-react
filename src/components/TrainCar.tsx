@@ -34,7 +34,6 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
 
     const direction = train.getDirection()
 
-    // useMemo on functions that get from maps to mitigate re-rendering
     const line = useMemo(() => train.getLine(), [train])
     const lineType = useMemo(() => getLineType(line), [line])
     const lineSVG = useMemo(() => getLineSVG(line), [line])

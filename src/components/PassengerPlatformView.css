@@ -9,8 +9,8 @@
 
 .platform {
     display: flex;
-    align-items: start;
-    justify-content: center;
+    align-items: center;
+    /* justify-content: center; */
     min-height: 18em;
     width: 60vw;
 }
@@ -23,17 +23,22 @@
     gap: 1em;
     width: 10em;
 
-    top: auto;
-    bottom: auto;
     transition: top 0.2s ease, bottom 0.2s ease;
 }
 
-.transfer-tunnels.platform-transfers.uptown:not(.has-other-platform-transfers) {
-    top: 14%;
+/* 
+need default top value for transition in all states (bc center = 100% - (73% - 16.5%) = 43.5%) 
+*/
+.transfer-tunnels.platform-transfers:not(.other-platform-transfers) {
+    top: 44%;
 }
 
-.transfer-tunnels.platform-transfers.downtown:not(.has-other-platform-transfers) {
-    top: 70.5%;
+.transfer-tunnels.platform-transfers.uptown:not(.other-platform-transfers) {
+    top: 16.5%;
+}
+
+.transfer-tunnels.platform-transfers.downtown:not(.other-platform-transfers) {
+    top: 73%;
 }
 
 
@@ -46,7 +51,7 @@
     align-content: center;
     width: auto;
     border: dashed 1px var(--text-color-opaque);
-    padding: 0 1em 0 1em;
+    padding: 0 1em 0.5em 1em;
 }
 
 .platform-container {

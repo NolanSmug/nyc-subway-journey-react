@@ -1,0 +1,14 @@
+.passenger {
+    width: 4em;
+    height: 4em;
+    margin: auto;
+    position: absolute;
+    z-index: 100;
+
+
+    transition: transform var(--walking-duration) linear;
+}
+
+.passenger:hover {
+    cursor: pointer;
+}

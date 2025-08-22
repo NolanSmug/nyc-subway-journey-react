@@ -1,6 +1,6 @@
 .landing-screen-container {
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     animation: fadeIn 0.6s ease;
     border-radius: 0.5em;
 }

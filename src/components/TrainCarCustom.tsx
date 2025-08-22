@@ -1,7 +1,7 @@
 import './TrainCar.css'
 import './TrainCarCustom.css'
 
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import TrainInfo from './TrainInfo'
 import Door from './Door'
 import ActionButton from './ActionButton'
@@ -39,15 +39,13 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
         setGameState,
     })
 
-    // if we were to call just train.getDirectionLabel()
-    const directionLabel = useMemo(
-        () => train.findDirectionLabel(direction, train.getLine(), train.getCurrentStation().getBorough()),
-        [direction, train, train.getLine(), train.getCurrentStation().getBorough()]
-    )
-
     // build TrainLineInfo object
     const lineType = useMemo(() => getLineType(line), [line])
     const lineSVG = useMemo(() => getLineSVG(line), [line])
+    const directionLabel = useMemo(
+        () => train.findDirectionLabel(direction, train.getLine(), train.getCurrentStation().getBorough()),
+        [direction, train.getLine(), train.getCurrentStation().getBorough()]
+    )
     const trainInfo: TrainLineInfo = {
         direction: direction,
         directionLabel: directionLabel,
@@ -80,17 +78,16 @@ function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps
 
                 <div className={`train-car ${isDowntown ? 'flipped-layout' : ''}`}>
                     <div className='doors'>
-                        <Door isLeft />
-                        <Door />
+                        <Door key='door-ll' isLeft hasPassenger={active} />
+                        <Door key='door-lr' />
                     </div>
-
                     <div className='windows' id='train-info'>
                         <TrainInfo {...trainInfo} />
                     </div>
 
                     <div className='doors'>
-                        <Door isLeft />
-                        <Door />
+                        <Door key='door-rl' isLeft hasPassenger={active} />
+                        <Door key='door-rr' />
                     </div>
 
                     <div className='windows'>

@@ -1,12 +1,13 @@
 .accordion-wrapper {
     display: flex;
-    column-gap: 0.5em;
     align-items: center;
     z-index: 2;
     opacity: 1;
+    column-gap: 0.5em;
 
     transition: opacity 0.5s ease-out;
 }
+
 
 .accordion-wrapper.hidden {
     opacity: 0;

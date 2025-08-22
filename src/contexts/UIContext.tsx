@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback } from 'react'
+import { PassengerPosition, PassengerState, CENTER_PLATFORM_POS } from '../hooks/usePassengerActions'
 
 export enum UpcomingStationsLayout {
     HORIZONTAL,
@@ -7,18 +8,25 @@ export enum UpcomingStationsLayout {
 
 interface UIContextProps {
     darkMode: boolean
+    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
     isTransferMode: boolean
+    setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
+
+    isLandingPage: boolean
+    setIsLandingPage: React.Dispatch<React.SetStateAction<boolean>>
+
     upcomingStationsVisible: boolean
     upcomingStationsLayout: UpcomingStationsLayout
-    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
-    setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
     setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
     setUpcomingStationsLayout: React.Dispatch<React.SetStateAction<UpcomingStationsLayout>>
     toggleUpcomingStationsLayout: () => void
     isVerticalLayout: () => boolean
     isHorizontalLayout: () => boolean
-    isLandingPage: boolean
-    setIsLandingPage: React.Dispatch<React.SetStateAction<boolean>>
+
+    passengerPosition: PassengerPosition
+    setPassengerPosition: React.Dispatch<React.SetStateAction<PassengerPosition>>
+    passengerState: PassengerState
+    setPassengerState: React.Dispatch<React.SetStateAction<PassengerState>>
 }
 
 const UIContext = createContext<UIContextProps | undefined>(undefined)
@@ -28,29 +36,18 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
-    const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(
-        UpcomingStationsLayout.HORIZONTAL
-    )
-    const [isLandingPage, setIsLandingPage] = useState<boolean>(process.env.REACT_APP_USE_DEV_API === 'true' ? false : true)
+    const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(UpcomingStationsLayout.HORIZONTAL)
+    const [isLandingPage, setIsLandingPage] = useState<boolean>(() => (process.env.REACT_APP_USE_DEV_API === 'true' ? false : true))
+    const [passengerPosition, setPassengerPosition] = useState<PassengerPosition>(CENTER_PLATFORM_POS)
+    const [passengerState, setPassengerState] = useState<PassengerState>(PassengerState.CENTER_PLATFORM)
 
     function toggleUpcomingStationsLayout(): void {
         if (upcomingStationsVisible) {
-            setUpcomingStationsLayout(
-                isHorizontalLayout()
-                    ? UpcomingStationsLayout.VERTICAL
-                    : UpcomingStationsLayout.HORIZONTAL
-            )
+            setUpcomingStationsLayout(isHorizontalLayout() ? UpcomingStationsLayout.VERTICAL : UpcomingStationsLayout.HORIZONTAL)
         }
     }
-    const isVerticalLayout = useCallback(
-        () => upcomingStationsLayout === UpcomingStationsLayout.VERTICAL,
-        [upcomingStationsLayout]
-    )
-
-    const isHorizontalLayout = useCallback(
-        () => upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL,
-        [upcomingStationsLayout]
-    )
+    const isVerticalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.VERTICAL, [upcomingStationsLayout])
+    const isHorizontalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL, [upcomingStationsLayout])
 
     const value = useMemo(
         () => ({
@@ -69,15 +66,12 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
             isHorizontalLayout: () => isHorizontalLayout(),
             isLandingPage,
             setIsLandingPage,
+            passengerPosition,
+            setPassengerPosition,
+            passengerState,
+            setPassengerState,
         }),
-        [
-            darkMode,
-            isTransferMode,
-            upcomingStationsVisible,
-            upcomingStationsLayout,
-            isLandingPage,
-            setIsLandingPage,
-        ]
+        [darkMode, isTransferMode, upcomingStationsVisible, upcomingStationsLayout, passengerPosition, passengerState, isLandingPage]
     )
 
     return (

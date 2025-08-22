@@ -1,5 +1,5 @@
 .train-direction {
-    color: var(--train-text-color);
+    color: var(--text-color);
     margin-bottom: 0.25em;
     width: fit-content;
     margin-top: 0.25em;
@@ -24,7 +24,7 @@
 }
 
 .train-type {
-    color: var(--train-text-color);
+    color: var(--text-color);
     margin-bottom: 0.25em;
     white-space: nowrap;
     margin-top: 0.25em;

@@ -1,5 +1,11 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react'
 import { Direction } from '../logic/LineManager'
+
+export enum Gender {
+    MALE,
+    FEMALE,
+    OTHER,
+}
 
 interface SettingsContextProps {
     conductorMode: boolean
@@ -8,6 +14,8 @@ interface SettingsContextProps {
     setConductorMode: React.Dispatch<React.SetStateAction<boolean>>
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
     setDefaultDirectionToggle: React.Dispatch<React.SetStateAction<Direction>>
+    passengerGender: Gender
+    setPassengerGender: React.Dispatch<React.SetStateAction<Gender>>
 }
 
 const SettingsContext = createContext<SettingsContextProps | undefined>(undefined)
@@ -16,6 +24,7 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [conductorMode, setConductorMode] = useState<boolean>(false)
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(NaN)
     const [defaultDirectionToggle, setDefaultDirectionToggle] = useState<Direction>(Direction.NULL_DIRECTION)
+    const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
 
     return (
         <SettingsContext.Provider
@@ -26,6 +35,8 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
                 setNumAdvanceStations,
                 defaultDirectionToggle,
                 setDefaultDirectionToggle,
+                passengerGender,
+                setPassengerGender,
             }}
         >
             {children}

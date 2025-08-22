@@ -15,26 +15,12 @@ interface LineSVGsProps {
     onTransferSelect?: (index: number) => void | undefined
 }
 
-function LineSVGs({
-    svgPaths,
-    small,
-    wide,
-    vertical,
-    grouped,
-    selectable,
-    numLines,
-    notDim,
-    className,
-    onTransferSelect,
-}: LineSVGsProps) {
+function LineSVGs({ svgPaths, small, wide, vertical, grouped, selectable, numLines, notDim, className, onTransferSelect }: LineSVGsProps) {
     const { isTransferMode } = useUIContext()
 
     return (
         <div
-            className={`line-svgs-container 
-                ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''}  
-                 ${className} ${selectable ? 'selectable' : ''} ${notDim ? 'not-dim' : ''} 
-                ${numLines ? `num-lines-${numLines}` : ''} ${vertical ? 'vertical' : ''}`}
+            className={`line-svgs-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''} ${className} ${selectable ? 'selectable' : ''} ${notDim ? 'not-dim' : ''} ${numLines ? `num-lines-${numLines}` : ''} ${vertical ? 'vertical' : ''}`}
         >
             {svgPaths.map((imageSrc, index) => (
                 <img

@@ -15,8 +15,8 @@ function LandingScreen() {
             <div className='landing-screen-content'>
                 <JigglyTitle text='NYC-Subway-Journey' />
                 <p>
-                    Test your knowledge of the NYC subway network by finding a route between two given stations. Make smart
-                    transfers, and avoid getting lost!
+                    Test your knowledge of the NYC subway network by finding a route between two given stations. Make smart transfers, and
+                    avoid getting lost!
                 </p>
 
                 <ActionButton noImage label='Start journey' onMouseDown={() => setIsLandingPage(false)}></ActionButton>
