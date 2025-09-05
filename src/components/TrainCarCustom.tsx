@@ -10,7 +10,6 @@ import R_ARROW_BLACK from '../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../images/right-arrow-w.svg'
 import { Direction, LineName } from '../logic/LineManager'
 
-import useTrainActions from '../hooks/useTrainActions'
 import { configureLineStyles } from '../hooks/useCSSProperties'
 import { TrainLineInfo } from './TrainCar'
 import { getLineType } from '../logic/LineManager'
@@ -24,20 +23,13 @@ interface TrainCarStaticProps {
     direction: Direction
     active: boolean
     hidden?: boolean
+    advanceStation: (n: number) => void
 }
 
-function TrainCarCustom({ line, direction, active, hidden }: TrainCarStaticProps) {
+function TrainCarCustom({ line, direction, active, hidden, advanceStation }: TrainCarStaticProps) {
     const { darkMode } = useUIContext()
-    const { numAdvanceStations, conductorMode } = useSettingsContext()
-    const { train, updateTrainObject, setGameState, gameState } = useGameContext()
-
-    const { advanceStation } = useTrainActions({
-        train,
-        gameState,
-        conductorMode,
-        updateTrainObject,
-        setGameState,
-    })
+    const { numAdvanceStations } = useSettingsContext()
+    const { train } = useGameContext()
 
     // build TrainLineInfo object
     const lineType = useMemo(() => getLineType(line), [line])

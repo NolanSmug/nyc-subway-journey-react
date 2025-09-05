@@ -1,3 +1,12 @@
+.game-over-wrapper {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .optimal-route-window-container {
     display: flex;
     flex-direction: column;

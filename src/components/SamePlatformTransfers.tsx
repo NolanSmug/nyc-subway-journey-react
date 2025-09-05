@@ -9,10 +9,11 @@ import './SamePlatformTransfers.css'
 export interface SamePlatformTransfersProps {
     lines: LineName[]
     hidden: boolean
+    passengerIsWalking?: boolean
     onSelection: (line: LineName) => void
 }
 
-function SamePlatformTransfers({ lines, hidden, onSelection }: SamePlatformTransfersProps) {
+function SamePlatformTransfers({ lines, hidden, passengerIsWalking, onSelection }: SamePlatformTransfersProps) {
     return (
         <div className={`accordion-wrapper ${hidden ? 'hidden' : ''}`}>
             <h3 style={{ margin: 0 }}>Same platform transfer</h3>

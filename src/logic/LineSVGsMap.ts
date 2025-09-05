@@ -145,7 +145,7 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     CSQ: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]],
     LEX: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SIX_TRAIN]],
     D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]],
-    710: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]],
+    '710': [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]],
     '4A9': [[LineName.F_TRAIN, LineName.G_TRAIN], [LineName.R_TRAIN]],
 }
 

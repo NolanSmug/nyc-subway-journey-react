@@ -146,7 +146,7 @@ function OptimalRouteUI() {
 
     if (!isRequested) {
         return (
-            <>
+            <div className='game-over-wrapper'>
                 <Header text='You win!' />
                 <Station name={gameState.destinationStation.getName()}>
                     <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} notDim />
@@ -166,7 +166,7 @@ function OptimalRouteUI() {
                         }}
                     />
                 </div>
-            </>
+            </div>
         )
     }
 

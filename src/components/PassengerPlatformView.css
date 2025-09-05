@@ -33,11 +33,11 @@ need default top value for transition in all states (bc center = 100% - (73% - 1
     top: 44%;
 }
 
-.transfer-tunnels.platform-transfers.uptown:not(.other-platform-transfers) {
+.transfer-tunnels.platform-transfers.Uptown:not(.other-platform-transfers) {
     top: 16.5%;
 }
 
-.transfer-tunnels.platform-transfers.downtown:not(.other-platform-transfers) {
+.transfer-tunnels.platform-transfers.Downtown:not(.other-platform-transfers) {
     top: 73%;
 }
 

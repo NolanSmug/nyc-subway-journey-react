@@ -5,8 +5,12 @@
     position: absolute;
     z-index: 100;
 
-
     transition: transform var(--walking-duration) linear;
+}
+
+.chrome .passenger {
+    height: 3.8em;
+    width: 4.1em;
 }
 
 .passenger:hover {

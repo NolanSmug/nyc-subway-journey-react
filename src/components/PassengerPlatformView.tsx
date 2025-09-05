@@ -54,10 +54,19 @@ function PassengerPlatformView() {
     )
     const passengerIsWalking: boolean = useMemo(() => passengerState == PassengerState.WALKING, [passengerState])
 
-    const { transfer } = useTrainActions({ train, gameState, conductorMode, updateTrainObject, setGameState, passengerIsWalking })
+    const { transfer, advanceStation } = useTrainActions({
+        train,
+        gameState,
+        conductorMode,
+        updateTrainObject,
+        setGameState,
+        passengerIsWalking,
+    })
     const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
 
     function selectStaircaseLine(line: LineName, index: number): void {
+        setSelectedGroupIndex(index)
+
         if (inTransferTunnel && line) {
             transfer(line)
             // need to do this to fix a state race condition
@@ -66,21 +75,22 @@ function PassengerPlatformView() {
             }, 25)
             train.setDirection(Direction.NULL_DIRECTION)
         } else {
+            // staircase isn't open yet
             setInTransferTunnel(true)
         }
-        setSelectedGroupIndex(index)
     }
 
     return (
         <div className='platform-wrapper'>
             <div
-                className={`transfer-tunnels ${hasSamePlatformTransfers ? 'platform-transfers' : ''} ${hasOtherPlatformTransfers ? 'other-platform-transfers' : ''} ${train.getDirection().toLowerCase()} `}
+                className={`transfer-tunnels ${hasSamePlatformTransfers ? 'platform-transfers' : ''} ${hasOtherPlatformTransfers ? 'other-platform-transfers' : ''} ${train.getDirection()} `}
             >
                 {hasSamePlatformTransfers && (
                     <SamePlatformTransfers
                         lines={currentPlatformGroup.filter((line) => line !== train.getLine())}
                         hidden={inTransferTunnel}
-                        onSelection={(line) => transfer(line)}
+                        passengerIsWalking={passengerIsWalking}
+                        onSelection={transfer}
                     />
                 )}
                 {otherPlatformGroups.map((transfers, index) => (
@@ -90,6 +100,7 @@ function PassengerPlatformView() {
                         onSelection={(line: LineName) => {
                             selectStaircaseLine(line, index)
                         }}
+                        isSelected={!inTransferTunnel && selectedGroupIndex === index}
                         tunnelLayout={inTransferTunnel && selectedGroupIndex === index}
                         hidden={inTransferTunnel && selectedGroupIndex !== index}
                     />
@@ -105,6 +116,7 @@ function PassengerPlatformView() {
                     direction={Direction.UPTOWN}
                     active={train.getDirection() === Direction.UPTOWN}
                     hidden={inTransferTunnel}
+                    advanceStation={advanceStation}
                 />
                 <ActionButton
                     label='board uptown train'
@@ -116,7 +128,7 @@ function PassengerPlatformView() {
 
                 <div className='platform'>
                     <ActionButton
-                        label={hasSamePlatformTransfers && !hasOtherPlatformTransfers ? 'deboard' : 'transfer'}
+                        label={hasSamePlatformTransfers && !hasOtherPlatformTransfers && !train.isNullDirection() ? 'deboard' : 'transfer'}
                         noImage
                         onMouseDown={() => (
                             walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM),
@@ -138,6 +150,7 @@ function PassengerPlatformView() {
                     direction={Direction.DOWNTOWN}
                     active={train.getDirection() === Direction.DOWNTOWN}
                     hidden={inTransferTunnel}
+                    advanceStation={advanceStation}
                 />
                 <Station
                     name={train.getCurrentStation().getName()}

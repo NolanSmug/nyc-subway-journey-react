@@ -1,25 +1,31 @@
 import './Statircase.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import LineSVGs from './LineSVGs'
 
 import { LineName } from '../logic/LineManager'
 import { useUIContext } from '../contexts/UIContext'
 import { getLineSVGs } from '../logic/LineSVGsMap'
+import usePassengerActions, { PassengerAction, PassengerState } from '../hooks/usePassengerActions'
 
 export interface StaircaseProps {
     lines: LineName[]
     tunnelLayout?: boolean
     hidden?: boolean
+    isSelected?: boolean
     onSelection?: (line: LineName) => void | undefined
 }
 
 // for use ref position: .getBoundingClientRect()
 
-function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps) {
+function Staircase({ lines, tunnelLayout, isSelected, onSelection, hidden }: StaircaseProps) {
     if (lines.length === 0) return null
 
-    const { setIsTransferMode } = useUIContext()
+    const { setIsTransferMode, setPassengerPosition, setPassengerState } = useUIContext()
+    const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
+
     const [tunnelLinesVisible, setTunnelLinesVisible] = useState(false)
+
+    const staircaseRef = useRef<HTMLDivElement | null>(null)
 
     // DELAY LINE SVGs VISIBILITY DURING TRANSITION
     useEffect(() => {
@@ -36,6 +42,12 @@ function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps)
         }
     }, [tunnelLayout])
 
+    // useEffect(() => {
+    //     if (isSelected && staircaseRef.current) {
+    //         walkPassenger(PassengerAction.TO_STAIRCASE, PassengerState.TRANSFER_TUNNEL, staircaseRef.current)
+    //     }
+    // }, [isSelected])
+
     return (
         <div className={`staircase-container ${tunnelLayout ? 'tunnel-expanded' : ''} ${hidden ? 'hidden' : ''}`}>
             <LineSVGs
@@ -47,7 +59,7 @@ function Staircase({ lines, tunnelLayout, onSelection, hidden }: StaircaseProps)
                 selectable={tunnelLinesVisible}
                 notDim
             />
-            <div className={`staircase ${tunnelLayout ? 'tunnel-expanded' : ''}`}>
+            <div ref={staircaseRef} className={`staircase ${tunnelLayout ? 'tunnel-expanded' : ''}`}>
                 <div className='steps'>
                     <div className='step first'></div>
                     <div className='step'></div>

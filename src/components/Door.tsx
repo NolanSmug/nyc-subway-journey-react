@@ -26,12 +26,13 @@ const Door = ({ isLeft, hasPassenger, direction }: DoorProps) => {
 
     useEffect(() => {
         // Only run passenger logic once per passenger
-        if (hasPassenger && doorRef.current) {
+        if (doorRef.current && hasPassenger) {
+            debugger
             const toPassengerState: PassengerState =
                 direction === Direction.DOWNTOWN ? PassengerState.DOWNTOWN_TRAIN : PassengerState.UPTOWN_TRAIN
             walkPassenger(PassengerAction.BOARD_TRAIN, toPassengerState, doorRef.current)
         }
-    }, [hasPassenger, direction, walkPassenger])
+    }, [direction, hasPassenger])
 
     return (
         <div
