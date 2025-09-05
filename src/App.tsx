@@ -40,6 +40,13 @@ function App() {
     if (train.isLineNull() || gameState.isEmpty())
         return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
 
+    if (gameState.isWon)
+        return (
+            <div className='Game'>
+                <OptimalRouteUI />
+            </div>
+        )
+
     return (
         <>
             <div
@@ -51,8 +58,7 @@ function App() {
             {isLandingPage && <LandingScreen />}
 
             <div className='Game' style={conductorMode ? {} : { paddingBottom: '0' }}>
-                {gameState.isWon && <OptimalRouteUI />}
-                {!gameState.isWon && upcomingStationsVisible && isHorizontalLayout() && (
+                {upcomingStationsVisible && isHorizontalLayout() && (
                     <UpcomingStationsHorizontal
                         stations={train.getScheduledStops()}
                         currentStationID={train.getCurrentStation().getId()}
@@ -60,8 +66,8 @@ function App() {
                     />
                 )}
                 <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
-                    {!gameState.isWon && conductorMode && <ConductorModeUI />}
-                    {!gameState.isWon && !conductorMode && <RiderModeUI />}
+                    {conductorMode && <ConductorModeUI />}
+                    {!conductorMode && <RiderModeUI />}
                 </div>
             </div>
 
@@ -83,7 +89,7 @@ function App() {
                 </div>
             </div>
 
-            {!gameState.isWon && upcomingStationsVisible && isVerticalLayout() && (
+            {upcomingStationsVisible && isVerticalLayout() && (
                 <div className='upcoming-stations-vertical'>
                     <UpcomingStationsVertical
                         stations={train.getScheduledStops()}
