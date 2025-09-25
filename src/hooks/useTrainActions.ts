@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { GameState } from '../logic/GameState'
 import { Train } from '../logic/TrainManager'
-import { LineName } from '../logic/LineManager'
+import { Direction, LineName } from '../logic/LineManager'
 
 type UseTrainActionsParams = {
     train: Train
@@ -44,11 +44,7 @@ export default function useTrainActions({
     )
 
     // TRANSFERRING LINES
-    const transfer: {
-        // can either transfer by index, or specific line
-        (index: number): Promise<void>
-        (line: LineName): Promise<void>
-    } = useCallback(
+    const transfer = useCallback(
         async (transferInput: number | LineName) => {
             if (passengerIsWalking) return
 
@@ -73,9 +69,14 @@ export default function useTrainActions({
     )
 
     // CHANGING DIRECTION
-    const changeDirection = useCallback(() => {
+    const changeDirection = useCallback((direction?: Direction) => {
         if (!train) throw new Error('repOK failed on change direction action')
         if (passengerIsWalking) return
+
+        if (direction) {
+            updateTrainObject({ ...train.setDirection(direction) })
+            return
+        }
 
         updateTrainObject({ ...train.reverseDirection() })
     }, [train, updateTrainObject])

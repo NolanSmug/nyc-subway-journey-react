@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import ActionButton from './ActionButton'
 
 import './UmbrellaButton.css'
-import { useUIContext } from '../contexts/UIContext'
+import { useUIContext } from '../../contexts/UIContext'
 
 export interface UmbrellaButtonProps {
     openingButtonsW_B: string[] // [white, black]

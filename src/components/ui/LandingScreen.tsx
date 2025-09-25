@@ -1,5 +1,5 @@
-import { useUIContext } from '../contexts/UIContext'
-import ActionButton from './ActionButton'
+import { useUIContext } from '../../contexts/UIContext'
+import ActionButton from '../common/ActionButton'
 
 import './LandingScreen.css'
 

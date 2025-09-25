@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 
 import './DirectionSwitch.css'
-import { Direction } from '../logic/LineManager'
-import { useUIContext } from '../contexts/UIContext'
+import { Direction } from '../../logic/LineManager'
+import { useUIContext } from '../../contexts/UIContext'
 
-import INFO_ICON_B from '../images/info-icon-black.svg'
-import INFO_ICON_W from '../images/info-icon-white.svg'
+import INFO_ICON_B from '../../images/info-icon-black.svg'
+import INFO_ICON_W from '../../images/info-icon-white.svg'
 
 interface DirectionSwitchProps {
     state: Direction

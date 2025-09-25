@@ -1,11 +1,11 @@
 import './Staircase.css'
 import { useEffect, useRef, useState } from 'react'
-import LineSVGs from './LineSVGs'
+import LineSVGs from '../LineSVGs'
 
-import { LineName } from '../logic/LineManager'
-import { useUIContext } from '../contexts/UIContext'
-import { getLineSVGs } from '../logic/LineSVGsMap'
-import usePassengerActions from '../hooks/usePassengerActions'
+import { LineName } from '../../logic/LineManager'
+import { useUIContext } from '../../contexts/UIContext'
+import { getLineSVGs } from '../../logic/LineSVGsMap'
+import usePassengerActions from '../../hooks/usePassengerActions'
 
 export interface StaircaseProps {
     lines: LineName[]

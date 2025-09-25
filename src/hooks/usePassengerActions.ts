@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { configurePassengerTransition } from './useCSSProperties'
+import { usePassengerTransition } from './useCSSProperties'
 
 export type PassengerPosition = {
     x: number
@@ -41,7 +41,7 @@ export default function usePassengerActions({ setPassengerPosition, setPassenger
             const walkingTime: number | undefined = PASSENGER_WALK_DURATIONS.get(passengerAction)
 
             if (platformContainer) {
-                configurePassengerTransition(walkingTime)
+                usePassengerTransition(walkingTime)
                 setPassengerState(PassengerState.WALKING)
 
                 switch (passengerAction) {

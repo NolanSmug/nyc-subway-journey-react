@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import './Door.css'
-import { useUIContext } from '../contexts/UIContext'
-import usePassengerActions, { PassengerAction, PassengerState } from '../hooks/usePassengerActions'
-import { Direction } from '../logic/LineManager'
+import { useUIContext } from '../../contexts/UIContext'
+import usePassengerActions, { PassengerAction, PassengerState } from '../../hooks/usePassengerActions'
+import { Direction } from '../../logic/LineManager'
 
 interface DoorProps {
     isLeft?: boolean

@@ -15,7 +15,6 @@
     flex-direction: column;
     background: none;
     border: none;
-    cursor: pointer;
     font: inherit;
     color: inherit;
     z-index: 2;
@@ -27,6 +26,11 @@
 .action-button {
     all: unset;
     border-radius: 0.5em;
+}
+
+.action-button.disabled {
+    pointer-events: none;
+    opacity: 0.4;
 }
 
 .action-button:active .icon {

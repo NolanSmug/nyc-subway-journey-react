@@ -2,23 +2,23 @@ import React, { useEffect, useState } from 'react'
 
 import './OptimalRouteUI.css'
 
-import ActionButton from './ActionButton'
-import LoadingSpinner from './LoadingSpinner'
+import ActionButton from '../common/ActionButton'
+import LoadingSpinner from '../common/LoadingSpinner'
 
-import { useGameContext } from '../contexts/GameContext'
-import { useUIContext } from '../contexts/UIContext'
-import { LineName, lineArrayEquals } from '../logic/LineManager'
-import { getLineSVGs, lineToLineColor } from '../logic/LineSVGsMap'
-import { getLineType, LineType } from '../logic/LineManager'
+import { useGameContext } from '../../contexts/GameContext'
+import { useUIContext } from '../../contexts/UIContext'
+import { LineName, lineArrayEquals } from '../../logic/LineManager'
+import { getLineSVGs, lineToLineColor } from '../../logic/LineSVGsMap'
+import { getLineType, LineType } from '../../logic/LineManager'
 
-import REFRESH_BLACK from '../images/refresh-icon-b.svg'
-import REFRESH_WHITE from '../images/refresh-icon-w.svg'
-import OPTIMAL_BLACK from '../images/optimal-route-icon-b.svg'
-import OPTIMAL_WHITE from '../images/optimal-route-icon-w.svg'
-import LineSVGs from './LineSVGs'
-import Header from './Header'
-import TrainCar from './TrainCar'
-import Station from './Station'
+import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
+import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
+import OPTIMAL_BLACK from '../../images/optimal-route-icon-b.svg'
+import OPTIMAL_WHITE from '../../images/optimal-route-icon-w.svg'
+import LineSVGs from '../LineSVGs'
+import Header from '../common/Header'
+import TrainCar from '../train/TrainCar'
+import Station from '../station/Station'
 
 interface StationData {
     id: string

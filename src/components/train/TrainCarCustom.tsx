@@ -4,19 +4,19 @@ import './TrainCarCustom.css'
 import { useMemo } from 'react'
 import TrainInfo from './TrainInfo'
 import Door from './Door'
-import ActionButton from './ActionButton'
+import ActionButton from '../common/ActionButton'
 
-import R_ARROW_BLACK from '../images/right-arrow-b.svg'
-import R_ARROW_WHITE from '../images/right-arrow-w.svg'
-import { Direction, LineName } from '../logic/LineManager'
+import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
+import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
+import { Direction, LineName } from '../../logic/LineManager'
 
-import { configureLineStyles } from '../hooks/useCSSProperties'
+import { useLineStyles } from '../../hooks/useCSSProperties'
 import { TrainLineInfo } from './TrainCar'
-import { getLineType } from '../logic/LineManager'
-import { getLineSVG } from '../logic/LineSVGsMap'
-import { useUIContext } from '../contexts/UIContext'
-import { useGameContext } from '../contexts/GameContext'
-import { useSettingsContext } from '../contexts/SettingsContext'
+import { getLineType } from '../../logic/LineManager'
+import { getLineSVG } from '../../logic/LineSVGsMap'
+import { useUIContext } from '../../contexts/UIContext'
+import { useGameContext } from '../../contexts/GameContext'
+import { useSettingsContext } from '../../contexts/SettingsContext'
 
 interface TrainCarStaticProps {
     line: LineName
@@ -52,7 +52,7 @@ function TrainCarCustom({ line, direction, active, hidden, advanceStation }: Tra
     const isDowntown = useMemo(() => direction === Direction.DOWNTOWN, [direction])
     const isUptown = useMemo(() => direction === Direction.UPTOWN, [direction])
 
-    configureLineStyles(line, lineType)
+    useLineStyles(line, lineType)
 
     return (
         <div className={`train-wrapper ${isDowntown ? 'downtown' : 'uptown'} ${active ? '' : 'inactive'} ${hidden ? 'hidden' : ''}`}>

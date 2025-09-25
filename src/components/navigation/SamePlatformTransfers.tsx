@@ -1,8 +1,8 @@
 import React from 'react'
-import { LineName } from '../logic/LineManager'
+import { LineName } from '../../logic/LineManager'
 
-import { getLineSVGs } from '../logic/LineSVGsMap'
-import LineSVGs from './LineSVGs'
+import { getLineSVGs } from '../../logic/LineSVGsMap'
+import LineSVGs from '../LineSVGs'
 
 import './SamePlatformTransfers.css'
 

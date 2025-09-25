@@ -1,22 +1,22 @@
 import { useEffect, useMemo } from 'react'
 
 import Door from './Door'
-import Header from './Header'
-import TrainInfo from '../components/TrainInfo'
-import DirectionSwitch from './DirectionSwitch'
+import Header from '../common/Header'
+import TrainInfo from './TrainInfo'
+import DirectionSwitch from '../navigation/DirectionSwitch'
 
 import './TrainCar.css'
-import { useGameContext } from '../contexts/GameContext'
-import { useSettingsContext } from '../contexts/SettingsContext'
-import { useUIContext } from '../contexts/UIContext'
+import { useGameContext } from '../../contexts/GameContext'
+import { useSettingsContext } from '../../contexts/SettingsContext'
+import { useUIContext } from '../../contexts/UIContext'
 
-import { configureLineStyles } from '../hooks/useCSSProperties'
+import { useLineStyles } from '../../hooks/useCSSProperties'
 
-import { Direction, LineType, LineName, getLineType } from '../logic/LineManager'
-import { getLineSVG } from '../logic/LineSVGsMap'
+import { Direction, LineType, LineName, getLineType } from '../../logic/LineManager'
+import { getLineSVG } from '../../logic/LineSVGsMap'
 
-import R_ARROW_BLACK from '../images/right-arrow-b.svg'
-import R_ARROW_WHITE from '../images/right-arrow-w.svg'
+import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
+import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
 
 export interface TrainLineInfo {
     direction: Direction
@@ -57,7 +57,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
         reverseButton: true,
     }
 
-    configureLineStyles(line, lineType)
+    useLineStyles(line, lineType)
 
     return (
         <>

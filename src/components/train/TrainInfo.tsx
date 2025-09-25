@@ -2,9 +2,9 @@ import './TrainInfo.css'
 
 import { TrainLineInfo } from './TrainCar'
 
-import { default as Line } from './LineSVGs'
-import { Direction } from '../logic/LineManager'
-import { useGameContext } from '../contexts/GameContext'
+import { default as Line } from '../LineSVGs'
+import { Direction } from '../../logic/LineManager'
+import { useGameContext } from '../../contexts/GameContext'
 
 export interface TrainInfoProps extends TrainLineInfo {}
 

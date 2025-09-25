@@ -1,10 +1,10 @@
 import React from 'react'
-import LineSVGs from './LineSVGs'
+import LineSVGs from '../LineSVGs'
 
 import './StationFragmentVertical.css'
-import { getLineSVGs } from '../logic/LineSVGsMap'
-import { Station } from '../logic/StationManager'
-import { LineName } from '../logic/LineManager'
+import { getLineSVGs } from '../../logic/LineSVGsMap'
+import { Station } from '../../logic/StationManager'
+import { LineName } from '../../logic/LineManager'
 
 export interface StationFragmentVerticalProps {
     station: Station

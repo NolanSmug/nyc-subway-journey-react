@@ -1,33 +1,37 @@
 import React, { useMemo, useState } from 'react'
-import './PassengerPlatformView.css'
+import './RiderModeUI.css'
 
-import TrainCarCustom from './TrainCarCustom'
-import Staircase from './Staircase'
-import SamePlatformTransfers from './SamePlatformTransfers'
-import ActionButton from './ActionButton'
-import Station from './Station'
-import LineSVGs from './LineSVGs'
-import Passenger from './Passenger'
+import TrainCarCustom from '../train/TrainCarCustom'
+import Staircase from '../station/Staircase'
+import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
+import ActionButton from '../common/ActionButton'
+import Station from '../station/Station'
+import LineSVGs from '../LineSVGs'
+import Passenger from '../Passenger'
 
-import useTrainActions from '../hooks/useTrainActions'
-import usePassengerActions, { PassengerAction, PassengerState } from '../hooks/usePassengerActions'
+import usePassengerActions, { PassengerAction, PassengerState } from '../../hooks/usePassengerActions'
 
-import { useUIContext } from '../contexts/UIContext'
-import { useGameContext } from '../contexts/GameContext'
-import { useSettingsContext } from '../contexts/SettingsContext'
+import { Train } from '../../logic/TrainManager'
+import { GameState } from '../../logic/GameState'
+import { Direction, LineName } from '../../logic/LineManager'
+import { groupLines, getCorrespondingGroup, getLineSVGs } from '../../logic/LineSVGsMap'
+import { useUIContext } from '../../contexts/UIContext'
 
-import { Direction, LineName } from '../logic/LineManager'
-import { groupLines, getCorrespondingGroup, getLineSVGs } from '../logic/LineSVGsMap'
+interface RiderModeUIProps {
+    train: Train
+    gameState: GameState
+    advanceStation: (n: number) => void
+    transfer: (input: number | LineName) => Promise<void>
+    changeDirection: (direction?: Direction) => void
+}
 
-function PassengerPlatformView() {
-    const { train, gameState, setGameState, updateTrainObject } = useGameContext()
-    const { conductorMode } = useSettingsContext()
+function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirection }: RiderModeUIProps) {
     const { passengerState, setPassengerState, setPassengerPosition } = useUIContext()
 
     const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
     const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0)
 
-    const stationID: string = train.getCurrentStation().getId()
+    const stationID: string = useMemo(() => train.getCurrentStation().getId(), [train.getCurrentStation().getId()])
     const transfers: LineName[] = useMemo(() => train.getCurrentStation().getTransfers(), [train.getCurrentStation().getTransfers()])
     const currentLine = useMemo(() => train.getLine(), [train.getLine()])
 
@@ -52,16 +56,8 @@ function PassengerPlatformView() {
             inTransferTunnel,
         [transfers, passengerState, inTransferTunnel]
     )
-    const passengerIsWalking: boolean = useMemo(() => passengerState == PassengerState.WALKING, [passengerState])
+    const passengerIsWalking = passengerState === PassengerState.WALKING
 
-    const { transfer, advanceStation } = useTrainActions({
-        train,
-        gameState,
-        conductorMode,
-        updateTrainObject,
-        setGameState,
-        passengerIsWalking,
-    })
     const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
 
     function selectStaircaseLine(line: LineName, index: number): void {
@@ -121,7 +117,7 @@ function PassengerPlatformView() {
                 <ActionButton
                     label='board uptown train'
                     noImage
-                    onMouseDown={() => updateTrainObject({ ...train.setDirection(Direction.UPTOWN) })}
+                    onMouseDown={() => changeDirection(Direction.UPTOWN)}
                     hidden={inTransferTunnel || train.getDirection() === Direction.UPTOWN}
                     wrapperClassName='uptown-button-offset'
                 />
@@ -141,7 +137,7 @@ function PassengerPlatformView() {
                 <ActionButton
                     label='board downtown train'
                     noImage
-                    onMouseDown={() => updateTrainObject({ ...train.setDirection(Direction.DOWNTOWN) })}
+                    onMouseDown={() => changeDirection(Direction.DOWNTOWN)}
                     hidden={inTransferTunnel || train.getDirection() === Direction.DOWNTOWN}
                     wrapperClassName='downtown-button-offset'
                 />
@@ -168,4 +164,4 @@ function PassengerPlatformView() {
     )
 }
 
-export default PassengerPlatformView
+export default React.memo(RiderModeUI)

@@ -1,24 +1,26 @@
-import { Direction } from '../logic/LineManager'
-import { useGameContext } from '../contexts/GameContext'
-import { useSettingsContext } from '../contexts/SettingsContext'
-import { useUIContext } from '../contexts/UIContext'
+import { Direction } from '../../logic/LineManager'
+import { useGameContext } from '../../contexts/GameContext'
+import { useSettingsContext } from '../../contexts/SettingsContext'
+import { useUIContext } from '../../contexts/UIContext'
 
 import './AdvanceNStationsInput.css'
 
-import RESET_INPUT_B from '../images/reset-input-black.svg'
-import RESET_INPUT_W from '../images/reset-input-white.svg'
+import RESET_INPUT_B from '../../images/reset-input-black.svg'
+import RESET_INPUT_W from '../../images/reset-input-white.svg'
 
 function AdvanceNStationsInput() {
     const { darkMode } = useUIContext()
     const { train } = useGameContext()
     const { numAdvanceStations, setNumAdvanceStations, conductorMode: visible } = useSettingsContext()
+    
+    if (!visible) return null
 
     let currentMaxNumber: number =
         train.getDirection() === Direction.DOWNTOWN
             ? train.getCurrentStationIndex()
             : train.getScheduledStops().length - train.getCurrentStationIndex() - 1
 
-    if (train.isNullDirection()) currentMaxNumber = NaN
+    if (train.isNullDirection()) currentMaxNumber = 1
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue: string = e.target.value
@@ -32,7 +34,6 @@ function AdvanceNStationsInput() {
         }
     }
 
-    if (!visible) return null
 
     return (
         <div className='additional-input-container'>

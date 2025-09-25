@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import ConductorModeUI from './components/ConductorModeUI'
-import UmbrellaButton from './components/UmbrellaButton'
-import SettingsMenu from './components/SettingsMenu'
-import UpcomingStationsVertical from './components/UpcomingStationsVertical'
-import UpcomingStationsHorizontal from './components/UpcomingStationsHorizontal'
-import KeyShortcutMenu from './components/KeyShortcutMenu'
-import OptimalRouteUI from './components/OptimalRouteUI'
+import ConductorMode from './components/modes/ConductorMode'
+import UmbrellaButton from './components/common/UmbrellaButton'
+import SettingsMenu from './components/common/SettingsMenu'
+import UpcomingStationsVertical from './components/common/UpcomingStationsVertical'
+import UpcomingStationsHorizontal from './components/common/UpcomingStationsHorizontal'
+import KeyShortcutMenu from './components/keyboard/KeyShortcutMenu'
+import OptimalRouteUI from './components/ui/OptimalRouteUI'
 // import SubwayMap from './components/SubwayMap'
 
 import './App.css'
@@ -17,8 +17,8 @@ import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
-import LandingScreen from './components/LandingScreen'
-import RiderModeUI from './components/RiderModeUI'
+import LandingScreen from './components/ui/LandingScreen'
+import RiderMode from './components/modes/RiderMode'
 
 function App() {
     const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isLandingPage } =
@@ -66,8 +66,8 @@ function App() {
                     />
                 )}
                 <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
-                    {conductorMode && <ConductorModeUI />}
-                    {!conductorMode && <RiderModeUI />}
+                    {conductorMode && <ConductorMode />}
+                    {!conductorMode && <RiderMode />}
                 </div>
             </div>
 

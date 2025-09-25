@@ -11,7 +11,7 @@ export interface StationProps {
 }
 
 function Station({ name, header, noLines, hidden, isDestination, children }: StationProps) {
-    const isGreaterThan20Chars = (!noLines && name.length > 18) || (children && children.toString().length > 10)
+    const isGreaterThan20Chars = !noLines && name.length > 18
 
     return (
         <div className={`station-wrapper ${hidden ? 'hidden' : ''} ${noLines && !isDestination ? 'no-lines' : ''}`}>

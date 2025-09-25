@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './UpcomingStationsVertical.css'
 
-import StationFragmentVertical from './StationFragmentVertical'
+import StationFragmentVertical from '../station/StationFragmentVertical'
 import { scrollToCurrentStation, UpcomingStationsProps } from './UpcomingStationsHorizontal'
 
 function UpcomingStationsVertical({ stations, currentStationID, currentStationIndex }: UpcomingStationsProps) {
