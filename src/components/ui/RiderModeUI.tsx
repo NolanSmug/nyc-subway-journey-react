@@ -60,7 +60,9 @@ function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirecti
 
     const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
 
-    function selectStaircaseLine(line: LineName, index: number): void {
+    function selectStaircaseLine(index: number, line?: LineName): void {
+        if (passengerState !== PassengerState.TRANSFER_PLATFORM) return
+
         setSelectedGroupIndex(index)
 
         if (inTransferTunnel && line) {
@@ -89,12 +91,12 @@ function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirecti
                         onSelection={transfer}
                     />
                 )}
-                {otherPlatformGroups.map((transfers, index) => (
+                {otherPlatformGroups.map((transfers: LineName[], index: number) => (
                     <Staircase
                         key={index}
                         lines={transfers}
                         onSelection={(line: LineName) => {
-                            selectStaircaseLine(line, index)
+                            selectStaircaseLine(index, line)
                         }}
                         isSelected={!inTransferTunnel && selectedGroupIndex === index}
                         tunnelLayout={inTransferTunnel && selectedGroupIndex === index}

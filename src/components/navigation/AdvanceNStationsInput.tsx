@@ -12,7 +12,7 @@ function AdvanceNStationsInput() {
     const { darkMode } = useUIContext()
     const { train } = useGameContext()
     const { numAdvanceStations, setNumAdvanceStations, conductorMode: visible } = useSettingsContext()
-    
+
     if (!visible) return null
 
     let currentMaxNumber: number =
@@ -33,7 +33,6 @@ function AdvanceNStationsInput() {
             setNumAdvanceStations(parsedValue)
         }
     }
-
 
     return (
         <div className='additional-input-container'>

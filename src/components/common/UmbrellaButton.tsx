@@ -53,10 +53,7 @@ const UmbrellaButton = ({ openingButtonsW_B, umbrellaContent, below, visible }: 
                 <div className="popup-arrow" />
             </div> */}
             {isOpen && visible && (
-                <div
-                    ref={popupRef}
-                    className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : 'above'}`}
-                >
+                <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : 'above'}`}>
                     {umbrellaContent}
                     <div className='popup-arrow' />
                 </div>

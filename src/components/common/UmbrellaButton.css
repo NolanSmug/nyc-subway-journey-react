@@ -11,10 +11,9 @@
     position: absolute;
     bottom: 4.1em;
     background: var(--bg-color);
-    padding: 1em;
+    padding: 1em 1em 0 1em;
     border-radius: 8px;
     border: 1px solid var(--bg-color-3);
-    width: 17em;
     z-index: 10;
     opacity: 0;
 }
@@ -36,11 +35,13 @@
 }
 
 .popup-arrow {
-    position: absolute;
-    top: 28.5em;
-    left: 1em;
+    position: relative;
+    top: 0.6em;
+
     width: 0;
     height: 0;
+
+    /* Triangle */
     border-left: 0.6em solid transparent;
     border-right: 0.6em solid transparent;
     border-top: 0.6em solid var(--bg-color-3);

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react'
+import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { Direction } from '../logic/LineManager'
 
 export enum Gender {
@@ -22,7 +22,7 @@ const SettingsContext = createContext<SettingsContextProps | undefined>(undefine
 
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [conductorMode, setConductorMode] = useState<boolean>(false)
-    const [numAdvanceStations, setNumAdvanceStations] = useState<number>(NaN)
+    const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
     const [defaultDirectionToggle, setDefaultDirectionToggle] = useState<Direction>(Direction.NULL_DIRECTION)
     const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
 

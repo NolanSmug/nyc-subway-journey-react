@@ -16,19 +16,6 @@
     box-shadow: 0 0 0.25em var(--box-shadow);
 }
 
-/* TODO: CLEAN UP */
-.station-box.win-state {
-    box-shadow: 0 0.5em 1em rgba(90, 232, 149, 0.3), 0 0 10em rgba(90, 232, 149, 0.2);
-    border-color: rgba(90, 232, 149, 0.5);
-    transition: box-shadow 0.5s ease, border-color 0.5s ease-in-out;
-}
-
-.dark-mode .station-box.win-state {
-    box-shadow: 0 0.5em 1em rgba(90, 232, 149, 0.2), 0 0 10em rgba(90, 232, 149, 0.15);
-    border-color: rgba(90, 232, 149, 0.4);
-    transition: box-shadow 0.5s ease, border-color 0.5s ease-in-out;
-}
-
 .win-state .train-car {
     box-shadow: 0 0.5em 0.75em rgba(90, 232, 149, 0.3), 0 0 5em rgba(90, 232, 149, 0.2);
     border-radius: 1em 1em 0.2em 0.2em;
