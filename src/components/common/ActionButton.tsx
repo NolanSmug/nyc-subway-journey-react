@@ -1,7 +1,7 @@
 import React from 'react'
 import './ActionButton.css'
 
-export interface ActionButtonProps {
+interface ActionButtonProps {
     imageSrc?: string
     imageClassName?: string
     wrapperClassName?: string

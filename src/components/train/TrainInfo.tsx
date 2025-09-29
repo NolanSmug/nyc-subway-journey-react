@@ -6,7 +6,7 @@ import { default as Line } from '../LineSVGs'
 import { Direction } from '../../logic/LineManager'
 import { useGameContext } from '../../contexts/GameContext'
 
-export interface TrainInfoProps extends TrainLineInfo {}
+interface TrainInfoProps extends TrainLineInfo {}
 
 export function TrainInfo({ direction, directionLabel, lineSVG, lineType, reverseButton }: TrainInfoProps) {
     const { train, updateTrainObject } = useGameContext()

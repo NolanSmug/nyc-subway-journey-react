@@ -4,7 +4,7 @@ import ActionButton from './ActionButton'
 import './UmbrellaButton.css'
 import { useUIContext } from '../../contexts/UIContext'
 
-export interface UmbrellaButtonProps {
+interface UmbrellaButtonProps {
     openingButtonsW_B: string[] // [white, black]
     umbrellaContent: ReactNode
     below?: boolean

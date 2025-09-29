@@ -7,7 +7,7 @@ import { useUIContext } from '../../contexts/UIContext'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 import usePassengerActions from '../../hooks/usePassengerActions'
 
-export interface StaircaseProps {
+interface StaircaseProps {
     lines: LineName[]
     tunnelLayout?: boolean
     hidden?: boolean

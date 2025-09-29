@@ -1,7 +1,7 @@
 import ActionButton from './ActionButton'
 import './SettingsButton.css'
 
-export interface SettingsButtonProps {
+interface SettingsButtonProps {
     label: string
     imgSrc: string
     onClick: () => void

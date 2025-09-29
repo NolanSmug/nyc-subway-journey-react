@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import './Station.css'
 
-export interface StationProps {
+interface StationProps {
     name: string
     header?: ReactNode
     noLines?: boolean

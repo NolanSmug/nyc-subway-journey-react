@@ -6,7 +6,7 @@ import LineSVGs from '../LineSVGs'
 
 import './SamePlatformTransfers.css'
 
-export interface SamePlatformTransfersProps {
+interface SamePlatformTransfersProps {
     lines: LineName[]
     hidden: boolean
     passengerIsWalking?: boolean

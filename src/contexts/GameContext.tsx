@@ -5,8 +5,6 @@ import { Station as StationClass } from '../logic/StationManager'
 import { Game } from '../logic/Game'
 import { useUIContext } from './UIContext'
 
-import { CENTER_PLATFORM_POS } from '../hooks/usePassengerActions'
-
 interface GameContextProps {
     train: Train
     gameState: GameState

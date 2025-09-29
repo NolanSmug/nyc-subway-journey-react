@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import './LoadingSpinner.css'
 
-export interface LoadingSpinnerProps {
+interface LoadingSpinnerProps {
     visible?: boolean
     text?: string
     textDelaySecs?: number

@@ -1,6 +1,6 @@
 import './KeyShortcut.css'
 
-export interface KeyShortcutProps {
+interface KeyShortcutProps {
     shortcutKey: string
     label: string
     isCommand?: boolean

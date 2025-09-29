@@ -3,16 +3,9 @@ import LineSVGs from '../LineSVGs'
 
 import './StationFragmentVertical.css'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
-import { Station } from '../../logic/StationManager'
-import { LineName } from '../../logic/LineManager'
+import { StationFragmentProps } from './StationFragment'
 
-export interface StationFragmentVerticalProps {
-    station: Station
-    className?: string
-    transfers: LineName[]
-}
-
-const StationFragmentVertical: React.FC<StationFragmentVerticalProps> = ({ station, className, transfers }) => {
+const StationFragmentVertical: React.FC<StationFragmentProps> = ({ station, className, transfers }) => {
     return (
         <div className={`station-frag-vertical-container ${className}`}>
             <div className={`station-dot-container`}>
