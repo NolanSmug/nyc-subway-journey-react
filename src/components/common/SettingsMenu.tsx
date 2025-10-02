@@ -40,11 +40,11 @@ const SettingsMenu = () => {
                 imgSrc={
                     isHorizontalLayout()
                         ? darkMode
-                            ? UPCOMING_STATIONS_HORIZONTAL_WHITE
-                            : UPCOMING_STATIONS_HORIZONTAL_BLACK
+                            ? UPCOMING_STATIONS_VERTICAL_WHITE
+                            : UPCOMING_STATIONS_VERTICAL_BLACK
                         : darkMode
-                          ? UPCOMING_STATIONS_VERTICAL_WHITE
-                          : UPCOMING_STATIONS_VERTICAL_BLACK
+                          ? UPCOMING_STATIONS_HORIZONTAL_WHITE
+                          : UPCOMING_STATIONS_HORIZONTAL_BLACK
                 }
                 onClick={() => conductorMode && toggleUpcomingStationsLayout()}
                 disabled={!conductorMode}

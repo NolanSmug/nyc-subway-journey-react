@@ -9,11 +9,9 @@ import { getLineSVG } from '../../logic/LineSVGsMap'
 import { useLineStyles } from '../../hooks/useCSSProperties'
 
 function TrainInfo({ direction, reverseButton }: { direction: Direction; reverseButton?: boolean }) {
+    const changeDirection = useTrainContext((state) => state.actions.changeDirection)
     const line = useTrainContext((state) => state.train.getLine())
     const borough = useTrainContext((state) => state.train.getCurrentStation().getBorough())
-
-    const updateTrainObject = useTrainContext((state) => state.updateTrainObject)
-    const train = useTrainContext((state) => state.train)
 
     const lineType = useMemo(() => getLineType(line), [line])
     const lineSVG = useMemo(() => getLineSVG(line), [line])
@@ -21,7 +19,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 
-    useLineStyles(line, lineType)
+    useLineStyles(line, lineType) // updates CSS props (--line-color, --dot-color)
 
     return (
         <>
@@ -30,7 +28,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
                 {...(reverseButton
                     ? {
                           onMouseDown: () => {
-                              updateTrainObject({ ...train.reverseDirection() })
+                              changeDirection()
                           },
                       }
                     : null)}

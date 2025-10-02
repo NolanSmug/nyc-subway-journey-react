@@ -21,10 +21,10 @@ import { Station as StationObject } from '../../logic/StationManager'
 function RiderModeUI() {
     const { gameState } = useGameStateContext()
 
+    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const currentLine: LineName = useTrainContext((state) => state.train.getLine())
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
-    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
 
     const passengerState: PassengerState = useUIContext((state) => state.passengerState)
     const setPassengerState = useUIContext((state) => state.setPassengerState)

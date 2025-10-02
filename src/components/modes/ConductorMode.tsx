@@ -10,7 +10,8 @@ import useKeyShortcuts from '../../hooks/useKeyShortcuts'
 
 function ConductorMode() {
     const { initializeGame } = useGame()
-    const { advanceStation, changeDirection } = useTrainContext((state) => state.actions)
+    const advanceStation = useTrainContext((state) => state.actions.advanceStation)
+    const changeDirection = useTrainContext((state) => state.actions.changeDirection)
 
     const darkMode = useUIContext((state) => state.darkMode)
     const setDarkMode = useUIContext((state) => state.setDarkMode)

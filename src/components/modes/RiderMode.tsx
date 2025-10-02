@@ -12,7 +12,8 @@ import useKeyShortcuts from '../../hooks/useKeyShortcuts'
 
 function RiderMode() {
     const { initializeGame } = useGame()
-    const { advanceStation, changeDirection } = useTrainContext((state) => state.actions)
+    const advanceStation = useTrainContext((state) => state.actions.advanceStation)
+    const changeDirection = useTrainContext((state) => state.actions.changeDirection) // ? Is it better to separate these?
 
     const darkMode = useUIContext((state) => state.darkMode)
     const passengerState = useUIContext((state) => state.passengerState)
