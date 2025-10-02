@@ -3,7 +3,7 @@ import { SubwayMap } from './SubwayMap'
 
 export class Station {
     private id: string = '000'
-    private name: string = 'NULL_STATION'
+    private name: string = ''
     private transfers: LineName[] = [LineName.NULL_TRAIN]
     private borough: Borough = Borough.STATEN_ISLAND
 
@@ -17,7 +17,7 @@ export class Station {
         }
     }
 
-    static NULL_STATION: Station = new Station('000', 'NULL_STATION', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
+    static NULL_STATION: Station = new Station('000', '', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
 
     constructor(id: string, name: string, transfers: LineName[], borough: Borough) {
         this.id = id
@@ -82,7 +82,7 @@ export class Station {
             }
         }
 
-        return new Station('000', 'NULL_STATION', [LineName.NULL_TRAIN], Borough.MANHATTAN)
+        return this.NULL_STATION
     }
 
     static getRandomStation(stations: Station[]): Station {

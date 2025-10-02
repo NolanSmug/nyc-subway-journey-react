@@ -33,6 +33,7 @@ type UsePassengerActionsParams = {
     setPassengerPosition: (pos: PassengerPosition) => void
     setPassengerState: (state: PassengerState) => void
 }
+
 export default function usePassengerActions({ setPassengerPosition, setPassengerState }: UsePassengerActionsParams) {
     const walkPassenger = useCallback(
         (passengerAction: PassengerAction, toPassengerState: PassengerState, element?: HTMLDivElement) => {

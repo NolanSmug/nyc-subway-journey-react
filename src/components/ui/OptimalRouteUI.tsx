@@ -4,9 +4,15 @@ import './OptimalRouteUI.css'
 
 import ActionButton from '../common/ActionButton'
 import LoadingSpinner from '../common/LoadingSpinner'
+import LineSVGs from '../LineSVGs'
+import Header from '../common/Header'
+import TrainCar from '../train/TrainCar'
+import Station from '../station/Station'
 
-import { useGameContext } from '../../contexts/GameContext'
 import { useUIContext } from '../../contexts/UIContext'
+import { useGameStateContext } from '../../contexts/GameStateContext'
+import { useGame } from '../../hooks/useGame'
+
 import { LineName, lineArrayEquals } from '../../logic/LineManager'
 import { getLineSVGs, lineToLineColor } from '../../logic/LineSVGsMap'
 import { getLineType, LineType } from '../../logic/LineManager'
@@ -15,10 +21,6 @@ import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
 import OPTIMAL_BLACK from '../../images/optimal-route-icon-b.svg'
 import OPTIMAL_WHITE from '../../images/optimal-route-icon-w.svg'
-import LineSVGs from '../LineSVGs'
-import Header from '../common/Header'
-import TrainCar from '../train/TrainCar'
-import Station from '../station/Station'
 
 interface StationData {
     id: string
@@ -49,7 +51,7 @@ async function fetchShortestPath(start: string, dest: string): Promise<StationDa
     return data
 }
 
-function getTransfersIndexes(stationData: StationData[]): number[] {
+const getTransfersIndexes = (stationData: StationData[]): number[] => {
     let indexes_with_transfer: number[] = []
     let prev_lines: LineName[] = [LineName.NULL_TRAIN]
 
@@ -65,53 +67,89 @@ function getTransfersIndexes(stationData: StationData[]): number[] {
     return indexes_with_transfer
 }
 
-function hasMultiColoredLines(lines: LineName[]): boolean {
+const hasMultiColoredLines = (lines: LineName[]): boolean => {
     for (let i = 0; i < lines.length; i++) {
         if (lineToLineColor(lines[i]) !== lineToLineColor(lines[0])) {
             return true
         }
     }
-
     return false
 }
 
-function OptimalRouteUI() {
-    const { gameState, initializeGame } = useGameContext()
-    const { darkMode } = useUIContext()
+const getDotColor = (line: LineName) => {
+    return getLineType(line) === LineType.EXPRESS ? '#fff' : '#222'
+}
 
-    const [stationData, setStationData] = useState<StationData[]>([])
-    const [transferIndexes, setTransferIndexes] = useState<number[]>([])
-    const [loadingVisible, setLoadingVisible] = useState(false)
-    const [isRequested, setIsRequested] = useState(false)
+const getMutliColorLineDivider = (lines: LineName[]): string => {
+    const uniqueColors = Array.from(new Set(lines.map(lineToLineColor))) // use Set object to get unique colors
 
-    const getDotColor = (line: LineName) => {
-        return getLineType(line) === LineType.EXPRESS ? '#fff' : '#222'
+    if (uniqueColors.length === 1) {
+        return uniqueColors[0]
     }
 
-    function getMutliColorLineDivider(lines: LineName[]): string {
-        const uniqueColors = Array.from(new Set(lines.map(lineToLineColor))) // use Set object to get unique colors
-
-        if (uniqueColors.length === 1) {
-            return uniqueColors[0]
-        }
-
-        if (uniqueColors.length === 2) {
-            return `linear-gradient(to bottom, 
+    if (uniqueColors.length === 2) {
+        return `linear-gradient(to bottom, 
                 ${uniqueColors[0]} 0%, 
                 ${uniqueColors[0]} 50%, 
                 ${uniqueColors[1]} 50%, 
                 ${uniqueColors[1]} 100%)`
-        }
+    }
 
-        if (uniqueColors.length === 3) {
-            return `linear-gradient(to bottom, 
+    if (uniqueColors.length === 3) {
+        return `linear-gradient(to bottom, 
                 ${uniqueColors[0]} 0%, ${uniqueColors[0]} 33.33%,
                 ${uniqueColors[1]} 33.33%, ${uniqueColors[1]} 66.66%,
                 ${uniqueColors[2]} 66.66%, ${uniqueColors[2]} 100%)`
-        }
-
-        return `linear-gradient(to bottom, ${uniqueColors.join(', ')})` // fallback to actual gradient if > 3, but pretty rare if not impossible
     }
+
+    return `linear-gradient(to bottom, ${uniqueColors.join(', ')})` // fallback to actual gradient if > 3, but pretty rare if not impossible
+}
+
+type OptimalStationFragmentProps = {
+    station: StationData
+    prevStation?: StationData
+    isTransfer: boolean
+}
+
+function OptimalStationFragment({ station, prevStation, isTransfer }: OptimalStationFragmentProps) {
+    const isLastStation = station.lines.includes(LineName.NULL_TRAIN)
+    const dotStyle = {
+        backgroundColor: isLastStation && prevStation ? getDotColor(prevStation.lines[0]) : getDotColor(station.lines[0]),
+        borderColor: isLastStation && prevStation ? prevStation.color : station.color,
+    }
+    const lineStyle = {
+        width: `${station.name.length * 12}px`,
+        background: hasMultiColoredLines(station.lines) ? getMutliColorLineDivider(station.lines) : station.color,
+        height: `${hasMultiColoredLines(station.lines) ? '0.7rem' : '0.5rem'}`,
+    }
+
+    return (
+        <div className='optimal-station-container'>
+            <div className='transfer-lines-wrapper'>
+                {isTransfer ? (
+                    <LineSVGs svgPaths={getLineSVGs(station.lines)} wide={station.lines.length > 3} />
+                ) : (
+                    <div className='transfer-placeholder' />
+                )}
+            </div>
+            <div className='station-with-line'>
+                <div className='optimal-station-dot' style={dotStyle} />
+                <div className='line-divider-custom' style={lineStyle} />
+            </div>
+            <div className='optimal-station-name'>{station.name}</div>
+        </div>
+    )
+}
+
+function OptimalRouteUI() {
+    const { gameState } = useGameStateContext()
+    const { initializeGame } = useGame()
+    const darkMode = useUIContext((state) => state.darkMode)
+
+    const [stationData, setStationData] = useState<StationData[]>([])
+    const [transferIndexes, setTransferIndexes] = useState<number[]>([])
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const [isRouteRequested, setIsRouteRequested] = useState(false)
 
     useEffect(() => {
         if (!gameState.isWon || stationData.length > 0) return
@@ -144,7 +182,7 @@ function OptimalRouteUI() {
         }
     }, [stationData])
 
-    if (!isRequested) {
+    if (!isRouteRequested) {
         return (
             <div className='game-over-wrapper'>
                 <Header text='You win!' />
@@ -156,7 +194,7 @@ function OptimalRouteUI() {
                     <ActionButton
                         imageSrc={darkMode ? OPTIMAL_WHITE : OPTIMAL_BLACK}
                         label='Show optimal route'
-                        onMouseDown={() => setIsRequested(true)}
+                        onMouseDown={() => setIsRouteRequested(true)}
                     />
                     <ActionButton
                         imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
@@ -183,42 +221,12 @@ function OptimalRouteUI() {
                 />
                 <div className='optimal-stations-horizontal'>
                     {stationData.map((station, index) => (
-                        <div key={index} className='optimal-station-container'>
-                            <div className='transfer-lines-wrapper'>
-                                {transferIndexes.includes(index) ? (
-                                    <LineSVGs svgPaths={getLineSVGs(station.lines)} wide={station.lines.length > 3} />
-                                ) : (
-                                    <div className='transfer-placeholder' /> // we need a placeholder for dots with no transfer svg
-                                )}
-                            </div>
-
-                            <div className='station-with-line'>
-                                <div
-                                    // dynamically setting the coloring of station dots depending on if current line is express/local
-                                    className={`optimal-station-dot`}
-                                    style={{
-                                        backgroundColor: station.lines.includes(LineName.NULL_TRAIN)
-                                            ? getDotColor(stationData[index - 1].lines[0]) // if is the last station's dot, set dot color to prev dot color
-                                            : getDotColor(station.lines[0]), // else set dot color properly
-                                        borderColor: station.lines.includes(LineName.NULL_TRAIN)
-                                            ? stationData[index - 1].color // same logic here as in backgroundColor
-                                            : station.color,
-                                    }}
-                                />
-                                <div
-                                    className='line-divider-custom'
-                                    style={{
-                                        width: `${station.name.length * 12}px`,
-                                        background: hasMultiColoredLines(station.lines)
-                                            ? getMutliColorLineDivider(station.lines)
-                                            : station.color,
-                                        height: `${hasMultiColoredLines(station.lines) ? '0.7rem' : '0.5rem'}`,
-                                    }}
-                                />
-                            </div>
-
-                            <div className='optimal-station-name'>{station.name}</div>
-                        </div>
+                        <OptimalStationFragment
+                            key={index}
+                            station={station}
+                            prevStation={stationData[index - 1]}
+                            isTransfer={transferIndexes.includes(index)}
+                        />
                     ))}
                 </div>
             </div>

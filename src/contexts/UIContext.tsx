@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback } from 'react'
+import React, { useState, ReactNode, useMemo, useCallback } from 'react'
+import { createContext, useContextSelector } from 'use-context-selector'
 import { PassengerPosition, PassengerState, CENTER_PLATFORM_POS } from '../hooks/usePassengerActions'
 
 export enum UpcomingStationsLayout {
@@ -41,11 +42,11 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [passengerPosition, setPassengerPosition] = useState<PassengerPosition>(CENTER_PLATFORM_POS)
     const [passengerState, setPassengerState] = useState<PassengerState>(PassengerState.CENTER_PLATFORM)
 
-    function toggleUpcomingStationsLayout(): void {
+    const toggleUpcomingStationsLayout = useCallback(() => {
         if (upcomingStationsVisible) {
             setUpcomingStationsLayout(isHorizontalLayout() ? UpcomingStationsLayout.VERTICAL : UpcomingStationsLayout.HORIZONTAL)
         }
-    }
+    }, [upcomingStationsLayout])
     const isVerticalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.VERTICAL, [upcomingStationsLayout])
     const isHorizontalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL, [upcomingStationsLayout])
 
@@ -93,10 +94,21 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
     )
 }
 
-export const useUIContext = () => {
-    const context = useContext(UIContext)
-    if (context === undefined) {
-        throw new Error('useUIContext must be used within a UIProvider')
-    }
+// export const useUIContext = () => {
+//     const context = useContext(UIContext)
+//     if (context === undefined) {
+//         throw new Error('useUIContext must be used within a UIProvider')
+//     }
+//     return context
+// }
+
+export const useUIContext = <T,>(selector: (state: UIContextProps) => T): T => {
+    const context = useContextSelector(UIContext, (state) => {
+        if (state === undefined) {
+            throw new Error('useUIContext must be used within a UIProvider')
+        }
+        return selector(state)
+    })
+
     return context
 }

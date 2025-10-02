@@ -11,7 +11,8 @@ interface DoorProps {
 }
 
 const Door = ({ isLeft, hasPassenger, direction }: DoorProps) => {
-    const { setPassengerPosition, setPassengerState } = useUIContext()
+    const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
+    const setPassengerState = useUIContext((state) => state.setPassengerState)
 
     const doorRef = useRef<HTMLDivElement | null>(null)
 
@@ -27,7 +28,6 @@ const Door = ({ isLeft, hasPassenger, direction }: DoorProps) => {
     useEffect(() => {
         // Only run passenger logic once per passenger
         if (doorRef.current && hasPassenger) {
-            debugger
             const toPassengerState: PassengerState =
                 direction === Direction.DOWNTOWN ? PassengerState.DOWNTOWN_TRAIN : PassengerState.UPTOWN_TRAIN
             walkPassenger(PassengerAction.BOARD_TRAIN, toPassengerState, doorRef.current)

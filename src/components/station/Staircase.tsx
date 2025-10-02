@@ -20,7 +20,9 @@ interface StaircaseProps {
 function Staircase({ lines, tunnelLayout, isSelected, onSelection, hidden }: StaircaseProps) {
     if (lines.length === 0) return null
 
-    const { setIsTransferMode, setPassengerPosition, setPassengerState } = useUIContext()
+    const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
+    const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
+    const setPassengerState = useUIContext((state) => state.setPassengerState)
     const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
 
     const [tunnelLinesVisible, setTunnelLinesVisible] = useState(false)

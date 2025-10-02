@@ -28,15 +28,30 @@
     border-radius: 0.5em;
 }
 
-.action-button.disabled {
-    pointer-events: none;
-    opacity: 0.4;
+.action-button:hover {
+    cursor: pointer;
 }
 
 .action-button:active .icon {
     transform: scale(0.95);
     outline: 0.15em solid var(--line-color);
     outline-offset: -0.1em;
+}
+
+.action-button.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.action-button.no-image {
+    border: 0.1em solid var(--bg-color-3);
+    border-radius: 0.5em;
+    padding: 0.5em 2em;
+    background-color: var(--bg-color-2);
+}
+
+.action-button.no-image:hover {
+    background-color: var(--bg-color-3);
 }
 
 .icon {
@@ -55,11 +70,9 @@
 }
 
 .icon:hover {
-    cursor: pointer;
+    transform: scale(1.05);
     background-color: var(--bg-color-3);
-    transform: scale(1.05)
 }
-
 
 .label {
     margin: 0.5em 0 0 0;
@@ -75,15 +88,4 @@
     font-size: 1.2rem;
     font-family: Helvetica, system-ui, sans-serif;
     white-space: nowrap;
-}
-
-.no-image-wrapper {
-    border: 0.1em solid var(--bg-color-3);
-    border-radius: 0.5em;
-    padding: 0.5em 2em;
-    background-color: var(--bg-color-2);
-}
-
-.no-image-wrapper:hover {
-    background-color: var(--bg-color-3);
 }

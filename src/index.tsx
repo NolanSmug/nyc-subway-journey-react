@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { UIProvider } from './contexts/UIContext'
-import { GameProvider } from './contexts/GameContext'
+import { GameStateProvider } from './contexts/GameStateContext'
 import { SettingsProvider } from './contexts/SettingsContext'
+import { TrainProvider } from './contexts/TrainContext'
 
 import useBrowserCSS from './hooks/useBrowserCSS'
 
@@ -14,12 +15,12 @@ document.body.classList.add(useBrowserCSS())
 
 root.render(
     <UIProvider>
-        <GameProvider>
+        <GameStateProvider>
             <SettingsProvider>
-                {/* <React.StrictMode> */}
-                <App />
-                {/* </React.StrictMode> */}
+                <TrainProvider>
+                    <App />
+                </TrainProvider>
             </SettingsProvider>
-        </GameProvider>
+        </GameStateProvider>
     </UIProvider>
 )

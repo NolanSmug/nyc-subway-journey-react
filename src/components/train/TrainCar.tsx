@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import Door from './Door'
 import Header from '../common/Header'
@@ -6,41 +6,32 @@ import TrainInfo from './TrainInfo'
 import DirectionSwitch from '../navigation/DirectionSwitch'
 
 import './TrainCar.css'
-import { useGameContext } from '../../contexts/GameContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 import { useUIContext } from '../../contexts/UIContext'
+import { useTrainContext } from '../../contexts/TrainContext'
 
-import { useLineStyles } from '../../hooks/useCSSProperties'
-
-import { Direction, LineType, LineName, getLineType } from '../../logic/LineManager'
-import { getLineSVG } from '../../logic/LineSVGsMap'
+import { Direction } from '../../logic/LineManager'
 
 import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
 
-export interface TrainLineInfo {
-    direction: Direction
-    directionLabel: string
-    line: LineName
-    lineSVG: string
-    lineType: LineType
-    reverseButton?: boolean
-}
-
 function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
-    const { isHorizontalLayout, isVerticalLayout, darkMode } = useUIContext()
-    const { train } = useGameContext()
-    const { conductorMode, defaultDirectionToggle, setDefaultDirectionToggle } = useSettingsContext()
+    const direction = useTrainContext((state) => state.train.getDirection())
+    const darkMode = useUIContext((state) => state.darkMode)
+    const isHorizontalLayout = useUIContext((state) => state.isHorizontalLayout)
+    const isVerticalLayout = useUIContext((state) => state.isVerticalLayout)
 
-    const direction = train.getDirection()
+    const conductorMode = useSettingsContext((state) => state.conductorMode)
+    const defaultDirectionToggle = useSettingsContext((state) => state.defaultDirectionToggle)
+    const setDefaultDirectionToggle = useSettingsContext((state) => state.setDefaultDirectionToggle)
 
-    const line = useMemo(() => train.getLine(), [train])
-    const lineType = useMemo(() => getLineType(line), [line])
-    const lineSVG = useMemo(() => getLineSVG(line), [line])
+    const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 
     // arrow direction logic (yes I am using one image for it and rotating with css classes. who cares it's cool to save a few KBs when you can)
     let ARROW_SVG: string = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
     const arrowDirection = useMemo(() => {
+        if (isNullDirection) return
+
         if (isVerticalLayout()) {
             return direction === Direction.DOWNTOWN ? 'down' : 'up'
         } else {
@@ -48,16 +39,12 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
         }
     }, [direction, isVerticalLayout])
 
-    const trainInfo: TrainLineInfo = {
-        direction: direction,
-        directionLabel: train.getDirectionLabel(),
-        line: line,
-        lineSVG: lineSVG,
-        lineType: lineType,
-        reverseButton: true,
-    }
-
-    useLineStyles(line, lineType)
+    const handleDirectionChange = useCallback(
+        (newDirection: Direction) => {
+            setDefaultDirectionToggle(newDirection)
+        },
+        [setDefaultDirectionToggle]
+    )
 
     return (
         <>
@@ -76,10 +63,8 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                 <div className={`train-car ${forWinDisplay ? 'win-display' : ''}`}>
                     <DirectionSwitch
                         state={defaultDirectionToggle}
-                        onChange={(newDirection: Direction) => {
-                            setDefaultDirectionToggle(newDirection)
-                        }}
-                        visible={conductorMode}
+                        onChange={handleDirectionChange}
+                        visible={conductorMode && !forWinDisplay}
                     />
                     <div className='doors'>
                         <Door isLeft />
@@ -87,7 +72,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                     </div>
 
                     <div className='windows' id='train-info'>
-                        <TrainInfo {...trainInfo} reverseButton={!forWinDisplay} />
+                        <TrainInfo direction={direction} reverseButton={!forWinDisplay} />
                     </div>
 
                     <div className='doors'>
@@ -100,7 +85,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                     </div>
                 </div>
 
-                {isHorizontalLayout() && !train.isNullDirection() && !forWinDisplay && (
+                {isHorizontalLayout() && !isNullDirection && !forWinDisplay && (
                     <img
                         src={ARROW_SVG}
                         className={`arrow arrow-${arrowDirection} ${
@@ -109,7 +94,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                         alt='Right Arrow'
                     />
                 )}
-                {isVerticalLayout() && !train.isNullDirection() && !forWinDisplay && (
+                {isVerticalLayout() && !isNullDirection && !forWinDisplay && (
                     <img src={ARROW_SVG} className={`arrow arrow-${arrowDirection}`} alt='Up/Down Arrow' />
                 )}
             </div>

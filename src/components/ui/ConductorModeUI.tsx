@@ -1,6 +1,4 @@
 import React from 'react'
-import './ConductorModeUI.css'
-
 import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
 import LineSVGs from '../LineSVGs'
@@ -8,10 +6,16 @@ import TrainCar from '../train/TrainCar'
 import Header from '../common/Header'
 import AdvanceNStationsInput from '../navigation/AdvanceNStationsInput'
 
-import { Train } from '../../logic/TrainManager'
-import { LineName } from '../../logic/LineManager'
-import { GameState } from '../../logic/GameState'
+import './ConductorModeUI.css'
+import { useTrainContext } from '../../contexts/TrainContext'
+import { useGameStateContext } from '../../contexts/GameStateContext'
+import { useSettingsContext } from '../../contexts/SettingsContext'
+import { useUIContext } from '../../contexts/UIContext'
+
+import { useGame } from '../../hooks/useGame'
+
 import { getLineSVGs } from '../../logic/LineSVGsMap'
+import { Station as StationObject } from '../../logic/StationManager'
 
 import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
@@ -22,31 +26,19 @@ import C_DIRECTION_BLACK from '../../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
 
-interface ConductorModeUIProps {
-    train: Train
-    gameState: GameState
-    advanceStation: (n: number) => void
-    transfer: (input: number | LineName) => Promise<void>
-    changeDirection: () => void
-    resetGame: () => void
-    setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
-    conductorMode: boolean
-    darkMode: boolean
-    numAdvanceStations: number
-}
+function ConductorModeUI() {
+    const { gameState } = useGameStateContext()
+    const { initializeGame } = useGame()
 
-function ConductorModeUI({
-    train,
-    gameState,
-    advanceStation,
-    transfer,
-    changeDirection,
-    resetGame,
-    setIsTransferMode,
-    conductorMode,
-    darkMode,
-    numAdvanceStations,
-}: ConductorModeUIProps) {
+    const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
+    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
+
+    const darkMode = useUIContext((state) => state.darkMode)
+    const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
+
+    const conductorMode = useSettingsContext((state) => state.conductorMode)
+    const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
+
     return (
         <>
             <div className={`${gameState.isWon ? 'win-state' : ''}`}>
@@ -57,11 +49,12 @@ function ConductorModeUI({
                 <div className={`station-box ${gameState.isWon ? 'win-state' : ''}`} id='current-station'>
                     <Header text='Current station' />
                     <div className='station-item'>
-                        <Station name={train.getCurrentStation().getName()}>
+                        <Station name={currentStation.getName()}>
                             <LineSVGs
-                                svgPaths={getLineSVGs(train.getCurrentStation().getTransfers())}
+                                svgPaths={getLineSVGs(currentStation.getTransfers())}
                                 onTransferSelect={(index) => {
-                                    setIsTransferMode(false), transfer(index).catch(console.error)
+                                    setIsTransferMode(false)
+                                    transfer(index).catch(console.error)
                                 }}
                                 notDim
                                 selectable
@@ -105,7 +98,7 @@ function ConductorModeUI({
                         <ActionButton
                             imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
                             label='Reset game'
-                            onMouseDown={() => resetGame()}
+                            onMouseDown={() => initializeGame()}
                         />
                     </div>
                 </div>

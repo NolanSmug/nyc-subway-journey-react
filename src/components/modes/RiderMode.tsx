@@ -1,43 +1,49 @@
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import RiderModeUI from '../ui/RiderModeUI'
 
-import useKeyShortcuts from '../../hooks/useKeyShortcuts'
+import { useTrainContext } from '../../contexts/TrainContext'
+import { UpcomingStationsLayout, useUIContext } from '../../contexts/UIContext'
+import { useSettingsContext } from '../../contexts/SettingsContext'
+
+import { useGame } from '../../hooks/useGame'
+import { useUITheme } from '../../hooks/useCSSProperties'
 import { PassengerState } from '../../hooks/usePassengerActions'
-import { useGameModeHooks } from '../../hooks/useGameModeHooks'
-import { UpcomingStationsLayout } from '../../contexts/UIContext'
+import useKeyShortcuts from '../../hooks/useKeyShortcuts'
 
 function RiderMode() {
-    const { ui, settings, game, actions } = useGameModeHooks()
+    const { initializeGame } = useGame()
+    const { advanceStation, changeDirection } = useTrainContext((state) => state.actions)
 
-    const resetGame = useCallback(async () => await game.initializeGame(), [game.gameState.destinationStation])
+    const darkMode = useUIContext((state) => state.darkMode)
+    const passengerState = useUIContext((state) => state.passengerState)
+    const setDarkMode = useUIContext((state) => state.setDarkMode)
+    const setUpcomingStationsLayout = useUIContext((state) => state.setUpcomingStationsLayout)
+    const setUpcomingStationsVisible = useUIContext((state) => state.setUpcomingStationsVisible)
+
+    const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
+    const setConductorMode = useSettingsContext((state) => state.setConductorMode)
+
+    useUITheme(darkMode)
 
     useKeyShortcuts({
         comboKeys: {
-            'Shift+D': () => ui.setDarkMode((prev) => !prev),
-            'Shift+U': () => ui.setUpcomingStationsVisible((prev) => !prev),
-            'Shift+C': () => settings.setConductorMode((prev) => !prev),
+            'Shift+D': () => setDarkMode((prev) => !prev),
+            'Shift+U': () => setUpcomingStationsVisible((prev) => !prev),
+            'Shift+C': () => setConductorMode((prev) => !prev),
         },
         singleKeys: {
-            c: actions.changeDirection,
-            r: resetGame,
-            ArrowRight: () => actions.advanceStation(settings.numAdvanceStations),
+            ArrowRight: () => advanceStation(numAdvanceStations),
+            c: changeDirection,
+            r: initializeGame,
         },
-        enabled: ui.passengerState != PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true',
+        enabled: passengerState != PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true',
     })
 
     useEffect(() => {
-        ui.setUpcomingStationsLayout(UpcomingStationsLayout.HORIZONTAL)
-    }, [ui.setUpcomingStationsLayout])
+        setUpcomingStationsLayout(UpcomingStationsLayout.HORIZONTAL)
+    }, [setUpcomingStationsLayout])
 
-    return (
-        <RiderModeUI
-            train={game.train}
-            gameState={game.gameState}
-            advanceStation={actions.advanceStation}
-            transfer={actions.transfer}
-            changeDirection={actions.changeDirection}
-        />
-    )
+    return <RiderModeUI />
 }
 
 export default RiderMode

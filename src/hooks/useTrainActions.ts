@@ -6,18 +6,18 @@ import { Direction, LineName } from '../logic/LineManager'
 type UseTrainActionsParams = {
     train: Train
     gameState: GameState
-    conductorMode: boolean
     updateTrainObject: (t: Partial<Train>) => void
     setGameState: (gs: GameState) => void
+    conductorMode: boolean
     passengerIsWalking?: boolean
 }
 
 export default function useTrainActions({
     train,
     gameState,
-    conductorMode,
     updateTrainObject,
     setGameState,
+    conductorMode,
     passengerIsWalking,
 }: UseTrainActionsParams) {
     const checkForWin = useCallback(() => {
@@ -26,10 +26,9 @@ export default function useTrainActions({
         }
     }, [gameState, train, setGameState])
 
-    // ADVANCING STATIONS
     const advanceStation = useCallback(
         (numAdvanceStations: number) => {
-            if (!train) throw new Error('repOK failed on advanceaction')
+            if (!train) throw new Error('attempted to advanceStation - Train object is null')
             if (passengerIsWalking) return
 
             if (numAdvanceStations > 1 && conductorMode) {
@@ -43,9 +42,9 @@ export default function useTrainActions({
         [train, conductorMode, updateTrainObject, checkForWin]
     )
 
-    // TRANSFERRING LINES
     const transfer = useCallback(
         async (transferInput: number | LineName) => {
+            if (!train) throw new Error('attempted to transfer - Train object is null')
             if (passengerIsWalking) return
 
             let selectedLine: LineName | undefined
@@ -68,18 +67,20 @@ export default function useTrainActions({
         [train, updateTrainObject]
     )
 
-    // CHANGING DIRECTION
-    const changeDirection = useCallback((direction?: Direction) => {
-        if (!train) throw new Error('repOK failed on change direction action')
-        if (passengerIsWalking) return
+    const changeDirection = useCallback(
+        (direction?: Direction) => {
+            if (!train) throw new Error('repOK failed on change direction action')
+            if (passengerIsWalking) return
 
-        if (direction) {
+            if (direction === undefined) {
+                updateTrainObject({ ...train.reverseDirection() }) // if no input, reverse
+                return
+            }
+
             updateTrainObject({ ...train.setDirection(direction) })
-            return
-        }
-
-        updateTrainObject({ ...train.reverseDirection() })
-    }, [train, updateTrainObject])
+        },
+        [train, passengerIsWalking, updateTrainObject]
+    )
 
     return {
         advanceStation,

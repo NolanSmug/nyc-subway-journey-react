@@ -20,7 +20,7 @@
 
 .train-direction.no-reverse-action {
     pointer-events: none;
-    /* transform: none; */
+    transform: none;
 }
 
 .train-type {

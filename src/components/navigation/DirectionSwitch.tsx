@@ -14,9 +14,9 @@ interface DirectionSwitchProps {
 }
 
 export function DirectionSwitch({ state, onChange, visible }: DirectionSwitchProps) {
-    const labelRef = useRef<HTMLSpanElement | null>(null)
+    const darkMode = useUIContext((state) => state.darkMode)
 
-    const { darkMode } = useUIContext()
+    const labelRef = useRef<HTMLSpanElement | null>(null)
     const infoIcon = darkMode ? INFO_ICON_W : INFO_ICON_B
 
     useEffect(() => {

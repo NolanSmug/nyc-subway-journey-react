@@ -4,7 +4,8 @@ import ActionButton from '../common/ActionButton'
 import './LandingScreen.css'
 
 function LandingScreen() {
-    const { isLandingPage, setIsLandingPage } = useUIContext()
+    const isLandingPage = useUIContext((state) => state.isLandingPage)
+    const setIsLandingPage = useUIContext((state) => state.setIsLandingPage)
 
     if (!isLandingPage) {
         return null

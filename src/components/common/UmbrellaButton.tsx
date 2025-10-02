@@ -16,7 +16,7 @@ const UmbrellaButton = ({ openingButtonsW_B, umbrellaContent, below, visible }: 
     const popupRef = useRef<HTMLDivElement | null>(null)
     const buttonRef = useRef<HTMLDivElement | null>(null)
 
-    const { darkMode } = useUIContext()
+    const darkMode = useUIContext((state) => state.darkMode)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

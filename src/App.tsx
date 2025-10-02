@@ -1,30 +1,43 @@
 import React, { useEffect } from 'react'
 import ConductorMode from './components/modes/ConductorMode'
+import RiderMode from './components/modes/RiderMode'
+import OptimalRouteUI from './components/ui/OptimalRouteUI'
+import LandingScreen from './components/ui/LandingScreen'
 import UmbrellaButton from './components/common/UmbrellaButton'
 import SettingsMenu from './components/common/SettingsMenu'
 import UpcomingStationsVertical from './components/common/UpcomingStationsVertical'
 import UpcomingStationsHorizontal from './components/common/UpcomingStationsHorizontal'
 import KeyShortcutMenu from './components/keyboard/KeyShortcutMenu'
-import OptimalRouteUI from './components/ui/OptimalRouteUI'
 // import SubwayMap from './components/SubwayMap'
 
 import './App.css'
 import { useUIContext } from './contexts/UIContext'
-import { useGameContext } from './contexts/GameContext'
+import { useTrainContext } from './contexts/TrainContext'
+import { useGameStateContext } from './contexts/GameStateContext'
 import { useSettingsContext } from './contexts/SettingsContext'
+import { useGame } from './hooks/useGame'
 
 import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
-import LandingScreen from './components/ui/LandingScreen'
-import RiderMode from './components/modes/RiderMode'
 
 function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isLandingPage } =
-        useUIContext()
-    const { conductorMode } = useSettingsContext()
-    const { train, gameState, initializeGame } = useGameContext()
+    const { initializeGame } = useGame()
+    const { gameState } = useGameStateContext()
+
+    const isLineNull = useTrainContext((state) => state.train.isLineNull())
+
+    const isTransferMode = useUIContext((state) => state.isTransferMode)
+    const upcomingStationsVisible = useUIContext((state) => state.upcomingStationsVisible)
+    const isLandingPage = useUIContext((state) => state.isLandingPage)
+    const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
+    const isHorizontalLayout = useUIContext((state) => state.isHorizontalLayout)
+    const isVerticalLayout = useUIContext((state) => state.isVerticalLayout)
+
+    const conductorMode = useSettingsContext((state) => state.conductorMode)
+
+    // useUITheme(darkMode)
 
     const handleClickAway = (e: React.MouseEvent) => {
         const transferLinesContainer = document.querySelector('.line-svgs-container')
@@ -37,15 +50,16 @@ function App() {
         initializeGame()
     }, [initializeGame])
 
-    if (train.isLineNull() || gameState.isEmpty())
+    if (isLineNull || gameState.isEmpty())
         return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
 
-    if (gameState.isWon)
+    if (gameState.isWon) {
         return (
             <div className='Game'>
                 <OptimalRouteUI />
             </div>
         )
+    }
 
     return (
         <>
@@ -58,13 +72,7 @@ function App() {
             {isLandingPage && <LandingScreen />}
 
             <div className='Game' style={conductorMode ? {} : { paddingBottom: '0' }}>
-                {upcomingStationsVisible && isHorizontalLayout() && (
-                    <UpcomingStationsHorizontal
-                        stations={train.getScheduledStops()}
-                        currentStationID={train.getCurrentStation().getId()}
-                        currentStationIndex={train.getCurrentStationIndex()}
-                    />
-                )}
+                {upcomingStationsVisible && isHorizontalLayout() && <UpcomingStationsHorizontal />}
                 <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
                     {conductorMode && <ConductorMode />}
                     {!conductorMode && <RiderMode />}
@@ -91,11 +99,7 @@ function App() {
 
             {upcomingStationsVisible && isVerticalLayout() && (
                 <div className='upcoming-stations-vertical'>
-                    <UpcomingStationsVertical
-                        stations={train.getScheduledStops()}
-                        currentStationID={train.getCurrentStation().getId()}
-                        currentStationIndex={train.getCurrentStationIndex()}
-                    />
+                    <UpcomingStationsVertical />
                 </div>
             )}
         </>

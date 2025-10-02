@@ -2,60 +2,54 @@ import React, { useMemo, useState } from 'react'
 import './RiderModeUI.css'
 
 import TrainCarCustom from '../train/TrainCarCustom'
-import Staircase from '../station/Staircase'
-import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
-import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
+import Staircase from '../station/Staircase'
 import LineSVGs from '../LineSVGs'
 import Passenger from '../Passenger'
+import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
+import ActionButton from '../common/ActionButton'
 
 import usePassengerActions, { PassengerAction, PassengerState } from '../../hooks/usePassengerActions'
 
-import { Train } from '../../logic/TrainManager'
-import { GameState } from '../../logic/GameState'
 import { Direction, LineName } from '../../logic/LineManager'
 import { groupLines, getCorrespondingGroup, getLineSVGs } from '../../logic/LineSVGsMap'
 import { useUIContext } from '../../contexts/UIContext'
+import { useTrainContext } from '../../contexts/TrainContext'
+import { useGameStateContext } from '../../contexts/GameStateContext'
+import { Station as StationObject } from '../../logic/StationManager'
 
-interface RiderModeUIProps {
-    train: Train
-    gameState: GameState
-    advanceStation: (n: number) => void
-    transfer: (input: number | LineName) => Promise<void>
-    changeDirection: (direction?: Direction) => void
-}
+function RiderModeUI() {
+    const { gameState } = useGameStateContext()
 
-function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirection }: RiderModeUIProps) {
-    const { passengerState, setPassengerState, setPassengerPosition } = useUIContext()
+    const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
+    const currentLine: LineName = useTrainContext((state) => state.train.getLine())
+    const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
+    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
+
+    const passengerState: PassengerState = useUIContext((state) => state.passengerState)
+    const setPassengerState = useUIContext((state) => state.setPassengerState)
+    const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
 
     const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
     const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0)
 
-    const stationID: string = useMemo(() => train.getCurrentStation().getId(), [train.getCurrentStation().getId()])
-    const transfers: LineName[] = useMemo(() => train.getCurrentStation().getTransfers(), [train.getCurrentStation().getTransfers()])
-    const currentLine = useMemo(() => train.getLine(), [train.getLine()])
+    const stationID = currentStation.getId()
+    const transfers = currentStation.getTransfers()
 
-    const groupedTransfers: LineName[][] = useMemo(() => groupLines(transfers, stationID), [stationID]) // sort transfers array into proper line groupings
+    const groupedTransfers: LineName[][] = useMemo(() => groupLines(transfers, stationID), [transfers, stationID])
     const currentPlatformGroup: LineName[] = useMemo(
-        // lines that share the current train line's platform
         () => getCorrespondingGroup(currentLine, groupedTransfers),
         [currentLine, groupedTransfers]
     )
-    const otherPlatformGroups: LineName[][] = useMemo(
-        // all other lines at the station
-        () => groupedTransfers.filter((g) => !g.includes(currentLine)),
-        [groupedTransfers, currentLine]
-    )
-    const hasSamePlatformTransfers: boolean = useMemo(() => currentPlatformGroup.length > 1, [currentPlatformGroup])
-    const hasOtherPlatformTransfers: boolean = useMemo(() => otherPlatformGroups.length > 0, [otherPlatformGroups])
-    const hideTransferButton: boolean = useMemo(
-        () =>
-            passengerState === PassengerState.WALKING ||
-            passengerState === PassengerState.TRANSFER_PLATFORM ||
-            transfers.length === 1 ||
-            inTransferTunnel,
-        [transfers, passengerState, inTransferTunnel]
-    )
+    const otherPlatformGroups = useMemo(() => groupedTransfers.filter((g) => !g.includes(currentLine)), [groupedTransfers, currentLine])
+
+    const hasSamePlatformTransfers = currentPlatformGroup.length > 1
+    const hasOtherPlatformTransfers = otherPlatformGroups.length > 0
+    const hideTransferButton =
+        passengerState === PassengerState.WALKING ||
+        passengerState === PassengerState.TRANSFER_PLATFORM ||
+        transfers.length === 1 ||
+        inTransferTunnel
     const passengerIsWalking = passengerState === PassengerState.WALKING
 
     const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
@@ -71,7 +65,7 @@ function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirecti
             setTimeout(() => {
                 setInTransferTunnel(false)
             }, 25)
-            train.setDirection(Direction.NULL_DIRECTION)
+            changeDirection(Direction.NULL_DIRECTION)
         } else {
             // staircase isn't open yet
             setInTransferTunnel(true)
@@ -81,11 +75,11 @@ function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirecti
     return (
         <div className='platform-wrapper'>
             <div
-                className={`transfer-tunnels ${hasSamePlatformTransfers ? 'platform-transfers' : ''} ${hasOtherPlatformTransfers ? 'other-platform-transfers' : ''} ${train.getDirection()} `}
+                className={`transfer-tunnels ${hasSamePlatformTransfers ? 'platform-transfers' : ''} ${hasOtherPlatformTransfers ? 'other-platform-transfers' : ''} ${currentDirection} `}
             >
                 {hasSamePlatformTransfers && (
                     <SamePlatformTransfers
-                        lines={currentPlatformGroup.filter((line) => line !== train.getLine())}
+                        lines={currentPlatformGroup.filter((line) => line !== currentLine)}
                         hidden={inTransferTunnel}
                         passengerIsWalking={passengerIsWalking}
                         onSelection={transfer}
@@ -108,11 +102,11 @@ function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirecti
             <div className='platform-container'>
                 <Passenger />
 
-                <Station name={train.getCurrentStation().getName()} hidden={train.getDirection() === Direction.DOWNTOWN} noLines />
+                <Station name={currentStation.getName()} hidden={currentDirection === Direction.DOWNTOWN} noLines />
                 <TrainCarCustom
-                    line={train.getLine()}
+                    line={currentLine}
                     direction={Direction.UPTOWN}
-                    active={train.getDirection() === Direction.UPTOWN}
+                    active={currentDirection === Direction.UPTOWN}
                     hidden={inTransferTunnel}
                     advanceStation={advanceStation}
                 />
@@ -120,17 +114,21 @@ function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirecti
                     label='board uptown train'
                     noImage
                     onMouseDown={() => changeDirection(Direction.UPTOWN)}
-                    hidden={inTransferTunnel || train.getDirection() === Direction.UPTOWN}
+                    hidden={inTransferTunnel || currentDirection === Direction.UPTOWN}
                     wrapperClassName='uptown-button-offset'
                 />
 
                 <div className='platform'>
                     <ActionButton
-                        label={hasSamePlatformTransfers && !hasOtherPlatformTransfers && !train.isNullDirection() ? 'deboard' : 'transfer'}
+                        label={
+                            hasSamePlatformTransfers && !hasOtherPlatformTransfers && currentDirection !== Direction.NULL_DIRECTION
+                                ? 'deboard'
+                                : 'transfer'
+                        }
                         noImage
                         onMouseDown={() => (
                             walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM),
-                            train.setDirection(Direction.NULL_DIRECTION)
+                            changeDirection(Direction.NULL_DIRECTION)
                         )}
                         hidden={hideTransferButton}
                     />
@@ -140,19 +138,19 @@ function RiderModeUI({ train, gameState, advanceStation, transfer, changeDirecti
                     label='board downtown train'
                     noImage
                     onMouseDown={() => changeDirection(Direction.DOWNTOWN)}
-                    hidden={inTransferTunnel || train.getDirection() === Direction.DOWNTOWN}
+                    hidden={inTransferTunnel || currentDirection === Direction.DOWNTOWN}
                     wrapperClassName='downtown-button-offset'
                 />
                 <TrainCarCustom
-                    line={train.getLine()}
+                    line={currentLine}
                     direction={Direction.DOWNTOWN}
-                    active={train.getDirection() === Direction.DOWNTOWN}
+                    active={currentDirection === Direction.DOWNTOWN}
                     hidden={inTransferTunnel}
                     advanceStation={advanceStation}
                 />
                 <Station
-                    name={train.getCurrentStation().getName()}
-                    hidden={train.isNullDirection() || train.getDirection() === Direction.UPTOWN}
+                    name={currentStation.getName()}
+                    hidden={currentDirection === Direction.NULL_DIRECTION || currentDirection === Direction.UPTOWN}
                     noLines
                 />
             </div>

@@ -1,7 +1,7 @@
 import { Direction } from '../../logic/LineManager'
-import { useGameContext } from '../../contexts/GameContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 import { useUIContext } from '../../contexts/UIContext'
+import { useTrainContext } from '../../contexts/TrainContext'
 
 import './AdvanceNStationsInput.css'
 
@@ -9,18 +9,20 @@ import RESET_INPUT_B from '../../images/reset-input-black.svg'
 import RESET_INPUT_W from '../../images/reset-input-white.svg'
 
 function AdvanceNStationsInput() {
-    const { darkMode } = useUIContext()
-    const { train } = useGameContext()
-    const { numAdvanceStations, setNumAdvanceStations, conductorMode: visible } = useSettingsContext()
+    const darkMode = useUIContext((state) => state.darkMode)
+    const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
+    const setNumAdvanceStations = useSettingsContext((state) => state.setNumAdvanceStations)
+    const visible = useSettingsContext((state) => state.conductorMode)
+
+    const trainDirection = useTrainContext((state) => state.train.getDirection())
+    const stationIndex = useTrainContext((state) => state.train.getCurrentStationIndex())
+    const scheduledStopsCount = useTrainContext((state) => state.train.getScheduledStops().length)
 
     if (!visible) return null
 
-    let currentMaxNumber: number =
-        train.getDirection() === Direction.DOWNTOWN
-            ? train.getCurrentStationIndex()
-            : train.getScheduledStops().length - train.getCurrentStationIndex() - 1
+    let currentMaxNumber: number = trainDirection === Direction.DOWNTOWN ? stationIndex : scheduledStopsCount - stationIndex - 1
 
-    if (train.isNullDirection()) currentMaxNumber = 1
+    if (trainDirection === Direction.NULL_DIRECTION) currentMaxNumber = 1
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue: string = e.target.value

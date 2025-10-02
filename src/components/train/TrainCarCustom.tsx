@@ -10,12 +10,7 @@ import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
 import { Direction, LineName } from '../../logic/LineManager'
 
-import { useLineStyles } from '../../hooks/useCSSProperties'
-import { TrainLineInfo } from './TrainCar'
-import { getLineType } from '../../logic/LineManager'
-import { getLineSVG } from '../../logic/LineSVGsMap'
 import { useUIContext } from '../../contexts/UIContext'
-import { useGameContext } from '../../contexts/GameContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
 interface TrainCarStaticProps {
@@ -26,33 +21,14 @@ interface TrainCarStaticProps {
     advanceStation: (n: number) => void
 }
 
-function TrainCarCustom({ line, direction, active, hidden, advanceStation }: TrainCarStaticProps) {
-    const { darkMode } = useUIContext()
-    const { numAdvanceStations } = useSettingsContext()
-    const { train } = useGameContext()
-
-    // build TrainLineInfo object
-    const lineType = useMemo(() => getLineType(line), [line])
-    const lineSVG = useMemo(() => getLineSVG(line), [line])
-    const directionLabel = useMemo(
-        () => train.findDirectionLabel(direction, train.getLine(), train.getCurrentStation().getBorough()),
-        [direction, train.getLine(), train.getCurrentStation().getBorough()]
-    )
-    const trainInfo: TrainLineInfo = {
-        direction: direction,
-        directionLabel: directionLabel,
-        line: line,
-        lineSVG: lineSVG,
-        lineType: lineType,
-        reverseButton: false,
-    }
-
-    let ARROW = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
+function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarStaticProps) {
+    const darkMode = useUIContext((state) => state.darkMode)
+    const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
 
     const isDowntown = useMemo(() => direction === Direction.DOWNTOWN, [direction])
     const isUptown = useMemo(() => direction === Direction.UPTOWN, [direction])
 
-    useLineStyles(line, lineType)
+    let ARROW = darkMode ? R_ARROW_WHITE : R_ARROW_BLACK
 
     return (
         <div className={`train-wrapper ${isDowntown ? 'downtown' : 'uptown'} ${active ? '' : 'inactive'} ${hidden ? 'hidden' : ''}`}>
@@ -74,7 +50,7 @@ function TrainCarCustom({ line, direction, active, hidden, advanceStation }: Tra
                         <Door key='door-lr' />
                     </div>
                     <div className='windows' id='train-info'>
-                        <TrainInfo {...trainInfo} />
+                        <TrainInfo direction={direction} />
                     </div>
 
                     <div className='doors'>

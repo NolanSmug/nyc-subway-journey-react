@@ -9200,6 +9200,7 @@ __metadata:
     react-modal: ^3.16.3
     react-scripts: ^5.0.1
     typescript: ^4.9.5
+    use-context-selector: ^2.0.0
   languageName: unknown
   linkType: soft
 
@@ -12830,6 +12831,16 @@ __metadata:
     querystringify: ^2.1.1
     requires-port: ^1.0.0
   checksum: fbdba6b1d83336aca2216bbdc38ba658d9cfb8fc7f665eb8b17852de638ff7d1a162c198a8e4ed66001ddbf6c9888d41e4798912c62b4fd777a31657989f7bdf
+  languageName: node
+  linkType: hard
+
+"use-context-selector@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "use-context-selector@npm:2.0.0"
+  peerDependencies:
+    react: ">=18.0.0"
+    scheduler: ">=0.19.0"
+  checksum: d6e576d24959ffb5bb061102941bef9e0b35b05219e9f52f802c11062b003ad05904e257609f60b706627f39f4b0a37bec91d93fe217468d388431e44cead488
   languageName: node
   linkType: hard
 

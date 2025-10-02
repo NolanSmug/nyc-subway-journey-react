@@ -3,18 +3,17 @@ import './UpcomingStationsHorizontal.css'
 
 import StationFragment from '../station/StationFragment'
 import { Station } from '../../logic/StationManager'
+import { useTrainContext } from '../../contexts/TrainContext'
 
 // TODO: Borough barrier
 
-export interface UpcomingStationsProps {
-    stations: Station[]
-    currentStationID: string
-    currentStationIndex?: number
-}
-
-function UpcomingStationsHorizontal({ stations, currentStationID, currentStationIndex }: UpcomingStationsProps) {
+function UpcomingStationsHorizontal() {
     const stationsRef = useRef<HTMLDivElement>(null)
     const lineDividerRef = useRef<HTMLDivElement>(null)
+
+    const stations = useTrainContext((state) => state.train.getScheduledStops())
+    const currentStationID = useTrainContext((state) => state.train.getCurrentStation().getId())
+    const currentStationIndex = useTrainContext((state) => state.train.getCurrentStationIndex())
 
     useEffect(() => {
         if (stationsRef.current && stations.length > 0) {

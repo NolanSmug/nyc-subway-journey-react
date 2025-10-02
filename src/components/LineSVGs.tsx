@@ -16,7 +16,7 @@ interface LineSVGsProps {
 }
 
 function LineSVGs({ svgPaths, small, wide, vertical, grouped, selectable, numLines, notDim, className, onTransferSelect }: LineSVGsProps) {
-    const { isTransferMode } = useUIContext()
+    const isTransferMode = useUIContext((state) => state.isTransferMode)
 
     return (
         <div

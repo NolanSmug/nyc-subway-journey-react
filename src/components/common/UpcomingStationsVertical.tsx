@@ -2,10 +2,16 @@ import { useEffect, useRef } from 'react'
 import './UpcomingStationsVertical.css'
 
 import StationFragmentVertical from '../station/StationFragmentVertical'
-import { scrollToCurrentStation, UpcomingStationsProps } from './UpcomingStationsHorizontal'
+import { scrollToCurrentStation } from './UpcomingStationsHorizontal'
 
-function UpcomingStationsVertical({ stations, currentStationID, currentStationIndex }: UpcomingStationsProps) {
+import { useTrainContext } from '../../contexts/TrainContext'
+
+function UpcomingStationsVertical() {
     const stationsRef = useRef<HTMLDivElement>(null)
+
+    const stations = useTrainContext((state) => state.train.getScheduledStops())
+    const currentStationID = useTrainContext((state) => state.train.getCurrentStation().getId())
+    const currentStationIndex = useTrainContext((state) => state.train.getCurrentStationIndex())
 
     // scroll to the current station
     useEffect(() => {

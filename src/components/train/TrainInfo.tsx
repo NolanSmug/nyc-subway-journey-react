@@ -1,17 +1,27 @@
+import { useMemo } from 'react'
+
 import './TrainInfo.css'
 
-import { TrainLineInfo } from './TrainCar'
-
 import { default as Line } from '../LineSVGs'
-import { Direction } from '../../logic/LineManager'
-import { useGameContext } from '../../contexts/GameContext'
+import { Direction, getLineType } from '../../logic/LineManager'
+import { useTrainContext } from '../../contexts/TrainContext'
+import { getLineSVG } from '../../logic/LineSVGsMap'
+import { useLineStyles } from '../../hooks/useCSSProperties'
 
-interface TrainInfoProps extends TrainLineInfo {}
+function TrainInfo({ direction, reverseButton }: { direction: Direction; reverseButton?: boolean }) {
+    const line = useTrainContext((state) => state.train.getLine())
+    const borough = useTrainContext((state) => state.train.getCurrentStation().getBorough())
 
-export function TrainInfo({ direction, directionLabel, lineSVG, lineType, reverseButton }: TrainInfoProps) {
-    const { train, updateTrainObject } = useGameContext()
+    const updateTrainObject = useTrainContext((state) => state.updateTrainObject)
+    const train = useTrainContext((state) => state.train)
+
+    const lineType = useMemo(() => getLineType(line), [line])
+    const lineSVG = useMemo(() => getLineSVG(line), [line])
+    const directionLabel = useTrainContext((state) => state.train.findDirectionLabel(direction, line, borough))
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
+
+    useLineStyles(line, lineType)
 
     return (
         <>
