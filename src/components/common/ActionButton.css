@@ -38,7 +38,7 @@
     outline-offset: -0.1em;
 }
 
-.action-button.disabled {
+.disabled {
     pointer-events: none;
     opacity: 0.4;
 }

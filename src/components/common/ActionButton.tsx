@@ -27,13 +27,9 @@ function ActionButton({
     additionalInput,
 }: ActionButtonProps) {
     return (
-        <div className={`action-button-wrapper ${wrapperClassName || ''} ${hidden ? 'hidden' : ''}`}>
+        <div className={`action-button-wrapper ${wrapperClassName || ''} ${hidden ? 'hidden' : ''} ${disabled ? 'disabled' : ''}`}>
             <div className='action-button-container'>
-                <button
-                    className={`action-button ${disabled ? 'disabled' : ''} ${noImage ? 'no-image' : ''}`}
-                    type='button'
-                    onMouseDown={onMouseDown}
-                >
+                <button className={`action-button  ${noImage ? 'no-image' : ''}`} type='button' onMouseDown={onMouseDown}>
                     {noImage ? (
                         <span className='button-text'>{label}</span>
                     ) : (

@@ -16,6 +16,7 @@ import { useGame } from '../../hooks/useGame'
 
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station as StationObject } from '../../logic/StationManager'
+import { Direction } from '../../logic/LineManager'
 
 import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
@@ -31,6 +32,7 @@ function ConductorModeUI() {
     const { initializeGame } = useGame()
 
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
+    const isNullDirection: boolean = useTrainContext((state) => state.train.getDirection()) === Direction.NULL_DIRECTION
     const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
 
     const darkMode = useUIContext((state) => state.darkMode)
@@ -83,6 +85,7 @@ function ConductorModeUI() {
                                 advanceStation(numAdvanceStations)
                             }}
                             additionalInput={<AdvanceNStationsInput />}
+                            disabled={isNullDirection}
                         />
                     </div>
                 </div>
