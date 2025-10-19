@@ -21,7 +21,6 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     const isHorizontalLayout = useUIContext((state) => state.isHorizontalLayout)
     const isVerticalLayout = useUIContext((state) => state.isVerticalLayout)
 
-    const conductorMode = useSettingsContext((state) => state.conductorMode)
     const defaultDirectionToggle = useSettingsContext((state) => state.defaultDirectionToggle)
     const setDefaultDirectionToggle = useSettingsContext((state) => state.setDefaultDirectionToggle)
 
@@ -61,11 +60,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                 )}
 
                 <div className={`train-car ${forWinDisplay ? 'win-display' : ''}`}>
-                    <DirectionSwitch
-                        state={defaultDirectionToggle}
-                        onChange={handleDirectionChange}
-                        visible={conductorMode && !forWinDisplay}
-                    />
+                    <DirectionSwitch state={defaultDirectionToggle} onChange={handleDirectionChange} visible={!forWinDisplay} />
                     <div className='doors'>
                         <Door isLeft />
                         <Door />

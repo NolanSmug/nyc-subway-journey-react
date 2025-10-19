@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 
 import './Passenger.css'
 import HUMAN_MALE_WHITE from '../images/human-male-w.svg'
@@ -8,7 +8,7 @@ import HUMAN_FEMALE_BLACK from '../images/human-female-b.svg'
 import HUMAN_OTHER_WHITE from '../images/human-other-w.svg'
 import HUMAN_OTHER_BLACK from '../images/human-other-b.svg'
 
-import { Gender, useSettingsContext } from '../contexts/SettingsContext'
+import { GameMode, Gender, useSettingsContext } from '../contexts/SettingsContext'
 import { useUIContext } from '../contexts/UIContext'
 import { PassengerState } from '../hooks/usePassengerActions'
 
@@ -19,9 +19,9 @@ const Passenger = () => {
 
     const passengerGender = useSettingsContext((state) => state.passengerGender)
     const setPassengerGender = useSettingsContext((state) => state.setPassengerGender)
-    const conductorMode = useSettingsContext((state) => state.conductorMode)
+    const activated = useSettingsContext((state) => state.gameMode === GameMode.RIDER)
 
-    if (conductorMode) return null
+    if (!activated) return null
 
     function getGenderSVG() {
         if (passengerGender === Gender.MALE) {
@@ -55,4 +55,4 @@ const Passenger = () => {
     )
 }
 
-export default Passenger
+export default React.memo(Passenger)

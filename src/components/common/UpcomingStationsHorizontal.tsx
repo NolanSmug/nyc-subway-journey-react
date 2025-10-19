@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import './UpcomingStationsHorizontal.css'
 
 import StationFragment from '../station/StationFragment'
-import { Station } from '../../logic/StationManager'
 import { useTrainContext } from '../../contexts/TrainContext'
 
 // TODO: Borough barrier

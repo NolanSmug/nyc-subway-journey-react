@@ -20,7 +20,7 @@ function LandingScreen() {
                     avoid getting lost!
                 </p>
 
-                <ActionButton noImage label='Start journey' onMouseDown={() => setIsLandingPage(false)}></ActionButton>
+                <ActionButton noImage label='Start journey' onClick={() => setIsLandingPage(false)}></ActionButton>
             </div>
         </div>
     )

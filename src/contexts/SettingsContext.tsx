@@ -8,11 +8,16 @@ export enum Gender {
     OTHER,
 }
 
+export enum GameMode {
+    CONDUCTOR,
+    RIDER,
+}
+
 interface SettingsContextProps {
-    conductorMode: boolean
+    gameMode: GameMode
+    setGameMode: React.Dispatch<React.SetStateAction<GameMode>>
     numAdvanceStations: number
     defaultDirectionToggle: Direction
-    setConductorMode: React.Dispatch<React.SetStateAction<boolean>>
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
     setDefaultDirectionToggle: React.Dispatch<React.SetStateAction<Direction>>
     passengerGender: Gender
@@ -22,15 +27,15 @@ interface SettingsContextProps {
 const SettingsContext = createContext<SettingsContextProps | undefined>(undefined)
 
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
-    const [conductorMode, setConductorMode] = useState<boolean>(false)
+    const [gameMode, setGameMode] = useState<GameMode>(GameMode.RIDER)
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
     const [defaultDirectionToggle, setDefaultDirectionToggle] = useState<Direction>(Direction.NULL_DIRECTION)
     const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
 
     const value = useMemo(
         () => ({
-            conductorMode,
-            setConductorMode,
+            gameMode,
+            setGameMode,
             numAdvanceStations,
             setNumAdvanceStations,
             defaultDirectionToggle,
@@ -38,7 +43,7 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
             passengerGender,
             setPassengerGender,
         }),
-        [conductorMode, numAdvanceStations, defaultDirectionToggle, passengerGender]
+        [gameMode, numAdvanceStations, defaultDirectionToggle, passengerGender]
     )
 
     return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>

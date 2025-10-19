@@ -47,6 +47,9 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
             setUpcomingStationsLayout(isHorizontalLayout() ? UpcomingStationsLayout.VERTICAL : UpcomingStationsLayout.HORIZONTAL)
         }
     }, [upcomingStationsLayout])
+    const toggleDarkMode = useCallback(() => setDarkMode((prev) => !prev), [])
+    const toggleTransferMode = useCallback(() => setIsTransferMode((prev) => !prev), [])
+
     const isVerticalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.VERTICAL, [upcomingStationsLayout])
     const isHorizontalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL, [upcomingStationsLayout])
 
@@ -60,38 +63,35 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
             setIsTransferMode,
             setUpcomingStationsVisible,
             setUpcomingStationsLayout,
-            toggleDarkMode: () => setDarkMode((prev) => !prev),
-            toggleTransferMode: () => setIsTransferMode((prev) => !prev),
-            toggleUpcomingStationsLayout,
-            isVerticalLayout: () => isVerticalLayout(),
-            isHorizontalLayout: () => isHorizontalLayout(),
             isLandingPage,
             setIsLandingPage,
             passengerPosition,
             setPassengerPosition,
             passengerState,
             setPassengerState,
+            toggleDarkMode,
+            toggleTransferMode,
+            toggleUpcomingStationsLayout,
+            isVerticalLayout,
+            isHorizontalLayout,
         }),
-        [darkMode, isTransferMode, upcomingStationsVisible, upcomingStationsLayout, passengerPosition, passengerState, isLandingPage]
+        [
+            darkMode,
+            isTransferMode,
+            upcomingStationsVisible,
+            upcomingStationsLayout,
+            isLandingPage,
+            passengerPosition,
+            passengerState,
+            toggleDarkMode,
+            toggleTransferMode,
+            toggleUpcomingStationsLayout,
+            isVerticalLayout,
+            isHorizontalLayout,
+        ]
     )
 
-    return (
-        <UIContext.Provider value={value}>{children}</UIContext.Provider>
-        // <UIContext.Provider
-        //     value={{
-        //         isTransferMode,
-        //         setIsTransferMode,
-        //         darkMode,
-        //         setDarkMode,
-        //         upcomingStationsVisible,
-        //         setUpcomingStationsVisible,
-        //         upcomingStationsLayout,
-        //         setUpcomingStationsLayout,
-        //     }}
-        // >
-        //     {children}
-        // </UIContext.Provider>
-    )
+    return <UIContext.Provider value={value}>{children}</UIContext.Provider>
 }
 
 // export const useUIContext = () => {

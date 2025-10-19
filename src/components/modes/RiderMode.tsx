@@ -3,7 +3,7 @@ import RiderModeUI from '../ui/RiderModeUI'
 
 import { useTrainContext } from '../../contexts/TrainContext'
 import { UpcomingStationsLayout, useUIContext } from '../../contexts/UIContext'
-import { useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { useGame } from '../../hooks/useGame'
 import { useUITheme } from '../../hooks/useCSSProperties'
@@ -22,7 +22,7 @@ function RiderMode() {
     const setUpcomingStationsVisible = useUIContext((state) => state.setUpcomingStationsVisible)
 
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
-    const setConductorMode = useSettingsContext((state) => state.setConductorMode)
+    const setGameMode = useSettingsContext((state) => state.setGameMode)
 
     useUITheme(darkMode)
 
@@ -30,7 +30,7 @@ function RiderMode() {
         comboKeys: {
             'Shift+D': () => setDarkMode((prev) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev) => !prev),
-            'Shift+C': () => setConductorMode((prev) => !prev),
+            'Shift+C': () => setGameMode((prev) => (prev === GameMode.CONDUCTOR ? GameMode.RIDER : GameMode.CONDUCTOR)),
         },
         singleKeys: {
             ArrowRight: () => advanceStation(numAdvanceStations),

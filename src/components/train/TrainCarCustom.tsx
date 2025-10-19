@@ -1,7 +1,7 @@
+import React, { useMemo } from 'react'
 import './TrainCar.css'
 import './TrainCarCustom.css'
 
-import { useMemo } from 'react'
 import TrainInfo from './TrainInfo'
 import Door from './Door'
 import ActionButton from '../common/ActionButton'
@@ -39,7 +39,7 @@ function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarS
                             imageSrc={ARROW}
                             imageClassName='arrow-left'
                             label='Advance'
-                            onMouseDown={() => advanceStation(numAdvanceStations)}
+                            onClick={() => advanceStation(numAdvanceStations)}
                         />
                     )}
                 </div>
@@ -69,7 +69,7 @@ function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarS
                             imageSrc={ARROW}
                             imageClassName='arrow-right'
                             label='Advance'
-                            onMouseDown={() => advanceStation(numAdvanceStations)}
+                            onClick={() => advanceStation(numAdvanceStations)}
                         />
                     )}
                 </div>
@@ -78,4 +78,4 @@ function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarS
     )
 }
 
-export default TrainCarCustom
+export default React.memo(TrainCarCustom)

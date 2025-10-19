@@ -44,10 +44,6 @@ export class GameState {
         } while (this.startingStation.equals(this.destinationStation))
     }
 
-    public isEmpty(): boolean {
-        return this.startingLine == LineName.NULL_TRAIN
-    }
-
     public async getStartDestStationIDs(): Promise<string[]> {
         return [this.startingStation.getId(), this.destinationStation.getId()]
     }

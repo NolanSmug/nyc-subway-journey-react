@@ -194,12 +194,12 @@ function OptimalRouteUI() {
                     <ActionButton
                         imageSrc={darkMode ? OPTIMAL_WHITE : OPTIMAL_BLACK}
                         label='Show optimal route'
-                        onMouseDown={() => setIsRouteRequested(true)}
+                        onClick={() => setIsRouteRequested(true)}
                     />
                     <ActionButton
                         imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
                         label='Reset game'
-                        onMouseDown={() => {
+                        onClick={() => {
                             initializeGame()
                         }}
                     />
@@ -234,7 +234,7 @@ function OptimalRouteUI() {
                 <ActionButton
                     imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
                     label='Reset game'
-                    onMouseDown={() => {
+                    onClick={() => {
                         initializeGame()
                     }}
                 />

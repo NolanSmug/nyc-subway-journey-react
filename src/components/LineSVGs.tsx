@@ -1,3 +1,4 @@
+import React from 'react'
 import './LineSVGs.css'
 
 import { useUIContext } from '../contexts/UIContext'
@@ -36,4 +37,4 @@ function LineSVGs({ svgPaths, small, wide, vertical, grouped, selectable, numLin
     )
 }
 
-export default LineSVGs
+export default React.memo(LineSVGs)

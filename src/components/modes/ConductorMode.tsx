@@ -2,7 +2,7 @@ import ConductorModeUI from '../ui/ConductorModeUI'
 
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
-import { useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { useUITheme } from '../../hooks/useCSSProperties'
 import { useGame } from '../../hooks/useGame'
@@ -21,7 +21,7 @@ function ConductorMode() {
 
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
     const setNumAdvanceStations = useSettingsContext((state) => state.setNumAdvanceStations)
-    const setConductorMode = useSettingsContext((state) => state.setConductorMode)
+    const setGameMode = useSettingsContext((state) => state.setGameMode)
 
     useUITheme(darkMode)
 
@@ -30,7 +30,7 @@ function ConductorMode() {
             'Shift+L': toggleUpcomingStationsLayout,
             'Shift+D': () => setDarkMode((prev: boolean) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev: boolean) => !prev),
-            'Shift+C': () => setConductorMode((prev: boolean) => !prev),
+            'Shift+C': () => setGameMode((prev) => (prev === GameMode.CONDUCTOR ? GameMode.RIDER : GameMode.CONDUCTOR)),
         },
         singleKeys: {
             t: () => setIsTransferMode((prev: boolean) => !prev),

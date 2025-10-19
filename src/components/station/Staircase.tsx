@@ -1,3 +1,4 @@
+import React from 'react'
 import './Staircase.css'
 import { useEffect, useRef, useState } from 'react'
 import LineSVGs from '../LineSVGs'
@@ -77,4 +78,4 @@ function Staircase({ lines, tunnelLayout, isSelected, onSelection, hidden }: Sta
     )
 }
 
-export default Staircase
+export default React.memo(Staircase)

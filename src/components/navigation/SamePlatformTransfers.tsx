@@ -31,4 +31,4 @@ function SamePlatformTransfers({ lines, hidden, passengerIsWalking, onSelection 
     )
 }
 
-export default SamePlatformTransfers
+export default React.memo(SamePlatformTransfers)

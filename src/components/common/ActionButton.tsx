@@ -6,7 +6,7 @@ interface ActionButtonProps {
     imageClassName?: string
     wrapperClassName?: string
     label?: string
-    onMouseDown?: () => void
+    onClick?: () => void
     hidden?: boolean
     noImage?: boolean
     small?: boolean
@@ -20,7 +20,7 @@ function ActionButton({
     wrapperClassName,
     label,
     noImage,
-    onMouseDown,
+    onClick,
     hidden,
     small,
     disabled,
@@ -29,7 +29,12 @@ function ActionButton({
     return (
         <div className={`action-button-wrapper ${wrapperClassName || ''} ${hidden ? 'hidden' : ''} ${disabled ? 'disabled' : ''}`}>
             <div className='action-button-container'>
-                <button className={`action-button  ${noImage ? 'no-image' : ''}`} type='button' onMouseDown={onMouseDown}>
+                <button
+                    className={`action-button  ${noImage ? 'no-image' : ''}`}
+                    type='button'
+                    onMouseDown={noImage ? undefined : onClick}
+                    onMouseUp={noImage ? onClick : undefined}
+                >
                     {noImage ? (
                         <span className='button-text'>{label}</span>
                     ) : (
@@ -50,4 +55,4 @@ function ActionButton({
     )
 }
 
-export default ActionButton
+export default React.memo(ActionButton)

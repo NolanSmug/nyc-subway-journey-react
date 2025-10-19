@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import './RiderModeUI.css'
 
 import TrainCarCustom from '../train/TrainCarCustom'
@@ -43,6 +43,11 @@ function RiderModeUI() {
     )
     const otherPlatformGroups = useMemo(() => groupedTransfers.filter((g) => !g.includes(currentLine)), [groupedTransfers, currentLine])
 
+    const samePlatformLines = useMemo(
+        () => currentPlatformGroup.filter((line) => line !== currentLine),
+        [currentPlatformGroup, currentLine]
+    )
+
     const hasSamePlatformTransfers = currentPlatformGroup.length > 1
     const hasOtherPlatformTransfers = otherPlatformGroups.length > 0
     const hideTransferButton =
@@ -54,23 +59,36 @@ function RiderModeUI() {
 
     const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
 
-    function selectStaircaseLine(index: number, line?: LineName): void {
-        if (passengerState !== PassengerState.TRANSFER_PLATFORM) return
+    const handleBoardUptown = useCallback(() => {
+        changeDirection(Direction.UPTOWN)
+    }, [walkPassenger, changeDirection])
 
-        setSelectedGroupIndex(index)
+    const handleBoardDowntown = useCallback(() => {
+        changeDirection(Direction.DOWNTOWN)
+    }, [walkPassenger, changeDirection])
 
-        if (inTransferTunnel && line) {
-            transfer(line)
-            // need to do this to fix a state race condition
-            setTimeout(() => {
-                setInTransferTunnel(false)
-            }, 25)
-            changeDirection(Direction.NULL_DIRECTION)
-        } else {
-            // staircase isn't open yet
-            setInTransferTunnel(true)
-        }
-    }
+    const handleDeboard = useCallback(() => {
+        walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM)
+        changeDirection(Direction.NULL_DIRECTION)
+    }, [walkPassenger, changeDirection])
+
+    const selectStaircaseLine = useCallback(
+        (index: number, line?: LineName): void => {
+            if (passengerState !== PassengerState.TRANSFER_PLATFORM) return
+            setSelectedGroupIndex(index)
+
+            if (inTransferTunnel && line) {
+                transfer(line)
+                // need to do this to fix a state race condition
+                setTimeout(() => setInTransferTunnel(false), 25)
+                changeDirection(Direction.NULL_DIRECTION)
+            } else {
+                // staircase isn't open yet
+                setInTransferTunnel(true)
+            }
+        },
+        [passengerState, inTransferTunnel, transfer, changeDirection]
+    )
 
     return (
         <div className='platform-wrapper'>
@@ -79,7 +97,7 @@ function RiderModeUI() {
             >
                 {hasSamePlatformTransfers && (
                     <SamePlatformTransfers
-                        lines={currentPlatformGroup.filter((line) => line !== currentLine)}
+                        lines={samePlatformLines}
                         hidden={inTransferTunnel}
                         passengerIsWalking={passengerIsWalking}
                         onSelection={transfer}
@@ -113,7 +131,7 @@ function RiderModeUI() {
                 <ActionButton
                     label='board uptown train'
                     noImage
-                    onMouseDown={() => changeDirection(Direction.UPTOWN)}
+                    onClick={handleBoardUptown}
                     hidden={inTransferTunnel || currentDirection === Direction.UPTOWN}
                     wrapperClassName='uptown-button-offset'
                 />
@@ -126,10 +144,7 @@ function RiderModeUI() {
                                 : 'transfer'
                         }
                         noImage
-                        onMouseDown={() => (
-                            walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM),
-                            changeDirection(Direction.NULL_DIRECTION)
-                        )}
+                        onClick={handleDeboard}
                         hidden={hideTransferButton}
                     />
                 </div>
@@ -137,7 +152,7 @@ function RiderModeUI() {
                 <ActionButton
                     label='board downtown train'
                     noImage
-                    onMouseDown={() => changeDirection(Direction.DOWNTOWN)}
+                    onClick={handleBoardDowntown}
                     hidden={inTransferTunnel || currentDirection === Direction.DOWNTOWN}
                     wrapperClassName='downtown-button-offset'
                 />

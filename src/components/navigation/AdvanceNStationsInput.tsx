@@ -12,13 +12,10 @@ function AdvanceNStationsInput() {
     const darkMode = useUIContext((state) => state.darkMode)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
     const setNumAdvanceStations = useSettingsContext((state) => state.setNumAdvanceStations)
-    const visible = useSettingsContext((state) => state.conductorMode)
 
     const trainDirection = useTrainContext((state) => state.train.getDirection())
     const stationIndex = useTrainContext((state) => state.train.getCurrentStationIndex())
     const scheduledStopsCount = useTrainContext((state) => state.train.getScheduledStops().length)
-
-    if (!visible) return null
 
     let currentMaxNumber: number = trainDirection === Direction.DOWNTOWN ? stationIndex : scheduledStopsCount - stationIndex - 1
 

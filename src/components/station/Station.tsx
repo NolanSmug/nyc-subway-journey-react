@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import './Station.css'
 
 interface StationProps {
@@ -24,4 +24,4 @@ function Station({ name, header, noLines, hidden, isDestination, children }: Sta
     )
 }
 
-export default Station
+export default React.memo(Station)

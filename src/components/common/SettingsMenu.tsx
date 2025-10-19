@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React from 'react'
 import SettingsButton from './SettingsButton'
 
-import { useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
 import { useUIContext } from '../../contexts/UIContext'
 
 import L_MODE from '../../images/light-mode-icon.svg'
@@ -24,8 +24,8 @@ const SettingsMenu = () => {
     const toggleUpcomingStationsLayout = useUIContext((state) => state.toggleUpcomingStationsLayout)
     const setUpcomingStationsVisible = useUIContext((state) => state.setUpcomingStationsVisible)
 
-    const conductorMode = useSettingsContext((state) => state.conductorMode)
-    const setConductorMode = useSettingsContext((state) => state.setConductorMode)
+    const gameMode = useSettingsContext((state) => state.gameMode)
+    const setGameMode = useSettingsContext((state) => state.setGameMode)
 
     return (
         <>
@@ -46,13 +46,13 @@ const SettingsMenu = () => {
                           ? UPCOMING_STATIONS_HORIZONTAL_WHITE
                           : UPCOMING_STATIONS_HORIZONTAL_BLACK
                 }
-                onClick={() => conductorMode && toggleUpcomingStationsLayout()}
-                disabled={!conductorMode}
+                onClick={() => gameMode === GameMode.CONDUCTOR && toggleUpcomingStationsLayout()}
+                disabled={gameMode === GameMode.RIDER}
             />
             <SettingsButton
-                label={!conductorMode ? 'Conductor mode' : 'Rider mode'}
+                label={!gameMode ? 'Conductor mode' : 'Rider mode'}
                 imgSrc={
-                    conductorMode
+                    gameMode === GameMode.RIDER
                         ? darkMode
                             ? RIDER_MODE_WHITE
                             : RIDER_MODE_BLACK
@@ -61,11 +61,11 @@ const SettingsMenu = () => {
                           : CONDUCTOR_MODE_BLACK
                 }
                 onClick={() => {
-                    setConductorMode((prev) => !prev)
+                    setGameMode((prev) => (prev == GameMode.CONDUCTOR ? GameMode.RIDER : GameMode.CONDUCTOR))
                 }}
             />
         </>
     )
 }
 
-export default SettingsMenu
+export default React.memo(SettingsMenu)

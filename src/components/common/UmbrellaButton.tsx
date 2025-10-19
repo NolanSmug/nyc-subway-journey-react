@@ -6,12 +6,12 @@ import { useUIContext } from '../../contexts/UIContext'
 
 interface UmbrellaButtonProps {
     openingButtonsW_B: string[] // [white, black]
-    umbrellaContent: ReactNode
+    children: ReactNode
     below?: boolean
     visible?: boolean
 }
 
-const UmbrellaButton = ({ openingButtonsW_B, umbrellaContent, below, visible }: UmbrellaButtonProps) => {
+const UmbrellaButton = ({ openingButtonsW_B, children, below, visible }: UmbrellaButtonProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const popupRef = useRef<HTMLDivElement | null>(null)
     const buttonRef = useRef<HTMLDivElement | null>(null)
@@ -46,7 +46,7 @@ const UmbrellaButton = ({ openingButtonsW_B, umbrellaContent, below, visible }: 
 
     return (
         <div ref={buttonRef}>
-            <ActionButton imageSrc={darkMode ? openingButtonsW_B[0] : openingButtonsW_B[1]} onMouseDown={togglePopup} />
+            <ActionButton imageSrc={darkMode ? openingButtonsW_B[0] : openingButtonsW_B[1]} onClick={togglePopup} />
 
             {/* <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? "visible" : "hidden"} ${below ? "below" : ""}`}>
                 {umbrellaContent}
@@ -54,7 +54,7 @@ const UmbrellaButton = ({ openingButtonsW_B, umbrellaContent, below, visible }: 
             </div> */}
             {isOpen && visible && (
                 <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : 'above'}`}>
-                    {umbrellaContent}
+                    {isOpen && children}
                     <div className='popup-arrow' />
                 </div>
             )}

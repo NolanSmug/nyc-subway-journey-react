@@ -14,7 +14,7 @@ function SettingsButton({ imgSrc, label, onClick, disabled }: SettingsButtonProp
             <span id='setting-label' className={`${disabled ? 'disabled' : ''}`} title={`${disabled ? 'disabled in this mode' : ''}`}>
                 {label}
             </span>
-            <ActionButton disabled={disabled} imageSrc={imgSrc} onMouseDown={onClick} small></ActionButton>
+            <ActionButton disabled={disabled} imageSrc={imgSrc} onClick={onClick} small></ActionButton>
         </div>
     )
 }

@@ -32,10 +32,15 @@
     cursor: pointer;
 }
 
+.action-button .icon {
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .action-button:active .icon {
     transform: scale(0.95);
     outline: 0.15em solid var(--line-color);
-    outline-offset: -0.1em;
+    outline-offset: 0.1em;
+    outline-width: 0.2em;
 }
 
 .disabled {
@@ -48,10 +53,18 @@
     border-radius: 0.5em;
     padding: 0.5em 2em;
     background-color: var(--bg-color-2);
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .action-button.no-image:hover {
     background-color: var(--bg-color-3);
+}
+
+.action-button.no-image:active {
+    transform: scale(0.95);
+    outline: 0.15em solid var(--line-color);
+    outline-offset: 0.1em;
+    outline-width: 0.2em;
 }
 
 .icon {
@@ -64,15 +77,16 @@
     transition: transform 0.1s ease-out, outline 0.2s ease-out;
 }
 
+.icon:hover {
+    transform: scale(1.08);
+    background-color: var(--bg-color-3);
+}
+
 .small-button {
     height: 1.25rem;
     width: 1.25rem;
 }
 
-.icon:hover {
-    transform: scale(1.05);
-    background-color: var(--bg-color-3);
-}
 
 .label {
     margin: 0.5em 0 0 0;

@@ -78,6 +78,8 @@ export const lineTypes: Map<LineName, LineType> = new Map([
     [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
 ])
 
+// TODO: repOk() implementation (see TrainManger.ts)
+
 export function getRandomLine(): LineName {
     const lines: LineName[] = Object.values(LineName)
     let randomLine: LineName = LineName.NULL_TRAIN
@@ -410,6 +412,10 @@ export const lineDirectionsDetailed: Map<LineName, LineDirectionDetails> = new M
                     [Direction.UPTOWN]: 'Brooklyn-bound',
                 },
                 [Borough.BROOKLYN]: {
+                    [Direction.DOWNTOWN]: 'Rockaway Parkway-bound',
+                    [Direction.UPTOWN]: 'Manhattan-bound',
+                },
+                [Borough.QUEENS]: {
                     [Direction.DOWNTOWN]: 'Rockaway Parkway-bound',
                     [Direction.UPTOWN]: 'Manhattan-bound',
                 },

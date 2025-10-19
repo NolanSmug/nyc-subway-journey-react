@@ -38,7 +38,6 @@ function ConductorModeUI() {
     const darkMode = useUIContext((state) => state.darkMode)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
-    const conductorMode = useSettingsContext((state) => state.conductorMode)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
 
     return (
@@ -63,16 +62,16 @@ function ConductorModeUI() {
                             />
                         </Station>
                     </div>
-                    <div className={`action-buttons-container ${conductorMode ? 'conductor' : ''}`} id='starting-station'>
+                    <div className={`action-buttons-container`} id='starting-station'>
                         <ActionButton
                             imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
                             label='Transfer lines'
-                            onMouseDown={() => setIsTransferMode((prev) => (prev ? false : true))}
+                            onClick={() => setIsTransferMode((prev) => (prev ? false : true))}
                         />
                         <ActionButton
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label='Change direction'
-                            onMouseDown={() => {
+                            onClick={() => {
                                 setIsTransferMode(false)
                                 changeDirection()
                             }}
@@ -80,7 +79,7 @@ function ConductorModeUI() {
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                             label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
-                            onMouseDown={() => {
+                            onClick={() => {
                                 setIsTransferMode(false)
                                 advanceStation(numAdvanceStations)
                             }}
@@ -101,7 +100,7 @@ function ConductorModeUI() {
                         <ActionButton
                             imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
                             label='Reset game'
-                            onMouseDown={() => initializeGame()}
+                            onClick={() => initializeGame()}
                         />
                     </div>
                 </div>

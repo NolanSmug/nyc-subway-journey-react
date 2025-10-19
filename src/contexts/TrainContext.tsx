@@ -3,7 +3,7 @@ import { useContextSelector, createContext } from 'use-context-selector'
 import { Train } from '../logic/TrainManager'
 import useTrainActions from '../hooks/useTrainActions'
 import { useGameStateContext } from './GameStateContext'
-import { useSettingsContext } from './SettingsContext'
+import { GameMode, useSettingsContext } from './SettingsContext'
 import { useUIContext } from './UIContext'
 import { PassengerState } from '../hooks/usePassengerActions'
 
@@ -22,7 +22,7 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
     const [train, setTrain] = useState(() => new Train())
 
     const { gameState, setGameState } = useGameStateContext()
-    const conductorMode = useSettingsContext((state) => state.conductorMode)
+    const gameMode = useSettingsContext((state) => state.gameMode)
     const passengerState = useUIContext((state) => state.passengerState)
 
     const updateTrainObject = useCallback((updates: Partial<Train>) => {
@@ -37,8 +37,8 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
         gameState,
         updateTrainObject,
         setGameState,
-        conductorMode,
-        passengerIsWalking: conductorMode && passengerState === PassengerState.WALKING,
+        gameMode,
+        passengerIsWalking: gameMode === GameMode.RIDER && passengerState === PassengerState.WALKING,
     })
 
     const value = useMemo(() => ({ train, actions, updateTrainObject, setTrain }), [train, updateTrainObject, actions])

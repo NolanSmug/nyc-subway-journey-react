@@ -2,13 +2,14 @@ import { useCallback } from 'react'
 import { GameState } from '../logic/GameState'
 import { Train } from '../logic/TrainManager'
 import { Direction, LineName } from '../logic/LineManager'
+import { GameMode } from '../contexts/SettingsContext'
 
 type UseTrainActionsParams = {
     train: Train
     gameState: GameState
     updateTrainObject: (t: Partial<Train>) => void
     setGameState: (gs: GameState) => void
-    conductorMode: boolean
+    gameMode: GameMode
     passengerIsWalking?: boolean
 }
 
@@ -17,7 +18,7 @@ export default function useTrainActions({
     gameState,
     updateTrainObject,
     setGameState,
-    conductorMode,
+    gameMode,
     passengerIsWalking,
 }: UseTrainActionsParams) {
     const checkForWin = useCallback(() => {
@@ -29,9 +30,9 @@ export default function useTrainActions({
     const advanceStation = useCallback(
         (numAdvanceStations: number) => {
             if (!train) throw new Error('attempted to advanceStation - Train object is null')
-            if (passengerIsWalking) return
+            if (passengerIsWalking && process.env.REACT_APP_USE_DEV_API === 'true') return
 
-            if (numAdvanceStations > 1 && conductorMode) {
+            if (numAdvanceStations > 1 && gameMode === GameMode.CONDUCTOR) {
                 updateTrainObject({ ...train.advanceStationInc(numAdvanceStations) })
             } else {
                 updateTrainObject({ ...train.advanceStation() })
@@ -39,7 +40,7 @@ export default function useTrainActions({
 
             checkForWin()
         },
-        [train, conductorMode, updateTrainObject, checkForWin]
+        [train, passengerIsWalking, gameMode, updateTrainObject, checkForWin]
     )
 
     const transfer = useCallback(
@@ -47,20 +48,22 @@ export default function useTrainActions({
             if (!train) throw new Error('attempted to transfer - Train object is null')
             if (passengerIsWalking) return
 
+            const currentStation = train.getCurrentStation()
+
             let selectedLine: LineName | undefined
             if (typeof transferInput === 'number') {
-                selectedLine = train.getCurrentStation().getTransfers()[transferInput]
+                selectedLine = currentStation.getTransfers()[transferInput]
             } else {
                 selectedLine = transferInput
             }
 
             if (!selectedLine) {
-                console.error(`${selectedLine} not found at ${train.getCurrentStation()}`)
+                console.error(`${selectedLine} not found at ${currentStation}`)
                 return
             }
 
             // DO THE TRANSFER
-            if (await train.transferToLine(selectedLine, train.getCurrentStation())) {
+            if (await train.transferToLine(selectedLine, currentStation)) {
                 updateTrainObject({ ...train })
             }
         },
@@ -69,7 +72,7 @@ export default function useTrainActions({
 
     const changeDirection = useCallback(
         (direction?: Direction) => {
-            if (!train) throw new Error('repOK failed on change direction action')
+            if (!train) throw new Error('attempted to changeDirection - Train object is null')
             if (passengerIsWalking) return
 
             if (direction === undefined) {
