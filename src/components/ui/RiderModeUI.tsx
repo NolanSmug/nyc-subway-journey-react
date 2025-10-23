@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import './RiderModeUI.css'
 
-import TrainCarCustom from '../train/TrainCarCustom'
+import TrainCarStatic from '../train/TrainCarStatic'
 import Station from '../station/Station'
 import Staircase from '../station/Staircase'
 import LineSVGs from '../LineSVGs'
@@ -9,7 +9,7 @@ import Passenger from '../Passenger'
 import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
 import ActionButton from '../common/ActionButton'
 
-import usePassengerActions, { PassengerAction, PassengerState } from '../../hooks/usePassengerActions'
+import { PassengerState } from '../../hooks/usePassengerActions'
 
 import { Direction, LineName } from '../../logic/LineManager'
 import { groupLines, getCorrespondingGroup, getLineSVGs } from '../../logic/LineSVGsMap'
@@ -18,7 +18,21 @@ import { useTrainContext } from '../../contexts/TrainContext'
 import { useGameStateContext } from '../../contexts/GameStateContext'
 import { Station as StationObject } from '../../logic/StationManager'
 
-function RiderModeUI() {
+interface RiderModeUIProps {
+    handleBoardUptown: () => void
+    handleBoardDowntown: () => void
+    handleDeboard: () => void
+    uptownTrainDoorRef: React.RefObject<HTMLDivElement>
+    downtownTrainDoorRef: React.RefObject<HTMLDivElement>
+}
+
+function RiderModeUI({
+    handleBoardUptown,
+    handleBoardDowntown,
+    handleDeboard,
+    uptownTrainDoorRef,
+    downtownTrainDoorRef,
+}: RiderModeUIProps) {
     const { gameState } = useGameStateContext()
 
     const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
@@ -27,8 +41,6 @@ function RiderModeUI() {
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
 
     const passengerState: PassengerState = useUIContext((state) => state.passengerState)
-    const setPassengerState = useUIContext((state) => state.setPassengerState)
-    const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
 
     const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
     const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0)
@@ -56,21 +68,6 @@ function RiderModeUI() {
         transfers.length === 1 ||
         inTransferTunnel
     const passengerIsWalking = passengerState === PassengerState.WALKING
-
-    const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
-
-    const handleBoardUptown = useCallback(() => {
-        changeDirection(Direction.UPTOWN)
-    }, [walkPassenger, changeDirection])
-
-    const handleBoardDowntown = useCallback(() => {
-        changeDirection(Direction.DOWNTOWN)
-    }, [walkPassenger, changeDirection])
-
-    const handleDeboard = useCallback(() => {
-        walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM)
-        changeDirection(Direction.NULL_DIRECTION)
-    }, [walkPassenger, changeDirection])
 
     const selectStaircaseLine = useCallback(
         (index: number, line?: LineName): void => {
@@ -110,6 +107,7 @@ function RiderModeUI() {
                         onSelection={(line: LineName) => {
                             selectStaircaseLine(index, line)
                         }}
+                        selectable={passengerState === PassengerState.TRANSFER_PLATFORM}
                         isSelected={!inTransferTunnel && selectedGroupIndex === index}
                         tunnelLayout={inTransferTunnel && selectedGroupIndex === index}
                         hidden={inTransferTunnel && selectedGroupIndex !== index}
@@ -121,11 +119,12 @@ function RiderModeUI() {
                 <Passenger />
 
                 <Station name={currentStation.getName()} hidden={currentDirection === Direction.DOWNTOWN} noLines />
-                <TrainCarCustom
+                <TrainCarStatic
                     line={currentLine}
                     direction={Direction.UPTOWN}
                     active={currentDirection === Direction.UPTOWN}
                     hidden={inTransferTunnel}
+                    uptownDoorRef={uptownTrainDoorRef}
                     advanceStation={advanceStation}
                 />
                 <ActionButton
@@ -156,11 +155,12 @@ function RiderModeUI() {
                     hidden={inTransferTunnel || currentDirection === Direction.DOWNTOWN}
                     wrapperClassName='downtown-button-offset'
                 />
-                <TrainCarCustom
+                <TrainCarStatic
                     line={currentLine}
                     direction={Direction.DOWNTOWN}
                     active={currentDirection === Direction.DOWNTOWN}
                     hidden={inTransferTunnel}
+                    downtownDoorRef={downtownTrainDoorRef}
                     advanceStation={advanceStation}
                 />
                 <Station
@@ -172,7 +172,7 @@ function RiderModeUI() {
             <div className='destination-station-rider-mode' id='destination-station'>
                 <h2>Destination Station</h2>
                 <Station name={gameState.destinationStation.getName()} noLines isDestination>
-                    <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} />
+                    <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled />
                 </Station>
             </div>
         </div>

@@ -23,7 +23,7 @@ const Passenger = () => {
 
     if (!activated) return null
 
-    function getGenderSVG() {
+    const getGenderSVG = useCallback(() => {
         if (passengerGender === Gender.MALE) {
             return darkMode ? HUMAN_MALE_WHITE : HUMAN_MALE_BLACK
         } else if (passengerGender === Gender.FEMALE) {
@@ -31,7 +31,7 @@ const Passenger = () => {
         } else {
             return darkMode ? HUMAN_OTHER_WHITE : HUMAN_OTHER_BLACK
         }
-    }
+    }, [passengerGender, darkMode])
 
     const selectNewGender = useCallback(() => {
         if (passengerGender === Gender.MALE) {

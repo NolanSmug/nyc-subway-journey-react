@@ -32,7 +32,6 @@ interface UIContextProps {
 
 const UIContext = createContext<UIContextProps | undefined>(undefined)
 
-// Provides values/state variables related to the user interface
 export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)

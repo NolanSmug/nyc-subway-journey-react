@@ -15,9 +15,12 @@ export function useLineStyles(line: LineName, lineType: LineType) {
     }, [line, lineType])
 }
 
-export function usePassengerTransition(duration: number | undefined) {
-    if (!duration) return
+export function setPassengerTransitionDuration(duration: number | undefined): void {
+    if (duration === undefined) {
+        document.documentElement.style.setProperty('--walking-duration', '250ms')
+        return
+    }
 
-    const durationString: string = duration.toString() + 'ms'
+    const durationString: string = `${duration}ms`
     document.documentElement.style.setProperty('--walking-duration', durationString)
 }

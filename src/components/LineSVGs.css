@@ -37,7 +37,7 @@
     right: 2.3em;
 }
 
-.line-svgs-container.grouped:not(.selectable):hover {
+.line-svgs-container.grouped:not(.disabled):hover {
     cursor: pointer;
     transform: scale(1.25);
 }
@@ -85,19 +85,23 @@
     transition: transform 0.1s ease-out;
 }
 
-.selectable .line-svg-image:active {
+.line-svg-image:active {
     --active-scale: 0.90;
 }
 
-
-.selectable .line-svg-image:hover {
+.line-svg-image:hover {
     --hover-scale: 1.10;
     cursor: pointer;
     transition: transform ease-in-out 0.1s;
 }
 
-.selectable .line-svg-image.jiggle-animation {
+.line-svg-image.jiggle-animation {
     animation: jiggle 0.5s ease-in-out infinite;
+}
+
+.disabled .line-svg-image {
+    pointer-events: none;
+    animation: none;
 }
 
 .small {

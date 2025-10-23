@@ -8,7 +8,7 @@ import { useUIContext } from '../contexts/UIContext'
 
 export function useGame() {
     const { setGameState } = useGameStateContext()
-    const setTrain = useTrainContext((state) => state.setTrain)
+    const updateTrainObject = useTrainContext((state) => state.updateTrainObject)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
     const initializeGame = useCallback(async () => {
@@ -18,11 +18,11 @@ export function useGame() {
             await newGame.runGame()
 
             setIsTransferMode(false)
-            setTrain(newGame.train)
+            updateTrainObject(newGame.train)
             setGameState(newGame.gameState)
         } catch (error) {
             console.error('Error initializing game:', error)
         }
-    }, [setTrain, setGameState, setIsTransferMode])
+    }, [updateTrainObject, setGameState, setIsTransferMode])
     return { initializeGame }
 }

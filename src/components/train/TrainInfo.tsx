@@ -46,7 +46,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
                 {isNullDirection ? 'TOGGLE DIRECTION' : directionLabel}
             </h2>
             <div className='train-car-line'>
-                <Line svgPaths={[lineSVG]} notDim />
+                <Line svgPaths={[lineSVG]} notDim disabled />
             </div>
             <h2 className='train-type not-dim'>{lineType + ' train'}</h2>
         </>

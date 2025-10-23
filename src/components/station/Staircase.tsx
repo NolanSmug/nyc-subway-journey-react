@@ -6,25 +6,26 @@ import LineSVGs from '../LineSVGs'
 import { LineName } from '../../logic/LineManager'
 import { useUIContext } from '../../contexts/UIContext'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
-import usePassengerActions from '../../hooks/usePassengerActions'
+import usePassengerActions, { PassengerState } from '../../hooks/usePassengerActions'
 
 interface StaircaseProps {
     lines: LineName[]
     tunnelLayout?: boolean
     hidden?: boolean
+    selectable?: boolean
     isSelected?: boolean
     onSelection?: (line: LineName) => void | undefined
 }
 
 // for use ref position: .getBoundingClientRect()
 
-function Staircase({ lines, tunnelLayout, isSelected, onSelection, hidden }: StaircaseProps) {
+function Staircase({ lines, tunnelLayout, selectable, isSelected, onSelection, hidden }: StaircaseProps) {
     if (lines.length === 0) return null
 
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
-    const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
+    // const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
+    const passengerState = useUIContext((state) => state.passengerState)
     const setPassengerState = useUIContext((state) => state.setPassengerState)
-    const { walkPassenger } = usePassengerActions({ setPassengerPosition, setPassengerState })
 
     const [tunnelLinesVisible, setTunnelLinesVisible] = useState(false)
 
@@ -59,7 +60,7 @@ function Staircase({ lines, tunnelLayout, isSelected, onSelection, hidden }: Sta
                 numLines={lines.length}
                 onTransferSelect={(index: number) => (onSelection && onSelection(lines[index])) || setIsTransferMode(false)}
                 className={tunnelLinesVisible ? 'show-flipped' : ''}
-                selectable={tunnelLinesVisible}
+                disabled={!selectable}
                 notDim
             />
             <div ref={staircaseRef} className={`staircase ${tunnelLayout ? 'tunnel-expanded' : ''}`}>

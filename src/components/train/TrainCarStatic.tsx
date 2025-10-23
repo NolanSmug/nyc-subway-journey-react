@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import './TrainCar.css'
-import './TrainCarCustom.css'
+import './TrainCarStatic.css'
 
 import TrainInfo from './TrainInfo'
 import Door from './Door'
@@ -18,10 +18,12 @@ interface TrainCarStaticProps {
     direction: Direction
     active: boolean
     hidden?: boolean
+    uptownDoorRef?: React.RefObject<HTMLDivElement>
+    downtownDoorRef?: React.RefObject<HTMLDivElement>
     advanceStation: (n: number) => void
 }
 
-function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarStaticProps) {
+function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoorRef, advanceStation }: TrainCarStaticProps) {
     const darkMode = useUIContext((state) => state.darkMode)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
 
@@ -46,7 +48,7 @@ function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarS
 
                 <div className={`train-car ${isDowntown ? 'flipped-layout' : ''}`}>
                     <div className='doors'>
-                        <Door key='door-ll' isLeft hasPassenger={active} />
+                        <Door ref={isUptown ? uptownDoorRef : null} isLeft hasPassenger={active} />
                         <Door key='door-lr' />
                     </div>
                     <div className='windows' id='train-info'>
@@ -54,7 +56,7 @@ function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarS
                     </div>
 
                     <div className='doors'>
-                        <Door key='door-rl' isLeft hasPassenger={active} />
+                        <Door ref={isDowntown ? downtownDoorRef : null} key='door-rl' isLeft hasPassenger={active} />
                         <Door key='door-rr' />
                     </div>
 
@@ -78,4 +80,4 @@ function TrainCarCustom({ direction, active, hidden, advanceStation }: TrainCarS
     )
 }
 
-export default React.memo(TrainCarCustom)
+export default React.memo(TrainCarStatic)

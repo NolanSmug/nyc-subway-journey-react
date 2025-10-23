@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
-import { usePassengerTransition } from './useCSSProperties'
+import { useCallback, useEffect, useRef } from 'react'
+import { setPassengerTransitionDuration } from './useCSSProperties'
 
 export type PassengerPosition = {
     x: number
@@ -23,6 +23,7 @@ export enum PassengerAction {
 
 export const CENTER_PLATFORM_POS: PassengerPosition = { x: 20, y: window.innerHeight / 3 }
 
+// TODO: update this to use two PassengerStates instead of a PassengerAction
 export const PASSENGER_WALK_DURATIONS: Map<PassengerAction, number> = new Map([
     [PassengerAction.BOARD_TRAIN, 250],
     [PassengerAction.DEBOARD_TRAIN, 500],
@@ -30,52 +31,87 @@ export const PASSENGER_WALK_DURATIONS: Map<PassengerAction, number> = new Map([
 ])
 
 type UsePassengerActionsParams = {
+    passengerState: PassengerState
     setPassengerPosition: (pos: PassengerPosition) => void
     setPassengerState: (state: PassengerState) => void
 }
 
-export default function usePassengerActions({ setPassengerPosition, setPassengerState }: UsePassengerActionsParams) {
+export default function usePassengerActions({ passengerState, setPassengerPosition, setPassengerState }: UsePassengerActionsParams) {
+    const walkTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+    // Clear timeout on umount:
+    useEffect(() => {
+        return () => {
+            if (walkTimeoutRef.current) {
+                clearTimeout(walkTimeoutRef.current)
+            }
+        }
+    }, [])
+
+    // Clear timeout when no longer walking
+    useEffect(() => {
+        if (passengerState !== PassengerState.WALKING && walkTimeoutRef.current) {
+            clearTimeout(walkTimeoutRef.current)
+            walkTimeoutRef.current = null
+        }
+    }, [passengerState])
+
     const walkPassenger = useCallback(
         (passengerAction: PassengerAction, toPassengerState: PassengerState, element?: HTMLDivElement) => {
             const platformContainer: DOMRect | undefined = document.querySelector('.platform-container')?.getBoundingClientRect()
             const selectedElement: DOMRect | undefined = element?.getBoundingClientRect()
-            const walkingTime: number | undefined = PASSENGER_WALK_DURATIONS.get(passengerAction)
+            const walkingTime: number = PASSENGER_WALK_DURATIONS.get(passengerAction) ?? 250
 
-            if (platformContainer) {
-                usePassengerTransition(walkingTime)
-                setPassengerState(PassengerState.WALKING)
-
-                switch (passengerAction) {
-                    case PassengerAction.BOARD_TRAIN:
-                        if (selectedElement) {
-                            setPassengerPosition({
-                                x: -311, // TODO: figure out dynamic value
-                                y: selectedElement.top + selectedElement.height / 2 - platformContainer.top,
-                            })
-                        }
-                        break
-                    case PassengerAction.DEBOARD_TRAIN:
-                        setPassengerPosition({
-                            x: -311, // TODO: figure out dynamic value
-                            y: platformContainer.height / 2, // center of platform
-                        })
-                        break
-                    case PassengerAction.TO_STAIRCASE:
-                        // if (selectedElement) {
-                        //     setPassengerPosition({
-                        //         x: selectedElement.left,
-                        //         y: selectedElement.top + selectedElement.height / 2 - platformContainer.top,
-                        //     })
-                        // }
-                        break
-                    default:
-                        setPassengerPosition(CENTER_PLATFORM_POS)
-                        break
-                }
-
-                const walkingDelay = setTimeout(() => setPassengerState(toPassengerState), walkingTime)
-                return () => clearTimeout(walkingDelay)
+            if (!platformContainer) {
+                console.error('Platform container DNE')
+                return
             }
+
+            let toPosition: PassengerPosition = CENTER_PLATFORM_POS
+
+            switch (passengerAction) {
+                case PassengerAction.BOARD_TRAIN:
+                    if (selectedElement) {
+                        toPosition = {
+                            x: -311, // TODO: figure out dynamic value
+                            y: selectedElement.top + selectedElement.height / 2 - platformContainer.top,
+                        }
+                    } else {
+                        console.warn('Door element not found for passenger when boarding train')
+                    }
+                    break
+                case PassengerAction.DEBOARD_TRAIN:
+                    toPosition = {
+                        x: -311, // TODO: figure out dynamic value
+                        y: platformContainer.height / 2, // center of platform
+                    }
+                    break
+                case PassengerAction.TO_STAIRCASE:
+                    // if (selectedElement) {
+                    //     setPassengerPosition({
+                    //         x: selectedElement.left,
+                    //         y: selectedElement.top + selectedElement.height / 2 - platformContainer.top,
+                    //     })
+                    // }
+                    break
+                default:
+                    break
+            }
+
+            if (walkTimeoutRef.current) clearTimeout(walkTimeoutRef.current)
+
+            setPassengerTransitionDuration(walkingTime)
+            setPassengerPosition(toPosition)
+
+            requestAnimationFrame(() => {
+                setPassengerState(PassengerState.WALKING)
+            })
+
+            // when done with walking, set the passenger state back
+            walkTimeoutRef.current = setTimeout(() => {
+                setPassengerState(toPassengerState)
+                walkTimeoutRef.current = null
+            }, walkingTime)
         },
 
         [setPassengerPosition, setPassengerState]

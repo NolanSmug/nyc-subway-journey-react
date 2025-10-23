@@ -10,17 +10,9 @@ type UseTrainActionsParams = {
     updateTrainObject: (t: Partial<Train>) => void
     setGameState: (gs: GameState) => void
     gameMode: GameMode
-    passengerIsWalking?: boolean
 }
 
-export default function useTrainActions({
-    train,
-    gameState,
-    updateTrainObject,
-    setGameState,
-    gameMode,
-    passengerIsWalking,
-}: UseTrainActionsParams) {
+export default function useTrainActions({ train, gameState, updateTrainObject, setGameState, gameMode }: UseTrainActionsParams) {
     const checkForWin = useCallback(() => {
         if (train.getCurrentStation().equals(gameState.destinationStation)) {
             setGameState(Object.assign(new GameState(), { ...gameState, isWon: true }))
@@ -30,23 +22,21 @@ export default function useTrainActions({
     const advanceStation = useCallback(
         (numAdvanceStations: number) => {
             if (!train) throw new Error('attempted to advanceStation - Train object is null')
-            if (passengerIsWalking && process.env.REACT_APP_USE_DEV_API === 'true') return
 
             if (numAdvanceStations > 1 && gameMode === GameMode.CONDUCTOR) {
-                updateTrainObject({ ...train.advanceStationInc(numAdvanceStations) })
+                updateTrainObject(train.advanceStationInc(numAdvanceStations))
             } else {
-                updateTrainObject({ ...train.advanceStation() })
+                updateTrainObject(train.advanceStation())
             }
 
             checkForWin()
         },
-        [train, passengerIsWalking, gameMode, updateTrainObject, checkForWin]
+        [train, gameMode, updateTrainObject, checkForWin]
     )
 
     const transfer = useCallback(
         async (transferInput: number | LineName) => {
             if (!train) throw new Error('attempted to transfer - Train object is null')
-            if (passengerIsWalking) return
 
             const currentStation = train.getCurrentStation()
 
@@ -64,7 +54,7 @@ export default function useTrainActions({
 
             // DO THE TRANSFER
             if (await train.transferToLine(selectedLine, currentStation)) {
-                updateTrainObject({ ...train })
+                updateTrainObject(train)
             }
         },
         [train, updateTrainObject]
@@ -73,16 +63,17 @@ export default function useTrainActions({
     const changeDirection = useCallback(
         (direction?: Direction) => {
             if (!train) throw new Error('attempted to changeDirection - Train object is null')
-            if (passengerIsWalking) return
 
             if (direction === undefined) {
-                updateTrainObject({ ...train.reverseDirection() }) // if no input, reverse
+                updateTrainObject(train.reverseDirection()) // if no input, reverse
                 return
             }
 
-            updateTrainObject({ ...train.setDirection(direction) })
+            if (train.getDirection() === direction) return // not sure if this could happen, but just in case save computation
+
+            updateTrainObject(train.setDirection(direction))
         },
-        [train, passengerIsWalking, updateTrainObject]
+        [train, updateTrainObject]
     )
 
     return {

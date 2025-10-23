@@ -187,7 +187,7 @@ function OptimalRouteUI() {
             <div className='game-over-wrapper'>
                 <Header text='You win!' />
                 <Station name={gameState.destinationStation.getName()}>
-                    <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} notDim />
+                    <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled notDim />
                 </Station>
                 <TrainCar forWinDisplay />
                 <div className='optimal-route-request-container'>

@@ -58,7 +58,6 @@ function ConductorModeUI() {
                                     transfer(index).catch(console.error)
                                 }}
                                 notDim
-                                selectable
                             />
                         </Station>
                     </div>
@@ -93,7 +92,7 @@ function ConductorModeUI() {
                     <Header text='Destination station' />
                     <div className='station-item'>
                         <Station name={gameState.destinationStation.getName()}>
-                            <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} />
+                            <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled />
                         </Station>
                     </div>
                     <div className='action-buttons-container' id='destination-station'>

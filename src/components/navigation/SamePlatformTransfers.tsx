@@ -24,7 +24,6 @@ function SamePlatformTransfers({ lines, hidden, passengerIsWalking, onSelection 
                         onSelection(lines[index])
                     }}
                     numLines={lines.length}
-                    selectable
                 ></LineSVGs>
             </div>
         </div>
