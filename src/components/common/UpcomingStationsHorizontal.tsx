@@ -64,7 +64,6 @@ export function scrollToCurrentStation(currentStationElement: Element | null, is
     } else {
         console.warn(`Current station not found.`)
     }
-    console.warn(`Current station not found.`)
     return () => {}
 }
 

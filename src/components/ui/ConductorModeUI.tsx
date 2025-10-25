@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
 import LineSVGs from '../LineSVGs'
@@ -31,14 +31,47 @@ function ConductorModeUI() {
     const { gameState } = useGameStateContext()
     const { initializeGame } = useGame()
 
+    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const isNullDirection: boolean = useTrainContext((state) => state.train.getDirection()) === Direction.NULL_DIRECTION
-    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
 
-    const darkMode = useUIContext((state) => state.darkMode)
+    const darkMode = useSettingsContext((state) => state.darkMode)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
+
+    const currentTransferSVGs = useMemo(() => getLineSVGs(currentStation.getTransfers()), [currentStation.getTransfers()])
+    const destinationTransferSVGs = useMemo(
+        () => getLineSVGs(gameState.destinationStation.getTransfers()),
+        [gameState.destinationStation.getTransfers()]
+    )
+
+    const handleLineClick = useCallback(
+        (index: number) => {
+            setIsTransferMode(false)
+            transfer(index)
+        },
+        [setIsTransferMode, transfer]
+    )
+
+    const handleTransferClick = useCallback(() => {
+        setIsTransferMode((prev) => (prev ? false : true))
+    }, [setIsTransferMode])
+
+    const handleAdvanceClick = useCallback(() => {
+        setIsTransferMode(false)
+        advanceStation(numAdvanceStations)
+    }, [setIsTransferMode, advanceStation, numAdvanceStations])
+
+    const handleChangeDirectionClick = useCallback(() => {
+        setIsTransferMode(false)
+        changeDirection()
+    }, [setIsTransferMode, changeDirection])
+
+    const handleResetClick = useCallback(() => {
+        setIsTransferMode(false)
+        initializeGame()
+    }, [setIsTransferMode, initializeGame])
 
     return (
         <>
@@ -52,10 +85,9 @@ function ConductorModeUI() {
                     <div className='station-item'>
                         <Station name={currentStation.getName()}>
                             <LineSVGs
-                                svgPaths={getLineSVGs(currentStation.getTransfers())}
+                                svgPaths={currentTransferSVGs}
                                 onTransferSelect={(index) => {
-                                    setIsTransferMode(false)
-                                    transfer(index).catch(console.error)
+                                    handleLineClick(index)
                                 }}
                                 notDim
                             />
@@ -65,23 +97,17 @@ function ConductorModeUI() {
                         <ActionButton
                             imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
                             label='Transfer lines'
-                            onClick={() => setIsTransferMode((prev) => (prev ? false : true))}
+                            onClick={handleTransferClick}
                         />
                         <ActionButton
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label='Change direction'
-                            onClick={() => {
-                                setIsTransferMode(false)
-                                changeDirection()
-                            }}
+                            onClick={handleChangeDirectionClick}
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
                             label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
-                            onClick={() => {
-                                setIsTransferMode(false)
-                                advanceStation(numAdvanceStations)
-                            }}
+                            onClick={handleAdvanceClick}
                             additionalInput={<AdvanceNStationsInput />}
                             disabled={isNullDirection}
                         />
@@ -92,15 +118,11 @@ function ConductorModeUI() {
                     <Header text='Destination station' />
                     <div className='station-item'>
                         <Station name={gameState.destinationStation.getName()}>
-                            <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled />
+                            <LineSVGs svgPaths={destinationTransferSVGs} disabled />
                         </Station>
                     </div>
                     <div className='action-buttons-container' id='destination-station'>
-                        <ActionButton
-                            imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
-                            label='Reset game'
-                            onClick={() => initializeGame()}
-                        />
+                        <ActionButton imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} label='Reset game' onClick={handleResetClick} />
                     </div>
                 </div>
             </div>

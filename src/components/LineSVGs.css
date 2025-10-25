@@ -109,6 +109,11 @@
     width: 1rem;
 }
 
+.chrome .small {
+    height: 0.9rem;
+    width: 0.9rem;
+}
+
 .chrome .line-svg-image {
     zoom: 0.9;
 }

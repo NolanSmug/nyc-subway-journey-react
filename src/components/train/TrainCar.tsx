@@ -1,13 +1,11 @@
-import { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 import Door from './Door'
 import Header from '../common/Header'
 import TrainInfo from './TrainInfo'
-import DirectionSwitch from '../navigation/DirectionSwitch'
 
 import './TrainCar.css'
 import { useSettingsContext } from '../../contexts/SettingsContext'
-import { useUIContext } from '../../contexts/UIContext'
 import { useTrainContext } from '../../contexts/TrainContext'
 
 import { Direction } from '../../logic/LineManager'
@@ -17,12 +15,9 @@ import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
 
 function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     const direction = useTrainContext((state) => state.train.getDirection())
-    const darkMode = useUIContext((state) => state.darkMode)
-    const isHorizontalLayout = useUIContext((state) => state.isHorizontalLayout)
-    const isVerticalLayout = useUIContext((state) => state.isVerticalLayout)
-
-    const defaultDirectionToggle = useSettingsContext((state) => state.defaultDirectionToggle)
-    const setDefaultDirectionToggle = useSettingsContext((state) => state.setDefaultDirectionToggle)
+    const darkMode = useSettingsContext((state) => state.darkMode)
+    const isHorizontalLayout = useSettingsContext((state) => state.isHorizontalLayout)
+    const isVerticalLayout = useSettingsContext((state) => state.isVerticalLayout)
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 
@@ -37,13 +32,6 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
             return direction === Direction.DOWNTOWN ? 'left' : 'right'
         }
     }, [direction, isVerticalLayout])
-
-    const handleDirectionChange = useCallback(
-        (newDirection: Direction) => {
-            setDefaultDirectionToggle(newDirection)
-        },
-        [setDefaultDirectionToggle]
-    )
 
     return (
         <>
@@ -60,7 +48,6 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                 )}
 
                 <div className={`train-car ${forWinDisplay ? 'win-display' : ''}`}>
-                    <DirectionSwitch state={defaultDirectionToggle} onChange={handleDirectionChange} visible={!forWinDisplay} />
                     <div className='doors'>
                         <Door isLeft />
                         <Door />
@@ -97,4 +84,4 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     )
 }
 
-export default TrainCar
+export default React.memo(TrainCar)

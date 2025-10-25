@@ -9,7 +9,6 @@ import Header from '../common/Header'
 import TrainCar from '../train/TrainCar'
 import Station from '../station/Station'
 
-import { useUIContext } from '../../contexts/UIContext'
 import { useGameStateContext } from '../../contexts/GameStateContext'
 import { useGame } from '../../hooks/useGame'
 
@@ -21,6 +20,7 @@ import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
 import OPTIMAL_BLACK from '../../images/optimal-route-icon-b.svg'
 import OPTIMAL_WHITE from '../../images/optimal-route-icon-w.svg'
+import { useSettingsContext } from '../../contexts/SettingsContext'
 
 interface StationData {
     id: string
@@ -51,6 +51,7 @@ async function fetchShortestPath(start: string, dest: string): Promise<StationDa
     return data
 }
 
+// originally implemented in python lol
 const getTransfersIndexes = (stationData: StationData[]): number[] => {
     let indexes_with_transfer: number[] = []
     let prev_lines: LineName[] = [LineName.NULL_TRAIN]
@@ -144,7 +145,7 @@ function OptimalStationFragment({ station, prevStation, isTransfer }: OptimalSta
 function OptimalRouteUI() {
     const { gameState } = useGameStateContext()
     const { initializeGame } = useGame()
-    const darkMode = useUIContext((state) => state.darkMode)
+    const darkMode = useSettingsContext((state) => state.darkMode)
 
     const [stationData, setStationData] = useState<StationData[]>([])
     const [transferIndexes, setTransferIndexes] = useState<number[]>([])

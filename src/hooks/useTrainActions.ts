@@ -40,7 +40,7 @@ export default function useTrainActions({ train, gameState, updateTrainObject, s
 
             const currentStation = train.getCurrentStation()
 
-            let selectedLine: LineName | undefined
+            let selectedLine: LineName
             if (typeof transferInput === 'number') {
                 selectedLine = currentStation.getTransfers()[transferInput]
             } else {
@@ -64,12 +64,11 @@ export default function useTrainActions({ train, gameState, updateTrainObject, s
         (direction?: Direction) => {
             if (!train) throw new Error('attempted to changeDirection - Train object is null')
 
+            // note: undefined here because passing in NULL_DIRECTION should literally make the train's direction NULL (for rider mode)
             if (direction === undefined) {
                 updateTrainObject(train.reverseDirection()) // if no input, reverse
                 return
             }
-
-            if (train.getDirection() === direction) return // not sure if this could happen, but just in case save computation
 
             updateTrainObject(train.setDirection(direction))
         },

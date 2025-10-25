@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import ActionButton from './ActionButton'
 
 import './UmbrellaButton.css'
-import { useUIContext } from '../../contexts/UIContext'
+import { useSettingsContext } from '../../contexts/SettingsContext'
 
 interface UmbrellaButtonProps {
     openingButtonsW_B: string[] // [white, black]
@@ -16,7 +16,7 @@ const UmbrellaButton = ({ openingButtonsW_B, children, below, visible }: Umbrell
     const popupRef = useRef<HTMLDivElement | null>(null)
     const buttonRef = useRef<HTMLDivElement | null>(null)
 
-    const darkMode = useUIContext((state) => state.darkMode)
+    const darkMode = useSettingsContext((state) => state.darkMode)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

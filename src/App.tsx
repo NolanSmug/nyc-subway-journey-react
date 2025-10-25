@@ -22,20 +22,19 @@ import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
 
-function App() {
+function Game() {
     const { initializeGame } = useGame()
     const { gameState } = useGameStateContext()
-
     const isLineNull = useTrainContext((state) => state.train.isLineNull())
 
     const isTransferMode = useUIContext((state) => state.isTransferMode)
-    const upcomingStationsVisible = useUIContext((state) => state.upcomingStationsVisible)
     const isLandingPage = useUIContext((state) => state.isLandingPage)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
-    const isVerticalLayout = useUIContext((state) => state.isVerticalLayout)
-    const isHorizontalLayout = useUIContext((state) => state.isHorizontalLayout)
 
     const gameMode = useSettingsContext((state) => state.gameMode)
+    const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible)
+    const isVerticalLayout = useSettingsContext((state) => state.isVerticalLayout)
+    const isHorizontalLayout = useSettingsContext((state) => state.isHorizontalLayout)
 
     const handleClickAway = (e: React.MouseEvent) => {
         const transferLinesContainer = document.querySelector('.line-svgs-container')
@@ -68,7 +67,7 @@ function App() {
 
             {isLandingPage && <LandingScreen />}
 
-            <div className='Game'>
+            <div className={`Game ${gameMode}-mode`}>
                 {upcomingStationsVisible && isHorizontalLayout() && <UpcomingStationsHorizontal />}
                 <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
                     {gameMode === GameMode.CONDUCTOR && <ConductorMode />}
@@ -101,6 +100,10 @@ function App() {
             )}
         </>
     )
+}
+
+function App() {
+    return <Game />
 }
 
 export default App

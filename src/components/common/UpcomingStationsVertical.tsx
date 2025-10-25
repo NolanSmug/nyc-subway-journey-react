@@ -17,7 +17,7 @@ function UpcomingStationsVertical() {
     useEffect(() => {
         if (stationsRef.current && stations.length > 0) {
             const currentStationElement: Element | null = stationsRef.current.querySelector('.current-station-vertical')
-            const isBelowCenteredScroll: boolean | undefined = currentStationIndex !== undefined && currentStationIndex < 7
+            const isBelowCenteredScroll: boolean = currentStationIndex < 7
 
             scrollToCurrentStation(currentStationElement, isBelowCenteredScroll)
         }

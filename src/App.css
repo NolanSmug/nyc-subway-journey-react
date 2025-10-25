@@ -56,11 +56,16 @@ body {
     max-width: 1400px;
     padding: 2em;
     box-sizing: border-box;
-    margin-bottom: 4em;
     position: relative;
     transition: transform 0.2s linear;
     overflow-y: none;
     overflow-x: visible;
+    margin-bottom: 4em;
+}
+
+.Game.rider-mode{
+    margin-bottom: 0;
+    padding-bottom: 1em;
 }
 
 .game-state-ui {

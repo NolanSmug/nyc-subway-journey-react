@@ -41,9 +41,6 @@
     font-size: 0.7rem;
 }
 
-
-
-
 .station-dot {
     width: 0.75rem;
     height: 0.75rem;
@@ -80,7 +77,7 @@
 .station-frag-content.extra-overflow .transfer-lines {
     white-space: normal;
     overflow-wrap: break-word;
-    transform: translateX(1em);
+    /* transform: translateX(1em); */
 }
 
 .station-frag-container.current-station .station-frag-content.overflow, .station-frag-container.current-station .station-frag-content.extra-overflow {

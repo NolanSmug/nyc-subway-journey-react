@@ -13,13 +13,13 @@ function ConductorMode() {
     const advanceStation = useTrainContext((state) => state.actions.advanceStation)
     const changeDirection = useTrainContext((state) => state.actions.changeDirection)
 
-    const darkMode = useUIContext((state) => state.darkMode)
-    const setDarkMode = useUIContext((state) => state.setDarkMode)
-    const toggleUpcomingStationsLayout = useUIContext((state) => state.toggleUpcomingStationsLayout)
-    const setUpcomingStationsVisible = useUIContext((state) => state.setUpcomingStationsVisible)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
+    const darkMode = useSettingsContext((state) => state.darkMode)
+    const setDarkMode = useSettingsContext((state) => state.setDarkMode)
+    const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
+    const toggleUpcomingStationsLayout = useSettingsContext((state) => state.toggleUpcomingStationsLayout)
     const setNumAdvanceStations = useSettingsContext((state) => state.setNumAdvanceStations)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
 

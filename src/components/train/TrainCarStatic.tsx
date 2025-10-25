@@ -10,7 +10,6 @@ import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
 import { Direction, LineName } from '../../logic/LineManager'
 
-import { useUIContext } from '../../contexts/UIContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
 interface TrainCarStaticProps {
@@ -24,7 +23,7 @@ interface TrainCarStaticProps {
 }
 
 function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoorRef, advanceStation }: TrainCarStaticProps) {
-    const darkMode = useUIContext((state) => state.darkMode)
+    const darkMode = useSettingsContext((state) => state.darkMode)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
 
     const isDowntown = useMemo(() => direction === Direction.DOWNTOWN, [direction])

@@ -13,7 +13,7 @@ import { useUIContext } from '../contexts/UIContext'
 import { PassengerState } from '../hooks/usePassengerActions'
 
 const Passenger = () => {
-    const darkMode = useUIContext((state) => state.darkMode)
+    const darkMode = useSettingsContext((state) => state.darkMode)
     const passengerState = useUIContext((state) => state.passengerState)
     const passengerPosition = useUIContext((state) => state.passengerPosition)
 

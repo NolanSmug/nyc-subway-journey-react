@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef } from 'react'
 import RiderModeUI from '../ui/RiderModeUI'
 
 import { useTrainContext } from '../../contexts/TrainContext'
-import { UpcomingStationsLayout, useUIContext } from '../../contexts/UIContext'
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { useUIContext } from '../../contexts/UIContext'
+import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { Direction } from '../../logic/LineManager'
 import { useGame } from '../../hooks/useGame'
@@ -16,18 +16,17 @@ function RiderMode() {
     const advanceStation = useTrainContext((state) => state.actions.advanceStation)
     const changeDirection = useTrainContext((state) => state.actions.changeDirection) // ? Is it better to separate these?
 
-    const darkMode = useUIContext((state) => state.darkMode)
     const passengerState = useUIContext((state) => state.passengerState)
-    const setDarkMode = useUIContext((state) => state.setDarkMode)
-    const setUpcomingStationsLayout = useUIContext((state) => state.setUpcomingStationsLayout)
-    const setUpcomingStationsVisible = useUIContext((state) => state.setUpcomingStationsVisible)
     const setPassengerState = useUIContext((state) => state.setPassengerState)
     const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
 
+    const darkMode = useSettingsContext((state) => state.darkMode)
+    const setDarkMode = useSettingsContext((state) => state.setDarkMode)
+    const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
+    const setUpcomingStationsLayout = useSettingsContext((state) => state.setUpcomingStationsLayout)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
 
-    useUITheme(darkMode)
     const { walkPassenger } = usePassengerActions({ passengerState, setPassengerPosition, setPassengerState })
     const uptownTrainDoorRef = useRef<HTMLDivElement>(null)
     const downtownTrainDoorRef = useRef<HTMLDivElement>(null)
@@ -38,17 +37,31 @@ function RiderMode() {
             walkPassenger(PassengerAction.BOARD_TRAIN, PassengerState.UPTOWN_TRAIN, uptownTrainDoorRef.current)
         }
         changeDirection(Direction.UPTOWN)
-    }, [walkPassenger, changeDirection, passengerState])
+    }, [walkPassenger, changeDirection])
+
     const handleBoardDowntown = useCallback(() => {
         if (downtownTrainDoorRef.current) {
             walkPassenger(PassengerAction.BOARD_TRAIN, PassengerState.DOWNTOWN_TRAIN, downtownTrainDoorRef.current)
         }
         changeDirection(Direction.DOWNTOWN)
-    }, [walkPassenger, changeDirection, passengerState])
+    }, [walkPassenger, changeDirection])
+
     const handleDeboard = useCallback(() => {
         walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM)
         changeDirection(Direction.NULL_DIRECTION)
-    }, [walkPassenger, changeDirection, passengerState])
+    }, [walkPassenger, changeDirection])
+
+    const handleChangeDirection = useCallback(() => {
+        if (!downtownTrainDoorRef.current || !uptownTrainDoorRef.current || passengerState === PassengerState.WALKING) return
+
+        const toState: PassengerState =
+            passengerState === PassengerState.DOWNTOWN_TRAIN ? PassengerState.UPTOWN_TRAIN : PassengerState.DOWNTOWN_TRAIN
+        const toElement: HTMLDivElement =
+            passengerState === PassengerState.DOWNTOWN_TRAIN ? uptownTrainDoorRef.current : downtownTrainDoorRef.current
+
+        walkPassenger(PassengerAction.BOARD_TRAIN, toState, toElement)
+        changeDirection()
+    }, [passengerState, walkPassenger, changeDirection])
 
     useKeyShortcuts({
         comboKeys: {
@@ -61,12 +74,13 @@ function RiderMode() {
             u: handleBoardUptown,
             d: handleBoardDowntown,
             t: handleDeboard,
-            c: process.env.REACT_APP_USE_DEV_API === 'true' ? changeDirection : () => {},
+            c: process.env.REACT_APP_USE_DEV_API === 'true' ? handleChangeDirection : () => {},
             r: initializeGame,
         },
-        enabled: passengerState != PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true',
+        enabled: passengerState !== PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true',
     })
 
+    useUITheme(darkMode)
     useEffect(() => {
         setUpcomingStationsLayout(UpcomingStationsLayout.HORIZONTAL) // vertical layout not (yet) supported in rider mode
     }, [setUpcomingStationsLayout])

@@ -2,7 +2,6 @@ import React from 'react'
 import SettingsButton from './SettingsButton'
 
 import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
-import { useUIContext } from '../../contexts/UIContext'
 
 import L_MODE from '../../images/light-mode-icon.svg'
 import D_MODE from '../../images/dark-mode-icon.svg'
@@ -18,14 +17,14 @@ import RIDER_MODE_BLACK from '../../images/rider-mode-icon-b.svg'
 import RIDER_MODE_WHITE from '../../images/rider-mode-icon-w.svg'
 
 const SettingsMenu = () => {
-    const darkMode = useUIContext((state) => state.darkMode)
-    const setDarkMode = useUIContext((state) => state.setDarkMode)
-    const isHorizontalLayout = useUIContext((state) => state.isHorizontalLayout)
-    const toggleUpcomingStationsLayout = useUIContext((state) => state.toggleUpcomingStationsLayout)
-    const setUpcomingStationsVisible = useUIContext((state) => state.setUpcomingStationsVisible)
+    const darkMode = useSettingsContext((state) => state.darkMode)
+    const setDarkMode = useSettingsContext((state) => state.setDarkMode)
 
     const gameMode = useSettingsContext((state) => state.gameMode)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
+    const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
+    const toggleUpcomingStationsLayout = useSettingsContext((state) => state.toggleUpcomingStationsLayout)
+    const isHorizontalLayout = useSettingsContext((state) => state.isHorizontalLayout)
 
     return (
         <>

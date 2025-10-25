@@ -74,7 +74,7 @@ need default top value for transition in all states (bc center = 100% - (73% - 1
 
 /* Fix chrome aspect ratio issues */
 .chrome .platform {
-    min-height: 13.75em;
+    min-height: 13em;
 }
 
 .chrome .destination-station-rider-mode {
