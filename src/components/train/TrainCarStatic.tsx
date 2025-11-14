@@ -1,16 +1,16 @@
-import React, { useMemo } from 'react'
-import './TrainCar.css'
 import './TrainCarStatic.css'
+import React, { useMemo } from 'react'
 
 import TrainInfo from './TrainInfo'
 import Door from './Door'
 import ActionButton from '../common/ActionButton'
 
-import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
-import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
+import { useSettingsContext } from '../../contexts/SettingsContext'
+
 import { Direction, LineName } from '../../logic/LineManager'
 
-import { useSettingsContext } from '../../contexts/SettingsContext'
+import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
+import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
 
 interface TrainCarStaticProps {
     line: LineName

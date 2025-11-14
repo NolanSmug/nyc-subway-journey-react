@@ -78,9 +78,8 @@
     font-size: 1.04rem;
     white-space: wrap;
     color: var(--line-color);
-    filter: brightness(140%) saturate(85%);
     opacity: 0.9;
-    transition: font-size linear 0.1s
+    transition: font-size linear 0.1s;
 }
 
 .current-station-vertical .station-frag-vertical-info {

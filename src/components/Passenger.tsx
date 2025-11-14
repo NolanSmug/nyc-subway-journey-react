@@ -1,6 +1,9 @@
+import './Passenger.css'
 import React, { useCallback } from 'react'
 
-import './Passenger.css'
+import { GameMode, Gender, useSettingsContext } from '../contexts/SettingsContext'
+import { PassengerPosition, PassengerState } from '../hooks/usePassengerActions'
+
 import HUMAN_MALE_WHITE from '../images/human-male-w.svg'
 import HUMAN_MALE_BLACK from '../images/human-male-b.svg'
 import HUMAN_FEMALE_WHITE from '../images/human-female-w.svg'
@@ -8,14 +11,13 @@ import HUMAN_FEMALE_BLACK from '../images/human-female-b.svg'
 import HUMAN_OTHER_WHITE from '../images/human-other-w.svg'
 import HUMAN_OTHER_BLACK from '../images/human-other-b.svg'
 
-import { GameMode, Gender, useSettingsContext } from '../contexts/SettingsContext'
-import { useUIContext } from '../contexts/UIContext'
-import { PassengerState } from '../hooks/usePassengerActions'
+interface PassengerProps {
+    passengerState: PassengerState
+    passengerPosition: PassengerPosition
+}
 
-const Passenger = () => {
+const Passenger = ({ passengerState, passengerPosition }: PassengerProps) => {
     const darkMode = useSettingsContext((state) => state.darkMode)
-    const passengerState = useUIContext((state) => state.passengerState)
-    const passengerPosition = useUIContext((state) => state.passengerPosition)
 
     const passengerGender = useSettingsContext((state) => state.passengerGender)
     const setPassengerGender = useSettingsContext((state) => state.setPassengerGender)

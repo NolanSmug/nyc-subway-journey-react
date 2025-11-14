@@ -1,8 +1,8 @@
+import './AdvanceNStationsInput.css'
+
 import { Direction } from '../../logic/LineManager'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 import { useTrainContext } from '../../contexts/TrainContext'
-
-import './AdvanceNStationsInput.css'
 
 import RESET_INPUT_B from '../../images/reset-input-black.svg'
 import RESET_INPUT_W from '../../images/reset-input-white.svg'

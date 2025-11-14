@@ -1,10 +1,10 @@
+import './TrainCar.css'
 import React, { useMemo } from 'react'
 
 import Door from './Door'
 import Header from '../common/Header'
 import TrainInfo from './TrainInfo'
 
-import './TrainCar.css'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 import { useTrainContext } from '../../contexts/TrainContext'
 

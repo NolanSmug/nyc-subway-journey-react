@@ -57,13 +57,12 @@ body {
     padding: 2em;
     box-sizing: border-box;
     position: relative;
-    transition: transform 0.2s linear;
     overflow-y: none;
     overflow-x: visible;
     margin-bottom: 4em;
 }
 
-.Game.rider-mode{
+.Game.rider-mode {
     margin-bottom: 0;
     padding-bottom: 1em;
 }

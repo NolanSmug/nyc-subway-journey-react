@@ -1,12 +1,11 @@
-import React from 'react'
 import './Staircase.css'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+
 import LineSVGs from '../LineSVGs'
 
 import { LineName } from '../../logic/LineManager'
 import { useUIContext } from '../../contexts/UIContext'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
-import usePassengerActions, { PassengerState } from '../../hooks/usePassengerActions'
 
 interface StaircaseProps {
     lines: LineName[]
@@ -23,9 +22,6 @@ function Staircase({ lines, tunnelLayout, selectable, isSelected, onSelection, h
     if (lines.length === 0) return null
 
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
-    // const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
-    const passengerState = useUIContext((state) => state.passengerState)
-    const setPassengerState = useUIContext((state) => state.setPassengerState)
 
     const [tunnelLinesVisible, setTunnelLinesVisible] = useState(false)
 

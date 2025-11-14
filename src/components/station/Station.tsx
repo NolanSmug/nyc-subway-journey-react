@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
 import './Station.css'
+import React, { ReactNode } from 'react'
 
 interface StationProps {
     name: string

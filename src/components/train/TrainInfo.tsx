@@ -1,10 +1,9 @@
+import './TrainInfo.css'
 import { useMemo } from 'react'
 
-import './TrainInfo.css'
-
-import { default as Line } from '../LineSVGs'
-import { Direction, getLineType } from '../../logic/LineManager'
 import { useTrainContext } from '../../contexts/TrainContext'
+
+import { Direction, getLineType } from '../../logic/LineManager'
 import { getLineSVG } from '../../logic/LineSVGsMap'
 import { useLineStyles } from '../../hooks/useCSSProperties'
 
@@ -19,7 +18,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 
-    useLineStyles(line, lineType) // updates CSS props (--line-color, --dot-color)
+    useLineStyles(line, lineType)
 
     return (
         <>
@@ -27,7 +26,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
                 className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''} ${reverseButton ? '' : 'no-reverse-action'}`}
                 {...(reverseButton
                     ? {
-                          onMouseDown: () => {
+                          onMouseUp: () => {
                               changeDirection()
                           },
                       }
@@ -43,12 +42,18 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
                         : {}
                 }
             >
-                {isNullDirection ? 'TOGGLE DIRECTION' : directionLabel}
+                <span key={directionLabel} className={`${!isNullDirection ? 'rollsign-animate' : ''}`} id='direction-rollsign'>
+                    {isNullDirection ? 'TOGGLE DIRECTION' : directionLabel}
+                </span>
             </h2>
-            <div className='train-car-line'>
-                <Line svgPaths={[lineSVG]} notDim disabled />
+            <div className='train-car-line line-svgs-container not-dim'>
+                <img src={lineSVG} alt={line} className='line-svg-image disabled rollsign-animate' style={{ padding: '0.15em' }} />
             </div>
-            <h2 className='train-type not-dim'>{lineType + ' train'}</h2>
+            <h2 className='train-type not-dim'>
+                <span key={lineType} className={`${!isNullDirection ? 'rollsign-animate' : ''}`} id='type-rollsign'>
+                    {lineType + ' train'}
+                </span>
+            </h2>
         </>
     )
 }

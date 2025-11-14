@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-
 import './OptimalRouteUI.css'
+import React, { useEffect, useState } from 'react'
 
 import ActionButton from '../common/ActionButton'
 import LoadingSpinner from '../common/LoadingSpinner'

@@ -47,12 +47,12 @@
     border-radius: 1em 1em 0.2em 0.2em;
 }
 
-.train-car.flipped-layout * {
+.train-car.flipped-layout .windows * {
     transform: scaleY(-1);
 }
 
-.train-car.flipped-layout #train-info {
-    transform: none;
+.train-car.flipped-layout #train-info .rollsign-animate {
+    transform: none
 }
 
 .train-car.flipped-layout .doors {
@@ -66,9 +66,20 @@
     left: 3.25em;
     width: 90%;
     height: 24px;
-    background:
-        radial-gradient(circle, rgb(242, 242, 168) 40%, transparent 41%) repeat,
-        rgba(0, 0, 0, 0.05);
+
+    /* HISTORICAL PROJECT ARTIFACT:
+    * The below line was what was originally drawing the tiny dots for the platform edge. 
+    * This was fine, until Firefox decided to cheap out on their rendering engine, causing massive lag ONLY in Firefox (my beloved browser) 
+    * The flaw was the "repeat" keyword combined with a tiny background-size, which abused the browser/CPU to rasterize 9000+ unique radial gradients on every action. 
+    * Somehow Chrome was able to handle it easily (not sure what engine they have), but we must be good web developers and optimize for ALL browsers (except Edge). 
+    */
+    /* background: radial-gradient(circle, rgb(242, 242, 168) 40%, transparent 41%) repeat, rgba(0, 0, 0, 0.05); */
+
+    /* Instead, we use a url encoded SVG circle, and place columns of 4 over/under the train. 
+       Since this is in the :before of the element, the columns of circles are repeated across the width of the train. */
+    background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='rgb(242, 242, 168)' fill-opacity='0.8' /%3E%3C/svg%3E");
+
+
     background-size: 3px 3px;
     background-position: center;
     z-index: 0;

@@ -1,7 +1,7 @@
+import './LandingScreen.css'
+
 import { useUIContext } from '../../contexts/UIContext'
 import ActionButton from '../common/ActionButton'
-
-import './LandingScreen.css'
 
 function LandingScreen() {
     const isLandingPage = useUIContext((state) => state.isLandingPage)

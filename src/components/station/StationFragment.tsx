@@ -1,7 +1,8 @@
+import './StationFragment.css'
 import React, { useMemo } from 'react'
+
 import LineSVGs from '../LineSVGs'
 
-import './StationFragment.css'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station } from '../../logic/StationManager'
 import { LineName } from '../../logic/LineManager'

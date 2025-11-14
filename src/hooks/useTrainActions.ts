@@ -1,8 +1,10 @@
 import { useCallback } from 'react'
+
+import { GameMode } from '../contexts/SettingsContext'
+
 import { GameState } from '../logic/GameState'
 import { Train } from '../logic/TrainManager'
 import { Direction, LineName } from '../logic/LineManager'
-import { GameMode } from '../contexts/SettingsContext'
 
 type UseTrainActionsParams = {
     train: Train

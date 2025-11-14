@@ -22,6 +22,11 @@ import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
 
+const settingsMenu = <SettingsMenu />
+const keyShortcutMenu = <KeyShortcutMenu />
+const settingsButtons = [GEAR_WHITE, GEAR_BLACK]
+const keyShortcutButtons = [KEYBOARD_WHITE, KEYBOARD_BLACK]
+
 function Game() {
     const { initializeGame } = useGame()
     const { gameState } = useGameStateContext()
@@ -77,14 +82,12 @@ function Game() {
 
             <div className='umbrella-menus'>
                 <div className='settings-umbrella'>
-                    <UmbrellaButton openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]} below visible>
-                        <SettingsMenu />
+                    <UmbrellaButton openingButtonsW_B={settingsButtons} below visible>
+                        {settingsMenu}
                     </UmbrellaButton>
                 </div>
                 <div className='shortcuts-umbrella'>
-                    <UmbrellaButton openingButtonsW_B={[KEYBOARD_WHITE, KEYBOARD_BLACK]}>
-                        <KeyShortcutMenu />
-                    </UmbrellaButton>
+                    <UmbrellaButton openingButtonsW_B={keyShortcutButtons}>{keyShortcutMenu}</UmbrellaButton>
                     {/* <UmbrellaButton
                         openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
                         umbrellaContent={<SubwayMap />}

@@ -1,21 +1,27 @@
 .train-direction {
     color: var(--text-color);
     margin-bottom: 0.25em;
+
     width: fit-content;
     margin-top: 0.25em;
-    transition: transform 0.1s;
     text-align: center;
-    flex-grow: 0.5;
+    white-space: normal;
+
+    --hover-scale: 1;
+    --active-scale: 1;
+
+    transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    transition: transform 0.1s ease-in-out;
 }
 
 .train-direction:hover {
     cursor: pointer;
-    transform: scale(1.02);
-    transition: transform ease-in 0.1s;
+    --hover-scale: 1.05;
+    transition: transform ease-in-out 0.1s;
 }
 
 .train-direction:active {
-    transform: scale(0.98);
+    --active-scale: 0.95;
 }
 
 .train-direction.no-reverse-action {
@@ -31,11 +37,27 @@
     word-wrap: normal !important;
     margin-left: 0.15em;
     text-align: center;
-    flex-grow: 0.2;
 }
 
 .train-car-line {
     margin-left: 0.25em;
+}
+
+.rollsign-animate {
+    animation: rollsignFade 0.2s ease-in-out;
+    display: inline-block;
+}
+
+@keyframes rollsignFade {
+    0% {
+        opacity: 0;
+        transform: scaleY(-1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
 }
 
 @keyframes pulse {

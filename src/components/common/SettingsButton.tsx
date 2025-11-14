@@ -1,5 +1,5 @@
-import ActionButton from './ActionButton'
 import './SettingsButton.css'
+import ActionButton from './ActionButton'
 
 interface SettingsButtonProps {
     label: string

@@ -1,9 +1,10 @@
 import React, { useState, ReactNode, useCallback, useMemo } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
-import { Train } from '../logic/TrainManager'
-import useTrainActions from '../hooks/useTrainActions'
 import { useGameStateContext } from './GameStateContext'
 import { useSettingsContext } from './SettingsContext'
+
+import useTrainActions from '../hooks/useTrainActions'
+import { Train } from '../logic/TrainManager'
 
 type TrainActions = ReturnType<typeof useTrainActions>
 

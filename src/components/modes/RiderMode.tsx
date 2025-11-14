@@ -1,24 +1,25 @@
-import { useCallback, useEffect, useRef } from 'react'
 import RiderModeUI from '../ui/RiderModeUI'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+import Passenger from '../Passenger'
 
 import { useTrainContext } from '../../contexts/TrainContext'
-import { useUIContext } from '../../contexts/UIContext'
 import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
-import { Direction } from '../../logic/LineManager'
 import { useGame } from '../../hooks/useGame'
 import { useUITheme } from '../../hooks/useCSSProperties'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
-import usePassengerActions, { PassengerAction, PassengerState } from '../../hooks/usePassengerActions'
+import usePassengerActions, {
+    CENTER_PLATFORM_POS,
+    PassengerAction,
+    PassengerPosition,
+    PassengerState,
+} from '../../hooks/usePassengerActions'
+
+import { Direction, LineName } from '../../logic/LineManager'
 
 function RiderMode() {
     const { initializeGame } = useGame()
-    const advanceStation = useTrainContext((state) => state.actions.advanceStation)
-    const changeDirection = useTrainContext((state) => state.actions.changeDirection) // ? Is it better to separate these?
-
-    const passengerState = useUIContext((state) => state.passengerState)
-    const setPassengerState = useUIContext((state) => state.setPassengerState)
-    const setPassengerPosition = useUIContext((state) => state.setPassengerPosition)
 
     const darkMode = useSettingsContext((state) => state.darkMode)
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
@@ -27,11 +28,34 @@ function RiderMode() {
     const setUpcomingStationsLayout = useSettingsContext((state) => state.setUpcomingStationsLayout)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
 
+    const [passengerPosition, setPassengerPosition] = useState<PassengerPosition>(CENTER_PLATFORM_POS)
+    const [passengerState, setPassengerState] = useState<PassengerState>(PassengerState.CENTER_PLATFORM)
+
+    const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
+    const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0)
+
+    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
     const { walkPassenger } = usePassengerActions({ passengerState, setPassengerPosition, setPassengerState })
+
     const uptownTrainDoorRef = useRef<HTMLDivElement>(null)
     const downtownTrainDoorRef = useRef<HTMLDivElement>(null)
 
-    // User actions that update the train AND passenger states
+    const selectStaircaseLine = useCallback(
+        (index: number, line?: LineName): void => {
+            if (passengerState !== PassengerState.TRANSFER_PLATFORM) return
+            setSelectedGroupIndex(index)
+
+            if (inTransferTunnel && line) {
+                transfer(line)
+                setTimeout(() => setInTransferTunnel(false), 25)
+                changeDirection(Direction.NULL_DIRECTION)
+            } else {
+                setInTransferTunnel(true)
+            }
+        },
+        [passengerState, inTransferTunnel, transfer, changeDirection]
+    )
+
     const handleBoardUptown = useCallback(() => {
         if (uptownTrainDoorRef.current) {
             walkPassenger(PassengerAction.BOARD_TRAIN, PassengerState.UPTOWN_TRAIN, uptownTrainDoorRef.current)
@@ -51,18 +75,6 @@ function RiderMode() {
         changeDirection(Direction.NULL_DIRECTION)
     }, [walkPassenger, changeDirection])
 
-    const handleChangeDirection = useCallback(() => {
-        if (!downtownTrainDoorRef.current || !uptownTrainDoorRef.current || passengerState === PassengerState.WALKING) return
-
-        const toState: PassengerState =
-            passengerState === PassengerState.DOWNTOWN_TRAIN ? PassengerState.UPTOWN_TRAIN : PassengerState.DOWNTOWN_TRAIN
-        const toElement: HTMLDivElement =
-            passengerState === PassengerState.DOWNTOWN_TRAIN ? uptownTrainDoorRef.current : downtownTrainDoorRef.current
-
-        walkPassenger(PassengerAction.BOARD_TRAIN, toState, toElement)
-        changeDirection()
-    }, [passengerState, walkPassenger, changeDirection])
-
     useKeyShortcuts({
         comboKeys: {
             'Shift+D': () => setDarkMode((prev) => !prev),
@@ -74,7 +86,6 @@ function RiderMode() {
             u: handleBoardUptown,
             d: handleBoardDowntown,
             t: handleDeboard,
-            c: process.env.REACT_APP_USE_DEV_API === 'true' ? handleChangeDirection : () => {},
             r: initializeGame,
         },
         enabled: passengerState !== PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true',
@@ -82,7 +93,7 @@ function RiderMode() {
 
     useUITheme(darkMode)
     useEffect(() => {
-        setUpcomingStationsLayout(UpcomingStationsLayout.HORIZONTAL) // vertical layout not (yet) supported in rider mode
+        setUpcomingStationsLayout(UpcomingStationsLayout.HORIZONTAL)
     }, [setUpcomingStationsLayout])
 
     return (
@@ -90,9 +101,17 @@ function RiderMode() {
             handleBoardUptown={handleBoardUptown}
             handleBoardDowntown={handleBoardDowntown}
             handleDeboard={handleDeboard}
+            selectStaircaseLine={selectStaircaseLine}
+            advanceStation={advanceStation}
+            transfer={transfer}
             uptownTrainDoorRef={uptownTrainDoorRef}
             downtownTrainDoorRef={downtownTrainDoorRef}
-        />
+            passengerState={passengerState}
+            inTransferTunnel={inTransferTunnel}
+            selectedGroupIndex={selectedGroupIndex}
+        >
+            <Passenger passengerState={passengerState} passengerPosition={passengerPosition} />
+        </RiderModeUI>
     )
 }
 

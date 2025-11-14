@@ -2,6 +2,8 @@
     display: flex;
     column-gap: 0.25em;
     opacity: 1;
+    transition: transform ease-in-out 0.1s;
+    transform: scaleY(1);
 }
 
 /* -------------- CONTAINER MODIFICATIONS -------------- */

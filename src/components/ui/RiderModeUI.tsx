@@ -1,90 +1,73 @@
-import React, { useCallback, useMemo, useState } from 'react'
 import './RiderModeUI.css'
+import React, { useMemo } from 'react'
 
 import TrainCarStatic from '../train/TrainCarStatic'
 import Station from '../station/Station'
 import Staircase from '../station/Staircase'
 import LineSVGs from '../LineSVGs'
-import Passenger from '../Passenger'
 import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
 import ActionButton from '../common/ActionButton'
 
-import { PassengerState } from '../../hooks/usePassengerActions'
-
-import { Direction, LineName } from '../../logic/LineManager'
-import { groupLines, getCorrespondingGroup, getLineSVGs } from '../../logic/LineSVGsMap'
-import { useUIContext } from '../../contexts/UIContext'
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useGameStateContext } from '../../contexts/GameStateContext'
+
+import { PassengerState } from '../../hooks/usePassengerActions'
+import { usePlatformTransferGroups } from '../../hooks/usePlatformTransferGroups'
+
+import { Direction, LineName } from '../../logic/LineManager'
+import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station as StationObject } from '../../logic/StationManager'
 
 interface RiderModeUIProps {
     handleBoardUptown: () => void
     handleBoardDowntown: () => void
     handleDeboard: () => void
+    selectStaircaseLine: (index: number, line?: LineName) => void
+    advanceStation: (numStations: number) => void
+    transfer: (line: LineName) => void
+
     uptownTrainDoorRef: React.RefObject<HTMLDivElement>
     downtownTrainDoorRef: React.RefObject<HTMLDivElement>
+
+    passengerState: PassengerState
+    children: React.ReactNode // <Passenger>
+
+    inTransferTunnel: boolean
+    selectedGroupIndex: number
 }
 
 function RiderModeUI({
     handleBoardUptown,
     handleBoardDowntown,
     handleDeboard,
+    selectStaircaseLine,
+    advanceStation,
+    transfer,
     uptownTrainDoorRef,
     downtownTrainDoorRef,
+    inTransferTunnel,
+    selectedGroupIndex,
+    passengerState,
+    children: passengerComponent,
 }: RiderModeUIProps) {
     const { gameState } = useGameStateContext()
 
-    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const currentLine: LineName = useTrainContext((state) => state.train.getLine())
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
 
-    const passengerState: PassengerState = useUIContext((state) => state.passengerState)
+    const { otherPlatformGroups, samePlatformLines, hasSamePlatformTransfers, hasOtherPlatformTransfers, transfers } =
+        usePlatformTransferGroups({ currentStation, currentLine })
 
-    const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
-    const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0)
-
-    const stationID = currentStation.getId()
-    const transfers = currentStation.getTransfers()
-
-    const groupedTransfers: LineName[][] = useMemo(() => groupLines(transfers, stationID), [transfers, stationID])
-    const currentPlatformGroup: LineName[] = useMemo(
-        () => getCorrespondingGroup(currentLine, groupedTransfers),
-        [currentLine, groupedTransfers]
-    )
-    const otherPlatformGroups = useMemo(() => groupedTransfers.filter((g) => !g.includes(currentLine)), [groupedTransfers, currentLine])
-
-    const samePlatformLines = useMemo(
-        () => currentPlatformGroup.filter((line) => line !== currentLine),
-        [currentPlatformGroup, currentLine]
-    )
-
-    const hasSamePlatformTransfers = currentPlatformGroup.length > 1
-    const hasOtherPlatformTransfers = otherPlatformGroups.length > 0
     const hideTransferButton =
         passengerState === PassengerState.WALKING ||
         passengerState === PassengerState.TRANSFER_PLATFORM ||
         transfers.length === 1 ||
         inTransferTunnel
-    const passengerIsWalking = passengerState === PassengerState.WALKING
 
-    const selectStaircaseLine = useCallback(
-        (index: number, line?: LineName): void => {
-            if (passengerState !== PassengerState.TRANSFER_PLATFORM) return
-            setSelectedGroupIndex(index)
-
-            if (inTransferTunnel && line) {
-                transfer(line)
-                // need to do this to fix a state race condition
-                setTimeout(() => setInTransferTunnel(false), 25)
-                changeDirection(Direction.NULL_DIRECTION)
-            } else {
-                // staircase isn't open yet
-                setInTransferTunnel(true)
-            }
-        },
-        [passengerState, inTransferTunnel, transfer, changeDirection]
+    const destinationStationChildren = useMemo(
+        () => <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled />,
+        [gameState.destinationStation]
     )
 
     return (
@@ -96,7 +79,7 @@ function RiderModeUI({
                     <SamePlatformTransfers
                         lines={samePlatformLines}
                         hidden={inTransferTunnel}
-                        passengerIsWalking={passengerIsWalking}
+                        passengerIsWalking={passengerState === PassengerState.WALKING}
                         onSelection={transfer}
                     />
                 )}
@@ -116,7 +99,7 @@ function RiderModeUI({
             </div>
 
             <div className='platform-container'>
-                <Passenger />
+                {passengerComponent}
 
                 <Station name={currentStation.getName()} hidden={currentDirection === Direction.DOWNTOWN} noLines />
                 <TrainCarStatic
@@ -172,7 +155,7 @@ function RiderModeUI({
             <div className='destination-station-rider-mode' id='destination-station'>
                 <h2>Destination Station</h2>
                 <Station name={gameState.destinationStation.getName()} noLines isDestination>
-                    <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled />
+                    {destinationStationChildren}
                 </Station>
             </div>
         </div>

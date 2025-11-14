@@ -1,5 +1,6 @@
 import React, { useState, ReactNode, useMemo, useCallback } from 'react'
 import { createContext, useContextSelector } from 'use-context-selector'
+
 import { PassengerPosition, PassengerState, CENTER_PLATFORM_POS } from '../hooks/usePassengerActions'
 
 interface UIContextProps {

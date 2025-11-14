@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, ReactNode } from 'react'
-import ActionButton from './ActionButton'
-
 import './UmbrellaButton.css'
+import React, { useState, useEffect, useRef, ReactNode } from 'react'
+
+import ActionButton from './ActionButton'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
 interface UmbrellaButtonProps {
@@ -11,7 +11,7 @@ interface UmbrellaButtonProps {
     visible?: boolean
 }
 
-const UmbrellaButton = ({ openingButtonsW_B, children, below, visible }: UmbrellaButtonProps) => {
+const UmbrellaButton = React.memo(({ openingButtonsW_B, children, below, visible }: UmbrellaButtonProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const popupRef = useRef<HTMLDivElement | null>(null)
     const buttonRef = useRef<HTMLDivElement | null>(null)
@@ -60,6 +60,6 @@ const UmbrellaButton = ({ openingButtonsW_B, children, below, visible }: Umbrell
             )}
         </div>
     )
-}
+})
 
 export default UmbrellaButton

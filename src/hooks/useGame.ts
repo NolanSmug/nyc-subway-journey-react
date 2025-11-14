@@ -1,10 +1,11 @@
 import { useCallback } from 'react'
-import { Game } from '../logic/Game'
-import { Station as StationClass } from '../logic/StationManager'
 
 import { useTrainContext } from '../contexts/TrainContext'
 import { useGameStateContext } from '../contexts/GameStateContext'
 import { useUIContext } from '../contexts/UIContext'
+
+import { Game } from '../logic/Game'
+import { Station as StationClass } from '../logic/StationManager'
 
 export function useGame() {
     const { setGameState } = useGameStateContext()

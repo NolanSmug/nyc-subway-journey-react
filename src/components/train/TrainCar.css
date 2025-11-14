@@ -92,22 +92,34 @@ h2 {
 }
 
 .windows#train-info {
-    width: 34em;
+    min-width: 34em;
     overflow: visible;
-    white-space: nowrap;
-    flex-shrink: 0;
 }
 
-
-
 /* Windows styling */
-.train-car .train-direction,
+/* .train-car .train-direction,
 .train-car .train-type,
 .train-car .line-svgs-container img.line-svg-image {
     border: 1px solid var(--train-car-border);
     padding: 0.3em;
     border-radius: 0.1em;
+} */
+
+.train-car .train-direction,
+.train-car .train-type,
+.train-car .line-svgs-container {
+    border: 1px solid var(--train-car-border);
+    padding: 0.3em;
+    border-radius: 0.1em;
+
+    overflow: hidden;
+    flex-grow: 0.2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 .train-car .line-svgs-container img.line-svg-image {
     border-radius: 0.2em;

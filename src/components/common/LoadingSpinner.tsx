@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-
 import './LoadingSpinner.css'
+import React, { useState, useEffect } from 'react'
 
 interface LoadingSpinnerProps {
     visible?: boolean

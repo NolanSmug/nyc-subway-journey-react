@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo } from 'react'
+import './ConductorModeUI.css'
+import React, { useMemo } from 'react'
+
 import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
 import LineSVGs from '../LineSVGs'
@@ -6,17 +8,9 @@ import TrainCar from '../train/TrainCar'
 import Header from '../common/Header'
 import AdvanceNStationsInput from '../navigation/AdvanceNStationsInput'
 
-import './ConductorModeUI.css'
-import { useTrainContext } from '../../contexts/TrainContext'
-import { useGameStateContext } from '../../contexts/GameStateContext'
-import { useSettingsContext } from '../../contexts/SettingsContext'
-import { useUIContext } from '../../contexts/UIContext'
-
-import { useGame } from '../../hooks/useGame'
-
-import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station as StationObject } from '../../logic/StationManager'
-import { Direction } from '../../logic/LineManager'
+import { GameState } from '../../logic/GameState'
+import { getLineSVGs } from '../../logic/LineSVGsMap'
 
 import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
@@ -27,51 +21,34 @@ import C_DIRECTION_BLACK from '../../images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
 
-function ConductorModeUI() {
-    const { gameState } = useGameStateContext()
-    const { initializeGame } = useGame()
+interface ConductorModeUIProps {
+    handleLineClick: (index: number) => void
+    handleTransferClick: () => void
+    handleAdvanceClick: () => void
+    handleChangeDirectionClick: () => void
+    handleResetClick: () => void
 
-    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
-    const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
-    const isNullDirection: boolean = useTrainContext((state) => state.train.getDirection()) === Direction.NULL_DIRECTION
+    gameState: GameState
+    currentStation: StationObject
+    isNullDirection: boolean
+    darkMode: boolean
+    numAdvanceStations: number
+}
 
-    const darkMode = useSettingsContext((state) => state.darkMode)
-    const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
-
-    const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
-
-    const currentTransferSVGs = useMemo(() => getLineSVGs(currentStation.getTransfers()), [currentStation.getTransfers()])
-    const destinationTransferSVGs = useMemo(
-        () => getLineSVGs(gameState.destinationStation.getTransfers()),
-        [gameState.destinationStation.getTransfers()]
-    )
-
-    const handleLineClick = useCallback(
-        (index: number) => {
-            setIsTransferMode(false)
-            transfer(index)
-        },
-        [setIsTransferMode, transfer]
-    )
-
-    const handleTransferClick = useCallback(() => {
-        setIsTransferMode((prev) => (prev ? false : true))
-    }, [setIsTransferMode])
-
-    const handleAdvanceClick = useCallback(() => {
-        setIsTransferMode(false)
-        advanceStation(numAdvanceStations)
-    }, [setIsTransferMode, advanceStation, numAdvanceStations])
-
-    const handleChangeDirectionClick = useCallback(() => {
-        setIsTransferMode(false)
-        changeDirection()
-    }, [setIsTransferMode, changeDirection])
-
-    const handleResetClick = useCallback(() => {
-        setIsTransferMode(false)
-        initializeGame()
-    }, [setIsTransferMode, initializeGame])
+function ConductorModeUI({
+    gameState,
+    currentStation,
+    isNullDirection,
+    darkMode,
+    numAdvanceStations,
+    handleLineClick,
+    handleTransferClick,
+    handleAdvanceClick,
+    handleChangeDirectionClick,
+    handleResetClick,
+}: ConductorModeUIProps) {
+    const currentTransferSVGs = useMemo(() => getLineSVGs(currentStation.getTransfers()), [currentStation])
+    const destinationTransferSVGs = useMemo(() => getLineSVGs(gameState.destinationStation.getTransfers()), [gameState.destinationStation])
 
     return (
         <>
