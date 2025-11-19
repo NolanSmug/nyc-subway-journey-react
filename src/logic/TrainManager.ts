@@ -28,6 +28,14 @@ export class Train {
         this.scheduledStops = scheduledStops
     }
 
+    public clone(): Train {
+        const newTrain = new Train()
+
+        Object.assign(newTrain, this)
+
+        return newTrain
+    }
+
     // LineName
     public getLine(): LineName {
         return this.currentLine

@@ -12,7 +12,6 @@ interface TrainContextProps {
     train: Train
     setTrain: React.Dispatch<React.SetStateAction<Train>>
     actions: TrainActions
-    updateTrainObject: (updates: Partial<Train>) => void
 }
 
 const TrainContext = createContext<TrainContextProps | undefined>(undefined)
@@ -23,22 +22,22 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
     const { gameState, setGameState } = useGameStateContext()
     const gameMode = useSettingsContext((state) => state.gameMode)
 
-    const updateTrainObject = useCallback((updates: Partial<Train>) => {
-        setTrain((prevTrain) => {
-            const newTrain = Object.create(Object.getPrototypeOf(prevTrain))
-            return Object.assign(newTrain, prevTrain, updates)
-        })
-    }, [])
+    // const updateTrainObject = useCallback((updates: Partial<Train>) => {
+    //     setTrain((prevTrain) => {
+    //         const newTrain = Object.create(Object.getPrototypeOf(prevTrain))
+    //         return Object.assign(newTrain, prevTrain, updates)
+    //     })
+    // }, [])
 
     const actions = useTrainActions({
         train,
         gameState,
-        updateTrainObject,
+        setTrain,
         setGameState,
         gameMode,
     })
 
-    const value = useMemo(() => ({ train, actions, updateTrainObject, setTrain }), [train, updateTrainObject, actions])
+    const value = useMemo(() => ({ train, actions, setTrain }), [train, actions])
 
     return <TrainContext.Provider value={value}>{children}</TrainContext.Provider>
 }

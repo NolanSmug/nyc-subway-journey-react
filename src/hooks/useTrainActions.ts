@@ -8,13 +8,13 @@ import { Direction, LineName } from '../logic/LineManager'
 
 type UseTrainActionsParams = {
     train: Train
+    setTrain: React.Dispatch<React.SetStateAction<Train>>
     gameState: GameState
-    updateTrainObject: (t: Partial<Train>) => void
     setGameState: (gs: GameState) => void
     gameMode: GameMode
 }
 
-export default function useTrainActions({ train, gameState, updateTrainObject, setGameState, gameMode }: UseTrainActionsParams) {
+export default function useTrainActions({ train, setTrain, gameState, setGameState, gameMode }: UseTrainActionsParams) {
     const checkForWin = useCallback(() => {
         if (train.getCurrentStation().equals(gameState.destinationStation)) {
             setGameState(Object.assign(new GameState(), { ...gameState, isWon: true }))
@@ -26,14 +26,15 @@ export default function useTrainActions({ train, gameState, updateTrainObject, s
             if (!train) throw new Error('attempted to advanceStation - Train object is null')
 
             if (numAdvanceStations > 1 && gameMode === GameMode.CONDUCTOR) {
-                updateTrainObject(train.advanceStationInc(numAdvanceStations))
+                train.advanceStationInc(numAdvanceStations)
             } else {
-                updateTrainObject(train.advanceStation())
+                train.advanceStation()
             }
 
+            setTrain(train.clone())
             checkForWin()
         },
-        [train, gameMode, updateTrainObject, checkForWin]
+        [train, setTrain, gameMode, checkForWin]
     )
 
     const transfer = useCallback(
@@ -54,12 +55,14 @@ export default function useTrainActions({ train, gameState, updateTrainObject, s
                 return
             }
 
+            const isValidTransfer = await train.transferToLine(selectedLine, currentStation)
+
             // DO THE TRANSFER
-            if (await train.transferToLine(selectedLine, currentStation)) {
-                updateTrainObject(train)
+            if (isValidTransfer) {
+                setTrain(train.clone())
             }
         },
-        [train, updateTrainObject]
+        [train, setTrain]
     )
 
     const changeDirection = useCallback(
@@ -68,13 +71,14 @@ export default function useTrainActions({ train, gameState, updateTrainObject, s
 
             // note: undefined here because passing in NULL_DIRECTION should literally make the train's direction NULL (for rider mode)
             if (direction === undefined) {
-                updateTrainObject(train.reverseDirection()) // if no input, reverse
-                return
+                train.reverseDirection() // if no input, reverse
+            } else {
+                train.setDirection(direction)
             }
 
-            updateTrainObject(train.setDirection(direction))
+            setTrain(train.clone())
         },
-        [train, updateTrainObject]
+        [train, setTrain]
     )
 
     return {

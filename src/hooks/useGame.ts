@@ -9,7 +9,7 @@ import { Station as StationClass } from '../logic/StationManager'
 
 export function useGame() {
     const { setGameState } = useGameStateContext()
-    const updateTrainObject = useTrainContext((state) => state.updateTrainObject)
+    const setTrain = useTrainContext((state) => state.setTrain)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
     const initializeGame = useCallback(async () => {
@@ -19,11 +19,11 @@ export function useGame() {
             await newGame.runGame()
 
             setIsTransferMode(false)
-            updateTrainObject(newGame.train)
+            setTrain(newGame.train)
             setGameState(newGame.gameState)
         } catch (error) {
             console.error('Error initializing game:', error)
         }
-    }, [updateTrainObject, setGameState, setIsTransferMode])
+    }, [setTrain, setGameState, setIsTransferMode])
     return { initializeGame }
 }
