@@ -12,13 +12,14 @@ export enum PassengerState {
     TRANSFER_PLATFORM,
     UPTOWN_TRAIN,
     DOWNTOWN_TRAIN,
+    STAIRCASE,
     TRANSFER_TUNNEL,
 }
 
 export enum PassengerAction {
     BOARD_TRAIN,
     DEBOARD_TRAIN,
-    TO_STAIRCASE,
+    DOWN_STAIRCASE,
 }
 
 export const CENTER_PLATFORM_POS: PassengerPosition = { x: 20, y: window.innerHeight / 3 }
@@ -27,7 +28,7 @@ export const CENTER_PLATFORM_POS: PassengerPosition = { x: 20, y: window.innerHe
 export const PASSENGER_WALK_DURATIONS: Map<PassengerAction, number> = new Map([
     [PassengerAction.BOARD_TRAIN, 250],
     [PassengerAction.DEBOARD_TRAIN, 500],
-    [PassengerAction.TO_STAIRCASE, 250],
+    [PassengerAction.DOWN_STAIRCASE, 250],
 ])
 
 type UsePassengerActionsParams = {
@@ -39,7 +40,7 @@ type UsePassengerActionsParams = {
 export default function usePassengerActions({ passengerState, setPassengerPosition, setPassengerState }: UsePassengerActionsParams) {
     const walkTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-    // Clear timeout on umount:
+    // Clear timeout on umount
     useEffect(() => {
         return () => {
             if (walkTimeoutRef.current) {
@@ -86,13 +87,13 @@ export default function usePassengerActions({ passengerState, setPassengerPositi
                         y: platformContainer.height / 2, // center of platform
                     }
                     break
-                case PassengerAction.TO_STAIRCASE:
-                    // if (selectedElement) {
-                    //     setPassengerPosition({
-                    //         x: selectedElement.left,
-                    //         y: selectedElement.top + selectedElement.height / 2 - platformContainer.top,
-                    //     })
-                    // }
+                case PassengerAction.DOWN_STAIRCASE:
+                    if (selectedElement) {
+                        toPosition = {
+                            x: selectedElement.x - platformContainer.x + selectedElement.width / 2,
+                            y: selectedElement.top + selectedElement.height / 2 - platformContainer.top,
+                        }
+                    }
                     break
                 default:
                     break

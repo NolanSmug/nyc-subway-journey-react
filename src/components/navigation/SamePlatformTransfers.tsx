@@ -1,19 +1,21 @@
 import './SamePlatformTransfers.css'
 import React from 'react'
 
-import LineSVGs from '../LineSVGs'
+import LineSVGs from '../common/LineSVGs'
 
 import { LineName } from '../../logic/LineManager'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
+import { useTrainContext } from '../../contexts/TrainContext'
 
 interface SamePlatformTransfersProps {
     lines: LineName[]
     hidden: boolean
     passengerIsWalking?: boolean
-    onSelection: (line: LineName) => void
 }
 
-function SamePlatformTransfers({ lines, hidden, passengerIsWalking, onSelection }: SamePlatformTransfersProps) {
+function SamePlatformTransfers({ lines, hidden, passengerIsWalking }: SamePlatformTransfersProps) {
+    const { transfer } = useTrainContext((state) => state.actions)
+
     return (
         <div className={`accordion-wrapper ${hidden ? 'hidden' : ''}`}>
             <h3 style={{ margin: 0 }}>Same platform transfer</h3>
@@ -21,7 +23,7 @@ function SamePlatformTransfers({ lines, hidden, passengerIsWalking, onSelection 
                 <LineSVGs
                     svgPaths={getLineSVGs(lines)}
                     onTransferSelect={(index) => {
-                        onSelection(lines[index])
+                        transfer(lines[index])
                     }}
                     numLines={lines.length}
                 ></LineSVGs>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import ActionButton from '../common/ActionButton'
 import LoadingSpinner from '../common/LoadingSpinner'
-import LineSVGs from '../LineSVGs'
+import LineSVGs from '../common/LineSVGs'
 import Header from '../common/Header'
 import TrainCar from '../train/TrainCar'
 import Station from '../station/Station'

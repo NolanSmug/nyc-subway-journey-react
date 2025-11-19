@@ -87,6 +87,11 @@ export function getRandomLine(): LineName {
         randomLine = lines[Math.floor(Math.random() * lines.length)]
     } while (randomLine === LineName.NULL_TRAIN)
 
+    // can't start with special A train (weird transfer logic occurs)
+    if (randomLine === LineName.A_LEFFERTS_TRAIN || randomLine === LineName.A_ROCKAWAY_MOTT_TRAIN) {
+        randomLine = LineName.A_TRAIN
+    }
+
     return randomLine
 }
 

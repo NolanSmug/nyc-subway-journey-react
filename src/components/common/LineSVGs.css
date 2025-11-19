@@ -35,13 +35,21 @@
     width: 4.95em;
 }
 
-.staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped.num-lines-3 {
-    right: 2.3em;
-}
-
 .line-svgs-container.grouped:not(.disabled):hover {
     cursor: pointer;
     transform: scale(1.25);
+}
+
+.line-svgs-container.grouped:not(.disabled):active {
+    transform: scale(0.95);
+}
+
+/* special line group cases for staircase display */
+.staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped.num-lines-3 {
+    right: 2.3em;
+}
+.staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped .line-svg-image:hover {
+    transform: scale(1); /* only want to scale the whole group, ignore individual line image's hover scale */
 }
 
 /* --- wide --- */

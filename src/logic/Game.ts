@@ -19,6 +19,7 @@ export class Game {
         this.train.setScheduledStops(await getStationsForLine(this.gameState.startingLine))
         this.train.setCurrentStation(this.gameState.startingStation)
         this.train.setLine(this.gameState.startingLine)
+        // console.log(this.gameState.startingLine)
         this.train.updateTrainState()
     }
 }

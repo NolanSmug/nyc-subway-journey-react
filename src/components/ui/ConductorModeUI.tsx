@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 
 import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
-import LineSVGs from '../LineSVGs'
+import LineSVGs from '../common/LineSVGs'
 import TrainCar from '../train/TrainCar'
 import Header from '../common/Header'
 import AdvanceNStationsInput from '../navigation/AdvanceNStationsInput'

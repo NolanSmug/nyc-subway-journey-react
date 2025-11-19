@@ -1,7 +1,7 @@
 import './StationFragmentVertical.css'
 import React from 'react'
 
-import LineSVGs from '../LineSVGs'
+import LineSVGs from '../common/LineSVGs'
 
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { StationFragmentProps } from './StationFragment'

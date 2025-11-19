@@ -39,6 +39,7 @@ function RiderMode() {
 
     const uptownTrainDoorRef = useRef<HTMLDivElement>(null)
     const downtownTrainDoorRef = useRef<HTMLDivElement>(null)
+    const staircaseRef = useRef<HTMLDivElement>(null)
 
     const selectStaircaseLine = useCallback(
         (index: number, line?: LineName): void => {
@@ -50,7 +51,10 @@ function RiderMode() {
                 setTimeout(() => setInTransferTunnel(false), 25)
                 changeDirection(Direction.NULL_DIRECTION)
             } else {
-                setInTransferTunnel(true)
+                // console.log(selectedGroupIndex)
+
+                // handleTransferStaircase()
+                setTimeout(() => setInTransferTunnel(true), 0)
             }
         },
         [passengerState, inTransferTunnel, transfer, changeDirection]
@@ -74,6 +78,13 @@ function RiderMode() {
         walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM)
         changeDirection(Direction.NULL_DIRECTION)
     }, [walkPassenger, changeDirection])
+
+    // const handleTransferStaircase = useCallback(() => {
+    //     console.log(inTransferTunnel, staircaseRef.current)
+    //     if (staircaseRef.current) {
+    //         walkPassenger(PassengerAction.DOWN_STAIRCASE, PassengerState.TRANSFER_TUNNEL, staircaseRef.current)
+    //     }
+    // }, [walkPassenger])
 
     useKeyShortcuts({
         comboKeys: {
@@ -102,10 +113,9 @@ function RiderMode() {
             handleBoardDowntown={handleBoardDowntown}
             handleDeboard={handleDeboard}
             selectStaircaseLine={selectStaircaseLine}
-            advanceStation={advanceStation}
-            transfer={transfer}
             uptownTrainDoorRef={uptownTrainDoorRef}
             downtownTrainDoorRef={downtownTrainDoorRef}
+            staircaseRef={staircaseRef}
             passengerState={passengerState}
             inTransferTunnel={inTransferTunnel}
             selectedGroupIndex={selectedGroupIndex}

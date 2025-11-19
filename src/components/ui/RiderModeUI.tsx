@@ -4,7 +4,7 @@ import React, { useMemo } from 'react'
 import TrainCarStatic from '../train/TrainCarStatic'
 import Station from '../station/Station'
 import Staircase from '../station/Staircase'
-import LineSVGs from '../LineSVGs'
+import LineSVGs from '../common/LineSVGs'
 import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
 import ActionButton from '../common/ActionButton'
 
@@ -23,11 +23,10 @@ interface RiderModeUIProps {
     handleBoardDowntown: () => void
     handleDeboard: () => void
     selectStaircaseLine: (index: number, line?: LineName) => void
-    advanceStation: (numStations: number) => void
-    transfer: (line: LineName) => void
 
     uptownTrainDoorRef: React.RefObject<HTMLDivElement>
     downtownTrainDoorRef: React.RefObject<HTMLDivElement>
+    staircaseRef: React.RefObject<HTMLDivElement>
 
     passengerState: PassengerState
     children: React.ReactNode // <Passenger>
@@ -41,10 +40,9 @@ function RiderModeUI({
     handleBoardDowntown,
     handleDeboard,
     selectStaircaseLine,
-    advanceStation,
-    transfer,
     uptownTrainDoorRef,
     downtownTrainDoorRef,
+    staircaseRef,
     inTransferTunnel,
     selectedGroupIndex,
     passengerState,
@@ -70,6 +68,8 @@ function RiderModeUI({
         [gameState.destinationStation]
     )
 
+    // console.log(selectedGroupIndex)
+
     return (
         <div className='platform-wrapper'>
             <div
@@ -80,7 +80,6 @@ function RiderModeUI({
                         lines={samePlatformLines}
                         hidden={inTransferTunnel}
                         passengerIsWalking={passengerState === PassengerState.WALKING}
-                        onSelection={transfer}
                     />
                 )}
                 {otherPlatformGroups.map((transfers: LineName[], index: number) => (
@@ -94,6 +93,7 @@ function RiderModeUI({
                         isSelected={!inTransferTunnel && selectedGroupIndex === index}
                         tunnelLayout={inTransferTunnel && selectedGroupIndex === index}
                         hidden={inTransferTunnel && selectedGroupIndex !== index}
+                        ref={staircaseRef}
                     />
                 ))}
             </div>
@@ -103,12 +103,10 @@ function RiderModeUI({
 
                 <Station name={currentStation.getName()} hidden={currentDirection === Direction.DOWNTOWN} noLines />
                 <TrainCarStatic
-                    line={currentLine}
                     direction={Direction.UPTOWN}
                     active={currentDirection === Direction.UPTOWN}
                     hidden={inTransferTunnel}
                     uptownDoorRef={uptownTrainDoorRef}
-                    advanceStation={advanceStation}
                 />
                 <ActionButton
                     label='board uptown train'
@@ -139,12 +137,10 @@ function RiderModeUI({
                     wrapperClassName='downtown-button-offset'
                 />
                 <TrainCarStatic
-                    line={currentLine}
                     direction={Direction.DOWNTOWN}
                     active={currentDirection === Direction.DOWNTOWN}
                     hidden={inTransferTunnel}
                     downtownDoorRef={downtownTrainDoorRef}
-                    advanceStation={advanceStation}
                 />
                 <Station
                     name={currentStation.getName()}

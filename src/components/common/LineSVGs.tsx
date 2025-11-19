@@ -1,7 +1,7 @@
 import './LineSVGs.css'
 import React from 'react'
 
-import { useUIContext } from '../contexts/UIContext'
+import { useUIContext } from '../../contexts/UIContext'
 
 interface LineSVGsProps {
     svgPaths: string[]
