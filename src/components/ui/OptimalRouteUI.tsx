@@ -9,9 +9,11 @@ import TrainCar from '../train/TrainCar'
 import Station from '../station/Station'
 
 import { useGameStateContext } from '../../contexts/GameStateContext'
+import { useSettingsContext } from '../../contexts/SettingsContext'
+
 import { useGame } from '../../hooks/useGame'
 
-import { LineName, lineArrayEquals } from '../../logic/LineManager'
+import { LineName, areLineSetsEqual } from '../../logic/LineManager'
 import { getLineSVGs, lineToLineColor } from '../../logic/LineSVGsMap'
 import { getLineType, LineType } from '../../logic/LineManager'
 
@@ -19,7 +21,7 @@ import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
 import OPTIMAL_BLACK from '../../images/optimal-route-icon-b.svg'
 import OPTIMAL_WHITE from '../../images/optimal-route-icon-w.svg'
-import { useSettingsContext } from '../../contexts/SettingsContext'
+import INFO_ICON_W from '../../images/info-icon-white.svg'
 
 interface StationData {
     id: string
@@ -57,7 +59,7 @@ const getTransfersIndexes = (stationData: StationData[]): number[] => {
 
     // Don't check last station, which always has a Null_train
     for (let i = 0; i < stationData.length - 1; i++) {
-        if (!lineArrayEquals(stationData[i].lines, prev_lines)) {
+        if (!areLineSetsEqual(stationData[i].lines, prev_lines)) {
             // if lines changed...
             indexes_with_transfer.push(i)
             prev_lines = stationData[i].lines
@@ -112,15 +114,17 @@ type OptimalStationFragmentProps = {
 }
 
 function OptimalStationFragment({ station, prevStation, isTransfer }: OptimalStationFragmentProps) {
-    const isLastStation = station.lines.includes(LineName.NULL_TRAIN)
-    const dotStyle = {
+    const isLastStation: boolean = station.lines.includes(LineName.NULL_TRAIN)
+    const isMultiColor: boolean = hasMultiColoredLines(station.lines)
+
+    const dotStyle: React.CSSProperties /* why do we use tsx again? */ = {
         backgroundColor: isLastStation && prevStation ? getDotColor(prevStation.lines[0]) : getDotColor(station.lines[0]),
         borderColor: isLastStation && prevStation ? prevStation.color : station.color,
     }
-    const lineStyle = {
+    const lineStyle: React.CSSProperties = {
         width: `${station.name.length * 12}px`,
-        background: hasMultiColoredLines(station.lines) ? getMutliColorLineDivider(station.lines) : station.color,
-        height: `${hasMultiColoredLines(station.lines) ? '0.7rem' : '0.5rem'}`,
+        background: isMultiColor ? getMutliColorLineDivider(station.lines) : station.color,
+        height: `${isMultiColor ? '0.7rem' : '0.5rem'}`,
     }
 
     return (
@@ -141,6 +145,54 @@ function OptimalStationFragment({ station, prevStation, isTransfer }: OptimalSta
     )
 }
 
+type GameOverUIProps = {
+    destinationStationName: string
+    destinationStationTransfers: LineName[]
+    darkMode: boolean
+    setIsRouteRequested: React.Dispatch<React.SetStateAction<boolean>>
+    initializeGame: () => void
+}
+
+function GameOverUI({
+    destinationStationName,
+    destinationStationTransfers,
+    darkMode,
+    setIsRouteRequested,
+    initializeGame,
+}: GameOverUIProps) {
+    return (
+        <div className='game-over-wrapper'>
+            <Header text='You win!' />
+            <Station name={destinationStationName}>
+                <LineSVGs svgPaths={getLineSVGs(destinationStationTransfers)} disabled notDim />
+            </Station>
+            <TrainCar forWinDisplay />
+            <div className='optimal-route-request-container'>
+                <div className='optimal-route-request-btn'>
+                    <ActionButton
+                        imageSrc={darkMode ? OPTIMAL_WHITE : OPTIMAL_BLACK}
+                        label='Show optimal route'
+                        onClick={() => setIsRouteRequested(true)}
+                    />
+                    <div>
+                        <img src={INFO_ICON_W} alt='info' className='info-icon' />
+                        <div className='tooltip'>
+                            Calculates the <u>minimum number of stations</u> to visit.
+                        </div>
+                    </div>
+                </div>
+                <ActionButton
+                    imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
+                    label='Reset game'
+                    onClick={() => {
+                        initializeGame()
+                    }}
+                />
+            </div>
+        </div>
+    )
+}
+
 function OptimalRouteUI() {
     const { gameState } = useGameStateContext()
     const { initializeGame } = useGame()
@@ -152,27 +204,34 @@ function OptimalRouteUI() {
     const [isRouteRequested, setIsRouteRequested] = useState(false)
 
     useEffect(() => {
-        if (!gameState.isWon || stationData.length > 0) return
+        let isMounted = true
+
         ;(async () => {
             setLoadingVisible(true)
             try {
                 const [startID, destID] = await gameState.getStartDestStationIDs()
                 const data = await fetchShortestPath(startID, destID)
 
-                const stationsData: StationData[] = data.map((station: StationData) => ({
-                    id: station.id,
-                    name: station.name,
-                    lines: station.lines,
-                    color: station.color,
-                }))
+                if (isMounted) {
+                    const stationsData: StationData[] = data.map((station: StationData) => ({
+                        id: station.id,
+                        name: station.name,
+                        lines: station.lines,
+                        color: station.color,
+                    }))
 
-                setStationData(stationsData)
+                    setStationData(stationsData)
+                }
             } catch (error) {
                 console.error('Error fetching optimal route:', error)
             } finally {
-                setLoadingVisible(false)
+                isMounted && setLoadingVisible(false)
             }
         })()
+
+        return () => {
+            isMounted = false
+        }
     }, [gameState.isWon])
 
     useEffect(() => {
@@ -184,33 +243,25 @@ function OptimalRouteUI() {
 
     if (!isRouteRequested) {
         return (
-            <div className='game-over-wrapper'>
-                <Header text='You win!' />
-                <Station name={gameState.destinationStation.getName()}>
-                    <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled notDim />
-                </Station>
-                <TrainCar forWinDisplay />
-                <div className='optimal-route-request-container'>
-                    <ActionButton
-                        imageSrc={darkMode ? OPTIMAL_WHITE : OPTIMAL_BLACK}
-                        label='Show optimal route'
-                        onClick={() => setIsRouteRequested(true)}
-                    />
-                    <ActionButton
-                        imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}
-                        label='Reset game'
-                        onClick={() => {
-                            initializeGame()
-                        }}
-                    />
-                </div>
-            </div>
+            <GameOverUI
+                destinationStationName={gameState.destinationStation.getName()}
+                destinationStationTransfers={gameState.destinationStation.getTransfers()}
+                darkMode={darkMode}
+                setIsRouteRequested={setIsRouteRequested}
+                initializeGame={initializeGame}
+            />
         )
     }
 
     return (
         <>
             <h1>Optimal route</h1>
+            <div>
+                <img src={INFO_ICON_W} alt='info' className='info-icon' />
+                <div className='tooltip'>
+                    This is the <u>minimum number of stations</u> to visit. Transfers are instant in this game!
+                </div>
+            </div>
             <div className='optimal-route-window-container'>
                 <LoadingSpinner
                     visible={loadingVisible}
@@ -219,16 +270,19 @@ function OptimalRouteUI() {
                     contact the developer if any other issues occur.'
                     textDelaySecs={5}
                 />
-                <div className='optimal-stations-horizontal'>
-                    {stationData.map((station, index) => (
-                        <OptimalStationFragment
-                            key={index}
-                            station={station}
-                            prevStation={stationData[index - 1]}
-                            isTransfer={transferIndexes.includes(index)}
-                        />
-                    ))}
-                </div>
+                {stationData.length === 0 && <h3 style={{ alignSelf: 'center' }}>Failed to load optimal route. Please try again later.</h3>}
+                {stationData.length > 0 && (
+                    <div className='optimal-stations-horizontal'>
+                        {stationData.map((station, index) => (
+                            <OptimalStationFragment
+                                key={index}
+                                station={station}
+                                prevStation={stationData[index - 1]}
+                                isTransfer={transferIndexes.includes(index)}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
             <div className='optimal-route-action-buttons'>
                 <ActionButton

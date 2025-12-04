@@ -5,7 +5,7 @@ import Door from './Door'
 import Header from '../common/Header'
 import TrainInfo from './TrainInfo'
 
-import { useSettingsContext } from '../../contexts/SettingsContext'
+import { UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 import { useTrainContext } from '../../contexts/TrainContext'
 
 import { Direction } from '../../logic/LineManager'
@@ -16,8 +16,8 @@ import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
 function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     const direction = useTrainContext((state) => state.train.getDirection())
     const darkMode = useSettingsContext((state) => state.darkMode)
-    const isHorizontalLayout = useSettingsContext((state) => state.isHorizontalLayout)
-    const isVerticalLayout = useSettingsContext((state) => state.isVerticalLayout)
+    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
+    const isVerticalLayout = !isHorizontalLayout
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 
@@ -26,7 +26,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     const arrowDirection = useMemo(() => {
         if (isNullDirection) return
 
-        if (isVerticalLayout()) {
+        if (isVerticalLayout) {
             return direction === Direction.DOWNTOWN ? 'down' : 'up'
         } else {
             return direction === Direction.DOWNTOWN ? 'left' : 'right'
@@ -41,7 +41,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                     <img
                         src={ARROW_SVG}
                         className={`arrow arrow-${arrowDirection} ${
-                            direction === Direction.DOWNTOWN && isHorizontalLayout() ? 'show' : 'hide'
+                            direction === Direction.DOWNTOWN && isHorizontalLayout ? 'show' : 'hide'
                         }`}
                         alt='Left Arrow'
                     />
@@ -64,19 +64,20 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
 
                     <div className='windows'>
                         <div className='front-window'> </div>
+                        {/* <div className='front-light'></div> */}
                     </div>
                 </div>
 
-                {isHorizontalLayout() && !isNullDirection && !forWinDisplay && (
+                {isHorizontalLayout && !isNullDirection && !forWinDisplay && (
                     <img
                         src={ARROW_SVG}
                         className={`arrow arrow-${arrowDirection} ${
-                            direction === Direction.UPTOWN && isHorizontalLayout() ? 'show' : 'hide'
+                            direction === Direction.UPTOWN && isHorizontalLayout ? 'show' : 'hide'
                         }`}
                         alt='Right Arrow'
                     />
                 )}
-                {isVerticalLayout() && !isNullDirection && !forWinDisplay && (
+                {isVerticalLayout && !isNullDirection && !forWinDisplay && (
                     <img src={ARROW_SVG} className={`arrow arrow-${arrowDirection}`} alt='Up/Down Arrow' />
                 )}
             </div>

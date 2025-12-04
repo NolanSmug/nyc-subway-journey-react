@@ -12,9 +12,10 @@ interface LineSVGsProps {
     disabled?: boolean
     numLines?: number // if we want to keep the lines centered
     notDim?: boolean
-    className?: String
+    className?: string
     onTransferSelect?: (index: number) => void | undefined
 }
+
 const LineSVGs = React.memo<LineSVGsProps>(
     ({ svgPaths, small, wide, vertical, grouped, disabled, numLines, notDim, className, onTransferSelect }) => {
         const isTransferMode = useUIContext((state) => state.isTransferMode)
@@ -27,7 +28,7 @@ const LineSVGs = React.memo<LineSVGsProps>(
                     <img
                         key={index}
                         src={imageSrc}
-                        className={`${small ? 'small' : 'line-svg-image'} ${isTransferMode ? 'jiggle-animation' : ''}`}
+                        className={`${small ? 'small' : 'line-svg-image'} ${isTransferMode && !disabled ? 'jiggle-animation' : ''}`}
                         onMouseDown={() => onTransferSelect && onTransferSelect(index)}
                         alt={svgPaths[index]}
                         style={{ animationDelay: `${index * 0.1}s` }} // delay for image jiggle animation

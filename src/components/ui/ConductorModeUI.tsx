@@ -10,6 +10,7 @@ import AdvanceNStationsInput from '../navigation/AdvanceNStationsInput'
 
 import { Station as StationObject } from '../../logic/StationManager'
 import { GameState } from '../../logic/GameState'
+import { Direction } from '../../logic/LineManager'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 
 import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
@@ -30,15 +31,16 @@ interface ConductorModeUIProps {
 
     gameState: GameState
     currentStation: StationObject
-    isNullDirection: boolean
+    direction: Direction
     darkMode: boolean
     numAdvanceStations: number
+    isVerticalLayout: boolean
 }
 
 function ConductorModeUI({
     gameState,
     currentStation,
-    isNullDirection,
+    direction,
     darkMode,
     numAdvanceStations,
     handleLineClick,
@@ -46,9 +48,18 @@ function ConductorModeUI({
     handleAdvanceClick,
     handleChangeDirectionClick,
     handleResetClick,
+    isVerticalLayout,
 }: ConductorModeUIProps) {
     const currentTransferSVGs = useMemo(() => getLineSVGs(currentStation.getTransfers()), [currentStation])
     const destinationTransferSVGs = useMemo(() => getLineSVGs(gameState.destinationStation.getTransfers()), [gameState.destinationStation])
+
+    const advanceArrowRotateDegrees: number = isVerticalLayout
+        ? direction === Direction.DOWNTOWN
+            ? 270
+            : 90
+        : direction === Direction.DOWNTOWN
+          ? 180
+          : 0
 
     return (
         <>
@@ -83,10 +94,11 @@ function ConductorModeUI({
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
+                            rotateDegrees={advanceArrowRotateDegrees}
                             label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
                             onClick={handleAdvanceClick}
                             additionalInput={<AdvanceNStationsInput />}
-                            disabled={isNullDirection}
+                            disabled={direction === Direction.NULL_DIRECTION}
                         />
                     </div>
                 </div>

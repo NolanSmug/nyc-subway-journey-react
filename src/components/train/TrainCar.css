@@ -17,15 +17,17 @@ h2 {
 }
 
 .arrow-up {
-    transform: rotate(-90deg);
+    transition: transform 0.1s linear;
+    transform: rotate(270deg);
 }
 
 .arrow-down {
+    transition: transform 0.1s linear;
     transform: rotate(90deg);
 }
 
 .arrow-left {
-    transform: rotate(180deg);
+    transform: rotate(-180deg);
 }
 
 .arrow-left:hover,
@@ -141,3 +143,13 @@ h2 {
 .is-null-direction {
     animation: pulse 1.5s ease-in-out infinite;
 }
+
+/* .front-light {
+    margin-top: 3.5em;
+    width: 3em;
+    height: 1em;
+    background-color: none;
+    box-shadow: 2.25em -1em 2em #f3ff94;
+    transition: box-shadow 1s ease-in-out;
+    z-index: -1;
+} */

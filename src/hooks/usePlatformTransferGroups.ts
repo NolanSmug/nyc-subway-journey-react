@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { LineName } from '../logic/LineManager'
 import { Station } from '../logic/StationManager'
-import { getCorrespondingGroup, groupLines } from '../logic/LineSVGsMap'
+import { getCorrespondingLineGroup, groupLines } from '../logic/LineSVGsMap'
 
 type UsePlatformTransferGroups = {
     currentStation: Station
@@ -13,7 +13,7 @@ export function usePlatformTransferGroups({ currentStation, currentLine }: UsePl
     const transfers: LineName[] = currentStation.getTransfers()
 
     const groupedTransfers = useMemo(() => groupLines(transfers, stationID), [transfers, stationID])
-    const currentPlatformGroup = useMemo(() => getCorrespondingGroup(currentLine, groupedTransfers), [currentLine, groupedTransfers])
+    const currentPlatformGroup = useMemo(() => getCorrespondingLineGroup(currentLine, groupedTransfers), [currentLine, groupedTransfers])
     const otherPlatformGroups = useMemo(() => groupedTransfers.filter((g) => !g.includes(currentLine)), [groupedTransfers, currentLine])
     const samePlatformLines = useMemo(
         () => currentPlatformGroup.filter((line) => line !== currentLine),

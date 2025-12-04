@@ -6,7 +6,12 @@
     z-index: 100;
 
     will-change: transform;
-    transition: transform var(--walking-duration) linear;
+    /* add again if having problems: */
+    /* transition: transform 250ms linear; */
+
+    top: 0;
+    left: 0;
+    margin: 0;
 }
 
 .chrome .passenger {

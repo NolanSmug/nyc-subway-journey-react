@@ -3,7 +3,7 @@ import ConductorModeUI from '../ui/ConductorModeUI'
 
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 import { useGameStateContext } from '../../contexts/GameStateContext'
 
 import { useUITheme } from '../../hooks/useCSSProperties'
@@ -19,9 +19,10 @@ function ConductorMode() {
 
     const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
-    const isNullDirection: boolean = useTrainContext((state) => state.train.getDirection()) === Direction.NULL_DIRECTION
+    const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
 
     const darkMode = useSettingsContext((state) => state.darkMode)
+    const isVerticalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.VERTICAL)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
@@ -48,10 +49,13 @@ function ConductorMode() {
         advanceStation(numAdvanceStations)
     }, [setIsTransferMode, advanceStation, numAdvanceStations])
 
-    const handleChangeDirectionClick = useCallback(() => {
-        setIsTransferMode(false)
-        changeDirection()
-    }, [setIsTransferMode, changeDirection])
+    const handleChangeDirectionClick = useCallback(
+        (direction?: Direction) => {
+            setIsTransferMode(false)
+            changeDirection(direction)
+        },
+        [setIsTransferMode, changeDirection]
+    )
 
     const handleResetClick = useCallback(() => {
         setIsTransferMode(false)
@@ -63,11 +67,16 @@ function ConductorMode() {
             'Shift+L': toggleUpcomingStationsLayout,
             'Shift+D': () => setDarkMode((prev: boolean) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev: boolean) => !prev),
-            'Shift+C': () => setGameMode((prev) => (prev === GameMode.CONDUCTOR ? GameMode.RIDER : GameMode.CONDUCTOR)),
+            'Shift+C': () => {
+                setGameMode(GameMode.RIDER)
+                changeDirection(Direction.NULL_DIRECTION) // passenger mounts on CENTER_PLATFORM
+            },
         },
         singleKeys: {
             t: handleTransferClick,
-            c: handleChangeDirectionClick,
+            u: () => handleChangeDirectionClick(Direction.UPTOWN),
+            d: () => handleChangeDirectionClick(Direction.DOWNTOWN),
+            c: () => handleChangeDirectionClick(),
             r: handleResetClick,
             ArrowRight: handleAdvanceClick,
             Escape: () => setIsTransferMode(false),
@@ -83,7 +92,7 @@ function ConductorMode() {
         <ConductorModeUI
             gameState={gameState}
             currentStation={currentStation}
-            isNullDirection={isNullDirection}
+            direction={currentDirection}
             darkMode={darkMode}
             numAdvanceStations={numAdvanceStations}
             handleLineClick={handleLineClick}
@@ -91,6 +100,7 @@ function ConductorMode() {
             handleAdvanceClick={handleAdvanceClick}
             handleChangeDirectionClick={handleChangeDirectionClick}
             handleResetClick={handleResetClick}
+            isVerticalLayout={isVerticalLayout}
         />
     )
 }

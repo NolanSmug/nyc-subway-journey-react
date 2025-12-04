@@ -3,12 +3,11 @@ import React from 'react'
 
 interface ActionButtonProps {
     imageSrc?: string
-    imageClassName?: string
+    rotateDegrees?: number
     wrapperClassName?: string
     label?: string
     onClick?: () => void
     hidden?: boolean
-    noImage?: boolean
     small?: boolean
     disabled?: boolean
     additionalInput?: React.ReactNode
@@ -16,16 +15,17 @@ interface ActionButtonProps {
 
 function ActionButton({
     imageSrc,
-    imageClassName,
+    rotateDegrees,
     wrapperClassName,
     label,
-    noImage,
     onClick,
     hidden,
     small,
     disabled,
     additionalInput,
 }: ActionButtonProps) {
+    const noImage: boolean = imageSrc === undefined
+
     return (
         <div className={`action-button-wrapper ${wrapperClassName || ''} ${hidden ? 'hidden' : ''} ${disabled ? 'disabled' : ''}`}>
             <div className='action-button-container'>
@@ -38,19 +38,25 @@ function ActionButton({
                     {noImage ? (
                         <span className='button-text'>{label}</span>
                     ) : (
-                        <img
-                            src={imageSrc}
-                            style={imageClassName === 'arrow-left' ? { transform: 'rotate(180deg)' } : undefined}
-                            className={`icon ${small ? 'small-button' : ''} ${imageClassName || ''}`}
-                            alt={label}
-                        />
+                        <div className={`icon-wrapper ${small ? 'small-button' : ''}`}>
+                            <img
+                                src={imageSrc}
+                                className='icon'
+                                style={
+                                    rotateDegrees
+                                        ? { transform: `rotate(${-rotateDegrees}deg)` /* yes, we use unit circle angle */ }
+                                        : undefined
+                                }
+                                alt={label}
+                            />
+                        </div>
                     )}
                 </button>
 
                 {/* Only render label below if it's an image button */}
-                {!noImage && label && <p className='label'>{label}</p>}
+                {!noImage && label && <p className='button-label'>{label}</p>}
             </div>
-            {additionalInput}
+            {additionalInput && additionalInput}
         </div>
     )
 }

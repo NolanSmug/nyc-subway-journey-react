@@ -48,7 +48,7 @@ export class SubwayMap {
 
             subwayStations.push(station)
         })
-        
+
         return subwayStations
     }
 }

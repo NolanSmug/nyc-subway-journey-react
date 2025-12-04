@@ -1,7 +1,7 @@
 import React from 'react'
 import SettingsButton from './SettingsButton'
 
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
 import L_MODE from '../../images/light-mode-icon.svg'
 import D_MODE from '../../images/dark-mode-icon.svg'
@@ -24,7 +24,9 @@ const SettingsMenu = () => {
     const setGameMode = useSettingsContext((state) => state.setGameMode)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const toggleUpcomingStationsLayout = useSettingsContext((state) => state.toggleUpcomingStationsLayout)
-    const isHorizontalLayout = useSettingsContext((state) => state.isHorizontalLayout)
+    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
+
+    const isConductorMode = gameMode === GameMode.CONDUCTOR
 
     return (
         <>
@@ -37,7 +39,7 @@ const SettingsMenu = () => {
             <SettingsButton
                 label='Upcoming stations layout'
                 imgSrc={
-                    isHorizontalLayout()
+                    isHorizontalLayout
                         ? darkMode
                             ? UPCOMING_STATIONS_VERTICAL_WHITE
                             : UPCOMING_STATIONS_VERTICAL_BLACK
@@ -45,13 +47,13 @@ const SettingsMenu = () => {
                           ? UPCOMING_STATIONS_HORIZONTAL_WHITE
                           : UPCOMING_STATIONS_HORIZONTAL_BLACK
                 }
-                onClick={() => gameMode === GameMode.CONDUCTOR && toggleUpcomingStationsLayout()}
-                disabled={gameMode === GameMode.RIDER}
+                onClick={() => isConductorMode && toggleUpcomingStationsLayout()}
+                disabled={!isConductorMode}
             />
             <SettingsButton
-                label={!gameMode ? 'Conductor mode' : 'Rider mode'}
+                label={isConductorMode ? 'Rider mode' : 'Conductor mode'}
                 imgSrc={
-                    gameMode === GameMode.RIDER
+                    isConductorMode
                         ? darkMode
                             ? RIDER_MODE_WHITE
                             : RIDER_MODE_BLACK
@@ -60,7 +62,7 @@ const SettingsMenu = () => {
                           : CONDUCTOR_MODE_BLACK
                 }
                 onClick={() => {
-                    setGameMode((prev) => (prev == GameMode.CONDUCTOR ? GameMode.RIDER : GameMode.CONDUCTOR))
+                    setGameMode(isConductorMode ? GameMode.RIDER : GameMode.CONDUCTOR)
                 }}
             />
         </>

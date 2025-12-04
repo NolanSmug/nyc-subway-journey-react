@@ -35,7 +35,7 @@ export class GameState {
 
     public async resetGameState(): Promise<void> {
         this.startingLine = getRandomLine()
-        // this.startingLine = LineName.F_TRAIN
+        // this.startingLine = LineName.L_TRAIN
         this.isFirstTurn = true
 
         this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine))

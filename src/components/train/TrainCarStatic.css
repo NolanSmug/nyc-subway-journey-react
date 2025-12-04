@@ -79,7 +79,6 @@
        Since this is in the :before of the element, the columns of circles are repeated across the width of the train. */
     background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='rgb(242, 242, 168)' fill-opacity='0.8' /%3E%3C/svg%3E");
 
-
     background-size: 3px 3px;
     background-position: center;
     z-index: 0;

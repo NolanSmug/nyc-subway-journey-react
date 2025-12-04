@@ -32,15 +32,14 @@
     cursor: pointer;
 }
 
-.action-button .icon {
+.action-button .icon-wrapper {
     transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.action-button:active .icon {
+.action-button:active .icon-wrapper {
     transform: scale(0.95);
     outline: 0.15em solid var(--line-color);
     outline-offset: 0.1em;
-    outline-width: 0.2em;
 }
 
 .disabled {
@@ -67,28 +66,32 @@
     outline-width: 0.2em;
 }
 
-.icon {
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 2rem;
     width: 2rem;
-    border-radius: 0.5em;
     padding: 0.5em;
     background-color: var(--bg-color-2);
     border: 0.1em solid var(--bg-color-3);
-    transition: transform 0.1s ease-out, outline 0.2s ease-out;
+    border-radius: 0.5em;
 }
 
-.icon:hover {
+.icon-wrapper:hover {
     transform: scale(1.08);
     background-color: var(--bg-color-3);
 }
 
-.small-button {
-    height: 1.25rem;
-    width: 1.25rem;
+.icon {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    border: none;
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-.label {
+.button-label {
     margin: 0.5em 0 0 0;
     width: min-content;
     font-size: medium;
@@ -102,4 +105,9 @@
     font-size: 1.2rem;
     font-family: Helvetica, system-ui, sans-serif;
     white-space: nowrap;
+}
+
+.small-button {
+    height: 1.25rem;
+    width: 1.25rem;
 }

@@ -10,10 +10,9 @@ import { useTrainContext } from '../../contexts/TrainContext'
 interface SamePlatformTransfersProps {
     lines: LineName[]
     hidden: boolean
-    passengerIsWalking?: boolean
 }
 
-function SamePlatformTransfers({ lines, hidden, passengerIsWalking }: SamePlatformTransfersProps) {
+function SamePlatformTransfers({ lines, hidden }: SamePlatformTransfersProps) {
     const { transfer } = useTrainContext((state) => state.actions)
 
     return (

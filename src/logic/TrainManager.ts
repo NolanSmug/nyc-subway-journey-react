@@ -1,4 +1,4 @@
-import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, getLineType } from './LineManager'
+import { LineName, LineType, Borough, Direction, LINE_DIRECTION_LABELS, getLineType } from './LineManager'
 import { Station } from './StationManager'
 import { getStationsForLine } from './SubwayMap'
 
@@ -107,7 +107,7 @@ export class Train {
     }
 
     public findDirectionLabel(direction: Direction, line: LineName, currentBorough?: Borough): string {
-        const detailedLineDirection = lineDirectionsDetailed.get(line)
+        const detailedLineDirection = LINE_DIRECTION_LABELS.get(line)
 
         if (detailedLineDirection) {
             if (currentBorough && detailedLineDirection.boroughSpecificLabels?.[currentBorough]) {
@@ -290,7 +290,7 @@ export class Train {
 
         // sometimes we want the train line to be null (examples below), so assert less conditions
         if (this.isLineNull()) {
-            assert(this.direction === Direction.NULL_DIRECTION, 'A null train ')
+            assert(this.direction === Direction.NULL_DIRECTION, 'A null train must be in NULL_DIRECTION')
         } else {
             assert(this.scheduledStops.length > 0, 'Active train must have scheduled stops')
             assert(

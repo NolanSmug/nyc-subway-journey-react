@@ -1,4 +1,6 @@
+import './App.css'
 import React, { useEffect } from 'react'
+
 import LandingScreen from './components/ui/LandingScreen'
 import OptimalRouteUI from './components/ui/OptimalRouteUI'
 import ConductorMode from './components/modes/ConductorMode'
@@ -10,12 +12,13 @@ import UpcomingStationsVertical from './components/common/UpcomingStationsVertic
 import KeyShortcutMenu from './components/keyboard/KeyShortcutMenu'
 // import SubwayMap from './components/SubwayMap'
 
-import './App.css'
 import { useUIContext } from './contexts/UIContext'
 import { useTrainContext } from './contexts/TrainContext'
 import { useGameStateContext } from './contexts/GameStateContext'
-import { useSettingsContext, GameMode } from './contexts/SettingsContext'
+import { useSettingsContext, GameMode, UpcomingStationsLayout } from './contexts/SettingsContext'
 import { useGame } from './hooks/useGame'
+
+import { useLineFavicon } from './hooks/useLineFavicon'
 
 import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
@@ -38,8 +41,8 @@ function Game() {
 
     const gameMode = useSettingsContext((state) => state.gameMode)
     const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible)
-    const isVerticalLayout = useSettingsContext((state) => state.isVerticalLayout)
-    const isHorizontalLayout = useSettingsContext((state) => state.isHorizontalLayout)
+    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
+    const isVerticalLayout = !isHorizontalLayout
 
     const handleClickAway = (e: React.MouseEvent) => {
         const transferLinesContainer = document.querySelector('.line-svgs-container')
@@ -51,6 +54,8 @@ function Game() {
     useEffect(() => {
         initializeGame()
     }, [initializeGame])
+
+    useLineFavicon()
 
     if (isLineNull) return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
 
@@ -73,8 +78,8 @@ function Game() {
             {isLandingPage && <LandingScreen />}
 
             <div className={`Game ${gameMode}-mode`}>
-                {upcomingStationsVisible && isHorizontalLayout() && <UpcomingStationsHorizontal />}
-                <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
+                {upcomingStationsVisible && isHorizontalLayout && <UpcomingStationsHorizontal />}
+                <div className={`game-state-ui ${isVerticalLayout && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
                     {gameMode === GameMode.CONDUCTOR && <ConductorMode />}
                     {gameMode === GameMode.RIDER && <RiderMode />}
                 </div>
@@ -87,7 +92,9 @@ function Game() {
                     </UmbrellaButton>
                 </div>
                 <div className='shortcuts-umbrella'>
-                    <UmbrellaButton openingButtonsW_B={keyShortcutButtons}>{keyShortcutMenu}</UmbrellaButton>
+                    <UmbrellaButton openingButtonsW_B={keyShortcutButtons} visible>
+                        {keyShortcutMenu}
+                    </UmbrellaButton>
                     {/* <UmbrellaButton
                         openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
                         umbrellaContent={<SubwayMap />}
@@ -96,7 +103,7 @@ function Game() {
                 </div>
             </div>
 
-            {upcomingStationsVisible && isVerticalLayout() && (
+            {upcomingStationsVisible && isVerticalLayout && (
                 <div className='upcoming-stations-vertical'>
                     <UpcomingStationsVertical />
                 </div>

@@ -27,7 +27,7 @@ kbd {
 }
 
 #key-label {
-    text-decoration: none;
+    /* text-decoration: none; */
     font-weight: 500;
     font-size: medium;
     width: max-content;

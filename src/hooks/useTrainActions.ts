@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { RefObject, useCallback } from 'react'
 
 import { GameMode } from '../contexts/SettingsContext'
 
@@ -7,41 +7,49 @@ import { Train } from '../logic/TrainManager'
 import { Direction, LineName } from '../logic/LineManager'
 
 type UseTrainActionsParams = {
-    train: Train
+    trainRef: RefObject<Train>
     setTrain: React.Dispatch<React.SetStateAction<Train>>
     gameState: GameState
     setGameState: (gs: GameState) => void
     gameMode: GameMode
 }
 
-export default function useTrainActions({ train, setTrain, gameState, setGameState, gameMode }: UseTrainActionsParams) {
-    const checkForWin = useCallback(() => {
-        if (train.getCurrentStation().equals(gameState.destinationStation)) {
-            setGameState(Object.assign(new GameState(), { ...gameState, isWon: true }))
-        }
-    }, [gameState, train, setGameState])
+export default function useTrainActions({ trainRef, setTrain, gameState, setGameState, gameMode }: UseTrainActionsParams) {
+    const checkForWin = useCallback(
+        (train: Train) => {
+            if (train.getCurrentStation().equals(gameState.destinationStation)) {
+                setGameState(Object.assign(new GameState(), { ...gameState, isWon: true }))
+            }
+        },
+        [gameState, setGameState]
+    )
 
     const advanceStation = useCallback(
         (numAdvanceStations: number) => {
-            if (!train) throw new Error('attempted to advanceStation - Train object is null')
+            const currentTrain = trainRef.current
+            if (!currentTrain) throw new Error('attempted to advanceStation - Train object is null')
+
+            const nextTrain = currentTrain.clone()
 
             if (numAdvanceStations > 1 && gameMode === GameMode.CONDUCTOR) {
-                train.advanceStationInc(numAdvanceStations)
+                nextTrain.advanceStationInc(numAdvanceStations)
             } else {
-                train.advanceStation()
+                nextTrain.advanceStation()
             }
 
-            setTrain(train.clone())
-            checkForWin()
+            setTrain(nextTrain)
+            checkForWin(nextTrain)
         },
-        [train, setTrain, gameMode, checkForWin]
+        [trainRef, setTrain, gameMode, checkForWin]
     )
 
     const transfer = useCallback(
         async (transferInput: number | LineName) => {
-            if (!train) throw new Error('attempted to transfer - Train object is null')
+            const currentTrain = trainRef.current
+            if (!currentTrain) throw new Error('attempted to transfer - Train object is null')
 
-            const currentStation = train.getCurrentStation()
+            const nextTrain = currentTrain.clone()
+            const currentStation = nextTrain.getCurrentStation()
 
             let selectedLine: LineName
             if (typeof transferInput === 'number') {
@@ -55,30 +63,36 @@ export default function useTrainActions({ train, setTrain, gameState, setGameSta
                 return
             }
 
-            const isValidTransfer = await train.transferToLine(selectedLine, currentStation)
+            const isValidTransfer = await nextTrain.transferToLine(selectedLine, currentStation)
 
             // DO THE TRANSFER
             if (isValidTransfer) {
-                setTrain(train.clone())
+                setTrain(nextTrain)
             }
         },
-        [train, setTrain]
+        [trainRef, setTrain]
     )
 
     const changeDirection = useCallback(
-        (direction?: Direction) => {
-            if (!train) throw new Error('attempted to changeDirection - Train object is null')
+        (direction?: Direction): void | Direction => {
+            const currentTrain = trainRef.current
+            if (!currentTrain) throw new Error('attempted to changeDirection - Train object is null')
 
-            // note: undefined here because passing in NULL_DIRECTION should literally make the train's direction NULL (for rider mode)
+            if (currentTrain.getDirection() === direction) return
+
+            const nextTrain = currentTrain.clone()
+
             if (direction === undefined) {
-                train.reverseDirection() // if no input, reverse
+                nextTrain.reverseDirection() // if no input, reverse
             } else {
-                train.setDirection(direction)
+                nextTrain.setDirection(direction)
             }
 
-            setTrain(train.clone())
+            setTrain(nextTrain)
+
+            return nextTrain.getDirection() // return the new direction so RiderMode knows where to move Passenger
         },
-        [train, setTrain]
+        [trainRef, setTrain]
     )
 
     return {

@@ -30,8 +30,6 @@ interface SettingsContextProps {
     upcomingStationsLayout: UpcomingStationsLayout
     setUpcomingStationsLayout: React.Dispatch<React.SetStateAction<UpcomingStationsLayout>>
     toggleUpcomingStationsLayout: () => void
-    isVerticalLayout: () => boolean
-    isHorizontalLayout: () => boolean
 
     numAdvanceStations: number
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
@@ -49,11 +47,12 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
     const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(UpcomingStationsLayout.HORIZONTAL)
 
-    const isVerticalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.VERTICAL, [upcomingStationsLayout])
-    const isHorizontalLayout = useCallback(() => upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL, [upcomingStationsLayout])
-
     const toggleUpcomingStationsLayout = useCallback(() => {
-        setUpcomingStationsLayout(isHorizontalLayout() ? UpcomingStationsLayout.VERTICAL : UpcomingStationsLayout.HORIZONTAL)
+        setUpcomingStationsLayout(
+            upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL
+                ? UpcomingStationsLayout.VERTICAL
+                : UpcomingStationsLayout.HORIZONTAL
+        )
     }, [upcomingStationsLayout])
 
     const value = useMemo(
@@ -66,8 +65,6 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
             upcomingStationsLayout,
             setUpcomingStationsLayout,
             toggleUpcomingStationsLayout,
-            isVerticalLayout,
-            isHorizontalLayout,
 
             gameMode,
             setGameMode,

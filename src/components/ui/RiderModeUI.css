@@ -58,6 +58,7 @@ need default top value for transition in all states (bc center = 100% - (73% - 1
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .uptown-button-offset {

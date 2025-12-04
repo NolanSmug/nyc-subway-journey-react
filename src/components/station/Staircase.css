@@ -3,12 +3,17 @@
     flex-direction: row;
     align-content: space-between;
     width: 100%;
-    position: relative;
-    z-index: 10;
 
+    position: relative;
+    left: 0;
     opacity: 1;
-    transition: opacity 1s ease, transform 0.5s ease;
+
     pointer-events: auto;
+}
+
+.staircase-container.selectable {
+    cursor: pointer;
+    z-index: 1;
 }
 
 .staircase-container.hidden {
@@ -21,12 +26,21 @@
     justify-content: flex-end;
 }
 
+.staircase-container.tunnel-expanded.passenger-walk-tunnel {
+    left: -52em;
+}
+
+.chrome .staircase-container.tunnel-expanded.passenger-walk-tunnel {
+    left: -42em;
+}
+
 .staircase {
     border-width: 1px 0px 1px 1px;
     border-color: var(--text-color);
     border-style: solid;
-    padding: 0.3em;
     border-radius: 0.1em;
+
+    padding: 0.3em;
     width: 5em;
     height: 4em;
     left: 0;
@@ -46,11 +60,13 @@
     flex-shrink: 0;
 }
 
+.chrome .staircase.tunnel-expanded {
+    width: 42em;
+}
+
 .staircase.tunnel-expanded>.steps {
     flex-direction: row;
 }
-
-/* ---------------------- */
 
 .steps {
     display: flex;
@@ -60,9 +76,8 @@
 }
 
 .step.first {
-    background-color: var(--text-color);
     height: 4.5em;
-    bottom: 3px;
+    /* bottom: 3px; */
 }
 
 .step {
@@ -72,23 +87,20 @@
     height: 4.4em;
     width: 0.5px;
     background-color: var(--text-color);
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .step.middle {
-    background-color: var(--text-color);
-    opacity: 0.7;
+    opacity: 0.5;
 }
 
 .step.smaller {
-    background-color: var(--text-color);
-    opacity: 0.5;
-    bottom: 3.5px;
+    opacity: 0.3;
+    /* bottom: 3.5px; */
 }
 
 .step.last {
-    background-color: var(--text-color);
-    opacity: 0.4
+    opacity: 0.2;
 }
 
 .staircase.right {

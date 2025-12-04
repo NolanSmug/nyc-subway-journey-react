@@ -38,7 +38,7 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
                     {isDowntown && active && (
                         <ActionButton
                             imageSrc={ARROW}
-                            imageClassName='arrow-left'
+                            rotateDegrees={180} // left arrow
                             label='Advance'
                             onClick={() => advanceStation(numAdvanceStations)}
                         />
@@ -47,7 +47,7 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
 
                 <div className={`train-car ${isDowntown ? 'flipped-layout' : ''}`}>
                     <div className='doors'>
-                        <Door ref={isUptown ? uptownDoorRef : null} isLeft hasPassenger={active} />
+                        <Door key='door-ll' ref={isUptown ? uptownDoorRef : downtownDoorRef} isLeft hasPassenger={active} />
                         <Door key='door-lr' />
                     </div>
                     <div className='windows' id='train-info'>
@@ -55,7 +55,7 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
                     </div>
 
                     <div className='doors'>
-                        <Door ref={isDowntown ? downtownDoorRef : null} key='door-rl' isLeft hasPassenger={active} />
+                        <Door key='door-rl' isLeft />
                         <Door key='door-rr' />
                     </div>
 
@@ -66,12 +66,7 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
 
                 <div className='train-advance-button'>
                     {isUptown && active && (
-                        <ActionButton
-                            imageSrc={ARROW}
-                            imageClassName='arrow-right'
-                            label='Advance'
-                            onClick={() => advanceStation(numAdvanceStations)}
-                        />
+                        <ActionButton imageSrc={ARROW} label='Advance' onClick={() => advanceStation(numAdvanceStations)} />
                     )}
                 </div>
             </div>

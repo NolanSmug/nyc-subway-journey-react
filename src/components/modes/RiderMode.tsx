@@ -4,22 +4,22 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Passenger from '../Passenger'
 
 import { useTrainContext } from '../../contexts/TrainContext'
+import { useUIContext } from '../../contexts/UIContext'
 import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { useGame } from '../../hooks/useGame'
 import { useUITheme } from '../../hooks/useCSSProperties'
+import { usePassenger } from '../../hooks/usePassenger'
+import { PassengerState } from '../../hooks/usePassenger'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
-import usePassengerActions, {
-    CENTER_PLATFORM_POS,
-    PassengerAction,
-    PassengerPosition,
-    PassengerState,
-} from '../../hooks/usePassengerActions'
 
 import { Direction, LineName } from '../../logic/LineManager'
 
 function RiderMode() {
+    const passenger = usePassenger()
+
     const { initializeGame } = useGame()
+    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
 
     const darkMode = useSettingsContext((state) => state.darkMode)
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
@@ -27,79 +27,120 @@ function RiderMode() {
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
     const setUpcomingStationsLayout = useSettingsContext((state) => state.setUpcomingStationsLayout)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
-
-    const [passengerPosition, setPassengerPosition] = useState<PassengerPosition>(CENTER_PLATFORM_POS)
-    const [passengerState, setPassengerState] = useState<PassengerState>(PassengerState.CENTER_PLATFORM)
+    const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
     const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
     const [selectedGroupIndex, setSelectedGroupIndex] = useState<number>(0)
-
-    const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
-    const { walkPassenger } = usePassengerActions({ passengerState, setPassengerPosition, setPassengerState })
+    const [isPassengerTransferring, setIsPassengerTransferring] = useState<boolean>(false)
 
     const uptownTrainDoorRef = useRef<HTMLDivElement>(null)
     const downtownTrainDoorRef = useRef<HTMLDivElement>(null)
-    const staircaseRef = useRef<HTMLDivElement>(null)
+    const staircaseRefs = useRef<(HTMLDivElement | null)[]>([])
 
-    const selectStaircaseLine = useCallback(
-        (index: number, line?: LineName): void => {
-            if (passengerState !== PassengerState.TRANSFER_PLATFORM) return
-            setSelectedGroupIndex(index)
+    const resetStates = useCallback(() => {
+        setInTransferTunnel(false)
+        setIsPassengerTransferring(false)
+        setSelectedGroupIndex(-1)
+    }, [setInTransferTunnel, setIsPassengerTransferring, setSelectedGroupIndex])
 
-            if (inTransferTunnel && line) {
-                transfer(line)
-                setTimeout(() => setInTransferTunnel(false), 25)
-                changeDirection(Direction.NULL_DIRECTION)
-            } else {
-                // console.log(selectedGroupIndex)
+    const resetGame = useCallback(() => {
+        initializeGame()
 
-                // handleTransferStaircase()
-                setTimeout(() => setInTransferTunnel(true), 0)
+        passenger.resetState()
+        resetStates()
+    }, [passenger, resetStates, initializeGame])
+
+    const animatePassengerDownStairs = useCallback(
+        async (index: number) => {
+            const targetStaircase = staircaseRefs.current[index]
+
+            if (!targetStaircase) {
+                console.error('Target staircase ref is missing for index:', index)
+                return
             }
+
+            await passenger.transferDownStairs(targetStaircase)
         },
-        [passengerState, inTransferTunnel, transfer, changeDirection]
+        [passenger]
     )
 
-    const handleBoardUptown = useCallback(() => {
+    const animatePassengerUpStairs = useCallback(async () => {
+        setIsPassengerTransferring(true)
+        await passenger.transferUpStairs()
+    }, [passenger])
+
+    const handleBoardUptown = useCallback(async () => {
+        if (passenger.passengerState === PassengerState.UPTOWN_TRAIN) return
+
         if (uptownTrainDoorRef.current) {
-            walkPassenger(PassengerAction.BOARD_TRAIN, PassengerState.UPTOWN_TRAIN, uptownTrainDoorRef.current)
+            await passenger.boardTrain(uptownTrainDoorRef.current, Direction.UPTOWN)
         }
         changeDirection(Direction.UPTOWN)
-    }, [walkPassenger, changeDirection])
+    }, [passenger, changeDirection])
 
-    const handleBoardDowntown = useCallback(() => {
+    const handleBoardDowntown = useCallback(async () => {
+        if (passenger.passengerState === PassengerState.DOWNTOWN_TRAIN) return
+
         if (downtownTrainDoorRef.current) {
-            walkPassenger(PassengerAction.BOARD_TRAIN, PassengerState.DOWNTOWN_TRAIN, downtownTrainDoorRef.current)
+            await passenger.boardTrain(downtownTrainDoorRef.current, Direction.DOWNTOWN)
         }
         changeDirection(Direction.DOWNTOWN)
-    }, [walkPassenger, changeDirection])
+    }, [passenger, changeDirection])
 
-    const handleDeboard = useCallback(() => {
-        walkPassenger(PassengerAction.DEBOARD_TRAIN, PassengerState.TRANSFER_PLATFORM)
+    const handleDeboard = useCallback(async () => {
+        await passenger.deboard()
         changeDirection(Direction.NULL_DIRECTION)
-    }, [walkPassenger, changeDirection])
+    }, [passenger, changeDirection])
 
-    // const handleTransferStaircase = useCallback(() => {
-    //     console.log(inTransferTunnel, staircaseRef.current)
-    //     if (staircaseRef.current) {
-    //         walkPassenger(PassengerAction.DOWN_STAIRCASE, PassengerState.TRANSFER_TUNNEL, staircaseRef.current)
-    //     }
-    // }, [walkPassenger])
+    const handleTransferSelect = useCallback(
+        async (line: LineName) => {
+            if (!inTransferTunnel || !line) return
+
+            setIsTransferMode(false)
+            await animatePassengerUpStairs()
+
+            transfer(line)
+            resetStates()
+            handleDeboard() // passenger goes back to transfer platform after completing transfer
+        },
+        [inTransferTunnel, transfer, animatePassengerUpStairs, resetStates, handleDeboard]
+    )
+
+    const handleStaircaseSelect = useCallback(
+        async (staircaseIndex: number) => {
+            if (staircaseIndex === undefined || staircaseIndex === null) return
+
+            setSelectedGroupIndex(staircaseIndex)
+            await animatePassengerDownStairs(staircaseIndex)
+
+            setInTransferTunnel(true)
+        },
+        [setInTransferTunnel, animatePassengerDownStairs]
+    )
+
+    const handleStaircaseDeselect = useCallback(() => {
+        handleDeboard()
+        resetStates()
+    }, [resetStates, handleDeboard])
 
     useKeyShortcuts({
         comboKeys: {
             'Shift+D': () => setDarkMode((prev) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev) => !prev),
-            'Shift+C': () => setGameMode((prev) => (prev === GameMode.CONDUCTOR ? GameMode.RIDER : GameMode.CONDUCTOR)),
+            'Shift+C': () => setGameMode(GameMode.CONDUCTOR),
         },
         singleKeys: {
             ArrowRight: () => advanceStation(numAdvanceStations),
             u: handleBoardUptown,
             d: handleBoardDowntown,
             t: handleDeboard,
-            r: initializeGame,
+            c: () => {
+                changeDirection() === Direction.UPTOWN ? handleBoardUptown() : handleBoardDowntown()
+            },
+            r: () => resetGame(),
+            Escape: () => inTransferTunnel && handleStaircaseDeselect(),
         },
-        enabled: passengerState !== PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true',
+        enabled: passenger.passengerState !== PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true', // don't allow shortcuts when passenger is in motion (except in dev mode)
     })
 
     useUITheme(darkMode)
@@ -112,15 +153,18 @@ function RiderMode() {
             handleBoardUptown={handleBoardUptown}
             handleBoardDowntown={handleBoardDowntown}
             handleDeboard={handleDeboard}
-            selectStaircaseLine={selectStaircaseLine}
+            onStaircaseSelect={handleStaircaseSelect}
+            onStaircaseDeselect={handleStaircaseDeselect}
+            onTransferSelect={handleTransferSelect}
             uptownTrainDoorRef={uptownTrainDoorRef}
             downtownTrainDoorRef={downtownTrainDoorRef}
-            staircaseRef={staircaseRef}
-            passengerState={passengerState}
+            staircaseRefs={staircaseRefs}
+            passengerState={passenger.passengerState}
             inTransferTunnel={inTransferTunnel}
+            isPassengerTransferring={isPassengerTransferring}
             selectedGroupIndex={selectedGroupIndex}
         >
-            <Passenger passengerState={passengerState} passengerPosition={passengerPosition} />
+            <Passenger ref={passenger.ref} passengerState={passenger.passengerState} />
         </RiderModeUI>
     )
 }

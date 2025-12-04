@@ -1,8 +1,8 @@
 import './Passenger.css'
-import React, { useCallback } from 'react'
+import React, { forwardRef, useCallback } from 'react'
 
 import { GameMode, Gender, useSettingsContext } from '../contexts/SettingsContext'
-import { PassengerPosition, PassengerState } from '../hooks/usePassengerActions'
+import { PassengerState } from '../hooks/usePassenger'
 
 import HUMAN_MALE_WHITE from '../images/human-male-w.svg'
 import HUMAN_MALE_BLACK from '../images/human-male-b.svg'
@@ -13,12 +13,10 @@ import HUMAN_OTHER_BLACK from '../images/human-other-b.svg'
 
 interface PassengerProps {
     passengerState: PassengerState
-    passengerPosition: PassengerPosition
 }
 
-const Passenger = ({ passengerState, passengerPosition }: PassengerProps) => {
+const Passenger = forwardRef<HTMLImageElement, PassengerProps>(({ passengerState }, ref) => {
     const darkMode = useSettingsContext((state) => state.darkMode)
-
     const passengerGender = useSettingsContext((state) => state.passengerGender)
     const setPassengerGender = useSettingsContext((state) => state.setPassengerGender)
     const activated = useSettingsContext((state) => state.gameMode === GameMode.RIDER)
@@ -47,14 +45,13 @@ const Passenger = ({ passengerState, passengerPosition }: PassengerProps) => {
 
     return (
         <img
+            ref={ref}
             src={getGenderSVG()}
             className={`passenger ${passengerState === PassengerState.WALKING ? 'walking' : ''}`}
-            style={{
-                transform: `translate(${passengerPosition?.x || 0}px, ${passengerPosition?.y || 0}px) translate(-50%, -50%)`,
-            }}
             onMouseDown={selectNewGender}
+            alt='passenger'
         />
     )
-}
+})
 
 export default React.memo(Passenger)

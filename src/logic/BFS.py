@@ -1,7 +1,7 @@
 """
 Nolan Cyr
 
-This is an live FastAPI service I wrote for OptimalRoute.tsx
+This is an live FastAPI service I wrote for OptimalRoute.tsx. It is NOT being hosted in this repo, this is just a copy of the code.
 
 Breadth First Search algorithm to find the shortest path between two given NYC subway stations
     creates a graph representation of the network

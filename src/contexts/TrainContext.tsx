@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useCallback, useMemo } from 'react'
+import React, { useState, ReactNode, useMemo, useRef, useEffect } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
 import { useGameStateContext } from './GameStateContext'
 import { useSettingsContext } from './SettingsContext'
@@ -19,20 +19,19 @@ const TrainContext = createContext<TrainContextProps | undefined>(undefined)
 export const TrainProvider = ({ children }: { children: ReactNode }) => {
     const [train, setTrain] = useState(() => new Train())
 
+    const trainRef = useRef(train)
+
+    useEffect(() => {
+        trainRef.current = train
+    }, [train])
+
     const { gameState, setGameState } = useGameStateContext()
     const gameMode = useSettingsContext((state) => state.gameMode)
 
-    // const updateTrainObject = useCallback((updates: Partial<Train>) => {
-    //     setTrain((prevTrain) => {
-    //         const newTrain = Object.create(Object.getPrototypeOf(prevTrain))
-    //         return Object.assign(newTrain, prevTrain, updates)
-    //     })
-    // }, [])
-
     const actions = useTrainActions({
-        train,
-        gameState,
+        trainRef,
         setTrain,
+        gameState,
         setGameState,
         gameMode,
     })
