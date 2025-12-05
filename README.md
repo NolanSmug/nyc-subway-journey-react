@@ -180,9 +180,7 @@ Upon winning the game, you can choose to reveal the **Optimal route**. This feat
 - The graph construction and algorithm are implemented in [BFS.py](./src/logic/BFS.py).
   - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com ](https://render.com/). The `BFS.py` in this repo is a copy of the code hosted there.
 
-> It can often be difficult to match the optimal route's path. Don't let this frustrate you! I plan on implementing heuristics to make the algorithm's route suggestions more accurate.
-
-
+> It can often be difficult to match the optimal route's path. Don't let this frustrate you! I plan on implementing heuristics to make the algorithm's route suggestions more realistic.
 
 <br><br>
 
