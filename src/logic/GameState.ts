@@ -35,17 +35,13 @@ export class GameState {
 
     public async resetGameState(): Promise<void> {
         this.startingLine = getRandomLine()
-        // this.startingLine = LineName.F_TRAIN
+        // this.startingLine = LineName.L_TRAIN
         this.isFirstTurn = true
 
         this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine))
         do {
             this.destinationStation = Station.getRandomStation(Station.allNycStations)
         } while (this.startingStation.equals(this.destinationStation))
-    }
-
-    public isEmpty(): boolean {
-        return this.startingLine == LineName.NULL_TRAIN
     }
 
     public async getStartDestStationIDs(): Promise<string[]> {

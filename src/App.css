@@ -4,10 +4,10 @@
     --bg-color-3: rgb(187 187 187);
     --bg-color-3-opacity: rgba(187, 187, 187, 0.9);
     --text-color: #222;
-    --train-text-color: rgba(255, 255, 255, 0.9);
+    --text-color-opaque: #22222280;
     --box-shadow: rgba(0, 0, 0, 0.04);
     --station-bg: rgb(27, 26, 26);
-    --train-car-bg: rgb(168, 168, 168);
+    --train-car-bg: rgb(200, 200, 200);
     --train-car-border: rgb(74, 74, 74);
     --overlay-opacity: 1;
     --transfer-opacity: 1;
@@ -19,7 +19,7 @@
     --bg-color-3: rgb(51 51 51);
     --bg-color-3-opacity: rgba(51, 51, 51, 0.9);
     --text-color: white;
-    --train-text-color: white;
+    --text-color-opaque: rgba(255, 255, 255, 0.5);
     /* --box-shadow: rgba(255, 255, 255, 0.1); */
     --train-car-bg: rgb(84, 83, 83);
     --train-car-border: rgb(6, 6, 6);
@@ -56,11 +56,15 @@ body {
     max-width: 1400px;
     padding: 2em;
     box-sizing: border-box;
-    margin-bottom: 4em;
     position: relative;
-    transition: transform 0.2s linear;
     overflow-y: none;
     overflow-x: visible;
+    margin-bottom: 4em;
+}
+
+.Game.rider-mode {
+    margin-bottom: 0;
+    padding-bottom: 1em;
 }
 
 .game-state-ui {
@@ -68,6 +72,7 @@ body {
     top: 0;
     left: 0;
     transition: top ease 0.2s, left ease 0.2s;
+    gap: 1em;
 }
 
 .game-state-ui.is-vertical-layout {

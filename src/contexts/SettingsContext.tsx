@@ -1,42 +1,91 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react'
-import { Direction } from '../logic/LineManager'
+import React, { useState, ReactNode, useMemo, useCallback } from 'react'
+import { useContextSelector, createContext } from 'use-context-selector'
+
+export enum UpcomingStationsLayout {
+    HORIZONTAL,
+    VERTICAL,
+}
+
+export enum GameMode {
+    CONDUCTOR = 'conductor',
+    RIDER = 'rider',
+}
+
+export enum Gender {
+    MALE,
+    FEMALE,
+    OTHER,
+}
 
 interface SettingsContextProps {
-    conductorMode: boolean
+    darkMode: boolean
+    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
+
+    gameMode: GameMode
+    setGameMode: React.Dispatch<React.SetStateAction<GameMode>>
+
+    upcomingStationsVisible: boolean
+    setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
+
+    upcomingStationsLayout: UpcomingStationsLayout
+    setUpcomingStationsLayout: React.Dispatch<React.SetStateAction<UpcomingStationsLayout>>
+    toggleUpcomingStationsLayout: () => void
+
     numAdvanceStations: number
-    defaultDirectionToggle: Direction
-    setConductorMode: React.Dispatch<React.SetStateAction<boolean>>
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
-    setDefaultDirectionToggle: React.Dispatch<React.SetStateAction<Direction>>
+    passengerGender: Gender
+    setPassengerGender: React.Dispatch<React.SetStateAction<Gender>>
 }
 
 const SettingsContext = createContext<SettingsContextProps | undefined>(undefined)
 
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
-    const [conductorMode, setConductorMode] = useState<boolean>(false)
-    const [numAdvanceStations, setNumAdvanceStations] = useState<number>(NaN)
-    const [defaultDirectionToggle, setDefaultDirectionToggle] = useState<Direction>(Direction.NULL_DIRECTION)
+    const [darkMode, setDarkMode] = useState<boolean>(true)
+    const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
+    const [gameMode, setGameMode] = useState<GameMode>(GameMode.RIDER)
+    const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
+    const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
+    const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(UpcomingStationsLayout.HORIZONTAL)
 
-    return (
-        <SettingsContext.Provider
-            value={{
-                conductorMode,
-                setConductorMode,
-                numAdvanceStations,
-                setNumAdvanceStations,
-                defaultDirectionToggle,
-                setDefaultDirectionToggle,
-            }}
-        >
-            {children}
-        </SettingsContext.Provider>
+    const toggleUpcomingStationsLayout = useCallback(() => {
+        setUpcomingStationsLayout(
+            upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL
+                ? UpcomingStationsLayout.VERTICAL
+                : UpcomingStationsLayout.HORIZONTAL
+        )
+    }, [upcomingStationsLayout])
+
+    const value = useMemo(
+        () => ({
+            darkMode,
+            setDarkMode,
+
+            upcomingStationsVisible,
+            setUpcomingStationsVisible,
+            upcomingStationsLayout,
+            setUpcomingStationsLayout,
+            toggleUpcomingStationsLayout,
+
+            gameMode,
+            setGameMode,
+            numAdvanceStations,
+            setNumAdvanceStations,
+            passengerGender,
+            setPassengerGender,
+        }),
+        [darkMode, gameMode, upcomingStationsVisible, upcomingStationsLayout, numAdvanceStations, passengerGender]
     )
+
+    return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>
 }
 
-export const useSettingsContext = () => {
-    const context = useContext(SettingsContext)
-    if (context === undefined) {
-        throw new Error('useSettingsContext must be used within a UIProvider')
-    }
+export const useSettingsContext = <T,>(selector: (state: SettingsContextProps) => T): T => {
+    const context = useContextSelector(SettingsContext, (state) => {
+        if (state === undefined) {
+            throw new Error('useSettingsContext must be used within a SettingsProvider')
+        }
+        return selector(state)
+    })
+
     return context
 }

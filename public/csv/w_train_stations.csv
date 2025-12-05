@@ -1,7 +1,7 @@
 stop_id,stop_name,transfers,borough
 R27,Whitehall St-South Ferry,1 R W,M
 R26,Rector St,R W,M
-R25,Cortlandt St,R W,M
+WTC,Cortlandt St,2 3 A C E R W,M
 R24,City Hall,R W,M
 CAN,Canal St,6 N Q R W J Z,M
 R22,Prince St,R W,M
@@ -16,6 +16,7 @@ R14,57 St-7 Av,N Q R W,M
 R13,5 Av/59 St,N R W,M
 R11,Lexington Av/59 St,N R W 4 5 6,M
 QBP,Queensboro Plaza,7 N W,Q
+R08,39 Av-Dutch Kills,N W,Q
 R06,36 Av,N W,Q
 R05,Broadway,N W,Q
 R04,30 Av,N W,Q

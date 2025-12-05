@@ -1,0 +1,160 @@
+.line-svgs-container {
+    display: flex;
+    column-gap: 0.25em;
+    opacity: 1;
+    transition: transform ease-in-out 0.1s;
+    transform: scaleY(1);
+}
+
+/* -------------- CONTAINER MODIFICATIONS -------------- */
+
+/* --- grouped --- */
+.line-svgs-container.grouped {
+    flex-wrap: wrap;
+    row-gap: 0.25em;
+    width: 5rem;
+    transform: scale(1);
+    transition: transform ease-in-out 0.1s;
+    /* ESSENTIAL: */
+    flex-shrink: 0;
+}
+
+.line-svgs-container.grouped.num-lines-1 {
+    align-items: center;
+    justify-content: center;
+}
+
+.line-svgs-container.grouped.num-lines-2 {
+    align-items: center;
+}
+
+.line-svgs-container.grouped.num-lines-3 {
+    flex-wrap: nowrap;
+    align-items: center;
+    position: relative;
+    width: 4.95em;
+}
+
+.line-svgs-container.grouped:not(.disabled):hover {
+    cursor: pointer;
+    transform: scale(1.25);
+}
+
+.line-svgs-container.grouped:not(.disabled):active {
+    transform: scale(0.95);
+}
+
+/* special line group cases for staircase display */
+.staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped.num-lines-3 {
+    right: 2.3em;
+}
+
+.staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped .line-svg-image:hover {
+    transform: scale(1);
+    /* only want to scale the whole group, ignore individual line image's hover scale */
+}
+
+/* --- wide --- */
+.line-svgs-container.wide {
+    min-width: 16rem !important;
+}
+
+/* --- small --- */
+.line-svgs-container.small {
+    column-gap: 0.15em;
+    flex-wrap: wrap;
+    row-gap: 0.15em;
+    min-width: 6rem;
+}
+
+/* --- (staircase tunnel stuff) --- */
+.tunnel-expanded .line-svgs-container {
+    opacity: 0;
+}
+
+.tunnel-expanded .line-svgs-container.show-flipped {
+    opacity: 1;
+    transition: opacity 0.5s ease, transform ease-in-out 0.1s;
+}
+
+/* override jiggle animation for when the tunnel has only 1 line */
+.tunnel-expanded .line-svgs-container.show-flipped .line-svg-image {
+    animation: jiggle 0.5s ease-in-out infinite;
+}
+
+/* --- vertical (not used yet) --- */
+.line-svgs-container.vertical {
+    flex-direction: column;
+    row-gap: 0.25em;
+}
+
+/* ----------------------------------------------------- */
+
+.line-svg-image {
+    height: 2rem;
+    width: 2rem;
+    opacity: 1;
+
+    --hover-scale: 1;
+    --active-scale: 1;
+
+    transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    transition: transform 0.1s ease-out;
+}
+
+.line-svg-image:active {
+    --active-scale: 0.90;
+}
+
+.line-svg-image:hover {
+    --hover-scale: 1.10;
+    cursor: pointer;
+    transition: transform ease-in-out 0.1s;
+}
+
+.line-svg-image.jiggle-animation {
+    animation: jiggle 0.5s ease-in-out infinite;
+}
+
+.disabled .line-svg-image {
+    pointer-events: none;
+    animation: none;
+}
+
+.small {
+    height: 1rem;
+    width: 1rem;
+}
+
+.chrome .small {
+    height: 0.9rem;
+    width: 0.9rem;
+}
+
+.chrome .line-svg-image {
+    zoom: 0.9;
+}
+
+
+/* tedious, but necessary to keep animation "smooth" */
+@keyframes jiggle {
+    0% {
+        transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+
+    25% {
+        transform: translateY(1px) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+
+    50% {
+        transform: translateY(-1px) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+
+    75% {
+        transform: translateY(1px) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+
+    100% {
+        transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
+    }
+}

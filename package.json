@@ -9,7 +9,8 @@
         "react-dom": "^18.3.1",
         "react-modal": "^3.16.3",
         "react-scripts": "^5.0.1",
-        "typescript": "^4.9.5"
+        "typescript": "^4.9.5",
+        "use-context-selector": "^2.0.0"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -34,7 +35,8 @@
         "@types/react": "^18.0.0",
         "@types/react-dom": "^18.3.1",
         "@types/react-modal": "^3.16.3",
-        "nth-check": "2.0.1"
+        "nth-check": "2.0.1",
+        "prettier": "^3.5.3"
     },
     "packageManager": "yarn@3.6.4"
 }

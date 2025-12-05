@@ -1,0 +1,155 @@
+h2 {
+    user-select: none;
+    font-size: 1.6em;
+}
+
+.train-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75em;
+}
+
+.arrow {
+    height: 2em;
+    width: 2em;
+}
+
+.arrow-up {
+    transition: transform 0.1s linear;
+    transform: rotate(270deg);
+}
+
+.arrow-down {
+    transition: transform 0.1s linear;
+    transform: rotate(90deg);
+}
+
+.arrow-left {
+    transform: rotate(-180deg);
+}
+
+.arrow-left:hover,
+.arrow-up:hover,
+.arrow-down:hover {
+    transform: scale(1.05);
+}
+
+.show {
+    visibility: visible;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.train-car {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: var(--train-car-bg);
+    max-width: 100%;
+    min-width: 20em;
+    padding: 1em 1em 0 1em;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 1em 1em 0.2em 0.2em;
+    box-shadow: 0 0.5em 1em var(--box-shadow);
+    gap: 0.3em;
+}
+
+.train-car::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 1px;
+    right: 1px;
+    height: 1px;
+    background-color: var(--train-car-border);
+}
+
+.train-car.win-display {
+    box-shadow: 0 0.5em 0.75em rgba(90, 232, 149, 0.3), 0 0 5em rgba(90, 232, 149, 0.2);
+    border-radius: 1em 1em 0.2em 0.2em;
+    margin-bottom: 2em;
+}
+
+.doors {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    padding: 0.5em 1em 0 1em;
+    gap: 0;
+    align-self: stretch;
+}
+
+.windows {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+    padding-bottom: 1.2em;
+}
+
+.windows#train-info {
+    min-width: 34em;
+    overflow: visible;
+}
+
+/* Windows styling */
+/* .train-car .train-direction,
+.train-car .train-type,
+.train-car .line-svgs-container img.line-svg-image {
+    border: 1px solid var(--train-car-border);
+    padding: 0.3em;
+    border-radius: 0.1em;
+} */
+
+.train-car .train-direction,
+.train-car .train-type,
+.train-car .line-svgs-container {
+    border: 1px solid var(--train-car-border);
+    padding: 0.3em;
+    border-radius: 0.1em;
+
+    overflow: hidden;
+    flex-grow: 0.2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.train-car .line-svgs-container img.line-svg-image {
+    border-radius: 0.2em;
+    padding: 0.43em;
+    cursor: default;
+    /* transform: none; */
+}
+
+.front-window {
+    border: 1px solid var(--train-car-border);
+    padding: 0.3em;
+    border-radius: 0.1em;
+}
+
+.front-window:before {
+    content: '\00a0\00a0\00a0\00a0\00a0\00a0';
+}
+
+.is-null-direction {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* .front-light {
+    margin-top: 3.5em;
+    width: 3em;
+    height: 1em;
+    background-color: none;
+    box-shadow: 2.25em -1em 2em #f3ff94;
+    transition: box-shadow 1s ease-in-out;
+    z-index: -1;
+} */

@@ -49,7 +49,7 @@ export enum LineType {
     LOCAL = 'Local',
 }
 
-export const lineTypes: Map<LineName, LineType> = new Map([
+export const LINE_TYPES: Map<LineName, LineType> = new Map([
     [LineName.NULL_TRAIN, LineType.NONE],
     [LineName.ONE_TRAIN, LineType.LOCAL],
     [LineName.TWO_TRAIN, LineType.EXPRESS],
@@ -78,30 +78,42 @@ export const lineTypes: Map<LineName, LineType> = new Map([
     [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
 ])
 
+// TODO: repOk() implementation (see TrainManger.ts)
+
 export function getRandomLine(): LineName {
-    const lines = Object.values(LineName)
-    let randomLine = LineName.NULL_TRAIN
+    const lines: LineName[] = Object.values(LineName)
+    let randomLine: LineName = LineName.NULL_TRAIN
     do {
         randomLine = lines[Math.floor(Math.random() * lines.length)]
     } while (randomLine === LineName.NULL_TRAIN)
 
+    // can't start with special A train (weird transfer logic occurs)
+    // TODO: logic has not been implemented yet for A train junction split
+    if (
+        randomLine === LineName.A_LEFFERTS_TRAIN ||
+        randomLine === LineName.A_ROCKAWAY_MOTT_TRAIN ||
+        randomLine === LineName.S_TRAIN_ROCKAWAY
+    ) {
+        randomLine = LineName.A_TRAIN
+    }
+
     return randomLine
 }
 
-export function lineArrayEquals(arrayA: LineName[], arrayB: LineName[]): boolean {
-    if (arrayA.length != arrayB.length) return false
+export function areLineSetsEqual(arrayA: LineName[], arrayB: LineName[], strictOrder = false): boolean {
+    if (arrayA.length !== arrayB.length) return false
 
-    for (let i = 0; i < arrayA.length; i++) {
-        if (arrayA[i] !== arrayB[i]) {
-            return false
-        }
+    if (strictOrder) {
+        return arrayA.every((line, index) => line === arrayB[index])
     }
 
-    return true
+    const setA: Set<LineName> = new Set(arrayA)
+
+    return arrayB.every((line) => setA.has(line))
 }
 
 export function getLineType(line: LineName): LineType {
-    return lineTypes.get(line) ?? LineType.NONE
+    return LINE_TYPES.get(line) ?? LineType.NONE
 }
 
 interface LineDirectionDetails {
@@ -113,7 +125,7 @@ interface LineDirectionDetails {
     }
 }
 
-export const lineDirectionsDetailed: Map<LineName, LineDirectionDetails> = new Map([
+export const LINE_DIRECTION_LABELS: Map<LineName, LineDirectionDetails> = new Map([
     [
         LineName.ONE_TRAIN,
         {
@@ -406,10 +418,14 @@ export const lineDirectionsDetailed: Map<LineName, LineDirectionDetails> = new M
         {
             boroughSpecificLabels: {
                 [Borough.MANHATTAN]: {
-                    [Direction.DOWNTOWN]: '8 Avenue-bound',
-                    [Direction.UPTOWN]: 'Brooklyn-bound',
+                    [Direction.DOWNTOWN]: 'Brooklyn-bound',
+                    [Direction.UPTOWN]: '8 Avenue-bound',
                 },
                 [Borough.BROOKLYN]: {
+                    [Direction.DOWNTOWN]: 'Rockaway Parkway-bound',
+                    [Direction.UPTOWN]: 'Manhattan-bound',
+                },
+                [Borough.QUEENS]: {
                     [Direction.DOWNTOWN]: 'Rockaway Parkway-bound',
                     [Direction.UPTOWN]: 'Manhattan-bound',
                 },
@@ -511,13 +527,13 @@ export const lineDirectionsDetailed: Map<LineName, LineDirectionDetails> = new M
                     [Direction.DOWNTOWN]: 'Brooklyn-bound',
                     [Direction.UPTOWN]: 'Jamaica Center-bound',
                 },
-                [Borough.MANHATTAN]: {
-                    [Direction.DOWNTOWN]: 'Brooklyn-bound',
-                    [Direction.UPTOWN]: 'Uptown',
-                },
                 [Borough.BROOKLYN]: {
-                    [Direction.DOWNTOWN]: 'Jamaica Center-bound',
-                    [Direction.UPTOWN]: 'Manhattan-bound',
+                    [Direction.DOWNTOWN]: 'Manhattan-bound',
+                    [Direction.UPTOWN]: 'Queens-bound',
+                },
+                [Borough.MANHATTAN]: {
+                    [Direction.DOWNTOWN]: 'Broad St-bound',
+                    [Direction.UPTOWN]: 'Uptown',
                 },
             },
         },

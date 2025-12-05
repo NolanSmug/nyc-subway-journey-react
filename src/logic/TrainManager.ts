@@ -1,4 +1,4 @@
-import { LineName, LineType, Borough, Direction, lineDirectionsDetailed, getLineType } from './LineManager'
+import { LineName, LineType, Borough, Direction, LINE_DIRECTION_LABELS, getLineType } from './LineManager'
 import { Station } from './StationManager'
 import { getStationsForLine } from './SubwayMap'
 
@@ -28,13 +28,22 @@ export class Train {
         this.scheduledStops = scheduledStops
     }
 
+    public clone(): Train {
+        const newTrain = new Train()
+
+        Object.assign(newTrain, this)
+
+        return newTrain
+    }
+
     // LineName
     public getLine(): LineName {
         return this.currentLine
     }
 
-    public setLine(newLineName: LineName) {
+    public setLine(newLineName: LineName): void {
         this.currentLine = newLineName
+        this.repOk()
     }
 
     public isLineNull(): boolean {
@@ -61,6 +70,7 @@ export class Train {
 
     public setDirection(newDirection: Direction): Train {
         this.direction = newDirection
+        this.repOk()
         return this
     }
 
@@ -97,7 +107,7 @@ export class Train {
     }
 
     public findDirectionLabel(direction: Direction, line: LineName, currentBorough?: Borough): string {
-        const detailedLineDirection = lineDirectionsDetailed.get(line)
+        const detailedLineDirection = LINE_DIRECTION_LABELS.get(line)
 
         if (detailedLineDirection) {
             if (currentBorough && detailedLineDirection.boroughSpecificLabels?.[currentBorough]) {
@@ -150,14 +160,11 @@ export class Train {
 
     // Current Stations
     public getCurrentStation(): Station {
-        if (this.scheduledStops.length === 0) {
-            throw new Error('No scheduled stops found in dataset. Please contact developer')
-        }
         return this.scheduledStops[this.currentStationIndex]
     }
 
     public getCurrentStationIndex(): number {
-        return this.currentStationIndex ?? 0 // Uses 0 if `currentStationIndex` is undefined
+        return this.currentStationIndex
     }
 
     public setCurrentStationByIndex(stationIndex: number): void {
@@ -175,15 +182,13 @@ export class Train {
     public setCurrentStation(station: Station) {
         const index: number = this.scheduledStops.findIndex((stop) => stop.getId() === station.getId())
 
-        if (index === -1) {
-            throw new Error('Station not found in dataset. Please contact developer')
-        } else {
-            this.currentStationIndex = index
-        }
+        this.currentStationIndex = index
+        this.repOk()
     }
 
     public setCurrentStationIndexByID(stationID: string, newScheduledStops: Station[]) {
         this.currentStationIndex = newScheduledStops.findIndex((station) => station.getId() === stationID)
+        this.repOk()
     }
 
     public static getCurrentStationIndexByID(stationID: string, scheduledStops: Station[]): number {
@@ -205,14 +210,16 @@ export class Train {
 
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
-            this.setScheduledStops(await getStationsForLine(newLine)) 
+            this.setScheduledStops(await getStationsForLine(newLine))
             this.setCurrentStationIndexByID(currentStation.getId(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)
             this.downtownLabel = this.findDirectionLabel(Direction.DOWNTOWN, newLine)
 
+            this.repOk()
             return true
         }
+
         return false // not a valid requested transfer
     }
 
@@ -227,6 +234,7 @@ export class Train {
             ((this.currentStationIndex === 0 && this.direction === Direction.DOWNTOWN) ||
                 (this.currentStationIndex === lastStationIndex && this.direction === Direction.UPTOWN)) &&
             !this.isAtRockawayBranch
+        this.repOk()
     }
 
     public advanceStation(): Train {
@@ -245,6 +253,8 @@ export class Train {
         }
 
         this.setCurrentStationByIndex(newStationIndex)
+        this.repOk()
+
         return this
     }
 
@@ -265,7 +275,32 @@ export class Train {
             return this // Out of bounds
         }
 
+        this.repOk()
         this.setCurrentStationByIndex(newStationIndex)
+
         return this
+    }
+
+    private repOk(): void {
+        function assert(exp: boolean, msg?: string): void {
+            if (!exp) {
+                throw new Error(msg)
+            }
+        }
+
+        // sometimes we want the train line to be null (examples below), so assert less conditions
+        if (this.isLineNull()) {
+            assert(this.direction === Direction.NULL_DIRECTION, 'A null train must be in NULL_DIRECTION')
+        } else {
+            assert(this.scheduledStops.length > 0, 'Active train must have scheduled stops')
+            assert(
+                this.currentStationIndex >= 0 && this.currentStationIndex < this.scheduledStops.length,
+                `currentStationIndex (${this.currentStationIndex} is out of bounds for scheduledStops of length ${this.scheduledStops.length})`
+            )
+        }
+        // When we like NULL_TRAIN
+        //  - SubwayMap will load all_stations if isLineNull()
+        //  - The OptimalRoute UI AND API. The entire API backend will break if it can't utilize NULL_TRAIN
+        //
     }
 }

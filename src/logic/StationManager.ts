@@ -2,22 +2,32 @@ import { LineName, Borough } from './LineManager'
 import { SubwayMap } from './SubwayMap'
 
 export class Station {
-    private id: string = '000'
-    private name: string = 'NULL_STATION'
-    private transfers: LineName[] = [LineName.NULL_TRAIN]
-    private borough: Borough = Borough.STATEN_ISLAND
+    private id: string
+    private name: string
+    private transfers: LineName[]
+    private borough: Borough
 
     static allNycStations: Station[] = []
     static async initializeAllStations(): Promise<void> {
-        if (this.allNycStations.length === 0) {
-            this.allNycStations = await SubwayMap.getAllLineStations(LineName.NULL_TRAIN)
-            console.log('All NYC stations initialized:', this.allNycStations)
-        } else {
+        if (this.allNycStations.length > 0) {
             console.log('All NYC stations already initialized.')
+            return
         }
+
+        this.allNycStations = await SubwayMap.getAllLineStations(LineName.NULL_TRAIN)
+        console.log('All NYC stations initialized:', this.allNycStations)
     }
 
-    static NULL_STATION: Station = new Station('000', 'NULL_STATION', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
+    static getRandomStation(stations: Station[]): Station {
+        if (stations.length === 0) {
+            throw new Error('Station vector is empty')
+        }
+        const randomIndex = Math.floor(Math.random() * stations.length)
+
+        return stations[randomIndex]
+    }
+
+    static NULL_STATION: Station = new Station('000', '', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
 
     constructor(id: string, name: string, transfers: LineName[], borough: Borough) {
         this.id = id
@@ -75,22 +85,13 @@ export class Station {
         return this.transfers
     }
 
-    public static getStationByID(stationID: string) {
-        for (const station of Station.allNycStations) {
-            if (station.id === stationID) {
-                return station
-            }
-        }
+    // public static getStationByID(stationID: string) {
+    //     for (const station of Station.allNycStations) {
+    //         if (station.id === stationID) {
+    //             return station
+    //         }
+    //     }
 
-        return new Station('000', 'NULL_STATION', [LineName.NULL_TRAIN], Borough.MANHATTAN)
-    }
-
-    static getRandomStation(stations: Station[]): Station {
-        if (stations.length === 0) {
-            throw new Error('Station vector is empty')
-        }
-        const randomIndex = Math.floor(Math.random() * stations.length)
-
-        return stations[randomIndex]
-    }
+    //     return this.NULL_STATION
+    // }
 }

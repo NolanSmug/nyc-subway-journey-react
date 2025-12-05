@@ -1,0 +1,18 @@
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+#setting-label {
+    font-weight: 500;
+    font-size: medium;
+    text-decoration: overline;
+    padding: 0.4em 0.3em 0.3em 0.3em;
+}
+
+#setting-label.disabled {
+    opacity: 0.5;
+    text-decoration: line-through;
+}

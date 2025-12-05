@@ -1,29 +1,48 @@
+import './App.css'
 import React, { useEffect } from 'react'
-import GameStateUI from './components/GameStateUI'
-import UmbrellaButton from './components/UmbrellaButton'
-import SettingsMenu from './components/SettingsMenu'
-import UpcomingStationsVertical from './components/UpcomingStationsVertical'
-import UpcomingStationsHorizontal from './components/UpcomingStationsHorizontal'
-import KeyShortcutMenu from './components/KeyShortcutMenu'
-import OptimalRouteUI from './components/OptimalRouteUI'
+
+import LandingScreen from './components/ui/LandingScreen'
+import OptimalRouteUI from './components/ui/OptimalRouteUI'
+import ConductorMode from './components/modes/ConductorMode'
+import RiderMode from './components/modes/RiderMode'
+import UmbrellaButton from './components/common/UmbrellaButton'
+import SettingsMenu from './components/common/SettingsMenu'
+import UpcomingStationsHorizontal from './components/common/UpcomingStationsHorizontal'
+import UpcomingStationsVertical from './components/common/UpcomingStationsVertical'
+import KeyShortcutMenu from './components/keyboard/KeyShortcutMenu'
 // import SubwayMap from './components/SubwayMap'
 
-import './App.css'
 import { useUIContext } from './contexts/UIContext'
-import { useGameContext } from './contexts/GameContext'
-import { useSettingsContext } from './contexts/SettingsContext'
+import { useTrainContext } from './contexts/TrainContext'
+import { useGameStateContext } from './contexts/GameStateContext'
+import { useSettingsContext, GameMode, UpcomingStationsLayout } from './contexts/SettingsContext'
+import { useGame } from './hooks/useGame'
+
+import { useLineFavicon } from './hooks/useLineFavicon'
 
 import GEAR_BLACK from './images/settings-icon-b.svg'
 import GEAR_WHITE from './images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
 import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
-import LandingScreen from './components/LandingScreen'
 
-function App() {
-    const { isTransferMode, setIsTransferMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isLandingPage } =
-        useUIContext()
-    const { conductorMode } = useSettingsContext()
-    const { train, gameState, initializeGame } = useGameContext()
+const settingsMenu = <SettingsMenu />
+const keyShortcutMenu = <KeyShortcutMenu />
+const settingsButtons = [GEAR_WHITE, GEAR_BLACK]
+const keyShortcutButtons = [KEYBOARD_WHITE, KEYBOARD_BLACK]
+
+function Game() {
+    const { initializeGame } = useGame()
+    const { gameState } = useGameStateContext()
+    const isLineNull = useTrainContext((state) => state.train.isLineNull())
+
+    const isTransferMode = useUIContext((state) => state.isTransferMode)
+    const isLandingPage = useUIContext((state) => state.isLandingPage)
+    const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
+
+    const gameMode = useSettingsContext((state) => state.gameMode)
+    const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible)
+    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
+    const isVerticalLayout = !isHorizontalLayout
 
     const handleClickAway = (e: React.MouseEvent) => {
         const transferLinesContainer = document.querySelector('.line-svgs-container')
@@ -36,10 +55,17 @@ function App() {
         initializeGame()
     }, [initializeGame])
 
-    if (train.isLineNull() || gameState.isEmpty())
-        return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
+    useLineFavicon()
 
-    // console.log(gameState.isWon)
+    if (isLineNull) return <>Sorry, something went wrong on our end and we can't display the page right now. Try again later?</>
+
+    if (gameState.isWon) {
+        return (
+            <div className='Game'>
+                <OptimalRouteUI />
+            </div>
+        )
+    }
 
     return (
         <>
@@ -51,54 +77,43 @@ function App() {
 
             {isLandingPage && <LandingScreen />}
 
-            <div className='Game'>
-                {gameState.isWon && <OptimalRouteUI />}
-                {!gameState.isWon && upcomingStationsVisible && isHorizontalLayout() && (
-                    <UpcomingStationsHorizontal
-                        stations={train.getScheduledStops()}
-                        currentStationID={train.getCurrentStation().getId()}
-                        currentStationIndex={train.getCurrentStationIndex()}
-                    />
-                )}
-                <div className={`game-state-ui ${isVerticalLayout() && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
-                    {!gameState.isWon && <GameStateUI />}
+            <div className={`Game ${gameMode}-mode`}>
+                {upcomingStationsVisible && isHorizontalLayout && <UpcomingStationsHorizontal />}
+                <div className={`game-state-ui ${isVerticalLayout && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
+                    {gameMode === GameMode.CONDUCTOR && <ConductorMode />}
+                    {gameMode === GameMode.RIDER && <RiderMode />}
                 </div>
             </div>
 
             <div className='umbrella-menus'>
                 <div className='settings-umbrella'>
-                    <UmbrellaButton
-                        openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
-                        umbrellaContent={<SettingsMenu />}
-                        below
-                        visible
-                    />
+                    <UmbrellaButton openingButtonsW_B={settingsButtons} below visible>
+                        {settingsMenu}
+                    </UmbrellaButton>
                 </div>
                 <div className='shortcuts-umbrella'>
-                    <UmbrellaButton
-                        openingButtonsW_B={[KEYBOARD_WHITE, KEYBOARD_BLACK]}
-                        umbrellaContent={<KeyShortcutMenu />}
-                        visible={conductorMode}
-                    />
+                    <UmbrellaButton openingButtonsW_B={keyShortcutButtons} visible>
+                        {keyShortcutMenu}
+                    </UmbrellaButton>
                     {/* <UmbrellaButton
                         openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
                         umbrellaContent={<SubwayMap />}
-                        visible={!conductorMode}
+                        visible={!gameMode}
                     /> */}
                 </div>
             </div>
 
-            {!gameState.isWon && upcomingStationsVisible && isVerticalLayout() && (
+            {upcomingStationsVisible && isVerticalLayout && (
                 <div className='upcoming-stations-vertical'>
-                    <UpcomingStationsVertical
-                        stations={train.getScheduledStops()}
-                        currentStationID={train.getCurrentStation().getId()}
-                        currentStationIndex={train.getCurrentStationIndex()}
-                    />
+                    <UpcomingStationsVertical />
                 </div>
             )}
         </>
     )
+}
+
+function App() {
+    return <Game />
 }
 
 export default App

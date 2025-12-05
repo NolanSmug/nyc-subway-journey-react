@@ -1,71 +1,72 @@
-# NYC Subway Journey Game React App
+# NYC Subway Journey Game 
 
 
-- [NYC Subway Journey Game React App](#nyc-subway-journey-game-react-app)
-    - [Screenshots](#screenshots)
+<img src='./src/images/subway-journey.gif' width='100%'>
+
+| ![cover screenshot 1](./src/images/screenshot-cover-1.png) | ![cover screenshot 2](./src/images/screenshot-cover-2.png) |
+| -----------------------------------------------------------| ---------------------------------------------------------- |
+
+- [NYC Subway Journey Game](#nyc-subway-journey-game)
+  - [Developer's note](#developers-note)
 - [Running the project](#running-the-project)
   - [Play online](#play-online)
-  - [Running the project locally with Docker](#running-the-project-locally-with-docker)
-      - [1. Pull the Docker image](#1-pull-the-docker-image)
-      - [2. Run the Docker container](#2-run-the-docker-container)
-      - [3. Open the application](#3-open-the-application)
-  - [Running the project locally with Node.js](#running-the-project-locally-with-nodejs)
-      - [1. Clone the repository](#1-clone-the-repository)
-      - [2. Install dependencies and run project](#2-install-dependencies-and-run-project)
-  - [How to play](#how-to-play)
-    - [Initialization](#initialization)
-    - [Gameplay](#gameplay)
+  - [Running locally with Docker](#running-locally-with-docker)
+  - [Running locally with Node.js](#running-locally-with-nodejs)
+- [How to play](#how-to-play)
+  - [Initialization](#initialization)
+  - [Gameplay](#gameplay)
     - [Configuration settings](#configuration-settings)
-    - [Conductor mode](#conductor-mode)
     - [Keyboard shortcuts](#keyboard-shortcuts)
+- [Game modes](#game-modes)
+  - [Rider mode](#rider-mode)
+  - [Conductor mode](#conductor-mode)
+- [Optimal route](#optimal-route)
 
+## Developer's note
 
-### Screenshots
-| ![cover screenshot 1](./src/images/cover-screenshot-1.png) | ![cover screenshot 2](./src/images/cover-screenshot-2.png) |
-| -----------------------------------------------------------| ---------------------------------------------------------- |
-<br>
+This is a "from-scratch" project. All components, animations, layout, and game logic are custom-built. I intentionally avoided third-party UI libraries or game engines so I could have more control over my project. I have learned so much from building it this way.
 
+Everything from rider movement and staircase mechanics to platform interactions and SVG animations is run by my own TypeScript logic (3,000+ lines) and *extensive* custom CSS (~1,500 lines). I even implemented my own coordinate system for passenger pathfinding and wrote a Python BFS backend for route calculations. Even tiny details, like button behaviors and icon rendering, are manually programmed.
 
 # Running the project
 
-
 ## Play [online](https://nolansmug.github.io/)
-- Currently hosted on GitHub Pages
+- Built with Docker in CI/CD and deployed as static files to GitHub Pages.
 
-## Running the project locally with Docker
+
+## Running locally with Docker
 
 > Make sure you have Docker [installed](https://www.docker.com/get-started)
-#### 1. Pull the Docker image 
+
+**1. Pull the Docker image**
 ```bash
 docker pull nanosmug/nyc-subway-journey
 ```
 > Image on Docker Hub [here](https://hub.docker.com/r/nanosmug/nyc-subway-journey)
 
 
-#### 2. Run the Docker container
+**2. Run the Docker container**
 ```bash
 docker run -p 3000:3000 nanosmug/nyc-subway-journey
 ```
 
-#### 3. Open the application
+**3. Open the application**
 Open your browser and go to [http://localhost:3000](http://localhost:3000)
 
 > If the app doesn't load, make sure Docker is [installed](https://www.docker.com/get-started) and running.  
 > 
-> Reach me via [email](mailto:nolangcyr@gmail.com) with any issues. Bugs are inevitable!
+> Reach me via [email](mailto:nolangcyr@gmail.com) with any issues.
 
-<br>
-
-## Running the project locally with Node.js
+## Running locally with Node.js
 > Make sure you have `Node.js` [installed](https://nodejs.org/en/download) 
 
-#### 1. Clone the repository
+**1. Clone the repository**
 ```bash
 git clone https://github.com/NolanSmug/nyc-subway-journey-react
 cd nyc-subway-journey-react
 ```
 
-#### 2. Install dependencies and run project
+**2. Install dependencies and run project**
 - **Npm**
   > Make sure you have `npm` [installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
   ```bash
@@ -80,17 +81,17 @@ cd nyc-subway-journey-react
   yarn start
   ```
 
-## How to play
+# How to play
 You are placed into a random NYC subway station. Your objective is to reach another randomly given station by utilizing your knowledge of the NYC subway system.
 
-### Initialization
+## Initialization
 1. **Random starting point:**
 - At the beginning of the game, you are assigned:
-  - A `starting station` 
-  - A `destination station` (see [all_stations.csv](./public/csv/all_stations.csv))
-  - A `starting line` (e.g., A, 2, N,...)
+  - A **starting station**
+  - A **destination station** (see [all_stations.csv](./public/csv/all_stations.csv))
+  - A **starting line** (e.g., A, 2, N,...)
 2. **Choosing a direction:**
-- Before you can move, you must choose a `starting direction` (e.g. UPTOWN, DOWNTOWN) by either: 
+- Before you can move, you must choose a **direction** (e.g. `UPTOWN`, `DOWNTOWN`) by either: 
    - Clicking the `[Toggle direction]` text on the subway car, or 
    - Clicking `Change direction` button. 
 - The `Advance` button will remain disabled until a direction is chosen.
@@ -98,17 +99,18 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 3. **Ready to move:**
 - Once a direction is selected, you are able to `Advance` and `Transfer`. 
 
-### Gameplay
+## Gameplay
 
 1. **Navigating the subway:**
-- The game UI displays your `current station` and `destination station`. Like you would in real life, use the according actions to progress:
+   - **Rider Mode:** Interact with the environment (doors, stairs) to move your character.
+   - **Conductor Mode:** Use the UI buttons to control the train directly.
 
-   **Buttons:**
-  -  `Advance station` – Advance 1 station (see `conductor mode` to control this value)
-  -  `Change direction` – Reverses your current direction. Each line has specific `UPTOWN` and `DOWNTOWN` labels.
-  -  `Transfer lines` –  Click on a subway line at your `current station` to switch to that line and continue your journey in the same direction.
-      > **Note:** Using this button is optional. You can directly click on a subway line icon at the current station to switch to it as well.
-  - `Refresh` – Refreshes the current game with new starting and destination stations.  
+   **Actions:**
+     -  `Advance station`: Advance 1 station (see [conductor mode](#conductor-mode) to control this value)
+     -  `Change direction`: Reverses your current direction. Each line has specific uptown and downtown labels.
+     -  `Transfer lines`: Click on a subway line at your **current station** to switch to that line and continue your journey (slightly different in [rider mode](#rider-mode)).
+        > **Note:** Using this button is optional. You can directly click on a subway line icon at the current station to switch to it as well.
+     - `Refresh` – Refreshes the current game with new starting and destination stations.  
 <br>
 
 2. **Goal:**
@@ -117,37 +119,70 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 ### Configuration settings
 - **`Theme`** – Toggle light/dark mode
 - **`Upcoming stations`** – Toggle upcoming stations visibility
-- **`Upcoming stations layout`** – Toggle the upcoming stations view between vertical or horizontal
+- **`Upcoming stations layout`** – Toggle the upcoming stations view between **vertical** or **horizontal**
 - **`Conductor mode`** – Enable conductor mode (default is rider mode)
-
-
-### Conductor mode
-Think of conductor mode as a sort of a professional feature mode. When enabled, users are able to:  
-
-1. Advance an input number of stations (with "reset to 1" button)
-2. Configure the "default" `starting direction` upon completing a transfer
-   - `Uptown`
-   - `Select direction` (user is given choice of direction each time)
-   - `Downtown`
-3. View all available [keyboard shortcuts](#keyboard-shortcuts)
-
-| ![conductor mode](./src/images/conductor-mode-screenshot.png) |
-| ------------------------------------------------------------- | 
-
-> The "Uptown" text fades shortly after each toggle click.
 
 ### Keyboard shortcuts
 - `→` Advance station
 - `t` Transfer lines
 - `c` Change direction
+- `u` Change direction UPTOWN
+- `d` Change direction DOWNTOWN
 - `r` Reset game
-- `+` Increase advance count
-- `-` Decrease advance count
+- `+` Increase advance count*
+- `-` Decrease advance count*
+- `Esc` Exit transfer
 <br><br>
 - `Shift` + `D` – Toggle **Theme**
 - `Shift` + `U` – Toggle **Upcoming stations**
-- `Shift` + `L` – Toggle **Upcoming stations layout**
-- `Shift` + `C` – Toggle **Conductor mode**
+- `Shift` + `L` – Toggle **Upcoming stations layout***
+- `Shift` + `C` – Toggle **Game mode**
+<br><br>
+  \**conductor mode only*
+
+# Game modes
+
+## Rider mode
+
+Rider mode is the default game mode and is the recommended mode for those who are learning and want to visualize their journey. 
+
+<img src="./src/images/screenshot-rider-mode.png" alt="rider mode screenshot" width="100%">
+
+You are riding from the *rider's perspective*. Watch your character "walk" around the screen as you perform actions. 
+
+* **Boarding:** Click "board train" button on the platform edge below/above the train car. You must choose the correct side of the platform (Uptown/Downtown).
+* **Riding:** Once on board, use the advance button or arrow keys to advance stations.
+* **Transferring:** 
+    1. Deboard the train to return to the platform (`transfer` button).
+    2. Click on the `staircase` that leads to the desired line you want to transfer to. The staircase will open up to reveal a tunnel.
+    3. Select your desired line, and await the rider to reach the end of the tunnel.
+
+> *Click on the rider to toggle gender! (male/female/other)*
+
+
+## Conductor mode
+Conductor mode is for players who want to bypass the animations and play at a faster pace, or for those who already understand how to physically navigate the system. It grants you direct control over the train's state.
+
+<img src="./src/images/screenshot-conductor-mode.png" alt="conductor mode screenshot" width="100%">
+
+* There is no longer a passenger to control. You are the train! 
+* All actions (`Advance`, `Transfer`, `Change direction`) are executed immediately.
+* You can set the number of stations the train advances per click.
+* You can toggle the `Upcoming Stations` display to be **vertical** now too!
+
+# Optimal route
+
+Upon winning the game, you can choose to reveal the **Optimal route**. This feature calculates the *mathematically shortest path* (fewest stops) from your starting station to the destination station.
+
+<img src="./src/images/screenshot-optimal-route.png" alt="optimal route screenshot" width="100%">
+
+- Calculated using the [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm.
+- The graph construction and algorithm are implemented in [BFS.py](./src/logic/BFS.py).
+  - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com ](https://render.com/). The `BFS.py` in this repo is a copy of the code hosted there.
+
+> It can often be difficult to match the optimal route's path. Don't let this frustrate you! I plan on implementing heuristics to make the algorithm's route suggestions more accurate.
+
+
 
 <br><br>
 

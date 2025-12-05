@@ -1,0 +1,98 @@
+.station-frag-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* keeps dot and label centered */
+    overflow: visible;
+    /* don’t clip anything */
+}
+
+.station-frag-content {
+    margin-bottom: 1.5rem;
+    /* width: fit-content; */
+    transform: rotate(-38deg);
+    position: relative;
+    /* RELATIVE TO DOT POSITION: */
+    bottom: 2em;
+    left: 3em;
+    width: auto;
+    transform-origin: bottom;
+    margin-bottom: 1.2em;
+}
+
+.station-frag-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.station-frag-name {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: visible;
+    max-width: none;
+    /* overflow: scroll; */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+}
+
+.chrome .station-frag-name {
+    font-size: 0.7rem;
+}
+
+.station-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--dot-color);
+    border-color: var(--line-color);
+    border-radius: 50%;
+    border-width: 0.15rem;
+    border-style: solid;
+    position: relative;
+    transform: translate(-50%, 50%);
+    z-index: 2;
+}
+
+.current-station .station-dot {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-width: 0.4rem;
+    transition: 0.2s ease-in;
+    transition: 0.1s ease-out;
+}
+
+.chrome .current-station .station-dot {
+    width: 1rem;
+    height: 1rem;
+}
+
+.station-frag-content.overflow .station-frag-name,
+.station-frag-content.overflow .transfer-lines {
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.station-frag-content.extra-overflow .station-frag-name,
+.station-frag-content.extra-overflow .transfer-lines {
+    white-space: normal;
+    overflow-wrap: break-word;
+    /* transform: translateX(1em); */
+}
+
+.station-frag-container.current-station .station-frag-content.overflow, .station-frag-container.current-station .station-frag-content.extra-overflow {
+    margin-bottom: 0.5em;
+    /* less margin when it's current station to reduce distance */
+}
+
+/* 
+    StationFragment is reused in VerticalUpcomingStations
+    Below are styling modifications for such
+*/
+.upcoming-stations-vertical-container .station-frag-container .station-frag-content {
+    transform: rotate(0deg);
+    /* vertical list requires no rotate */
+    top: 2em;
+    left: 6em;
+    margin-bottom: 0;
+}

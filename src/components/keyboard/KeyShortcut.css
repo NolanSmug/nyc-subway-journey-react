@@ -1,0 +1,36 @@
+.shortcut {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    justify-content: space-between;
+}
+
+.shortcut-key {
+    width: max-content;
+    margin: 0;
+}
+
+.shortcut-key.command:hover kbd {
+    top: 2px;
+    left: 1px;
+    position: relative;
+}
+
+kbd {
+    height: fit-content;
+    padding: 1px;
+    min-width: 1em;
+    box-shadow: 1.5px 1.5px #8b8b8b;
+    font-family: 'Helvetica', 'sans-serif';
+    font-size: medium;
+    font-weight: 550;
+}
+
+#key-label {
+    /* text-decoration: none; */
+    font-weight: 500;
+    font-size: medium;
+    width: max-content;
+    min-width: 12ch;
+    padding: 0.4em 0.3em 0.3em 0.3em;
+}

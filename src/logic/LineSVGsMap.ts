@@ -1,4 +1,4 @@
-import { LineName } from './LineManager'
+import { areLineSetsEqual, LineName } from './LineManager'
 import IMG_A from '../images/a.svg'
 import IMG_B from '../images/b.svg'
 import IMG_C from '../images/c.svg'
@@ -28,9 +28,8 @@ import IMG_6 from '../images/6.svg'
 // import IMG_6D from '../images/6d.svg'
 import IMG_7 from '../images/7.svg'
 // import IMG_7D from '../images/7d.svg'
-import { Station } from './StationManager'
 
-const lineSVGsMap: { [key in LineName]: string } = {
+const LINE_SVGS: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: '',
     [LineName.ONE_TRAIN]: IMG_1,
     [LineName.TWO_TRAIN]: IMG_2,
@@ -61,23 +60,7 @@ const lineSVGsMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 }
 
-export const getLineSVG = (input: Station | LineName | null | undefined): string[] => {
-    if (!input) return []
-
-    if (input instanceof Station) {
-        return getLineSVGs(input.getTransfers())
-    }
-    if (typeof input === 'string') {
-        return getLineSVGs([input])
-    }
-    return []
-}
-
-export const getLineSVGs = (transfers: LineName[]): string[] => {
-    return transfers.map((transfer) => lineSVGsMap[transfer] || '')
-}
-
-const lineColorMap: { [key in LineName]: string } = {
+const LINE_COLORS: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: '',
     [LineName.ONE_TRAIN]: '#EE352E',
     [LineName.TWO_TRAIN]: '#EE352E',
@@ -108,8 +91,101 @@ const lineColorMap: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: '#808183',
 }
 
-export function lineToLineColor(lineName: LineName): string {
-    return lineColorMap[lineName]
+export const getLineSVG = (line: LineName): string => {
+    const svgPath: string = LINE_SVGS[line]
+
+    if (!svgPath) {
+        return ''
+    }
+
+    return svgPath
 }
 
-export default lineSVGsMap
+export const getLineSVGs = (lines: LineName[]): string[] => {
+    return lines.map((transfer) => LINE_SVGS[transfer] || '')
+}
+
+export function lineToLineColor(line: LineName): string {
+    return LINE_COLORS[line]
+}
+
+const LINE_GROUPS: LineName[][] = [
+    [LineName.ONE_TRAIN, LineName.TWO_TRAIN, LineName.THREE_TRAIN],
+    [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN, LineName.SIX_TRAIN],
+    [LineName.SEVEN_TRAIN],
+    [LineName.A_TRAIN, LineName.C_TRAIN, LineName.E_TRAIN],
+    [LineName.B_TRAIN, LineName.D_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN],
+    [LineName.N_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN],
+    [LineName.J_TRAIN, LineName.Z_TRAIN],
+    [LineName.G_TRAIN],
+    [LineName.L_TRAIN],
+    [LineName.S_TRAIN, LineName.S_TRAIN_SHUTTLE, LineName.S_TRAIN_ROCKAWAY],
+]
+
+const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
+    //? FUN GAME: guess these station names just by their ids (ex: AAB == Atlantic Av Barclays)
+
+    AAB: [
+        [LineName.TWO_TRAIN, LineName.THREE_TRAIN],
+        [LineName.FOUR_TRAIN, LineName.FIVE_TRAIN],
+        [LineName.D_TRAIN, LineName.N_TRAIN, LineName.R_TRAIN],
+        [LineName.B_TRAIN, LineName.Q_TRAIN],
+    ],
+    CAN: [
+        [LineName.N_TRAIN, LineName.Q_TRAIN],
+        [LineName.R_TRAIN, LineName.W_TRAIN],
+        [LineName.J_TRAIN, LineName.Z_TRAIN],
+        [LineName.SIX_TRAIN],
+    ],
+    WTC: [
+        [LineName.TWO_TRAIN, LineName.THREE_TRAIN],
+        [LineName.A_TRAIN, LineName.C_TRAIN],
+        [LineName.E_TRAIN],
+        [LineName.R_TRAIN, LineName.W_TRAIN],
+    ],
+    JAY: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN], [LineName.R_TRAIN]],
+    BOT: [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN], [LineName.S_TRAIN_SHUTTLE]],
+    CSQ: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]],
+    QBP: [[LineName.SEVEN_TRAIN, LineName.N_TRAIN, LineName.W_TRAIN]],
+    LEX: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SIX_TRAIN]],
+    CBC: [[LineName.A_TRAIN, LineName.B_TRAIN, LineName.C_TRAIN, LineName.D_TRAIN], [LineName.ONE_TRAIN]],
+
+    BO8: [[LineName.F_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
+    F12: [[LineName.E_TRAIN, LineName.M_TRAIN]], // 5 Av/53 St
+    M14: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Hewes St
+    M13: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Lorimer St
+    M12: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Flushing Av
+    R30: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN]], // DeKalb
+    A42: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.G_TRAIN]], // Hoyt Schermerhorn
+    M16: [[LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN]], // Marcy Av
+    D14: [[LineName.B_TRAIN, LineName.D_TRAIN, LineName.E_TRAIN]], // 7 Av (53 St)
+    G21: [[LineName.E_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN]], // Queens Plaza
+    D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]], // Prospect Park
+    '4A9': [[LineName.F_TRAIN, LineName.G_TRAIN], [LineName.R_TRAIN]], // 4 Av 9th
+    '222': [[LineName.TWO_TRAIN, LineName.FIVE_TRAIN], [LineName.FOUR_TRAIN]], // 149 St-Grand Concourse
+    '234': [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN]], // Nevins St
+    '710': [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]], // Jackson Hts
+}
+
+export function groupLines(lines: LineName[], stationID: string): LineName[][] {
+    if (stationID in UNIQUE_STATION_GROUPS) {
+        return UNIQUE_STATION_GROUPS[stationID]
+    }
+
+    // handle F,G train pairing
+    if (areLineSetsEqual(lines, [LineName.F_TRAIN, LineName.G_TRAIN])) {
+        return [[LineName.F_TRAIN, LineName.G_TRAIN]]
+    }
+    // handle 2,5 train pairing
+    if (areLineSetsEqual(lines, [LineName.TWO_TRAIN, LineName.FIVE_TRAIN])) {
+        return [[LineName.TWO_TRAIN, LineName.FIVE_TRAIN]]
+    }
+
+    return LINE_GROUPS.map((group) => group.filter((line) => lines.includes(line))).filter((filteredGroup) => filteredGroup.length > 0)
+}
+
+export function getCorrespondingLineGroup(line: LineName, groups: LineName[][]): LineName[] {
+    if (!groups) groups = LINE_GROUPS
+
+    return groups.find((group) => group.includes(line)) ?? []
+}

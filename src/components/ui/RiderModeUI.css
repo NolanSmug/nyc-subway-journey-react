@@ -1,0 +1,83 @@
+.platform-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: position 0.5s ease;
+}
+
+.platform {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    min-height: 18em;
+    width: 60vw;
+}
+
+.transfer-tunnels {
+    position: absolute;
+    right: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 10em;
+
+    transition: top 0.2s ease, bottom 0.2s ease;
+}
+
+/* 
+need default top value for transition in all states (bc center = 100% - (73% - 16.5%) = 43.5%) 
+*/
+.transfer-tunnels.platform-transfers:not(.other-platform-transfers) {
+    top: 44%;
+}
+
+.transfer-tunnels.platform-transfers.Uptown:not(.other-platform-transfers) {
+    top: 16.5%;
+}
+
+.transfer-tunnels.platform-transfers.Downtown:not(.other-platform-transfers) {
+    top: 73%;
+}
+
+
+.destination-station-rider-mode {
+    position: absolute;
+    left: 99%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+    border: dashed 1px var(--text-color-opaque);
+    padding: 0 1em 0.5em 1em;
+}
+
+.platform-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.uptown-button-offset {
+    position: relative;
+    bottom: 30px;
+    z-index: 1;
+}
+
+.downtown-button-offset {
+    position: relative;
+    top: 30px;
+    z-index: 1;
+}
+
+/* Fix chrome aspect ratio issues */
+.chrome .platform {
+    min-height: 13em;
+}
+
+.chrome .destination-station-rider-mode {
+    left: 95%
+}

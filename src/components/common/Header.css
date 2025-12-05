@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+}
+
+.chrome .header {
+    margin-top: 0.05rem;
+}
+
+.header:hover {
+    cursor: default;
+}

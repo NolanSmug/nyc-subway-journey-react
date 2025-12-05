@@ -1,0 +1,24 @@
+.passenger {
+    width: 4em;
+    height: 4em;
+    margin: auto;
+    position: absolute;
+    z-index: 100;
+
+    will-change: transform;
+    /* add again if having problems: */
+    /* transition: transform 250ms linear; */
+
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.chrome .passenger {
+    height: 3.8em;
+    width: 4.1em;
+}
+
+.passenger:hover {
+    cursor: pointer;
+}

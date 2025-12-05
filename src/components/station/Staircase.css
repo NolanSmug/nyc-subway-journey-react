@@ -1,0 +1,108 @@
+.staircase-container {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    width: 100%;
+
+    position: relative;
+    left: 0;
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.staircase-container.selectable {
+    cursor: pointer;
+    z-index: 1;
+}
+
+.staircase-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.staircase-container.tunnel-expanded {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.staircase-container.tunnel-expanded.passenger-walk-tunnel {
+    left: -52em;
+}
+
+.chrome .staircase-container.tunnel-expanded.passenger-walk-tunnel {
+    left: -42em;
+}
+
+.staircase {
+    border-width: 1px 0px 1px 1px;
+    border-color: var(--text-color);
+    border-style: solid;
+    border-radius: 0.1em;
+
+    padding: 0.3em;
+    width: 5em;
+    height: 4em;
+    left: 0;
+
+    transition: width 1s ease;
+    opacity: 1;
+}
+
+/* --- MIRRORED LOGIC --- */
+.staircase.tunnel-expanded {
+    position: relative;
+    height: 4em;
+    width: 52em;
+
+    transform: translateX(5em) rotate(180deg);
+    margin-right: 6em;
+    flex-shrink: 0;
+}
+
+.chrome .staircase.tunnel-expanded {
+    width: 42em;
+}
+
+.staircase.tunnel-expanded>.steps {
+    flex-direction: row;
+}
+
+.steps {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 6px;
+    align-items: center;
+}
+
+.step.first {
+    height: 4.5em;
+    /* bottom: 3px; */
+}
+
+.step {
+    display: block;
+    position: relative;
+    bottom: 4px;
+    height: 4.4em;
+    width: 0.5px;
+    background-color: var(--text-color);
+    opacity: 0.8;
+}
+
+.step.middle {
+    opacity: 0.5;
+}
+
+.step.smaller {
+    opacity: 0.3;
+    /* bottom: 3.5px; */
+}
+
+.step.last {
+    opacity: 0.2;
+}
+
+.staircase.right {
+    border-right: 1px solid var(--text-color);
+}

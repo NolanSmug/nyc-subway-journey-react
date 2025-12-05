@@ -1,0 +1,64 @@
+.station-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--station-bg);
+    min-width: var(--station-min-width, 220px);
+    max-width: fit-content;
+    height: fit-content;
+    padding: 13px 1em 1em;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0 0.5em 0.75em var(--box-shadow);
+
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.station-container::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 1px;
+    right: 1px;
+    height: 1px;
+    background-color: white;
+}
+
+.station-name {
+    color: white;
+    margin-bottom: 0.25em;
+    width: 100%;
+    margin-top: 0.25em;
+    font-size: 22px;
+    font-stretch: 200% 200%;
+    letter-spacing: 0.03em;
+}
+
+.shrink-station-name {
+    font-size: 17px;
+}
+
+/* rider mode current station styling (no lines) */
+.no-lines {
+    z-index: 10;
+}
+
+.station-wrapper.no-lines {
+    max-height: 2em;
+    transform: translateY(-0.5em);
+    opacity: 1;
+    transition: opacity 0.2s ease, transform 0.5s ease, margin 0.5s ease;
+}
+
+.station-wrapper.no-lines.hidden {
+    opacity: 0;
+}
+
+.no-lines>.station-container {
+    box-shadow: none;
+    min-width: 25em;
+    padding: 0.25em 0.5em 0 0.5em;
+    border: double 2px var(--line-color);
+}

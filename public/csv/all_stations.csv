@@ -92,7 +92,7 @@ G20,36 St,M R,Q
 R08,39 Av-Dutch Kills,N W,Q
 4A9,4 Av-9 St,R F G,Bk
 715,40 St-Lowery St,7,Q
-BRY,42 St-Bryant Pk,B D F M 7,M
+BRY,42 St-Bryant Park,B D F M 7,M
 127,42 St-Port Authority Bus Terminal,1 2 3 7 A C E N Q R W S,M
 R39,45 St,R N,Bk
 G18,46 St,M R,Q
@@ -222,7 +222,7 @@ M10,Central Av,M,Bk
 227,Central Park North (110 St),2 3,M
 BRB,Brooklyn Bridge-City Hall,4 5 6 J Z,M
 137,Chambers St,1 2 3,M
-A36,Chambers St,A C,M
+WTC,Chambers St,2 3 A C E R W,M
 J28,Chauncey St,J Z,Bk
 133,Christopher St-Sheridan Sq,1,M
 D28,Church Av,B Q,Bk
@@ -236,7 +236,7 @@ A44,Clinton-Washington Avs,C,Bk
 G35,Clinton-Washington Avs,G,Bk
 D43,Coney Island-Stillwell Av,D F N Q,Bk
 D30,Cortelyou Road,Q,Bk
-R25,Cortlandt St,R W,M
+WTC,Cortlandt St,2 3 A C E R W,M
 CSQ,Court Sq-23 St,7 E M G,Q
 BOR,Court St,2 3 4 5 R,Bk
 J20,Crescent St,J Z,Bk
@@ -353,7 +353,7 @@ F39,Neptune Av,F,Bk
 234,Nevins St,2 3 4 5,Bk
 L27,New Lots Av,L,Bk
 257,New Lots Av,3,Bk
-N04,New Utrecht Av,N,Bk
+B16,New Utrecht Av,D N,Bk
 246,Newkirk Av-Little Haiti,2 5,Bk
 D31,Newkirk Plaza,B Q,Bk
 G16,Northern Blvd,M R,Q
@@ -364,7 +364,7 @@ A46,Nostrand Av,A C,Bk
 D41,Ocean Pkwy,Q,Bk
 A65,Ozone Park-Lefferts Blvd,A,Q
 S03,Park Place,Sf,Bk
-228,Park Place,2 3,M
+WTC,Park Place,2 3 A C E R W,M
 608,Parkchester,6,Bx
 D27,Parkside Av,Q,Bk
 F03,Parsons Blvd,F,Q
@@ -426,7 +426,7 @@ L20,Wilson Av,L,Bk
 J15,Woodhaven Blvd,J Z,Q
 G11,Woodhaven Blvd,M R,Q
 401,Woodlawn,4,Bx
-E01,World Trade Center,E,M
+WTC,World Trade Center,2 3 A C E R W,M
 138,WTC Cortlandt,1,M
 F18,York St,F,Bk
 606,Zerega Av,6,Bx

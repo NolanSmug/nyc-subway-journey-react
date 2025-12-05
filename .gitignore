@@ -10,6 +10,7 @@
 # misc
 .vscode
 .build
+.prettierrc
 gtfs_subway/
 .DS_Store
 .env.local
