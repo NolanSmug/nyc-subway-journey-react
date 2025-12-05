@@ -177,7 +177,7 @@ function GameOverUI({
                     <div>
                         <img src={INFO_ICON_W} alt='info' className='info-icon' />
                         <div className='tooltip'>
-                            Calculates the <u>minimum number of stations</u> to visit.
+                            Calculates the <u>mathematically shortest path</u> (fewest stops visited).
                         </div>
                     </div>
                 </div>
@@ -259,7 +259,7 @@ function OptimalRouteUI() {
             <div>
                 <img src={INFO_ICON_W} alt='info' className='info-icon' />
                 <div className='tooltip'>
-                    This is the <u>minimum number of stations</u> to visit. Transfers are instant in this game!
+                    This is the <u>mathematically shortest path</u> from the starting station to the destination.
                 </div>
             </div>
             <div className='optimal-route-window-container'>

@@ -90,7 +90,7 @@ function ConductorModeUI({
                         <ActionButton
                             imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
                             label='Change direction'
-                            onClick={handleChangeDirectionClick}
+                            onClick={() => handleChangeDirectionClick()}
                         />
                         <ActionButton
                             imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
