@@ -270,7 +270,9 @@ function OptimalRouteUI() {
                     contact the developer if any other issues occur.'
                     textDelaySecs={5}
                 />
-                {stationData.length === 0 && <h3 style={{ alignSelf: 'center' }}>Failed to load optimal route. Please try again later.</h3>}
+                {stationData.length === 0 && !loadingVisible && (
+                    <h3 style={{ alignSelf: 'center' }}>Failed to load optimal route. Please try again later.</h3>
+                )}
                 {stationData.length > 0 && (
                     <div className='optimal-stations-horizontal'>
                         {stationData.map((station, index) => (
