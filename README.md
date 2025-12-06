@@ -47,7 +47,7 @@ docker pull nanosmug/nyc-subway-journey
 
 **2. Run the Docker container**
 ```bash
-docker run -p 3000:3000 nanosmug/nyc-subway-journey
+docker run -p 3000:80 nanosmug/nyc-subway-journey
 ```
 
 **3. Open the application**
