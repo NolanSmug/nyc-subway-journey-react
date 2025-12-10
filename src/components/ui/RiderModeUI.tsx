@@ -18,10 +18,14 @@ import { Direction, LineName } from '../../logic/LineManager'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station as StationObject } from '../../logic/StationManager'
 
+import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
+import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
+
 interface RiderModeUIProps {
     handleBoardUptown: () => void
     handleBoardDowntown: () => void
     handleDeboard: () => void
+    handleReset: () => void
 
     onStaircaseSelect: (index: number) => void
     onStaircaseDeselect: () => void
@@ -34,6 +38,7 @@ interface RiderModeUIProps {
     passengerState: PassengerState
     children: React.ReactNode // <Passenger>
 
+    darkMode: boolean
     inTransferTunnel: boolean
     isPassengerTransferring: boolean
     selectedGroupIndex: number
@@ -43,6 +48,7 @@ function RiderModeUI({
     handleBoardUptown,
     handleBoardDowntown,
     handleDeboard,
+    handleReset,
 
     onStaircaseSelect,
     onStaircaseDeselect,
@@ -51,6 +57,8 @@ function RiderModeUI({
     uptownTrainDoorRef,
     downtownTrainDoorRef,
     staircaseRefs,
+
+    darkMode,
     inTransferTunnel,
     isPassengerTransferring,
     selectedGroupIndex,
@@ -158,6 +166,7 @@ function RiderModeUI({
                 <Station name={gameState.destinationStation.getName()} noLines isDestination>
                     {destinationStationChildren}
                 </Station>
+                <ActionButton onClick={handleReset} imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} /* hidden={inTransferTunnel} */ />
             </div>
         </div>
     )

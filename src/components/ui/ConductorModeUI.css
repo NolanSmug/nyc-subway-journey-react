@@ -29,6 +29,7 @@
 
 .station-box h2 {
     margin-bottom: 15px;
+    text-wrap: none;
 }
 
 .station-item {

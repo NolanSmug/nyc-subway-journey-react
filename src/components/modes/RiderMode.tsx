@@ -153,6 +153,7 @@ function RiderMode() {
             handleBoardUptown={handleBoardUptown}
             handleBoardDowntown={handleBoardDowntown}
             handleDeboard={handleDeboard}
+            handleReset={resetGame}
             onStaircaseSelect={handleStaircaseSelect}
             onStaircaseDeselect={handleStaircaseDeselect}
             onTransferSelect={handleTransferSelect}
@@ -160,6 +161,7 @@ function RiderMode() {
             downtownTrainDoorRef={downtownTrainDoorRef}
             staircaseRefs={staircaseRefs}
             passengerState={passenger.passengerState}
+            darkMode={darkMode}
             inTransferTunnel={inTransferTunnel}
             isPassengerTransferring={isPassengerTransferring}
             selectedGroupIndex={selectedGroupIndex}
