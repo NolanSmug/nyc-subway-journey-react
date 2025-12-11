@@ -43,15 +43,15 @@ need default top value for transition in all states (bc center = 100% - (73% - 1
 
 .destination-station-rider-mode {
     position: absolute;
-    left: 50%;
+    left: 99%;
 
-    margin-left: 28vw;
+    /* margin-left: 28vw; */
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: fit-content;
+    width: auto;
     border: dashed 1px var(--text-color-opaque);
     padding: 0 1em 0.5em 1em;
 
