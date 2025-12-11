@@ -1,14 +1,17 @@
 stop_id,stop_name,transfers,borough
-H11,Far Rockaway-Mott Av,A,Q
-H10,Beach 25 St,A,Q
-H09,Beach 36 St,A,Q
-H08,Beach 44 St,A,Q
-H07,Beach 60 St,A,Q
-H06,Beach 67 St,A,Q
-H04,Broad Channel,A Sr,Q
-H03,Howard Beach-JFK Airport,A,Q
-AQR,Aqueduct-N Conduit Av,A,Q
-H01,Aqueduct Racetrack,A,Q
+H11,Far Rockaway-Mott Av,Ar,Q
+H10,Beach 25 St,Ar,Q
+H09,Beach 36 St,Ar,Q
+H08,Beach 44 St,Ar,Q
+H07,Beach 60 St,Ar,Q
+H06,Beach 67 St,Ar,Q
+H04,Broad Channel,Ar Sr,Q
+H03,Howard Beach-JFK Airport,Ar,Q
+H01,Aqueduct-N Conduit Av,Ar,Q
+AQR,Aqueduct Racetrack,Ar,Q
+A61,Rockaway Blvd,A Al Ar,Q
+A60,88 St,A,Q
+A59,80 St,A,Q
 A57,Grant Av,A,Bk
 A55,Euclid Av,A C,Bk
 BWJ,Broadway Junction,A C J Z L,Bk

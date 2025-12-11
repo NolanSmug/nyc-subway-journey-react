@@ -36,7 +36,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    animation: jiggle 0.6s ease-in-out infinite, colorCycle 5s steps(1) infinite;
+    animation: jiggle-letters 0.6s ease-in-out infinite, colorCycle 5s steps(1) infinite;
     animation-delay: calc(var(--delay, 0s)), calc(var(--color-delay, 0s));
 }
 
@@ -73,7 +73,7 @@
 }
 
 
-@keyframes jiggle {
+@keyframes jiggle-letters {
     0% {
         transform: translateY(0);
     }

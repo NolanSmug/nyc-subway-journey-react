@@ -88,6 +88,10 @@ function mapTransferString(transfer: string): LineName {
             return LineName.SEVEN_TRAIN
         case 'A':
             return LineName.A_TRAIN
+        case 'Al':
+            return LineName.A_LEFFERTS_TRAIN
+        case 'Ar':
+            return LineName.A_ROCKAWAY_MOTT_TRAIN
         case 'B':
             return LineName.B_TRAIN
         case 'C':

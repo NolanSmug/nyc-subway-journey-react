@@ -12,6 +12,13 @@ export function usePlatformTransferGroups({ currentStation, currentLine }: UsePl
     const stationID: string = currentStation.getId()
     const transfers: LineName[] = currentStation.getTransfers()
 
+    const isOnAlternateATrain: boolean = useMemo(
+        () => currentLine === LineName.A_ROCKAWAY_MOTT_TRAIN || currentLine === LineName.A_LEFFERTS_TRAIN,
+        [currentLine]
+    )
+
+    if (isOnAlternateATrain && stationID !== 'A61' && stationID !== 'H04') currentLine = LineName.A_TRAIN
+
     const groupedTransfers = useMemo(() => groupLines(transfers, stationID), [transfers, stationID])
     const currentPlatformGroup = useMemo(() => getCorrespondingLineGroup(currentLine, groupedTransfers), [currentLine, groupedTransfers])
     const otherPlatformGroups = useMemo(() => groupedTransfers.filter((g) => !g.includes(currentLine)), [groupedTransfers, currentLine])
@@ -19,6 +26,9 @@ export function usePlatformTransferGroups({ currentStation, currentLine }: UsePl
         () => currentPlatformGroup.filter((line) => line !== currentLine),
         [currentPlatformGroup, currentLine]
     )
+
+    console.log(currentPlatformGroup)
+    console.log(otherPlatformGroups)
 
     return {
         otherPlatformGroups,

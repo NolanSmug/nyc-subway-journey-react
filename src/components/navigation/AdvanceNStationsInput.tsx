@@ -16,6 +16,7 @@ function AdvanceNStationsInput() {
     const stationIndex = useTrainContext((state) => state.train.getCurrentStationIndex())
     const scheduledStopsCount = useTrainContext((state) => state.train.getScheduledStops().length)
 
+    const hideResetButton: boolean = numAdvanceStations === 1
     let currentMaxNumber: number = trainDirection === Direction.DOWNTOWN ? stationIndex : scheduledStopsCount - stationIndex - 1
 
     if (trainDirection === Direction.NULL_DIRECTION) currentMaxNumber = 1
@@ -46,7 +47,7 @@ function AdvanceNStationsInput() {
             <img
                 src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
                 alt='Reset Input'
-                className='reset-input-button'
+                className={`reset-input-button ${hideResetButton ? 'hide-reset-button' : ''}`}
                 onMouseDown={() => setNumAdvanceStations(1)}
                 style={{ opacity: numAdvanceStations == 1 ? 0 : 1 }}
             />

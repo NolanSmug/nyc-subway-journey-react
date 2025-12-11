@@ -48,6 +48,17 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
                 )}
 
                 <div className={`train-car ${forWinDisplay ? 'win-display' : ''}`}>
+                    {!forWinDisplay && (
+                        <div
+                            className='headlight'
+                            style={
+                                direction === Direction.DOWNTOWN
+                                    ? { boxShadow: '-1.5em -1.5em 2em 0.9em #f3ff94' }
+                                    : { boxShadow: '0 0 0 0 #00000000' }
+                            }
+                        ></div>
+                    )}
+
                     <div className='doors'>
                         <Door isLeft />
                         <Door />
@@ -64,8 +75,18 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
 
                     <div className='windows'>
                         <div className='front-window'> </div>
-                        {/* <div className='front-light'></div> */}
                     </div>
+
+                    {!forWinDisplay && (
+                        <div
+                            className='headlight'
+                            style={
+                                direction === Direction.UPTOWN
+                                    ? { boxShadow: '1.5em -1.5em 2em 0.9em #f3ff94' }
+                                    : { boxShadow: '0 0 0 0 #00000000' }
+                            }
+                        ></div>
+                    )}
                 </div>
 
                 {isHorizontalLayout && !isNullDirection && !forWinDisplay && (

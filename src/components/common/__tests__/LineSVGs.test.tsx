@@ -76,7 +76,7 @@ describe('LineSVGs', () => {
         expect(wrapper).toHaveClass('not-dim')
     })
 
-    test('Merges custom className prop', () => {
+    test('Applies className prop', () => {
         const { container } = render(<LineSVGs svgPaths={MOCK_PATHS} className='nolan-test-class' />)
 
         const wrapper: ChildNode | null = container.firstChild

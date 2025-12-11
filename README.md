@@ -178,8 +178,8 @@ Upon winning the game, you can choose to reveal the **Optimal route**. This feat
 <img src="./src/images/screenshot-optimal-route.png" alt="optimal route screenshot" width="100%">
 
 - Calculated using the [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm.
-- The graph construction and algorithm are implemented in [BFS.py](./src/logic/BFS.py).
-  - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com](https://render.com/). The `BFS.py` in this repo is a copy of the code hosted there.
+- The graph construction and algorithm are implemented in [bfs.py](./src/logic/bfs.py).
+  - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com](https://render.com/). The `bfs.py` in this repo is a copy of the code hosted there.
 
 > It can often be difficult to match the optimal route's path. Don't let this frustrate you! I plan on implementing heuristics to make the algorithm's route suggestions more realistic.
 

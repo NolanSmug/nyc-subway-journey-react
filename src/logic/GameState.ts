@@ -42,6 +42,8 @@ export class GameState {
         do {
             this.destinationStation = Station.getRandomStation(Station.allNycStations)
         } while (this.startingStation.equals(this.destinationStation))
+
+        // this.destinationStation = Station.getStationByID('AQR')
     }
 
     public async getStartDestStationIDs(): Promise<string[]> {

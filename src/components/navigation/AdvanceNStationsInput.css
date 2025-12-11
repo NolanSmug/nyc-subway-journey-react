@@ -35,7 +35,7 @@
 }
 
 
-.reset-input-button:hover {
+.reset-input-button:hover:not(.hide-reset-button) {
     cursor: pointer;
     background-color: var(--bg-color-3);
     border-radius: 25%;

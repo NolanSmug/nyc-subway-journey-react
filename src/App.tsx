@@ -95,11 +95,9 @@ function Game() {
                     <UmbrellaButton openingButtonsW_B={keyShortcutButtons} visible>
                         {keyShortcutMenu}
                     </UmbrellaButton>
-                    {/* <UmbrellaButton
-                        openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]}
-                        umbrellaContent={<SubwayMap />}
-                        visible={!gameMode}
-                    /> */}
+                    {/* <UmbrellaButton openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]} visible>
+                        <SubwayMap />
+                    </UmbrellaButton> */}
                 </div>
             </div>
 

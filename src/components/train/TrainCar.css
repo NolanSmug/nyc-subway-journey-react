@@ -144,12 +144,10 @@ h2 {
     animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* .front-light {
-    margin-top: 3.5em;
-    width: 3em;
+.headlight {
+    margin-top: 4em;
     height: 1em;
     background-color: none;
-    box-shadow: 2.25em -1em 2em #f3ff94;
-    transition: box-shadow 1s ease-in-out;
-    z-index: -1;
-} */
+    transition: box-shadow 0.5s ease-in;
+    z-index: -5;
+}

@@ -46,6 +46,14 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
                 </div>
 
                 <div className={`train-car ${isDowntown ? 'flipped-layout' : ''}`}>
+                    {
+                        // TODO: Figure out CSS z-index bug with the transform: scaleY(-1) for the flipped-layout car
+                        /* <div
+                        className='headlight'
+                        style={isDowntown && active ? { boxShadow: '-1.5em -1em 2em 0.9em #f3ff94' } : { boxShadow: '0 0 0 0 #00000000' }}
+                        ></div> */
+                    }
+
                     <div className='doors'>
                         <Door key='door-ll' ref={isUptown ? uptownDoorRef : downtownDoorRef} isLeft hasPassenger={active} />
                         <Door key='door-lr' />
@@ -62,6 +70,11 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
                     <div className='windows'>
                         <div className='front-window'> </div>
                     </div>
+
+                    {/* <div
+                        className='headlight'
+                        style={isUptown && active ? { boxShadow: '1.5em -1em 2em 0.9em #f3ff94' } : { boxShadow: '0 0 0 0 #00000000' }}
+                    ></div> */}
                 </div>
 
                 <div className='train-advance-button'>

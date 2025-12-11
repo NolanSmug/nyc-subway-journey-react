@@ -79,7 +79,7 @@
 
 /* override jiggle animation for when the tunnel has only 1 line */
 .tunnel-expanded .line-svgs-container.show-flipped .line-svg-image {
-    animation: jiggle 0.5s ease-in-out infinite;
+    animation: jiggle-lines 0.5s ease-in-out infinite;
 }
 
 /* --- vertical (not used yet) --- */
@@ -113,7 +113,7 @@
 }
 
 .line-svg-image.jiggle-animation {
-    animation: jiggle 0.5s ease-in-out infinite;
+    animation: jiggle-lines 0.5s ease-in-out infinite;
 }
 
 .disabled .line-svg-image {
@@ -137,7 +137,7 @@
 
 
 /* tedious, but necessary to keep animation "smooth" */
-@keyframes jiggle {
+@keyframes jiggle-lines {
     0% {
         transform: translateY(0) scale(var(--hover-scale)) scale(var(--active-scale));
     }

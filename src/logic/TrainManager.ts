@@ -11,9 +11,6 @@ export class Train {
     private scheduledStops: Station[]
     private currentStationIndex: number = 0
 
-    private isAtRockawayBranch: boolean = false
-    private isAtEndOfLine: boolean = false
-
     constructor(
         currentLine: LineName = LineName.NULL_TRAIN,
         direction: Direction = Direction.NULL_DIRECTION,
@@ -171,14 +168,6 @@ export class Train {
         this.currentStationIndex = stationIndex
     }
 
-    public isAtLastStop(): boolean {
-        return this.isAtEndOfLine
-    }
-
-    public isAtRockawayBranchJunction(): boolean {
-        return this.isAtRockawayBranch
-    }
-
     public setCurrentStation(station: Station) {
         const index: number = this.scheduledStops.findIndex((stop) => stop.getId() === station.getId())
 
@@ -221,20 +210,6 @@ export class Train {
         }
 
         return false // not a valid requested transfer
-    }
-
-    // Action Logic
-    public updateTrainState() {
-        const lastStationIndex: number = this.scheduledStops.length - 1
-
-        this.isAtRockawayBranch = this.getCurrentStation().getName() === 'Rockaway Blvd' && this.direction === Direction.DOWNTOWN
-
-        // this is a mess but trust it works (I don't remember how I did this)
-        this.isAtEndOfLine =
-            ((this.currentStationIndex === 0 && this.direction === Direction.DOWNTOWN) ||
-                (this.currentStationIndex === lastStationIndex && this.direction === Direction.UPTOWN)) &&
-            !this.isAtRockawayBranch
-        this.repOk()
     }
 
     public advanceStation(): Train {

@@ -1,5 +1,7 @@
 import { areLineSetsEqual, LineName } from './LineManager'
 import IMG_A from '../images/a.svg'
+import IMG_AL from '../images/al.svg'
+import IMG_AR from '../images/ar.svg'
 import IMG_B from '../images/b.svg'
 import IMG_C from '../images/c.svg'
 import IMG_D from '../images/d.svg'
@@ -39,8 +41,8 @@ const LINE_SVGS: { [key in LineName]: string } = {
     [LineName.SIX_TRAIN]: IMG_6,
     [LineName.SEVEN_TRAIN]: IMG_7,
     [LineName.A_TRAIN]: IMG_A,
-    [LineName.A_ROCKAWAY_MOTT_TRAIN]: IMG_A,
-    [LineName.A_LEFFERTS_TRAIN]: IMG_A,
+    [LineName.A_ROCKAWAY_MOTT_TRAIN]: IMG_AR,
+    [LineName.A_LEFFERTS_TRAIN]: IMG_AL,
     [LineName.C_TRAIN]: IMG_C,
     [LineName.E_TRAIN]: IMG_E,
     [LineName.B_TRAIN]: IMG_B,
@@ -150,6 +152,7 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     LEX: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SIX_TRAIN]],
     CBC: [[LineName.A_TRAIN, LineName.B_TRAIN, LineName.C_TRAIN, LineName.D_TRAIN], [LineName.ONE_TRAIN]],
 
+    A61: [[LineName.A_TRAIN, LineName.A_LEFFERTS_TRAIN, LineName.A_ROCKAWAY_MOTT_TRAIN]], // Rockaway Blvd (junction)
     BO8: [[LineName.F_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
     F12: [[LineName.E_TRAIN, LineName.M_TRAIN]], // 5 Av/53 St
     M14: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Hewes St
@@ -165,6 +168,7 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     '222': [[LineName.TWO_TRAIN, LineName.FIVE_TRAIN], [LineName.FOUR_TRAIN]], // 149 St-Grand Concourse
     '234': [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN]], // Nevins St
     '710': [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]], // Jackson Hts
+    H04: [[LineName.A_ROCKAWAY_MOTT_TRAIN, LineName.S_TRAIN_ROCKAWAY]],
 }
 
 export function groupLines(lines: LineName[], stationID: string): LineName[][] {

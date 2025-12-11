@@ -77,8 +77,8 @@ function RiderModeUI({
     const hideTransferButton: boolean =
         passengerState === PassengerState.WALKING ||
         passengerState === PassengerState.TRANSFER_PLATFORM ||
-        (!hasOtherPlatformTransfers && hasSamePlatformTransfers) ||
-        transfers.length === 1 ||
+        !hasOtherPlatformTransfers ||
+        transfers.length === 0 ||
         inTransferTunnel
 
     const destinationStationChildren: JSX.Element = useMemo(
