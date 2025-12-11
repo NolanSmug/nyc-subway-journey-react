@@ -31,7 +31,7 @@ R15,49 St,N R W,M
 R14,57 St-7 Av,N Q R W,M
 R13,5 Av/59 St,N R W,M
 R11,Lexington Av/59 St,N R W 4 5 6,M
-G21,Queens Plaza,E M R,Q
+G21,Queens Plaza,E F R,Q
 G20,36 St,M R,Q
 G19,Steinway St,M R,Q
 G18,46 St,M R,Q

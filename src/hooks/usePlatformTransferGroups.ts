@@ -27,9 +27,6 @@ export function usePlatformTransferGroups({ currentStation, currentLine }: UsePl
         [currentPlatformGroup, currentLine]
     )
 
-    console.log(currentPlatformGroup)
-    console.log(otherPlatformGroups)
-
     return {
         otherPlatformGroups,
         samePlatformLines,

@@ -60,7 +60,7 @@ B20,20 Av,D,Bk
 N06,20 Av,N,Bk
 108,207 St,1,M
 G24,21 St,G,Q
-B04,21 St-Queensbridge,F,Q
+B04,21 St-Queensbridge,M,Q
 107,215 St,1,M
 207,219 St,2 5,Bx
 206,225 St,2 5,Bx
@@ -99,7 +99,7 @@ G18,46 St,M R,Q
 714,46 St-Bliss St,7,Q
 D15,47-50 Sts-Rockefeller Ctr,B D F M,M
 R15,49 St,N R W,M
-F12,5 Av/53 St,E M,M
+F12,5 Av/53 St,E F,M
 R13,5 Av/59 St,N R W,M
 A25,50 St,C E,M
 B14,50 St,D,Bk
@@ -107,7 +107,7 @@ B14,50 St,D,Bk
 713,52 St,7,Q
 R40,53 St,R N,Bk
 B15,55 St,D,Bk
-B10,57 St,F,M
+B10,57 St,M,M
 R14,57 St-7 Av,N Q R W,M
 R41,59 St,N R,Bk
 CBC,59 St-Columbus Circle,A B C D 1,M
@@ -238,7 +238,7 @@ G35,Clinton-Washington Avs,G,Bk
 D43,Coney Island-Stillwell Av,D F N Q,Bk
 D30,Cortelyou Road,Q,Bk
 WTC,Cortlandt St,2 3 A C E R W,M
-CSQ,Court Sq-23 St,7 E M G,Q
+CSQ,Court Sq-23 St,7 E F G,Q
 BOR,Court St,2 3 4 5 R,Bk
 J20,Crescent St,J Z,Bk
 250,Crown Hts-Utica Av,3 4,Bk
@@ -323,9 +323,9 @@ A47,Kingston-Throop Avs,C,Bk
 M09,Knickerbocker Av,M,Bk
 J31,Kosciuszko St,J,Bk
 A43,Lafayette Av,C,Bk
-LEX,Lexington Av/53 St,E M 6,M
+LEX,Lexington Av/53 St,E F 6,M
 R11,Lexington Av/59 St,N R W 4 5 6,M
-B08,Lexington Av/63 St,F Q,M
+B08,Lexington Av/63 St,M Q,M
 A52,Liberty Av,C,Bk
 L26,Livonia Av,L,Bk
 614,Longwood Av,6,Bx
@@ -378,7 +378,7 @@ R22,Prince St,R W,M
 219,Prospect Av,2 5,Bx
 R34,Prospect Av,R,Bk
 D26,Prospect Park,B Q Sf,Bk
-G21,Queens Plaza,E M R,Q
+G21,Queens Plaza,E F R,Q
 QBP,Queensboro Plaza,7 N W,Q
 A49,Ralph Av,C,Bk
 139,Rector St,1,M
@@ -387,7 +387,7 @@ A50,Rockaway Av,C,Bk
 253,Rockaway Av,3,Bk
 A61,Rockaway Blvd,A Al Ar,Q
 H15,Rockaway Park-Beach 116 St,Sr,Q
-B06,Roosevelt Island,F,M
+B06,Roosevelt Island,M,M
 252,Saratoga Av,3,Bk
 M06,Seneca Av,M,Q
 D39,Sheepshead Bay,B Q,Bk

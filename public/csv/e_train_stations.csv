@@ -9,10 +9,10 @@ PEN,34 St-Penn Station,A C E 1 2 3,M
 127,42 St-Port Authority Bus Terminal,1 2 3 7 A C E N Q R W S,M
 A25,50 St,C E,M
 D14,7 Av,B D E,M
-F12,5 Av/53 St,E M,M
-LEX,Lexington Av/53 St,E M 6,M
-CSQ,Court Sq-23 St,7 E M G,Q
-G21,Queens Plaza,E M R,Q
+F12,5 Av/53 St,E F,M
+LEX,Lexington Av/53 St,E F 6,M
+CSQ,Court Sq-23 St,7 E F G,Q
+G21,Queens Plaza,E F R,Q
 710,Jackson Hts-Roosevelt Av,7 E F M R,Q
 G08,Forest Hills-71 Av,E F M R,Q
 F07,75 Av,E F,Q

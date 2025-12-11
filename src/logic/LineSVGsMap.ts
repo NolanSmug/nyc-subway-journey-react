@@ -147,14 +147,13 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     ],
     JAY: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN], [LineName.R_TRAIN]],
     BOT: [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN], [LineName.S_TRAIN_SHUTTLE]],
-    CSQ: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]],
+    CSQ: [[LineName.E_TRAIN, LineName.F_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]],
     QBP: [[LineName.SEVEN_TRAIN, LineName.N_TRAIN, LineName.W_TRAIN]],
-    LEX: [[LineName.E_TRAIN, LineName.M_TRAIN], [LineName.SIX_TRAIN]],
+    LEX: [[LineName.E_TRAIN, LineName.F_TRAIN], [LineName.SIX_TRAIN]],
     CBC: [[LineName.A_TRAIN, LineName.B_TRAIN, LineName.C_TRAIN, LineName.D_TRAIN], [LineName.ONE_TRAIN]],
 
     A61: [[LineName.A_TRAIN, LineName.A_LEFFERTS_TRAIN, LineName.A_ROCKAWAY_MOTT_TRAIN]], // Rockaway Blvd (junction)
     BO8: [[LineName.F_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
-    F12: [[LineName.E_TRAIN, LineName.M_TRAIN]], // 5 Av/53 St
     M14: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Hewes St
     M13: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Lorimer St
     M12: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Flushing Av
@@ -162,7 +161,7 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     A42: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.G_TRAIN]], // Hoyt Schermerhorn
     M16: [[LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN]], // Marcy Av
     D14: [[LineName.B_TRAIN, LineName.D_TRAIN, LineName.E_TRAIN]], // 7 Av (53 St)
-    G21: [[LineName.E_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN]], // Queens Plaza
+    G21: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.R_TRAIN]], // Queens Plaza
     D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]], // Prospect Park
     '4A9': [[LineName.F_TRAIN, LineName.G_TRAIN], [LineName.R_TRAIN]], // 4 Av 9th
     '222': [[LineName.TWO_TRAIN, LineName.FIVE_TRAIN], [LineName.FOUR_TRAIN]], // 149 St-Grand Concourse
@@ -179,6 +178,14 @@ export function groupLines(lines: LineName[], stationID: string): LineName[][] {
     // handle F,G train pairing
     if (areLineSetsEqual(lines, [LineName.F_TRAIN, LineName.G_TRAIN])) {
         return [[LineName.F_TRAIN, LineName.G_TRAIN]]
+    }
+    // handle E,F train pairing
+    if (areLineSetsEqual(lines, [LineName.E_TRAIN, LineName.F_TRAIN])) {
+        return [[LineName.E_TRAIN, LineName.F_TRAIN]]
+    }
+    // handle M,R train pairing
+    if (areLineSetsEqual(lines, [LineName.M_TRAIN, LineName.R_TRAIN])) {
+        return [[LineName.M_TRAIN, LineName.R_TRAIN]]
     }
     // handle 2,5 train pairing
     if (areLineSetsEqual(lines, [LineName.TWO_TRAIN, LineName.FIVE_TRAIN])) {
