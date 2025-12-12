@@ -151,23 +151,31 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     QBP: [[LineName.SEVEN_TRAIN, LineName.N_TRAIN, LineName.W_TRAIN]],
     LEX: [[LineName.E_TRAIN, LineName.F_TRAIN], [LineName.SIX_TRAIN]],
     CBC: [[LineName.A_TRAIN, LineName.B_TRAIN, LineName.C_TRAIN, LineName.D_TRAIN], [LineName.ONE_TRAIN]],
+    ESX: [[LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN], [LineName.F_TRAIN]], // Delancey St Essex St
 
     A61: [[LineName.A_TRAIN, LineName.A_LEFFERTS_TRAIN, LineName.A_ROCKAWAY_MOTT_TRAIN]], // Rockaway Blvd (junction)
-    BO8: [[LineName.F_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
+    H04: [[LineName.A_ROCKAWAY_MOTT_TRAIN, LineName.S_TRAIN_ROCKAWAY]],
+    BO8: [[LineName.M_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
     M14: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Hewes St
     M13: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Lorimer St
     M12: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Flushing Av
     R30: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN]], // DeKalb
     A42: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.G_TRAIN]], // Hoyt Schermerhorn
-    M16: [[LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN]], // Marcy Av
     D14: [[LineName.B_TRAIN, LineName.D_TRAIN, LineName.E_TRAIN]], // 7 Av (53 St)
     G21: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.R_TRAIN]], // Queens Plaza
     D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]], // Prospect Park
+    G05: [[LineName.E_TRAIN, LineName.J_TRAIN, LineName.Z_TRAIN]], // Jamaica Center-Parsons/Archer
+    G06: [[LineName.E_TRAIN, LineName.J_TRAIN, LineName.Z_TRAIN]], // Sutphin Blvd-ArcherAv-JFK Airport
+    G08: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN]], // Forest Hills-71 Av
+    D43: [[LineName.D_TRAIN, LineName.F_TRAIN, LineName.N_TRAIN, LineName.Q_TRAIN]], // Coney Island-Stillwell Av
+    A15: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.B_TRAIN, LineName.D_TRAIN]], // 125 St
+    R36: [[LineName.D_TRAIN, LineName.N_TRAIN, LineName.R_TRAIN]], // 36 St
+    '250': [[LineName.THREE_TRAIN, LineName.FOUR_TRAIN]], // Crown Hts-Utica Av
+    '626': [[LineName.FOUR_TRAIN, LineName.FIVE_TRAIN], [LineName.SIX_TRAIN]], // 86 St
     '4A9': [[LineName.F_TRAIN, LineName.G_TRAIN], [LineName.R_TRAIN]], // 4 Av 9th
     '222': [[LineName.TWO_TRAIN, LineName.FIVE_TRAIN], [LineName.FOUR_TRAIN]], // 149 St-Grand Concourse
     '234': [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN]], // Nevins St
     '710': [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]], // Jackson Hts
-    H04: [[LineName.A_ROCKAWAY_MOTT_TRAIN, LineName.S_TRAIN_ROCKAWAY]],
 }
 
 export function groupLines(lines: LineName[], stationID: string): LineName[][] {
@@ -186,6 +194,18 @@ export function groupLines(lines: LineName[], stationID: string): LineName[][] {
     // handle M,R train pairing
     if (areLineSetsEqual(lines, [LineName.M_TRAIN, LineName.R_TRAIN])) {
         return [[LineName.M_TRAIN, LineName.R_TRAIN]]
+    }
+    // handle B,C train pairing
+    if (areLineSetsEqual(lines, [LineName.B_TRAIN, LineName.C_TRAIN])) {
+        return [[LineName.B_TRAIN, LineName.C_TRAIN]]
+    }
+    // handle J,M,Z train pairing
+    if (areLineSetsEqual(lines, [LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN])) {
+        return [[LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN]]
+    }
+    // handle B,Q train pairing
+    if (areLineSetsEqual(lines, [LineName.B_TRAIN, LineName.Q_TRAIN])) {
+        return [[LineName.B_TRAIN, LineName.Q_TRAIN]]
     }
     // handle 2,5 train pairing
     if (areLineSetsEqual(lines, [LineName.TWO_TRAIN, LineName.FIVE_TRAIN])) {

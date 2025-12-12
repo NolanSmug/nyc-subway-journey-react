@@ -305,7 +305,7 @@ A42,Hoyt-Schermerhorn Sts,A C G,Bk
 A02,Inwood-207 St,A,M
 220,Jackson Av,2 5,Bx
 710,Jackson Hts-Roosevelt Av,7 E F M R,Q
-G05,Jamaica Center-Parsons/Archer,E,Q
+G05,Jamaica Center-Parsons/Archer,E J Z,Q
 F01,Jamaica-179 St,F,Q
 G07,Jamaica-Van Wyck,E,Q
 JAY,Jay St-MetroTech,A C F R,Bk
@@ -330,10 +330,10 @@ A52,Liberty Av,C,Bk
 L26,Livonia Av,L,Bk
 614,Longwood Av,6,Bx
 M13,Lorimer St,J M,Bk
-L10,Lorimer St,L,Bk
+LOR,Lorimer St,L G,Bk
 106,Marble Hill-225 St,1,M
 M16,Marcy Av,J M Z,Bk
-G29,Metropolitan Av,G,Bk
+LOR,Metropolitan Av,G,Bk
 702,Mets-Willets Point,7,Q
 M01,Middle Village-Metropolitan Av,M,Q
 603,Middletown Rd,6,Bx
@@ -345,8 +345,7 @@ L14,Morgan Av,L,Bk
 411,Mount Eden Avenue,4,Bx
 M11,Myrtle Av,J M Z,Bk
 G32,Myrtle-Willoughby Avs,G,Bk
-L17,Myrtle-Wyckoff Avs,L,Bk
-M08,Myrtle-Wyckoff Avs,M,Bk
+M08,Myrtle-Wyckoff Avs,L M,Bk
 G28,Nassau Av,G,Bk
 D38,Neck Rd,Q,Bk
 F39,Neptune Av,F,Bk
