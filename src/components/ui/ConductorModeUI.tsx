@@ -13,14 +13,14 @@ import { GameState } from '../../logic/GameState'
 import { Direction } from '../../logic/LineManager'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 
-import R_ARROW_BLACK from '../../images/right-arrow-b.svg'
-import R_ARROW_WHITE from '../../images/right-arrow-w.svg'
-import TRANSFER_WHITE from '../../images/transfer-icon-w.svg'
-import TRANSFER_BLACK from '../../images/transfer-icon-b.svg'
-import C_DIRECTION_WHITE from '../../images/change-direction-icon-w.svg'
-import C_DIRECTION_BLACK from '../../images/change-direction-icon-b.svg'
-import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
-import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
+import R_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
+import R_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
+import TRANSFER_WHITE from '../../assets/images/transfer-icon-w.svg'
+import TRANSFER_BLACK from '../../assets/images/transfer-icon-b.svg'
+import C_DIRECTION_WHITE from '../../assets/images/change-direction-icon-w.svg'
+import C_DIRECTION_BLACK from '../../assets/images/change-direction-icon-b.svg'
+import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
+import REFRESH_WHITE from '../../assets/images/refresh-icon-w.svg'
 
 interface ConductorModeUIProps {
     handleLineClick: (index: number) => void

@@ -17,11 +17,11 @@ import { LineName, areLineSetsEqual } from '../../logic/LineManager'
 import { getLineSVGs, lineToLineColor } from '../../logic/LineSVGsMap'
 import { getLineType, LineType } from '../../logic/LineManager'
 
-import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
-import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
-import OPTIMAL_BLACK from '../../images/optimal-route-icon-b.svg'
-import OPTIMAL_WHITE from '../../images/optimal-route-icon-w.svg'
-import INFO_ICON_W from '../../images/info-icon-white.svg'
+import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
+import REFRESH_WHITE from '../../assets/images/refresh-icon-w.svg'
+import OPTIMAL_BLACK from '../../assets/images/optimal-route-icon-b.svg'
+import OPTIMAL_WHITE from '../../assets/images/optimal-route-icon-w.svg'
+import INFO_ICON_W from '../../assets/images/info-icon-white.svg'
 
 interface StationData {
     id: string

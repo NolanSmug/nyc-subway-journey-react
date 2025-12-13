@@ -4,12 +4,12 @@ import React, { forwardRef, useCallback } from 'react'
 import { GameMode, Gender, useSettingsContext } from '../contexts/SettingsContext'
 import { PassengerState } from '../hooks/usePassenger'
 
-import HUMAN_MALE_WHITE from '../images/human-male-w.svg'
-import HUMAN_MALE_BLACK from '../images/human-male-b.svg'
-import HUMAN_FEMALE_WHITE from '../images/human-female-w.svg'
-import HUMAN_FEMALE_BLACK from '../images/human-female-b.svg'
-import HUMAN_OTHER_WHITE from '../images/human-other-w.svg'
-import HUMAN_OTHER_BLACK from '../images/human-other-b.svg'
+import HUMAN_MALE_WHITE from '../assets/images/human-male-w.svg'
+import HUMAN_MALE_BLACK from '../assets/images/human-male-b.svg'
+import HUMAN_FEMALE_WHITE from '../assets/images/human-female-w.svg'
+import HUMAN_FEMALE_BLACK from '../assets/images/human-female-b.svg'
+import HUMAN_OTHER_WHITE from '../assets/images/human-other-w.svg'
+import HUMAN_OTHER_BLACK from '../assets/images/human-other-b.svg'
 
 interface PassengerProps {
     passengerState: PassengerState

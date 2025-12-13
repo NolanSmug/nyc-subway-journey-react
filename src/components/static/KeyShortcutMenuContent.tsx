@@ -1,7 +1,7 @@
 import React from 'react'
 import KeyShortcut from './KeyShortcut'
 
-import './KeyShortcutMenu.css'
+import './KeyShortcutMenuContent.css'
 
 const KeyShortcutMenu = () => {
     return (

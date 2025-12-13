@@ -42,4 +42,5 @@ function KeyShortcut({ shortcutKey, label, isCommand, conductorModeOnly }: KeySh
         </div>
     )
 }
+
 export default KeyShortcut

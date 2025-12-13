@@ -77,4 +77,19 @@ describe('Train actions (ONE_TRAIN)', () => {
         train.advanceStation()
         expect(train.isValidTransfer(LineName.R_TRAIN, train.getCurrentStation())).toBe(false)
     })
+
+    test('advanceStation overflow', () => {
+        train.setCurrentStationByIndex(2) // WTC
+        train.advanceStation()
+        train.advanceStationInc(2)
+
+        expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
+    })
+
+    test('directionLabel', () => {
+        expect(train.getDirectionLabel()).toBe('Uptown')
+
+        train.reverseDirection()
+        expect(train.getDirectionLabel()).toBe('Downtown')
+    })
 })

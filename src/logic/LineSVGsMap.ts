@@ -1,35 +1,35 @@
 import { areLineSetsEqual, LineName } from './LineManager'
-import IMG_A from '../images/a.svg'
-import IMG_AL from '../images/al.svg'
-import IMG_AR from '../images/ar.svg'
-import IMG_B from '../images/b.svg'
-import IMG_C from '../images/c.svg'
-import IMG_D from '../images/d.svg'
-import IMG_E from '../images/e.svg'
-import IMG_F from '../images/f.svg'
-import IMG_G from '../images/g.svg'
-// import IMG_H from '../images/h.svg'
-import IMG_J from '../images/j.svg'
-import IMG_L from '../images/l.svg'
-import IMG_M from '../images/m.svg'
-import IMG_N from '../images/n.svg'
-import IMG_Q from '../images/q.svg'
-import IMG_R from '../images/r.svg'
-import IMG_S from '../images/s.svg'
-// import IMG_T from '../images/t.svg'
-import IMG_W from '../images/w.svg'
-import IMG_Z from '../images/z.svg'
-import IMG_SF from '../images/sf.svg'
-import IMG_SR from '../images/sr.svg'
-import IMG_1 from '../images/1.svg'
-import IMG_2 from '../images/2.svg'
-import IMG_3 from '../images/3.svg'
-import IMG_4 from '../images/4.svg'
-import IMG_5 from '../images/5.svg'
-import IMG_6 from '../images/6.svg'
-// import IMG_6D from '../images/6d.svg'
-import IMG_7 from '../images/7.svg'
-// import IMG_7D from '../images/7d.svg'
+import IMG_A from '../assets/images/a.svg'
+import IMG_AL from '../assets/images/al.svg'
+import IMG_AR from '../assets/images/ar.svg'
+import IMG_B from '../assets/images/b.svg'
+import IMG_C from '../assets/images/c.svg'
+import IMG_D from '../assets/images/d.svg'
+import IMG_E from '../assets/images/e.svg'
+import IMG_F from '../assets/images/f.svg'
+import IMG_G from '../assets/images/g.svg'
+// import IMG_H from '../assets/images/h.svg'
+import IMG_J from '../assets/images/j.svg'
+import IMG_L from '../assets/images/l.svg'
+import IMG_M from '../assets/images/m.svg'
+import IMG_N from '../assets/images/n.svg'
+import IMG_Q from '../assets/images/q.svg'
+import IMG_R from '../assets/images/r.svg'
+import IMG_S from '../assets/images/s.svg'
+// import IMG_T from '../assets/images/t.svg'
+import IMG_W from '../assets/images/w.svg'
+import IMG_Z from '../assets/images/z.svg'
+import IMG_SF from '../assets/images/sf.svg'
+import IMG_SR from '../assets/images/sr.svg'
+import IMG_1 from '../assets/images/1.svg'
+import IMG_2 from '../assets/images/2.svg'
+import IMG_3 from '../assets/images/3.svg'
+import IMG_4 from '../assets/images/4.svg'
+import IMG_5 from '../assets/images/5.svg'
+import IMG_6 from '../assets/images/6.svg'
+// import IMG_6D from '../assets/images/6d.svg'
+import IMG_7 from '../assets/images/7.svg'
+// import IMG_7D from '../assets/images/7d.svg'
 
 const LINE_SVGS: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: '',
@@ -133,48 +133,48 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
         [LineName.D_TRAIN, LineName.N_TRAIN, LineName.R_TRAIN],
         [LineName.B_TRAIN, LineName.Q_TRAIN],
     ],
+    BOT: [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN], [LineName.S_TRAIN_SHUTTLE]],
     CAN: [
         [LineName.N_TRAIN, LineName.Q_TRAIN],
         [LineName.R_TRAIN, LineName.W_TRAIN],
         [LineName.J_TRAIN, LineName.Z_TRAIN],
         [LineName.SIX_TRAIN],
     ],
+    CBC: [[LineName.A_TRAIN, LineName.B_TRAIN, LineName.C_TRAIN, LineName.D_TRAIN], [LineName.ONE_TRAIN]],
+    CSQ: [[LineName.E_TRAIN, LineName.F_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]],
+    ESX: [[LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN], [LineName.F_TRAIN]],
+    JAY: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN], [LineName.R_TRAIN]],
+    LEX: [[LineName.E_TRAIN, LineName.F_TRAIN], [LineName.SIX_TRAIN]],
+    QBP: [[LineName.SEVEN_TRAIN, LineName.N_TRAIN, LineName.W_TRAIN]],
     WTC: [
         [LineName.TWO_TRAIN, LineName.THREE_TRAIN],
         [LineName.A_TRAIN, LineName.C_TRAIN],
         [LineName.E_TRAIN],
         [LineName.R_TRAIN, LineName.W_TRAIN],
     ],
-    JAY: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.F_TRAIN], [LineName.R_TRAIN]],
-    BOT: [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN], [LineName.S_TRAIN_SHUTTLE]],
-    CSQ: [[LineName.E_TRAIN, LineName.F_TRAIN], [LineName.SEVEN_TRAIN], [LineName.G_TRAIN]],
-    QBP: [[LineName.SEVEN_TRAIN, LineName.N_TRAIN, LineName.W_TRAIN]],
-    LEX: [[LineName.E_TRAIN, LineName.F_TRAIN], [LineName.SIX_TRAIN]],
-    CBC: [[LineName.A_TRAIN, LineName.B_TRAIN, LineName.C_TRAIN, LineName.D_TRAIN], [LineName.ONE_TRAIN]],
-    ESX: [[LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN], [LineName.F_TRAIN]], // Delancey St Essex St
 
+    A15: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.B_TRAIN, LineName.D_TRAIN]], // 125 St
+    A42: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.G_TRAIN]], // Hoyt Schermerhorn
     A61: [[LineName.A_TRAIN, LineName.A_LEFFERTS_TRAIN, LineName.A_ROCKAWAY_MOTT_TRAIN]], // Rockaway Blvd (junction)
-    H04: [[LineName.A_ROCKAWAY_MOTT_TRAIN, LineName.S_TRAIN_ROCKAWAY]],
     BO8: [[LineName.M_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
+    D14: [[LineName.B_TRAIN, LineName.D_TRAIN, LineName.E_TRAIN]], // 7 Av (53 St)
+    D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]], // Prospect Park
+    D43: [[LineName.D_TRAIN, LineName.F_TRAIN, LineName.N_TRAIN, LineName.Q_TRAIN]], // Coney Island-Stillwell Av
+    G05: [[LineName.E_TRAIN, LineName.J_TRAIN, LineName.Z_TRAIN]], // Jamaica Center-Parsons/Archer
+    G06: [[LineName.E_TRAIN, LineName.J_TRAIN, LineName.Z_TRAIN]], // Sutphin Blvd-ArcherAv-JFK Airport
+    G08: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN]], // Forest Hills-71 Av
+    G21: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.R_TRAIN]], // Queens Plaza
+    H04: [[LineName.A_ROCKAWAY_MOTT_TRAIN, LineName.S_TRAIN_ROCKAWAY]],
     M14: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Hewes St
     M13: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Lorimer St
     M12: [[LineName.J_TRAIN, LineName.M_TRAIN]], // Flushing Av
     R30: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.R_TRAIN]], // DeKalb
-    A42: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.G_TRAIN]], // Hoyt Schermerhorn
-    D14: [[LineName.B_TRAIN, LineName.D_TRAIN, LineName.E_TRAIN]], // 7 Av (53 St)
-    G21: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.R_TRAIN]], // Queens Plaza
-    D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]], // Prospect Park
-    G05: [[LineName.E_TRAIN, LineName.J_TRAIN, LineName.Z_TRAIN]], // Jamaica Center-Parsons/Archer
-    G06: [[LineName.E_TRAIN, LineName.J_TRAIN, LineName.Z_TRAIN]], // Sutphin Blvd-ArcherAv-JFK Airport
-    G08: [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN]], // Forest Hills-71 Av
-    D43: [[LineName.D_TRAIN, LineName.F_TRAIN, LineName.N_TRAIN, LineName.Q_TRAIN]], // Coney Island-Stillwell Av
-    A15: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.B_TRAIN, LineName.D_TRAIN]], // 125 St
     R36: [[LineName.D_TRAIN, LineName.N_TRAIN, LineName.R_TRAIN]], // 36 St
-    '250': [[LineName.THREE_TRAIN, LineName.FOUR_TRAIN]], // Crown Hts-Utica Av
-    '626': [[LineName.FOUR_TRAIN, LineName.FIVE_TRAIN], [LineName.SIX_TRAIN]], // 86 St
-    '4A9': [[LineName.F_TRAIN, LineName.G_TRAIN], [LineName.R_TRAIN]], // 4 Av 9th
     '222': [[LineName.TWO_TRAIN, LineName.FIVE_TRAIN], [LineName.FOUR_TRAIN]], // 149 St-Grand Concourse
     '234': [[LineName.TWO_TRAIN, LineName.THREE_TRAIN, LineName.FOUR_TRAIN, LineName.FIVE_TRAIN]], // Nevins St
+    '250': [[LineName.THREE_TRAIN, LineName.FOUR_TRAIN]], // Crown Hts-Utica Av
+    '4A9': [[LineName.F_TRAIN, LineName.G_TRAIN], [LineName.R_TRAIN]], // 4 Av 9th
+    '626': [[LineName.FOUR_TRAIN, LineName.FIVE_TRAIN], [LineName.SIX_TRAIN]], // 86 St
     '710': [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]], // Jackson Hts
 }
 

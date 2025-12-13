@@ -18,8 +18,8 @@ import { Direction, LineName } from '../../logic/LineManager'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station as StationObject } from '../../logic/StationManager'
 
-import REFRESH_BLACK from '../../images/refresh-icon-b.svg'
-import REFRESH_WHITE from '../../images/refresh-icon-w.svg'
+import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
+import REFRESH_WHITE from '../../assets/images/refresh-icon-w.svg'
 
 interface RiderModeUIProps {
     handleBoardUptown: () => void

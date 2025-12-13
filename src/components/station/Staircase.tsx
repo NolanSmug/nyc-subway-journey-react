@@ -12,8 +12,8 @@ import { LineName } from '../../logic/LineManager'
 import { useUIContext } from '../../contexts/UIContext'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 
-import RIGHT_ARROW_BLACK from '../../images/right-arrow-b.svg'
-import RIGHT_ARROW_WHITE from '../../images/right-arrow-w.svg'
+import RIGHT_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
+import RIGHT_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
 
 interface StaircaseProps {
     lines: LineName[]

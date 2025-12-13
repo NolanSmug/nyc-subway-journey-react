@@ -31,7 +31,7 @@ describe('ActionButton', () => {
         expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
-    test('Applies rotation style when provided', () => {
+    test('Applies rotationDegrees style', () => {
         render(<ActionButton imageSrc='arrow.svg' rotateDegrees={90} />)
 
         const img: HTMLImageElement = screen.getByRole('img')

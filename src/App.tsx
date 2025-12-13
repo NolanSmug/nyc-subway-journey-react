@@ -9,7 +9,7 @@ import UmbrellaButton from './components/common/UmbrellaButton'
 import SettingsMenu from './components/common/SettingsMenu'
 import UpcomingStationsHorizontal from './components/common/UpcomingStationsHorizontal'
 import UpcomingStationsVertical from './components/common/UpcomingStationsVertical'
-import KeyShortcutMenu from './components/keyboard/KeyShortcutMenu'
+import KeyShortcutMenu from './components/static/KeyShortcutMenuContent'
 // import SubwayMap from './components/SubwayMap'
 
 import { useUIContext } from './contexts/UIContext'
@@ -20,10 +20,11 @@ import { useGame } from './hooks/useGame'
 
 import { useLineFavicon } from './hooks/useLineFavicon'
 
-import GEAR_BLACK from './images/settings-icon-b.svg'
-import GEAR_WHITE from './images/settings-icon-w.svg'
-import KEYBOARD_BLACK from './images/shortcut-icon-black.svg'
-import KEYBOARD_WHITE from './images/shortcut-icon-white.svg'
+import GEAR_BLACK from './assets/images/settings-icon-b.svg'
+import GEAR_WHITE from './assets/images/settings-icon-w.svg'
+import KEYBOARD_BLACK from './assets/images/shortcut-icon-black.svg'
+import KEYBOARD_WHITE from './assets/images/shortcut-icon-white.svg'
+import WelcomeScreenContent from './components/static/WelcomeScreenContent'
 
 const settingsMenu = <SettingsMenu />
 const keyShortcutMenu = <KeyShortcutMenu />
@@ -75,7 +76,11 @@ function Game() {
                 onMouseDown={handleClickAway}
             />
 
-            {isLandingPage && <LandingScreen />}
+            {isLandingPage && (
+                <LandingScreen closeLabel='Start journey'>
+                    <WelcomeScreenContent />
+                </LandingScreen>
+            )}
 
             <div className={`Game ${gameMode}-mode`}>
                 {upcomingStationsVisible && isHorizontalLayout && <UpcomingStationsHorizontal />}

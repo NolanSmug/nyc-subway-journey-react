@@ -10,7 +10,7 @@ jest.mock('../../../contexts/UIContext', () => ({
 }))
 
 describe('LineSVGs', () => {
-    const MOCK_PATHS: string[] = ['../../../images/j.svg', 'l../../../images/m.svg', '../../../images/z.svg']
+    const MOCK_PATHS: string[] = ['../../../assets/images/j.svg', 'l../../../assets/images/m.svg', '../../../assets/images/z.svg']
 
     test('Renders the correct number of line icons', () => {
         render(<LineSVGs svgPaths={MOCK_PATHS} />)
