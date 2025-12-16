@@ -1,9 +1,9 @@
 # NYC Subway Journey Game 
 
 
-<img src='./src/images/subway-journey.gif' width='100%'>
+<img src='./src/assets/images/subway-journey.gif' width='100%'>
 
-| ![cover screenshot 1](./src/images/screenshot-cover-1.png) | ![cover screenshot 2](./src/images/screenshot-cover-2.png) |
+| ![cover screenshot 1](./src/assets/images/screenshot-cover-1.png) | ![cover screenshot 2](./src/assets/images/screenshot-cover-2.png) |
 | -----------------------------------------------------------| ---------------------------------------------------------- |
 
 - [NYC Subway Journey Game](#nyc-subway-journey-game)
@@ -88,7 +88,7 @@ You are placed into a random NYC subway station. Your objective is to reach anot
    - At the beginning of the game, you are assigned:
      - A **starting station**
      - A **destination station** (see [all_stations.csv](./public/csv/all_stations.csv))
-     - A **starting line** (ex:<img src='./src/images/j.svg' width='20px' align='top'>, <img src='./src/images/m.svg' width='20px' align='top'>, <img src='./src/images/z.svg' width='20px' align='top'>, ...)
+     - A **starting line** (ex:<img src='./src/assets/images/j.svg' width='20px' align='top'>, <img src='./src/assets/images/m.svg' width='20px' align='top'>, <img src='./src/assets/images/z.svg' width='20px' align='top'>, ...)
 
 2. **Choosing a direction:**
    - Before you can move, you must choose a **direction** (e.g. `UPTOWN`, `DOWNTOWN`).
@@ -147,7 +147,7 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 
 Rider mode is the default game mode and is the recommended mode for those who are learning and want to visualize their journey. 
 
-<img src="./src/images/screenshot-rider-mode.png" alt="rider mode screenshot" width="100%">
+<img src="./src/assets/images/screenshot-rider-mode.png" alt="rider mode screenshot" width="100%">
 
 You are riding from the *passenger's perspective*. Watch your character "walk" around the screen as you perform actions. 
 
@@ -164,7 +164,7 @@ You are riding from the *passenger's perspective*. Watch your character "walk" a
 ## Conductor mode
 Conductor mode is for players who want to bypass the animations and play at a faster pace, or for those who already understand how to physically navigate the system. It grants you direct control over the train's state.
 
-<img src="./src/images/screenshot-conductor-mode.png" alt="conductor mode screenshot" width="100%">
+<img src="./src/assets/images/screenshot-conductor-mode.png" alt="conductor mode screenshot" width="100%">
 
 * There is no longer a passenger to control. You are the train! 
 * All actions (`Advance`, `Transfer`, `Change direction`) are executed immediately.
@@ -175,7 +175,7 @@ Conductor mode is for players who want to bypass the animations and play at a fa
 
 Upon winning the game, you can choose to reveal the **Optimal route**. This feature calculates the *mathematically shortest path* (fewest stops) from your starting station to the destination station.
 
-<img src="./src/images/screenshot-optimal-route.png" alt="optimal route screenshot" width="100%">
+<img src="./src/assets/images/screenshot-optimal-route.png" alt="optimal route screenshot" width="100%">
 
 - Calculated using the [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm.
 - The graph construction and algorithm are implemented in [bfs.py](./src/logic/bfs.py).
