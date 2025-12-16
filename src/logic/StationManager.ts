@@ -18,13 +18,15 @@ export class Station {
         console.log('All NYC stations initialized:', this.allNycStations)
     }
 
-    static getRandomStation(stations: Station[]): Station {
-        if (stations.length === 0) {
-            throw new Error('Station vector is empty')
-        }
-        const randomIndex = Math.floor(Math.random() * stations.length)
+    static getRandomStation(stations: Station[], excludedIds: string[] = []): Station {
+        const validStations = stations.filter((station: Station) => !excludedIds.includes(station.id))
 
-        return stations[randomIndex]
+        if (validStations.length === 0) {
+            throw new Error('getRandomStation(): Station vector is empty')
+        }
+
+        const randomIndex = Math.floor(Math.random() * validStations.length)
+        return validStations[randomIndex]
     }
 
     static NULL_STATION: Station = new Station('000', '', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)

@@ -7,8 +7,13 @@ export enum UpcomingStationsLayout {
 }
 
 export enum GameMode {
-    CONDUCTOR = 'conductor',
-    RIDER = 'rider',
+    CONDUCTOR,
+    RIDER,
+}
+
+export enum GameDifficulty {
+    NORMAL,
+    NEW_YORKER,
 }
 
 export enum Gender {
@@ -23,6 +28,9 @@ interface SettingsContextProps {
 
     gameMode: GameMode
     setGameMode: React.Dispatch<React.SetStateAction<GameMode>>
+
+    gameDifficulty: GameDifficulty
+    setGameDifficulty: React.Dispatch<React.SetStateAction<GameDifficulty>>
 
     upcomingStationsVisible: boolean
     setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -43,6 +51,7 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
     const [gameMode, setGameMode] = useState<GameMode>(GameMode.RIDER)
+    const [gameDifficulty, setGameDifficulty] = useState<GameDifficulty>(GameDifficulty.NORMAL)
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
     const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
     const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(UpcomingStationsLayout.HORIZONTAL)
@@ -66,6 +75,8 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
             setUpcomingStationsLayout,
             toggleUpcomingStationsLayout,
 
+            gameDifficulty,
+            setGameDifficulty,
             gameMode,
             setGameMode,
             numAdvanceStations,
@@ -73,7 +84,7 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
             passengerGender,
             setPassengerGender,
         }),
-        [darkMode, gameMode, upcomingStationsVisible, upcomingStationsLayout, numAdvanceStations, passengerGender]
+        [darkMode, gameMode, gameDifficulty, upcomingStationsVisible, upcomingStationsLayout, numAdvanceStations, passengerGender]
     )
 
     return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>
