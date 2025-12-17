@@ -1,6 +1,6 @@
 import { RefObject, useCallback } from 'react'
 
-import { GameMode } from '../contexts/SettingsContext'
+import { GameDifficulty, GameMode } from '../contexts/SettingsContext'
 
 import { GameState } from '../logic/GameState'
 import { Train } from '../logic/TrainManager'
@@ -12,9 +12,12 @@ type UseTrainActionsParams = {
     gameState: GameState
     setGameState: (gs: GameState) => void
     gameMode: GameMode
+    gameDifficulty: GameDifficulty
 }
 
-export default function useTrainActions({ trainRef, setTrain, gameState, setGameState, gameMode }: UseTrainActionsParams) {
+export default function useTrainActions({ trainRef, setTrain, gameState, setGameState, gameMode, gameDifficulty }: UseTrainActionsParams) {
+    const enableServiceDisruptions: boolean = gameDifficulty === GameDifficulty.NEW_YORKER
+
     const checkForWin = useCallback(
         (train: Train) => {
             if (train.getCurrentStation().equals(gameState.destinationStation)) {
@@ -30,6 +33,11 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
             if (!currentTrain) throw new Error('attempted to advanceStation - Train object is null')
 
             const nextTrain = currentTrain.clone()
+
+            // if (serviceDisruptionsEnabled) {
+            //     handleServiceDisruptionAdvance() // TODO: something like this. return early? happy path where?
+            //     const nextValidIndex: number = nextTrain.advanceStationInc()
+            // }
 
             if (numAdvanceStations > 1 && gameMode === GameMode.CONDUCTOR) {
                 nextTrain.advanceStationInc(numAdvanceStations)

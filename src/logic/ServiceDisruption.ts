@@ -2,7 +2,8 @@ import { LineName } from './LineManager'
 
 export enum ServiceAlertType {
     DELAYS = 'Delays',
-    STATION_CLOSURE = 'Station Closure',
+    STATION_CLOSURE = 'Station closure',
+    LINE_SUSPENSION = 'Line suspension',
 }
 
 export class ServiceDisruption {
@@ -15,7 +16,7 @@ export class ServiceDisruption {
     }
 
     get affectedLines(): LineName[] {
-        return Array.from(this.affectedStations.keys()) ?? [LineName.NULL_TRAIN]
+        return Array.from(this.affectedStations.keys())
     }
 
     public isLineAffected(line: LineName): boolean {
@@ -42,5 +43,29 @@ export class ServiceDisruption {
             new Map([[LineName.ONE_TRAIN, new Set(['132', 'PEN', '127'])]])
         )
         return [oneTrainShit]
+    }
+
+    public static getDisabledStationIDs(disruptions: ServiceDisruption[]): Set<string> {
+        const disabledStationIDs = new Set<string>()
+
+        disruptions.forEach((disruption) => {
+            disruption.affectedStations.forEach((stationsSet) => {
+                stationsSet.forEach((id) => disabledStationIDs.add(id))
+            })
+        })
+
+        return disabledStationIDs
+    }
+
+    public static getSuspendedLines(disruptions: ServiceDisruption[]): LineName[] {
+        const suspendedLines: LineName[] = []
+
+        disruptions.forEach((disruption) => {
+            if (disruption.type === ServiceAlertType.LINE_SUSPENSION) {
+                suspendedLines.push(...disruption.affectedLines)
+            }
+        })
+
+        return suspendedLines
     }
 }

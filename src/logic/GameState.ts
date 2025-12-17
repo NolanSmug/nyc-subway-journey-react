@@ -1,7 +1,7 @@
-import { LineName, getRandomLine } from './LineManager'
-import { ServiceAlertType, ServiceDisruption } from './ServiceDisruption'
 import { Station } from './StationManager'
+import { LineName, getRandomLine } from './LineManager'
 import { getStationsForLine } from './SubwayMap'
+import { ServiceDisruption } from './ServiceDisruption'
 
 export class GameState {
     startingLine: LineName
@@ -40,30 +40,24 @@ export class GameState {
         return this.isWon
     }
 
-    public async resetGameState(): Promise<void> {
-        const disabledLines: LineName[] = []
-        const disabledStationIDs: Set<string> = new Set<string>()
+    public async resetGameState(enableDisruptions: boolean = false): Promise<void> {
+        let suspendedLines: LineName[] = []
+        let disabledStationIDs: Set<string> = new Set<string>()
 
-        if (this.activeServiceDisruptions) {
-            this.activeServiceDisruptions.forEach((disruption) => {
-                disruption.affectedStations.forEach((stationSet, line) => {
-                    disabledLines.push(line)
+        if (enableDisruptions) {
+            this.activeServiceDisruptions = ServiceDisruption.generateDisruptions()
 
-                    stationSet.forEach((stationId) => {
-                        // lol 3x forEach
-                        disabledStationIDs.add(stationId)
-                    })
-                })
-            })
+            suspendedLines = ServiceDisruption.getSuspendedLines(this.activeServiceDisruptions)
+            disabledStationIDs = ServiceDisruption.getDisabledStationIDs(this.activeServiceDisruptions)
         }
 
-        const disabledStationIDsArr = Array.from(disabledStationIDs)
+        const disabledStationIDsArr: string[] = Array.from(disabledStationIDs)
 
-        this.startingLine = getRandomLine(disabledLines)
-        // this.startingLine = LineName.L_TRAIN
+        this.startingLine = getRandomLine(suspendedLines)
         this.isFirstTurn = true
+        // this.startingLine = LineName.L_TRAIN
 
-        this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine))
+        this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine), disabledStationIDsArr)
         this.destinationStation = Station.getRandomStation(Station.allNycStations, [this.startingStation.getId(), ...disabledStationIDsArr])
 
         // this.destinationStation = Station.getStationByID('AQR')

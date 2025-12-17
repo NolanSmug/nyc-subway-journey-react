@@ -7,13 +7,16 @@ export class Game {
     public gameState: GameState
     public train: Train
 
-    constructor() {
+    private enableServiceDisruptions: boolean
+
+    constructor(enableServiceDisruptions: boolean = false) {
         this.gameState = new GameState()
         this.train = new Train()
+        this.enableServiceDisruptions = enableServiceDisruptions
     }
 
     public async runGame(): Promise<void> {
-        await this.gameState.resetGameState() // fill gameState with new params
+        await this.gameState.resetGameState(this.enableServiceDisruptions) // fill gameState with new params
 
         this.train.setDirection(Direction.NULL_DIRECTION)
         this.train.setScheduledStops(await getStationsForLine(this.gameState.startingLine))

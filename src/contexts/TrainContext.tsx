@@ -27,6 +27,7 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
 
     const { gameState, setGameState } = useGameStateContext()
     const gameMode = useSettingsContext((state) => state.gameMode)
+    const gameDifficulty = useSettingsContext((state) => state.gameDifficulty)
 
     const actions = useTrainActions({
         trainRef,
@@ -34,6 +35,7 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
         gameState,
         setGameState,
         gameMode,
+        gameDifficulty,
     })
 
     const value = useMemo(() => ({ train, actions, setTrain }), [train, actions])

@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 
 import { useTrainContext } from '../contexts/TrainContext'
 import { useGameStateContext } from '../contexts/GameStateContext'
+import { GameDifficulty, useSettingsContext } from '../contexts/SettingsContext'
 import { useUIContext } from '../contexts/UIContext'
 
 import { Game } from '../logic/Game'
@@ -11,11 +12,12 @@ export function useGame() {
     const { setGameState } = useGameStateContext()
     const setTrain = useTrainContext((state) => state.setTrain)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
+    const gameDifficulty = useSettingsContext((state) => state.gameDifficulty)
 
     const initializeGame = useCallback(async () => {
         try {
             await StationClass.initializeAllStations()
-            let newGame = new Game()
+            let newGame = new Game(gameDifficulty === GameDifficulty.NEW_YORKER)
             await newGame.runGame()
 
             setIsTransferMode(false)
@@ -24,6 +26,7 @@ export function useGame() {
         } catch (error) {
             console.error('Error initializing game:', error)
         }
-    }, [setTrain, setGameState, setIsTransferMode])
+    }, [setTrain, setGameState, setIsTransferMode, gameDifficulty])
+
     return { initializeGame }
 }

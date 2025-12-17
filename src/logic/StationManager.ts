@@ -19,14 +19,16 @@ export class Station {
     }
 
     static getRandomStation(stations: Station[], excludedIds: string[] = []): Station {
-        const validStations = stations.filter((station: Station) => !excludedIds.includes(station.id))
-
-        if (validStations.length === 0) {
+        if (stations.length === 0) {
             throw new Error('getRandomStation(): Station vector is empty')
         }
 
-        const randomIndex = Math.floor(Math.random() * validStations.length)
-        return validStations[randomIndex]
+        const validStations = stations.filter((station: Station) => !excludedIds.includes(station.getId()))
+
+        const domain: Station[] = validStations.length > 0 ? validStations : stations
+
+        const randomIndex = Math.floor(Math.random() * domain.length)
+        return domain[randomIndex]
     }
 
     static NULL_STATION: Station = new Station('000', '', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
