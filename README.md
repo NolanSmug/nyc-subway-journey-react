@@ -21,12 +21,15 @@
   - [Rider mode](#rider-mode)
   - [Conductor mode](#conductor-mode)
 - [Optimal route](#optimal-route)
+- [Station image HTML elements](#station-image-html-elements)
 
 ## Developer's note
 
 This is a "from scratch" project. All components, animations, layout, and game logic are custom-built. I intentionally avoided third-party UI libraries or game engines so I could have more control over my project. I have learned so much from building it this way.
 
 Everything from rider movement and staircase mechanics to platform interactions and SVG animations is run by my own TypeScript logic (3,000+ lines) and *extensive* custom CSS (~1,500 lines). I even implemented my own coordinate system for passenger pathfinding and wrote a Python breadth first search backend for an optimal route algorithm. Even tiny details, like button behaviors and icon rendering, are manually programmed.
+
+> See [station image HTML elements](#station-image-html-elements) for more info on how I designed station images for the browser.
 
 # Running the project
 
@@ -183,7 +186,15 @@ Upon winning the game, you can choose to reveal the **Optimal route**. This feat
 
 > It can often be difficult to match the optimal route's path. Don't let this frustrate you! I plan on implementing heuristics to make the algorithm's route suggestions more realistic.
 
-<br><br>
+<br>
+
+# Station image HTML elements
+
+I wasn't happy with the idea of using static images for each of the 400+ stations, so I built my own dynamic elements using pure HTML and CSS. It’s a lot faster, looks better, and is how I got the conductor mode transfers to work. If you're interested in how I styled them, the original repo is [here](https://github.com/NolanSmug/mta-subway-stations-html)
+
+<img src="./src/assets/images/screenshot-station-image-inspector.png" alt="station image inspector screenshot" width="100%">
+
+<br>
 
 ---
 
