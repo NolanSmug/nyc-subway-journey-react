@@ -190,7 +190,7 @@ Upon winning the game, you can choose to reveal the **Optimal route**. This feat
 
 # Station image HTML elements
 
-I wasn't happy with the idea of using static images for each of the 400+ stations, so I built my own dynamic elements using pure HTML and CSS. It’s a lot faster, looks better, and is how I got the conductor mode transfers to work. If you're interested in how I styled them, the original repo is [here](https://github.com/NolanSmug/mta-subway-stations-html)
+I wasn't happy with the idea of using static images for each of the 400+ stations, so I built my own dynamic elements using HTML and CSS. It’s a lot faster, looks better, and is how I got the conductor mode transfers to work. If you're interested in how I styled them, the original repo is [here](https://github.com/NolanSmug/mta-subway-stations-html)
 
 <img src="./src/assets/images/screenshot-station-image-inspector.png" alt="station image inspector screenshot" width="100%">
 
