@@ -2,21 +2,25 @@ import { GameState } from './GameState'
 import { Train } from './TrainManager'
 import { Direction } from './LineManager'
 import { getStationsForLine } from './SubwayMap'
+import { GameDifficulty } from '../contexts/SettingsContext'
+
+export interface GameConfig {
+    difficulty: GameDifficulty
+}
 
 export class Game {
     public gameState: GameState
     public train: Train
+    private config: GameConfig
 
-    private enableServiceDisruptions: boolean
-
-    constructor(enableServiceDisruptions: boolean = false) {
+    constructor(config: GameConfig) {
         this.gameState = new GameState()
         this.train = new Train()
-        this.enableServiceDisruptions = enableServiceDisruptions
+        this.config = config
     }
 
     public async runGame(): Promise<void> {
-        await this.gameState.resetGameState(this.enableServiceDisruptions) // fill gameState with new params
+        await this.gameState.initialize(this.config)
 
         this.train.setDirection(Direction.NULL_DIRECTION)
         this.train.setScheduledStops(await getStationsForLine(this.gameState.startingLine))

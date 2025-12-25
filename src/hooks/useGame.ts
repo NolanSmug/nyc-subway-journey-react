@@ -12,12 +12,15 @@ export function useGame() {
     const { setGameState } = useGameStateContext()
     const setTrain = useTrainContext((state) => state.setTrain)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
+
     const gameDifficulty = useSettingsContext((state) => state.gameDifficulty)
 
     const initializeGame = useCallback(async () => {
         try {
             await StationClass.initializeAllStations()
-            let newGame = new Game(gameDifficulty === GameDifficulty.NEW_YORKER)
+            let newGame = new Game({
+                difficulty: gameDifficulty,
+            })
             await newGame.runGame()
 
             setIsTransferMode(false)

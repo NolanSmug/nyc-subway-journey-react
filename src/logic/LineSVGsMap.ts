@@ -178,9 +178,9 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     '710': [[LineName.E_TRAIN, LineName.F_TRAIN, LineName.M_TRAIN, LineName.R_TRAIN], [LineName.SEVEN_TRAIN]], // Jackson Hts
 }
 
-export function groupLines(lines: LineName[], stationID: string): LineName[][] {
-    if (stationID in UNIQUE_STATION_GROUPS) {
-        return UNIQUE_STATION_GROUPS[stationID]
+export function groupLines(lines: LineName[], stationId: string): LineName[][] {
+    if (stationId in UNIQUE_STATION_GROUPS) {
+        return UNIQUE_STATION_GROUPS[stationId]
     }
 
     // handle F,G train pairing

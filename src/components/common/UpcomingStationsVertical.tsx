@@ -10,7 +10,7 @@ function UpcomingStationsVertical() {
     const stationsRef = useRef<HTMLDivElement>(null)
 
     const stations = useTrainContext((state) => state.train.getScheduledStops())
-    const currentStationID = useTrainContext((state) => state.train.getCurrentStation().getId())
+    const currentStationId = useTrainContext((state) => state.train.getCurrentStation().getId())
     const currentStationIndex = useTrainContext((state) => state.train.getCurrentStationIndex())
 
     // scroll to the current station
@@ -21,7 +21,7 @@ function UpcomingStationsVertical() {
 
             scrollToCurrentStation(currentStationElement, isBelowCenteredScroll)
         }
-    }, [currentStationIndex, stations.length, currentStationID])
+    }, [currentStationIndex, stations.length, currentStationId])
 
     if (!stations || stations.length === 0) {
         return <div style={{ display: 'none' }} />
@@ -35,7 +35,7 @@ function UpcomingStationsVertical() {
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        className={currentStationID === station.getId() ? 'current-station-vertical' : ''}
+                        className={currentStationId === station.getId() ? 'current-station-vertical' : ''}
                     />
                 ))}
             </div>

@@ -25,10 +25,8 @@ export class Station {
 
         const validStations = stations.filter((station: Station) => !excludedIds.includes(station.getId()))
 
-        const domain: Station[] = validStations.length > 0 ? validStations : stations
-
-        const randomIndex = Math.floor(Math.random() * domain.length)
-        return domain[randomIndex]
+        const randomIndex = Math.floor(Math.random() * validStations.length)
+        return validStations[randomIndex]
     }
 
     static NULL_STATION: Station = new Station('000', '', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
@@ -54,7 +52,7 @@ export class Station {
         return this.transfers.every((transfer, index) => transfer === transfers[index])
     }
 
-    // ID
+    // Id
     public getId(): string {
         if (this.id === '000' || this.id === '' || this.id === null || this.id === undefined) {
             throw new Error('station id not found in data files, please contact developer')
@@ -89,9 +87,9 @@ export class Station {
         return this.transfers
     }
 
-    public static getStationByID(stationID: string) {
+    public static getStationById(stationId: string) {
         for (const station of Station.allNycStations) {
-            if (station.id === stationID) {
+            if (station.id === stationId) {
                 return station
             }
         }

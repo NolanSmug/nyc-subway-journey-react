@@ -80,8 +80,8 @@ export const LINE_TYPES: Map<LineName, LineType> = new Map([
 
 // TODO: repOk() implementation (see TrainManger.ts)
 
-export function getRandomLine(excludeLines?: LineName[]): LineName {
-    const lines: LineName[] = Object.values(LineName).filter((line) => !excludeLines?.includes(line))
+export function getRandomLine(exclude?: LineName[]): LineName {
+    const lines: LineName[] = Object.values(LineName).filter((line) => !exclude?.includes(line))
     let randomLine: LineName = LineName.NULL_TRAIN
 
     do {

@@ -9,7 +9,7 @@ type UsePlatformTransferGroups = {
 }
 
 export function usePlatformTransferGroups({ currentStation, currentLine }: UsePlatformTransferGroups) {
-    const stationID: string = currentStation.getId()
+    const stationId: string = currentStation.getId()
     const transfers: LineName[] = currentStation.getTransfers()
 
     const isOnJunctionLineA: boolean = useMemo(
@@ -17,9 +17,9 @@ export function usePlatformTransferGroups({ currentStation, currentLine }: UsePl
         [currentLine]
     )
 
-    if (isOnJunctionLineA && stationID !== 'A61' && stationID !== 'H04') currentLine = LineName.A_TRAIN // pretend we're on normal A train in special rockaway/lefferts cases
+    if (isOnJunctionLineA && stationId !== 'A61' && stationId !== 'H04') currentLine = LineName.A_TRAIN // pretend we're on normal A train in special rockaway/lefferts cases
 
-    const groupedTransfers = useMemo(() => groupLines(transfers, stationID), [transfers, stationID])
+    const groupedTransfers = useMemo(() => groupLines(transfers, stationId), [transfers, stationId])
     const currentPlatformGroup = useMemo(() => getCorrespondingLineGroup(currentLine, groupedTransfers), [currentLine, groupedTransfers])
     const otherPlatformGroups = useMemo(() => groupedTransfers.filter((g) => !g.includes(currentLine)), [groupedTransfers, currentLine])
     const samePlatformLines = useMemo(

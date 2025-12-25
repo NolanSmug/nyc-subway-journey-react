@@ -20,7 +20,7 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
 
     const checkForWin = useCallback(
         (train: Train) => {
-            if (train.getCurrentStation().equals(gameState.destinationStation)) {
+            if (gameState.checkWin(train.getCurrentStation())) {
                 setGameState(Object.assign(new GameState(), { ...gameState, isWon: true }))
             }
         },
@@ -30,16 +30,21 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
     const advanceStation = useCallback(
         (numAdvanceStations: number) => {
             const currentTrain = trainRef.current
-            if (!currentTrain) throw new Error('attempted to advanceStation - Train object is null')
+            if (!currentTrain) throw new Error('Train object is null')
 
-            const nextTrain = currentTrain.clone()
+            if (enableServiceDisruptions) {
+                let tempId: string | null = currentTrain.getNextStationId(numAdvanceStations)
+                const currentLine: LineName = currentTrain.getLine()
 
-            // if (serviceDisruptionsEnabled) {
-            //     handleServiceDisruptionAdvance() // TODO: something like this. return early? happy path where?
-            //     const nextValidIndex: number = nextTrain.advanceStationInc()
-            // }
+                while (tempId && gameState.isStationDisabled(currentLine, tempId)) {
+                    numAdvanceStations++
+                    tempId = currentTrain.getNextStationId(numAdvanceStations)
+                }
+            }
 
-            if (numAdvanceStations > 1 && gameMode === GameMode.CONDUCTOR) {
+            const nextTrain: Train = currentTrain.clone()
+
+            if (numAdvanceStations > 1) {
                 nextTrain.advanceStationInc(numAdvanceStations)
             } else {
                 nextTrain.advanceStation()
@@ -48,16 +53,15 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
             setTrain(nextTrain)
             checkForWin(nextTrain)
         },
-        [trainRef, setTrain, gameMode, checkForWin]
+        [trainRef, setTrain, checkForWin, gameState, enableServiceDisruptions]
     )
 
     const transfer = useCallback(
         async (transferInput: number | LineName) => {
             const currentTrain = trainRef.current
-            if (!currentTrain) throw new Error('attempted to transfer - Train object is null')
+            if (!currentTrain) throw new Error('Train object is null')
 
-            const nextTrain = currentTrain.clone()
-            const currentStation = nextTrain.getCurrentStation()
+            const currentStation = currentTrain.getCurrentStation()
 
             let selectedLine: LineName
             if (typeof transferInput === 'number') {
@@ -71,6 +75,11 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
                 return
             }
 
+            if (enableServiceDisruptions && gameState.isLineSuspended(selectedLine)) {
+                return
+            }
+
+            const nextTrain = currentTrain.clone()
             const isValidTransfer = await nextTrain.transferToLine(selectedLine, currentStation)
 
             // DO THE TRANSFER
@@ -78,13 +87,13 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
                 setTrain(nextTrain)
             }
         },
-        [trainRef, setTrain]
+        [trainRef, setTrain, gameState, enableServiceDisruptions]
     )
 
     const changeDirection = useCallback(
         (direction?: Direction): void | Direction => {
             const currentTrain = trainRef.current
-            if (!currentTrain) throw new Error('attempted to changeDirection - Train object is null')
+            if (!currentTrain) throw new Error('Train object is null')
 
             if (currentTrain.getDirection() === direction) return
 

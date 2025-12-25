@@ -82,7 +82,7 @@ function Game() {
                 </LandingScreen>
             )}
 
-            <div className={`Game ${gameMode}-mode`}>
+            <div className={`Game ${gameMode === GameMode.CONDUCTOR ? 'conductor' : 'rider'}-mode`}>
                 {upcomingStationsVisible && isHorizontalLayout && <UpcomingStationsHorizontal />}
                 <div className={`game-state-ui ${isVerticalLayout && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
                     {gameMode === GameMode.CONDUCTOR && <ConductorMode />}

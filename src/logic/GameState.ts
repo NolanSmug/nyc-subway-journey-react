@@ -1,7 +1,9 @@
 import { Station } from './StationManager'
 import { LineName, getRandomLine } from './LineManager'
 import { getStationsForLine } from './SubwayMap'
-import { ServiceDisruption } from './ServiceDisruption'
+import { DisruptionService } from './DisruptionService'
+import { GameConfig } from './Game'
+import { GameDifficulty } from '../contexts/SettingsContext'
 
 export class GameState {
     startingLine: LineName
@@ -10,24 +12,20 @@ export class GameState {
     isFirstTurn: boolean
     isWon: boolean
 
-    activeServiceDisruptions?: ServiceDisruption[]
+    disruptionService: DisruptionService | null = null
 
     constructor(
         startingLine: LineName = LineName.NULL_TRAIN,
         startingStation: Station = Station.NULL_STATION,
         destinationStation: Station = Station.NULL_STATION,
         isFirstTurn: boolean = true,
-        isWon: boolean = false,
-
-        activeServiceDisruptions = []
+        isWon: boolean = false
     ) {
         this.startingLine = startingLine
         this.startingStation = startingStation
         this.destinationStation = destinationStation
         this.isFirstTurn = isFirstTurn
         this.isWon = isWon
-
-        this.activeServiceDisruptions = activeServiceDisruptions
     }
 
     public checkWin(currentStation: Station): boolean {
@@ -40,36 +38,40 @@ export class GameState {
         return this.isWon
     }
 
-    public async resetGameState(enableDisruptions: boolean = false): Promise<void> {
-        let suspendedLines: LineName[] = []
-        let disabledStationIDs: Set<string> = new Set<string>()
+    public async initialize(config: GameConfig): Promise<void> {
+        this.isFirstTurn = true
+        this.isWon = false
 
-        if (enableDisruptions) {
-            this.activeServiceDisruptions = ServiceDisruption.generateDisruptions()
-
-            suspendedLines = ServiceDisruption.getSuspendedLines(this.activeServiceDisruptions)
-            disabledStationIDs = ServiceDisruption.getDisabledStationIDs(this.activeServiceDisruptions)
+        if (config.difficulty === GameDifficulty.NEW_YORKER) {
+            this.disruptionService = new DisruptionService()
         }
 
-        const disabledStationIDsArr: string[] = Array.from(disabledStationIDs)
+        const suspendedLines: LineName[] = this.disruptionService?.getSuspendedLines() ?? []
+        const disabledIdsArr = Array.from(this.disruptionService?.getDisabledStationIds() ?? [])
 
         this.startingLine = getRandomLine(suspendedLines)
-        this.isFirstTurn = true
         // this.startingLine = LineName.L_TRAIN
 
-        this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine), disabledStationIDsArr)
-        this.destinationStation = Station.getRandomStation(Station.allNycStations, [this.startingStation.getId(), ...disabledStationIDsArr])
+        const lineStations: Station[] = await getStationsForLine(this.startingLine)
+        this.startingStation = Station.getRandomStation(lineStations, disabledIdsArr)
+        this.destinationStation = Station.getRandomStation(Station.allNycStations, [this.startingStation.getId(), ...disabledIdsArr])
 
-        // this.destinationStation = Station.getStationByID('AQR')
+        // this.destinationStation = Station.getStationById('AQR')
     }
 
-    public async getStartDestStationIDs(): Promise<string[]> {
+    public async getStartDestStationIds(): Promise<string[]> {
         return [this.startingStation.getId(), this.destinationStation.getId()]
     }
 
-    public isStationDisabled(stationID: string, line: LineName): boolean {
-        if (!this.activeServiceDisruptions) return false
+    public isStationDisabled(line: LineName, stationId: string): boolean {
+        if (!stationId) return false
 
-        return this.activeServiceDisruptions.some((disruption) => disruption.isStationAffected(stationID, line))
+        return this.disruptionService?.isStationDisabled(stationId, line) ?? false
+    }
+
+    public isLineSuspended(line: LineName): boolean {
+        if (!line) return false
+
+        return this.disruptionService?.getSuspendedLines().includes(line) ?? false
     }
 }

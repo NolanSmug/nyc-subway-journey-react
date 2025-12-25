@@ -11,7 +11,7 @@ function UpcomingStationsHorizontal() {
     const lineDividerRef = useRef<HTMLDivElement>(null)
 
     const stations = useTrainContext((state) => state.train.getScheduledStops())
-    const currentStationID = useTrainContext((state) => state.train.getCurrentStation().getId())
+    const currentStationId = useTrainContext((state) => state.train.getCurrentStation().getId())
     const currentStationIndex = useTrainContext((state) => state.train.getCurrentStationIndex())
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function UpcomingStationsHorizontal() {
             const currentStationElement = stationsRef.current.querySelector('.current-station')
             scrollToCurrentStation(currentStationElement)
         }
-    }, [currentStationIndex, stations.length, currentStationID])
+    }, [currentStationIndex, stations.length, currentStationId])
 
     useEffect(() => {
         if (stationsRef.current && lineDividerRef.current) {
@@ -42,7 +42,7 @@ function UpcomingStationsHorizontal() {
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        className={currentStationID === station.getId() ? 'current-station' : ''}
+                        className={currentStationId === station.getId() ? 'current-station' : ''}
                     />
                 ))}
             </div>

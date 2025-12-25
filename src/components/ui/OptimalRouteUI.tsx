@@ -209,8 +209,8 @@ function OptimalRouteUI() {
         ;(async () => {
             setLoadingVisible(true)
             try {
-                const [startID, destID] = await gameState.getStartDestStationIDs()
-                const data = await fetchShortestPath(startID, destID)
+                const [startId, destId] = await gameState.getStartDestStationIds()
+                const data = await fetchShortestPath(startId, destId)
 
                 if (isMounted) {
                     const stationsData: StationData[] = data.map((station: StationData) => ({

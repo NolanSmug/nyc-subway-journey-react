@@ -51,7 +51,7 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
     const [gameMode, setGameMode] = useState<GameMode>(GameMode.RIDER)
-    const [gameDifficulty, setGameDifficulty] = useState<GameDifficulty>(GameDifficulty.NORMAL)
+    const [gameDifficulty, setGameDifficulty] = useState<GameDifficulty>(GameDifficulty.NEW_YORKER) // ! TESTING ONLY: change to NORMAL
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
     const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
     const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(UpcomingStationsLayout.HORIZONTAL)

@@ -147,6 +147,26 @@ export class Train {
         return newScheduledStops
     }
 
+    public getNextStationId(numAdvanceStations?: number): string | null {
+        if (!numAdvanceStations) numAdvanceStations = 1
+
+        let nextStationIndex = this.currentStationIndex
+
+        if (this.direction === Direction.UPTOWN) {
+            nextStationIndex += numAdvanceStations
+        } else if (this.direction === Direction.DOWNTOWN) {
+            nextStationIndex -= numAdvanceStations
+        } else {
+            return null // Null Direction
+        }
+
+        if (nextStationIndex < 0 || nextStationIndex >= this.scheduledStops.length) {
+            return null // Out of bounds
+        }
+
+        return this.scheduledStops[nextStationIndex].getId()
+    }
+
     public addScheduledStop(newStop: Station): void {
         this.scheduledStops.push(newStop)
     }
@@ -175,13 +195,13 @@ export class Train {
         this.repOk()
     }
 
-    public setCurrentStationIndexByID(stationID: string, newScheduledStops: Station[]) {
-        this.currentStationIndex = newScheduledStops.findIndex((station) => station.getId() === stationID)
+    public setCurrentStationIndexById(stationId: string, newScheduledStops: Station[]) {
+        this.currentStationIndex = newScheduledStops.findIndex((station) => station.getId() === stationId)
         this.repOk()
     }
 
-    public static getCurrentStationIndexByID(stationID: string, scheduledStops: Station[]): number {
-        return scheduledStops.findIndex((station) => station.getId() === stationID)
+    public static getCurrentStationIndexById(stationId: string, scheduledStops: Station[]): number {
+        return scheduledStops.findIndex((station) => station.getId() === stationId)
     }
 
     // Transfer Logic
@@ -200,7 +220,7 @@ export class Train {
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
         if (this.isValidTransfer(newLine, currentStation)) {
             this.setScheduledStops(await getStationsForLine(newLine))
-            this.setCurrentStationIndexByID(currentStation.getId(), this.scheduledStops)
+            this.setCurrentStationIndexById(currentStation.getId(), this.scheduledStops)
             this.currentLine = newLine
             this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)
             this.downtownLabel = this.findDirectionLabel(Direction.DOWNTOWN, newLine)
