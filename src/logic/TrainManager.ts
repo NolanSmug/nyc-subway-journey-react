@@ -65,19 +65,17 @@ export class Train {
         return this.direction
     }
 
-    public setDirection(newDirection: Direction): Train {
+    public setDirection(newDirection: Direction): void {
         this.direction = newDirection
         this.repOk()
-        return this
     }
 
     public isNullDirection(): boolean {
         return this.direction === Direction.NULL_DIRECTION
     }
 
-    public reverseDirection(): Train {
+    public reverseDirection(): void {
         this.setDirection(this.direction === Direction.DOWNTOWN ? Direction.UPTOWN : Direction.DOWNTOWN)
-        return this
     }
 
     public getRandomDirection(): Direction {
@@ -186,7 +184,9 @@ export class Train {
 
     // Transfer Logic
     public isValidTransfer(newLine: LineName, currentStation: Station): boolean {
-        const transfers = currentStation.getTransfers()
+        if (this.currentLine === newLine) return false
+
+        const transfers: LineName[] = currentStation.getTransfers()
 
         for (const transferLine of transfers) {
             if (transferLine === newLine) {
@@ -206,36 +206,14 @@ export class Train {
             this.downtownLabel = this.findDirectionLabel(Direction.DOWNTOWN, newLine)
 
             this.repOk()
+
             return true
         }
 
         return false // not a valid requested transfer
     }
 
-    public advanceStation(): Train {
-        let newStationIndex = this.currentStationIndex
-
-        if (this.direction === Direction.UPTOWN) {
-            newStationIndex++
-        } else if (this.direction === Direction.DOWNTOWN) {
-            newStationIndex--
-        } else {
-            return this // Null Direction
-        }
-
-        if (newStationIndex < 0 || newStationIndex >= this.scheduledStops.length) {
-            return this // Out of bounds
-        }
-
-        this.setCurrentStationByIndex(newStationIndex)
-        this.repOk()
-
-        return this
-    }
-
-    public advanceStationInc(numStations: number): Train {
-        if (numStations <= 0) return this
-
+    public advanceStation(numStations: number = 1): boolean {
         let newStationIndex = this.currentStationIndex
 
         if (this.direction === Direction.UPTOWN) {
@@ -243,17 +221,17 @@ export class Train {
         } else if (this.direction === Direction.DOWNTOWN) {
             newStationIndex -= numStations
         } else {
-            return this // Null Direction
+            return false // Null Direction
         }
 
         if (newStationIndex < 0 || newStationIndex >= this.scheduledStops.length) {
-            return this // Out of bounds
+            return false // Out of bounds
         }
 
-        this.repOk()
         this.setCurrentStationByIndex(newStationIndex)
+        this.repOk()
 
-        return this
+        return true
     }
 
     private repOk(): void {

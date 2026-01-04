@@ -5,6 +5,12 @@
     justify-content: space-between;
 }
 
+.shortcut.disabled {
+    text-decoration: line-through;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .shortcut-key {
     width: max-content;
     margin: 0;
@@ -14,6 +20,7 @@
     top: 2px;
     left: 1px;
     position: relative;
+    cursor: pointer;
 }
 
 kbd {

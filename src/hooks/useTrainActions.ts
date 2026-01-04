@@ -25,26 +25,24 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
     )
 
     const advanceStation = useCallback(
-        (numAdvanceStations: number) => {
+        (numAdvanceStations: number = 1) => {
             const currentTrain = trainRef.current
             if (!currentTrain) throw new Error('attempted to advanceStation - Train object is null')
 
             const nextTrain = currentTrain.clone()
 
-            if (numAdvanceStations > 1 && gameMode === GameMode.CONDUCTOR) {
-                nextTrain.advanceStationInc(numAdvanceStations)
-            } else {
-                nextTrain.advanceStation()
-            }
+            const isAdvanced: boolean = nextTrain.advanceStation(numAdvanceStations)
+            if (!isAdvanced) return
 
             setTrain(nextTrain)
             checkForWin(nextTrain)
+            gameState.playerScore.incrementAdvanceCount(numAdvanceStations)
         },
-        [trainRef, setTrain, gameMode, checkForWin]
+        [trainRef, setTrain, checkForWin, gameState.playerScore]
     )
 
     const transfer = useCallback(
-        async (transferInput: number | LineName) => {
+        async (transferInput: number | LineName = 0) => {
             const currentTrain = trainRef.current
             if (!currentTrain) throw new Error('attempted to transfer - Train object is null')
 
@@ -68,9 +66,10 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
             // DO THE TRANSFER
             if (isValidTransfer) {
                 setTrain(nextTrain)
+                gameState.playerScore.incrementTransferCount()
             }
         },
-        [trainRef, setTrain]
+        [trainRef, setTrain, gameState.playerScore]
     )
 
     const changeDirection = useCallback(

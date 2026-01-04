@@ -25,11 +25,7 @@ function KeyShortcut({ shortcutKey, label, isCommand, conductorModeOnly }: KeySh
     }
 
     return (
-        <div
-            className='shortcut'
-            onMouseDown={handleShortcutClick}
-            style={disabled ? { textDecoration: 'line-through', opacity: 0.5 } : {}}
-        >
+        <div className={`shortcut ${disabled ? 'disabled' : ''}`} onMouseDown={handleShortcutClick}>
             <span id='key-label'>{label}</span>
             <p className={`shortcut-key ${isCommand ? 'command' : ''}`}>
                 {isCommand && (

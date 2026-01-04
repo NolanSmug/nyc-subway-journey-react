@@ -1,4 +1,5 @@
 import { LineName, getRandomLine } from './LineManager'
+import { Score } from './Score'
 import { Station } from './StationManager'
 import { getStationsForLine } from './SubwayMap'
 
@@ -8,19 +9,22 @@ export class GameState {
     destinationStation: Station
     isFirstTurn: boolean
     isWon: boolean
+    playerScore: Score
 
     constructor(
         startingLine: LineName = LineName.NULL_TRAIN,
         startingStation: Station = Station.NULL_STATION,
         destinationStation: Station = Station.NULL_STATION,
         isFirstTurn: boolean = true,
-        isWon: boolean = false
+        isWon: boolean = false,
+        playerScore: Score = new Score(0, 0)
     ) {
         this.startingLine = startingLine
         this.startingStation = startingStation
         this.destinationStation = destinationStation
         this.isFirstTurn = isFirstTurn
         this.isWon = isWon
+        this.playerScore = playerScore
     }
 
     public checkWin(currentStation: Station): boolean {
@@ -37,6 +41,7 @@ export class GameState {
         this.startingLine = getRandomLine()
         // this.startingLine = LineName.L_TRAIN
         this.isFirstTurn = true
+        this.playerScore.reset()
 
         this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine))
         do {

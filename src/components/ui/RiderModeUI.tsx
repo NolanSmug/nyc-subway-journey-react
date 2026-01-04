@@ -65,11 +65,10 @@ function RiderModeUI({
     passengerState,
     children: passengerComponent,
 }: RiderModeUIProps) {
-    const { gameState } = useGameStateContext()
-
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const currentLine: LineName = useTrainContext((state) => state.train.getLine())
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
+    const destinationStation: StationObject = useGameStateContext().gameState.destinationStation
 
     const { otherPlatformGroups, samePlatformLines, hasSamePlatformTransfers, hasOtherPlatformTransfers, transfers } =
         usePlatformTransferGroups({ currentStation, currentLine })
@@ -82,8 +81,8 @@ function RiderModeUI({
         inTransferTunnel
 
     const destinationStationChildren: JSX.Element = useMemo(
-        () => <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled />,
-        [gameState.destinationStation.getId()]
+        () => <LineSVGs svgPaths={getLineSVGs(destinationStation.getTransfers())} disabled />,
+        [destinationStation.getId()]
     )
 
     return (
@@ -125,7 +124,7 @@ function RiderModeUI({
                     uptownDoorRef={uptownTrainDoorRef}
                 />
                 <ActionButton
-                    label='board uptown train'
+                    label='board train'
                     onClick={handleBoardUptown}
                     hidden={inTransferTunnel || currentDirection === Direction.UPTOWN}
                     wrapperClassName='uptown-button-offset'
@@ -144,7 +143,7 @@ function RiderModeUI({
                 </div>
 
                 <ActionButton
-                    label='board downtown train'
+                    label='board train'
                     onClick={handleBoardDowntown}
                     hidden={inTransferTunnel || currentDirection === Direction.DOWNTOWN}
                     wrapperClassName='downtown-button-offset'
@@ -163,7 +162,7 @@ function RiderModeUI({
             </div>
             <div className='destination-station-rider-mode' id='destination-station'>
                 <h2>Destination Station</h2>
-                <Station name={gameState.destinationStation.getName()} noLines isDestination>
+                <Station name={destinationStation.getName()} noLines isDestination>
                     {destinationStationChildren}
                 </Station>
                 <ActionButton onClick={handleReset} imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} /* hidden={inTransferTunnel} */ />
