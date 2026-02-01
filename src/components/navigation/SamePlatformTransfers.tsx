@@ -4,7 +4,6 @@ import React from 'react'
 import LineSVGs from '../common/LineSVGs'
 
 import { LineName } from '../../logic/LineManager'
-import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { useTrainContext } from '../../contexts/TrainContext'
 
 interface SamePlatformTransfersProps {
@@ -20,7 +19,7 @@ function SamePlatformTransfers({ lines, hidden }: SamePlatformTransfersProps) {
             <h3 style={{ margin: 0 }}>Same platform transfer</h3>
             <div className={`accordion-svgs-container`}>
                 <LineSVGs
-                    svgPaths={getLineSVGs(lines)}
+                    lines={lines}
                     onTransferSelect={(index) => {
                         transfer(lines[index])
                     }}

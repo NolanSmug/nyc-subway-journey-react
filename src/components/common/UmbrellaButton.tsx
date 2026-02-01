@@ -45,7 +45,7 @@ const UmbrellaButton = React.memo(({ openingButtonsW_B, children, below, visible
     if (!visible) return null
 
     return (
-        <div ref={buttonRef}>
+        <div ref={buttonRef} className='umbrella-button-container'>
             <ActionButton imageSrc={darkMode ? openingButtonsW_B[0] : openingButtonsW_B[1]} onClick={togglePopup} />
 
             {/* <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? "visible" : "hidden"} ${below ? "below" : ""}`}>

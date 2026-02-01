@@ -34,4 +34,21 @@ export class Score {
         this.advanceCount = 0
         this.transferCount = 0
     }
+
+    public static fromJSON(json: any): Score {
+        return new Score(json.advanceCount ?? 0, json.transferCount ?? 0)
+    }
+
+    // LEADERBOARD??
+    // public static isBetterThan(current: Score, benchmark: Score): boolean {
+    //     return current.routeScore < benchmark.routeScore
+    // }
+
+    // public toJSON() {
+    //     return {
+    //         stops: this.advanceCount,
+    //         transfers: this.transferCount,
+    //         total: this.routeScore,
+    //     }
+    // }
 }

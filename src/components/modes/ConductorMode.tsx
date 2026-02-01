@@ -3,10 +3,9 @@ import ConductorModeUI from '../ui/ConductorModeUI'
 
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
-import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 import { useGameStateContext } from '../../contexts/GameStateContext'
+import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
-import { useUITheme } from '../../hooks/useCSSProperties'
 import { useGame } from '../../hooks/useGame'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
 
@@ -85,8 +84,6 @@ function ConductorMode() {
             '=': () => setNumAdvanceStations((prev: number) => prev + 1),
         },
     })
-
-    useUITheme(darkMode)
 
     return (
         <ConductorModeUI

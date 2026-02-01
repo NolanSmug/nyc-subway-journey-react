@@ -198,6 +198,8 @@ export class Train {
     }
 
     public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
+        if (!newLine || !currentStation) return false
+
         if (this.isValidTransfer(newLine, currentStation)) {
             this.setScheduledStops(await getStationsForLine(newLine))
             this.setCurrentStationIndexByID(currentStation.getId(), this.scheduledStops)

@@ -22,34 +22,16 @@ const SettingsMenu = () => {
 
     const gameMode = useSettingsContext((state) => state.gameMode)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
+    const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const toggleUpcomingStationsLayout = useSettingsContext((state) => state.toggleUpcomingStationsLayout)
     const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
+    const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
 
-    const isConductorMode = gameMode === GameMode.CONDUCTOR
+    const isConductorMode: boolean = gameMode === GameMode.CONDUCTOR
 
     return (
         <>
-            <SettingsButton label='Theme' imgSrc={darkMode ? L_MODE : D_MODE} onClick={() => setDarkMode((prev) => !prev)} />
-            <SettingsButton
-                label='Upcoming stations'
-                imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
-                onClick={() => setUpcomingStationsVisible((prev) => !prev)}
-            />
-            <SettingsButton
-                label='Upcoming stations layout'
-                imgSrc={
-                    isHorizontalLayout
-                        ? darkMode
-                            ? UPCOMING_STATIONS_VERTICAL_WHITE
-                            : UPCOMING_STATIONS_VERTICAL_BLACK
-                        : darkMode
-                          ? UPCOMING_STATIONS_HORIZONTAL_WHITE
-                          : UPCOMING_STATIONS_HORIZONTAL_BLACK
-                }
-                onClick={() => isConductorMode && toggleUpcomingStationsLayout()}
-                disabled={!isConductorMode}
-            />
             <SettingsButton
                 label={isConductorMode ? 'Rider mode' : 'Conductor mode'}
                 imgSrc={
@@ -65,6 +47,27 @@ const SettingsMenu = () => {
                     setGameMode(isConductorMode ? GameMode.RIDER : GameMode.CONDUCTOR)
                 }}
             />
+            <SettingsButton
+                label='Upcoming stations'
+                imgSrc={darkMode ? UPCOMING_STATIONS_WHITE : UPCOMING_STATIONS_BLACK}
+                onClick={() => setUpcomingStationsVisible((prev) => !prev)}
+                disabled={isDailyChallenge}
+            />
+            <SettingsButton
+                label='Upcoming stations layout'
+                imgSrc={
+                    isHorizontalLayout
+                        ? darkMode
+                            ? UPCOMING_STATIONS_VERTICAL_WHITE
+                            : UPCOMING_STATIONS_VERTICAL_BLACK
+                        : darkMode
+                          ? UPCOMING_STATIONS_HORIZONTAL_WHITE
+                          : UPCOMING_STATIONS_HORIZONTAL_BLACK
+                }
+                onClick={() => isConductorMode && toggleUpcomingStationsLayout()}
+                disabled={!isConductorMode || !upcomingStationsVisible || isDailyChallenge}
+            />
+            <SettingsButton label='Theme' imgSrc={darkMode ? L_MODE : D_MODE} onClick={() => setDarkMode((prev) => !prev)} />
         </>
     )
 }

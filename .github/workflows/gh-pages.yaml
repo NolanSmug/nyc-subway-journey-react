@@ -32,6 +32,9 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          REACT_APP_RNG_SALT: ${{ secrets.REACT_APP_RNG_SALT }}
+          REACT_APP_OPTIMAL_ROUTE_PROD_API: ${{ secrets.REACT_APP_OPTIMAL_ROUTE_PROD_API }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

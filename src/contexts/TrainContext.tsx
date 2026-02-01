@@ -1,10 +1,10 @@
 import React, { useState, ReactNode, useMemo, useRef, useEffect } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
 import { useGameStateContext } from './GameStateContext'
-import { useSettingsContext } from './SettingsContext'
 
 import useTrainActions from '../hooks/useTrainActions'
 import { Train } from '../logic/TrainManager'
+import { useSettingsContext } from './SettingsContext'
 
 type TrainActions = ReturnType<typeof useTrainActions>
 
@@ -17,23 +17,23 @@ interface TrainContextProps {
 const TrainContext = createContext<TrainContextProps | undefined>(undefined)
 
 export const TrainProvider = ({ children }: { children: ReactNode }) => {
-    const [train, setTrain] = useState(() => new Train())
+    const [train, setTrain] = useState<Train>(() => new Train())
+    const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
 
-    const trainRef = useRef(train)
+    const trainRef: React.MutableRefObject<Train> = useRef(train)
 
     useEffect(() => {
         trainRef.current = train
     }, [train])
 
     const { gameState, setGameState } = useGameStateContext()
-    const gameMode = useSettingsContext((state) => state.gameMode)
 
     const actions = useTrainActions({
         trainRef,
         setTrain,
         gameState,
         setGameState,
-        gameMode,
+        isDailyChallenge,
     })
 
     const value = useMemo(() => ({ train, actions, setTrain }), [train, actions])

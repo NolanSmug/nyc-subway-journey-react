@@ -10,7 +10,6 @@ import { PASSENGER_WALK_DURATIONS, PassengerAction } from '../../hooks/usePassen
 
 import { LineName } from '../../logic/LineManager'
 import { useUIContext } from '../../contexts/UIContext'
-import { getLineSVGs } from '../../logic/LineSVGsMap'
 
 import RIGHT_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
 import RIGHT_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
@@ -62,7 +61,7 @@ const Staircase = forwardRef<HTMLDivElement, StaircaseProps>(
                 }}
             >
                 <LineSVGs
-                    svgPaths={getLineSVGs(lines)}
+                    lines={lines}
                     grouped
                     numLines={lines.length}
                     onTransferSelect={isTunnelLayout ? (index: number) => onTransferSelect(lines[index]) : undefined}

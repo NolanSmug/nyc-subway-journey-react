@@ -43,6 +43,10 @@
     margin-left: 0.25em;
 }
 
+.small-label {
+    font-size: 0.85em;
+}
+
 .rollsign-animate {
     animation: rollsignFade 0.2s ease-in-out;
     display: inline-block;

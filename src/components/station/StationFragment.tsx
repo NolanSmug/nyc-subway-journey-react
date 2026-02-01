@@ -1,9 +1,8 @@
 import './StationFragment.css'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import LineSVGs from '../common/LineSVGs'
 
-import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station } from '../../logic/StationManager'
 import { LineName } from '../../logic/LineManager'
 
@@ -17,8 +16,6 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
     const isOverflowing = station.getName().length > 17 && station.getName().length < 25
     const extraOverflow = station.getName().length >= 25
 
-    const svgPaths = useMemo(() => getLineSVGs(transfers), [transfers])
-
     return (
         <div
             className={`station-frag-container ${
@@ -29,7 +26,7 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
                 <div className='station-frag-info'>
                     <h2 className='station-frag-name'>{station.getName()}</h2>
                     <div className='transfer-lines'>
-                        <LineSVGs small svgPaths={svgPaths} />
+                        <LineSVGs lines={transfers} small />
                     </div>
                 </div>
             </div>

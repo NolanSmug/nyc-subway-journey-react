@@ -16,3 +16,7 @@
     opacity: 0.5;
     text-decoration: line-through;
 }
+
+#setting-label.label-color {
+    color: var(--line-color);
+}

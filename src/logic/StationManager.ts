@@ -10,19 +10,19 @@ export class Station {
     static allNycStations: Station[] = []
     static async initializeAllStations(): Promise<void> {
         if (this.allNycStations.length > 0) {
-            console.log('All NYC stations already initialized.')
+            // console.log('All NYC stations already initialized.')
             return
         }
 
         this.allNycStations = await SubwayMap.getAllLineStations(LineName.NULL_TRAIN)
-        console.log('All NYC stations initialized:', this.allNycStations)
+        console.log('All NYC stations initialized')
     }
 
-    static getRandomStation(stations: Station[]): Station {
+    static getRandomStation(stations: Station[], rng: () => number = Math.random): Station {
         if (stations.length === 0) {
             throw new Error('Station vector is empty')
         }
-        const randomIndex = Math.floor(Math.random() * stations.length)
+        const randomIndex = Math.floor(rng() * stations.length)
 
         return stations[randomIndex]
     }

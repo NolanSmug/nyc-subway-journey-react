@@ -15,7 +15,6 @@ import { PassengerState } from '../../hooks/usePassenger'
 import { usePlatformTransferGroups } from '../../hooks/usePlatformTransferGroups'
 
 import { Direction, LineName } from '../../logic/LineManager'
-import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station as StationObject } from '../../logic/StationManager'
 
 import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
@@ -81,7 +80,7 @@ function RiderModeUI({
         inTransferTunnel
 
     const destinationStationChildren: JSX.Element = useMemo(
-        () => <LineSVGs svgPaths={getLineSVGs(destinationStation.getTransfers())} disabled />,
+        () => <LineSVGs lines={destinationStation.getTransfers()} disabled />,
         [destinationStation.getId()]
     )
 
@@ -161,7 +160,7 @@ function RiderModeUI({
                 />
             </div>
             <div className='destination-station-rider-mode' id='destination-station'>
-                <h2>Destination Station</h2>
+                <h2 style={{ textAlign: 'center' }}>Destination Station</h2>
                 <Station name={destinationStation.getName()} noLines isDestination>
                     {destinationStationChildren}
                 </Station>

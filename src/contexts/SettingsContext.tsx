@@ -35,6 +35,8 @@ interface SettingsContextProps {
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
     passengerGender: Gender
     setPassengerGender: React.Dispatch<React.SetStateAction<Gender>>
+    isDailyChallenge: boolean
+    setIsDailyChallenge: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const SettingsContext = createContext<SettingsContextProps | undefined>(undefined)
@@ -46,14 +48,17 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
     const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
     const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(UpcomingStationsLayout.HORIZONTAL)
+    const [isDailyChallenge, setIsDailyChallenge] = useState<boolean>(false)
 
     const toggleUpcomingStationsLayout = useCallback(() => {
+        if (!upcomingStationsVisible) return
+
         setUpcomingStationsLayout(
             upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL
                 ? UpcomingStationsLayout.VERTICAL
                 : UpcomingStationsLayout.HORIZONTAL
         )
-    }, [upcomingStationsLayout])
+    }, [upcomingStationsLayout, upcomingStationsVisible])
 
     const value = useMemo(
         () => ({
@@ -72,8 +77,10 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
             setNumAdvanceStations,
             passengerGender,
             setPassengerGender,
+            isDailyChallenge,
+            setIsDailyChallenge,
         }),
-        [darkMode, gameMode, upcomingStationsVisible, upcomingStationsLayout, numAdvanceStations, passengerGender]
+        [darkMode, gameMode, upcomingStationsVisible, upcomingStationsLayout, numAdvanceStations, passengerGender, isDailyChallenge]
     )
 
     return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>
