@@ -40,7 +40,7 @@ This is a "from scratch" project. All components, animations, layout, and game l
 
 I used dynamic HTML and CSS to render the train cars, upcoming stations, tunnels, and signage. There is no canvas interaction. Everything is just DOM elements.
 
-Everything from rider movement and staircase mechanics to platform interactions and SVG animations is run by my own TypeScript logic (3,000+ lines) and *extensive* custom CSS (~1,500 lines). I even implemented my own coordinate system for passenger pathfinding and wrote a Python breadth first search backend for an optimal route algorithm. Even tiny details, like button behaviors and icon rendering, are manually programmed. 
+Everything from rider movement and staircase mechanics to platform interactions and SVG animations is run by my own TypeScript logic (4,000+ lines) and *extensive* custom CSS (~1,500 lines). I even implemented my own coordinate system for passenger pathfinding and wrote a Python breadth first search backend for an optimal route algorithm. Even tiny details, like button behaviors and icon rendering, are manually programmed. 
 
 > See [station image HTML elements](#station-image-html-elements) for more info on how I designed station images for the browser.
 
