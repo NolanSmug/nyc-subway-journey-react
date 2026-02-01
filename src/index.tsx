@@ -15,12 +15,12 @@ document.body.classList.add(useBrowserCSS())
 
 root.render(
     <UIProvider>
-        <GameStateProvider>
-            <SettingsProvider>
+        <SettingsProvider>
+            <GameStateProvider>
                 <TrainProvider>
                     <App />
                 </TrainProvider>
-            </SettingsProvider>
-        </GameStateProvider>
+            </GameStateProvider>
+        </SettingsProvider>
     </UIProvider>
 )

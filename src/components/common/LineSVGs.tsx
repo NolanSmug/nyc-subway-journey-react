@@ -3,8 +3,11 @@ import React from 'react'
 
 import { useUIContext } from '../../contexts/UIContext'
 
+import { getLineSVGs } from '../../logic/LineSVGsMap'
+import { LineName } from '../../logic/LineManager'
+
 interface LineSVGsProps {
-    svgPaths: string[]
+    lines: LineName[]
     small?: boolean // for smaller images like in upcoming stations view
     wide?: boolean // allow more svgs per row
     vertical?: boolean // use column flex-direction
@@ -17,8 +20,10 @@ interface LineSVGsProps {
 }
 
 const LineSVGs = React.memo<LineSVGsProps>(
-    ({ svgPaths, small, wide, vertical, grouped, disabled, numLines, notDim, className, onTransferSelect }) => {
+    ({ lines, small, wide, vertical, grouped, disabled, numLines, notDim, className, onTransferSelect }) => {
         const isTransferMode = useUIContext((state) => state.isTransferMode)
+
+        const svgPaths: string[] = getLineSVGs(lines)
 
         return (
             <div

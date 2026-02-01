@@ -48,6 +48,7 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
                 <div className={`train-car ${isDowntown ? 'flipped-layout' : ''}`}>
                     {
                         // TODO: Figure out CSS z-index bug with the transform: scaleY(-1) for the flipped-layout car
+                        // ? Eh, it's not memory efficient anyways to use conditional styles like this
                         /* <div
                         className='headlight'
                         style={isDowntown && active ? { boxShadow: '-1.5em -1em 2em 0.9em #f3ff94' } : { boxShadow: '0 0 0 0 #00000000' }}

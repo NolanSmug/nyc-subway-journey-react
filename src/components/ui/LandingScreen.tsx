@@ -12,9 +12,7 @@ function LandingScreen({ closeLabel, children }: LandingScreenProps) {
     const isLandingPage = useUIContext((state) => state.isLandingPage)
     const setIsLandingPage = useUIContext((state) => state.setIsLandingPage)
 
-    if (!isLandingPage) {
-        return null
-    }
+    if (!isLandingPage) return null
 
     return (
         <div className='landing-screen-container'>

@@ -15,7 +15,6 @@ import { PassengerState } from '../../hooks/usePassenger'
 import { usePlatformTransferGroups } from '../../hooks/usePlatformTransferGroups'
 
 import { Direction, LineName } from '../../logic/LineManager'
-import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { Station as StationObject } from '../../logic/StationManager'
 
 import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
@@ -65,11 +64,10 @@ function RiderModeUI({
     passengerState,
     children: passengerComponent,
 }: RiderModeUIProps) {
-    const { gameState } = useGameStateContext()
-
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const currentLine: LineName = useTrainContext((state) => state.train.getLine())
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
+    const destinationStation: StationObject = useGameStateContext().gameState.destinationStation
 
     const { otherPlatformGroups, samePlatformLines, hasSamePlatformTransfers, hasOtherPlatformTransfers, transfers } =
         usePlatformTransferGroups({ currentStation, currentLine })
@@ -82,8 +80,8 @@ function RiderModeUI({
         inTransferTunnel
 
     const destinationStationChildren: JSX.Element = useMemo(
-        () => <LineSVGs svgPaths={getLineSVGs(gameState.destinationStation.getTransfers())} disabled />,
-        [gameState.destinationStation.getId()]
+        () => <LineSVGs lines={destinationStation.getTransfers()} disabled />,
+        [destinationStation.getId()]
     )
 
     return (
@@ -125,7 +123,7 @@ function RiderModeUI({
                     uptownDoorRef={uptownTrainDoorRef}
                 />
                 <ActionButton
-                    label='board uptown train'
+                    label='board train'
                     onClick={handleBoardUptown}
                     hidden={inTransferTunnel || currentDirection === Direction.UPTOWN}
                     wrapperClassName='uptown-button-offset'
@@ -144,7 +142,7 @@ function RiderModeUI({
                 </div>
 
                 <ActionButton
-                    label='board downtown train'
+                    label='board train'
                     onClick={handleBoardDowntown}
                     hidden={inTransferTunnel || currentDirection === Direction.DOWNTOWN}
                     wrapperClassName='downtown-button-offset'
@@ -162,8 +160,8 @@ function RiderModeUI({
                 />
             </div>
             <div className='destination-station-rider-mode' id='destination-station'>
-                <h2>Destination Station</h2>
-                <Station name={gameState.destinationStation.getName()} noLines isDestination>
+                <h2 style={{ textAlign: 'center' }}>Destination Station</h2>
+                <Station name={destinationStation.getName()} noLines isDestination>
                     {destinationStationChildren}
                 </Station>
                 <ActionButton onClick={handleReset} imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} /* hidden={inTransferTunnel} */ />

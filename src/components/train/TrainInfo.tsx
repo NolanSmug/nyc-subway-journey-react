@@ -17,6 +17,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
     const directionLabel = useTrainContext((state) => state.train.findDirectionLabel(direction, line, borough))
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
+    const shrinkDirectionLabel: boolean = directionLabel.length > 20
 
     useLineStyles(line, lineType)
 
@@ -42,7 +43,11 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
                         : {}
                 }
             >
-                <span key={directionLabel} className={`${!isNullDirection ? 'rollsign-animate' : ''}`} id='direction-rollsign'>
+                <span
+                    key={directionLabel}
+                    className={`${!isNullDirection ? 'rollsign-animate' : ''} ${shrinkDirectionLabel ? 'small-label' : ''}`}
+                    id='direction-rollsign'
+                >
                     {isNullDirection ? 'TOGGLE DIRECTION' : directionLabel}
                 </span>
             </h2>

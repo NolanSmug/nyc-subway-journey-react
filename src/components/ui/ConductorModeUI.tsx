@@ -1,5 +1,5 @@
 import './ConductorModeUI.css'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
@@ -11,7 +11,6 @@ import AdvanceNStationsInput from '../navigation/AdvanceNStationsInput'
 import { Station as StationObject } from '../../logic/StationManager'
 import { GameState } from '../../logic/GameState'
 import { Direction } from '../../logic/LineManager'
-import { getLineSVGs } from '../../logic/LineSVGsMap'
 
 import R_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
 import R_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
@@ -50,9 +49,6 @@ function ConductorModeUI({
     handleResetClick,
     isVerticalLayout,
 }: ConductorModeUIProps) {
-    const currentTransferSVGs = useMemo(() => getLineSVGs(currentStation.getTransfers()), [currentStation])
-    const destinationTransferSVGs = useMemo(() => getLineSVGs(gameState.destinationStation.getTransfers()), [gameState.destinationStation])
-
     const advanceArrowRotateDegrees: number = isVerticalLayout
         ? direction === Direction.DOWNTOWN
             ? 270
@@ -73,7 +69,7 @@ function ConductorModeUI({
                     <div className='station-item'>
                         <Station name={currentStation.getName()}>
                             <LineSVGs
-                                svgPaths={currentTransferSVGs}
+                                lines={currentStation.getTransfers()}
                                 onTransferSelect={(index) => {
                                     handleLineClick(index)
                                 }}
@@ -107,7 +103,7 @@ function ConductorModeUI({
                     <Header text='Destination station' />
                     <div className='station-item'>
                         <Station name={gameState.destinationStation.getName()}>
-                            <LineSVGs svgPaths={destinationTransferSVGs} disabled />
+                            <LineSVGs lines={gameState.destinationStation.getTransfers()} disabled />
                         </Station>
                     </div>
                     <div className='action-buttons-container' id='destination-station'>

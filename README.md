@@ -1,4 +1,14 @@
 # NYC Subway Journey Game 
+![Build Status](https://img.shields.io/github/actions/workflow/status/NolanSmug/nyc-subway-journey-react/gh-pages.yaml?logo=github&logoColor=A7A9AC&labelColor=222222&color=00933C)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fnolansmug.github.io%2F&up_color=00933C&down_color=EE352E&style=flat&label=Website&labelColor=222222&logo=firefoxbrowser&logoColor=A7A9AC)
+
+![Docker Pulls](https://img.shields.io/docker/pulls/nanosmug/nyc-subway-journey?color=FF6319&labelColor=222222&logo=docker&logoColor=FF6319)
+![Docker Image Size](https://img.shields.io/docker/image-size/nanosmug/nyc-subway-journey?color=6CBE45&logo=docker&labelColor=222222&logoColor=6CBE45)
+![Repo Size](https://img.shields.io/github/repo-size/NolanSmug/nyc-subway-journey-react?logo=github&color=FCCC0A&labelColor=222222&logoColor=FCCC0A)
+
+![TypeScript](https://img.shields.io/badge/TypeScript-0039A6?style=flat&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-808183?style=flat&logo=react)
+![CSS](https://img.shields.io/badge/CSS3-B933AD?style=flat&logo=css&logoColor=53297d)
 
 
 <img src='./src/assets/images/subway-journey.gif' width='100%'>
@@ -21,13 +31,16 @@
   - [Rider mode](#rider-mode)
   - [Conductor mode](#conductor-mode)
 - [Optimal route](#optimal-route)
+- [Daily challenge](#daily-challenge)
 - [Station image HTML elements](#station-image-html-elements)
 
 ## Developer's note
 
 This is a "from scratch" project. All components, animations, layout, and game logic are custom-built. I intentionally avoided third-party UI libraries or game engines so I could have more control over my project. I have learned so much from building it this way.
 
-Everything from rider movement and staircase mechanics to platform interactions and SVG animations is run by my own TypeScript logic (3,000+ lines) and *extensive* custom CSS (~1,500 lines). I even implemented my own coordinate system for passenger pathfinding and wrote a Python breadth first search backend for an optimal route algorithm. Even tiny details, like button behaviors and icon rendering, are manually programmed.
+I used dynamic HTML and CSS to render the train cars, upcoming stations, tunnels, and signage. There is no canvas interaction. Everything is just DOM elements.
+
+Everything from rider movement and staircase mechanics to platform interactions and SVG animations is run by my own TypeScript logic (3,000+ lines) and *extensive* custom CSS (~1,500 lines). I even implemented my own coordinate system for passenger pathfinding and wrote a Python breadth first search backend for an optimal route algorithm. Even tiny details, like button behaviors and icon rendering, are manually programmed. 
 
 > See [station image HTML elements](#station-image-html-elements) for more info on how I designed station images for the browser.
 
@@ -69,7 +82,12 @@ git clone https://github.com/NolanSmug/nyc-subway-journey-react
 cd nyc-subway-journey-react
 ```
 
-**2. Install dependencies and run project**
+**2. Set up environment**
+```bash
+cp .env.example .env
+```
+
+**3. Install dependencies and run project**
 - **Npm**
   > Make sure you have `npm` [installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
   ```bash
@@ -95,8 +113,8 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 
 2. **Choosing a direction:**
    - Before you can move, you must choose a **direction** (e.g. `UPTOWN`, `DOWNTOWN`).
-   - **Rider Mode:** Board the train on the side of the platform matching your desired direction.
-   - **Conductor Mode:** Select the direction using the `[Toggle direction]` button.
+   - **Rider mode:** Board the train on the side of the platform matching your desired direction.
+   - **Conductor mode:** Select the direction using the `[Toggle direction]` button.
    - The `Advance` button will not be available until a direction is chosen (or a train is boarded).
        > If you want, you may transfer to a different line before selecting a direction.
 
@@ -154,9 +172,9 @@ Rider mode is the default game mode and is the recommended mode for those who ar
 
 You are riding from the *passenger's perspective*. Watch your character "walk" around the screen as you perform actions. 
 
-* **Boarding:** Click the `board train` button next to the respective train you'd like to board (`UPTOWN` or `DOWNTOWN`).
-* **Riding:** Once on board, use the `Advance` button to travel to the next station.
-* **Transferring:** 
+- **Boarding:** Click the `board train` button next to the respective train you'd like to board (`UPTOWN` or `DOWNTOWN`).
+- **Riding:** Once on board, use the `Advance` button to travel to the next station.
+- **Transferring:** 
     1. Click `transfer` to step back onto the platform.
     2. Click on a `staircase` to explore other lines. A tunnel will appear.
     3. Select your new line and watch your rider walk through the tunnel to the new platform.
@@ -169,10 +187,10 @@ Conductor mode is for players who want to bypass the animations and play at a fa
 
 <img src="./src/assets/images/screenshot-conductor-mode.png" alt="conductor mode screenshot" width="100%">
 
-* There is no longer a passenger to control. You are the train! 
-* All actions (`Advance`, `Transfer`, `Change direction`) are executed immediately.
-* You can set the number of stations the train advances per click.
-* You can toggle the `Upcoming Stations` display to be **vertical** now too!
+- There is no longer a passenger to control. You are the train! 
+- All actions (`Advance`, `Transfer`, `Change direction`) are executed immediately.
+- You can set the number of stations the train advances per click.
+- You can toggle the `Upcoming Stations` display to be **vertical** now too!
 
 # Optimal route
 
@@ -183,8 +201,21 @@ Upon winning the game, you can choose to reveal the **Optimal route**. This feat
 - Calculated using the [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm.
 - The graph construction and algorithm are implemented in [bfs.py](./src/logic/bfs.py).
   - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com](https://render.com/). The `bfs.py` in this repo is a copy of the code hosted there.
+- Custom logic to handle ambiguous routes. If you can take multiple trains with different colors for a given leg of the trip, both line segments are shown (see <img src='./src/assets/images/m.svg' width='20px' align='top'> <img src='./src/assets/images/j.svg' width='20px' align='top'> <img src='./src/assets/images/z.svg' width='20px' align='top'> lines above).
 
 > It can often be difficult to match the optimal route's path. Don't let this frustrate you! I plan on implementing heuristics to make the algorithm's route suggestions more realistic.
+
+<br>
+
+# Daily challenge
+
+A competitive mode where every user globally receives the **exact same** route for the day, allowing for a fair leaderboard comparison.
+
+- **Deterministic RNG:** Uses a custom implementation of a Linear Congruential Generator (LCG).
+- **Seeding:** The RNG is seeded by the current date string + a build-time salt (injected via CI/CD), ensuring the route is unpredictable to users, but consistent across all clients.
+- **Scoring:** Your advance and transfer counts are tracked locally and compared against the daily optimal path.  
+  * *Global Leaderboard feature coming soon*
+- **No upcoming stations view**
 
 <br>
 

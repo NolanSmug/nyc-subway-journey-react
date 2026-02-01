@@ -10,6 +10,7 @@ interface ActionButtonProps {
     hidden?: boolean
     small?: boolean
     disabled?: boolean
+    pulse?: boolean
     additionalInput?: React.ReactNode
 }
 
@@ -22,15 +23,16 @@ function ActionButton({
     hidden,
     small,
     disabled,
+    pulse,
     additionalInput,
 }: ActionButtonProps) {
     const noImage: boolean = imageSrc === undefined
 
     return (
-        <div className={`action-button-wrapper ${wrapperClassName || ''} ${hidden ? 'hidden' : ''} ${disabled ? 'disabled' : ''}`}>
+        <div className={`action-button-wrapper ${wrapperClassName || ''} ${hidden ? 'hidden' : ''} ${disabled ? 'disabled' : ''} `}>
             <div className='action-button-container'>
                 <button
-                    className={`action-button  ${noImage ? 'no-image' : ''}`}
+                    className={`action-button  ${noImage ? 'no-image' : ''} ${pulse ? 'pulse' : ''}`}
                     type='button'
                     onMouseDown={noImage ? undefined : onClick}
                     onMouseUp={noImage ? onClick : undefined}

@@ -1,16 +1,13 @@
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
 import './KeyShortcut.css'
 
 interface KeyShortcutProps {
     shortcutKey: string
     label: string
     isCommand?: boolean
-    conductorModeOnly?: boolean
+    disabled?: boolean
 }
 
-function KeyShortcut({ shortcutKey, label, isCommand, conductorModeOnly }: KeyShortcutProps) {
-    const disabled = useSettingsContext((state) => state.gameMode === GameMode.RIDER && conductorModeOnly)
-
+function KeyShortcut({ shortcutKey, label, isCommand, disabled }: KeyShortcutProps) {
     const handleShortcutClick = () => {
         if (shortcutKey === 'Esc') shortcutKey = 'Escape'
         if (shortcutKey === '→') shortcutKey = 'ArrowRight'
@@ -25,11 +22,7 @@ function KeyShortcut({ shortcutKey, label, isCommand, conductorModeOnly }: KeySh
     }
 
     return (
-        <div
-            className='shortcut'
-            onMouseDown={handleShortcutClick}
-            style={disabled ? { textDecoration: 'line-through', opacity: 0.5 } : {}}
-        >
+        <div className={`shortcut ${disabled ? 'disabled' : ''}`} onMouseDown={handleShortcutClick}>
             <span id='key-label'>{label}</span>
             <p className={`shortcut-key ${isCommand ? 'command' : ''}`}>
                 {isCommand && (

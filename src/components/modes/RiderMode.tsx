@@ -8,7 +8,6 @@ import { useUIContext } from '../../contexts/UIContext'
 import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { useGame } from '../../hooks/useGame'
-import { useUITheme } from '../../hooks/useCSSProperties'
 import { usePassenger } from '../../hooks/usePassenger'
 import { PassengerState } from '../../hooks/usePassenger'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
@@ -25,8 +24,10 @@ function RiderMode() {
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
+    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
     const setUpcomingStationsLayout = useSettingsContext((state) => state.setUpcomingStationsLayout)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
+
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
     const [inTransferTunnel, setInTransferTunnel] = useState<boolean>(false)
@@ -143,10 +144,10 @@ function RiderMode() {
         enabled: passenger.passengerState !== PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true', // don't allow shortcuts when passenger is in motion (except in dev mode)
     })
 
-    useUITheme(darkMode)
     useEffect(() => {
+        if (isHorizontalLayout) return
         setUpcomingStationsLayout(UpcomingStationsLayout.HORIZONTAL)
-    }, [setUpcomingStationsLayout])
+    }, [isHorizontalLayout, setUpcomingStationsLayout])
 
     return (
         <RiderModeUI

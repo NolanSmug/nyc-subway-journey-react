@@ -80,11 +80,12 @@ export const LINE_TYPES: Map<LineName, LineType> = new Map([
 
 // TODO: repOk() implementation (see TrainManger.ts)
 
-export function getRandomLine(): LineName {
+export function getRandomLine(rng: () => number = Math.random): LineName {
     const lines: LineName[] = Object.values(LineName)
     let randomLine: LineName = LineName.NULL_TRAIN
+
     do {
-        randomLine = lines[Math.floor(Math.random() * lines.length)]
+        randomLine = lines[Math.floor(rng() * lines.length)]
     } while (randomLine === LineName.NULL_TRAIN)
 
     return randomLine

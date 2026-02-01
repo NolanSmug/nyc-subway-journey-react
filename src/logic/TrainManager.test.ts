@@ -47,8 +47,8 @@ describe('Train actions (ONE_TRAIN)', () => {
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })
 
-    test('advanceStationInc', () => {
-        train.advanceStationInc(2)
+    test('advanceStation multiple', () => {
+        train.advanceStation(2)
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })
 
@@ -81,7 +81,7 @@ describe('Train actions (ONE_TRAIN)', () => {
     test('advanceStation overflow', () => {
         train.setCurrentStationByIndex(2) // WTC
         train.advanceStation()
-        train.advanceStationInc(2)
+        train.advanceStation(2)
 
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })

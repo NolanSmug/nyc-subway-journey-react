@@ -13,10 +13,8 @@
 .prettierrc
 gtfs_subway/
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env**
+!.env.example
 
 .yarn/*
 !.yarn/releases

@@ -11,7 +11,8 @@
     align-items: center;
     background-color: var(--bg-color-2);
     color: var(--text-color);
-    padding: 4em;
+    padding: 0 2em 1em 2em;
+    border-radius: 0.75em;
     text-align: center;
 }
 
