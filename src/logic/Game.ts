@@ -4,6 +4,7 @@ import { Direction } from './LineManager'
 import { getStationsForLine } from './SubwayMap'
 import { SeedRNG } from './SeedRNG'
 import { DailyChallenge } from './DailyChallenge'
+import { Score } from './Score'
 
 export class Game {
     public gameState: GameState
@@ -26,14 +27,14 @@ export class Game {
 
         await this.gameState.resetGameState(rng)
 
-        if (isDailyChallenge) {
-            const [startID, destID] = this.gameState.getStartDestStationIDs()
-            this.gameState.optimalScore = await DailyChallenge.getOptimalScore(startID, destID)
-        }
-
         this.train.setDirection(Direction.NULL_DIRECTION)
         this.train.setScheduledStops(await getStationsForLine(this.gameState.startingLine))
         this.train.setCurrentStation(this.gameState.startingStation)
         this.train.setLine(this.gameState.startingLine)
+    }
+
+    public async fetchDailyScore(): Promise<Score | null> {
+        const [startID, destID] = this.gameState.getStartDestStationIDs()
+        return await DailyChallenge.getOptimalScore(startID, destID)
     }
 }

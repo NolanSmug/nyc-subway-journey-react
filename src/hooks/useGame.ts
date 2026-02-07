@@ -6,7 +6,17 @@ import { useUIContext } from '../contexts/UIContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 
 import { Game } from '../logic/Game'
+import { Score } from '../logic/Score'
 import { Station as StationClass } from '../logic/StationManager'
+
+const getDailyScoreSafe = async (game: Game): Promise<Score | null> => {
+    try {
+        return await game.fetchDailyScore()
+    } catch (error) {
+        console.warn('Error fetching optimal score:', error)
+        return null
+    }
+}
 
 export function useGame() {
     const { setGameState } = useGameStateContext()
@@ -17,12 +27,20 @@ export function useGame() {
     const initializeGame = useCallback(async () => {
         try {
             await StationClass.initializeAllStations()
-            let newGame = new Game()
+            const newGame = new Game()
+
             await newGame.runGame(isDailyChallenge)
 
-            setIsTransferMode(false)
+            if (isDailyChallenge) {
+                const score = await getDailyScoreSafe(newGame)
+                if (score !== null) {
+                    newGame.gameState.optimalScore = score
+                }
+            }
+
             setTrain(newGame.train)
             setGameState(newGame.gameState)
+            setIsTransferMode(false)
         } catch (error) {
             console.error('Error initializing game:', error)
         }

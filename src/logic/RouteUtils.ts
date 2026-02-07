@@ -43,3 +43,23 @@ export function getTransferIndices(routeData: StationData[]): number[] {
 
     return indices
 }
+
+export function getNumRequiredTransfers(route: StationData[]): number {
+    if (route.length < 2) return 0
+
+    let numTransfers: number = 0
+    let availableLines: LineName[] = route[0].lines
+
+    for (const { lines } of route.slice(1)) {
+        const sharedLines: LineName[] = availableLines.filter((l) => lines.includes(l))
+
+        if (sharedLines.length > 0) {
+            availableLines = sharedLines // stay on the same train
+        } else {
+            numTransfers++
+            availableLines = lines // reset options to new station
+        }
+    }
+
+    return numTransfers
+}
