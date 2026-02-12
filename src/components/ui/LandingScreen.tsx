@@ -19,7 +19,10 @@ function LandingScreen({ closeLabel, children }: LandingScreenProps) {
             <div className='landing-screen-content'>
                 {children}
 
-                <ActionButton label={closeLabel && closeLabel} onClick={() => setIsLandingPage(false)}></ActionButton>
+                <ActionButton label={
+                    // Is this a javascript thing?
+                    closeLabel && closeLabel
+                } onClick={() => setIsLandingPage(false)}></ActionButton>
             </div>
         </div>
     )

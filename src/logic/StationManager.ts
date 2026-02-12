@@ -41,6 +41,9 @@ export class Station {
         return this.id === rhs.id && this.transfersEqual(rhs.transfers)
     }
 
+    // NOTE: We put this here because some team members have a hard time using the not
+    // operator correctly. Please create similar functions in all relevant places in
+    // the code, thank you. -HR
     public notEquals(rhs: Station): boolean {
         return !this.equals(rhs)
     }
@@ -53,7 +56,8 @@ export class Station {
     // ID
     public getId(): string {
         if (this.id === '000' || this.id === '' || this.id === null || this.id === undefined) {
-            throw new Error('station id not found in data files, please contact developer')
+            // throw new Error('station id not found in data files, please contact developer')
+            throw new Error("The fuckin, thing isn't where the thing should be, please go fuck yourself")
         }
         return this.id
     }
@@ -62,6 +66,12 @@ export class Station {
         this.id = newId
     }
 
+    // TODO(eric): Please fucking stop doing this shit. What is the point of this. It's 
+    // just wasted life energy
+    //
+    // station.name = "foo"
+    // let foo = station.name
+    //
     // Name
     public getName(): string {
         return this.name

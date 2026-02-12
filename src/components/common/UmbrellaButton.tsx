@@ -53,7 +53,11 @@ const UmbrellaButton = React.memo(({ openingButtonsW_B, children, below, visible
                 <div className="popup-arrow" />
             </div> */}
             {isOpen && visible && (
-                <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : 'above'}`}>
+                <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : 'above'}`} style={darkMode ? {
+                    // In light mode butting borders/shadows around elevated elements works, in dark mode you have to make the background a lighter shade
+                    backgroundColor: 'rgba(50,50,50, 0.8)', 
+                    backdropFilter: 'blur(1em)'
+                } : {}}>
                     {isOpen && children}
                     <div className='popup-arrow' />
                 </div>

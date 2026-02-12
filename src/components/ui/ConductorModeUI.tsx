@@ -99,6 +99,9 @@ function ConductorModeUI({
                     </div>
                 </div>
 
+                {// In dark mode, the sign is indistinguishable from the background color
+                // The reset button is as big as the actual game components
+                }
                 <div className={`station-box ${gameState.isWon ? 'win-state' : ''}`} id='destination-station'>
                     <Header text='Destination station' />
                     <div className='station-item'>

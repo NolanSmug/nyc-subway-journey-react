@@ -3,6 +3,8 @@ import { createContext, useContextSelector } from 'use-context-selector'
 
 interface UIContextProps {
     isTransferMode: boolean
+    // TODO(eric): I don't know if you can fix this but what the fuck is this type?
+    // It's a bool! You're setting the bool! Even Rust isn't this complicated
     setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
 
     isLandingPage: boolean
