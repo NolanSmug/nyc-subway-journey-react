@@ -31,18 +31,18 @@ export function useGame() {
 
             await newGame.runGame(isDailyChallenge)
 
+            setTrain(newGame.train)
+            setGameState(newGame.gameState)
+            setIsTransferMode(false)
+
             if (isDailyChallenge) {
                 const score = await getDailyScoreSafe(newGame)
                 if (score !== null) {
                     newGame.gameState.optimalScore = score
                 }
             }
-
-            setTrain(newGame.train)
-            setGameState(newGame.gameState)
-            setIsTransferMode(false)
         } catch (error) {
-            console.error('Error initializing game:', error)
+            console.error('Error initializing game (useGame()):', error)
         }
     }, [isDailyChallenge, setTrain, setGameState, setIsTransferMode])
 
