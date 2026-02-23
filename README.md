@@ -4,7 +4,6 @@
 
 ![Docker Pulls](https://img.shields.io/docker/pulls/nanosmug/nyc-subway-journey?color=FF6319&labelColor=222222&logo=docker&logoColor=FF6319)
 ![Docker Image Size](https://img.shields.io/docker/image-size/nanosmug/nyc-subway-journey?color=6CBE45&logo=docker&labelColor=222222&logoColor=6CBE45)
-![Repo Size](https://img.shields.io/github/repo-size/NolanSmug/nyc-subway-journey-react?logo=github&color=FCCC0A&labelColor=222222&logoColor=FCCC0A)
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-0039A6?style=flat&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-808183?style=flat&logo=react)
