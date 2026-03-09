@@ -40,13 +40,12 @@ need default top value for transition in all states (bc center = 100% - (73% - 1
 }
 
 .destination-station-rider-mode {
-    position: absolute; 
+    position: absolute;
     left: 85%;
 
     width: auto;
     border: dashed 1px var(--text-color-opaque);
     padding: 0 1em 0.75em 1em;
-
     white-space: nowrap;
 }
 
@@ -73,6 +72,7 @@ need default top value for transition in all states (bc center = 100% - (73% - 1
 .chrome .platform {
     min-height: 13em;
 }
+
 /* 
 .chrome .destination-station-rider-mode {
     left: 95%

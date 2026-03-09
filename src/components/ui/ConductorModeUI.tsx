@@ -68,13 +68,7 @@ function ConductorModeUI({
                     <Header text='Current station' />
                     <div className='station-item'>
                         <Station name={currentStation.getName()}>
-                            <LineSVGs
-                                lines={currentStation.getTransfers()}
-                                onTransferSelect={(index) => {
-                                    handleLineClick(index)
-                                }}
-                                notDim
-                            />
+                            <LineSVGs lines={currentStation.getTransfers()} onTransferSelect={handleLineClick} notDim />
                         </Station>
                     </div>
                     <div className={`action-buttons-container`} id='starting-station'>

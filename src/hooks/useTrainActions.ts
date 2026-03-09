@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useMemo } from 'react'
+import { MutableRefObject, useCallback, useMemo } from 'react'
 
 import { GameState } from '../logic/GameState'
 import { Train } from '../logic/TrainManager'
@@ -6,31 +6,32 @@ import { Direction, LineName } from '../logic/LineManager'
 import { DailyChallenge } from '../logic/DailyChallenge'
 
 type UseTrainActionsParams = {
-    trainRef: RefObject<Train>
+    trainRef: MutableRefObject<Train>
     setTrain: React.Dispatch<React.SetStateAction<Train>>
-    gameState: GameState
-    setGameState: (gs: GameState) => void
+    setGameState: React.Dispatch<React.SetStateAction<GameState>>
     isDailyChallenge?: boolean
 }
 
-export default function useTrainActions({ trainRef, setTrain, gameState, setGameState, isDailyChallenge }: UseTrainActionsParams) {
+export default function useTrainActions({ trainRef, setTrain, setGameState, isDailyChallenge }: UseTrainActionsParams) {
     const checkForWin = useCallback(
         (train: Train) => {
-            if (gameState.checkWin(train.getCurrentStation())) {
-                if (isDailyChallenge) {
-                    DailyChallenge.saveScore(gameState.playerScore)
+            setGameState((prevGameState) => {
+                if (!prevGameState.checkWin(train.getCurrentStation())) {
+                    return prevGameState
                 }
 
-                setGameState(
-                    Object.assign(new GameState(), {
-                        ...gameState,
-                        isWon: true,
-                        isDailyChallengeCompleted: DailyChallenge.isAlreadyCompleted(),
-                    })
-                )
-            }
+                if (isDailyChallenge) {
+                    DailyChallenge.saveScore(prevGameState.playerScore)
+                }
+
+                return Object.assign(new GameState(), {
+                    ...prevGameState,
+                    isWon: true,
+                    isDailyChallengeCompleted: DailyChallenge.isAlreadyCompleted(),
+                })
+            })
         },
-        [gameState, setGameState, isDailyChallenge]
+        [setGameState, isDailyChallenge]
     )
 
     const advanceStation = useCallback(
@@ -43,11 +44,16 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
             const isAdvanced: boolean = nextTrain.advanceStation(numAdvanceStations)
             if (!isAdvanced) return
 
-            gameState.playerScore.incrementAdvanceCount(numAdvanceStations)
+            setGameState((prevGameState) => {
+                prevGameState.playerScore.incrementAdvanceCount(numAdvanceStations)
+                return Object.assign(new GameState(), prevGameState)
+            })
+
             setTrain(nextTrain)
+            trainRef.current = nextTrain
             checkForWin(nextTrain)
         },
-        [trainRef, setTrain, checkForWin, gameState.playerScore]
+        [trainRef, setTrain, setGameState, checkForWin]
     )
 
     const transfer = useCallback(
@@ -62,12 +68,16 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
             const isValidTransfer: boolean = await nextTrain.transferToLine(selectedLine, currentStation)
 
             if (selectedLine && isValidTransfer) {
-                gameState.playerScore.incrementTransferCount()
+                setGameState((prevGameState) => {
+                    prevGameState.playerScore.incrementTransferCount()
+                    return Object.assign(new GameState(), prevGameState)
+                })
                 setTrain(nextTrain)
+                trainRef.current = nextTrain
                 checkForWin(nextTrain)
             }
         },
-        [trainRef, setTrain, gameState.playerScore]
+        [trainRef, setTrain, setGameState, checkForWin]
     )
 
     const changeDirection = useCallback(
@@ -86,6 +96,7 @@ export default function useTrainActions({ trainRef, setTrain, gameState, setGame
             }
 
             setTrain(nextTrain)
+            trainRef.current = nextTrain
 
             return nextTrain.getDirection() // return the new direction so RiderMode knows where to move Passenger
         },

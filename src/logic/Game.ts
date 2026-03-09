@@ -1,10 +1,10 @@
-import { GameState } from './GameState'
-import { Train } from './TrainManager'
-import { Direction } from './LineManager'
-import { getStationsForLine } from './SubwayMap'
-import { SeedRNG } from './SeedRNG'
 import { DailyChallenge } from './DailyChallenge'
+import { Direction } from './LineManager'
+import { GameState } from './GameState'
 import { Score } from './Score'
+import { SeedRNG } from './SeedRNG'
+import { Train } from './TrainManager'
+import { getStationsForLine } from './SubwayMap'
 
 export class Game {
     public gameState: GameState

@@ -11,6 +11,8 @@
     --train-car-border: rgb(74, 74, 74);
     --overlay-opacity: 1;
     --transfer-opacity: 1;
+    --line-color: #00ADD0;
+    /* default line color is the T train color */
 }
 
 .dark-mode {
@@ -152,6 +154,7 @@ body {
 }
 
 .dimmed-overlay.landing {
+    background-color: rgba(0, 0, 0, 0.66);
     opacity: 1;
     z-index: 11;
 }

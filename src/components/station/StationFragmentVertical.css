@@ -8,6 +8,11 @@
     display: flex;
     margin-bottom: 0;
     width: 15em;
+    opacity: 0.6;
+}
+
+.current-station-vertical .station-frag-vertical-content {
+    opacity: 1;
 }
 
 .station-frag-vertical-info {
@@ -56,8 +61,7 @@
     transform: translate(-50%, 50%);
 }
 
-
-/* Current Station Modifications */
+/* Current station modifications */
 .current-station-vertical .station-dot-vertical::after {
     content: '';
     position: absolute;
@@ -77,8 +81,6 @@
 .current-station-vertical .station-frag-vertical-name {
     font-size: 1.04rem;
     white-space: wrap;
-    color: var(--line-color);
-    opacity: 0.9;
     transition: font-size linear 0.1s;
 }
 

@@ -3,7 +3,6 @@
     height: 4em;
     margin: auto;
     position: absolute;
-    z-index: 100;
 
     will-change: transform;
     /* add again if having problems: */
@@ -12,6 +11,7 @@
     top: 0;
     left: 0;
     margin: 0;
+    z-index: 101;
 }
 
 .chrome .passenger {

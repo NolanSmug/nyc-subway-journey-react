@@ -17,7 +17,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
     const directionLabel = useTrainContext((state) => state.train.findDirectionLabel(direction, line, borough))
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
-    const shrinkDirectionLabel: boolean = directionLabel.length > 20
+    const shrinkDirectionLabel: boolean = directionLabel.length >= 20
 
     useLineStyles(line, lineType)
 

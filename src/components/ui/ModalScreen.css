@@ -1,8 +1,12 @@
 .landing-screen-container {
     position: fixed;
-    z-index: 1000;
+    z-index: 100;
     animation: fadeIn 0.6s ease;
     border-radius: 0.5em;
+}
+
+.landing-screen-container:has(.daily-challenge-wrapper) {
+    z-index: 102;
 }
 
 .landing-screen-content {
@@ -22,9 +26,9 @@
 }
 
 .landing-screen-content p {
-    font-size: large;
-    margin-bottom: 2em;
-    width: 25em;
+    font-size: 1.5em;
+    width: 32em;
+    margin: 0.5em 0 0.5em 0;
 }
 
 @keyframes fadeIn {

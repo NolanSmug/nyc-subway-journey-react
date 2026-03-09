@@ -52,9 +52,9 @@ const UmbrellaButton = React.memo(({ openingButtonsW_B, children, below, visible
                 {umbrellaContent}
                 <div className="popup-arrow" />
             </div> */}
-            {isOpen && visible && (
+            {isOpen && (
                 <div ref={popupRef} className={`umbrella-content not-dim ${isOpen ? 'visible' : 'hidden'} ${below ? 'below' : 'above'}`}>
-                    {isOpen && children}
+                    {children}
                     <div className='popup-arrow' />
                 </div>
             )}

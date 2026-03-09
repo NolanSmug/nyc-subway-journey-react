@@ -3,6 +3,7 @@ import './DailyChallengeScreenContent.css'
 import Header from '../common/Header'
 import Station from '../station/Station'
 import LineSVGs from '../common/LineSVGs'
+import WelcomeTurnstile from './WelcomeTurnstile'
 
 import { useGameStateContext } from '../../contexts/GameStateContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'

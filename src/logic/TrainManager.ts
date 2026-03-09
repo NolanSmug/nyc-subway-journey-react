@@ -5,11 +5,11 @@ import { getStationsForLine } from './SubwayMap'
 export class Train {
     private currentLine: LineName
     private direction: Direction
+    private currentStationIndex: number = 0
+    // TODO: labels need not be in class
     private uptownLabel: string
     private downtownLabel: string
-
     private scheduledStops: Station[]
-    private currentStationIndex: number = 0
 
     constructor(
         currentLine: LineName = LineName.NULL_TRAIN,

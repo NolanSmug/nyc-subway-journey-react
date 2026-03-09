@@ -35,7 +35,7 @@ function UpcomingStationsVertical() {
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        className={currentStationID === station.getId() ? 'current-station-vertical' : ''}
+                        isCurrent={currentStationID === station.getId()}
                     />
                 ))}
             </div>

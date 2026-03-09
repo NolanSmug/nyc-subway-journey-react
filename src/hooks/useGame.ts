@@ -6,6 +6,7 @@ import { useUIContext } from '../contexts/UIContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 
 import { Game } from '../logic/Game'
+import { GameState } from '../logic/GameState'
 import { Score } from '../logic/Score'
 import { Station as StationClass } from '../logic/StationManager'
 
@@ -38,7 +39,7 @@ export function useGame() {
             if (isDailyChallenge) {
                 const score = await getDailyScoreSafe(newGame)
                 if (score !== null) {
-                    newGame.gameState.optimalScore = score
+                    setGameState((prev) => Object.assign(new GameState(), { ...prev, optimalScore: score }))
                 }
             }
         } catch (error) {

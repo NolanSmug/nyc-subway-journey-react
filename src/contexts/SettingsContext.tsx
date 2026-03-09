@@ -52,13 +52,10 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
 
     const toggleUpcomingStationsLayout = useCallback(() => {
         if (!upcomingStationsVisible) return
-
-        setUpcomingStationsLayout(
-            upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL
-                ? UpcomingStationsLayout.VERTICAL
-                : UpcomingStationsLayout.HORIZONTAL
+        setUpcomingStationsLayout((prev) =>
+            prev === UpcomingStationsLayout.HORIZONTAL ? UpcomingStationsLayout.VERTICAL : UpcomingStationsLayout.HORIZONTAL
         )
-    }, [upcomingStationsLayout, upcomingStationsVisible])
+    }, [upcomingStationsVisible])
 
     const value = useMemo(
         () => ({

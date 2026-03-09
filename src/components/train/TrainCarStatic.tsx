@@ -17,8 +17,8 @@ interface TrainCarStaticProps {
     direction: Direction
     active: boolean
     hidden?: boolean
-    uptownDoorRef?: React.RefObject<HTMLDivElement>
-    downtownDoorRef?: React.RefObject<HTMLDivElement>
+    uptownDoorRef?: React.RefObject<HTMLDivElement | null>
+    downtownDoorRef?: React.RefObject<HTMLDivElement | null>
 }
 
 function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoorRef }: TrainCarStaticProps) {

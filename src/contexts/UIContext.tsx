@@ -5,15 +5,15 @@ interface UIContextProps {
     isTransferMode: boolean
     setIsTransferMode: React.Dispatch<React.SetStateAction<boolean>>
 
-    isLandingPage: boolean
-    setIsLandingPage: React.Dispatch<React.SetStateAction<boolean>>
+    isModalOpen: boolean
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const UIContext = createContext<UIContextProps | undefined>(undefined)
 
 export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [isTransferMode, setIsTransferMode] = useState<boolean>(false)
-    const [isLandingPage, setIsLandingPage] = useState<boolean>(() => (process.env.REACT_APP_USE_DEV_API === 'true' ? false : true))
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(() => (process.env.REACT_APP_USE_DEV_API === '' ? false : true))
 
     const toggleTransferMode = useCallback(() => setIsTransferMode((prev) => !prev), [])
 
@@ -21,11 +21,11 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
         () => ({
             isTransferMode,
             setIsTransferMode,
-            isLandingPage,
-            setIsLandingPage,
+            isModalOpen,
+            setIsModalOpen,
             toggleTransferMode,
         }),
-        [isTransferMode, isLandingPage, toggleTransferMode]
+        [isTransferMode, isModalOpen, toggleTransferMode]
     )
 
     return <UIContext.Provider value={value}>{children}</UIContext.Provider>

@@ -42,7 +42,7 @@ function UpcomingStationsHorizontal() {
                         key={station.getId() || index}
                         station={station}
                         transfers={station.getTransfers()}
-                        className={currentStationID === station.getId() ? 'current-station' : ''}
+                        isCurrent={currentStationID === station.getId()}
                     />
                 ))}
             </div>
@@ -59,7 +59,7 @@ export function scrollToCurrentStation(currentStationElement: Element | null, is
                 block: isLowIndex ? 'nearest' : 'center',
                 inline: isLowIndex ? undefined : 'center',
             })
-        }, 0) // !DO NOT REMOVE! no idea why "0ms delay" fixes occasional scrolling issues, but it does
+        }, 0) // !DO NOT REMOVE!
         return () => clearTimeout(timer)
     } else {
         console.warn(`Current station not found.`)

@@ -49,7 +49,7 @@ export class GameState {
         } while (this.startingStation.equals(this.destinationStation))
     }
 
-    public getStartDestStationIDs(): string[] {
+    public getStartDestStationIDs(): [string, string] {
         return [this.startingStation.getId(), this.destinationStation.getId()]
     }
 }

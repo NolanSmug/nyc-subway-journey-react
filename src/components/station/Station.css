@@ -16,6 +16,15 @@
     transition: opacity 0.5s ease;
 }
 
+.station-container.across {
+    justify-content: space-between;
+    padding: 1.5em 1em 0.5em 1em;
+    flex-direction: row;
+    gap: 2em;
+    max-width: 100%;
+    min-width: 12em;
+}
+
 .station-container::before {
     content: '';
     position: absolute;
@@ -33,6 +42,10 @@
     font-size: 22px;
     font-stretch: 200% 200%;
     letter-spacing: 0.03em;
+}
+
+.across .station-name {
+    margin-top: 0;
 }
 
 .shrink-station-name {

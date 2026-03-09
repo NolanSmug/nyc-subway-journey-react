@@ -1,4 +1,4 @@
-import { areLineSetsEqual, LineName } from './LineManager'
+import { areLineSetsDisjoint, areLineSetsEqual, LineName } from './LineManager'
 
 export interface StationData {
     id: string
@@ -44,20 +44,16 @@ export function getTransferIndices(routeData: StationData[]): number[] {
     return indices
 }
 
-export function getNumRequiredTransfers(route: StationData[]): number {
-    if (route.length < 2) return 0
+export function getNumRequiredTransfers(routeData: StationData[]): number {
+    if (routeData.length < 2) return 0
 
     let numTransfers: number = 0
-    let availableLines: LineName[] = route[0].lines
+    let prevLines: LineName[] = routeData[0].lines
 
-    for (const { lines } of route.slice(1)) {
-        const sharedLines: LineName[] = availableLines.filter((l) => lines.includes(l))
-
-        if (sharedLines.length > 0) {
-            availableLines = sharedLines // stay on the same train
-        } else {
+    for (let i = 0; i < routeData.length - 1; i++) {
+        if (areLineSetsDisjoint(routeData[i].lines, prevLines)) {
             numTransfers++
-            availableLines = lines // reset options to new station
+            prevLines = routeData[i].lines
         }
     }
 

@@ -1,13 +1,14 @@
 import './Door.css'
-import React, { forwardRef } from 'react'
+import React from 'react'
 
 interface DoorProps {
+    ref?: React.Ref<HTMLDivElement>
     isLeft?: boolean
     hasPassenger?: boolean
 }
 
-const Door = forwardRef<HTMLDivElement, DoorProps>(({ isLeft, hasPassenger }, ref) => {
+const Door = ({ ref, isLeft, hasPassenger }: DoorProps) => {
     return <div ref={ref} className={`door ${isLeft ? 'door-left' : ''} ${hasPassenger ? 'door-passenger' : ''}`}></div>
-})
+}
 
 export default React.memo(Door)

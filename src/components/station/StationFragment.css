@@ -9,7 +9,6 @@
 
 .station-frag-content {
     margin-bottom: 1.5rem;
-    /* width: fit-content; */
     transform: rotate(-38deg);
     position: relative;
     /* RELATIVE TO DOT POSITION: */
@@ -18,20 +17,35 @@
     width: auto;
     transform-origin: bottom;
     margin-bottom: 1.2em;
+    opacity: 0.6;
+}
+
+.chrome .station-frag-content {
+    bottom: 1.8em;
+    /* Slightly lower to save vertical space */
+    left: 2.8em;
+    /* Pulled in slightly */
+}
+
+.current-station .station-frag-content {
+    opacity: 1;
 }
 
 .station-frag-info {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.15rem;
 }
 
 .station-frag-name {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     white-space: nowrap;
     overflow: visible;
     max-width: none;
-    /* overflow: scroll; */
+    /* overflow: visible; */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: left center;
+    padding-right: 0.5rem;
     scrollbar-width: none;
     /* Firefox */
     -ms-overflow-style: none;
@@ -39,32 +53,60 @@
 
 .chrome .station-frag-name {
     font-size: 0.7rem;
+    padding-right: 1.2rem;
+}
+
+.current-station .station-frag-name {
+    transform: scale(1.12);
+}
+
+.current-station .transfer-lines {
+    margin-left: 0.1rem;
+    transform: translateX(0.2rem);
+}
+
+.chrome .current-station .station-frag-name {
+    transform: scale(1.35);
+}
+
+.chrome .current-station .transfer-lines {
+    margin-left: 0.2rem;
+    transform: translateX(0.4rem);
 }
 
 .station-dot {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 1.25rem;
+    height: 1.25em;
     background-color: var(--dot-color);
     border-color: var(--line-color);
     border-radius: 50%;
-    border-width: 0.15rem;
     border-style: solid;
+    border-width: 0.15rem;
     position: relative;
-    transform: translate(-50%, 50%);
-    z-index: 2;
+
+    transform: translate(-50%, 50%) scale(0.6);
+    border-width: 0.15rem;
+    transition: transform 0.2s ease-in-out, border-width 0.2s ease-in-out;
 }
 
 .current-station .station-dot {
-    width: 1.25rem;
-    height: 1.25rem;
+    transform: translate(-50%, 50%) scale(1);
     border-width: 0.4rem;
-    transition: 0.2s ease-in;
-    transition: 0.1s ease-out;
 }
 
 .chrome .current-station .station-dot {
-    width: 1rem;
-    height: 1rem;
+    transform: translate(-50%, 50%) scale(0.8);
+}
+
+.transfer-lines {
+    display: flex;
+    flex-shrink: 0;
+    transition: transform 0.2s ease-in-out, margin-left 0.2s ease-in-out;
+    margin-left: -0.2rem;
+}
+
+.chrome .transfer-lines {
+    margin-left: -1rem;
 }
 
 .station-frag-content.overflow .station-frag-name,

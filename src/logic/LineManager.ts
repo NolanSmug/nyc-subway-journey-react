@@ -49,34 +49,36 @@ export enum LineType {
     LOCAL = 'Local',
 }
 
-export const LINE_TYPES: Map<LineName, LineType> = new Map([
-    [LineName.NULL_TRAIN, LineType.NONE],
-    [LineName.ONE_TRAIN, LineType.LOCAL],
-    [LineName.TWO_TRAIN, LineType.EXPRESS],
-    [LineName.THREE_TRAIN, LineType.EXPRESS],
-    [LineName.FOUR_TRAIN, LineType.EXPRESS],
-    [LineName.FIVE_TRAIN, LineType.EXPRESS],
-    [LineName.SIX_TRAIN, LineType.LOCAL],
-    [LineName.SEVEN_TRAIN, LineType.LOCAL],
-    [LineName.A_TRAIN, LineType.EXPRESS],
-    [LineName.B_TRAIN, LineType.EXPRESS],
-    [LineName.C_TRAIN, LineType.LOCAL],
-    [LineName.D_TRAIN, LineType.EXPRESS],
-    [LineName.E_TRAIN, LineType.EXPRESS],
-    [LineName.F_TRAIN, LineType.LOCAL],
-    [LineName.G_TRAIN, LineType.LOCAL],
-    [LineName.J_TRAIN, LineType.LOCAL],
-    [LineName.L_TRAIN, LineType.LOCAL],
-    [LineName.M_TRAIN, LineType.LOCAL],
-    [LineName.N_TRAIN, LineType.EXPRESS],
-    [LineName.Q_TRAIN, LineType.EXPRESS],
-    [LineName.R_TRAIN, LineType.LOCAL],
-    [LineName.W_TRAIN, LineType.LOCAL],
-    [LineName.Z_TRAIN, LineType.LOCAL],
-    [LineName.S_TRAIN, LineType.NONE],
-    [LineName.S_TRAIN_SHUTTLE, LineType.NONE],
-    [LineName.S_TRAIN_ROCKAWAY, LineType.NONE],
-])
+export const LINE_TYPES: Record<LineName, LineType> = {
+    [LineName.NULL_TRAIN]: LineType.NONE,
+    [LineName.ONE_TRAIN]: LineType.LOCAL,
+    [LineName.TWO_TRAIN]: LineType.EXPRESS,
+    [LineName.THREE_TRAIN]: LineType.EXPRESS,
+    [LineName.FOUR_TRAIN]: LineType.EXPRESS,
+    [LineName.FIVE_TRAIN]: LineType.EXPRESS,
+    [LineName.SIX_TRAIN]: LineType.LOCAL,
+    [LineName.SEVEN_TRAIN]: LineType.LOCAL,
+    [LineName.A_TRAIN]: LineType.EXPRESS,
+    [LineName.A_ROCKAWAY_MOTT_TRAIN]: LineType.EXPRESS,
+    [LineName.A_LEFFERTS_TRAIN]: LineType.EXPRESS,
+    [LineName.B_TRAIN]: LineType.EXPRESS,
+    [LineName.C_TRAIN]: LineType.LOCAL,
+    [LineName.D_TRAIN]: LineType.EXPRESS,
+    [LineName.E_TRAIN]: LineType.EXPRESS,
+    [LineName.F_TRAIN]: LineType.LOCAL,
+    [LineName.G_TRAIN]: LineType.LOCAL,
+    [LineName.J_TRAIN]: LineType.LOCAL,
+    [LineName.L_TRAIN]: LineType.LOCAL,
+    [LineName.M_TRAIN]: LineType.LOCAL,
+    [LineName.N_TRAIN]: LineType.EXPRESS,
+    [LineName.Q_TRAIN]: LineType.EXPRESS,
+    [LineName.R_TRAIN]: LineType.LOCAL,
+    [LineName.W_TRAIN]: LineType.LOCAL,
+    [LineName.Z_TRAIN]: LineType.LOCAL,
+    [LineName.S_TRAIN]: LineType.NONE,
+    [LineName.S_TRAIN_SHUTTLE]: LineType.NONE,
+    [LineName.S_TRAIN_ROCKAWAY]: LineType.NONE,
+}
 
 // TODO: repOk() implementation (see TrainManger.ts)
 
@@ -103,8 +105,12 @@ export function areLineSetsEqual(arrayA: LineName[], arrayB: LineName[], strictO
     return arrayB.every((line) => setA.has(line))
 }
 
+export function areLineSetsDisjoint(arrayA: LineName[], arrayB: LineName[]): boolean {
+    return !arrayA.some((line) => arrayB.includes(line))
+}
+
 export function getLineType(line: LineName): LineType {
-    return LINE_TYPES.get(line) ?? LineType.NONE
+    return LINE_TYPES[line] ?? LineType.NONE
 }
 
 interface LineDirectionDetails {

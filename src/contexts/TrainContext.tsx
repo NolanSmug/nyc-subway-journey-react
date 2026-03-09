@@ -20,18 +20,15 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
     const [train, setTrain] = useState<Train>(() => new Train())
     const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
 
-    const trainRef: React.MutableRefObject<Train> = useRef(train)
+    const trainRef: React.RefObject<Train> = useRef(train)
 
-    useEffect(() => {
-        trainRef.current = train
-    }, [train])
+    trainRef.current = train
 
-    const { gameState, setGameState } = useGameStateContext()
+    const { setGameState } = useGameStateContext()
 
     const actions = useTrainActions({
         trainRef,
         setTrain,
-        gameState,
         setGameState,
         isDailyChallenge,
     })

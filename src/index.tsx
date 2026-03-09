@@ -7,11 +7,11 @@ import { GameStateProvider } from './contexts/GameStateContext'
 import { SettingsProvider } from './contexts/SettingsContext'
 import { TrainProvider } from './contexts/TrainContext'
 
-import useBrowserCSS from './hooks/useBrowserCSS'
+import getBrowserType from './logic/browser'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
-document.body.classList.add(useBrowserCSS())
+document.body.classList.add(getBrowserType())
 
 root.render(
     <UIProvider>

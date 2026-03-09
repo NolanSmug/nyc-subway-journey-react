@@ -8,11 +8,11 @@ import { LineName } from '../../logic/LineManager'
 
 export interface StationFragmentProps {
     station: Station
-    className?: string
+    isCurrent: boolean
     transfers: LineName[]
 }
 
-const StationFragment: React.FC<StationFragmentProps> = ({ station, className, transfers }) => {
+const StationFragment: React.FC<StationFragmentProps> = ({ station, isCurrent, transfers }) => {
     const isOverflowing = station.getName().length > 17 && station.getName().length < 25
     const extraOverflow = station.getName().length >= 25
 
@@ -20,11 +20,11 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, className, t
         <div
             className={`station-frag-container ${
                 isOverflowing ? 'overflow' : extraOverflow ? 'extra-overflow' : ''
-            }  ${className} ${station.getName().length}`}
+            }  ${isCurrent ? 'current-station' : ''}`}
         >
-            <div className={`station-frag-content ${isOverflowing ? 'overflow' : extraOverflow ? 'extra-overflow' : ''} ${className}`}>
+            <div className={`station-frag-content ${isOverflowing ? 'overflow' : extraOverflow ? 'extra-overflow' : ''}`}>
                 <div className='station-frag-info'>
-                    <h2 className='station-frag-name'>{station.getName()}</h2>
+                    <h2 className={`station-frag-name`}>{station.getName()}</h2>
                     <div className='transfer-lines'>
                         <LineSVGs lines={transfers} small />
                     </div>

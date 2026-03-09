@@ -16,7 +16,7 @@ import IMG_N from '../assets/images/n.svg'
 import IMG_Q from '../assets/images/q.svg'
 import IMG_R from '../assets/images/r.svg'
 import IMG_S from '../assets/images/s.svg'
-// import IMG_T from '../assets/images/t.svg'
+import IMG_T from '../assets/images/t.svg'
 import IMG_W from '../assets/images/w.svg'
 import IMG_Z from '../assets/images/z.svg'
 import IMG_SF from '../assets/images/sf.svg'
@@ -32,7 +32,7 @@ import IMG_7 from '../assets/images/7.svg'
 // import IMG_7D from '../assets/images/7d.svg'
 
 const LINE_SVGS: { [key in LineName]: string } = {
-    [LineName.NULL_TRAIN]: '',
+    [LineName.NULL_TRAIN]: IMG_T,
     [LineName.ONE_TRAIN]: IMG_1,
     [LineName.TWO_TRAIN]: IMG_2,
     [LineName.THREE_TRAIN]: IMG_3,
@@ -62,8 +62,8 @@ const LINE_SVGS: { [key in LineName]: string } = {
     [LineName.S_TRAIN_ROCKAWAY]: IMG_SR,
 }
 
-const LINE_COLORS: { [key in LineName]: string } = {
-    [LineName.NULL_TRAIN]: '',
+const LINE_COLORS: Record<LineName, string> = {
+    [LineName.NULL_TRAIN]: '#00ADD0',
     [LineName.ONE_TRAIN]: '#EE352E',
     [LineName.TWO_TRAIN]: '#EE352E',
     [LineName.THREE_TRAIN]: '#EE352E',

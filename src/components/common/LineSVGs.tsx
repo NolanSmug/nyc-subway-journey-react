@@ -15,15 +15,21 @@ interface LineSVGsProps {
     disabled?: boolean
     numLines?: number // if we want to keep the lines centered
     notDim?: boolean
+    focusCurrentLine?: LineName
     className?: string
     onTransferSelect?: (index: number) => void | undefined
 }
 
 const LineSVGs = React.memo<LineSVGsProps>(
-    ({ lines, small, wide, vertical, grouped, disabled, numLines, notDim, className, onTransferSelect }) => {
+    ({ lines, small, wide, vertical, grouped, disabled, numLines, notDim, focusCurrentLine, className, onTransferSelect }) => {
         const isTransferMode = useUIContext((state) => state.isTransferMode)
 
         const svgPaths: string[] = getLineSVGs(lines)
+
+        if (focusCurrentLine === LineName.A_LEFFERTS_TRAIN || focusCurrentLine === LineName.A_ROCKAWAY_MOTT_TRAIN) {
+            focusCurrentLine = LineName.A_TRAIN
+        }
+        const currentLineIndex: number | undefined = focusCurrentLine && lines.findIndex((line) => line === focusCurrentLine)
 
         return (
             <div
@@ -36,7 +42,7 @@ const LineSVGs = React.memo<LineSVGsProps>(
                         className={`${small ? 'small' : 'line-svg-image'} ${isTransferMode && !disabled ? 'jiggle-animation' : ''}`}
                         onMouseDown={() => onTransferSelect && onTransferSelect(index)}
                         alt={svgPaths[index]}
-                        style={{ animationDelay: `${index * 0.1}s` }} // delay for image jiggle animation
+                        style={focusCurrentLine && index !== currentLineIndex ? { opacity: 0.33 } : { animationDelay: `${index * 0.1}s` }} // delay for image jiggle animation
                     />
                 ))}
             </div>

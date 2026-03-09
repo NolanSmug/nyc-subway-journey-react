@@ -11,7 +11,7 @@ import ActionButton from '../common/ActionButton'
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useGameStateContext } from '../../contexts/GameStateContext'
 
-import { PassengerState } from '../../hooks/usePassenger'
+import { PassengerState } from '../../hooks/usePassengerAnimations'
 import { usePlatformTransferGroups } from '../../hooks/usePlatformTransferGroups'
 
 import { Direction, LineName } from '../../logic/LineManager'
@@ -30,9 +30,10 @@ interface RiderModeUIProps {
     onStaircaseDeselect: () => void
     onTransferSelect: (line: LineName) => void
 
-    uptownTrainDoorRef: React.RefObject<HTMLDivElement>
-    downtownTrainDoorRef: React.RefObject<HTMLDivElement>
-    staircaseRefs: React.MutableRefObject<(HTMLDivElement | null)[]>
+    platformRef: React.RefObject<HTMLDivElement | null>
+    uptownTrainDoorRef: React.RefObject<HTMLDivElement | null>
+    downtownTrainDoorRef: React.RefObject<HTMLDivElement | null>
+    staircaseRefs: React.RefObject<(HTMLDivElement | null)[]>
 
     passengerState: PassengerState
     children: React.ReactNode // <Passenger>
@@ -53,6 +54,7 @@ function RiderModeUI({
     onStaircaseDeselect,
     onTransferSelect,
 
+    platformRef,
     uptownTrainDoorRef,
     downtownTrainDoorRef,
     staircaseRefs,
@@ -79,8 +81,9 @@ function RiderModeUI({
         transfers.length === 0 ||
         inTransferTunnel
 
-    const destinationStationChildren: JSX.Element = useMemo(
+    const destinationStationChildren: React.JSX.Element = useMemo(
         () => <LineSVGs lines={destinationStation.getTransfers()} disabled />,
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [destinationStation.getId()]
     )
 
@@ -95,7 +98,9 @@ function RiderModeUI({
                     return (
                         <Staircase
                             key={index} // UNINTENTIONAL FEATURE: forces DOM reuse which creates a visual "slide-out/in" after transfer.
-                            ref={(el) => (staircaseRefs.current[index] = el)}
+                            ref={(el) => {
+                                staircaseRefs.current[index] = el
+                            }}
                             lines={transfers}
                             onStairSelect={() => onStaircaseSelect(index)}
                             onStairDeselect={onStaircaseDeselect}
@@ -108,7 +113,7 @@ function RiderModeUI({
                     )
                 })}
             </div>
-            <div className='platform-container'>
+            <div className='platform-container' ref={platformRef}>
                 {passengerComponent}
 
                 <Station
@@ -130,15 +135,7 @@ function RiderModeUI({
                 />
 
                 <div className='platform'>
-                    <ActionButton
-                        label={
-                            hasSamePlatformTransfers && !hasOtherPlatformTransfers && currentDirection !== Direction.NULL_DIRECTION
-                                ? 'deboard'
-                                : 'transfer'
-                        }
-                        onClick={handleDeboard}
-                        hidden={hideTransferButton}
-                    />
+                    <ActionButton label={'transfer'} onClick={handleDeboard} hidden={hideTransferButton} />
                 </div>
 
                 <ActionButton
