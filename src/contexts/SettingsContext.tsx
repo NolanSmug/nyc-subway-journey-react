@@ -77,7 +77,16 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
             isDailyChallenge,
             setIsDailyChallenge,
         }),
-        [darkMode, gameMode, upcomingStationsVisible, upcomingStationsLayout, numAdvanceStations, passengerGender, isDailyChallenge]
+        [
+            darkMode,
+            gameMode,
+            upcomingStationsVisible,
+            upcomingStationsLayout,
+            toggleUpcomingStationsLayout,
+            numAdvanceStations,
+            passengerGender,
+            isDailyChallenge,
+        ]
     )
 
     return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useMemo, useRef, useEffect } from 'react'
+import React, { useState, ReactNode, useMemo, useRef } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
 import { useGameStateContext } from './GameStateContext'
 

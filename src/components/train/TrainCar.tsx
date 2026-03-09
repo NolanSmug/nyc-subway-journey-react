@@ -31,7 +31,7 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
         } else {
             return direction === Direction.DOWNTOWN ? 'left' : 'right'
         }
-    }, [direction, isVerticalLayout])
+    }, [direction, isVerticalLayout, isNullDirection])
 
     return (
         <>

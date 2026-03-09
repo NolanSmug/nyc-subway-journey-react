@@ -97,14 +97,14 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
 
         loadRoute()
         return () => controller.abort()
-    }, [gameState.isWon, isRouteRequested])
+    }, [gameState, isRouteRequested])
 
     useEffect(() => {
         if (routeData.length > 0 && transferIndexes.length === 0) {
             const indexes: number[] = getTransferIndices(routeData)
             setTransferIndexes(indexes)
         }
-    }, [routeData])
+    }, [routeData, transferIndexes.length])
 
     if (!isRouteRequested) {
         return (

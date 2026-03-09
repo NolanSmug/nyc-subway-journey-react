@@ -41,7 +41,6 @@ function GameOverUI({
     isDailyChallenge,
     setIsDailyChallenge,
 }: GameOverUIProps) {
-    const gameMode = useSettingsContext((state) => state.gameMode)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
     const isConductorMode = useSettingsContext((state) => state.gameMode === GameMode.CONDUCTOR)
 

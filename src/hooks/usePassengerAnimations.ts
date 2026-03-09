@@ -59,6 +59,7 @@ export function usePassengerAnimations(platformRef: RefObject<HTMLDivElement | n
         ref.current.style.transform = `translate(${startX}px, ${startY}px) translate(-50%, -50%)`
 
         setPassengerState(PassengerState.CENTER_PLATFORM)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setPassengerState, isModalOpen])
 
     // INITIAL CENTER PLATFORM POSITION
@@ -66,17 +67,21 @@ export function usePassengerAnimations(platformRef: RefObject<HTMLDivElement | n
     //     toCenterPlatform()
     // }, [])
 
-    const getRelativePosition = useCallback((target: HTMLElement) => {
-        const platform = platformRef.current?.getBoundingClientRect()
-        if (!platform) return null
+    const getRelativePosition = useCallback(
+        (target: HTMLElement) => {
+            const platform = platformRef.current?.getBoundingClientRect()
+            if (!platform) return null
 
-        const targetRect = target.getBoundingClientRect()
+            const targetRect = target.getBoundingClientRect()
 
-        return {
-            x: targetRect.left - platform.left + targetRect.width / 2,
-            y: targetRect.top - platform.top + targetRect.height / 2,
-        }
-    }, [])
+            return {
+                x: targetRect.left - platform.left + targetRect.width / 2,
+                y: targetRect.top - platform.top + targetRect.height / 2,
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
+    )
 
     const walkTo = useCallback(async (x: number, y: number, action: PassengerAction) => {
         if (!ref.current) return
@@ -109,6 +114,7 @@ export function usePassengerAnimations(platformRef: RefObject<HTMLDivElement | n
 
         await walkTo(platform.width / 8, platform.height / 2, PassengerAction.DEBOARD_TRAIN)
         setPassengerState(PassengerState.TRANSFER_PLATFORM)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [walkTo])
 
     const transferDownStairs = useCallback(
