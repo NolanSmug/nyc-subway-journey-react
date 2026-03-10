@@ -7,6 +7,5 @@ export default function getBrowserType(): string {
     if (ua.includes('Chrome')) return 'chrome'
     if (ua.includes('Safari')) return 'safari'
 
-    console.log(ua)
     return 'other'
 }
