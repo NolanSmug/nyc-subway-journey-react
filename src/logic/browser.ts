@@ -1,12 +1,12 @@
 export default function getBrowserType(): string {
-    const userAgent = navigator.userAgent
-    if (userAgent.includes('Chrome') && !userAgent.includes('Edge') && !userAgent.includes('OPR')) {
-        return 'chrome' // <-- L
-    } else if (userAgent.includes('Firefox')) {
-        return 'firefox'
-    } else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) {
-        return 'safari'
-    } else {
-        return ''
-    }
+    const ua = navigator.userAgent
+
+    if (ua.includes('Firefox')) return 'firefox'
+    if (ua.includes('Edg') || ua.includes('Edge')) return 'edge'
+    if (ua.includes('OPR')) return 'opera'
+    if (ua.includes('Chrome')) return 'chrome'
+    if (ua.includes('Safari')) return 'safari'
+
+    console.log(ua)
+    return 'other'
 }
