@@ -4,12 +4,9 @@
     align-items: center;
     position: relative;
     opacity: 1;
-    transition: opacity 0.25s ease-in
-}
-
-/* another chrome-specific spacing adjustment (I still refuse to surrender my Firefox) */
-.chrome .train-wrapper {
-    zoom: 0.9;
+    font-size: 0.9rem;
+    
+    transition: opacity 0.25s ease-in;
 }
 
 .train-wrapper.uptown {

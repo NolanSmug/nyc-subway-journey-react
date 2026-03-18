@@ -27,10 +27,6 @@
 }
 
 .staircase-container.tunnel-expanded.passenger-walk-tunnel {
-    left: -52em;
-}
-
-.chrome .staircase-container.tunnel-expanded.passenger-walk-tunnel {
     left: -42em;
 }
 
@@ -53,15 +49,11 @@
 .staircase.tunnel-expanded {
     position: relative;
     height: 4em;
-    width: 52em;
+    width: 42em;
 
     transform: translateX(5em) rotate(180deg);
     margin-right: 6em;
     flex-shrink: 0;
-}
-
-.chrome .staircase.tunnel-expanded {
-    width: 42em;
 }
 
 .staircase.tunnel-expanded>.steps {

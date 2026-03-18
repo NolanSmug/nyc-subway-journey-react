@@ -125,7 +125,7 @@ h2 {
 
 .train-car .line-svgs-container img.line-svg-image {
     border-radius: 0.2em;
-    padding: 0.43em;
+    padding: 0.15em;
     cursor: default;
     /* transform: none; */
 }

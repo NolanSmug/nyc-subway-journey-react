@@ -9,6 +9,10 @@
     left: 0;
 }
 
+#loading.hidden {
+    display: none;
+}
+
 .loading-inner {
     display: flex;
     flex-direction: column;

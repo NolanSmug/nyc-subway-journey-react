@@ -137,9 +137,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
                     contact the developer if any other issues occur.'
                     textDelaySecs={5}
                 />
-                {routeData.length === 0 && !loadingVisible && (
-                    <h3 style={{ alignSelf: 'center' }}>Failed to load optimal route. Please try again later.</h3>
-                )}
+                {routeData.length === 0 && !loadingVisible && <h3>Failed to load optimal route. Please try again later.</h3>}
                 {routeData.length > 0 && (
                     <div className='optimal-stations-horizontal'>
                         {routeData.map((station, index) => (

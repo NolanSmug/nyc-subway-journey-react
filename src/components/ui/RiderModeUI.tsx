@@ -157,7 +157,7 @@ function RiderModeUI({
                 />
             </div>
             <div className='destination-station-rider-mode' id='destination-station'>
-                <h2 style={{ textAlign: 'center' }}>Destination Station</h2>
+                <h2>Destination Station</h2>
                 <Station name={destinationStation.getName()} noLines isDestination>
                     {destinationStationChildren}
                 </Station>

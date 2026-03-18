@@ -56,7 +56,7 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
                     }
 
                     <div className='doors'>
-                        <Door key='door-ll' ref={isUptown ? uptownDoorRef : downtownDoorRef} isLeft hasPassenger={active} />
+                        <Door key='door-ll' ref={isUptown ? uptownDoorRef : downtownDoorRef} isLeft />
                         <Door key='door-lr' />
                     </div>
                     <div className='windows' id='train-info'>

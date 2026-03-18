@@ -91,8 +91,8 @@
 /* ----------------------------------------------------- */
 
 .line-svg-image {
-    height: 2rem;
-    width: 2rem;
+    height: 1.825rem;
+    width: 1.825rem;
     opacity: 1;
 
     --hover-scale: 1;
@@ -122,20 +122,9 @@
 }
 
 .small {
-    height: 1rem;
-    width: 1rem;
-}
-
-.chrome .small {
     height: 0.9rem;
     width: 0.9rem;
 }
-
-.chrome .line-svg-image {
-    transform: scale(0.9);
-    transform-origin: center;
-}
-
 
 /* tedious, but necessary to keep animation "smooth" */
 @keyframes jiggle-lines {

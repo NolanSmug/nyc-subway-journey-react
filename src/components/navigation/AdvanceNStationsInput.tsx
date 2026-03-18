@@ -49,7 +49,6 @@ function AdvanceNStationsInput() {
                 alt='Reset Input'
                 className={`reset-input-button ${hideResetButton ? 'hide-reset-button' : ''}`}
                 onMouseDown={() => setNumAdvanceStations(1)}
-                style={{ opacity: numAdvanceStations === 1 ? 0 : 1 }}
             />
         </div>
     )

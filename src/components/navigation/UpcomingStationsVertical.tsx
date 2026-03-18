@@ -24,7 +24,7 @@ function UpcomingStationsVertical() {
     }, [currentStationIndex, stations.length, currentStationID])
 
     if (!stations || stations.length === 0) {
-        return <div style={{ display: 'none' }} />
+        return null
     }
 
     return (

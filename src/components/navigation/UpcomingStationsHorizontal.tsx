@@ -31,7 +31,7 @@ function UpcomingStationsHorizontal() {
     }, [stations.length])
 
     if (!stations || stations.length === 0) {
-        return <div style={{ display: 'none' }} />
+        return null
     }
 
     return (

@@ -14,6 +14,10 @@
     transition: transform 0.1s ease-in-out;
 }
 
+h2 * {
+    font-size: 22px;
+}
+
 .train-direction:hover {
     cursor: pointer;
     --hover-scale: 1.05;
@@ -31,6 +35,7 @@
 
 .train-type {
     color: var(--text-color);
+    font-size: x-large;
     margin-bottom: 0.25em;
     white-space: nowrap;
     margin-top: 0.25em;

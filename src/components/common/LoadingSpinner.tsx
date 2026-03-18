@@ -22,7 +22,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ text, visible = false, 
     }, [visible, text, textDelaySecs])
 
     return (
-        <div id='loading' style={{ display: visible ? 'flex' : 'none' }}>
+        <div id='loading' className={`${!visible ? 'hidden' : ''}`}>
             <div className='loading-inner'>
                 <div className='loading-spinner' />
                 {text && showText && <p className={`loading-text ${showText ? 'visible' : ''}`}>{text}</p>}

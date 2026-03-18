@@ -15,7 +15,7 @@ const StationFragmentVertical: React.FC<StationFragmentProps> = ({ station, isCu
             <div className='station-frag-vertical-content'>
                 <div className={`station-frag-vertical-info`}>
                     <h2 className={`station-frag-vertical-name`}>{station.getName()}</h2>
-                    <div className='transfer-lines'>
+                    <div className='transfer-lines-vertical'>
                         <LineSVGs lines={transfers} small wide />
                     </div>
                 </div>

@@ -33,6 +33,12 @@
     max-width: 28ch;
 }
 
+.transfer-lines-vertical {
+    display: flex;
+    flex-shrink: 0;
+    transition: transform 0.2s ease-in-out, margin-left 0.2s ease-in-out;
+}
+
 .station-dot-container {
     position: relative;
     z-index: 0;

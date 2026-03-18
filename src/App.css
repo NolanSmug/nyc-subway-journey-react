@@ -124,8 +124,8 @@ body {
 .upcoming-stations-vertical {
     position: fixed;
     left: 80%;
-    transition: opacity 0.2s ease-in-out;
     z-index: 10;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .dark-mode-toggle-button {

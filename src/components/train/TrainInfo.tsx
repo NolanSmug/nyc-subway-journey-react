@@ -52,7 +52,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
                 </span>
             </h2>
             <div className='train-car-line line-svgs-container not-dim'>
-                <img src={lineSVG} alt={line} className='line-svg-image disabled rollsign-animate' style={{ padding: '0.15em' }} />
+                <img src={lineSVG} alt={line} className='line-svg-image disabled rollsign-animate' />
             </div>
             <h2 className='train-type not-dim'>
                 <span key={lineType} className={`${!isNullDirection ? 'rollsign-animate' : ''}`} id='type-rollsign'>

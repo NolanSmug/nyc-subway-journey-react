@@ -16,7 +16,7 @@ function SamePlatformTransfers({ lines, hidden }: SamePlatformTransfersProps) {
 
     return (
         <div className={`accordion-wrapper ${hidden ? 'hidden' : ''}`}>
-            <h3 style={{ margin: 0 }}>Same platform transfer</h3>
+            <h3>Same platform transfer</h3>
             <div className={`accordion-svgs-container`}>
                 <LineSVGs
                     lines={lines}

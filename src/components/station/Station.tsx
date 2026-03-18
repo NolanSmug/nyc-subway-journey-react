@@ -18,7 +18,7 @@ function Station({ name, header, noLines, hidden, across, isDestination, childre
         <div className={`station-wrapper ${hidden ? 'hidden' : ''} ${noLines && !isDestination ? 'no-lines' : ''}`}>
             {header}
             <div className={`station-container ${across ? 'across' : ''}`}>
-                <h2 className={`station-name ${shrinkName ? 'shrink-station-name' : undefined}`}>{name}</h2>
+                <h2 className={`station-name ${shrinkName ? 'shrink-station-name' : ''}`}>{name}</h2>
                 {children && children}
             </div>
         </div>
