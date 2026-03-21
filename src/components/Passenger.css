@@ -14,12 +14,6 @@
     z-index: 101;
 }
 
-.opera .passenger,
-.chrome .passenger {
-    height: 3.8em;
-    width: 4.1em;
-}
-
 .passenger:hover {
     cursor: pointer;
 }

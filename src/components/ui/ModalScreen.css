@@ -27,8 +27,9 @@
 
 .landing-screen-content p {
     font-size: 1.5em;
-    width: 32em;
     margin: 0.5em 0 0.5em 0;
+    width: 32em;
+    max-width: 100%;
 }
 
 @keyframes fadeIn {

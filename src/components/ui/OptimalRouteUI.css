@@ -46,7 +46,7 @@
     display: flex;
     align-items: center;
     gap: 0;
-    height: 20ch;
+    height: 12em;
     padding-left: 5em;
     /* reverse offset for the offset to center station names below their dots */
 }

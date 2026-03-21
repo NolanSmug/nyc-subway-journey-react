@@ -50,6 +50,7 @@ const Staircase = ({
                 setTunnelLinesVisible(true)
                 setIsTransferMode(lines.length > 1)
             }, PASSENGER_WALK_DURATIONS[PassengerAction.DOWN_STAIRCASE])
+
             return () => clearTimeout(timeout)
         } else {
             setTunnelLinesVisible(false)

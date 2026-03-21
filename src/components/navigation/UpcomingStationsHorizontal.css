@@ -4,6 +4,8 @@
     scroll-behavior: smooth;
     overflow-x: auto;
     overflow-y: hidden;
+    min-height: 10rem;
+    align-items: flex-end;
     display: flex;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -15,7 +17,7 @@
     display: flex;
     align-items: flex-end;
     align-self: flex-end;
-    height: 20em;
+    height: auto;
     column-gap: 1px;
     z-index: 1;
     margin-bottom: 1.5em;

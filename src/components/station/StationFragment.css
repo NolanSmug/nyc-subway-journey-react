@@ -2,9 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* keeps dot and label centered */
     overflow: visible;
-    /* don’t clip anything */
 }
 
 .station-frag-content {
@@ -18,6 +16,8 @@
     transform-origin: bottom;
     margin-bottom: 1.2em;
     opacity: 0.6;
+
+    transition: opacity 0.2s ease-in-out, margin-bottom 0.2s ease-in-out;
 }
 
 .current-station .station-frag-content {
@@ -28,6 +28,8 @@
     display: flex;
     align-items: center;
     gap: 0.15rem;
+    padding-top: 0.5rem;
+    padding-right: 2.5rem;
 }
 
 .station-frag-name {
@@ -36,18 +38,14 @@
     overflow: visible;
     max-width: none;
     /* overflow: visible; */
-    transition: transform 0.2s ease-in-out;
-    transform-origin: left center;
     padding-right: 1.2rem;
     scrollbar-width: none;
     /* Firefox */
     -ms-overflow-style: none;
-}
 
-.opera .station-frag-name,
-.chrome .station-frag-name {
-    font-size: 0.7rem;
-    padding-right: 1.2rem;
+    transform: scale(1);
+    transform-origin: left center;
+    transition: transform 0.2s ease-in-out;
 }
 
 .current-station .station-frag-name {
@@ -55,17 +53,6 @@
 }
 
 .current-station .transfer-lines {
-    margin-left: 0.2rem;
-    transform: translateX(0.4rem);
-}
-
-.opera .current-station .station-frag-name,
-.chrome .current-station .station-frag-name {
-    transform: scale(1.35);
-}
-
-.opera .current-station .transfer-lines,
-.chrome .current-station .transfer-lines {
     margin-left: 0.2rem;
     transform: translateX(0.4rem);
 }
@@ -81,7 +68,6 @@
     position: relative;
 
     transform: translate(-50%, 50%) scale(0.6);
-    border-width: 0.15rem;
     transition: transform 0.2s ease-in-out, border-width 0.2s ease-in-out;
 }
 
@@ -90,21 +76,13 @@
     border-width: 0.4rem;
 }
 
-.opera .current-station .station-dot,
-.chrome .current-station .station-dot {
-    transform: translate(-50%, 50%) scale(0.8);
-}
-
 .transfer-lines {
     display: flex;
     flex-shrink: 0;
+    margin-left: -1rem;
+    
+    transform: translateX(0);
     transition: transform 0.2s ease-in-out, margin-left 0.2s ease-in-out;
-    margin-left: -1rem;
-}
-
-.opera .transfer-lines,
-.chrome .transfer-lines {
-    margin-left: -1rem;
 }
 
 .station-frag-content.overflow .station-frag-name,

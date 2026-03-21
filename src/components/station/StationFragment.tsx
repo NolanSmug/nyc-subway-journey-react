@@ -13,8 +13,9 @@ export interface StationFragmentProps {
 }
 
 const StationFragment: React.FC<StationFragmentProps> = ({ station, isCurrent, transfers }) => {
-    const isOverflowing = station.getName().length > 17 && station.getName().length < 25
-    const extraOverflow = station.getName().length >= 25
+    const trueLength: number = station.getName().length + transfers.length
+    const isOverflowing = trueLength >= 17 && trueLength < 25
+    const extraOverflow = trueLength >= 25
 
     return (
         <div
