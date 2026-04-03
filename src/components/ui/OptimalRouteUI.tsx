@@ -5,7 +5,7 @@ import ActionButton from '../common/ActionButton'
 import LoadingSpinner from '../common/LoadingSpinner'
 import LineSVGs from '../common/LineSVGs'
 
-import { useGameStateContext } from '../../contexts/JourneyContext'
+import { useJourneyContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
 import { useGame } from '../../hooks/useGame'
@@ -67,7 +67,7 @@ interface OptimalRouteUIProps {
 
 function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteUIProps) {
     const { initializeGame } = useGame()
-    const journey = useGameStateContext((state) => state.journey)
+    const journey = useJourneyContext((state) => state.journey)
     const darkMode = useSettingsContext((state) => state.darkMode)
 
     const [routeData, setRouteData] = useState<StationData[]>([])

@@ -1,6 +1,6 @@
 import { useState, ReactNode, useMemo, useRef, RefObject } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
-import { useGameStateContext } from './JourneyContext'
+import { useJourneyContext } from './JourneyContext'
 import { useSettingsContext } from './SettingsContext'
 
 import useTrainActions from '../hooks/useTrainActions'
@@ -24,7 +24,7 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
 
     trainRef.current = train
 
-    const setJourney = useGameStateContext((state) => state.setJourney)
+    const setJourney = useJourneyContext((state) => state.setJourney)
     const actions = useTrainActions({
         trainRef,
         setTrain,

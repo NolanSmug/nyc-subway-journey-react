@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import { useTrainContext } from '../contexts/TrainContext'
-import { useGameStateContext } from '../contexts/JourneyContext'
+import { useJourneyContext } from '../contexts/JourneyContext'
 import { useUIContext } from '../contexts/UIContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 
@@ -20,7 +20,7 @@ import { Station as StationClass } from '../logic/StationManager'
 // }
 
 export function useGame() {
-    const setJourney = useGameStateContext((state) => state.setJourney)
+    const setJourney = useJourneyContext((state) => state.setJourney)
     const setTrain = useTrainContext((state) => state.setTrain)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
     const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)

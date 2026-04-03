@@ -14,7 +14,7 @@ import KeyShortcutMenu from './components/static/KeyShortcutMenuContent'
 
 import { useUIContext } from './contexts/UIContext'
 import { useTrainContext } from './contexts/TrainContext'
-import { useGameStateContext } from './contexts/JourneyContext'
+import { useJourneyContext } from './contexts/JourneyContext'
 import { useSettingsContext, GameMode, UpcomingStationsLayout } from './contexts/SettingsContext'
 
 import { useGame } from './hooks/useGame'
@@ -43,8 +43,8 @@ const keyShortcutButtons: string[] = [KEYBOARD_WHITE, KEYBOARD_BLACK]
 
 function Game() {
     const { initializeGame } = useGame()
-    const isWon = useGameStateContext((state) => state.journey.isWon)
-    const isDailyChallengeCompleted = useGameStateContext((state) => state.journey.isDailyChallengeCompleted)
+    const isWon = useJourneyContext((state) => state.journey.isWon)
+    const isDailyChallengeCompleted = useJourneyContext((state) => state.journey.isDailyChallengeCompleted)
     const isLineNull = useTrainContext((state) => state.train.isLineNull())
 
     const isTransferMode = useUIContext((state) => state.isTransferMode)

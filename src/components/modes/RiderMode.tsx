@@ -126,7 +126,7 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
             await boardTrain(downtownTrainDoorRef.current, Direction.DOWNTOWN)
         }
         changeDirection(Direction.DOWNTOWN)
-    }, [passengerState, changeDirection])
+    }, [passengerState, boardTrain, changeDirection])
 
     const handleDeboard = useCallback(async () => {
         await deboard()

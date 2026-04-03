@@ -17,17 +17,10 @@ export const JourneyProvider = ({ children }: { children: ReactNode }) => {
     return <JourneyContext.Provider value={value}>{children}</JourneyContext.Provider>
 }
 
-// export const useGameStateContext = () => {
-//     const context = useContext(GameStateContext)
-//     if (context === undefined) {
-//         throw new Error('useGameStateContext must be used within a GameStateProvider')
-//     }
-//     return context
-// }
-export const useGameStateContext = <T,>(selector: (state: JourneyContextProps) => T): T => {
+export const useJourneyContext = <T,>(selector: (state: JourneyContextProps) => T): T => {
     const context = useContextSelector(JourneyContext, (state) => {
         if (state === undefined) {
-            throw new Error('useGameStateContext must be used within a GameStateProvider')
+            throw new Error('useJourneyContext must be used within a JourneyProvider')
         }
         return selector(state)
     })

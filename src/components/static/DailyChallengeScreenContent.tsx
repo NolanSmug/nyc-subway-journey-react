@@ -4,7 +4,7 @@ import Header from '../common/Header'
 import Station from '../station/Station'
 import LineSVGs from '../common/LineSVGs'
 
-import { useGameStateContext } from '../../contexts/JourneyContext'
+import { useJourneyContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
 import { Station as StationObject } from '../../logic/StationManager'
@@ -14,9 +14,9 @@ import R_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
 
 const DailyChallengeScreenContent = () => {
     const darkMode = useSettingsContext((state) => state.darkMode)
-    const startingStation: StationObject = useGameStateContext((state) => state.journey.startingStation)
-    const destinationStation: StationObject = useGameStateContext((state) => state.journey.destinationStation)
-    const hasCompletedToday: boolean = useGameStateContext((state) => state.journey.isDailyChallengeCompleted)
+    const startingStation: StationObject = useJourneyContext((state) => state.journey.startingStation)
+    const destinationStation: StationObject = useJourneyContext((state) => state.journey.destinationStation)
+    const hasCompletedToday: boolean = useJourneyContext((state) => state.journey.isDailyChallengeCompleted)
 
     const TODAY: Date = new Date()
 

@@ -9,7 +9,7 @@ import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
 import ActionButton from '../common/ActionButton'
 
 import { useTrainContext } from '../../contexts/TrainContext'
-import { useGameStateContext } from '../../contexts/JourneyContext'
+import { useJourneyContext } from '../../contexts/JourneyContext'
 
 import { PassengerState } from '../../hooks/usePassengerAnimations'
 import { usePlatformTransferGroups } from '../../hooks/usePlatformTransferGroups'
@@ -69,7 +69,7 @@ function RiderModeUI({
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const currentLine: LineName = useTrainContext((state) => state.train.getLine())
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
-    const destinationStation: StationObject = useGameStateContext((state) => state.journey.destinationStation)
+    const destinationStation: StationObject = useJourneyContext((state) => state.journey.destinationStation)
 
     const { otherPlatformGroups, samePlatformLines, hasSamePlatformTransfers, hasOtherPlatformTransfers, transfers } =
         usePlatformTransferGroups({ currentStation, currentLine })

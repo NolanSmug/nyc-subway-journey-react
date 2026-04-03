@@ -103,7 +103,7 @@
 }
 
 .line-svg-image:active {
-    --active-scale: 0.90;
+    --active-scale: 0.85;
 }
 
 .line-svg-image:hover {
