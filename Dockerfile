@@ -19,6 +19,8 @@ RUN yarn build
 
 FROM nginx:alpine
 
+RUN apk update && apk upgrade --no-cache
+
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
 # start the app
