@@ -24,7 +24,7 @@
     background: var(--bg-color);
     padding: 1em;
     border-radius: 8px;
-    border: 1px solid var(--bg-color-3);
+    border: 1px solid var(--text-color);
     z-index: 10;
     opacity: 0;
 }
@@ -60,7 +60,7 @@
     /* Triangle */
     border-left: 0.6em solid transparent;
     border-right: 0.6em solid transparent;
-    border-top: 0.6em solid var(--bg-color-3);
+    border-top: 0.6em solid var(--text-color);
 }
 
 .below .popup-arrow {

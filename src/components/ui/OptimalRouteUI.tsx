@@ -5,7 +5,7 @@ import ActionButton from '../common/ActionButton'
 import LoadingSpinner from '../common/LoadingSpinner'
 import LineSVGs from '../common/LineSVGs'
 
-import { useGameStateContext } from '../../contexts/GameStateContext'
+import { useGameStateContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
 import { useGame } from '../../hooks/useGame'
@@ -66,8 +66,8 @@ interface OptimalRouteUIProps {
 }
 
 function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteUIProps) {
-    const { gameState } = useGameStateContext()
     const { initializeGame } = useGame()
+    const journey = useGameStateContext((state) => state.journey)
     const darkMode = useSettingsContext((state) => state.darkMode)
 
     const [routeData, setRouteData] = useState<StationData[]>([])
@@ -76,7 +76,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
     const [isRouteRequested, setIsRouteRequested] = useState(false)
 
     useEffect(() => {
-        if (!gameState.isWon || !isRouteRequested) return
+        if (!journey.isWon || !isRouteRequested) return
 
         const controller = new AbortController()
 
@@ -84,7 +84,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
             setLoadingVisible(true)
 
             try {
-                const [startId, destId] = gameState.getStartDestStationIDs()
+                const [startId, destId] = journey.getStartDestStationIDs()
                 const data = await fetchShortestPath(startId, destId, controller.signal)
                 setRouteData(data)
             } catch (e: unknown) {
@@ -97,7 +97,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
 
         loadRoute()
         return () => controller.abort()
-    }, [gameState, isRouteRequested])
+    }, [journey, isRouteRequested])
 
     useEffect(() => {
         if (routeData.length > 0 && transferIndexes.length === 0) {
@@ -109,8 +109,8 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
     if (!isRouteRequested) {
         return (
             <GameOverUI
-                destinationStationName={gameState.destinationStation.getName()}
-                destinationStationTransfers={gameState.destinationStation.getTransfers()}
+                destinationStationName={journey.destinationStation.getName()}
+                destinationStationTransfers={journey.destinationStation.getTransfers()}
                 darkMode={darkMode}
                 setIsRouteRequested={setIsRouteRequested}
                 initializeGame={initializeGame}

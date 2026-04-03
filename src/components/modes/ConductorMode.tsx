@@ -3,7 +3,7 @@ import ConductorModeUI from '../ui/ConductorModeUI'
 
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
-import { useGameStateContext } from '../../contexts/GameStateContext'
+import { useGameStateContext } from '../../contexts/JourneyContext'
 import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { useGame } from '../../hooks/useGame'
@@ -13,7 +13,7 @@ import { Station as StationObject } from '../../logic/StationManager'
 import { Direction } from '../../logic/LineManager'
 
 function ConductorMode() {
-    const { gameState } = useGameStateContext()
+    const journey = useGameStateContext((state) => state.journey)
     const { initializeGame } = useGame()
 
     const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
@@ -87,7 +87,7 @@ function ConductorMode() {
 
     return (
         <ConductorModeUI
-            gameState={gameState}
+            journey={journey}
             currentStation={currentStation}
             direction={currentDirection}
             darkMode={darkMode}

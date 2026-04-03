@@ -1,5 +1,5 @@
 import './LoadingSpinner.css'
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 interface LoadingSpinnerProps {
     visible?: boolean
@@ -7,7 +7,7 @@ interface LoadingSpinnerProps {
     textDelaySecs?: number
 }
 
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ text, visible = false, textDelaySecs = 0 }) => {
+const LoadingSpinner = ({ text, visible = false, textDelaySecs = 0 }: LoadingSpinnerProps) => {
     const [showText, setShowText] = useState(false)
 
     useEffect(() => {

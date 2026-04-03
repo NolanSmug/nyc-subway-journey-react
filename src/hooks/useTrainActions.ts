@@ -1,59 +1,55 @@
-import { MutableRefObject, useCallback, useMemo } from 'react'
+import { RefObject, useCallback, useMemo } from 'react'
 
-import { GameState } from '../logic/GameState'
+import { Journey } from '../logic/Journey'
 import { Train } from '../logic/TrainManager'
 import { Direction, LineName } from '../logic/LineManager'
 import { DailyChallenge } from '../logic/DailyChallenge'
+import { Station } from '../logic/StationManager'
 
 type UseTrainActionsParams = {
-    trainRef: MutableRefObject<Train>
+    trainRef: RefObject<Train>
     setTrain: React.Dispatch<React.SetStateAction<Train>>
-    setGameState: React.Dispatch<React.SetStateAction<GameState>>
+    setJourney: React.Dispatch<React.SetStateAction<Journey>>
     isDailyChallenge?: boolean
 }
 
-export default function useTrainActions({ trainRef, setTrain, setGameState, isDailyChallenge }: UseTrainActionsParams) {
-    const checkForWin = useCallback(
-        (train: Train) => {
-            setGameState((prevGameState) => {
-                if (!prevGameState.checkWin(train.getCurrentStation())) {
-                    return prevGameState
-                }
+export default function useTrainActions({ trainRef, setTrain, setJourney, isDailyChallenge }: UseTrainActionsParams) {
+    const updateGameProgress = useCallback(
+        (prevState: Journey, currentStation: Station) => {
+            // Clone the state to keep it immutable
+            const nextState = Object.assign(new Journey(), prevState)
 
+            // Check if the current move resulted in a win
+            if (nextState.checkWin(currentStation)) {
                 if (isDailyChallenge) {
-                    DailyChallenge.saveScore(prevGameState.playerScore)
+                    DailyChallenge.saveScore(nextState.playerScore)
                 }
+                nextState.isWon = true
+                nextState.isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
+            }
 
-                return Object.assign(new GameState(), {
-                    ...prevGameState,
-                    isWon: true,
-                    isDailyChallengeCompleted: DailyChallenge.isAlreadyCompleted(),
-                })
-            })
+            return nextState
         },
-        [setGameState, isDailyChallenge]
+        [isDailyChallenge]
     )
 
     const advanceStation = useCallback(
         (numAdvanceStations: number = 1) => {
             const currentTrain = trainRef.current
-            if (!currentTrain) throw new Error('attempted to advanceStation - Train object is null')
+            if (!currentTrain) throw new Error('Train is null')
 
             const nextTrain = currentTrain.clone()
-
-            const isAdvanced: boolean = nextTrain.advanceStation(numAdvanceStations)
-            if (!isAdvanced) return
-
-            setGameState((prevGameState) => {
-                prevGameState.playerScore.incrementAdvanceCount(numAdvanceStations)
-                return Object.assign(new GameState(), prevGameState)
-            })
+            if (!nextTrain.advanceStation(numAdvanceStations)) return
 
             setTrain(nextTrain)
             trainRef.current = nextTrain
-            checkForWin(nextTrain)
+
+            setJourney((prev) => {
+                prev.playerScore.incrementAdvanceCount(numAdvanceStations)
+                return updateGameProgress(prev, nextTrain.getCurrentStation())
+            })
         },
-        [trainRef, setTrain, setGameState, checkForWin]
+        [trainRef, setTrain, setJourney, updateGameProgress]
     )
 
     const transfer = useCallback(
@@ -68,16 +64,16 @@ export default function useTrainActions({ trainRef, setTrain, setGameState, isDa
             const isValidTransfer: boolean = await nextTrain.transferToLine(selectedLine, currentStation)
 
             if (selectedLine && isValidTransfer) {
-                setGameState((prevGameState) => {
-                    prevGameState.playerScore.incrementTransferCount()
-                    return Object.assign(new GameState(), prevGameState)
-                })
                 setTrain(nextTrain)
                 trainRef.current = nextTrain
-                checkForWin(nextTrain)
+
+                setJourney((prev) => {
+                    prev.playerScore.incrementTransferCount()
+                    return updateGameProgress(prev, nextTrain.getCurrentStation())
+                })
             }
         },
-        [trainRef, setTrain, setGameState, checkForWin]
+        [trainRef, setTrain, setJourney, updateGameProgress]
     )
 
     const changeDirection = useCallback(

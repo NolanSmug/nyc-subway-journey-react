@@ -9,7 +9,7 @@ import Header from '../common/Header'
 import AdvanceNStationsInput from '../navigation/AdvanceNStationsInput'
 
 import { Station as StationObject } from '../../logic/StationManager'
-import { GameState } from '../../logic/GameState'
+import { Journey } from '../../logic/Journey'
 import { Direction } from '../../logic/LineManager'
 
 import R_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
@@ -28,7 +28,7 @@ interface ConductorModeUIProps {
     handleChangeDirectionClick: () => void
     handleResetClick: () => void
 
-    gameState: GameState
+    journey: Journey
     currentStation: StationObject
     direction: Direction
     darkMode: boolean
@@ -37,7 +37,7 @@ interface ConductorModeUIProps {
 }
 
 function ConductorModeUI({
-    gameState,
+    journey,
     currentStation,
     direction,
     darkMode,
@@ -59,12 +59,12 @@ function ConductorModeUI({
 
     return (
         <>
-            <div className={`${gameState.isWon ? 'win-state' : ''}`}>
+            <div className={`${journey.isWon ? 'win-state' : ''}`}>
                 <TrainCar />
             </div>
 
             <div className='stations-container'>
-                <div className={`station-box ${gameState.isWon ? 'win-state' : ''}`} id='current-station'>
+                <div className={`station-box ${journey.isWon ? 'win-state' : ''}`} id='current-station'>
                     <Header text='Current station' />
                     <div className='station-item'>
                         <Station name={currentStation.getName()}>
@@ -93,11 +93,11 @@ function ConductorModeUI({
                     </div>
                 </div>
 
-                <div className={`station-box ${gameState.isWon ? 'win-state' : ''}`} id='destination-station'>
+                <div className={`station-box ${journey.isWon ? 'win-state' : ''}`} id='destination-station'>
                     <Header text='Destination station' />
                     <div className='station-item'>
-                        <Station name={gameState.destinationStation.getName()}>
-                            <LineSVGs lines={gameState.destinationStation.getTransfers()} disabled />
+                        <Station name={journey.destinationStation.getName()}>
+                            <LineSVGs lines={journey.destinationStation.getTransfers()} disabled />
                         </Station>
                     </div>
                     <div className='action-buttons-container' id='destination-station'>

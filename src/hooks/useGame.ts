@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import { useTrainContext } from '../contexts/TrainContext'
-import { useGameStateContext } from '../contexts/GameStateContext'
+import { useGameStateContext } from '../contexts/JourneyContext'
 import { useUIContext } from '../contexts/UIContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 
@@ -20,7 +20,7 @@ import { Station as StationClass } from '../logic/StationManager'
 // }
 
 export function useGame() {
-    const { setGameState } = useGameStateContext()
+    const setJourney = useGameStateContext((state) => state.setJourney)
     const setTrain = useTrainContext((state) => state.setTrain)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
     const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
@@ -33,19 +33,19 @@ export function useGame() {
             await newGame.runGame(isDailyChallenge)
 
             setTrain(newGame.train)
-            setGameState(newGame.gameState)
+            setJourney(newGame.journey)
             setIsTransferMode(false)
 
             // if (isDailyChallenge) {
             //     const score = await getDailyScoreSafe(newGame)
             //     if (score !== null) {
-            //         setGameState((prev) => Object.assign(new GameState(), { ...prev, optimalScore: score }))
+            //         setJourney((prev) => Object.assign(new GameState(), { ...prev, optimalScore: score }))
             //     }
             // }
         } catch (error) {
             console.error('Error initializing game (useGame()):', error)
         }
-    }, [isDailyChallenge, setTrain, setGameState, setIsTransferMode])
+    }, [isDailyChallenge, setTrain, setJourney, setIsTransferMode])
 
     return { initializeGame }
 }

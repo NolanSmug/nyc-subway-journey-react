@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import SettingsButton from './SettingsButton'
 
 import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
@@ -72,4 +72,4 @@ const SettingsMenu = () => {
     )
 }
 
-export default React.memo(SettingsMenu)
+export default memo(SettingsMenu)

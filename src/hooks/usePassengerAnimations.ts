@@ -43,14 +43,13 @@ export function usePassengerAnimations(platformRef: RefObject<HTMLDivElement | n
         let startX = platform.width / 2
         let startY = platform.height / 2
 
-        // landing modal is active
         if (isModalOpen) {
             const turnstile: HTMLDivElement | null = document.querySelector('.turnstile-arms-container')
             if (turnstile) {
-                const turnstilePos = getRelativePosition(turnstile)
-                if (turnstilePos) {
-                    startX = turnstilePos.x - 250
-                    startY = turnstilePos.y - 20
+                const pos = getRelativePosition(turnstile)
+                if (pos) {
+                    startX = pos.x - 250
+                    startY = pos.y - 20
                 }
             }
         }

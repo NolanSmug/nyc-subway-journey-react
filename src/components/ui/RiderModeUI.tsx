@@ -1,5 +1,5 @@
 import './RiderModeUI.css'
-import React, { useMemo } from 'react'
+import { useMemo, memo, RefObject, ReactNode } from 'react'
 
 import TrainCarStatic from '../train/TrainCarStatic'
 import Station from '../station/Station'
@@ -9,7 +9,7 @@ import SamePlatformTransfers from '../navigation/SamePlatformTransfers'
 import ActionButton from '../common/ActionButton'
 
 import { useTrainContext } from '../../contexts/TrainContext'
-import { useGameStateContext } from '../../contexts/GameStateContext'
+import { useGameStateContext } from '../../contexts/JourneyContext'
 
 import { PassengerState } from '../../hooks/usePassengerAnimations'
 import { usePlatformTransferGroups } from '../../hooks/usePlatformTransferGroups'
@@ -30,13 +30,13 @@ interface RiderModeUIProps {
     onStaircaseDeselect: () => void
     onTransferSelect: (line: LineName) => void
 
-    platformRef: React.RefObject<HTMLDivElement | null>
-    uptownTrainDoorRef: React.RefObject<HTMLDivElement | null>
-    downtownTrainDoorRef: React.RefObject<HTMLDivElement | null>
-    staircaseRefs: React.RefObject<(HTMLDivElement | null)[]>
+    platformRef: RefObject<HTMLDivElement | null>
+    uptownTrainDoorRef: RefObject<HTMLDivElement | null>
+    downtownTrainDoorRef: RefObject<HTMLDivElement | null>
+    staircaseRefs: RefObject<(HTMLDivElement | null)[]>
 
     passengerState: PassengerState
-    children: React.ReactNode // <Passenger>
+    children: ReactNode // <Passenger>
 
     darkMode: boolean
     inTransferTunnel: boolean
@@ -69,7 +69,7 @@ function RiderModeUI({
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const currentLine: LineName = useTrainContext((state) => state.train.getLine())
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
-    const destinationStation: StationObject = useGameStateContext().gameState.destinationStation
+    const destinationStation: StationObject = useGameStateContext((state) => state.journey.destinationStation)
 
     const { otherPlatformGroups, samePlatformLines, hasSamePlatformTransfers, hasOtherPlatformTransfers, transfers } =
         usePlatformTransferGroups({ currentStation, currentLine })
@@ -167,4 +167,4 @@ function RiderModeUI({
     )
 }
 
-export default React.memo(RiderModeUI)
+export default memo(RiderModeUI)

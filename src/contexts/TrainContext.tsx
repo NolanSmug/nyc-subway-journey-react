@@ -1,10 +1,10 @@
-import React, { useState, ReactNode, useMemo, useRef } from 'react'
+import { useState, ReactNode, useMemo, useRef, RefObject } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
-import { useGameStateContext } from './GameStateContext'
+import { useGameStateContext } from './JourneyContext'
+import { useSettingsContext } from './SettingsContext'
 
 import useTrainActions from '../hooks/useTrainActions'
 import { Train } from '../logic/TrainManager'
-import { useSettingsContext } from './SettingsContext'
 
 type TrainActions = ReturnType<typeof useTrainActions>
 
@@ -20,16 +20,15 @@ export const TrainProvider = ({ children }: { children: ReactNode }) => {
     const [train, setTrain] = useState<Train>(() => new Train())
     const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
 
-    const trainRef: React.RefObject<Train> = useRef(train)
+    const trainRef: RefObject<Train> = useRef(train)
 
     trainRef.current = train
 
-    const { setGameState } = useGameStateContext()
-
+    const setJourney = useGameStateContext((state) => state.setJourney)
     const actions = useTrainActions({
         trainRef,
         setTrain,
-        setGameState,
+        setJourney,
         isDailyChallenge,
     })
 

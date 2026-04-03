@@ -1,5 +1,5 @@
 import './ActionButton.css'
-import React from 'react'
+import { memo, ReactNode } from 'react'
 
 interface ActionButtonProps {
     imageSrc?: string
@@ -11,7 +11,7 @@ interface ActionButtonProps {
     small?: boolean
     disabled?: boolean
     pulse?: boolean
-    additionalInput?: React.ReactNode
+    additionalInput?: ReactNode
 }
 
 function ActionButton({
@@ -63,4 +63,4 @@ function ActionButton({
     )
 }
 
-export default React.memo(ActionButton)
+export default memo(ActionButton)

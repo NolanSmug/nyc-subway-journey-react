@@ -1,5 +1,5 @@
 import './TrainCarStatic.css'
-import React, { useMemo } from 'react'
+import { useMemo, RefObject, memo } from 'react'
 
 import TrainInfo from './TrainInfo'
 import Door from './Door'
@@ -17,8 +17,8 @@ interface TrainCarStaticProps {
     direction: Direction
     active: boolean
     hidden?: boolean
-    uptownDoorRef?: React.RefObject<HTMLDivElement | null>
-    downtownDoorRef?: React.RefObject<HTMLDivElement | null>
+    uptownDoorRef?: RefObject<HTMLDivElement | null>
+    downtownDoorRef?: RefObject<HTMLDivElement | null>
 }
 
 function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoorRef }: TrainCarStaticProps) {
@@ -88,4 +88,4 @@ function TrainCarStatic({ direction, active, hidden, uptownDoorRef, downtownDoor
     )
 }
 
-export default React.memo(TrainCarStatic)
+export default memo(TrainCarStatic)

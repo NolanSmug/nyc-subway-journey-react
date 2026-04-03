@@ -1,5 +1,5 @@
 import RiderModeUI from '../ui/RiderModeUI'
-import { useCallback, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import Passenger from '../Passenger'
 
@@ -24,7 +24,17 @@ interface RiderModeProps {
 
 const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
     const platformRef = useRef<HTMLDivElement>(null)
-    const passenger = usePassengerAnimations(platformRef)
+
+    const {
+        ref: passengerDOMRef,
+        passengerState,
+        boardTrain,
+        deboard,
+        transferDownStairs,
+        transferUpStairs,
+        turnstileSwipe,
+        resetState: resetPassengerState,
+    } = usePassengerAnimations(platformRef)
 
     const { initializeGame } = useGame()
     const { advanceStation, transfer, changeDirection } = useTrainContext((state) => state.actions)
@@ -56,7 +66,7 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
         passengerRef,
         () => ({
             gameLandingTurnstileSwipe: async () => {
-                await passenger.turnstileSwipe()
+                await turnstileSwipe()
             },
         }),
         // eslint-disable-next-line
@@ -64,7 +74,7 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
     )
 
     useLayoutEffect(() => {
-        passenger.resetState()
+        resetPassengerState()
         // eslint-disable-next-line
     }, [])
 
@@ -77,9 +87,9 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
     const resetGame = useCallback(() => {
         initializeGame()
 
-        passenger.resetState()
+        resetPassengerState()
         resetStates()
-    }, [passenger, resetStates, initializeGame])
+    }, [resetPassengerState, resetStates, initializeGame])
 
     const animatePassengerDownStairs = useCallback(
         async (index: number) => {
@@ -90,38 +100,38 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
                 return
             }
 
-            await passenger.transferDownStairs(targetStaircase)
+            await transferDownStairs(targetStaircase)
         },
-        [passenger]
+        [transferDownStairs]
     )
 
     const animatePassengerUpStairs = useCallback(async () => {
         setIsPassengerTransferring(true)
-        await passenger.transferUpStairs()
-    }, [passenger])
+        await transferUpStairs()
+    }, [transferUpStairs])
 
     const handleBoardUptown = useCallback(async () => {
-        if (passenger.passengerState === PassengerState.UPTOWN_TRAIN) return
+        if (passengerState === PassengerState.UPTOWN_TRAIN) return
 
         if (uptownTrainDoorRef.current) {
-            await passenger.boardTrain(uptownTrainDoorRef.current, Direction.UPTOWN)
+            await boardTrain(uptownTrainDoorRef.current, Direction.UPTOWN)
         }
         changeDirection(Direction.UPTOWN)
-    }, [passenger, changeDirection])
+    }, [passengerState, boardTrain, changeDirection])
 
     const handleBoardDowntown = useCallback(async () => {
-        if (passenger.passengerState === PassengerState.DOWNTOWN_TRAIN) return
+        if (passengerState === PassengerState.DOWNTOWN_TRAIN) return
 
         if (downtownTrainDoorRef.current) {
-            await passenger.boardTrain(downtownTrainDoorRef.current, Direction.DOWNTOWN)
+            await boardTrain(downtownTrainDoorRef.current, Direction.DOWNTOWN)
         }
         changeDirection(Direction.DOWNTOWN)
-    }, [passenger, changeDirection])
+    }, [passengerState, changeDirection])
 
     const handleDeboard = useCallback(async () => {
-        await passenger.deboard()
+        await deboard()
         changeDirection(Direction.NULL_DIRECTION)
-    }, [passenger, changeDirection])
+    }, [deboard, changeDirection])
 
     const handleTransferSelect = useCallback(
         async (line: LineName) => {
@@ -171,8 +181,13 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
             r: () => resetGame(),
             Escape: () => inTransferTunnel && handleStaircaseDeselect(),
         },
-        enabled: passenger.passengerState !== PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true', // don't allow shortcuts when passenger is in motion (except in dev env)
+        enabled: passengerState !== PassengerState.WALKING || process.env.REACT_APP_USE_DEV_API === 'true', // don't allow shortcuts when passenger is in motion (except in dev env)
     })
+
+    const passengerComponent = useMemo(
+        () => <Passenger ref={passengerDOMRef} passengerState={passengerState} />,
+        [passengerDOMRef, passengerState]
+    )
 
     return (
         <RiderModeUI
@@ -187,13 +202,13 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
             downtownTrainDoorRef={downtownTrainDoorRef}
             platformRef={platformRef}
             staircaseRefs={staircaseRefs}
-            passengerState={passenger.passengerState}
+            passengerState={passengerState}
             darkMode={darkMode}
             inTransferTunnel={inTransferTunnel}
             isPassengerTransferring={isPassengerTransferring}
             selectedGroupIndex={selectedGroupIndex}
         >
-            <Passenger ref={passenger.ref} passengerState={passenger.passengerState} />
+            {passengerComponent}
         </RiderModeUI>
     )
 }

@@ -1,5 +1,5 @@
 import './UpcomingStationsVertical.css'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef, memo } from 'react'
 
 import StationFragmentVertical from '../station/StationFragmentVertical'
 import { scrollToCurrentStation } from './UpcomingStationsHorizontal'
@@ -43,4 +43,4 @@ function UpcomingStationsVertical() {
     )
 }
 
-export default React.memo(UpcomingStationsVertical)
+export default memo(UpcomingStationsVertical)

@@ -1,6 +1,6 @@
 import './WelcomeScreenContent.css'
 import { useTrainContext } from '../../contexts/TrainContext'
-import { useGameStateContext } from '../../contexts/GameStateContext'
+import { useGameStateContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 import LineSVGs from '../common/LineSVGs'
 import Station from '../station/Station'
@@ -12,7 +12,7 @@ import R_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
 const WelcomeScreenContent = () => {
     const currentStation = useTrainContext((state) => state.train.getCurrentStation())
     const currentLine = useTrainContext((state) => state.train.getLine())
-    const destinationStation = useGameStateContext().gameState.destinationStation
+    const destinationStation = useGameStateContext((state) => state.journey.destinationStation)
     const darkMode = useSettingsContext((state) => state.darkMode)
 
     return (

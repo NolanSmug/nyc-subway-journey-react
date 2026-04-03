@@ -1,5 +1,5 @@
 import './SamePlatformTransfers.css'
-import React from 'react'
+import { memo } from 'react'
 
 import LineSVGs from '../common/LineSVGs'
 
@@ -30,4 +30,4 @@ function SamePlatformTransfers({ lines, hidden }: SamePlatformTransfersProps) {
     )
 }
 
-export default React.memo(SamePlatformTransfers)
+export default memo(SamePlatformTransfers)

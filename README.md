@@ -123,24 +123,24 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 ## Gameplay
 
 1. **Navigating the subway:**
-   - **Rider Mode:** Interact with the environment (doors, stairs) to move your character.
-   - **Conductor Mode:** Use the UI buttons to control the train directly.
+   - **[Rider mode](#rider-mode):** Interact with the environment (doors, stairs) to move your character.
+   - **[Conductor mode](#conductor-mode):** Use the UI buttons to control the train directly.
 
    **Actions:**
      -  `Advance station`: Advance 1 station (see [conductor mode](#conductor-mode) to control this value).
-     -  `Change direction`: Reverses your current direction. Each line has specific uptown and downtown labels.
+     -  `Change direction`: Reverses your current direction. Each line has specific UPTOWN and DOWNTOWN labels.
      -  `Transfer lines`: Click on a subway line at your **current station** to switch to that line and continue your journey (see [rider mode](#rider-mode) for specific transfer mechanics).
         > **Note:** Using this button is optional. You can directly click on a subway line icon at the current station to switch to it as well.
      - `Refresh` – Refreshes the current game with new starting and destination stations.  
 <br>
 
 2. **Goal:**
-   - Successfully navigate from your starting station to your destination station by advancing through stations and transferring train lines as needed. Be mindful of your `current direction` throughout as well.
+   - Successfully navigate from your **starting station** to your **destination station** by advancing through stations and transferring train lines as needed. Be mindful of your *current direction* throughout as well.
   
 ### Configuration settings
 - **`Theme`** – Toggle light/dark mode
 - **`Upcoming stations`** – Toggle upcoming stations visibility
-- **`Upcoming stations layout`** – Toggle the upcoming stations view between **vertical** or **horizontal**
+- **`Upcoming stations layout`** – Toggle the upcoming stations view between *vertical* or *horizontal*
 - **`Conductor mode`** – Enable conductor mode (default is rider mode)
 
 ### Keyboard shortcuts
@@ -171,7 +171,7 @@ Rider mode is the default game mode and is the recommended mode for those who ar
 
 You are riding from the *passenger's perspective*. Watch your character "walk" around the screen as you perform actions. 
 
-- **Boarding:** Click the `board train` button next to the respective train you'd like to board (`UPTOWN` or `DOWNTOWN`).
+- **Boarding:** Click the `board train` button next to the respective train you'd like to board (UPTOWN or DOWNTOWN`).
 - **Riding:** Once on board, use the `Advance` button to travel to the next station.
 - **Transferring:** 
     1. Click `transfer` to step back onto the platform.
@@ -193,7 +193,7 @@ Conductor mode is for players who want to bypass the animations and play at a fa
 
 # Optimal route
 
-Upon winning the game, you can choose to reveal the **Optimal route**. This feature calculates the *mathematically shortest path* (fewest stops) from your starting station to the destination station.
+Upon winning the game, you can choose to reveal the *optimal route*. This feature calculates the *mathematically shortest path* (fewest stops) from your starting station to the destination station.
 
 <img src="./src/assets/images/screenshot-optimal-route.png" alt="optimal route screenshot" width="100%">
 
@@ -213,7 +213,7 @@ A competitive mode where every user globally receives the **exact same** route f
 - **Deterministic RNG:** Uses a custom implementation of a Linear Congruential Generator (LCG).
 - **Seeding:** The RNG is seeded by the current date string + a build-time salt (injected via CI/CD), ensuring the route is unpredictable to users, but consistent across all clients.
 - **Scoring:** Your advance and transfer counts are tracked locally and compared against the daily optimal path.  
-  * *Global Leaderboard feature coming soon*
+  * *Global Leaderboard feature coming soon (scores currently being stored in `localStorage`)*
 - **No upcoming stations view**
 
 <br>

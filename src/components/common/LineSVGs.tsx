@@ -1,5 +1,5 @@
 import './LineSVGs.css'
-import React from 'react'
+import { memo } from 'react'
 
 import { useUIContext } from '../../contexts/UIContext'
 
@@ -20,7 +20,7 @@ interface LineSVGsProps {
     onTransferSelect?: (index: number) => void | undefined
 }
 
-const LineSVGs = React.memo<LineSVGsProps>(
+const LineSVGs = memo<LineSVGsProps>(
     ({ lines, small, wide, vertical, grouped, disabled, numLines, notDim, focusCurrentLine, className, onTransferSelect }) => {
         const isTransferMode = useUIContext((state) => state.isTransferMode)
 

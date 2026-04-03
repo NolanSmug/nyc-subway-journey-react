@@ -1,5 +1,5 @@
 import './Station.css'
-import React, { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 
 interface StationProps {
     name: string
@@ -25,4 +25,4 @@ function Station({ name, header, noLines, hidden, across, isDestination, childre
     )
 }
 
-export default React.memo(Station)
+export default memo(Station)

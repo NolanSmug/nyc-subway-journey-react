@@ -1,5 +1,5 @@
 import './Staircase.css'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, Ref, memo } from 'react'
 
 import LineSVGs from '../common/LineSVGs'
 import ActionButton from '../common/ActionButton'
@@ -15,7 +15,7 @@ import RIGHT_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
 import RIGHT_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
 
 interface StaircaseProps {
-    ref: React.Ref<HTMLDivElement>
+    ref: Ref<HTMLDivElement>
     lines: LineName[]
 
     isTunnelLayout: boolean
@@ -101,4 +101,4 @@ const Staircase = ({
     )
 }
 
-export default React.memo(Staircase)
+export default memo(Staircase)

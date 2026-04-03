@@ -3,7 +3,7 @@ import { Score } from './Score'
 import { Station } from './StationManager'
 import { getStationsForLine } from './SubwayMap'
 
-export class GameState {
+export class Journey {
     startingLine: LineName
     startingStation: Station
     destinationStation: Station
@@ -36,7 +36,7 @@ export class GameState {
         return this.isWon
     }
 
-    public async resetGameState(rng: () => number = Math.random): Promise<void> {
+    public async resetJourney(rng: () => number = Math.random): Promise<void> {
         this.optimalScore = null
 
         this.startingLine = getRandomLine(rng)

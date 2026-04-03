@@ -1,22 +1,22 @@
 import { DailyChallenge } from './DailyChallenge'
 import { Direction } from './LineManager'
-import { GameState } from './GameState'
+import { Journey } from './Journey'
 import { Score } from './Score'
 import { SeedRNG } from './SeedRNG'
 import { Train } from './TrainManager'
 import { getStationsForLine } from './SubwayMap'
 
 export class Game {
-    public gameState: GameState
+    public journey: Journey
     public train: Train
 
     constructor() {
-        this.gameState = new GameState()
+        this.journey = new Journey()
         this.train = new Train()
     }
 
     public async runGame(isDailyChallenge: boolean): Promise<void> {
-        this.gameState.isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
+        this.journey.isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
 
         const rng = isDailyChallenge
             ? (() => {
@@ -25,16 +25,16 @@ export class Game {
               })()
             : Math.random
 
-        await this.gameState.resetGameState(rng)
+        await this.journey.resetJourney(rng)
 
         this.train.setDirection(Direction.NULL_DIRECTION)
-        this.train.setScheduledStops(await getStationsForLine(this.gameState.startingLine))
-        this.train.setCurrentStation(this.gameState.startingStation)
-        this.train.setLine(this.gameState.startingLine)
+        this.train.setScheduledStops(await getStationsForLine(this.journey.startingLine))
+        this.train.setCurrentStation(this.journey.startingStation)
+        this.train.setLine(this.journey.startingLine)
     }
 
     public async fetchDailyScore(): Promise<Score | null> {
-        const [startID, destID] = this.gameState.getStartDestStationIDs()
+        const [startID, destID] = this.journey.getStartDestStationIDs()
         return await DailyChallenge.getOptimalScore(startID, destID)
     }
 }
