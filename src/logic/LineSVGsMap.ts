@@ -156,7 +156,7 @@ const UNIQUE_STATION_GROUPS: { [key: string]: LineName[][] } = {
     A15: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.B_TRAIN, LineName.D_TRAIN]], // 125 St
     A42: [[LineName.A_TRAIN, LineName.C_TRAIN, LineName.G_TRAIN]], // Hoyt Schermerhorn
     A61: [[LineName.A_TRAIN, LineName.A_LEFFERTS_TRAIN, LineName.A_ROCKAWAY_MOTT_TRAIN]], // Rockaway Blvd (junction)
-    BO8: [[LineName.M_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
+    B08: [[LineName.M_TRAIN, LineName.Q_TRAIN]], // Lexington Av/63 St
     D14: [[LineName.B_TRAIN, LineName.D_TRAIN, LineName.E_TRAIN]], // 7 Av (53 St)
     D26: [[LineName.B_TRAIN, LineName.Q_TRAIN, LineName.S_TRAIN_SHUTTLE]], // Prospect Park
     D43: [[LineName.D_TRAIN, LineName.F_TRAIN, LineName.N_TRAIN, LineName.Q_TRAIN]], // Coney Island-Stillwell Av

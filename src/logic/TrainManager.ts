@@ -1,4 +1,4 @@
-import { LineName, LineType, Borough, Direction, LINE_DIRECTION_LABELS, getLineType } from './LineManager'
+import { LineName, LineType, Direction, getLineType } from './LineManager'
 import { Station } from './StationManager'
 import { getStationsForLine } from './SubwayMap'
 
@@ -6,22 +6,15 @@ export class Train {
     private currentLine: LineName
     private direction: Direction
     private currentStationIndex: number = 0
-    // TODO: labels need not be in class
-    private uptownLabel: string
-    private downtownLabel: string
     private scheduledStops: Station[]
 
     constructor(
         currentLine: LineName = LineName.NULL_TRAIN,
         direction: Direction = Direction.NULL_DIRECTION,
-        uptownLabel: string = 'Uptown',
-        downtownLabel: string = 'Downtown',
         scheduledStops: Station[] = []
     ) {
         this.currentLine = currentLine
         this.direction = direction
-        this.uptownLabel = uptownLabel
-        this.downtownLabel = downtownLabel
         this.scheduledStops = scheduledStops
     }
 
@@ -84,50 +77,7 @@ export class Train {
         return directions[randomIndex]
     }
 
-    // Labels
-    public setUptownLabel(newLabel: string) {
-        this.uptownLabel = newLabel
-    }
-
-    public setDowntownLabel(newLabel: string) {
-        this.downtownLabel = newLabel
-    }
-
-    public getUptownLabel(): string {
-        return this.uptownLabel
-    }
-
-    public getDowntownLabel(): string {
-        return this.downtownLabel
-    }
-
-    public findDirectionLabel(direction: Direction, line: LineName, currentBorough?: Borough): string {
-        const detailedLineDirection = LINE_DIRECTION_LABELS.get(line)
-
-        if (detailedLineDirection) {
-            if (currentBorough && detailedLineDirection.boroughSpecificLabels?.[currentBorough]) {
-                const boroughSpecificLabels = detailedLineDirection.boroughSpecificLabels[currentBorough]
-                const boroughSpecificDirection = boroughSpecificLabels?.[direction]
-
-                if (boroughSpecificDirection) return boroughSpecificDirection
-            }
-            // fallback to default directions if borough specific not found
-            else if (detailedLineDirection.defaultDirectionLabels) {
-                return direction === Direction.DOWNTOWN
-                    ? detailedLineDirection.defaultDirectionLabels[0]
-                    : detailedLineDirection.defaultDirectionLabels[1]
-            }
-        }
-
-        return ''
-    }
-
-    public getDirectionLabel(): string {
-        const currentBorough = this.scheduledStops[this.getCurrentStationIndex()].getBorough()
-        return this.findDirectionLabel(this.direction, this.currentLine, currentBorough)
-    }
-
-    // Scheduled Stops
+    // Scheduled stops
     public getScheduledStops(): Station[] {
         return this.scheduledStops
     }
@@ -173,11 +123,6 @@ export class Train {
         this.repOk()
     }
 
-    public setCurrentStationIndexByID(stationID: string, newScheduledStops: Station[]) {
-        this.currentStationIndex = newScheduledStops.findIndex((station) => station.getId() === stationID)
-        this.repOk()
-    }
-
     public static getCurrentStationIndexByID(stationID: string, scheduledStops: Station[]): number {
         return scheduledStops.findIndex((station) => station.getId() === stationID)
     }
@@ -201,11 +146,14 @@ export class Train {
         if (!newLine || !currentStation) return false
 
         if (this.isValidTransfer(newLine, currentStation)) {
-            this.setScheduledStops(await getStationsForLine(newLine))
-            this.setCurrentStationIndexByID(currentStation.getId(), this.scheduledStops)
+            const newStops: Station[] = await getStationsForLine(newLine)
+            const newIndex: number = newStops.findIndex((s) => s.getId() === currentStation.getId())
+
+            if (newIndex === -1) return false
+
+            this.setScheduledStops(newStops)
+            this.setCurrentStationByIndex(newIndex)
             this.currentLine = newLine
-            this.uptownLabel = this.findDirectionLabel(Direction.UPTOWN, newLine)
-            this.downtownLabel = this.findDirectionLabel(Direction.DOWNTOWN, newLine)
 
             this.repOk()
 

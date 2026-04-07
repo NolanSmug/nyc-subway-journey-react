@@ -1,5 +1,5 @@
 import './ConductorModeUI.css'
-import React from 'react'
+import { memo } from 'react'
 
 import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
@@ -109,4 +109,4 @@ function ConductorModeUI({
     )
 }
 
-export default React.memo(ConductorModeUI)
+export default memo(ConductorModeUI)

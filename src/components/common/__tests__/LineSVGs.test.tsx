@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import LineSVGs from '../LineSVGs'
 import { LineName } from '../../../logic/LineManager'

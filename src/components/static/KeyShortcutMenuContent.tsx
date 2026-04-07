@@ -1,4 +1,3 @@
-import React from 'react'
 import KeyShortcut from './KeyShortcut'
 
 import './KeyShortcutMenuContent.css'

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import ConductorModeUI from '../ui/ConductorModeUI'
 
 import { useTrainContext } from '../../contexts/TrainContext'

@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, JSX, MouseEvent } from 'react'
 
 import ModalScreen from './components/ui/ModalScreen'
 import OptimalRouteUI from './components/ui/OptimalRouteUI'
@@ -36,8 +36,8 @@ import ActionButton from './components/common/ActionButton'
 import DailyChallengeScreenContent from './components/static/DailyChallengeScreenContent'
 import LoadingSpinner from './components/common/LoadingSpinner'
 
-const settingsMenu: React.JSX.Element = <SettingsMenu />
-const keyShortcutMenu: React.JSX.Element = <KeyShortcutMenu />
+const settingsMenu: JSX.Element = <SettingsMenu />
+const keyShortcutMenu: JSX.Element = <KeyShortcutMenu />
 const settingsButtons: string[] = [GEAR_WHITE, GEAR_BLACK]
 const keyShortcutButtons: string[] = [KEYBOARD_WHITE, KEYBOARD_BLACK]
 
@@ -64,7 +64,7 @@ function Game() {
     const riderModePassengerRef = useRef<RiderModeHandle>(null)
 
     const closeTransferMode = () => setIsTransferMode(false)
-    const handleTransferClickAway = (e: React.MouseEvent) => {
+    const handleTransferClickAway = (e: MouseEvent<HTMLDivElement>) => {
         const transferLinesContainer = document.querySelector('.line-svgs-container')
         if (transferLinesContainer && !transferLinesContainer.contains(e.target as Node)) {
             closeTransferMode()

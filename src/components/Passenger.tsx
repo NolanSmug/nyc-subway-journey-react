@@ -1,12 +1,12 @@
 import './Passenger.css'
-import React from 'react'
+import { Ref, memo } from 'react'
 
 import { GameMode, useSettingsContext } from '../contexts/SettingsContext'
 import { PassengerState } from '../hooks/usePassengerAnimations'
 import { usePassengerSprite } from '../hooks/usePassengerSprite'
 
 interface PassengerProps {
-    ref?: React.Ref<HTMLImageElement>
+    ref?: Ref<HTMLImageElement>
     passengerState: PassengerState
 }
 
@@ -27,4 +27,4 @@ const Passenger = ({ ref, passengerState }: PassengerProps) => {
     )
 }
 
-export default React.memo(Passenger)
+export default memo(Passenger)

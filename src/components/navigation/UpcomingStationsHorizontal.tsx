@@ -1,5 +1,5 @@
 import './UpcomingStationsHorizontal.css'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import StationFragment from '../station/StationFragment'
 import { useTrainContext } from '../../contexts/TrainContext'

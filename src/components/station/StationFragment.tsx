@@ -1,5 +1,5 @@
 import './StationFragment.css'
-import React from 'react'
+import { memo } from 'react'
 
 import LineSVGs from '../common/LineSVGs'
 
@@ -12,7 +12,7 @@ export interface StationFragmentProps {
     transfers: LineName[]
 }
 
-const StationFragment: React.FC<StationFragmentProps> = ({ station, isCurrent, transfers }) => {
+const StationFragment = ({ station, isCurrent, transfers }: StationFragmentProps) => {
     const trueLength: number = station.getName().length + transfers.length
     const isOverflowing = trueLength >= 17 && trueLength < 25
     const extraOverflow = trueLength >= 25
@@ -36,4 +36,4 @@ const StationFragment: React.FC<StationFragmentProps> = ({ station, isCurrent, t
     )
 }
 
-export default React.memo(StationFragment)
+export default memo(StationFragment)

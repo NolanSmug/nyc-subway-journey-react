@@ -1,5 +1,7 @@
 import './AdvanceNStationsInput.css'
 
+import { ChangeEvent } from 'react'
+
 import { Direction } from '../../logic/LineManager'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 import { useTrainContext } from '../../contexts/TrainContext'
@@ -21,7 +23,7 @@ function AdvanceNStationsInput() {
 
     if (trainDirection === Direction.NULL_DIRECTION) currentMaxNumber = 1
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const rawValue: string = e.target.value
         const parsedValue: number = parseInt(rawValue)
 

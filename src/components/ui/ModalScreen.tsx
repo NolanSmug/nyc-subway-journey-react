@@ -1,10 +1,12 @@
 import './ModalScreen.css'
+import { ReactNode } from 'react'
+
 import ActionButton from '../common/ActionButton'
 
 interface ModalScreenProps {
     closeLabel: string
     closeAction: () => void | Promise<void>
-    children: React.ReactNode
+    children: ReactNode
 }
 
 function ModalScreen({ closeLabel, closeAction, children }: ModalScreenProps) {

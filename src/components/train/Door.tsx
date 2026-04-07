@@ -1,8 +1,8 @@
 import './Door.css'
-import React from 'react'
+import { Ref, memo } from 'react'
 
 interface DoorProps {
-    ref?: React.Ref<HTMLDivElement>
+    ref?: Ref<HTMLDivElement>
     isLeft?: boolean
 }
 
@@ -10,4 +10,4 @@ const Door = ({ ref, isLeft }: DoorProps) => {
     return <div ref={ref} className={`door ${isLeft ? 'door-left' : ''} `}></div>
 }
 
-export default React.memo(Door)
+export default memo(Door)

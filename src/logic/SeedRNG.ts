@@ -21,7 +21,7 @@ export class SeedRNG {
             hash = hash >>> 0 // convert to UNSIGNED int32 "https://stackoverflow.com/questions/54406985/why-does-number-0-convert-to-32bit-integer#comment95625646_54406985"
         }
 
-        return Math.abs(hash)
+        return hash
     }
 
     // LCG (Linear Congruential Generator)

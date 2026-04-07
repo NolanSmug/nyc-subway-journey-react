@@ -140,7 +140,12 @@ h2 {
     content: '\00a0\00a0\00a0\00a0\00a0\00a0';
 }
 
-.is-null-direction {
+.train-direction.is-null-direction {
+    border-color: var(--line-color);
+    text-decoration: underline;
+    text-decoration-color: var(--line-color);
+    text-underline-offset: 4px;
+
     animation: pulse 1.5s ease-in-out infinite;
 }
 

@@ -1,6 +1,7 @@
 import { Train } from './TrainManager'
 import { Station } from './StationManager'
 import { Borough, Direction, LineName } from './LineManager'
+import { findDirectionLabel } from './directionLabels'
 
 const testStations = [
     new Station('R27', 'South Ferry', [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], Borough.MANHATTAN),
@@ -87,9 +88,9 @@ describe('Train actions (ONE_TRAIN)', () => {
     })
 
     test('directionLabel', () => {
-        expect(train.getDirectionLabel()).toBe('Uptown')
+        expect(findDirectionLabel(train.getDirection(), train.getLine(), train.getCurrentStation().getBorough())).toBe('Uptown')
 
         train.reverseDirection()
-        expect(train.getDirectionLabel()).toBe('Downtown')
+        expect(findDirectionLabel(train.getDirection(), train.getLine(), train.getCurrentStation().getBorough())).toBe('Downtown')
     })
 })

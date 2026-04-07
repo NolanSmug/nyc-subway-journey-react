@@ -25,7 +25,7 @@ export class SubwayMap {
         }
 
         const csv: string = await response.text()
-        const rows = csv.split('\n')
+        const rows: string[] = csv.split('\n')
         const subwayStations: Station[] = []
 
         rows.shift()
@@ -51,57 +51,55 @@ export class SubwayMap {
     }
 }
 
-function boroughStringToEnum(borough: string): Borough {
-    switch (borough.toLowerCase()) {
-        case 'bk':
-            return Borough.BROOKLYN
-        case 'm':
-            return Borough.MANHATTAN
-        case 'q':
-            return Borough.QUEENS
-        case 'bx':
-            return Borough.BRONX
-        case 'si':
-            return Borough.STATEN_ISLAND
-        default:
-            throw new Error('Unknown borough')
-    }
+export async function getStationsForLine(line: LineName): Promise<Station[]> {
+    return Promise.resolve(SubwayMap.getAllLineStations(line))
+}
+
+const BOROUGH_MAP: Record<string, Borough> = {
+    bk: Borough.BROOKLYN,
+    m: Borough.MANHATTAN,
+    q: Borough.QUEENS,
+    bx: Borough.BRONX,
+    si: Borough.STATEN_ISLAND,
+}
+
+const STRING_TO_LINE: Record<string, LineName> = {
+    '1': LineName.ONE_TRAIN,
+    '2': LineName.TWO_TRAIN,
+    '3': LineName.THREE_TRAIN,
+    '4': LineName.FOUR_TRAIN,
+    '5': LineName.FIVE_TRAIN,
+    '6': LineName.SIX_TRAIN,
+    '7': LineName.SEVEN_TRAIN,
+    A: LineName.A_TRAIN,
+    Al: LineName.A_LEFFERTS_TRAIN,
+    Ar: LineName.A_ROCKAWAY_MOTT_TRAIN,
+    B: LineName.B_TRAIN,
+    C: LineName.C_TRAIN,
+    D: LineName.D_TRAIN,
+    E: LineName.E_TRAIN,
+    F: LineName.F_TRAIN,
+    M: LineName.M_TRAIN,
+    N: LineName.N_TRAIN,
+    Q: LineName.Q_TRAIN,
+    R: LineName.R_TRAIN,
+    W: LineName.W_TRAIN,
+    J: LineName.J_TRAIN,
+    Z: LineName.Z_TRAIN,
+    G: LineName.G_TRAIN,
+    L: LineName.L_TRAIN,
+    S: LineName.S_TRAIN,
+    Sf: LineName.S_TRAIN_SHUTTLE,
+    Sr: LineName.S_TRAIN_ROCKAWAY,
 }
 
 function mapTransferString(transfer: string): LineName {
-    const stringToLine: Record<string, LineName> = {
-        '1': LineName.ONE_TRAIN,
-        '2': LineName.TWO_TRAIN,
-        '3': LineName.THREE_TRAIN,
-        '4': LineName.FOUR_TRAIN,
-        '5': LineName.FIVE_TRAIN,
-        '6': LineName.SIX_TRAIN,
-        '7': LineName.SEVEN_TRAIN,
-        A: LineName.A_TRAIN,
-        Al: LineName.A_LEFFERTS_TRAIN,
-        Ar: LineName.A_ROCKAWAY_MOTT_TRAIN,
-        B: LineName.B_TRAIN,
-        C: LineName.C_TRAIN,
-        D: LineName.D_TRAIN,
-        E: LineName.E_TRAIN,
-        F: LineName.F_TRAIN,
-        M: LineName.M_TRAIN,
-        N: LineName.N_TRAIN,
-        Q: LineName.Q_TRAIN,
-        R: LineName.R_TRAIN,
-        W: LineName.W_TRAIN,
-        J: LineName.J_TRAIN,
-        Z: LineName.Z_TRAIN,
-        G: LineName.G_TRAIN,
-        L: LineName.L_TRAIN,
-        S: LineName.S_TRAIN,
-        Sf: LineName.S_TRAIN_SHUTTLE,
-        Sr: LineName.S_TRAIN_ROCKAWAY,
-    }
-
-    return stringToLine[transfer] || LineName.NULL_TRAIN
+    return STRING_TO_LINE[transfer] || LineName.NULL_TRAIN
 }
 
-export async function getStationsForLine(line: LineName): Promise<Station[]> {
-    return Promise.resolve(SubwayMap.getAllLineStations(line))
+function boroughStringToEnum(borough: string): Borough {
+    const boro = BOROUGH_MAP[borough.toLowerCase()] // lol
+    if (!boro) throw new Error(`Unknown borough ${borough}`)
+
+    return boro
 }

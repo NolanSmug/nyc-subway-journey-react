@@ -84,14 +84,4 @@ export class Station {
     public getTransfers(): LineName[] {
         return this.transfers
     }
-
-    public static getStationByID(stationID: string) {
-        for (const station of Station.allNycStations) {
-            if (station.id === stationID) {
-                return station
-            }
-        }
-
-        return this.NULL_STATION
-    }
 }

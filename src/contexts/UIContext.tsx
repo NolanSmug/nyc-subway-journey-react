@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useMemo, useCallback } from 'react'
+import { useState, ReactNode, useMemo, useCallback } from 'react'
 import { createContext, useContextSelector } from 'use-context-selector'
 
 interface UIContextProps {

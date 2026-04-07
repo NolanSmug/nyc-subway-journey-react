@@ -1,5 +1,5 @@
 import './RiderModeUI.css'
-import { useMemo, memo, RefObject, ReactNode } from 'react'
+import { useMemo, memo, RefObject, ReactNode, JSX } from 'react'
 
 import TrainCarStatic from '../train/TrainCarStatic'
 import Station from '../station/Station'
@@ -81,7 +81,7 @@ function RiderModeUI({
         transfers.length === 0 ||
         inTransferTunnel
 
-    const destinationStationChildren: React.JSX.Element = useMemo(
+    const destinationStationChildren: JSX.Element = useMemo(
         () => <LineSVGs lines={destinationStation.getTransfers()} disabled />,
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [destinationStation.getId()]

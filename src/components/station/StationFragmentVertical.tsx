@@ -1,11 +1,8 @@
 import './StationFragmentVertical.css'
-import React from 'react'
-
 import LineSVGs from '../common/LineSVGs'
-
 import { StationFragmentProps } from './StationFragment'
 
-const StationFragmentVertical: React.FC<StationFragmentProps> = ({ station, isCurrent, transfers }) => {
+const StationFragmentVertical = ({ station, isCurrent, transfers }: StationFragmentProps) => {
     return (
         <div className={`station-frag-vertical-container ${isCurrent ? 'current-station-vertical' : ''}`}>
             <div className={`station-dot-container`}>

@@ -1,5 +1,5 @@
 import './OptimalRouteUI.css' // shared with GameOverUI component
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import ActionButton from '../common/ActionButton'
 import LoadingSpinner from '../common/LoadingSpinner'

@@ -1,5 +1,5 @@
 import './TrainCar.css'
-import React, { useMemo } from 'react'
+import { useMemo, memo } from 'react'
 
 import Door from './Door'
 import Header from '../common/Header'
@@ -106,4 +106,4 @@ function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     )
 }
 
-export default React.memo(TrainCar)
+export default memo(TrainCar)

@@ -1,5 +1,5 @@
 import RiderModeUI from '../ui/RiderModeUI'
-import { useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Ref, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import Passenger from '../Passenger'
 
@@ -19,7 +19,7 @@ export interface RiderModeHandle {
 }
 
 interface RiderModeProps {
-    ref?: React.Ref<RiderModeHandle>
+    ref?: Ref<RiderModeHandle>
 }
 
 const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {

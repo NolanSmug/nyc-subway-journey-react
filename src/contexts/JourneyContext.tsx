@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useMemo } from 'react'
+import { useState, ReactNode, useMemo } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
 import { Journey } from '../logic/Journey'
 
