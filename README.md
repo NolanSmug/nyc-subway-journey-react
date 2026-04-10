@@ -12,6 +12,8 @@
 
 <img src='./src/assets/images/subway-journey.gif' width='100%'>
 
+> *game is not nearly as laggy/choppy as the above gif demonstrates (hold down 'r' key to test the responsiveness)*
+
 | ![cover screenshot 1](./src/assets/images/screenshot-cover-1.png) | ![cover screenshot 2](./src/assets/images/screenshot-cover-2.png) |
 | -----------------------------------------------------------| ---------------------------------------------------------- |
 

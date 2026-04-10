@@ -11,7 +11,6 @@ export class Journey {
     isWon: boolean
     playerScore: Score
     optimalScore: Score | null
-    isDailyChallengeCompleted: boolean = false
 
     constructor(
         startingLine: LineName = LineName.NULL_TRAIN,

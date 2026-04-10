@@ -25,7 +25,6 @@ export default function useTrainActions({ trainRef, setTrain, setJourney, isDail
                     DailyChallenge.saveScore(nextState.playerScore)
                 }
                 nextState.isWon = true
-                nextState.isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
             }
 
             return nextState
@@ -53,23 +52,22 @@ export default function useTrainActions({ trainRef, setTrain, setJourney, isDail
     )
 
     const transfer = useCallback(
-        async (transferInput: number | LineName = 0) => {
+        async (toLine: LineName) => {
             const currentTrain = trainRef.current
             if (!currentTrain) throw new Error('attempted to transfer - Train object is null')
 
             const nextTrain = currentTrain.clone()
             const currentStation = nextTrain.getCurrentStation()
 
-            const selectedLine: LineName = typeof transferInput === 'number' ? currentStation.getTransfers()[transferInput] : transferInput
-            const isValidTransfer: boolean = await nextTrain.transferToLine(selectedLine, currentStation)
+            const isValidTransfer: boolean = await nextTrain.transferToLine(toLine, currentStation)
 
-            if (selectedLine && isValidTransfer) {
+            if (toLine && isValidTransfer) {
                 setTrain(nextTrain)
                 trainRef.current = nextTrain
 
                 setJourney((prev) => {
                     prev.playerScore.incrementTransferCount()
-                    return updateGameProgress(prev, nextTrain.getCurrentStation())
+                    return updateGameProgress(prev, currentStation)
                 })
             }
         },

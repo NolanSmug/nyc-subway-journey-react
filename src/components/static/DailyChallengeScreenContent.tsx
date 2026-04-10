@@ -8,6 +8,7 @@ import { useJourneyContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
 import { Station as StationObject } from '../../logic/StationManager'
+import { DailyChallenge } from '../../logic/DailyChallenge'
 
 import R_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
 import R_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
@@ -16,7 +17,7 @@ const DailyChallengeScreenContent = () => {
     const darkMode = useSettingsContext((state) => state.darkMode)
     const startingStation: StationObject = useJourneyContext((state) => state.journey.startingStation)
     const destinationStation: StationObject = useJourneyContext((state) => state.journey.destinationStation)
-    const hasCompletedToday: boolean = useJourneyContext((state) => state.journey.isDailyChallengeCompleted)
+    const hasCompletedToday: boolean = DailyChallenge.isAlreadyCompleted()
 
     const TODAY: Date = new Date()
 

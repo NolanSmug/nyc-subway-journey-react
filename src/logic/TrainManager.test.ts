@@ -87,6 +87,13 @@ describe('Train actions (ONE_TRAIN)', () => {
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })
 
+    // test('transfer', () => {
+    //     train.setCurrentStationByIndex(0)
+    //     train.transferToLine(LineName.R_TRAIN, train.getCurrentStation())
+    //     expect(train.getLine()).toBe(LineName.R_TRAIN)
+    //     expect(train.getCurrentStation().getName()).toBe('Whitehall St-South Ferry')
+    // })
+
     test('directionLabel', () => {
         expect(findDirectionLabel(train.getDirection(), train.getLine(), train.getCurrentStation().getBorough())).toBe('Uptown')
 

@@ -34,9 +34,9 @@ function ConductorMode() {
     const handleLineClick = useCallback(
         (index: number) => {
             setIsTransferMode(false)
-            transfer(index)
+            transfer(currentStation.getTransfers()[index])
         },
-        [setIsTransferMode, transfer]
+        [setIsTransferMode, transfer, currentStation]
     )
 
     const handleTransferClick = useCallback(() => {

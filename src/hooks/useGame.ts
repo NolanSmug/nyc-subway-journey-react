@@ -6,18 +6,7 @@ import { useUIContext } from '../contexts/UIContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 
 import { Game } from '../logic/Game'
-// import { GameState } from '../logic/GameState'
-// import { Score } from '../logic/Score'
 import { Station as StationClass } from '../logic/StationManager'
-
-// const getDailyScoreSafe = async (game: Game): Promise<Score | null> => {
-//     try {
-//         return await game.fetchDailyScore()
-//     } catch (error) {
-//         console.warn('Error fetching optimal score:', error)
-//         return null
-//     }
-// }
 
 export function useGame() {
     const setJourney = useJourneyContext((state) => state.setJourney)
@@ -35,13 +24,6 @@ export function useGame() {
             setTrain(newGame.train)
             setJourney(newGame.journey)
             setIsTransferMode(false)
-
-            // if (isDailyChallenge) {
-            //     const score = await getDailyScoreSafe(newGame)
-            //     if (score !== null) {
-            //         setJourney((prev) => Object.assign(new GameState(), { ...prev, optimalScore: score }))
-            //     }
-            // }
         } catch (error) {
             console.error('Error initializing game (useGame()):', error)
         }

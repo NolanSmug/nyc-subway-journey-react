@@ -10,6 +10,10 @@ import SettingsMenu from './components/common/SettingsMenu'
 import UpcomingStationsHorizontal from './components/navigation/UpcomingStationsHorizontal'
 import UpcomingStationsVertical from './components/navigation/UpcomingStationsVertical'
 import KeyShortcutMenu from './components/static/KeyShortcutMenuContent'
+import WelcomeScreenContent from './components/static/WelcomeScreenContent'
+import ActionButton from './components/common/ActionButton'
+import DailyChallengeScreenContent from './components/static/DailyChallengeScreenContent'
+import LoadingSpinner from './components/common/LoadingSpinner'
 // import SubwayMap from './components/SubwayMap'
 
 import { useUIContext } from './contexts/UIContext'
@@ -21,6 +25,8 @@ import { useGame } from './hooks/useGame'
 import { useUITheme } from './hooks/useCSSProperties'
 import { useLineFavicon } from './hooks/useLineFavicon'
 
+import { DailyChallenge } from './logic/DailyChallenge'
+
 import GEAR_BLACK from './assets/images/settings-icon-b.svg'
 import GEAR_WHITE from './assets/images/settings-icon-w.svg'
 import KEYBOARD_BLACK from './assets/images/shortcut-icon-black.svg'
@@ -31,11 +37,6 @@ import DAILY_CHALLENGE_WHITE from './assets/images/daily-challenge-w.svg'
 import DAILY_CHALLENGE_BLACK from './assets/images/daily-challenge-b.svg'
 import DAILY_CHALLENGE_COMPLETE from './assets/images/daily-challenge-complete-g.svg'
 
-import WelcomeScreenContent from './components/static/WelcomeScreenContent'
-import ActionButton from './components/common/ActionButton'
-import DailyChallengeScreenContent from './components/static/DailyChallengeScreenContent'
-import LoadingSpinner from './components/common/LoadingSpinner'
-
 const settingsMenu: JSX.Element = <SettingsMenu />
 const keyShortcutMenu: JSX.Element = <KeyShortcutMenu />
 const settingsButtons: string[] = [GEAR_WHITE, GEAR_BLACK]
@@ -44,7 +45,6 @@ const keyShortcutButtons: string[] = [KEYBOARD_WHITE, KEYBOARD_BLACK]
 function Game() {
     const { initializeGame } = useGame()
     const isWon = useJourneyContext((state) => state.journey.isWon)
-    const isDailyChallengeCompleted = useJourneyContext((state) => state.journey.isDailyChallengeCompleted)
     const isLineNull = useTrainContext((state) => state.train.isLineNull())
 
     const isTransferMode = useUIContext((state) => state.isTransferMode)
@@ -56,6 +56,7 @@ function Game() {
     const gameMode = useSettingsContext((state) => state.gameMode)
     const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
     const setIsDailyChallenge = useSettingsContext((state) => state.setIsDailyChallenge)
+    const isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
     const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible) && !isDailyChallenge
 
     const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)

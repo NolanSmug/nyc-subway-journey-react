@@ -16,8 +16,6 @@ export class Game {
     }
 
     public async runGame(isDailyChallenge: boolean): Promise<void> {
-        this.journey.isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
-
         const rng = isDailyChallenge
             ? (() => {
                   const seed = new SeedRNG(new Date().toDateString())
