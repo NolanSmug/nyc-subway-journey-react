@@ -186,7 +186,7 @@
     font-size: 1.25em;
 }
 
-h1 span,
+#optimal-route-title,
 .tooltip-item strong {
     text-decoration: underline;
     text-decoration-color: var(--line-color);
@@ -194,7 +194,7 @@ h1 span,
     text-decoration-thickness: 0.2em;
 }
 
-div.Game h1 {
+#optimal-route-title {
     margin-bottom: 0.5em;
 }
 

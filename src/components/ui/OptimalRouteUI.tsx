@@ -90,7 +90,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
 
     return (
         <>
-            <h1>
+            <h1 id='optimal-route-title'>
                 <span>{isHeuristic ? 'Heuristic' : 'Mathematical'}</span> optimal route
             </h1>
 
