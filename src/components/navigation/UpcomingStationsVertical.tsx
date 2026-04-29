@@ -2,8 +2,8 @@ import './UpcomingStationsVertical.css'
 import { useEffect, useRef, memo } from 'react'
 
 import StationFragmentVertical from '../station/StationFragmentVertical'
-import { scrollToCurrentStation } from './UpcomingStationsHorizontal'
 
+import { scrollToCurrentStation } from '../../logic/stationScroll'
 import { useTrainContext } from '../../contexts/TrainContext'
 
 function UpcomingStationsVertical() {
@@ -19,7 +19,7 @@ function UpcomingStationsVertical() {
             const currentStationElement: Element | null = stationsRef.current.querySelector('.current-station-vertical')
             const isBelowCenteredScroll: boolean = currentStationIndex < 7
 
-            scrollToCurrentStation(currentStationElement, isBelowCenteredScroll)
+            return scrollToCurrentStation(currentStationElement, isBelowCenteredScroll)
         }
     }, [currentStationIndex, stations.length, currentStationID])
 

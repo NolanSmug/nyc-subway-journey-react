@@ -1,13 +1,30 @@
-import { Train } from './TrainManager'
-import { Station } from './StationManager'
-import { Borough, Direction, LineName } from './LineManager'
-import { findDirectionLabel } from './directionLabels'
+import { Train } from '../TrainManager'
+import { Station } from '../StationManager'
+import { Borough, Direction, LineName } from '../LineManager'
+import { findDirectionLabel } from '../directionLabels'
+import { initializeSubwayData } from '../subwayMap'
 
 const testStations = [
     new Station('R27', 'South Ferry', [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], Borough.MANHATTAN),
     new Station('139', 'Rector St', [LineName.ONE_TRAIN], Borough.MANHATTAN),
     new Station('138', 'WTC Cortlandt', [LineName.ONE_TRAIN], Borough.MANHATTAN),
 ]
+
+const mockSubwayData = {
+    [LineName.ONE_TRAIN]: [
+        { id: 'R27', name: 'South Ferry', transfers: [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], borough: Borough.MANHATTAN },
+        { id: '139', name: 'Rector St', transfers: [LineName.ONE_TRAIN], borough: Borough.MANHATTAN },
+        { id: '138', name: 'WTC Cortlandt', transfers: [LineName.ONE_TRAIN], borough: Borough.MANHATTAN },
+    ],
+    [LineName.R_TRAIN]: [
+        {
+            id: 'R27',
+            name: 'Whitehall St-South Ferry',
+            transfers: [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN],
+            borough: Borough.MANHATTAN,
+        },
+    ],
+}
 
 // const testStations_R = [
 //     new Station('R27', 'Whitehall St', [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], Borough.MANHATTAN),
@@ -28,7 +45,7 @@ const testStations = [
 //     ),
 // ]
 
-describe('Train actions (ONE_TRAIN)', () => {
+describe('Train object mutable actions', () => {
     let train: Train
 
     beforeEach(() => {
@@ -87,12 +104,19 @@ describe('Train actions (ONE_TRAIN)', () => {
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })
 
-    // test('transfer', () => {
-    //     train.setCurrentStationByIndex(0)
-    //     train.transferToLine(LineName.R_TRAIN, train.getCurrentStation())
-    //     expect(train.getLine()).toBe(LineName.R_TRAIN)
-    //     expect(train.getCurrentStation().getName()).toBe('Whitehall St-South Ferry')
-    // })
+    test('transfer', async () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            Promise.resolve({
+                ok: true,
+                json: () => Promise.resolve(mockSubwayData),
+            })
+        )
+        await initializeSubwayData()
+
+        train.transferToLine(LineName.R_TRAIN, train.getCurrentStation())
+        expect(train.getLine()).toBe(LineName.R_TRAIN)
+        expect(train.getCurrentStation().getName()).toBe('Whitehall St-South Ferry')
+    })
 
     test('directionLabel', () => {
         expect(findDirectionLabel(train.getDirection(), train.getLine(), train.getCurrentStation().getBorough())).toBe('Uptown')

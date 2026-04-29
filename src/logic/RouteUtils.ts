@@ -7,12 +7,12 @@ export interface StationData {
     color: string
 }
 
-export async function fetchShortestPath(start: string, dest: string, signal?: AbortSignal): Promise<StationData[]> {
+export async function fetchOptimalRoute(start: string, dest: string, isHeuristic = false, signal?: AbortSignal): Promise<StationData[]> {
     const baseURL =
         process.env.REACT_APP_USE_DEV_API === 'true'
             ? process.env.REACT_APP_OPTIMAL_ROUTE_DEV_API
             : process.env.REACT_APP_OPTIMAL_ROUTE_PROD_API
-    const endpoint: string = `${baseURL}/${start}/${dest}`
+    const endpoint: string = `${baseURL}/${start}/${dest}/?heuristic=${isHeuristic}`
 
     const response = await fetch(endpoint, {
         method: 'GET',

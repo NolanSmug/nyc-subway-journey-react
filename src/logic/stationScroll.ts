@@ -1,6 +1,6 @@
 export function scrollToCurrentStation(currentStationElement: Element | null, isLowIndex?: boolean): () => void {
     if (!currentStationElement) {
-        console.warn(`Current station not found.`)
+        console.warn(`scrollToCurrentStation: current station element not found.`)
         return () => {}
     }
 

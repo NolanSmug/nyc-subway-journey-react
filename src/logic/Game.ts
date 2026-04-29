@@ -4,7 +4,7 @@ import { Journey } from './Journey'
 import { Score } from './Score'
 import { SeedRNG } from './SeedRNG'
 import { Train } from './TrainManager'
-import { getStationsForLine } from './SubwayMap'
+import { getStationsForLine } from './subwayMap'
 
 export class Game {
     public journey: Journey
@@ -15,7 +15,7 @@ export class Game {
         this.train = new Train()
     }
 
-    public async runGame(isDailyChallenge: boolean): Promise<void> {
+    public runGame(isDailyChallenge: boolean): void {
         const rng = isDailyChallenge
             ? (() => {
                   const seed = new SeedRNG(new Date().toDateString())
@@ -23,10 +23,10 @@ export class Game {
               })()
             : Math.random
 
-        await this.journey.resetJourney(rng)
+        this.journey.resetJourney(rng)
 
         this.train.setDirection(Direction.NULL_DIRECTION)
-        this.train.setScheduledStops(await getStationsForLine(this.journey.startingLine))
+        this.train.setScheduledStops(getStationsForLine(this.journey.startingLine))
         this.train.setCurrentStation(this.journey.startingStation)
         this.train.setLine(this.journey.startingLine)
     }

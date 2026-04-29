@@ -100,9 +100,12 @@ export function areLineSetsEqual(arrayA: LineName[], arrayB: LineName[], strictO
         return arrayA.every((line, index) => line === arrayB[index])
     }
 
-    const setA: Set<LineName> = new Set(arrayA)
+    let mapA: Map<string, number> = new Map()
+    for (let i = 0; i < arrayA.length; i++) {
+        mapA.set(arrayA[i], 1) // yes I can achieve the same with sorting the arrays or making a Set(), but I am practicing leetcode type solutions
+    }
 
-    return arrayB.every((line) => setA.has(line))
+    return arrayB.every((transfer) => mapA.get(transfer))
 }
 
 export function areLineSetsDisjoint(arrayA: LineName[], arrayB: LineName[]): boolean {

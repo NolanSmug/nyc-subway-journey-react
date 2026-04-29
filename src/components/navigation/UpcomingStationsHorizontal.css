@@ -1,38 +1,47 @@
 .upcoming-stations-horizontal-container {
-    position: relative;
-    max-width: 100vw;
-    scroll-behavior: smooth;
-    overflow-x: auto;
-    overflow-y: hidden;
-    min-height: 10rem;
-    align-items: flex-end;
     display: flex;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    opacity: 1;
+    align-items: flex-end;
+    position: relative;
+    z-index: 1;
+    max-width: 100vw;
+    min-height: 10rem;
+    overflow-y: hidden;
+    overflow-x: auto;
+    
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+
     transition: opacity 0.3s ease-in-out;
+}
+
+.upcoming-stations-horizontal-container:hover {
+    scrollbar-color: var(--line-color) transparent;
 }
 
 .stations-horizontal {
     display: flex;
     align-items: flex-end;
     align-self: flex-end;
+    z-index: 1;
     height: auto;
     column-gap: 1px;
-    z-index: 1;
     margin-bottom: 1.5em;
     overflow: visible;
 }
 
 .line-divider {
-    background-color: var(--line-color);
     position: absolute;
-    height: 0.3rem;
-    bottom: 1.4em;
     left: 0;
+    bottom: 1.4em;
     z-index: 0;
+    background-color: var(--line-color);
+    height: 0.3rem;
 }
 
 .current-station {
     font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: var(--line-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
 }

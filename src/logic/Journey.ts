@@ -1,7 +1,7 @@
 import { LineName, getRandomLine } from './LineManager'
 import { Score } from './Score'
 import { Station } from './StationManager'
-import { getStationsForLine } from './SubwayMap'
+import { getRandomDestination, getRandomStationFromLine } from './subwayMap'
 
 export class Journey {
     startingLine: LineName
@@ -31,20 +31,19 @@ export class Journey {
     }
 
     public checkWin(currentStation: Station): boolean {
-        this.isWon = currentStation.equals(this.destinationStation)
-        return this.isWon
+        return currentStation.equals(this.destinationStation)
     }
 
-    public async resetJourney(rng: () => number = Math.random): Promise<void> {
+    public resetJourney(rng: () => number = Math.random): void {
         this.optimalScore = null
-
         this.startingLine = getRandomLine(rng)
         this.isFirstTurn = true
         this.playerScore.reset()
 
-        this.startingStation = Station.getRandomStation(await getStationsForLine(this.startingLine), rng)
+        this.startingStation = getRandomStationFromLine(this.startingLine, rng)
+
         do {
-            this.destinationStation = Station.getRandomStation(Station.allNycStations, rng)
+            this.destinationStation = getRandomDestination(rng)
         } while (this.startingStation.equals(this.destinationStation))
     }
 

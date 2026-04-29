@@ -21,9 +21,9 @@ import { useTrainContext } from './contexts/TrainContext'
 import { useJourneyContext } from './contexts/JourneyContext'
 import { useSettingsContext, GameMode, UpcomingStationsLayout } from './contexts/SettingsContext'
 
-import { useGame } from './hooks/useGame'
+import useGame from './hooks/useGame'
+import useLineFavicon from './hooks/useLineFavicon'
 import { useUITheme } from './hooks/useCSSProperties'
-import { useLineFavicon } from './hooks/useLineFavicon'
 
 import { DailyChallenge } from './logic/DailyChallenge'
 
@@ -66,8 +66,7 @@ function Game() {
 
     const closeTransferMode = () => setIsTransferMode(false)
     const handleTransferClickAway = (e: MouseEvent<HTMLDivElement>) => {
-        const transferLinesContainer = document.querySelector('.line-svgs-container')
-        if (transferLinesContainer && !transferLinesContainer.contains(e.target as Node)) {
+        if (e.target === e.currentTarget) {
             closeTransferMode()
         }
     }
@@ -132,17 +131,12 @@ function Game() {
                 onMouseDown={handleTransferClickAway}
             />
 
-            {isModalOpen && !isDailyChallenge && (
-                <ModalScreen closeLabel='Start journey' closeAction={handleStartJourneyClick}>
-                    <WelcomeScreenContent />
-                </ModalScreen>
-            )}
-            {isModalOpen && isDailyChallenge && (
+            {isModalOpen && (
                 <ModalScreen
-                    closeLabel={isDailyChallengeCompleted ? 'Replay journey' : 'Start journey'}
+                    closeLabel={isDailyChallenge && isDailyChallengeCompleted ? 'Replay journey' : 'Start journey'}
                     closeAction={handleStartJourneyClick}
                 >
-                    <DailyChallengeScreenContent />
+                    {isDailyChallenge ? <DailyChallengeScreenContent /> : <WelcomeScreenContent />}
                 </ModalScreen>
             )}
 

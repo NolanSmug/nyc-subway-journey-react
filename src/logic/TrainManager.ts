@@ -1,6 +1,6 @@
 import { LineName, LineType, Direction, getLineType } from './LineManager'
 import { Station } from './StationManager'
-import { getStationsForLine } from './SubwayMap'
+import { getStationsForLine } from './subwayMap'
 
 export class Train {
     private currentLine: LineName
@@ -142,11 +142,11 @@ export class Train {
         return false
     }
 
-    public async transferToLine(newLine: LineName, currentStation: Station): Promise<boolean> {
+    public transferToLine(newLine: LineName, currentStation: Station): boolean {
         if (!newLine || !currentStation) return false
 
         if (this.isValidTransfer(newLine, currentStation)) {
-            const newStops: Station[] = await getStationsForLine(newLine)
+            const newStops: Station[] = getStationsForLine(newLine)
             const newIndex: number = newStops.findIndex((s) => s.getId() === currentStation.getId())
 
             if (newIndex === -1) return false

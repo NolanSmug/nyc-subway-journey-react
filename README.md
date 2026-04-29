@@ -109,7 +109,7 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 1. **Random starting point:**
    - At the beginning of the game, you are assigned:
      - A **starting station**
-     - A **destination station** (see [all_stations.csv](./public/csv/all_stations.csv))
+     - A **destination station** (see [subway_data.json](./public/data/subway_data.json))
      - A **starting line** (ex:<img src='./src/assets/images/j.svg' width='20px' align='top'>, <img src='./src/assets/images/m.svg' width='20px' align='top'>, <img src='./src/assets/images/z.svg' width='20px' align='top'>, ...)
 
 2. **Choosing a direction:**

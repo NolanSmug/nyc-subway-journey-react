@@ -3,7 +3,7 @@ import { useTrainContext } from '../contexts/TrainContext'
 import { getLineSVG } from '../logic/LineSVGsMap'
 import { LineName } from '../logic/LineManager'
 
-export function useLineFavicon() {
+export default function useLineFavicon() {
     const currentLine = useTrainContext((state) => state.train.getLine())
 
     useLayoutEffect(() => {

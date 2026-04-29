@@ -1,0 +1,7838 @@
+{
+    "C_Train": [
+        {
+            "id": "A55",
+            "name": "Euclid Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A54",
+            "name": "Shepherd Av",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A53",
+            "name": "Van Siclen Av",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A52",
+            "name": "Liberty Av",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BWJ",
+            "name": "Broadway Junction",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train",
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A50",
+            "name": "Rockaway Av",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A49",
+            "name": "Ralph Av",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A48",
+            "name": "Utica Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A47",
+            "name": "Kingston-Throop Avs",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A46",
+            "name": "Nostrand Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "S01",
+            "name": "Franklin Avenue",
+            "transfers": [
+                "C_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A44",
+            "name": "Clinton-Washington Avs",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A43",
+            "name": "Lafayette Av",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A42",
+            "name": "Hoyt-Schermerhorn Sts",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "JAY",
+            "name": "Jay St-MetroTech",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A40",
+            "name": "High St",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Chambers St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A34",
+            "name": "Canal St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A33",
+            "name": "Spring St",
+            "transfers": [
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "L01",
+            "name": "14 St-8 Av",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A30",
+            "name": "23 St",
+            "transfers": [
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "42 St-Port Authority Bus Terminal",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A25",
+            "name": "50 St",
+            "transfers": [
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CBC",
+            "name": "59 St-Columbus Circle",
+            "transfers": [
+                "A_Train",
+                "B_Train",
+                "C_Train",
+                "D_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A22",
+            "name": "72 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A21",
+            "name": "81 St-Museum of Natural History",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A20",
+            "name": "86 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A19",
+            "name": "96 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A18",
+            "name": "103 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A17",
+            "name": "Cathedral Pkwy (110 St)",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A16",
+            "name": "116 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A15",
+            "name": "125 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A14",
+            "name": "135 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A12",
+            "name": "145 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A11",
+            "name": "155 St",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A10",
+            "name": "163 St-Amsterdam Av",
+            "transfers": [
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A09",
+            "name": "168 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "N_Train": [
+        {
+            "id": "D43",
+            "name": "Coney Island-Stillwell Av",
+            "transfers": [
+                "D_Train",
+                "F_Train",
+                "N_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N10",
+            "name": "86 St",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N09",
+            "name": "Avenue U",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N08",
+            "name": "Kings Hwy",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N07",
+            "name": "Bay Parkway",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N06",
+            "name": "20 Av",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N05",
+            "name": "18 Av",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B16",
+            "name": "New Utrecht Av",
+            "transfers": [
+                "D_Train",
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N03",
+            "name": "Fort Hamilton Parkway",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "N02",
+            "name": "8 Av",
+            "transfers": [
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R41",
+            "name": "59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R36",
+            "name": "36 St",
+            "transfers": [
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "CAN",
+            "name": "Canal St",
+            "transfers": [
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R15",
+            "name": "49 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R14",
+            "name": "57 St-7 Av",
+            "transfers": [
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R13",
+            "name": "5 Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R11",
+            "name": "Lexington Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train",
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "QBP",
+            "name": "Queensboro Plaza",
+            "transfers": [
+                "Seven_Train",
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R08",
+            "name": "39 Av-Dutch Kills",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R06",
+            "name": "36 Av",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R05",
+            "name": "Broadway",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R04",
+            "name": "30 Av",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R03",
+            "name": "Astoria Blvd",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R01",
+            "name": "Astoria-Ditmars Blvd",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "A_Train_Lefferts": [
+        {
+            "id": "A65",
+            "name": "Ozone Park-Lefferts Blvd",
+            "transfers": [
+                "A_Train_Lefferts"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A64",
+            "name": "111 St",
+            "transfers": [
+                "A_Train_Lefferts"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A63",
+            "name": "104 St",
+            "transfers": [
+                "A_Train_Lefferts"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A61",
+            "name": "Rockaway Blvd",
+            "transfers": [
+                "A_Train",
+                "A_Train_Lefferts",
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A60",
+            "name": "88 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A59",
+            "name": "80 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A57",
+            "name": "Grant Av",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A55",
+            "name": "Euclid Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BWJ",
+            "name": "Broadway Junction",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train",
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A48",
+            "name": "Utica Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A46",
+            "name": "Nostrand Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A42",
+            "name": "Hoyt-Schermerhorn Sts",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "JAY",
+            "name": "Jay St-MetroTech",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A40",
+            "name": "High St",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Chambers St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A34",
+            "name": "Canal St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "L01",
+            "name": "14 St-8 Av",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "42 St-Port Authority Bus Terminal",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CBC",
+            "name": "59 St-Columbus Circle",
+            "transfers": [
+                "A_Train",
+                "B_Train",
+                "C_Train",
+                "D_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A15",
+            "name": "125 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A12",
+            "name": "145 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A09",
+            "name": "168 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A07",
+            "name": "175 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A06",
+            "name": "181 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A05",
+            "name": "190 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A03",
+            "name": "Dyckman St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A02",
+            "name": "Inwood-207 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "Five_Train": [
+        {
+            "id": "247",
+            "name": "Flatbush Av-Brooklyn College",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "246",
+            "name": "Newkirk Av-Little Haiti",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "245",
+            "name": "Beverly Rd",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "244",
+            "name": "Church Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "243",
+            "name": "Winthrop St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "242",
+            "name": "Sterling St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "241",
+            "name": "President St-Medgar Evers College",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOT",
+            "name": "Franklin Avenue-Medgar Evers College",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "234",
+            "name": "Nevins St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOR",
+            "name": "Borough Hall",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "420",
+            "name": "Bowling Green",
+            "transfers": [
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "419",
+            "name": "Wall St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRB",
+            "name": "Brooklyn Bridge-City Hall",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "GRC",
+            "name": "Grand Central-42 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "Seven_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R11",
+            "name": "Lexington Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train",
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "626",
+            "name": "86 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "621",
+            "name": "125 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "416",
+            "name": "138 St-Grand Concourse",
+            "transfers": [
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "222",
+            "name": "149 St-Grand Concourse",
+            "transfers": [
+                "Two_Train",
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "221",
+            "name": "3 Av-149 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "220",
+            "name": "Jackson Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "219",
+            "name": "Prospect Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "218",
+            "name": "Intervale Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "217",
+            "name": "Simpson St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "216",
+            "name": "Freeman St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "215",
+            "name": "174 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "214",
+            "name": "West Farms Sq-E Tremont Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "213",
+            "name": "E 180 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "212",
+            "name": "Bronx Park East",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "211",
+            "name": "Pelham Pkwy",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "210",
+            "name": "Allerton Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "209",
+            "name": "Burke Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "208",
+            "name": "Gun Hill Road",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "207",
+            "name": "219 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "206",
+            "name": "225 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "205",
+            "name": "233 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "204",
+            "name": "Nereid Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "505",
+            "name": "Morris Park",
+            "transfers": [
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "504",
+            "name": "Pelham Pkwy",
+            "transfers": [
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "502",
+            "name": "Baychester Av",
+            "transfers": [
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "501",
+            "name": "Eastchester-Dyre Av",
+            "transfers": [
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        }
+    ],
+    "M_Train": [
+        {
+            "id": "M01",
+            "name": "Middle Village-Metropolitan Av",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "M04",
+            "name": "Fresh Pond Road",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "M05",
+            "name": "Forest Av",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "M06",
+            "name": "Seneca Av",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "M08",
+            "name": "Myrtle-Wyckoff Avs",
+            "transfers": [
+                "L_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M09",
+            "name": "Knickerbocker Av",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M10",
+            "name": "Central Av",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M11",
+            "name": "Myrtle Av",
+            "transfers": [
+                "J_Train",
+                "M_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M12",
+            "name": "Flushing Av",
+            "transfers": [
+                "J_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M13",
+            "name": "Lorimer St",
+            "transfers": [
+                "J_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M14",
+            "name": "Hewes St",
+            "transfers": [
+                "J_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M16",
+            "name": "Marcy Av",
+            "transfers": [
+                "J_Train",
+                "M_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "ESX",
+            "name": "Delancey St-Essex St",
+            "transfers": [
+                "J_Train",
+                "Z_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BWL",
+            "name": "Broadway-Lafayette St",
+            "transfers": [
+                "Six_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "132",
+            "name": "14 St-6 Av",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "F_Train",
+                "M_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D18",
+            "name": "23 St",
+            "transfers": [
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRY",
+            "name": "42 St-Bryant Park",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "Seven_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D15",
+            "name": "47-50 Sts-Rockefeller Ctr",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "B10",
+            "name": "57 St",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "B08",
+            "name": "Lexington Av/63 St",
+            "transfers": [
+                "M_Train",
+                "Q_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "B06",
+            "name": "Roosevelt Island",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "B04",
+            "name": "21 St-Queensbridge",
+            "transfers": [
+                "M_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G20",
+            "name": "36 St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G19",
+            "name": "Steinway St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G18",
+            "name": "46 St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G16",
+            "name": "Northern Blvd",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G15",
+            "name": "65 St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "710",
+            "name": "Jackson Hts-Roosevelt Av",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G13",
+            "name": "Elmhurst Av",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G12",
+            "name": "Grand Av-Newtown",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G11",
+            "name": "Woodhaven Blvd",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G10",
+            "name": "63 Dr-Rego Park",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G09",
+            "name": "67 Av",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G08",
+            "name": "Forest Hills-71 Av",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "W_Train": [
+        {
+            "id": "R27",
+            "name": "Whitehall St-South Ferry",
+            "transfers": [
+                "One_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R26",
+            "name": "Rector St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Cortlandt St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R24",
+            "name": "City Hall",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CAN",
+            "name": "Canal St",
+            "transfers": [
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R22",
+            "name": "Prince St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "NYU",
+            "name": "8 St-NYU",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R19",
+            "name": "23 St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R18",
+            "name": "28 St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R15",
+            "name": "49 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R14",
+            "name": "57 St-7 Av",
+            "transfers": [
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R13",
+            "name": "5 Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R11",
+            "name": "Lexington Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train",
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "QBP",
+            "name": "Queensboro Plaza",
+            "transfers": [
+                "Seven_Train",
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R08",
+            "name": "39 Av-Dutch Kills",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R06",
+            "name": "36 Av",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R05",
+            "name": "Broadway",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R04",
+            "name": "30 Av",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R03",
+            "name": "Astoria Blvd",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "R01",
+            "name": "Astoria-Ditmars Blvd",
+            "transfers": [
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "Z_Train": [
+        {
+            "id": "M23",
+            "name": "Broad St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRB",
+            "name": "Chambers St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CAN",
+            "name": "Canal St",
+            "transfers": [
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "M19",
+            "name": "Bowery",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "ESX",
+            "name": "Delancey St-Essex St",
+            "transfers": [
+                "J_Train",
+                "Z_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "M16",
+            "name": "Marcy Av",
+            "transfers": [
+                "J_Train",
+                "M_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M11",
+            "name": "Myrtle Av",
+            "transfers": [
+                "J_Train",
+                "M_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J30",
+            "name": "Gates Av",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J28",
+            "name": "Chauncey St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BWJ",
+            "name": "Broadway Junction",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train",
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J23",
+            "name": "Van Siclen Av",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J21",
+            "name": "Norwood Av",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J20",
+            "name": "Crescent St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J17",
+            "name": "75 St-Elderts Ln",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J15",
+            "name": "Woodhaven Blvd",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J14",
+            "name": "104 St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J12",
+            "name": "121 St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G06",
+            "name": "Sutphin Blvd-Archer Av-JFK Airport",
+            "transfers": [
+                "E_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G05",
+            "name": "Jamaica Center-Parsons/Archer",
+            "transfers": [
+                "E_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "A_Train_Rockaway-Mott": [
+        {
+            "id": "H11",
+            "name": "Far Rockaway-Mott Av",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H10",
+            "name": "Beach 25 St",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H09",
+            "name": "Beach 36 St",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H08",
+            "name": "Beach 44 St",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H07",
+            "name": "Beach 60 St",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H06",
+            "name": "Beach 67 St",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H04",
+            "name": "Broad Channel",
+            "transfers": [
+                "A_Train_Rockaway-Mott",
+                "S_Train_Rockaway"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H03",
+            "name": "Howard Beach-JFK Airport",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H01",
+            "name": "Aqueduct-N Conduit Av",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "AQR",
+            "name": "Aqueduct Racetrack",
+            "transfers": [
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A61",
+            "name": "Rockaway Blvd",
+            "transfers": [
+                "A_Train",
+                "A_Train_Lefferts",
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A60",
+            "name": "88 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A59",
+            "name": "80 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A57",
+            "name": "Grant Av",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A55",
+            "name": "Euclid Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BWJ",
+            "name": "Broadway Junction",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train",
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A48",
+            "name": "Utica Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A46",
+            "name": "Nostrand Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A42",
+            "name": "Hoyt-Schermerhorn Sts",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "JAY",
+            "name": "Jay St-MetroTech",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A40",
+            "name": "High St",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Chambers St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A34",
+            "name": "Canal St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "L01",
+            "name": "14 St-8 Av",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "42 St-Port Authority Bus Terminal",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CBC",
+            "name": "59 St-Columbus Circle",
+            "transfers": [
+                "A_Train",
+                "B_Train",
+                "C_Train",
+                "D_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A15",
+            "name": "125 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A12",
+            "name": "145 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A09",
+            "name": "168 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A07",
+            "name": "175 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A06",
+            "name": "181 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A05",
+            "name": "190 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A03",
+            "name": "Dyckman St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A02",
+            "name": "Inwood-207 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "Q_Train": [
+        {
+            "id": "D43",
+            "name": "Coney Island-Stillwell Av",
+            "transfers": [
+                "D_Train",
+                "F_Train",
+                "N_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D42",
+            "name": "W 8 St-NY Aquarium",
+            "transfers": [
+                "F_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D41",
+            "name": "Ocean Pkwy",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D40",
+            "name": "Brighton Beach",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D39",
+            "name": "Sheepshead Bay",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D38",
+            "name": "Neck Rd",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D37",
+            "name": "Avenue U",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D35",
+            "name": "Kings Hwy",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D34",
+            "name": "Avenue M",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D33",
+            "name": "Avenue J",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D32",
+            "name": "Avenue H",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D31",
+            "name": "Newkirk Plaza",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D30",
+            "name": "Cortelyou Road",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D29",
+            "name": "Beverley Road",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D28",
+            "name": "Church Av",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D27",
+            "name": "Parkside Av",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D26",
+            "name": "Prospect Park",
+            "transfers": [
+                "B_Train",
+                "Q_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D25",
+            "name": "7 Av",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R30",
+            "name": "DeKalb Av",
+            "transfers": [
+                "B_Train",
+                "Q_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "CAN",
+            "name": "Canal St",
+            "transfers": [
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R14",
+            "name": "57 St-7 Av",
+            "transfers": [
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "B08",
+            "name": "Lexington Av/63 St",
+            "transfers": [
+                "M_Train",
+                "Q_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "Q03",
+            "name": "72 St",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "Q04",
+            "name": "86 St",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "Q05",
+            "name": "96 St",
+            "transfers": [
+                "Q_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "F_Train": [
+        {
+            "id": "D43",
+            "name": "Coney Island-Stillwell Av",
+            "transfers": [
+                "D_Train",
+                "F_Train",
+                "N_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D42",
+            "name": "W 8 St-NY Aquarium",
+            "transfers": [
+                "F_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F39",
+            "name": "Neptune Av",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F38",
+            "name": "Avenue X",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F36",
+            "name": "Avenue U",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F35",
+            "name": "Kings Hwy",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F34",
+            "name": "Avenue P",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F33",
+            "name": "Avenue N",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F32",
+            "name": "Bay Parkway",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F31",
+            "name": "Avenue I",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F30",
+            "name": "18 Av",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F29",
+            "name": "Ditmas Av",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F27",
+            "name": "Church Av",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F26",
+            "name": "Fort Hamilton Parkway",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F25",
+            "name": "15 St-Prospect Park",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F24",
+            "name": "7 Av",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "4A9",
+            "name": "4 Av-9 St",
+            "transfers": [
+                "R_Train",
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F22",
+            "name": "Smith-9 Sts",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F21",
+            "name": "Carroll St",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F20",
+            "name": "Bergen St",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "JAY",
+            "name": "Jay St-MetroTech",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F18",
+            "name": "York St",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F16",
+            "name": "East Broadway",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "ESX",
+            "name": "Delancey St-Essex St",
+            "transfers": [
+                "J_Train",
+                "Z_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "F14",
+            "name": "2 Av",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BWL",
+            "name": "Broadway-Lafayette St",
+            "transfers": [
+                "Six_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "132",
+            "name": "14 St-6 Av",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "F_Train",
+                "M_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D18",
+            "name": "23 St",
+            "transfers": [
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRY",
+            "name": "42 St-Bryant Park",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "Seven_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D15",
+            "name": "47-50 Sts-Rockefeller Ctr",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "F12",
+            "name": "5 Av/53 St",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "LEX",
+            "name": "Lexington Av/53 St",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CSQ",
+            "name": "Court Sq-23 St",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G21",
+            "name": "Queens Plaza",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "710",
+            "name": "Jackson Hts-Roosevelt Av",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G08",
+            "name": "Forest Hills-71 Av",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F07",
+            "name": "75 Av",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F06",
+            "name": "Kew Gardens-Union Tpke",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F05",
+            "name": "Briarwood",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F04",
+            "name": "Suthpin Boulevard",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F03",
+            "name": "Parsons Blvd",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F02",
+            "name": "169 St",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F01",
+            "name": "Jamaica-179 St",
+            "transfers": [
+                "F_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "Two_Train": [
+        {
+            "id": "247",
+            "name": "Flatbush Av-Brooklyn College",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "246",
+            "name": "Newkirk Av-Little Haiti",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "245",
+            "name": "Beverly Rd",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "244",
+            "name": "Church Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "243",
+            "name": "Winthrop St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "242",
+            "name": "Sterling St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "241",
+            "name": "President St-Medgar Evers College",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOT",
+            "name": "Franklin Avenue-Medgar Evers College",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "238",
+            "name": "Eastern Pkwy-Brooklyn Museum",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "237",
+            "name": "Grand Army Plaza",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "236",
+            "name": "Bergen St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "234",
+            "name": "Nevins St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "233",
+            "name": "Hoyt St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOR",
+            "name": "Borough Hall",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "231",
+            "name": "Clark St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "230",
+            "name": "Wall St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Park Place",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "137",
+            "name": "Chambers St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "132",
+            "name": "14 St-6 Av",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "F_Train",
+                "M_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "123",
+            "name": "72 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "120",
+            "name": "96 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "227",
+            "name": "Central Park North (110 St)",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "226",
+            "name": "116 St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "225",
+            "name": "125 St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "224",
+            "name": "135 St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "222",
+            "name": "149 St-Grand Concourse",
+            "transfers": [
+                "Two_Train",
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "221",
+            "name": "3 Av-149 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "220",
+            "name": "Jackson Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "219",
+            "name": "Prospect Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "218",
+            "name": "Intervale Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "217",
+            "name": "Simpson St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "216",
+            "name": "Freeman St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "215",
+            "name": "174 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "214",
+            "name": "West Farms Sq-E Tremont Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "213",
+            "name": "E 180 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "212",
+            "name": "Bronx Park East",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "211",
+            "name": "Pelham Pkwy",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "210",
+            "name": "Allerton Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "209",
+            "name": "Burke Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "208",
+            "name": "Gun Hill Road",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "207",
+            "name": "219 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "206",
+            "name": "225 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "205",
+            "name": "233 St",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "204",
+            "name": "Nereid Av",
+            "transfers": [
+                "Two_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "201",
+            "name": "Wakefield-241 St",
+            "transfers": [
+                "Two_Train"
+            ],
+            "borough": "Bronx"
+        }
+    ],
+    "R_Train": [
+        {
+            "id": "R45",
+            "name": "Bay Ridge-95 St",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R44",
+            "name": "86 St",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R43",
+            "name": "77 St",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R42",
+            "name": "Bay Ridge Av",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R41",
+            "name": "59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R40",
+            "name": "53 St",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R39",
+            "name": "45 St",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R36",
+            "name": "36 St",
+            "transfers": [
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R35",
+            "name": "25 St",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R34",
+            "name": "Prospect Av",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "4A9",
+            "name": "4 Av-9 St",
+            "transfers": [
+                "R_Train",
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R32",
+            "name": "Union St",
+            "transfers": [
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R30",
+            "name": "DeKalb Av",
+            "transfers": [
+                "B_Train",
+                "Q_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "JAY",
+            "name": "Jay St-MetroTech",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOR",
+            "name": "Court St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R27",
+            "name": "Whitehall St-South Ferry",
+            "transfers": [
+                "One_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R26",
+            "name": "Rector St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Cortlandt St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R24",
+            "name": "City Hall",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CAN",
+            "name": "Canal St",
+            "transfers": [
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R22",
+            "name": "Prince St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "NYU",
+            "name": "8 St-NYU",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R19",
+            "name": "23 St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R18",
+            "name": "28 St",
+            "transfers": [
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R15",
+            "name": "49 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R14",
+            "name": "57 St-7 Av",
+            "transfers": [
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R13",
+            "name": "5 Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R11",
+            "name": "Lexington Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train",
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "G21",
+            "name": "Queens Plaza",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G20",
+            "name": "36 St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G19",
+            "name": "Steinway St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G18",
+            "name": "46 St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G16",
+            "name": "Northern Blvd",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G15",
+            "name": "65 St",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "710",
+            "name": "Jackson Hts-Roosevelt Av",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G13",
+            "name": "Elmhurst Av",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G12",
+            "name": "Grand Av-Newtown",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G11",
+            "name": "Woodhaven Blvd",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G10",
+            "name": "63 Dr-Rego Park",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G09",
+            "name": "67 Av",
+            "transfers": [
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G08",
+            "name": "Forest Hills-71 Av",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "E_Train": [
+        {
+            "id": "WTC",
+            "name": "World Trade Center",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A34",
+            "name": "Canal St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A33",
+            "name": "Spring St",
+            "transfers": [
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "L01",
+            "name": "14 St-8 Av",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A30",
+            "name": "23 St",
+            "transfers": [
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "42 St-Port Authority Bus Terminal",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A25",
+            "name": "50 St",
+            "transfers": [
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D14",
+            "name": "7 Av",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "F12",
+            "name": "5 Av/53 St",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "LEX",
+            "name": "Lexington Av/53 St",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CSQ",
+            "name": "Court Sq-23 St",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G21",
+            "name": "Queens Plaza",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "710",
+            "name": "Jackson Hts-Roosevelt Av",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G08",
+            "name": "Forest Hills-71 Av",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F07",
+            "name": "75 Av",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F06",
+            "name": "Kew Gardens-Union Tpke",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "F05",
+            "name": "Briarwood",
+            "transfers": [
+                "E_Train",
+                "F_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G07",
+            "name": "Jamaica-Van Wyck",
+            "transfers": [
+                "E_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G06",
+            "name": "Sutphin Blvd-Archer Av-JFK Airport",
+            "transfers": [
+                "E_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G05",
+            "name": "Jamaica Center-Parsons/Archer",
+            "transfers": [
+                "E_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "Three_Train": [
+        {
+            "id": "257",
+            "name": "New Lots Av",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "256",
+            "name": "Van Siclen Av",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "255",
+            "name": "Pennsylvania Av",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "254",
+            "name": "Junius St",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "253",
+            "name": "Rockaway Av",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "252",
+            "name": "Saratoga Av",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "251",
+            "name": "Sutter Av-Rutland Rd",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "250",
+            "name": "Crown Hts-Utica Av",
+            "transfers": [
+                "Three_Train",
+                "Four_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "249",
+            "name": "Kingston Av",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "248",
+            "name": "Nostrand Av",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOT",
+            "name": "Franklin Avenue-Medgar Evers College",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "238",
+            "name": "Eastern Pkwy-Brooklyn Museum",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "237",
+            "name": "Grand Army Plaza",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "236",
+            "name": "Bergen St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "234",
+            "name": "Nevins St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "233",
+            "name": "Hoyt St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOR",
+            "name": "Borough Hall",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "231",
+            "name": "Clark St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "230",
+            "name": "Wall St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Park Place",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "137",
+            "name": "Chambers St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "132",
+            "name": "14 St-6 Av",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "F_Train",
+                "M_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "123",
+            "name": "72 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "120",
+            "name": "96 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "227",
+            "name": "Central Park North (110 St)",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "226",
+            "name": "116 St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "225",
+            "name": "125 St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "224",
+            "name": "135 St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "301",
+            "name": "Harlem-148 St",
+            "transfers": [
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "One_Train": [
+        {
+            "id": "R27",
+            "name": "South Ferry",
+            "transfers": [
+                "One_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "139",
+            "name": "Rector St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "138",
+            "name": "WTC Cortlandt",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "137",
+            "name": "Chambers St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "136",
+            "name": "Franklin St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "135",
+            "name": "Canal St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "134",
+            "name": "Houston St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "133",
+            "name": "Christopher St-Sheridan Sq",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "132",
+            "name": "14 St-6 Av",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "F_Train",
+                "M_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "131",
+            "name": "18 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "130",
+            "name": "23 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "129",
+            "name": "28 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "126",
+            "name": "50 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CBC",
+            "name": "59 St-Columbus Circle",
+            "transfers": [
+                "A_Train",
+                "B_Train",
+                "C_Train",
+                "D_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "124",
+            "name": "66 St-Lincoln Center",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "123",
+            "name": "72 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "122",
+            "name": "79 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "121",
+            "name": "86 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "120",
+            "name": "96 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "119",
+            "name": "103 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "118",
+            "name": "Cathedral Pkwy (110 St)",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "117",
+            "name": "116 St-Columbia University",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "116",
+            "name": "125 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "115",
+            "name": "137 St-City College",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "114",
+            "name": "145 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "113",
+            "name": "157 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A09",
+            "name": "168 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "111",
+            "name": "181 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "110",
+            "name": "191 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "109",
+            "name": "Dyckman St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "108",
+            "name": "207 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "107",
+            "name": "215 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "106",
+            "name": "Marble Hill-225 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "104",
+            "name": "231 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "103",
+            "name": "238 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "101",
+            "name": "Van Cortlandt Park-242 St",
+            "transfers": [
+                "One_Train"
+            ],
+            "borough": "Bronx"
+        }
+    ],
+    "Seven_Train": [
+        {
+            "id": "726",
+            "name": "34 St-Hudson Yards",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRY",
+            "name": "5 Av",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "Seven_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "GRC",
+            "name": "Grand Central-42 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "Seven_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "721",
+            "name": "Vernon Blvd-Jackson Av",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "720",
+            "name": "Hunters Point Av",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "CSQ",
+            "name": "Court Square",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "QBP",
+            "name": "Queensboro Plaza",
+            "transfers": [
+                "Seven_Train",
+                "N_Train",
+                "W_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "716",
+            "name": "33 St-Rawson St",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "715",
+            "name": "40 St-Lowery St",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "714",
+            "name": "46 St-Bliss St",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "713",
+            "name": "52 St",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "712",
+            "name": "61 St-Woodside",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "711",
+            "name": "69 St",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "710",
+            "name": "Jackson Hts-Roosevelt Av",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "M_Train",
+                "R_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "709",
+            "name": "82 St-Jackson Hts",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "708",
+            "name": "90 St-Elmhurst Av",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "707",
+            "name": "Junction Blvd",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "706",
+            "name": "103 St-Corona Plaza",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "705",
+            "name": "111 St",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "702",
+            "name": "Mets-Willets Point",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "701",
+            "name": "Flushing-Main St",
+            "transfers": [
+                "Seven_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "S_Train": [
+        {
+            "id": "127",
+            "name": "Times Sq-42 St",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "GRC",
+            "name": "Grand Central-42 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "Seven_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "D_Train": [
+        {
+            "id": "D43",
+            "name": "Coney Island-Stillwell Av",
+            "transfers": [
+                "D_Train",
+                "F_Train",
+                "N_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B23",
+            "name": "Bay 50 St",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B22",
+            "name": "25 Av",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B21",
+            "name": "Bay Parkway",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B20",
+            "name": "20 Av",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B19",
+            "name": "18 Av",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B18",
+            "name": "79 St",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B17",
+            "name": "71 St",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B16",
+            "name": "62 St",
+            "transfers": [
+                "D_Train",
+                "N_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B15",
+            "name": "55 St",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B14",
+            "name": "50 St",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B13",
+            "name": "Fort Hamilton Parkway",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "B12",
+            "name": "9 Av",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R36",
+            "name": "36 St",
+            "transfers": [
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D22",
+            "name": "Grand St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BWL",
+            "name": "Broadway-Lafayette St",
+            "transfers": [
+                "Six_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRY",
+            "name": "42 St-Bryant Park",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "Seven_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D15",
+            "name": "47-50 Sts-Rockefeller Ctr",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D14",
+            "name": "7 Av",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CBC",
+            "name": "59 St-Columbus Circle",
+            "transfers": [
+                "A_Train",
+                "B_Train",
+                "C_Train",
+                "D_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A15",
+            "name": "125 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A12",
+            "name": "145 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D12",
+            "name": "155 St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "NYY",
+            "name": "161 St-Yankee Stadium",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D10",
+            "name": "167 St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D09",
+            "name": "170 St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D08",
+            "name": "174-175 Sts",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D07",
+            "name": "Tremont Av",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D06",
+            "name": "182-183 Sts",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D05",
+            "name": "Fordham Road",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D04",
+            "name": "Kingsbridge Rd",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D03",
+            "name": "Bedford Park Boulevard",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D01",
+            "name": "Norwood-205 St",
+            "transfers": [
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        }
+    ],
+    "J_Train": [
+        {
+            "id": "M23",
+            "name": "Broad St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRB",
+            "name": "Chambers St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CAN",
+            "name": "Canal St",
+            "transfers": [
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "M19",
+            "name": "Bowery",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "ESX",
+            "name": "Delancey St-Essex St",
+            "transfers": [
+                "J_Train",
+                "Z_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "M16",
+            "name": "Marcy Av",
+            "transfers": [
+                "J_Train",
+                "M_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M14",
+            "name": "Hewes St",
+            "transfers": [
+                "J_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M13",
+            "name": "Lorimer St",
+            "transfers": [
+                "J_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M12",
+            "name": "Flushing Av",
+            "transfers": [
+                "J_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "M11",
+            "name": "Myrtle Av",
+            "transfers": [
+                "J_Train",
+                "M_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J31",
+            "name": "Kosciuszko St",
+            "transfers": [
+                "J_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J30",
+            "name": "Gates Av",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J29",
+            "name": "Halsey St",
+            "transfers": [
+                "J_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J28",
+            "name": "Chauncey St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BWJ",
+            "name": "Broadway Junction",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train",
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J24",
+            "name": "Alabama Av",
+            "transfers": [
+                "J_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J23",
+            "name": "Van Siclen Av",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J22",
+            "name": "Cleveland St",
+            "transfers": [
+                "J_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J21",
+            "name": "Norwood Av",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J20",
+            "name": "Crescent St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J19",
+            "name": "Cypress Hills",
+            "transfers": [
+                "J_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "J17",
+            "name": "75 St-Elderts Ln",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J16",
+            "name": "85 St-Forest Pkwy",
+            "transfers": [
+                "J_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J15",
+            "name": "Woodhaven Blvd",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J14",
+            "name": "104 St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J13",
+            "name": "111 St",
+            "transfers": [
+                "J_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "J12",
+            "name": "121 St",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G06",
+            "name": "Sutphin Blvd-Archer Av-JFK Airport",
+            "transfers": [
+                "E_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "G05",
+            "name": "Jamaica Center-Parsons/Archer",
+            "transfers": [
+                "E_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "G_Train": [
+        {
+            "id": "F27",
+            "name": "Church Av",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F26",
+            "name": "Fort Hamilton Parkway",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F25",
+            "name": "15 St-Prospect Park",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F24",
+            "name": "7 Av",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "4A9",
+            "name": "4 Av-9 St",
+            "transfers": [
+                "R_Train",
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F22",
+            "name": "Smith-9 Sts",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F21",
+            "name": "Carroll St",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "F20",
+            "name": "Bergen St",
+            "transfers": [
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A42",
+            "name": "Hoyt-Schermerhorn Sts",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G36",
+            "name": "Fulton St",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G35",
+            "name": "Clinton-Washington Avs",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G34",
+            "name": "Classon Av",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G33",
+            "name": "Bedford-Nostrand Avs",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G32",
+            "name": "Myrtle-Willoughby Avs",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G31",
+            "name": "Flushing Av",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G30",
+            "name": "Broadway",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "LOR",
+            "name": "Metropolitan Av",
+            "transfers": [
+                "L_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G28",
+            "name": "Nassau Av",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G26",
+            "name": "Greenpoint Av",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "G24",
+            "name": "21 St",
+            "transfers": [
+                "G_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "CSQ",
+            "name": "Court Square",
+            "transfers": [
+                "Seven_Train",
+                "E_Train",
+                "F_Train",
+                "G_Train"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "Six_Train": [
+        {
+            "id": "BRB",
+            "name": "Brooklyn Bridge-City Hall",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CAN",
+            "name": "Canal St",
+            "transfers": [
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "638",
+            "name": "Spring St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BWL",
+            "name": "Bleecker St",
+            "transfers": [
+                "Six_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "636",
+            "name": "Astor Place",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "634",
+            "name": "23 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "633",
+            "name": "28 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "632",
+            "name": "33 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "GRC",
+            "name": "Grand Central-42 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "Seven_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "LEX",
+            "name": "51 St",
+            "transfers": [
+                "E_Train",
+                "F_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R11",
+            "name": "59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train",
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "628",
+            "name": "68 St-Hunter College",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "627",
+            "name": "77 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "626",
+            "name": "86 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "625",
+            "name": "96 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "624",
+            "name": "103 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "623",
+            "name": "110 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "622",
+            "name": "116 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "621",
+            "name": "125 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "619",
+            "name": "3 Av-138 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "618",
+            "name": "Brook Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "617",
+            "name": "Cypress Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "616",
+            "name": "E 143 St-St Mary's St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "615",
+            "name": "E 149 St",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "614",
+            "name": "Longwood Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "613",
+            "name": "Hunts Point Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "612",
+            "name": "Whitlock Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "611",
+            "name": "Elder Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "610",
+            "name": "Morrison Av-Soundview",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "609",
+            "name": "St Lawrence Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "608",
+            "name": "Parkchester",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "607",
+            "name": "Castle Hill Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "606",
+            "name": "Zerega Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "604",
+            "name": "Westchester Sq-E Tremont Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "603",
+            "name": "Middletown Rd",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "602",
+            "name": "Buhre Av",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "601",
+            "name": "Pelham Bay Park",
+            "transfers": [
+                "Six_Train"
+            ],
+            "borough": "Bronx"
+        }
+    ],
+    "S_Train_Rockaway": [
+        {
+            "id": "H04",
+            "name": "Broad Channel",
+            "transfers": [
+                "A_Train_Rockaway-Mott",
+                "S_Train_Rockaway"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H12",
+            "name": "Beach 90 St",
+            "transfers": [
+                "S_Train_Rockaway"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H13",
+            "name": "Beach 98 St",
+            "transfers": [
+                "S_Train_Rockaway"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H14",
+            "name": "Beach 105 St",
+            "transfers": [
+                "S_Train_Rockaway"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "H15",
+            "name": "Rockaway Park-Beach 116 St",
+            "transfers": [
+                "S_Train_Rockaway"
+            ],
+            "borough": "Queens"
+        }
+    ],
+    "L_Train": [
+        {
+            "id": "L29",
+            "name": "Canarsie-Rockaway Parkway",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L28",
+            "name": "East 105 St",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L27",
+            "name": "New Lots Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L26",
+            "name": "Livonia Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L25",
+            "name": "Sutter Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L24",
+            "name": "Atlantic Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BWJ",
+            "name": "Broadway Junction",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train",
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L21",
+            "name": "Bushwick Av-Aberdeen St",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L20",
+            "name": "Wilson Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L19",
+            "name": "Halsey St",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "M08",
+            "name": "Myrtle-Wyckoff Avs",
+            "transfers": [
+                "L_Train",
+                "M_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L16",
+            "name": "DeKalb Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L15",
+            "name": "Jefferson St",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L14",
+            "name": "Morgan Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L13",
+            "name": "Montrose Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L12",
+            "name": "Grand St",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L11",
+            "name": "Graham Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "LOR",
+            "name": "Lorimer St",
+            "transfers": [
+                "L_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L08",
+            "name": "Bedford Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "L06",
+            "name": "1 Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "L05",
+            "name": "3 Av",
+            "transfers": [
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "132",
+            "name": "14 St-6 Av",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "F_Train",
+                "M_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "L01",
+            "name": "14 St-8 Av",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "A_Train": [
+        {
+            "id": "A61",
+            "name": "Rockaway Blvd",
+            "transfers": [
+                "A_Train",
+                "A_Train_Lefferts",
+                "A_Train_Rockaway-Mott"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A60",
+            "name": "88 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A59",
+            "name": "80 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Queens"
+        },
+        {
+            "id": "A57",
+            "name": "Grant Av",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A55",
+            "name": "Euclid Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BWJ",
+            "name": "Broadway Junction",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train",
+                "L_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A48",
+            "name": "Utica Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A46",
+            "name": "Nostrand Av",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A42",
+            "name": "Hoyt-Schermerhorn Sts",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "G_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "JAY",
+            "name": "Jay St-MetroTech",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "F_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "A40",
+            "name": "High St",
+            "transfers": [
+                "A_Train",
+                "C_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "WTC",
+            "name": "Chambers St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A34",
+            "name": "Canal St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "L01",
+            "name": "14 St-8 Av",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "PEN",
+            "name": "34 St-Penn Station",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "One_Train",
+                "Two_Train",
+                "Three_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "127",
+            "name": "42 St-Port Authority Bus Terminal",
+            "transfers": [
+                "One_Train",
+                "Two_Train",
+                "Three_Train",
+                "Seven_Train",
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CBC",
+            "name": "59 St-Columbus Circle",
+            "transfers": [
+                "A_Train",
+                "B_Train",
+                "C_Train",
+                "D_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A15",
+            "name": "125 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A12",
+            "name": "145 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A09",
+            "name": "168 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A07",
+            "name": "175 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A06",
+            "name": "181 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A05",
+            "name": "190 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A03",
+            "name": "Dyckman St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A02",
+            "name": "Inwood-207 St",
+            "transfers": [
+                "A_Train"
+            ],
+            "borough": "Manhattan"
+        }
+    ],
+    "S_Train_Shuttle": [
+        {
+            "id": "S01",
+            "name": "Franklin Avenue",
+            "transfers": [
+                "C_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "S03",
+            "name": "Park Place",
+            "transfers": [
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOT",
+            "name": "Botanic Garden",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D26",
+            "name": "Prospect Park",
+            "transfers": [
+                "B_Train",
+                "Q_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        }
+    ],
+    "B_Train": [
+        {
+            "id": "D40",
+            "name": "Brighton Beach",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D39",
+            "name": "Sheepshead Bay",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D35",
+            "name": "Kings Hwy",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D31",
+            "name": "Newkirk Plaza",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D28",
+            "name": "Church Av",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D26",
+            "name": "Prospect Park",
+            "transfers": [
+                "B_Train",
+                "Q_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D25",
+            "name": "7 Av",
+            "transfers": [
+                "B_Train",
+                "Q_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "R30",
+            "name": "DeKalb Av",
+            "transfers": [
+                "B_Train",
+                "Q_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "D22",
+            "name": "Grand St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BWL",
+            "name": "Broadway-Lafayette St",
+            "transfers": [
+                "Six_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A32",
+            "name": "W 4 St-Wash Sq",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "E_Train",
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "HSQ",
+            "name": "34 St-Herald Sq",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRY",
+            "name": "42 St-Bryant Park",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train",
+                "Seven_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D15",
+            "name": "47-50 Sts-Rockefeller Ctr",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "F_Train",
+                "M_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D14",
+            "name": "7 Av",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "E_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "CBC",
+            "name": "59 St-Columbus Circle",
+            "transfers": [
+                "A_Train",
+                "B_Train",
+                "C_Train",
+                "D_Train",
+                "One_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A22",
+            "name": "72 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A21",
+            "name": "81 St-Museum of Natural History",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A20",
+            "name": "86 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A19",
+            "name": "96 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A18",
+            "name": "103 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A17",
+            "name": "Cathedral Pkwy (110 St)",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A16",
+            "name": "116 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A15",
+            "name": "125 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A14",
+            "name": "135 St",
+            "transfers": [
+                "B_Train",
+                "C_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "A12",
+            "name": "145 St",
+            "transfers": [
+                "A_Train",
+                "C_Train",
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "D12",
+            "name": "155 St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "NYY",
+            "name": "161 St-Yankee Stadium",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D10",
+            "name": "167 St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D09",
+            "name": "170 St",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D08",
+            "name": "174-175 Sts",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D07",
+            "name": "Tremont Av",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D06",
+            "name": "182-183 Sts",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D05",
+            "name": "Fordham Road",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D04",
+            "name": "Kingsbridge Rd",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "D03",
+            "name": "Bedford Park Boulevard",
+            "transfers": [
+                "B_Train",
+                "D_Train"
+            ],
+            "borough": "Bronx"
+        }
+    ],
+    "Four_Train": [
+        {
+            "id": "250",
+            "name": "Crown Hts-Utica Av",
+            "transfers": [
+                "Three_Train",
+                "Four_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOT",
+            "name": "Franklin Avenue-Medgar Evers College",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "S_Train_Shuttle"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "AAB",
+            "name": "Atlantic Av-Barclays Ctr",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "B_Train",
+                "Q_Train",
+                "D_Train",
+                "N_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "234",
+            "name": "Nevins St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "BOR",
+            "name": "Borough Hall",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "R_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
+            "id": "420",
+            "name": "Bowling Green",
+            "transfers": [
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "419",
+            "name": "Wall St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "FUL",
+            "name": "Fulton St",
+            "transfers": [
+                "Two_Train",
+                "Three_Train",
+                "Four_Train",
+                "Five_Train",
+                "A_Train",
+                "C_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "BRB",
+            "name": "Brooklyn Bridge-City Hall",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "USQ",
+            "name": "14 St-Union Sq",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "N_Train",
+                "Q_Train",
+                "R_Train",
+                "W_Train",
+                "L_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "GRC",
+            "name": "Grand Central-42 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train",
+                "Seven_Train",
+                "S_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "R11",
+            "name": "Lexington Av/59 St",
+            "transfers": [
+                "N_Train",
+                "R_Train",
+                "W_Train",
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "626",
+            "name": "86 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "621",
+            "name": "125 St",
+            "transfers": [
+                "Four_Train",
+                "Five_Train",
+                "Six_Train"
+            ],
+            "borough": "Manhattan"
+        },
+        {
+            "id": "416",
+            "name": "138 St-Grand Concourse",
+            "transfers": [
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "222",
+            "name": "149 St-Grand Concourse",
+            "transfers": [
+                "Two_Train",
+                "Four_Train",
+                "Five_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "NYY",
+            "name": "161 St-Yankee Stadium",
+            "transfers": [
+                "B_Train",
+                "D_Train",
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "413",
+            "name": "167 St",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "412",
+            "name": "170 St",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "411",
+            "name": "Mount Eden Avenue",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "410",
+            "name": "176 St",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "409",
+            "name": "Burnside Av",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "408",
+            "name": "183 St",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "407",
+            "name": "Fordham Road",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "406",
+            "name": "Kingsbridge Rd",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "405",
+            "name": "Bedford Park Boulevard-Lehman College",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "402",
+            "name": "Mosholu Pkwy",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        },
+        {
+            "id": "401",
+            "name": "Woodlawn",
+            "transfers": [
+                "Four_Train"
+            ],
+            "borough": "Bronx"
+        }
+    ]
+}

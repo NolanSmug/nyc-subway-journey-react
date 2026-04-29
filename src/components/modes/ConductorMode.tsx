@@ -6,7 +6,7 @@ import { useUIContext } from '../../contexts/UIContext'
 import { useJourneyContext } from '../../contexts/JourneyContext'
 import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
-import { useGame } from '../../hooks/useGame'
+import useGame from '../../hooks/useGame'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
 
 import { Station as StationObject } from '../../logic/StationManager'
@@ -66,10 +66,7 @@ function ConductorMode() {
             'Shift+L': toggleUpcomingStationsLayout,
             'Shift+D': () => setDarkMode((prev: boolean) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev: boolean) => !prev),
-            'Shift+C': () => {
-                setGameMode(GameMode.RIDER)
-                changeDirection(Direction.NULL_DIRECTION) // passenger mounts on CENTER_PLATFORM
-            },
+            'Shift+C': () => setGameMode(GameMode.RIDER),
         },
         singleKeys: {
             t: handleTransferClick,

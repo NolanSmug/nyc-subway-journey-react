@@ -1,5 +1,5 @@
 import { Score } from './Score'
-import { fetchShortestPath, getNumRequiredTransfers, StationData } from './RouteUtils'
+import { fetchOptimalRoute, getNumRequiredTransfers, StationData } from './RouteUtils'
 
 export class DailyChallenge {
     private static getTodayKey(): string {
@@ -34,7 +34,7 @@ export class DailyChallenge {
         }
 
         try {
-            const routeData: StationData[] = await fetchShortestPath(startID, destID)
+            const routeData: StationData[] = await fetchOptimalRoute(startID, destID)
             const score = new Score(routeData.length, Math.max(0, getNumRequiredTransfers(routeData)))
 
             localStorage.setItem(

@@ -1,31 +1,10 @@
 import { LineName, Borough } from './LineManager'
-import { SubwayMap } from './SubwayMap'
 
 export class Station {
     private id: string
     private name: string
     private transfers: LineName[]
     private borough: Borough
-
-    static allNycStations: Station[] = []
-    static async initializeAllStations(): Promise<void> {
-        if (this.allNycStations.length > 0) {
-            // console.log('All NYC stations already initialized.')
-            return
-        }
-
-        this.allNycStations = await SubwayMap.getAllLineStations(LineName.NULL_TRAIN)
-        console.log('All NYC stations initialized')
-    }
-
-    static getRandomStation(stations: Station[], rng: () => number = Math.random): Station {
-        if (stations.length === 0) {
-            throw new Error('Station vector is empty')
-        }
-        const randomIndex = Math.floor(rng() * stations.length)
-
-        return stations[randomIndex]
-    }
 
     static NULL_STATION: Station = new Station('000', '', [LineName.NULL_TRAIN], Borough.STATEN_ISLAND)
 
@@ -38,16 +17,7 @@ export class Station {
 
     // Operators
     public equals(rhs: Station): boolean {
-        return this.id === rhs.id && this.transfersEqual(rhs.transfers)
-    }
-
-    public notEquals(rhs: Station): boolean {
-        return !this.equals(rhs)
-    }
-
-    private transfersEqual(transfers: string[]): boolean {
-        if (this.transfers.length !== transfers.length) return false
-        return this.transfers.every((transfer, index) => transfer === transfers[index])
+        return this.id === rhs.id // ! this could break if there is an id mismatch in my data
     }
 
     // ID

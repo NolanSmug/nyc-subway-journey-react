@@ -7,9 +7,9 @@ import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
 import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
 
-import { useGame } from '../../hooks/useGame'
 import { usePassengerAnimations } from '../../hooks/usePassengerAnimations'
 import { PassengerState } from '../../hooks/usePassengerAnimations'
+import useGame from '../../hooks/useGame'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
 
 import { Direction, LineName } from '../../logic/LineManager'

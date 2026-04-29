@@ -8,7 +8,7 @@
     display: flex;
     margin-bottom: 0;
     width: 15em;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 .current-station-vertical .station-frag-vertical-content {
@@ -27,9 +27,6 @@
     margin: 0;
     overflow: scroll;
     scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* Chrome */
     max-width: 28ch;
 }
 

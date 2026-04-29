@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 
 import StationFragment from '../station/StationFragment'
 import { useTrainContext } from '../../contexts/TrainContext'
+import { scrollToCurrentStation } from '../../logic/stationScroll'
 
 // TODO: Borough barrier
 
@@ -17,7 +18,7 @@ function UpcomingStationsHorizontal() {
     useEffect(() => {
         if (stationsRef.current && stations.length > 0) {
             const currentStationElement = stationsRef.current.querySelector('.current-station')
-            scrollToCurrentStation(currentStationElement)
+            return scrollToCurrentStation(currentStationElement)
         }
     }, [currentStationIndex, stations.length, currentStationID])
 
@@ -49,22 +50,6 @@ function UpcomingStationsHorizontal() {
             <div ref={lineDividerRef} className='line-divider' />
         </div>
     )
-}
-
-export function scrollToCurrentStation(currentStationElement: Element | null, isLowIndex?: boolean): () => void {
-    if (currentStationElement) {
-        const timer = setTimeout(() => {
-            currentStationElement.scrollIntoView({
-                behavior: 'smooth',
-                block: isLowIndex ? 'nearest' : 'center',
-                inline: isLowIndex ? undefined : 'center',
-            })
-        }, 0) // !DO NOT REMOVE!
-        return () => clearTimeout(timer)
-    } else {
-        console.warn(`Current station not found.`)
-    }
-    return () => {}
 }
 
 export default UpcomingStationsHorizontal

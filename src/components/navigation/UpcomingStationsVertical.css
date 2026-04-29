@@ -1,34 +1,39 @@
 .upcoming-stations-vertical-container {
-    position: relative;
-    scroll-behavior: smooth;
-    overflow-x: auto;
-    overflow-y: auto;
     display: flex;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    height: 90vh;
-    scroll-padding-bottom: 1em;
+    position: relative;
+    z-index: 20;
     opacity: 1;
+    height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+
     transition: opacity 0.3s ease;
+}
+
+.upcoming-stations-vertical-container:hover {
+    scrollbar-color: var(--line-color) transparent;
 }
 
 .stations-vertical {
     display: flex;
-    justify-content: flex-end;
     flex-direction: column-reverse;
+    gap: 1.5em;
+    justify-content: flex-end;
     align-items: center;
     position: relative;
-    gap: 1.5em;
-    width: 20em;
+    width: 18em;
 }
 
 .line-divider-vertical {
-    background-color: var(--line-color);
     position: absolute;
-    height: 0.3rem;
-    z-index: 0;
+    top: 25vh;
     left: 6.65em;
+    z-index: 0;
+    height: 0.3rem;
+    background-color: var(--line-color);
     transform: translateX(-50%) rotate(90deg);
     /* rotate (obvi) */
-    top: 25vh;
 }

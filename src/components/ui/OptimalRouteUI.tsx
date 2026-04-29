@@ -1,5 +1,5 @@
 import './OptimalRouteUI.css' // shared with GameOverUI component
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import ActionButton from '../common/ActionButton'
 import LoadingSpinner from '../common/LoadingSpinner'
@@ -8,12 +8,13 @@ import LineSVGs from '../common/LineSVGs'
 import { useJourneyContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
-import { useGame } from '../../hooks/useGame'
+import useGame from '../../hooks/useGame'
+import { useOptimalRoute } from '../../hooks/useOptimalRoute'
 
 import { LineName } from '../../logic/LineManager'
 import { getLineType, LineType } from '../../logic/LineManager'
 import { lineToLineColor } from '../../logic/LineSVGsMap'
-import { fetchShortestPath, getTransferIndices, StationData } from '../../logic/RouteUtils'
+import { getTransferIndices, StationData } from '../../logic/RouteUtils'
 
 import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../assets/images/refresh-icon-w.svg'
@@ -23,12 +24,7 @@ import SUBWAY_ICON_WHITE from '../../assets/images/subway-w.svg'
 import GameOverUI from './GameOverUI'
 
 const hasMultiColoredLines = (lines: LineName[]): boolean => {
-    for (let i = 0; i < lines.length; i++) {
-        if (lineToLineColor(lines[i]) !== lineToLineColor(lines[0])) {
-            return true
-        }
-    }
-    return false
+    return new Set(lines.map(lineToLineColor)).size > 1
 }
 
 const getDotColor = (line: LineName) => {
@@ -70,41 +66,14 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
     const journey = useJourneyContext((state) => state.journey)
     const darkMode = useSettingsContext((state) => state.darkMode)
 
-    const [routeData, setRouteData] = useState<StationData[]>([])
-    const [transferIndexes, setTransferIndexes] = useState<number[]>([])
-    const [loadingVisible, setLoadingVisible] = useState(false)
     const [isRouteRequested, setIsRouteRequested] = useState(false)
+    const [isHeuristic, setIsHeuristic] = useState(false)
 
-    useEffect(() => {
-        if (!journey.isWon || !isRouteRequested) return
+    const [startId, destId] = journey.getStartDestStationIDs()
 
-        const controller = new AbortController()
+    const { routeData, isLoading } = useOptimalRoute(startId, destId, isHeuristic, journey.isWon && isRouteRequested)
 
-        const loadRoute = async () => {
-            setLoadingVisible(true)
-
-            try {
-                const [startId, destId] = journey.getStartDestStationIDs()
-                const data = await fetchShortestPath(startId, destId, controller.signal)
-                setRouteData(data)
-            } catch (e: unknown) {
-                if (e instanceof Error && e.name === 'AbortError') return // why am I using typescript again?
-                console.error('Failed to load optimal route', e)
-            } finally {
-                setLoadingVisible(false)
-            }
-        }
-
-        loadRoute()
-        return () => controller.abort()
-    }, [journey, isRouteRequested])
-
-    useEffect(() => {
-        if (routeData.length > 0 && transferIndexes.length === 0) {
-            const indexes: number[] = getTransferIndices(routeData)
-            setTransferIndexes(indexes)
-        }
-    }, [routeData, transferIndexes.length])
+    const transferIndexes = getTransferIndices(routeData)
 
     if (!isRouteRequested) {
         return (
@@ -115,34 +84,57 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
                 setIsRouteRequested={setIsRouteRequested}
                 initializeGame={initializeGame}
                 isDailyChallenge={isDailyChallenge}
-                setIsDailyChallenge={setIsDailyChallenge}
             />
         )
     }
 
     return (
         <>
-            <h1>Optimal route</h1>
-            <div>
-                <img src={INFO_ICON_W} alt='info' className='info-icon' />
-                <div className='tooltip'>
-                    This is the <u>mathematically shortest path</u> from the starting station to the destination.
-                </div>
+            <h1>
+                <span>{isHeuristic ? 'Heuristic' : 'Mathematical'}</span> optimal route
+            </h1>
+
+            <div className='route-metrics'>
+                <p>
+                    Advanced {routeData.length - 1} {routeData.length - 1 === 1 ? 'station' /* edge edge case */ : 'stations'}
+                </p>
+                <p>
+                    Transferred {transferIndexes.length - 1} {transferIndexes.length - 1 === 1 ? 'time' : 'times'}
+                </p>
             </div>
+
             <div className='optimal-route-window-container'>
+                <div className='optimal-route-info-container'>
+                    <ActionButton
+                        label={isHeuristic ? 'Show mathematical route' : 'Show heuristic route'}
+                        onClick={() => setIsHeuristic(!isHeuristic)}
+                    />
+
+                    <div className='info-wrapper'>
+                        <img src={INFO_ICON_W} alt='info' className='info-icon' />
+                        <div className='tooltip'>
+                            <span className='tooltip-item'>
+                                <strong>Mathematical:</strong> true shortest path
+                            </span>
+                            <span className='tooltip-item'>
+                                <strong>Heuristic:</strong> realistic path (transfer costs)
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <LoadingSpinner
-                    visible={loadingVisible}
+                    visible={isLoading}
                     text='Fetching the optimal route for the first time in your session may take
                     longer than expected. Subsequent optimal route displays will be faster. Please
                     contact the developer if any other issues occur.'
                     textDelaySecs={5}
                 />
-                {routeData.length === 0 && !loadingVisible && <h3>Failed to load optimal route. Please try again later.</h3>}
+                {routeData.length === 0 && !isLoading && <h3>Failed to load optimal route. Please try again later.</h3>}
                 {routeData.length > 0 && (
                     <div className='optimal-stations-horizontal'>
                         {routeData.map((station, index) => (
                             <OptimalStationFragment
-                                key={index}
+                                key={`${isHeuristic ? 'h' : 'r'}-${index}`}
                                 station={station}
                                 prevStation={routeData[index - 1]}
                                 isTransfer={transferIndexes.includes(index)}

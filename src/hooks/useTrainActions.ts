@@ -59,7 +59,7 @@ export default function useTrainActions({ trainRef, setTrain, setJourney, isDail
             const nextTrain = currentTrain.clone()
             const currentStation = nextTrain.getCurrentStation()
 
-            const isValidTransfer: boolean = await nextTrain.transferToLine(toLine, currentStation)
+            const isValidTransfer: boolean = nextTrain.transferToLine(toLine, currentStation)
 
             if (toLine && isValidTransfer) {
                 setTrain(nextTrain)

@@ -1,5 +1,5 @@
 import './RiderModeUI.css'
-import { useMemo, memo, RefObject, ReactNode, JSX } from 'react'
+import { useMemo, memo, RefObject, ReactNode, JSX, useEffect } from 'react'
 
 import TrainCarStatic from '../train/TrainCarStatic'
 import Station from '../station/Station'
@@ -87,6 +87,14 @@ function RiderModeUI({
         [destinationStation.getId()]
     )
 
+    useEffect(() => {
+        if (currentDirection === Direction.UPTOWN) {
+            handleBoardUptown()
+        } else if (currentDirection === Direction.DOWNTOWN) {
+            handleBoardDowntown()
+        }
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <div className='platform-wrapper'>
             <div
@@ -161,7 +169,7 @@ function RiderModeUI({
                 <Station name={destinationStation.getName()} noLines isDestination>
                     {destinationStationChildren}
                 </Station>
-                <ActionButton onClick={handleReset} imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} /* hidden={inTransferTunnel} */ />
+                <ActionButton onClick={handleReset} imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} />
             </div>
         </div>
     )

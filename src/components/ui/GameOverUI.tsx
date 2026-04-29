@@ -14,7 +14,6 @@ import OPTIMAL_BLACK from '../../assets/images/optimal-route-icon-b.svg'
 import OPTIMAL_WHITE from '../../assets/images/optimal-route-icon-w.svg'
 import SUBWAY_ICON_BLACK from '../../assets/images/subway-b.svg'
 import SUBWAY_ICON_WHITE from '../../assets/images/subway-w.svg'
-import INFO_ICON_W from '../../assets/images/info-icon-white.svg'
 import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../assets/images/refresh-icon-w.svg'
 import CONDUCTOR_MODE_BLACK from '../../assets/images/conductor-mode-icon-b.svg'
@@ -29,7 +28,6 @@ type GameOverUIProps = {
     setIsRouteRequested: React.Dispatch<React.SetStateAction<boolean>>
     initializeGame: () => Promise<void>
     isDailyChallenge: boolean
-    setIsDailyChallenge: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function GameOverUI({
@@ -39,9 +37,9 @@ function GameOverUI({
     setIsRouteRequested,
     initializeGame,
     isDailyChallenge,
-    setIsDailyChallenge,
 }: GameOverUIProps) {
     const setGameMode = useSettingsContext((state) => state.setGameMode)
+    const setIsDailyChallenge = useSettingsContext((state) => state.setIsDailyChallenge)
     const isConductorMode = useSettingsContext((state) => state.gameMode === GameMode.CONDUCTOR)
 
     return (
@@ -59,12 +57,6 @@ function GameOverUI({
                         onClick={() => setIsRouteRequested(true)}
                         wrapperClassName='smart-border'
                     />
-                    <div>
-                        <img src={INFO_ICON_W} alt='info' className='info-icon' />
-                        <div className='tooltip'>
-                            Calculates the <u>mathematically shortest path</u> (fewest stops visited).
-                        </div>
-                    </div>
                 </div>
                 {isDailyChallenge && (
                     <ActionButton

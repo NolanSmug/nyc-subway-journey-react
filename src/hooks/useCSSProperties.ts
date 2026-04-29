@@ -10,7 +10,11 @@ export function useUITheme(darkMode: boolean) {
 
 export function useLineStyles(line: LineName, lineType: LineType) {
     useEffect(() => {
-        document.documentElement.style.setProperty('--line-color', lineToLineColor(line))
-        document.documentElement.style.setProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
+        updateCSSProperty('--line-color', lineToLineColor(line))
+        updateCSSProperty('--dot-color', lineType === LineType.LOCAL ? '#222' : '#fff')
     }, [line, lineType])
+}
+
+export const updateCSSProperty = (property: string, value: string) => {
+    document.documentElement.style.setProperty(property, value)
 }
