@@ -94,55 +94,63 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
                 <span>{isHeuristic ? 'Heuristic' : 'Mathematical'}</span> optimal route
             </h1>
 
-            <div className='route-metrics'>
-                <p>
-                    Advanced {routeData.length - 1} {routeData.length - 1 === 1 ? 'station' /* edge edge case */ : 'stations'}
-                </p>
-                <p>
-                    Transferred {transferIndexes.length - 1} {transferIndexes.length - 1 === 1 ? 'time' : 'times'}
-                </p>
-            </div>
-
-            <div className='optimal-route-window-container'>
-                <div className='optimal-route-info-container'>
-                    <ActionButton
-                        label={isHeuristic ? 'Show mathematical route' : 'Show heuristic route'}
-                        onClick={() => setIsHeuristic(!isHeuristic)}
+            {isLoading ? (
+                <div className='optimal-route-window-container'>
+                    <LoadingSpinner
+                        visible={true}
+                        text='Fetching the optimal route for the first time in your session may take longer than expected. Subsequent optimal route displays will be faster. Please contact the developer if any other issues occur.'
+                        textDelaySecs={5}
                     />
+                </div>
+            ) : routeData.length === 0 ? (
+                <div className='optimal-route-window-container'>
+                    <h3>Failed to load optimal route. Please try again later.</h3>
+                </div>
+            ) : (
+                <>
+                    <div className='route-metrics'>
+                        <p>
+                            Advanced {routeData.length - 1} {routeData.length - 1 === 1 ? 'station' : 'stations'}
+                        </p>
+                        <p>
+                            Transferred {transferIndexes.length - 1} {transferIndexes.length - 1 === 1 ? 'time' : 'times'}
+                        </p>
+                    </div>
 
-                    <div className='info-wrapper'>
-                        <img src={INFO_ICON_W} alt='info' className='info-icon' />
-                        <div className='tooltip'>
-                            <span className='tooltip-item'>
-                                <strong>Mathematical:</strong> true shortest path
-                            </span>
-                            <span className='tooltip-item'>
-                                <strong>Heuristic:</strong> realistic path (transfer costs)
-                            </span>
+                    <div className='optimal-route-window-container'>
+                        <div className='optimal-route-info-container'>
+                            <ActionButton
+                                label={isHeuristic ? 'Show mathematical route' : 'Show heuristic route'}
+                                onClick={() => setIsHeuristic(!isHeuristic)}
+                            />
+
+                            <div className='info-wrapper'>
+                                <img src={INFO_ICON_W} alt='info' className='info-icon' />
+                                <div className='tooltip'>
+                                    <span className='tooltip-item'>
+                                        <strong>Mathematical:</strong> true shortest path
+                                    </span>
+                                    <span className='tooltip-item'>
+                                        <strong>Heuristic:</strong> realistic path (transfer costs)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='optimal-stations-horizontal'>
+                            {routeData.map((station, index) => (
+                                <OptimalStationFragment
+                                    key={`${isHeuristic ? 'h' : 'r'}-${index}`}
+                                    station={station}
+                                    prevStation={routeData[index - 1]}
+                                    isTransfer={transferIndexes.includes(index)}
+                                />
+                            ))}
                         </div>
                     </div>
-                </div>
-                <LoadingSpinner
-                    visible={isLoading}
-                    text='Fetching the optimal route for the first time in your session may take
-                    longer than expected. Subsequent optimal route displays will be faster. Please
-                    contact the developer if any other issues occur.'
-                    textDelaySecs={5}
-                />
-                {routeData.length === 0 && !isLoading && <h3>Failed to load optimal route. Please try again later.</h3>}
-                {routeData.length > 0 && (
-                    <div className='optimal-stations-horizontal'>
-                        {routeData.map((station, index) => (
-                            <OptimalStationFragment
-                                key={`${isHeuristic ? 'h' : 'r'}-${index}`}
-                                station={station}
-                                prevStation={routeData[index - 1]}
-                                isTransfer={transferIndexes.includes(index)}
-                            />
-                        ))}
-                    </div>
-                )}
-            </div>
+                </>
+            )}
+
             <div className='optimal-route-action-buttons'>
                 <ActionButton
                     imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK}

@@ -145,8 +145,6 @@
 
 .info-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
 .info-icon {
