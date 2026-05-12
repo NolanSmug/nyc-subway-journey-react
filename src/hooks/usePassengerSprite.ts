@@ -25,5 +25,5 @@ export function usePassengerSprite() {
         else setPassengerGender(Gender.MALE)
     }, [passengerGender, setPassengerGender])
 
-    return { avatarSrc(): avatarSrc, cycleGender }
+    return { avatarSrc: avatarSrc(), cycleGender }
 }
