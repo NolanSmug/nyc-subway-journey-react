@@ -26,7 +26,6 @@ export class Train {
         return newTrain
     }
 
-    // LineName
     public getLine(): LineName {
         return this.currentLine
     }
@@ -48,12 +47,10 @@ export class Train {
         )
     }
 
-    // LineType
     public getLineType(): LineType {
         return getLineType(this.currentLine)
     }
 
-    // Direction
     public getDirection(): Direction {
         return this.direction
     }
@@ -77,7 +74,6 @@ export class Train {
         return directions[randomIndex]
     }
 
-    // Scheduled stops
     public getScheduledStops(): Station[] {
         return this.scheduledStops
     }
@@ -103,7 +99,6 @@ export class Train {
         this.scheduledStops = newScheduledStops
     }
 
-    // Current Stations
     public getCurrentStation(): Station {
         return this.scheduledStops[this.currentStationIndex]
     }
@@ -127,19 +122,10 @@ export class Train {
         return scheduledStops.findIndex((station) => station.getId() === stationID)
     }
 
-    // Transfer Logic
     public isValidTransfer(newLine: LineName, currentStation: Station): boolean {
         if (this.currentLine === newLine) return false
 
-        const transfers: LineName[] = currentStation.getTransfers()
-
-        for (const transferLine of transfers) {
-            if (transferLine === newLine) {
-                return true
-            }
-        }
-
-        return false
+        return currentStation.getTransfers().includes(newLine)
     }
 
     public transferToLine(newLine: LineName, currentStation: Station): boolean {

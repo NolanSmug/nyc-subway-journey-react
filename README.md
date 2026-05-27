@@ -186,7 +186,7 @@ You are riding from the *passenger's perspective*. Watch your character "walk" a
 ## Conductor mode
 Conductor mode is for players who want to bypass the animations and play at a faster pace, or for those who already understand how to physically navigate the system. It grants you direct control over the train's state.
 
-<img src="./src/assets/images/screenshot-conductor-mode.png" alt="conductor mode screenshot" width="100%">
+<!-- <img src="./src/assets/images/screenshot-conductor-mode.png" alt="conductor mode screenshot" width="100%"> -->
 
 - There is no longer a passenger to control. You are the train! 
 - All actions (`Advance`, `Transfer`, `Change direction`) are executed immediately.
@@ -195,16 +195,28 @@ Conductor mode is for players who want to bypass the animations and play at a fa
 
 # Optimal route
 
-Upon winning the game, you can choose to reveal the *optimal route*. This feature calculates the *mathematically shortest path* (fewest stops) from your starting station to the destination station.
+Upon winning the game, you can choose to reveal the *optimal route*. There are two algorithms available to choose from: [Mathematical](#mathematical-optimal-route) and [Heuristic](#heuristic-optimal-route)
 
-<img src="./src/assets/images/screenshot-optimal-route.png" alt="optimal route screenshot" width="100%">
+![optimal route](./src/assets/images/screenshot-optimal-route.png)
 
-- Calculated using the [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm.
-- The graph construction and algorithm are implemented in [bfs.py](./src/logic/bfs.py).
-  - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com](https://render.com/). The `bfs.py` in this repo is a copy of the code hosted there.
-- Custom logic to handle ambiguous routes. If you can take multiple trains with different colors for a given leg of the trip, both line segments are shown (see <img src='./src/assets/images/m.svg' width='20px' align='top'> <img src='./src/assets/images/j.svg' width='20px' align='top'> <img src='./src/assets/images/z.svg' width='20px' align='top'> lines above).
+- The graph construction and algorithms are implemented in [route.py](./src/logic/bfs.py).
+  - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com](https://render.com/). The `route.py` in this repo is a copy of the code hosted there.
+- If you can take multiple trains with different colors for a given leg of the trip, both line segments are shown (see <img src='./src/assets/images/m.svg' width='20px' align='top'> <img src='./src/assets/images/j.svg' width='20px' align='top'> <img src='./src/assets/images/z.svg' width='20px' align='top'> lines above).
 
-> It can often be difficult to match the optimal route's path. Don't let this frustrate you! I plan on implementing heuristics to make the algorithm's route suggestions more realistic.
+## Mathematical optimal route
+
+![math optimal route](./src/assets/images/screenshot-math-optimal.png)
+
+- Calculates the fewest stops (*mathematically* shortest path) from your starting station to the destination station ([Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search)).
+
+> It can often be difficult to match the mathematical optimal path. Don't let this frustrate you!
+
+## Heuristic optimal route
+
+![heuristic optimal route](./src/assets/images/screenshot-heuristic-optimal.png)
+
+- Calculates the most *realistic* path a commuter would actually take by penalizing line transfers ([uniform cost search](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Practical_optimizations_and_infinite_graphs)).
+- The mathematical route treats every stop and transfer equally. The heuristic algorithm weighs transfers as more "expensive," preferring to keep you on the same train for a few extra stops rather than forcing a transfer just to save a single stop.
 
 <br>
 

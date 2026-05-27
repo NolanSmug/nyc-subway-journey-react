@@ -52,7 +52,7 @@ export default function useTrainActions({ trainRef, setTrain, setJourney, isDail
     )
 
     const transfer = useCallback(
-        async (toLine: LineName) => {
+        (toLine: LineName) => {
             const currentTrain = trainRef.current
             if (!currentTrain) throw new Error('attempted to transfer - Train object is null')
 
