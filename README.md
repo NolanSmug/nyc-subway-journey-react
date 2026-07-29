@@ -12,15 +12,14 @@
 
 <img src='./src/assets/images/subway-journey.gif' width='100%'>
 
-> *game is not nearly as laggy/choppy as the above gif demonstrates (hold down 'r' key to test the responsiveness)*
 
 | ![cover screenshot 1](./src/assets/images/screenshot-cover-1.png) | ![cover screenshot 2](./src/assets/images/screenshot-cover-2.png) |
 | -----------------------------------------------------------| ---------------------------------------------------------- |
 
 - [NYC Subway Journey Game](#nyc-subway-journey-game)
+- [Play online](#play-online)
   - [Developer's note](#developers-note)
 - [Running the project](#running-the-project)
-  - [Play online](#play-online)
   - [Running locally with Docker](#running-locally-with-docker)
   - [Running locally with Node.js](#running-locally-with-nodejs)
 - [How to play](#how-to-play)
@@ -32,8 +31,16 @@
   - [Rider mode](#rider-mode)
   - [Conductor mode](#conductor-mode)
 - [Optimal route](#optimal-route)
+  - [Mathematical optimal route](#mathematical-optimal-route)
+  - [Heuristic optimal route](#heuristic-optimal-route)
 - [Daily challenge](#daily-challenge)
 - [Station image HTML elements](#station-image-html-elements)
+
+<br>
+
+# [Play online](https://nolansmug.github.io/)
+- Built with Docker in CI/CD and deployed as static files to GitHub Pages.
+
 
 ## Developer's note
 
@@ -46,10 +53,6 @@ Everything from rider movement and staircase mechanics to platform interactions 
 > See [station image HTML elements](#station-image-html-elements) for more info on how I designed station images for the browser.
 
 # Running the project
-
-## Play [online](https://nolansmug.github.io/)
-- Built with Docker in CI/CD and deployed as static files to GitHub Pages.
-
 
 ## Running locally with Docker
 
@@ -102,6 +105,7 @@ cp .env.example .env
   yarn install
   yarn start
   ```
+
 # How to play
 You are placed into a random NYC subway station. Your objective is to reach another randomly given station by utilizing your knowledge of the NYC subway system.
 
