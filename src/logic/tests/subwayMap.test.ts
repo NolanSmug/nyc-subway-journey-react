@@ -1,4 +1,4 @@
-import { initializeSubwayData, getStationsForLine, getRandomStationFromLine, getRandomDestination } from '../subwayMap'
+import { initializeSubwayData, getStationsForLine, getRandomStationFromLine, getRandomDestination } from '../../utility/subwayMap'
 import { LineName, Borough } from '../LineManager'
 
 const mockSubwayData = {

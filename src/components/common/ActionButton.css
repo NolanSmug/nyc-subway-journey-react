@@ -25,10 +25,11 @@
 .action-button {
     all: unset;
     border-radius: 0.5em;
-}
 
-.action-button:hover {
-    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .action-button .icon-wrapper {
@@ -43,12 +44,11 @@
 
 .disabled {
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.25;
 }
 
 .pulse {
     animation: pulse-custom 1.8s ease-in-out infinite;
-    transform-origin: center;
     transform-origin: center;
 }
 
@@ -58,10 +58,6 @@
     padding: 0.25em 1.75em;
     background-color: var(--bg-color-2);
     transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.action-button.no-image:hover {
-    background-color: var(--bg-color-3);
 }
 
 .action-button.no-image:active {
@@ -81,11 +77,6 @@
     background-color: var(--bg-color-2);
     border: 0.1em solid var(--bg-color-3);
     border-radius: 0.5em;
-}
-
-.icon-wrapper:hover {
-    transform: scale(1.08);
-    background-color: var(--bg-color-3);
 }
 
 .icon {
@@ -122,7 +113,7 @@
 }
 
 .line-color-border .action-button-container .icon-wrapper {
-    border-color: var(--line-color)
+    border-color: var(--line-color);
 }
 
 .smart-border .action-button-container .icon-wrapper {
@@ -130,11 +121,6 @@
     transition: all 0.3s ease;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
     box-shadow: 0 0 8px var(--line-color);
-}
-
-.smart-border:hover .action-button-container .icon-wrapper {
-    box-shadow: 0 0 16px var(--line-color);
-    transform: scale(1.02);
 }
 
 @keyframes pulse-custom {
@@ -148,5 +134,86 @@
 
     100% {
         transform: scale(1);
+    }
+}
+
+@media (any-hover: hover) {
+    .action-button:hover {
+        cursor: pointer;
+    }
+
+    .action-button.no-image:hover {
+        background-color: var(--bg-color-3);
+    }
+
+    .icon-wrapper:hover {
+        transform: scale(1.08);
+        background-color: var(--bg-color-3);
+    }
+
+    .smart-border:hover .action-button-container .icon-wrapper {
+        box-shadow: 0 0 16px var(--line-color);
+        transform: scale(1.02);
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .action-button .icon-wrapper {
+        transition:
+            transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+            background-color 0.12s ease-out;
+    }
+
+    .action-button:active .icon-wrapper {
+        transform: scale(0.84);
+        background-color: var(--bg-color-3);
+
+        outline: 0.25em solid var(--line-color);
+        outline-offset: 0.12em;
+
+        transition:
+            transform 0.035s ease-in,
+            background-color 0.035s ease-in;
+    }
+
+    .action-button.no-image:active {
+        transform: scale(0.9);
+        background-color: var(--bg-color-3);
+        outline: 0.25em solid var(--line-color);
+        outline-offset: 0.12em;
+
+        transition-duration: 0.035s;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .action-button,
+    .icon {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    .icon {
+        -webkit-user-drag: none;
+    }
+
+    .line-color-border .action-button-container .icon-wrapper {
+        border-width: 3px;
+    }
+
+    @keyframes pulse-custom {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.25);
+        }
+
+        100% {
+            transform: scale(1);
+        }
     }
 }

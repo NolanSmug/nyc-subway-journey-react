@@ -22,7 +22,7 @@ function KeyShortcut({ shortcutKey, label, isCommand, disabled }: KeyShortcutPro
     }
 
     return (
-        <div className={`shortcut ${disabled ? 'disabled' : ''}`} onMouseDown={handleShortcutClick}>
+        <div className={`shortcut ${disabled ? 'disabled' : ''}`} onPointerDown={handleShortcutClick}>
             <span id='key-label'>{label}</span>
             <p className={`shortcut-key ${isCommand ? 'command' : ''}`}>
                 {isCommand && (

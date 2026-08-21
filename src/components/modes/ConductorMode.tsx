@@ -4,13 +4,15 @@ import ConductorModeUI from '../ui/ConductorModeUI'
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
 import { useJourneyContext } from '../../contexts/JourneyContext'
-import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
 
 import useGame from '../../hooks/useGame'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
+import { useGameUI } from '../../hooks/useGameUI'
 
 import { Station as StationObject } from '../../logic/StationManager'
 import { Direction } from '../../logic/LineManager'
+import ConductorModeControls from '../ui/ConductorModeControls'
 
 function ConductorMode() {
     const journey = useJourneyContext((state) => state.journey)
@@ -20,8 +22,8 @@ function ConductorMode() {
     const currentStation: StationObject = useTrainContext((state) => state.train.getCurrentStation())
     const currentDirection: Direction = useTrainContext((state) => state.train.getDirection())
 
+    const { isVerticalLayout, isMobile } = useGameUI()
     const darkMode = useSettingsContext((state) => state.darkMode)
-    const isVerticalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.VERTICAL)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
@@ -83,19 +85,33 @@ function ConductorMode() {
     })
 
     return (
-        <ConductorModeUI
-            journey={journey}
-            currentStation={currentStation}
-            direction={currentDirection}
-            darkMode={darkMode}
-            numAdvanceStations={numAdvanceStations}
-            handleLineClick={handleLineClick}
-            handleTransferClick={handleTransferClick}
-            handleAdvanceClick={handleAdvanceClick}
-            handleChangeDirectionClick={handleChangeDirectionClick}
-            handleResetClick={handleResetClick}
-            isVerticalLayout={isVerticalLayout}
-        />
+        <>
+            <ConductorModeUI
+                journey={journey}
+                currentStation={currentStation}
+                direction={currentDirection}
+                darkMode={darkMode}
+                numAdvanceStations={numAdvanceStations}
+                handleLineClick={handleLineClick}
+                handleTransferClick={handleTransferClick}
+                handleAdvanceClick={handleAdvanceClick}
+                handleChangeDirectionClick={handleChangeDirectionClick}
+                handleResetClick={handleResetClick}
+                isVerticalLayout={isVerticalLayout}
+                isMobile={isMobile}
+            />
+            {isMobile && (
+                <ConductorModeControls
+                    handleTransferClick={handleTransferClick}
+                    handleAdvanceClick={handleAdvanceClick}
+                    handleChangeDirectionClick={handleChangeDirectionClick}
+                    numAdvanceStations={numAdvanceStations}
+                    direction={currentDirection}
+                    isVerticalLayout={isVerticalLayout}
+                    isMobile
+                />
+            )}
+        </>
     )
 }
 

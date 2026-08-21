@@ -6,7 +6,7 @@ import { useLineStyles } from '../../hooks/useCSSProperties'
 
 import { Direction, getLineType } from '../../logic/LineManager'
 import { getLineSVG } from '../../logic/LineSVGsMap'
-import { findDirectionLabel } from '../../logic/directionLabels'
+import { findDirectionLabel } from '../../utility/directionLabels'
 
 function TrainInfo({ direction, reverseButton }: { direction: Direction; reverseButton?: boolean }) {
     const changeDirection = useTrainContext((state) => state.actions.changeDirection)
@@ -28,7 +28,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
                 className={`train-direction not-dim ${isNullDirection ? 'is-null-direction' : ''} ${reverseButton ? '' : 'no-reverse-action'}`}
                 {...(reverseButton
                     ? {
-                          onMouseUp: () => {
+                          onPointerUp: () => {
                               changeDirection()
                           },
                       }

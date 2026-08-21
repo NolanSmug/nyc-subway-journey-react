@@ -11,6 +11,7 @@
 gtfs_subway/
 archive/
 .DS_Store
+notes.md
 
 .yarn/*
 !.yarn/releases

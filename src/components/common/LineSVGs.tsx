@@ -6,6 +6,9 @@ import { useUIContext } from '../../contexts/UIContext'
 import { getLineSVGs } from '../../logic/LineSVGsMap'
 import { LineName } from '../../logic/LineManager'
 
+const LONG_LINE_COUNT = 5
+const LOTS_LINE_COUNT = 8
+
 interface LineSVGsProps {
     lines: LineName[]
     small?: boolean // for smaller images like in upcoming stations view
@@ -17,12 +20,17 @@ interface LineSVGsProps {
     notDim?: boolean
     focusCurrentLine?: LineName
     className?: string
-    onTransferSelect?: (index: number) => void | undefined
+    onTransferSelect?: (index: number) => void
 }
 
 const LineSVGs = memo<LineSVGsProps>(
     ({ lines, small, wide, vertical, grouped, disabled, numLines, notDim, focusCurrentLine, className, onTransferSelect }) => {
         const isTransferMode = useUIContext((state) => state.isTransferMode)
+
+        const long = lines.length >= LONG_LINE_COUNT
+        const lots = lines.length >= LOTS_LINE_COUNT
+
+        const selectable = !disabled && onTransferSelect !== undefined
 
         const svgPaths: string[] = getLineSVGs(lines)
 
@@ -33,16 +41,30 @@ const LineSVGs = memo<LineSVGsProps>(
 
         return (
             <div
-                className={`line-svgs-container ${small ? 'small' : ''} ${wide ? 'wide' : ''} ${grouped ? 'grouped' : ''} ${className} ${disabled ? 'disabled' : ''} ${notDim ? 'not-dim' : ''} ${numLines ? `num-lines-${numLines}` : ''} ${vertical ? 'vertical' : ''}`}
+                className={`line-svgs-container 
+                    ${small ? 'small-lines' : ''} 
+                    ${wide ? 'wide' : ''} 
+                    ${grouped ? 'grouped' : ''} 
+                    ${className ?? ''} 
+                    ${selectable ? 'selectable' : ''}
+                    ${disabled ? 'disabled' : ''} 
+                    ${notDim ? 'not-dim' : ''} 
+                    ${numLines ? `num-lines-${numLines}` : ''} 
+                    ${vertical ? 'vertical' : ''} 
+                    ${long ? 'long' : ''} 
+                    ${lots ? 'lots' : ''}`}
             >
                 {svgPaths.map((imageSrc, index) => (
                     <img
                         key={index}
                         src={imageSrc}
-                        className={`${small ? 'small' : 'line-svg-image'} ${isTransferMode && !disabled ? 'jiggle-animation' : ''}`}
-                        onMouseDown={() => onTransferSelect && onTransferSelect(index)}
+                        className={`line-svg-image ${small ? 'small-line-svg' : ''} ${
+                            isTransferMode && selectable ? 'jiggle-animation' : ''
+                        }`}
+                        onPointerDown={selectable ? () => onTransferSelect?.(index) : undefined}
                         alt={svgPaths[index]}
-                        style={focusCurrentLine && index !== currentLineIndex ? { opacity: 0.33 } : { animationDelay: `${index * 0.1}s` }} // delay for image jiggle animation
+                        style={focusCurrentLine && index !== currentLineIndex ? { opacity: 0.33 } : { animationDelay: `${index * 0.1}s` }}
+                        draggable={false}
                     />
                 ))}
             </div>

@@ -2,31 +2,26 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import ActionButton from '../ActionButton'
 
 describe('ActionButton', () => {
-    test('Image buttons trigger onClick on MOUSE DOWN', () => {
+    test('Image buttons trigger onClick on POINTER DOWN', () => {
         const handleClick = jest.fn()
+        render(<ActionButton imageSrc='test.svg' onClick={handleClick} />)
 
-        render(<ActionButton imageSrc='test.svg' label='Image Button' onClick={handleClick} />)
+        const button = screen.getByRole('button')
 
-        const button: HTMLButtonElement = screen.getByRole('button')
-
-        fireEvent.mouseDown(button)
+        fireEvent.pointerDown(button)
         expect(handleClick).toHaveBeenCalledTimes(1)
 
-        fireEvent.mouseUp(button)
+        fireEvent.pointerUp(button)
         expect(handleClick).toHaveBeenCalledTimes(1) // Should NOT fire again
     })
 
-    test('Text-only buttons trigger onClick on MOUSE UP', () => {
+    test('Text-only buttons trigger onClick on CLICK', () => {
         const handleClick = jest.fn()
+        render(<ActionButton label='Test' onClick={handleClick} />)
 
-        render(<ActionButton label='Text Button' onClick={handleClick} />)
+        const button = screen.getByRole('button')
 
-        const button: HTMLButtonElement = screen.getByRole('button')
-
-        fireEvent.mouseDown(button)
-        expect(handleClick).not.toHaveBeenCalled() // Should NOT fire yet
-
-        fireEvent.mouseUp(button)
+        fireEvent.click(button)
         expect(handleClick).toHaveBeenCalledTimes(1)
     })
 

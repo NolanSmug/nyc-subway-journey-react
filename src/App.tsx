@@ -1,5 +1,5 @@
 import './App.css'
-import { useCallback, useEffect, useRef, JSX, MouseEvent } from 'react'
+import { useCallback, useEffect, useRef, JSX, PointerEvent } from 'react'
 
 import ModalScreen from './components/ui/ModalScreen'
 import OptimalRouteUI from './components/ui/OptimalRouteUI'
@@ -19,11 +19,12 @@ import LoadingSpinner from './components/common/LoadingSpinner'
 import { useUIContext } from './contexts/UIContext'
 import { useTrainContext } from './contexts/TrainContext'
 import { useJourneyContext } from './contexts/JourneyContext'
-import { useSettingsContext, GameMode, UpcomingStationsLayout } from './contexts/SettingsContext'
+import { useSettingsContext, GameMode } from './contexts/SettingsContext'
 
 import useGame from './hooks/useGame'
 import useLineFavicon from './hooks/useLineFavicon'
 import { useUITheme } from './hooks/useCSSProperties'
+import { useGameUI } from './hooks/useGameUI'
 
 import { DailyChallenge } from './logic/DailyChallenge'
 
@@ -36,6 +37,8 @@ import SUBWAY_ICON_WHITE from './assets/images/subway-w.svg'
 import DAILY_CHALLENGE_WHITE from './assets/images/daily-challenge-w.svg'
 import DAILY_CHALLENGE_BLACK from './assets/images/daily-challenge-b.svg'
 import DAILY_CHALLENGE_COMPLETE from './assets/images/daily-challenge-complete-g.svg'
+import REFRESH_BLACK from './assets/images/refresh-icon-b.svg'
+import REFRESH_WHITE from './assets/images/refresh-icon-w.svg'
 
 const settingsMenu: JSX.Element = <SettingsMenu />
 const keyShortcutMenu: JSX.Element = <KeyShortcutMenu />
@@ -47,25 +50,22 @@ function Game() {
     const isWon = useJourneyContext((state) => state.journey.isWon)
     const isLineNull = useTrainContext((state) => state.train.isLineNull())
 
+    const { gameMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isMobile } = useGameUI()
+
     const isTransferMode = useUIContext((state) => state.isTransferMode)
-    const isModalOpen = useUIContext((state) => state.isModalOpen)
+    const isModalOpen = useUIContext((state) => state.isModalOpen) && !isMobile
     const setIsModalOpen = useUIContext((state) => state.setIsModalOpen)
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
     const darkMode = useSettingsContext((state) => state.darkMode)
-    const gameMode = useSettingsContext((state) => state.gameMode)
     const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
     const setIsDailyChallenge = useSettingsContext((state) => state.setIsDailyChallenge)
     const isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
-    const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible) && !isDailyChallenge
-
-    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
-    const isVerticalLayout: boolean = !isHorizontalLayout
 
     const riderModePassengerRef = useRef<RiderModeHandle>(null)
 
     const closeTransferMode = () => setIsTransferMode(false)
-    const handleTransferClickAway = (e: MouseEvent<HTMLDivElement>) => {
+    const handleTransferClickAway = (e: PointerEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) {
             closeTransferMode()
         }
@@ -103,6 +103,7 @@ function Game() {
                     setIsModalOpen(!isDailyChallenge)
                 }}
             />
+            {isMobile && <ActionButton imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} onClick={() => initializeGame()} />}
         </div>
     )
 
@@ -113,11 +114,11 @@ function Game() {
     useLineFavicon()
     useUITheme(darkMode)
 
-    if (isLineNull) return <LoadingSpinner visible />
+    if (isLineNull) return <LoadingSpinner />
 
     if (isWon) {
         return (
-            <div className='Game'>
+            <div className={`Game ${isMobile ? 'one-column' : ''}`}>
                 <OptimalRouteUI isDailyChallenge={isDailyChallenge} setIsDailyChallenge={setIsDailyChallenge} />
                 {renderGameControls()}
             </div>
@@ -128,7 +129,7 @@ function Game() {
         <>
             <div
                 className={`dimmed-overlay ${isTransferMode ? 'active' : ''} ${isModalOpen ? 'landing' : ''}`}
-                onMouseDown={handleTransferClickAway}
+                onPointerDown={handleTransferClickAway}
             />
 
             {isModalOpen && (
@@ -140,7 +141,9 @@ function Game() {
                 </ModalScreen>
             )}
 
-            <div className={`Game ${gameMode}-mode ${!upcomingStationsVisible ? 'upcoming-stations-disabled' : ''}`}>
+            <div
+                className={`Game ${gameMode}-mode ${!upcomingStationsVisible ? 'upcoming-stations-disabled' : ''} ${!upcomingStationsVisible ? 'one-column' : ''}`}
+            >
                 {upcomingStationsVisible && isHorizontalLayout && <UpcomingStationsHorizontal />}
 
                 <div className={`game-state-ui ${isVerticalLayout && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
@@ -151,14 +154,16 @@ function Game() {
 
             <div className='umbrella-menus'>
                 {renderGameControls()}
-                <div className='bottom-page-umbrellas'>
-                    <UmbrellaButton openingButtonsW_B={keyShortcutButtons} visible>
-                        {keyShortcutMenu}
-                    </UmbrellaButton>
-                    {/* <UmbrellaButton openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]} visible>
+                {!isMobile && (
+                    <div className='bottom-page-umbrellas'>
+                        <UmbrellaButton openingButtonsW_B={keyShortcutButtons} visible>
+                            {keyShortcutMenu}
+                        </UmbrellaButton>
+                        {/* <UmbrellaButton openingButtonsW_B={[GEAR_WHITE, GEAR_BLACK]} visible>
                         <SubwayMap />
                     </UmbrellaButton> */}
-                </div>
+                    </div>
+                )}
             </div>
 
             {upcomingStationsVisible && isVerticalLayout && (

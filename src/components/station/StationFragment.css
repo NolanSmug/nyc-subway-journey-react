@@ -6,10 +6,8 @@
 }
 
 .station-frag-content {
-    margin-bottom: 1.5rem;
     transform: rotate(-38deg);
     position: relative;
-    /* RELATIVE TO DOT POSITION: */
     bottom: 1.8em;
     left: 2.8em;
     width: auto;
@@ -17,7 +15,7 @@
     margin-bottom: 1.2em;
     opacity: 0.5;
 
-    transition: opacity 0.2s ease-in-out, margin-bottom 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .current-station .station-frag-content {
@@ -42,48 +40,33 @@
     scrollbar-width: none;
     /* Firefox */
     -ms-overflow-style: none;
-
-    transform: scale(1);
-    transform-origin: left center;
-    transition: transform 0.2s ease-in-out;
-}
-
-.current-station .station-frag-name {
-    transform: scale(1.25);
-}
-
-.current-station .transfer-lines {
-    margin-left: 0.2rem;
-    transform: translateX(0.4rem);
 }
 
 .station-dot {
     width: 1.25rem;
     height: 1.25em;
     background-color: var(--dot-color);
-    border-color: var(--line-color);
+    border: 0.15rem solid var(--line-color);
     border-radius: 50%;
-    border-style: solid;
-    border-width: 0.15rem;
     position: relative;
     z-index: 20;
 
-    transform: translate(-50%, 50%) scale(0.6);
-    transition: transform 0.2s ease-in-out, border-width 0.2s ease-in-out;
+    transform: translate(-50%, 50%) scale(0.65);
+
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.2s ease-in-out,
+        border-width 0.2s ease-in-out;
 }
 
 .current-station .station-dot {
-    transform: translate(-50%, 50%) scale(0.8);
+    transform: translate(-50%, 50%) scale(1);
     border-width: 0.4rem;
 }
 
 .transfer-lines {
     display: flex;
-    flex-shrink: 0;
     margin-left: -1rem;
-    
-    transform: translateX(0);
-    transition: transform 0.2s ease-in-out, margin-left 0.2s ease-in-out;
 }
 
 .station-frag-content.overflow .station-frag-name,
@@ -96,12 +79,6 @@
 .station-frag-content.extra-overflow .transfer-lines {
     white-space: normal;
     overflow-wrap: break-word;
-    /* transform: translateX(1em); */
-}
-
-.station-frag-container.current-station .station-frag-content.overflow, .station-frag-container.current-station .station-frag-content.extra-overflow {
-    margin-bottom: 0.5em;
-    /* less margin when it's current station to reduce distance */
 }
 
 /* 

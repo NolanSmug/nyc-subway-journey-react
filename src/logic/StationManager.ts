@@ -15,12 +15,10 @@ export class Station {
         this.borough = borough
     }
 
-    // Operators
     public equals(rhs: Station): boolean {
         return this.id === rhs.id // ! this could break if there is an id mismatch in my data
     }
 
-    // ID
     public getId(): string {
         if (this.id === '000' || this.id === '' || this.id === null || this.id === undefined) {
             throw new Error('station id not found in data files, please contact developer')
@@ -32,7 +30,6 @@ export class Station {
         this.id = newId
     }
 
-    // Name
     public getName(): string {
         return this.name
     }
@@ -41,7 +38,6 @@ export class Station {
         this.name = newName
     }
 
-    // Borough
     public getBorough(): Borough {
         return this.borough
     }
@@ -50,7 +46,6 @@ export class Station {
         this.borough = newBorough
     }
 
-    // Transfers
     public getTransfers(): LineName[] {
         return this.transfers
     }

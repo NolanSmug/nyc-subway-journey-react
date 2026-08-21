@@ -7,6 +7,7 @@ import LineSVGs from '../common/LineSVGs'
 
 import { useJourneyContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
+import { useUIContext } from '../../contexts/UIContext'
 
 import useGame from '../../hooks/useGame'
 import { useOptimalRoute } from '../../hooks/useOptimalRoute'
@@ -65,6 +66,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
     const { initializeGame } = useGame()
     const journey = useJourneyContext((state) => state.journey)
     const darkMode = useSettingsContext((state) => state.darkMode)
+    const isMobile = useUIContext((state) => state.isMobile)
 
     const [isRouteRequested, setIsRouteRequested] = useState(false)
     const [isHeuristic, setIsHeuristic] = useState(false)
@@ -74,6 +76,11 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
     const { routeData, isLoading } = useOptimalRoute(startId, destId, isHeuristic, journey.isWon && isRouteRequested)
 
     const transferIndexes = getTransferIndices(routeData)
+
+    const optimalRouteInfoButtonLabel = () => {
+        const label = `${!isMobile ? 'Show ' : ''}${isHeuristic ? 'mathematical' : 'heuristic'} route`
+        return isMobile ? label.charAt(0).toUpperCase() + label.slice(1) /*lol*/ : label
+    }
 
     if (!isRouteRequested) {
         return (
@@ -97,7 +104,6 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
             {isLoading ? (
                 <div className='optimal-route-window-container'>
                     <LoadingSpinner
-                        visible={true}
                         text='Fetching the optimal route for the first time in your session may take longer than expected. Subsequent optimal route displays will be faster. Please contact the developer if any other issues occur.'
                         textDelaySecs={5}
                     />
@@ -119,10 +125,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
 
                     <div className='optimal-route-window-container'>
                         <div className='optimal-route-info-container'>
-                            <ActionButton
-                                label={isHeuristic ? 'Show mathematical route' : 'Show heuristic route'}
-                                onClick={() => setIsHeuristic(!isHeuristic)}
-                            />
+                            <ActionButton label={optimalRouteInfoButtonLabel()} onClick={() => setIsHeuristic(!isHeuristic)} />
 
                             <div className='info-wrapper'>
                                 <img src={INFO_ICON_W} alt='info' className='info-icon' />

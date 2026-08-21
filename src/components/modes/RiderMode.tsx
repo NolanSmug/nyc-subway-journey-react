@@ -1,11 +1,11 @@
 import RiderModeUI from '../ui/RiderModeUI'
-import { Ref, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Ref, useCallback, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import Passenger from '../Passenger'
 
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
-import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { usePassengerAnimations } from '../../hooks/usePassengerAnimations'
 import { PassengerState } from '../../hooks/usePassengerAnimations'
@@ -43,8 +43,6 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
-    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
-    const setUpcomingStationsLayout = useSettingsContext((state) => state.setUpcomingStationsLayout)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
 
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
@@ -56,11 +54,6 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
     const uptownTrainDoorRef = useRef<HTMLDivElement>(null)
     const downtownTrainDoorRef = useRef<HTMLDivElement>(null)
     const staircaseRefs = useRef<(HTMLDivElement | null)[]>([])
-
-    useEffect(() => {
-        if (isHorizontalLayout) return
-        setUpcomingStationsLayout(UpcomingStationsLayout.HORIZONTAL)
-    }, [isHorizontalLayout, setUpcomingStationsLayout])
 
     useImperativeHandle(
         passengerRef,

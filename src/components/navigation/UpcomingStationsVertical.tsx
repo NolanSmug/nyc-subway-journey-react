@@ -3,7 +3,7 @@ import { useEffect, useRef, memo } from 'react'
 
 import StationFragmentVertical from '../station/StationFragmentVertical'
 
-import { scrollToCurrentStation } from '../../logic/stationScroll'
+import { scrollToCurrentStation } from '../../utility/stationScroll'
 import { useTrainContext } from '../../contexts/TrainContext'
 
 function UpcomingStationsVertical() {

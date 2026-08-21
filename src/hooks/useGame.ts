@@ -6,7 +6,7 @@ import { useUIContext } from '../contexts/UIContext'
 import { useSettingsContext } from '../contexts/SettingsContext'
 
 import { Game } from '../logic/Game'
-import { initializeSubwayData } from '../logic/subwayMap'
+import { initializeSubwayData } from '../utility/subwayMap'
 
 export default function useGame() {
     const setJourney = useJourneyContext((state) => state.setJourney)

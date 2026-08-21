@@ -16,8 +16,8 @@ import R_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
 function TrainCar({ forWinDisplay }: { forWinDisplay?: boolean }) {
     const direction = useTrainContext((state) => state.train.getDirection())
     const darkMode = useSettingsContext((state) => state.darkMode)
-    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
-    const isVerticalLayout = !isHorizontalLayout
+    const isVerticalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.VERTICAL)
+    const isHorizontalLayout = !isVerticalLayout
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
 

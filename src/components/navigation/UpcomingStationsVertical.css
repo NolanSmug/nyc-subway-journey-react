@@ -6,10 +6,8 @@
     height: 90vh;
     overflow-y: scroll;
     overflow-x: hidden;
-
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
-
     transition: opacity 0.3s ease;
 }
 
@@ -22,18 +20,34 @@
     flex-direction: column-reverse;
     gap: 1.5em;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     width: 18em;
 }
 
-.line-divider-vertical {
-    position: absolute;
-    top: 25vh;
-    left: 6.65em;
-    z-index: 0;
-    height: 0.3rem;
-    background-color: var(--line-color);
-    transform: translateX(-50%) rotate(90deg);
-    /* rotate (obvi) */
+@media (max-width: 768px) {
+    .upcoming-stations-vertical {
+        left: 55vw;
+        right: 0;
+        top: 0;
+        width: 45vw;
+        margin-top: 2em;
+        margin-left: 0.3em;
+        height: calc(100dvh - 12em);
+    }
+
+    .upcoming-stations-vertical-container {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-top: 0.5em;
+    }
+
+    .stations-vertical {
+        width: 100%;
+        margin-left: 0.5em;
+        gap: 2em;
+        padding-right: 0.5em;
+        box-sizing: border-box;
+    }
 }

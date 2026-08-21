@@ -9,10 +9,6 @@
     left: 0;
 }
 
-#loading.hidden {
-    display: none;
-}
-
 .loading-inner {
     display: flex;
     flex-direction: column;
@@ -20,7 +16,7 @@
     position: absolute;
     max-width: 28rem;
     text-align: center;
-    transition: transform 0.3s ease-out
+    transition: transform 0.3s ease-out;
 }
 
 .loading-spinner {
@@ -33,14 +29,21 @@
 }
 
 .loading-text {
-    margin-top: 1em;
+    position: absolute;
+    top: calc(100% + 1em);
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 28rem;
+    max-width: 70vw;
+    margin: 0;
+
     font-size: medium;
     line-height: 1.4;
     color: var(--text-color);
     opacity: 0;
-    transition: opacity 0.3s ease-in
+    transition: opacity 0.3s ease-in;
 }
-
 
 .loading-text.visible {
     opacity: 1;

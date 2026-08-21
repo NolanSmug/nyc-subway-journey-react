@@ -4,7 +4,7 @@ import { Journey } from './Journey'
 import { Score } from './Score'
 import { SeedRNG } from './SeedRNG'
 import { Train } from './TrainManager'
-import { getStationsForLine } from './subwayMap'
+import { getStationsForLine } from '../utility/subwayMap'
 
 export class Game {
     public journey: Journey
