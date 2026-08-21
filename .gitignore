@@ -23,4 +23,5 @@ yarn-error.log*
 npm-debug.log*
 
 src/components/SubwayMap.*
+notes.md
 
