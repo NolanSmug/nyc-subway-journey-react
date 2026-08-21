@@ -2,16 +2,15 @@ import './LoadingSpinner.css'
 import { useState, useEffect } from 'react'
 
 interface LoadingSpinnerProps {
-    visible?: boolean
     text?: string
     textDelaySecs?: number
 }
 
-const LoadingSpinner = ({ text, visible = false, textDelaySecs = 0 }: LoadingSpinnerProps) => {
+const LoadingSpinner = ({ text, textDelaySecs = 0 }: LoadingSpinnerProps) => {
     const [showText, setShowText] = useState(false)
 
     useEffect(() => {
-        if (!visible || !text || textDelaySecs <= 0) {
+        if (!text || textDelaySecs <= 0) {
             setShowText(false)
             return
         }
@@ -19,13 +18,13 @@ const LoadingSpinner = ({ text, visible = false, textDelaySecs = 0 }: LoadingSpi
         const timer = setTimeout(() => setShowText(true), textDelaySecs * 1000)
 
         return () => clearTimeout(timer)
-    }, [visible, text, textDelaySecs])
+    }, [text, textDelaySecs])
 
     return (
-        <div id='loading' className={`${!visible ? 'hidden' : ''}`}>
+        <div id='loading'>
             <div className='loading-inner'>
                 <div className='loading-spinner' />
-                {text && showText && <p className={`loading-text ${showText ? 'visible' : ''}`}>{text}</p>}
+                {text && showText && <p className='loading-text visible'>{text}</p>}
             </div>
         </div>
     )

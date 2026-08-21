@@ -56,7 +56,7 @@
 
 .route-metrics p {
     margin: 0 0 0.25em 0;
-    font-family: monospace
+    font-family: monospace;
 }
 
 .optimal-stations-horizontal {
@@ -204,5 +204,19 @@
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .tooltip {
+        font-size: x-small;
+    }
+
+    #optimal-route-title {
+        font-size: x-large;
+    }
+
+    .optimal-route-request-container {
+        padding: 1em;
     }
 }

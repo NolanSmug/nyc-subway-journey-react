@@ -3,20 +3,24 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "body-parser": "^1.20.3",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-modal": "^3.16.3",
-        "react-scripts": "^5.0.1",
-        "typescript": "^4.9.5",
+        "scheduler": "^0.27.0",
         "use-context-selector": "^2.0.0"
     },
+    "devDependencies": {
+        "@testing-library/dom": "^10.4.1",
+        "@testing-library/jest-dom": "^6.9.1",
+        "@testing-library/react": "^16.3.0",
+        "@types/jest": "^30.0.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "prettier": "^3.5.3",
+        "react-scripts": "^5.0.1",
+        "typescript": "^4.9.5"
+    },
     "resolutions": {
-        "nth-check": "^2.0.1",
-        "lodash": "^4.18.1",
-        "node-forge": "^1.4.0",
-        "path-to-regexp": "^0.1.13",
-        "brace-expansion": "^1.1.13"
+        "css-select@npm:2.1.0/nth-check": "2.1.1"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -35,17 +39,6 @@
             "last 1 safari version",
             "last 1 chrome version"
         ]
-    },
-    "devDependencies": {
-        "@testing-library/dom": "^10.4.1",
-        "@testing-library/jest-dom": "^6.9.1",
-        "@testing-library/react": "^16.3.0",
-        "@types/body-parser": "^1.19.5",
-        "@types/jest": "^30.0.0",
-        "@types/react": "^19.0.0",
-        "@types/react-dom": "^19.0.0",
-        "@types/react-modal": "^3.16.3",
-        "prettier": "^3.5.3"
     },
     "packageManager": "yarn@3.6.4"
 }

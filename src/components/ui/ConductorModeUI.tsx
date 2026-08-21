@@ -5,19 +5,14 @@ import ActionButton from '../common/ActionButton'
 import Station from '../station/Station'
 import LineSVGs from '../common/LineSVGs'
 import TrainCar from '../train/TrainCar'
+import TrainCarFront from '../train/mobile/TrainCarFront'
 import Header from '../common/Header'
-import AdvanceNStationsInput from '../navigation/AdvanceNStationsInput'
+import ConductorModeControls from './ConductorModeControls'
 
 import { Station as StationObject } from '../../logic/StationManager'
 import { Journey } from '../../logic/Journey'
 import { Direction } from '../../logic/LineManager'
 
-import R_ARROW_BLACK from '../../assets/images/right-arrow-b.svg'
-import R_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'
-import TRANSFER_WHITE from '../../assets/images/transfer-icon-w.svg'
-import TRANSFER_BLACK from '../../assets/images/transfer-icon-b.svg'
-import C_DIRECTION_WHITE from '../../assets/images/change-direction-icon-w.svg'
-import C_DIRECTION_BLACK from '../../assets/images/change-direction-icon-b.svg'
 import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../assets/images/refresh-icon-w.svg'
 
@@ -34,6 +29,7 @@ interface ConductorModeUIProps {
     darkMode: boolean
     numAdvanceStations: number
     isVerticalLayout: boolean
+    isMobile: boolean
 }
 
 function ConductorModeUI({
@@ -48,64 +44,51 @@ function ConductorModeUI({
     handleChangeDirectionClick,
     handleResetClick,
     isVerticalLayout,
+    isMobile,
 }: ConductorModeUIProps) {
-    const advanceArrowRotateDegrees: number = isVerticalLayout
-        ? direction === Direction.DOWNTOWN
-            ? 270
-            : 90
-        : direction === Direction.DOWNTOWN
-          ? 180
-          : 0
-
     return (
-        <>
-            <div className={`${journey.isWon ? 'win-state' : ''}`}>
+        <div className='conductor-layout-wrapper'>
+            <div className={`desktop-train-wrapper ${journey.isWon ? 'win-state' : ''}`}>
                 <TrainCar />
             </div>
 
             <div className='stations-container'>
-                <div className={`station-box ${journey.isWon ? 'win-state' : ''}`} id='current-station'>
-                    <Header text='Current station' />
+                <div className={`station-box current-station-box ${journey.isWon ? 'win-state' : ''}`} id='current-station'>
+                    {!isMobile && <Header text='Current station' />}
                     <div className='station-item'>
                         <Station name={currentStation.getName()}>
                             <LineSVGs lines={currentStation.getTransfers()} onTransferSelect={handleLineClick} notDim />
                         </Station>
                     </div>
-                    <div className={`action-buttons-container`} id='starting-station'>
-                        <ActionButton
-                            imageSrc={darkMode ? TRANSFER_WHITE : TRANSFER_BLACK}
-                            label='Transfer lines'
-                            onClick={handleTransferClick}
+                    {!isMobile && (
+                        <ConductorModeControls
+                            handleTransferClick={handleTransferClick}
+                            handleAdvanceClick={handleAdvanceClick}
+                            handleChangeDirectionClick={handleChangeDirectionClick}
+                            numAdvanceStations={numAdvanceStations}
+                            direction={direction}
+                            isVerticalLayout={isVerticalLayout}
                         />
-                        <ActionButton
-                            imageSrc={darkMode ? C_DIRECTION_WHITE : C_DIRECTION_BLACK}
-                            label='Change direction'
-                            onClick={() => handleChangeDirectionClick()}
-                        />
-                        <ActionButton
-                            imageSrc={darkMode ? R_ARROW_WHITE : R_ARROW_BLACK}
-                            rotateDegrees={advanceArrowRotateDegrees}
-                            label={`Advance station${numAdvanceStations > 1 ? 's' : ''}`}
-                            onClick={handleAdvanceClick}
-                            additionalInput={<AdvanceNStationsInput />}
-                            disabled={direction === Direction.NULL_DIRECTION}
-                        />
-                    </div>
+                    )}
                 </div>
 
-                <div className={`station-box ${journey.isWon ? 'win-state' : ''}`} id='destination-station'>
-                    <Header text='Destination station' />
+                <div className={`station-box destination-station-box ${journey.isWon ? 'win-state' : ''}`} id='destination-station'>
+                    <Header text='Destination' />
                     <div className='station-item'>
                         <Station name={journey.destinationStation.getName()}>
                             <LineSVGs lines={journey.destinationStation.getTransfers()} disabled />
                         </Station>
                     </div>
-                    <div className='action-buttons-container' id='destination-station'>
+                    <div className='action-buttons-container dest-actions' id='destination-station'>
                         <ActionButton imageSrc={darkMode ? REFRESH_WHITE : REFRESH_BLACK} label='Reset game' onClick={handleResetClick} />
                     </div>
                 </div>
             </div>
-        </>
+
+            <div className={`mobile-train-wrapper ${journey.isWon ? 'win-state' : ''}`}>
+                <TrainCarFront changeDirection={handleChangeDirectionClick} />
+            </div>
+        </div>
     )
 }
 

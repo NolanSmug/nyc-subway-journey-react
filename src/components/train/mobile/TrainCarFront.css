@@ -1,0 +1,181 @@
+.train-car-front-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 2em;
+}
+
+.train-car-front-container {
+    width: 12em;
+    background-color: var(--train-car-bg);
+
+    border-top-left-radius: 50% 3em;
+    border-top-right-radius: 50% 3em;
+    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+
+    display: flex;
+    flex-direction: column;
+    padding: 2.5em 0.5em 0.5em 0.5em;
+    gap: 1.5em;
+    position: relative;
+}
+
+
+.front-windows-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 4em;
+    gap: 0.5em;
+}
+
+
+.train-car-front-container::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6em;
+    height: 1px;
+    background-color: var(--train-car-border);
+}
+
+.train-car-front-container::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 9em;
+    height: 1px;
+    background-color: var(--train-car-border);
+}
+
+.train-car-front-container.win-display {
+    box-shadow:
+        0 0.5em 0.75em rgba(90, 232, 149, 0.3),
+        0 0 5em rgba(90, 232, 149, 0.2);
+
+    border-bottom-left-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+    margin-bottom: 2em;
+}
+
+.window {
+    border-radius: 0.5em;
+    background-color: var(--bg-color-2);
+}
+
+.window-l {
+    flex: 1;
+}
+
+.window-c {
+    height: 50%;
+}
+
+.window-r {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-door {
+    display: flex;
+    flex: 0.9 1;
+    border: 1px solid var(--train-car-border);
+    border-radius: 0.2em 0.2em 0 0;
+    padding: 0.2em 0.5em;
+    height: 8em;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.door-window {
+    flex: 1;
+}
+
+.front-lights-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.light-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+.marker-light {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.marker-light.red {
+    background-color: #621414;
+    box-shadow: #941818 0 0 0.5em;
+
+}
+
+.marker-light.white {
+    background-color: #f4f4f4;
+    box-shadow: #f4f4f4 0 0 0.25em;
+}
+
+.front-train-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    width: 100%;
+    border: 1px solid var(--train-car-border);
+    border-radius: 0.2em;
+    padding: 0;
+    margin-top: auto;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.front-direction-label {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin: 0;
+    padding: 0 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.front-direction-label.is-null-direction {
+    text-decoration: underline;
+    text-decoration-color: var(--line-color);
+    text-decoration-thickness: 4px;
+    animation: train-front-pulse 1.8s ease-in-out infinite;
+}
+
+
+.front-label-small {
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.front-line-svg-image {
+    width: 3em;
+    height: 3em;
+}
+
+@keyframes train-front-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}

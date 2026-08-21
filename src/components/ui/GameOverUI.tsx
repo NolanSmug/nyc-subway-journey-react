@@ -5,8 +5,10 @@ import Header from '../common/Header'
 import LineSVGs from '../common/LineSVGs'
 import Station from '../station/Station'
 import TrainCar from '../train/TrainCar'
+import TrainCarFront from '../train/mobile/TrainCarFront'
 
 import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { useUIContext } from '../../contexts/UIContext'
 
 import { LineName } from '../../logic/LineManager'
 
@@ -42,13 +44,17 @@ function GameOverUI({
     const setIsDailyChallenge = useSettingsContext((state) => state.setIsDailyChallenge)
     const isConductorMode = useSettingsContext((state) => state.gameMode === GameMode.CONDUCTOR)
 
+    const isMobile = useUIContext((state) => state.isMobile)
+
     return (
         <div className='game-over-wrapper'>
             <Header text='You win!' />
             <Station name={destinationStationName}>
                 <LineSVGs lines={destinationStationTransfers} disabled notDim />
             </Station>
-            <TrainCar forWinDisplay />
+
+            {isMobile ? <TrainCarFront forWinDisplay /> : <TrainCar forWinDisplay />}
+
             <div className='optimal-route-request-container'>
                 <div className='optimal-route-request-btn'>
                     <ActionButton
@@ -67,7 +73,7 @@ function GameOverUI({
                         }}
                     />
                 )}
-                {!isDailyChallenge && (
+                {!isDailyChallenge && !isMobile && (
                     <ActionButton
                         label={isConductorMode ? 'Try rider mode' : 'Try conductor mode'}
                         imageSrc={

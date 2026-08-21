@@ -35,23 +35,9 @@
     width: 4.95em;
 }
 
-.line-svgs-container.grouped:not(.disabled):hover {
-    cursor: pointer;
-    transform: scale(1.25);
-}
-
-.line-svgs-container.grouped:not(.disabled):active {
-    transform: scale(0.95);
-}
-
 /* special line group cases for staircase display */
 .staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped.num-lines-3 {
     right: 2.3em;
-}
-
-.staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped .line-svg-image:hover {
-    transform: scale(1);
-    /* only want to scale the whole group, ignore individual line image's hover scale */
 }
 
 /* --- wide --- */
@@ -60,11 +46,18 @@
 }
 
 /* --- small --- */
-.line-svgs-container.small {
-    column-gap: 0.15em;
+.line-svgs-container.small-lines {
+    width: 6rem;
     flex-wrap: wrap;
+    flex-shrink: 0;
+    column-gap: 0.15em;
     row-gap: 0.15em;
-    min-width: 6rem;
+}
+
+/* Used by upcoming-station fragments */
+.line-svg-image.small-line-svg {
+    width: 0.9rem;
+    height: 0.9rem;
 }
 
 /* --- (staircase tunnel stuff) --- */
@@ -102,14 +95,8 @@
     transition: transform 0.1s ease-out;
 }
 
-.line-svg-image:active {
+.line-svgs-container.selectable .line-svg-image:active {
     --active-scale: 0.85;
-}
-
-.line-svg-image:hover {
-    --hover-scale: 1.10;
-    cursor: pointer;
-    transition: transform ease-in-out 0.1s;
 }
 
 .line-svg-image.jiggle-animation {
@@ -121,9 +108,77 @@
     animation: none;
 }
 
-.small {
-    height: 0.9rem;
-    width: 0.9rem;
+@media (any-hover: hover) {
+    .line-svgs-container.grouped.selectable:hover {
+        cursor: pointer;
+        transform: scale(1.25);
+    }
+
+    .line-svgs-container.selectable .line-svg-image:hover {
+        --hover-scale: 1.10;
+        cursor: pointer;
+    }
+
+    .staircase-container:not(.tunnel-expanded) .line-svgs-container.grouped.selectable .line-svg-image:hover {
+        transform: scale(1);
+        /* only want to scale the whole group, ignore individual line image's hover scale */
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .line-svgs-container.selectable .line-svg-image {
+        transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .line-svgs-container.selectable .line-svg-image:active {
+        --active-scale: 0.75;
+        transition: transform 0.03s ease-in;
+    }
+
+    .line-svgs-container.grouped.selectable {
+        transition:
+            transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+            filter 0.12s ease-out;
+    }
+
+    .line-svgs-container.grouped.selectable:active {
+        transform: scale(0.85);
+        filter: drop-shadow(0 0 0.3rem var(--line-color));
+
+        transition:
+            transform 0.03s ease-in,
+            filter 0.03s ease-in;
+    }
+}
+
+@media (max-width: 768px) {
+    .line-svg-image {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    .line-svgs-container {
+        flex-shrink: 0;
+        flex-wrap: wrap;
+        row-gap: 0.25em;
+    }
+
+    .line-svgs-container.wide {
+        min-width: fit-content !important;
+        max-width: 11ch;
+    }
+
+    .line-svgs-container:not(.small-lines).long img {
+        height: 1.6rem;
+        width: 1.6rem;
+    }
+
+    .line-svgs-container:not(.small-lines).lots img {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
 }
 
 /* tedious, but necessary to keep animation "smooth" */

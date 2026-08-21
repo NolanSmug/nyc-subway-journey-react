@@ -21,7 +21,7 @@ const Passenger = ({ ref, passengerState }: PassengerProps) => {
             ref={ref}
             src={avatarSrc}
             className={`passenger ${passengerState === PassengerState.WALKING ? 'walking' : ''}`}
-            onMouseDown={cycleGender}
+            onPointerDown={cycleGender}
             alt='passenger'
         />
     )

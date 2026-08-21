@@ -50,7 +50,7 @@ function AdvanceNStationsInput() {
                 src={darkMode ? RESET_INPUT_W : RESET_INPUT_B}
                 alt='Reset Input'
                 className={`reset-input-button ${hideResetButton ? 'hide-reset-button' : ''}`}
-                onMouseDown={() => setNumAdvanceStations(1)}
+                onPointerDown={() => setNumAdvanceStations(1)}
             />
         </div>
     )

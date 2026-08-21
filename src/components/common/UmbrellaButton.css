@@ -73,3 +73,9 @@
 .above .popup-arrow {
     right: 0.25em;
 }
+
+@media (max-width: 768px) {
+    .umbrella-content.visible {
+        opacity: 1;
+    }
+}

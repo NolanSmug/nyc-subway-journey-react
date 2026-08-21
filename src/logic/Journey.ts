@@ -1,7 +1,7 @@
 import { LineName, getRandomLine } from './LineManager'
 import { Score } from './Score'
 import { Station } from './StationManager'
-import { getRandomDestination, getRandomStationFromLine } from './subwayMap'
+import { getRandomDestination, getRandomStationFromLine } from '../utility/subwayMap'
 
 export class Journey {
     startingLine: LineName

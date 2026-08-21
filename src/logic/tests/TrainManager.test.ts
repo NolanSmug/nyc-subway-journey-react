@@ -1,8 +1,8 @@
 import { Train } from '../TrainManager'
 import { Station } from '../StationManager'
 import { Borough, Direction, LineName } from '../LineManager'
-import { findDirectionLabel } from '../directionLabels'
-import { initializeSubwayData } from '../subwayMap'
+import { findDirectionLabel } from '../../utility/directionLabels'
+import { initializeSubwayData } from '../../utility/subwayMap'
 
 const testStations = [
     new Station('R27', 'South Ferry', [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], Borough.MANHATTAN),

@@ -23,7 +23,9 @@ describe('LineSVGs', () => {
     })
 
     test('Applies "jiggle-animation" class when isTransferMode', () => {
-        render(<LineSVGs lines={[MOCK_LINES[0]]} />)
+        const handleSelect = jest.fn()
+
+        render(<LineSVGs lines={[MOCK_LINES[0]]} onTransferSelect={handleSelect} />)
 
         const img = screen.getByRole('img')
         expect(img).toHaveClass('jiggle-animation')
@@ -34,9 +36,8 @@ describe('LineSVGs', () => {
 
         render(<LineSVGs lines={MOCK_LINES} onTransferSelect={handleSelect} />)
 
-        const images: HTMLImageElement[] = screen.getAllByRole('img')
-
-        fireEvent.mouseDown(images[1])
+        const images = screen.getAllByRole('img')
+        fireEvent.pointerDown(images[1])
 
         expect(handleSelect).toHaveBeenCalledWith(1)
     })
@@ -46,7 +47,7 @@ describe('LineSVGs', () => {
 
         const wrapper: ChildNode | null = container.firstChild
 
-        expect(wrapper).toHaveClass('small')
+        expect(wrapper).toHaveClass('small-lines')
         expect(wrapper).toHaveClass('wide')
         expect(wrapper).toHaveClass('grouped')
     })

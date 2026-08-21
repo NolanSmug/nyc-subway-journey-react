@@ -1,7 +1,8 @@
 import { memo } from 'react'
 import SettingsButton from './SettingsButton'
 
-import { GameMode, UpcomingStationsLayout, useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { useGameUI } from '../../hooks/useGameUI'
 
 import L_MODE from '../../assets/images/light-mode-icon.svg'
 import D_MODE from '../../assets/images/dark-mode-icon.svg'
@@ -17,15 +18,14 @@ import RIDER_MODE_BLACK from '../../assets/images/rider-mode-icon-b.svg'
 import RIDER_MODE_WHITE from '../../assets/images/rider-mode-icon-w.svg'
 
 const SettingsMenu = () => {
+    const { gameMode, isHorizontalLayout, isMobile } = useGameUI()
     const darkMode = useSettingsContext((state) => state.darkMode)
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
 
-    const gameMode = useSettingsContext((state) => state.gameMode)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
     const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const toggleUpcomingStationsLayout = useSettingsContext((state) => state.toggleUpcomingStationsLayout)
-    const isHorizontalLayout = useSettingsContext((state) => state.upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL)
     const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
 
     const isConductorMode: boolean = gameMode === GameMode.CONDUCTOR
@@ -46,6 +46,7 @@ const SettingsMenu = () => {
                 onClick={() => {
                     setGameMode(isConductorMode ? GameMode.RIDER : GameMode.CONDUCTOR)
                 }}
+                disabled={isMobile}
             />
             <SettingsButton
                 label='Upcoming stations'
@@ -65,7 +66,7 @@ const SettingsMenu = () => {
                           : UPCOMING_STATIONS_HORIZONTAL_BLACK
                 }
                 onClick={() => isConductorMode && toggleUpcomingStationsLayout()}
-                disabled={!isConductorMode || !upcomingStationsVisible || isDailyChallenge}
+                disabled={!isConductorMode || !upcomingStationsVisible || isDailyChallenge || isMobile}
             />
             <SettingsButton label='Theme' imgSrc={darkMode ? L_MODE : D_MODE} onClick={() => setDarkMode((prev) => !prev)} />
         </>

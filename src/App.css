@@ -160,7 +160,66 @@ body {
 }
 
 .not-dim {
-    /* position: relative; */
     z-index: 10;
     opacity: 1;
+}
+
+@media (max-width: 768px) {
+    body,
+    #root {
+        justify-content: flex-start !important;
+        width: 100vw;
+        height: 100dvh;
+    }
+
+    .Game::before,
+    .Game::after {
+        display: none;
+    }
+
+    .Game {
+        display: grid;
+        grid-template-columns: 55vw;
+        grid-template-rows: minmax(0, 1fr);
+        width: 55vw;
+        height: 100dvh;
+        max-width: none;
+        padding: 1em 0 3em 1em;
+        margin: 0;
+        box-sizing: border-box;
+        align-items: stretch;
+
+        transition: grid-template-columns 0.3s ease;
+    }
+
+
+    .Game.one-column {
+        grid-template-columns: 100vw;
+        grid-template-rows: minmax(0, 1fr);
+        padding: 0 0 3em 0;
+        align-items: end;
+        justify-items: center;
+    }
+    
+
+    .Game.one-column:has(#optimal-route-title) {
+        margin-bottom: 20vh;
+    }
+
+    .game-state-ui {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        display: block;
+        overflow: visible;
+    }
+
+    .game-state-ui.is-vertical-layout {
+        top: 0;
+        left: 0;
+    }
+
+    .top-page-umbrellas .button-label {
+        display: none;
+    }
 }

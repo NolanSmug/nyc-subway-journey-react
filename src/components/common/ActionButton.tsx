@@ -34,8 +34,8 @@ function ActionButton({
                 <button
                     className={`action-button  ${noImage ? 'no-image' : ''} ${pulse ? 'pulse' : ''}`}
                     type='button'
-                    onMouseDown={noImage ? undefined : onClick}
-                    onMouseUp={noImage ? onClick : undefined}
+                    onPointerDown={!noImage ? onClick : undefined}
+                    onClick={noImage ? onClick : undefined}
                 >
                     {noImage ? (
                         <span className='button-text'>{label}</span>
@@ -50,11 +50,11 @@ function ActionButton({
                                         : undefined
                                 }
                                 alt={label}
+                                draggable={false}
                             />
                         </div>
                     )}
                 </button>
-
                 {/* Only render label below if it's an image button */}
                 {!noImage && label && <p className='button-label'>{label}</p>}
             </div>

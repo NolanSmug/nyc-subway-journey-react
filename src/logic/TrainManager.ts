@@ -1,6 +1,6 @@
 import { LineName, LineType, Direction, getLineType } from './LineManager'
 import { Station } from './StationManager'
-import { getStationsForLine } from './subwayMap'
+import { getStationsForLine } from '../utility/subwayMap'
 
 export class Train {
     private currentLine: LineName

@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 
 import StationFragment from '../station/StationFragment'
 import { useTrainContext } from '../../contexts/TrainContext'
-import { scrollToCurrentStation } from '../../logic/stationScroll'
+import { scrollToCurrentStation } from '../../utility/stationScroll'
 
 // TODO: Borough barrier
 
