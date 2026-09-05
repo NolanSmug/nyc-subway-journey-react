@@ -1,14 +1,7 @@
-import { Train } from '../TrainManager'
-import { Station } from '../StationManager'
+import { Train } from '../Train'
 import { Borough, Direction, LineName } from '../LineManager'
-import { findDirectionLabel } from '../../utility/directionLabels'
 import { initializeSubwayData } from '../../utility/subwayMap'
-
-const testStations = [
-    new Station('R27', 'South Ferry', [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], Borough.MANHATTAN),
-    new Station('139', 'Rector St', [LineName.ONE_TRAIN], Borough.MANHATTAN),
-    new Station('138', 'WTC Cortlandt', [LineName.ONE_TRAIN], Borough.MANHATTAN),
-]
+import { Station } from '../Station'
 
 const mockSubwayData = {
     [LineName.ONE_TRAIN]: [
@@ -26,38 +19,40 @@ const mockSubwayData = {
     ],
 }
 
-// const testStations_R = [
-//     new Station('R27', 'Whitehall St', [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], Borough.MANHATTAN),
-//     new Station('R26', 'Rector St', [LineName.R_TRAIN], Borough.MANHATTAN),
-//     new Station(
-//         'WTC',
-//         'Cortlandt St',
-//         [
-//             LineName.TWO_TRAIN,
-//             LineName.THREE_TRAIN,
-//             LineName.A_TRAIN,
-//             LineName.C_TRAIN,
-//             LineName.E_TRAIN,
-//             LineName.R_TRAIN,
-//             LineName.W_TRAIN,
-//         ],
-//         Borough.MANHATTAN
-//     ),
-// ]
+const testStations = [
+    new Station('R27', 'South Ferry', [LineName.ONE_TRAIN, LineName.R_TRAIN, LineName.W_TRAIN], Borough.MANHATTAN),
+    new Station('139', 'Rector St', [LineName.ONE_TRAIN], Borough.MANHATTAN),
+    new Station('138', 'WTC Cortlandt', [LineName.ONE_TRAIN], Borough.MANHATTAN),
+]
 
-describe('Train object mutable actions', () => {
+describe('Train()', () => {
     let train: Train
 
+    // STARTING TRAIN DATA
+    //
+    // line: ONE_TRAIN
+    // station: Whitehall St-South Ferry
+    // direction: UPTOWN
     beforeEach(() => {
         train = new Train()
         train.setScheduledStops(testStations)
         train.setLine(LineName.ONE_TRAIN)
 
-        train.setCurrentStationByIndex(0)
+        train.setCurrentStationByIndex(0) // South Ferry
         train.setDirection(Direction.UPTOWN)
     })
 
-    test('advanceStation', () => {
+    const mockLoadSubwayData = async () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            Promise.resolve({
+                ok: true,
+                json: () => Promise.resolve(mockSubwayData),
+            })
+        )
+        await initializeSubwayData()
+    }
+
+    test('advanceStation()', () => {
         train.advanceStation()
         expect(train.getCurrentStation().getName()).toBe('Rector St')
 
@@ -65,12 +60,12 @@ describe('Train object mutable actions', () => {
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })
 
-    test('advanceStation multiple', () => {
+    test('advanceStation(int)', () => {
         train.advanceStation(2)
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })
 
-    test('reverseDirection, setDirection', () => {
+    test('reverseDirection(), setDirection()', () => {
         train.setCurrentStationByIndex(2) // WTC
 
         train.reverseDirection()
@@ -88,7 +83,7 @@ describe('Train object mutable actions', () => {
         expect(train.getCurrentStation().getName()).toBe('Rector St')
     })
 
-    test('isValidTransfer', () => {
+    test('isValidTransfer()', () => {
         expect(train.isValidTransfer(LineName.R_TRAIN, train.getCurrentStation())).toBe(true)
         expect(train.isValidTransfer(LineName.TWO_TRAIN, train.getCurrentStation())).toBe(false)
 
@@ -96,7 +91,7 @@ describe('Train object mutable actions', () => {
         expect(train.isValidTransfer(LineName.R_TRAIN, train.getCurrentStation())).toBe(false)
     })
 
-    test('advanceStation overflow', () => {
+    test('advanceStation() overflow', () => {
         train.setCurrentStationByIndex(2) // WTC
         train.advanceStation()
         train.advanceStation(2)
@@ -104,24 +99,20 @@ describe('Train object mutable actions', () => {
         expect(train.getCurrentStation().getName()).toBe('WTC Cortlandt')
     })
 
-    test('transfer', async () => {
-        global.fetch = jest.fn().mockImplementation(() =>
-            Promise.resolve({
-                ok: true,
-                json: () => Promise.resolve(mockSubwayData),
-            })
-        )
-        await initializeSubwayData()
+    test('transferToLine()', async () => {
+        await mockLoadSubwayData()
 
         train.transferToLine(LineName.R_TRAIN, train.getCurrentStation())
+
         expect(train.getLine()).toBe(LineName.R_TRAIN)
         expect(train.getCurrentStation().getName()).toBe('Whitehall St-South Ferry')
     })
 
-    test('directionLabel', () => {
-        expect(findDirectionLabel(train.getDirection(), train.getLine(), train.getCurrentStation().getBorough())).toBe('Uptown')
+    test('transferToLine() to currentLine resets direction', async () => {
+        train.transferToLine(LineName.ONE_TRAIN, train.getCurrentStation())
 
-        train.reverseDirection()
-        expect(findDirectionLabel(train.getDirection(), train.getLine(), train.getCurrentStation().getBorough())).toBe('Downtown')
+        expect(train.getLine()).toBe(LineName.ONE_TRAIN)
+        expect(train.getCurrentStation().getName()).toBe('South Ferry')
+        expect(train.getDirection()).toBe(Direction.NULL_DIRECTION)
     })
 })

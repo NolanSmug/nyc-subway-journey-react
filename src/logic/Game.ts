@@ -3,7 +3,7 @@ import { Direction } from './LineManager'
 import { Journey } from './Journey'
 import { Score } from './Score'
 import { SeedRNG } from './SeedRNG'
-import { Train } from './TrainManager'
+import { Train } from './Train'
 import { getStationsForLine } from '../utility/subwayMap'
 
 export class Game {

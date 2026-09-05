@@ -3,7 +3,7 @@ import { memo } from 'react'
 
 import LineSVGs from '../common/LineSVGs'
 
-import { Station } from '../../logic/StationManager'
+import { Station } from '../../logic/Station'
 import { LineName } from '../../logic/LineManager'
 
 export interface StationFragmentProps {

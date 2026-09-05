@@ -1,5 +1,5 @@
-import { initializeSubwayData, getStationsForLine, getRandomStationFromLine, getRandomDestination } from '../../utility/subwayMap'
-import { LineName, Borough } from '../LineManager'
+import { initializeSubwayData, getStationsForLine, getRandomStationFromLine, getRandomDestination } from '../subwayMap'
+import { LineName, Borough } from '../../logic/LineManager'
 
 const mockSubwayData = {
     [LineName.ONE_TRAIN]: [
@@ -26,6 +26,7 @@ describe('subwayMap', () => {
 
     test('getStationsForLine() returns the correct stations', () => {
         const stations = getStationsForLine(LineName.ONE_TRAIN)
+
         expect(stations.length).toBe(2)
         expect(stations[0].getName()).toBe('96 St')
         expect(stations[0].getId()).toBe('120')

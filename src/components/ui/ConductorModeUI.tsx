@@ -9,7 +9,7 @@ import TrainCarFront from '../train/mobile/TrainCarFront'
 import Header from '../common/Header'
 import ConductorModeControls from './ConductorModeControls'
 
-import { Station as StationObject } from '../../logic/StationManager'
+import { Station as StationObject } from '../../logic/Station'
 import { Journey } from '../../logic/Journey'
 import { Direction } from '../../logic/LineManager'
 

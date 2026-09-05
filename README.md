@@ -203,7 +203,7 @@ Upon winning the game, you can choose to reveal the *optimal route*. There are t
 
 ![optimal route](./src/assets/images/screenshot-optimal-route.png)
 
-- The graph construction and algorithms are implemented in [route.py](./src/logic/bfs.py).
+- The graph construction and algorithms are implemented in [route.py](./src/logic/python/route.py).
   - **Note:** This contains `FastAPI` endpoints that are being hosted (for free) on [render.com](https://render.com/). The `route.py` in this repo is a copy of the code hosted there.
 - If you can take multiple trains with different colors for a given leg of the trip, both line segments are shown (see <img src='./src/assets/images/m.svg' width='20px' align='top'> <img src='./src/assets/images/j.svg' width='20px' align='top'> <img src='./src/assets/images/z.svg' width='20px' align='top'> lines above).
 

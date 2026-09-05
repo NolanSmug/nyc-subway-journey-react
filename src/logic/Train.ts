@@ -1,5 +1,5 @@
 import { LineName, LineType, Direction, getLineType } from './LineManager'
-import { Station } from './StationManager'
+import { Station } from './Station'
 import { getStationsForLine } from '../utility/subwayMap'
 
 export class Train {
@@ -18,6 +18,9 @@ export class Train {
         this.scheduledStops = scheduledStops
     }
 
+    // Ok I know I hate this and its ugly
+    // I originally wrote all the logic in C++, and what do you know OOP is not meant for React JSX
+    // TODO (tentative)
     public clone(): Train {
         const newTrain = new Train()
 
@@ -78,18 +81,18 @@ export class Train {
         return this.scheduledStops
     }
 
-    public getScheduledStopsBetween(index1: number, index2: number): Station[] {
-        const newScheduledStops: Station[] = []
+    // public getScheduledStopsBetween(index1: number, index2: number): Station[] {
+    //     const newScheduledStops: Station[] = []
 
-        for (let i = index1; i <= index2; i++) {
-            if (this.scheduledStops[i]) {
-                // Check if the station exists
-                newScheduledStops.push(this.scheduledStops[i])
-            }
-        }
+    //     for (let i = index1; i <= index2; i++) {
+    //         if (this.scheduledStops[i]) {
+    //             // Check if the station exists
+    //             newScheduledStops.push(this.scheduledStops[i])
+    //         }
+    //     }
 
-        return newScheduledStops
-    }
+    //     return newScheduledStops
+    // }
 
     public addScheduledStop(newStop: Station): void {
         this.scheduledStops.push(newStop)
@@ -118,18 +121,17 @@ export class Train {
         this.repOk()
     }
 
+    // For testing ONLY
     public static getCurrentStationIndexByID(stationID: string, scheduledStops: Station[]): number {
         return scheduledStops.findIndex((station) => station.getId() === stationID)
     }
 
     public isValidTransfer(newLine: LineName, currentStation: Station): boolean {
-        if (this.currentLine === newLine) return false
-
         return currentStation.getTransfers().includes(newLine)
     }
 
     public transferToLine(newLine: LineName, currentStation: Station): boolean {
-        if (!newLine || !currentStation) return false
+        if (this.currentLine === newLine) this.setDirection(Direction.NULL_DIRECTION)
 
         if (this.isValidTransfer(newLine, currentStation)) {
             const newStops: Station[] = getStationsForLine(newLine)
@@ -170,14 +172,17 @@ export class Train {
         return true
     }
 
+    // C++ stuff I wanted to keep
     private repOk(): void {
         function assert(exp: boolean, msg?: string): void {
-            if (!exp) {
-                throw new Error(msg)
-            }
+            if (!exp) throw new Error(msg)
         }
 
-        // sometimes we want the train line to be null (examples below), so assert less conditions
+        // Sometimes we want the train line to be null (examples below), so assert less conditions
+        // When we like NULL_TRAIN
+        // - SubwayMap will load all_stations if isLineNull()
+        // - PassengerState depends on it
+        // - OptimalRoute UI and API
         if (this.isLineNull()) {
             assert(this.direction === Direction.NULL_DIRECTION, 'A null train must be in NULL_DIRECTION')
         } else {
@@ -187,9 +192,5 @@ export class Train {
                 `currentStationIndex (${this.currentStationIndex} is out of bounds for scheduledStops of length ${this.scheduledStops.length})`
             )
         }
-        // When we like NULL_TRAIN
-        //  - SubwayMap will load all_stations if isLineNull()
-        //  - The OptimalRoute UI AND API. The entire API backend will break if it can't utilize NULL_TRAIN
-        //
     }
 }

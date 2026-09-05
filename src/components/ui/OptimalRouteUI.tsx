@@ -14,7 +14,7 @@ import { useOptimalRoute } from '../../hooks/useOptimalRoute'
 
 import { LineName } from '../../logic/LineManager'
 import { getLineType, LineType } from '../../logic/LineManager'
-import { lineToLineColor } from '../../logic/LineSVGsMap'
+import { lineToLineColor } from '../../utility/lineSVGsMap'
 import { getTransferIndices, StationData } from '../../logic/RouteUtils'
 
 import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'

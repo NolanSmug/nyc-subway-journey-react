@@ -4,7 +4,7 @@ import { useJourneyContext } from './JourneyContext'
 import { useSettingsContext } from './SettingsContext'
 
 import useTrainActions from '../hooks/useTrainActions'
-import { Train } from '../logic/TrainManager'
+import { Train } from '../logic/Train'
 
 type TrainActions = ReturnType<typeof useTrainActions>
 

@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react'
 import { useTrainContext } from '../contexts/TrainContext'
-import { getLineSVG } from '../logic/LineSVGsMap'
+import { getLineSVG } from '../utility/lineSVGsMap'
 import { LineName } from '../logic/LineManager'
 
 export default function useLineFavicon() {

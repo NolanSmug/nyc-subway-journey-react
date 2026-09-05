@@ -10,7 +10,7 @@ import useGame from '../../hooks/useGame'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
 import { useGameUI } from '../../hooks/useGameUI'
 
-import { Station as StationObject } from '../../logic/StationManager'
+import { Station as StationObject } from '../../logic/Station'
 import { Direction } from '../../logic/LineManager'
 import ConductorModeControls from '../ui/ConductorModeControls'
 

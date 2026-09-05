@@ -16,7 +16,7 @@ export class Station {
     }
 
     public equals(rhs: Station): boolean {
-        return this.id === rhs.id // ! this could break if there is an id mismatch in my data
+        return this.id === rhs.id
     }
 
     public getId(): string {

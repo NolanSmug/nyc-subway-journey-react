@@ -15,7 +15,7 @@ import { PassengerState } from '../../hooks/usePassengerAnimations'
 import { usePlatformTransferGroups } from '../../hooks/usePlatformTransferGroups'
 
 import { Direction, LineName } from '../../logic/LineManager'
-import { Station as StationObject } from '../../logic/StationManager'
+import { Station as StationObject } from '../../logic/Station'
 
 import REFRESH_BLACK from '../../assets/images/refresh-icon-b.svg'
 import REFRESH_WHITE from '../../assets/images/refresh-icon-w.svg'

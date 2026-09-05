@@ -1,10 +1,10 @@
 import { RefObject, useCallback, useMemo } from 'react'
 
 import { Journey } from '../logic/Journey'
-import { Train } from '../logic/TrainManager'
+import { Train } from '../logic/Train'
 import { Direction, LineName } from '../logic/LineManager'
 import { DailyChallenge } from '../logic/DailyChallenge'
-import { Station } from '../logic/StationManager'
+import { Station } from '../logic/Station'
 
 type UseTrainActionsParams = {
     trainRef: RefObject<Train>

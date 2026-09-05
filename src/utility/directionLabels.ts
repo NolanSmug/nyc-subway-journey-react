@@ -1,6 +1,6 @@
 import { Borough, Direction, LineName } from '../logic/LineManager'
 
-export function findDirectionLabel(direction: Direction, line: LineName, borough: Borough): string {
+export function findDirectionLabel(line: LineName, direction: Direction, borough: Borough): string {
     if (direction === Direction.NULL_DIRECTION) return ''
 
     const labels = LINE_DIRECTION_LABELS.get(line)

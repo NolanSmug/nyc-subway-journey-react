@@ -1,20 +1,17 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import LineSVGs from '../LineSVGs'
 import { LineName } from '../../../logic/LineManager'
-import { getLineSVGs } from '../../../logic/LineSVGsMap'
+import { getLineSVGs } from '../../../utility/lineSVGsMap'
 
 jest.mock('../../../contexts/UIContext', () => ({
-    useUIContext: (selector: any) =>
-        selector({
-            isTransferMode: true,
-        }),
+    useUIContext: (selector: any) => selector({ isTransferMode: true }),
 }))
 
 describe('LineSVGs', () => {
     const MOCK_LINES: LineName[] = [LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN]
     const MOCK_PATHS: string[] = getLineSVGs(MOCK_LINES)
 
-    test('Renders the correct number of line icons', () => {
+    test('renders the correct number of line icons', () => {
         render(<LineSVGs lines={MOCK_LINES} />)
 
         const images = screen.getAllByRole('img')
@@ -22,7 +19,7 @@ describe('LineSVGs', () => {
         expect(images[0]).toHaveAttribute('src', MOCK_PATHS[0])
     })
 
-    test('Applies "jiggle-animation" class when isTransferMode', () => {
+    test('applies "jiggle-animation" when isTransferMode', () => {
         const handleSelect = jest.fn()
 
         render(<LineSVGs lines={[MOCK_LINES[0]]} onTransferSelect={handleSelect} />)
@@ -31,7 +28,7 @@ describe('LineSVGs', () => {
         expect(img).toHaveClass('jiggle-animation')
     })
 
-    test('Handles clicking a specific line', () => {
+    test('handles clicking a specific line', () => {
         const handleSelect = jest.fn()
 
         render(<LineSVGs lines={MOCK_LINES} onTransferSelect={handleSelect} />)
@@ -42,7 +39,7 @@ describe('LineSVGs', () => {
         expect(handleSelect).toHaveBeenCalledWith(1)
     })
 
-    test('Applies wrapper classes (small, wide, grouped)', () => {
+    test('applies wrapper classes (small, wide, grouped)', () => {
         const { container } = render(<LineSVGs lines={MOCK_LINES} small wide grouped />)
 
         const wrapper: ChildNode | null = container.firstChild
@@ -52,7 +49,7 @@ describe('LineSVGs', () => {
         expect(wrapper).toHaveClass('grouped')
     })
 
-    test('Does NOT animate when disabled, even if isTransferMode', () => {
+    test('does NOT animate when disabled, even if isTransferMode', () => {
         render(<LineSVGs lines={[MOCK_LINES[0]]} disabled />)
 
         const img: HTMLImageElement = screen.getByRole('img')
@@ -62,7 +59,7 @@ describe('LineSVGs', () => {
         expect(img).not.toHaveClass('jiggle-animation')
     })
 
-    test('Applies vertical and num-lines classes', () => {
+    test('applies vertical and num-lines classes', () => {
         const { container } = render(<LineSVGs lines={MOCK_LINES} vertical numLines={3} />)
 
         const wrapper: ChildNode | null = container.firstChild
@@ -71,7 +68,7 @@ describe('LineSVGs', () => {
         expect(wrapper).toHaveClass('num-lines-3')
     })
 
-    test('Applies "not-dim" class', () => {
+    test('applies "not-dim" class', () => {
         const { container } = render(<LineSVGs lines={MOCK_LINES} notDim />)
 
         const wrapper: ChildNode | null = container.firstChild
@@ -79,7 +76,7 @@ describe('LineSVGs', () => {
         expect(wrapper).toHaveClass('not-dim')
     })
 
-    test('Applies className prop', () => {
+    test('applies className prop', () => {
         const { container } = render(<LineSVGs lines={MOCK_LINES} className='nolan-test-class' />)
 
         const wrapper: ChildNode | null = container.firstChild

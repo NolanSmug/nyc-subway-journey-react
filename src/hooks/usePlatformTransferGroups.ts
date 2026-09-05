@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { LineName } from '../logic/LineManager'
-import { Station } from '../logic/StationManager'
-import { getCorrespondingLineGroup, groupLines } from '../logic/LineSVGsMap'
+import { Station } from '../logic/Station'
+import { getCorrespondingLineGroup, groupLines } from '../utility/lineSVGsMap'
 
 type UsePlatformTransferGroups = {
     currentStation: Station

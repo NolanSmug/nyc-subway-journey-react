@@ -3,7 +3,7 @@ import './TrainCarFront.css'
 import { memo, useMemo } from 'react'
 import { Direction, getLineType } from '../../../logic/LineManager'
 import { useTrainContext } from '../../../contexts/TrainContext'
-import { getLineSVG } from '../../../logic/LineSVGsMap'
+import { getLineSVG } from '../../../utility/lineSVGsMap'
 import { findDirectionLabel } from '../../../utility/directionLabels'
 import { useLineStyles } from '../../../hooks/useCSSProperties'
 
@@ -18,7 +18,7 @@ function TrainCarFront({ changeDirection, forWinDisplay = false }: TrainCarFront
     const borough = useTrainContext((state) => state.train.getCurrentStation().getBorough())
     const lineSVG = useMemo(() => getLineSVG(line), [line])
     const lineType = useMemo(() => getLineType(line), [line])
-    const directionLabel = findDirectionLabel(direction, line, borough)
+    const directionLabel = findDirectionLabel(line, direction, borough)
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
     const shrinkDirectionLabel: boolean = directionLabel.length >= 18
 

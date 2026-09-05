@@ -5,7 +5,7 @@ import { useTrainContext } from '../../contexts/TrainContext'
 import { useLineStyles } from '../../hooks/useCSSProperties'
 
 import { Direction, getLineType } from '../../logic/LineManager'
-import { getLineSVG } from '../../logic/LineSVGsMap'
+import { getLineSVG } from '../../utility/lineSVGsMap'
 import { findDirectionLabel } from '../../utility/directionLabels'
 
 function TrainInfo({ direction, reverseButton }: { direction: Direction; reverseButton?: boolean }) {
@@ -15,7 +15,7 @@ function TrainInfo({ direction, reverseButton }: { direction: Direction; reverse
 
     const lineType = useMemo(() => getLineType(line), [line])
     const lineSVG = useMemo(() => getLineSVG(line), [line])
-    const directionLabel = findDirectionLabel(direction, line, borough)
+    const directionLabel = findDirectionLabel(line, direction, borough)
 
     const isNullDirection: boolean = direction === Direction.NULL_DIRECTION
     const shrinkDirectionLabel: boolean = directionLabel.length >= 20

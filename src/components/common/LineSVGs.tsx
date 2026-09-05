@@ -3,7 +3,7 @@ import { memo } from 'react'
 
 import { useUIContext } from '../../contexts/UIContext'
 
-import { getLineSVGs } from '../../logic/LineSVGsMap'
+import { getLineSVGs } from '../../utility/lineSVGsMap'
 import { LineName } from '../../logic/LineManager'
 
 const LONG_LINE_COUNT = 5

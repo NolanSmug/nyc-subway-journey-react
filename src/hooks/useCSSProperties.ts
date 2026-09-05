@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { LineName, LineType } from '../logic/LineManager'
-import { lineToLineColor } from '../logic/LineSVGsMap'
+import { lineToLineColor } from '../utility/lineSVGsMap'
 
 export function useUITheme(darkMode: boolean) {
     useEffect(() => {

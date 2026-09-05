@@ -1,5 +1,5 @@
 import { LineName } from '../logic/LineManager'
-import { Station } from '../logic/StationManager'
+import { Station } from '../logic/Station'
 
 export type SubwayData = Record<string, Station[]>
 

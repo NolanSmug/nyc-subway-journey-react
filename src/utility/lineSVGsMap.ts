@@ -1,4 +1,4 @@
-import { areLineSetsEqual, LineName } from './LineManager'
+import { areLineSetsEqual, LineName } from '../logic/LineManager'
 import IMG_A from '../assets/images/a.svg'
 import IMG_AL from '../assets/images/al.svg'
 import IMG_AR from '../assets/images/ar.svg'
@@ -27,9 +27,9 @@ import IMG_3 from '../assets/images/3.svg'
 import IMG_4 from '../assets/images/4.svg'
 import IMG_5 from '../assets/images/5.svg'
 import IMG_6 from '../assets/images/6.svg'
-// import IMG_6D from '../assets/images/6d.svg'
+//? TODO import IMG_6D from '../assets/images/6d.svg'
 import IMG_7 from '../assets/images/7.svg'
-// import IMG_7D from '../assets/images/7d.svg'
+//? TODO import IMG_7D from '../assets/images/7d.svg'
 
 const LINE_SVGS: { [key in LineName]: string } = {
     [LineName.NULL_TRAIN]: IMG_T,
@@ -215,7 +215,7 @@ export function groupLines(lines: LineName[], stationID: string): LineName[][] {
     return LINE_GROUPS.map((group) => group.filter((line) => lines.includes(line))).filter((filteredGroup) => filteredGroup.length > 0)
 }
 
-export function getCorrespondingLineGroup(line: LineName, groups: LineName[][]): LineName[] {
+export function getCorrespondingLineGroup(line: LineName, groups?: LineName[][]): LineName[] {
     if (!groups) groups = LINE_GROUPS
 
     return groups.find((group) => group.includes(line)) ?? []

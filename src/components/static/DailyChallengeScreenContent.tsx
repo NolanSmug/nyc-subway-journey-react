@@ -7,7 +7,7 @@ import LineSVGs from '../common/LineSVGs'
 import { useJourneyContext } from '../../contexts/JourneyContext'
 import { useSettingsContext } from '../../contexts/SettingsContext'
 
-import { Station as StationObject } from '../../logic/StationManager'
+import { Station as StationObject } from '../../logic/Station'
 import { DailyChallenge } from '../../logic/DailyChallenge'
 
 import R_ARROW_WHITE from '../../assets/images/right-arrow-w.svg'

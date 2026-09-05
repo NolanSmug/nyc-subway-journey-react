@@ -4,7 +4,7 @@ Nolan Cyr
 This is an live FastAPI service I wrote for OptimalRoute.tsx. It is NOT being hosted in this repo, this is just a copy of the code.
 
     Breadth-First Search and heuristic algorithms to find the shortest path between two given NYC subway stations.
-    Creates a graph representation of the network, runs algorithm with input being two station ids (IDs can be found in ./data/game-data.csv) and heuristic boolean.
+    Creates a graph representation of the network, runs algorithm with input being two station ids (IDs can be found in ./game-data.csv) and heuristic boolean.
     Returns the path as a list of station names in dictionary/JSON format
 """
 
