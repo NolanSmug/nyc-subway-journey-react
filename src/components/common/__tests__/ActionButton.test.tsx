@@ -15,7 +15,7 @@ describe('ActionButton', () => {
         expect(handleClick).toHaveBeenCalledTimes(1) // Should NOT fire again
     })
 
-    test('Text-only buttons trigger onClick on CLICK', () => {
+    test('text-only buttons trigger onClick on CLICK', () => {
         const handleClick = jest.fn()
         render(<ActionButton label='Test' onClick={handleClick} />)
 
@@ -25,14 +25,14 @@ describe('ActionButton', () => {
         expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
-    test('Applies rotationDegrees style', () => {
+    test('applies rotationDegrees style', () => {
         render(<ActionButton imageSrc='arrow.svg' rotateDegrees={90} />)
 
         const img: HTMLImageElement = screen.getByRole('img')
         expect(img).toHaveStyle('transform: rotate(-90deg)')
     })
 
-    test('Does not handle clicks when disabled', () => {
+    test('does not handle clicks when disabled', () => {
         const handleClick = jest.fn()
         render(<ActionButton label='Disabled' disabled onClick={handleClick} />)
 

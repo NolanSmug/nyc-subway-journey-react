@@ -9,14 +9,13 @@ jest.mock('../../../contexts/UIContext', () => ({
 
 describe('LineSVGs', () => {
     const MOCK_LINES: LineName[] = [LineName.J_TRAIN, LineName.M_TRAIN, LineName.Z_TRAIN]
-    const MOCK_PATHS: string[] = getLineSVGs(MOCK_LINES)
 
     test('renders the correct number of line icons', () => {
         render(<LineSVGs lines={MOCK_LINES} />)
 
         const images = screen.getAllByRole('img')
         expect(images).toHaveLength(3)
-        expect(images[0]).toHaveAttribute('src', MOCK_PATHS[0])
+        expect(images[0]).toHaveAttribute('src', getLineSVGs(MOCK_LINES))
     })
 
     test('applies "jiggle-animation" when isTransferMode', () => {
