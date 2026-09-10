@@ -27,7 +27,7 @@
   - [Gameplay](#gameplay)
     - [Configuration settings](#configuration-settings)
     - [Keyboard shortcuts](#keyboard-shortcuts)
-- [Game modes](#game-modes)
+- [UI modes](#ui-modes)
   - [Rider mode](#rider-mode)
   - [Conductor mode](#conductor-mode)
 - [Optimal route](#optimal-route)
@@ -163,15 +163,15 @@ You are placed into a random NYC subway station. Your objective is to reach anot
 - `Shift` + `D` – Toggle **Theme**
 - `Shift` + `U` – Toggle **Upcoming stations**
 - `Shift` + `L` – Toggle **Upcoming stations layout***
-- `Shift` + `C` – Toggle **Game mode**
+- `Shift` + `I` – Toggle **UI mode**
 <br><br>
   \**conductor mode only*
 
-# Game modes
+# UI modes
 
 ## Rider mode
 
-Rider mode is the default game mode and is the recommended mode for those who are learning and want to visualize their journey. 
+Rider mode is the default UI mode and is the recommended mode for those who are learning and want to visualize their journey. 
 
 <img src="./src/assets/images/screenshot-rider-mode.png" alt="rider mode screenshot" width="100%">
 

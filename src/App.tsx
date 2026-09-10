@@ -3,8 +3,8 @@ import { useCallback, useEffect, useRef, JSX, PointerEvent } from 'react'
 
 import ModalScreen from './components/ui/ModalScreen'
 import OptimalRouteUI from './components/ui/OptimalRouteUI'
-import ConductorMode from './components/modes/ConductorMode'
-import RiderMode, { RiderModeHandle } from './components/modes/RiderMode'
+import ConductorMode from './components/gameplay/ConductorMode'
+import RiderMode, { RiderModeHandle } from './components/gameplay/RiderMode'
 import UmbrellaButton from './components/common/UmbrellaButton'
 import SettingsMenu from './components/common/SettingsMenu'
 import UpcomingStationsHorizontal from './components/navigation/UpcomingStationsHorizontal'
@@ -19,7 +19,7 @@ import LoadingSpinner from './components/common/LoadingSpinner'
 import { useUIContext } from './contexts/UIContext'
 import { useTrainContext } from './contexts/TrainContext'
 import { useJourneyContext } from './contexts/JourneyContext'
-import { useSettingsContext, GameMode } from './contexts/SettingsContext'
+import { useSettingsContext, UIMode, GameMode } from './contexts/SettingsContext'
 
 import useGame from './hooks/useGame'
 import useLineFavicon from './hooks/useLineFavicon'
@@ -50,7 +50,7 @@ function Game() {
     const isWon = useJourneyContext((state) => state.journey.isWon)
     const isLineNull = useTrainContext((state) => state.train.isLineNull())
 
-    const { gameMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isMobile } = useGameUI()
+    const { uiMode, upcomingStationsVisible, isHorizontalLayout, isVerticalLayout, isMobile } = useGameUI()
 
     const isTransferMode = useUIContext((state) => state.isTransferMode)
     const isModalOpen = useUIContext((state) => state.isModalOpen) && !isMobile
@@ -58,8 +58,9 @@ function Game() {
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
     const darkMode = useSettingsContext((state) => state.darkMode)
-    const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
-    const setIsDailyChallenge = useSettingsContext((state) => state.setIsDailyChallenge)
+    const gameMode = useSettingsContext((state) => state.gameMode)
+    const isDailyChallenge = gameMode === GameMode.DAILY_CHALLENGE
+    const setGameMode = useSettingsContext((state) => state.setGameMode)
     const isDailyChallengeCompleted = DailyChallenge.isAlreadyCompleted()
 
     const riderModePassengerRef = useRef<RiderModeHandle>(null)
@@ -99,7 +100,7 @@ function Game() {
                 label={isDailyChallenge ? 'Exit challenge' : 'Daily challenge'}
                 imageSrc={getChallengeIcon()}
                 onClick={() => {
-                    setIsDailyChallenge((prev) => !prev)
+                    setGameMode(isDailyChallenge ? GameMode.OPEN : GameMode.DAILY_CHALLENGE)
                     setIsModalOpen(!isDailyChallenge)
                 }}
             />
@@ -119,7 +120,7 @@ function Game() {
     if (isWon) {
         return (
             <div className={`Game ${isMobile ? 'one-column' : ''}`}>
-                <OptimalRouteUI isDailyChallenge={isDailyChallenge} setIsDailyChallenge={setIsDailyChallenge} />
+                <OptimalRouteUI isDailyChallenge={isDailyChallenge} setGameMode={setGameMode} />
                 {renderGameControls()}
             </div>
         )
@@ -142,13 +143,13 @@ function Game() {
             )}
 
             <div
-                className={`Game ${gameMode}-mode ${!upcomingStationsVisible ? 'upcoming-stations-disabled' : ''} ${!upcomingStationsVisible ? 'one-column' : ''}`}
+                className={`Game ${uiMode}-mode ${!upcomingStationsVisible ? 'upcoming-stations-disabled' : ''} ${!upcomingStationsVisible ? 'one-column' : ''}`}
             >
                 {upcomingStationsVisible && isHorizontalLayout && <UpcomingStationsHorizontal />}
 
                 <div className={`game-state-ui ${isVerticalLayout && upcomingStationsVisible ? 'is-vertical-layout' : ''}`}>
-                    {gameMode === GameMode.CONDUCTOR && <ConductorMode />}
-                    {gameMode === GameMode.RIDER && <RiderMode ref={riderModePassengerRef} />}
+                    {uiMode === UIMode.CONDUCTOR && <ConductorMode />}
+                    {uiMode === UIMode.RIDER && <RiderMode ref={riderModePassengerRef} />}
                 </div>
             </div>
 

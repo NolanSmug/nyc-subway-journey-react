@@ -5,7 +5,7 @@ import Passenger from '../Passenger'
 
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { UIMode, useSettingsContext } from '../../contexts/SettingsContext'
 
 import { usePassengerAnimations } from '../../hooks/usePassengerAnimations'
 import { PassengerState } from '../../hooks/usePassengerAnimations'
@@ -43,7 +43,7 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const numAdvanceStations = useSettingsContext((state) => state.numAdvanceStations)
-    const setGameMode = useSettingsContext((state) => state.setGameMode)
+    const setUIMode = useSettingsContext((state) => state.setUIMode)
 
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
@@ -104,22 +104,18 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
     }, [transferUpStairs])
 
     const handleBoardUptown = useCallback(async () => {
-        if (passengerState === PassengerState.UPTOWN_TRAIN) return
-
         if (uptownTrainDoorRef.current) {
             await boardTrain(uptownTrainDoorRef.current, Direction.UPTOWN)
         }
         changeDirection(Direction.UPTOWN)
-    }, [passengerState, boardTrain, changeDirection])
+    }, [boardTrain, changeDirection])
 
     const handleBoardDowntown = useCallback(async () => {
-        if (passengerState === PassengerState.DOWNTOWN_TRAIN) return
-
         if (downtownTrainDoorRef.current) {
             await boardTrain(downtownTrainDoorRef.current, Direction.DOWNTOWN)
         }
         changeDirection(Direction.DOWNTOWN)
-    }, [passengerState, boardTrain, changeDirection])
+    }, [boardTrain, changeDirection])
 
     const handleDeboard = useCallback(async () => {
         await deboard()
@@ -161,7 +157,7 @@ const RiderMode = ({ ref: passengerRef }: RiderModeProps) => {
         comboKeys: {
             'Shift+D': () => setDarkMode((prev) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev) => !prev),
-            'Shift+C': () => setGameMode(GameMode.CONDUCTOR),
+            'Shift+I': () => setUIMode(UIMode.CONDUCTOR),
         },
         singleKeys: {
             ArrowRight: () => advanceStation(numAdvanceStations),

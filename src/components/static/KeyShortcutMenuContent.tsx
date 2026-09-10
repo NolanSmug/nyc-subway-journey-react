@@ -1,11 +1,10 @@
-import KeyShortcut from './KeyShortcut'
-
 import './KeyShortcutMenuContent.css'
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import KeyShortcut from './KeyShortcut'
+import { GameMode, UIMode, useSettingsContext } from '../../contexts/SettingsContext'
 
 const KeyShortcutMenu = () => {
-    const isRiderMode = useSettingsContext((state) => state.gameMode === GameMode.RIDER)
-    const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
+    const isRiderMode = useSettingsContext((state) => state.uiMode === UIMode.RIDER)
+    const isDailyChallenge = useSettingsContext((state) => state.gameMode) === GameMode.DAILY_CHALLENGE
 
     return (
         <>
@@ -18,7 +17,7 @@ const KeyShortcutMenu = () => {
             <KeyShortcut shortcutKey='D' label='Light/dark mode' isCommand />
             <KeyShortcut shortcutKey='U' label='Stations hide/show' isCommand disabled={isDailyChallenge} />
             <KeyShortcut shortcutKey='L' label='Toggle layout' isCommand disabled={isRiderMode || isDailyChallenge} />
-            <KeyShortcut shortcutKey='C' label='Conductor/rider mode' isCommand />
+            <KeyShortcut shortcutKey='I' label='Conductor/rider mode' isCommand />
             <KeyShortcut shortcutKey='+' label='Increase advance count' disabled={isRiderMode} />
             <KeyShortcut shortcutKey='-' label='Decrease Advance Count' disabled={isRiderMode} />
             <KeyShortcut shortcutKey='Esc' label='Exit transfer' />

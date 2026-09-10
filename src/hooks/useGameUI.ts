@@ -1,24 +1,24 @@
 import { useUIContext } from '../contexts/UIContext'
-import { useSettingsContext, UpcomingStationsLayout, GameMode } from '../contexts/SettingsContext'
+import { useSettingsContext, UpcomingStationsLayout, UIMode, GameMode } from '../contexts/SettingsContext'
 
 export function useGameUI() {
     const isMobile = useUIContext((state) => state.isMobile)
-    const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
+    const isDailyChallenge = useSettingsContext((state) => state.gameMode) === GameMode.DAILY_CHALLENGE
 
     const configuredLayout = useSettingsContext((state) => state.upcomingStationsLayout)
-    const configuredGameMode = useSettingsContext((state) => state.gameMode)
+    const configuredUIMode = useSettingsContext((state) => state.uiMode)
     const configuredUpcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible)
 
-    const gameMode = isMobile ? GameMode.CONDUCTOR : configuredGameMode
+    const uiMode = isMobile ? UIMode.CONDUCTOR : configuredUIMode
 
     const upcomingStationsLayout = isMobile
         ? UpcomingStationsLayout.VERTICAL
-        : gameMode === GameMode.RIDER
+        : uiMode === UIMode.RIDER
           ? UpcomingStationsLayout.HORIZONTAL
           : configuredLayout
 
     return {
-        gameMode,
+        uiMode,
         upcomingStationsVisible: !isDailyChallenge && configuredUpcomingStationsVisible,
         isVerticalLayout: upcomingStationsLayout === UpcomingStationsLayout.VERTICAL,
         isHorizontalLayout: upcomingStationsLayout === UpcomingStationsLayout.HORIZONTAL,

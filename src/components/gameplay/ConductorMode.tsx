@@ -4,7 +4,7 @@ import ConductorModeUI from '../ui/ConductorModeUI'
 import { useTrainContext } from '../../contexts/TrainContext'
 import { useUIContext } from '../../contexts/UIContext'
 import { useJourneyContext } from '../../contexts/JourneyContext'
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { UIMode, useSettingsContext } from '../../contexts/SettingsContext'
 
 import useGame from '../../hooks/useGame'
 import useKeyShortcuts from '../../hooks/useKeyShortcuts'
@@ -29,7 +29,7 @@ function ConductorMode() {
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const toggleUpcomingStationsLayout = useSettingsContext((state) => state.toggleUpcomingStationsLayout)
     const setNumAdvanceStations = useSettingsContext((state) => state.setNumAdvanceStations)
-    const setGameMode = useSettingsContext((state) => state.setGameMode)
+    const setUIMode = useSettingsContext((state) => state.setUIMode)
 
     const setIsTransferMode = useUIContext((state) => state.setIsTransferMode)
 
@@ -68,7 +68,7 @@ function ConductorMode() {
             'Shift+L': toggleUpcomingStationsLayout,
             'Shift+D': () => setDarkMode((prev: boolean) => !prev),
             'Shift+U': () => setUpcomingStationsVisible((prev: boolean) => !prev),
-            'Shift+C': () => setGameMode(GameMode.RIDER),
+            'Shift+I': () => setUIMode(UIMode.RIDER),
         },
         singleKeys: {
             t: handleTransferClick,

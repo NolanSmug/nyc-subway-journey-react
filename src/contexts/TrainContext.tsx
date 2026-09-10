@@ -1,7 +1,7 @@
 import { useState, ReactNode, useMemo, useRef, RefObject } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
 import { useJourneyContext } from './JourneyContext'
-import { useSettingsContext } from './SettingsContext'
+import { GameMode, useSettingsContext } from './SettingsContext'
 
 import useTrainActions from '../hooks/useTrainActions'
 import { Train } from '../logic/Train'
@@ -18,7 +18,7 @@ const TrainContext = createContext<TrainContextProps | undefined>(undefined)
 
 export const TrainProvider = ({ children }: { children: ReactNode }) => {
     const [train, setTrain] = useState<Train>(() => new Train())
-    const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
+    const isDailyChallenge = useSettingsContext((state) => state.gameMode) === GameMode.DAILY_CHALLENGE
 
     const trainRef: RefObject<Train> = useRef(train)
 

@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import SettingsButton from './SettingsButton'
 
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, UIMode, useSettingsContext } from '../../contexts/SettingsContext'
 import { useGameUI } from '../../hooks/useGameUI'
 
 import L_MODE from '../../assets/images/light-mode-icon.svg'
@@ -18,17 +18,17 @@ import RIDER_MODE_BLACK from '../../assets/images/rider-mode-icon-b.svg'
 import RIDER_MODE_WHITE from '../../assets/images/rider-mode-icon-w.svg'
 
 const SettingsMenu = () => {
-    const { gameMode, isHorizontalLayout, isMobile } = useGameUI()
+    const { uiMode, isHorizontalLayout, isMobile } = useGameUI()
     const darkMode = useSettingsContext((state) => state.darkMode)
     const setDarkMode = useSettingsContext((state) => state.setDarkMode)
 
-    const setGameMode = useSettingsContext((state) => state.setGameMode)
+    const setUIMode = useSettingsContext((state) => state.setUIMode)
     const upcomingStationsVisible = useSettingsContext((state) => state.upcomingStationsVisible)
     const setUpcomingStationsVisible = useSettingsContext((state) => state.setUpcomingStationsVisible)
     const toggleUpcomingStationsLayout = useSettingsContext((state) => state.toggleUpcomingStationsLayout)
-    const isDailyChallenge = useSettingsContext((state) => state.isDailyChallenge)
+    const isDailyChallenge = useSettingsContext((state) => state.gameMode) === GameMode.DAILY_CHALLENGE
 
-    const isConductorMode: boolean = gameMode === GameMode.CONDUCTOR
+    const isConductorMode: boolean = uiMode === UIMode.CONDUCTOR
 
     return (
         <>
@@ -44,7 +44,7 @@ const SettingsMenu = () => {
                           : CONDUCTOR_MODE_BLACK
                 }
                 onClick={() => {
-                    setGameMode(isConductorMode ? GameMode.RIDER : GameMode.CONDUCTOR)
+                    setUIMode(isConductorMode ? UIMode.RIDER : UIMode.CONDUCTOR)
                 }}
                 disabled={isMobile}
             />

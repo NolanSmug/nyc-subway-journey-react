@@ -6,7 +6,7 @@ import LoadingSpinner from '../common/LoadingSpinner'
 import LineSVGs from '../common/LineSVGs'
 
 import { useJourneyContext } from '../../contexts/JourneyContext'
-import { useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
 import { useUIContext } from '../../contexts/UIContext'
 
 import useGame from '../../hooks/useGame'
@@ -59,10 +59,10 @@ const getMutliColorLineDivider = (lines: LineName[]): string => {
 
 interface OptimalRouteUIProps {
     isDailyChallenge: boolean
-    setIsDailyChallenge: React.Dispatch<React.SetStateAction<boolean>>
+    setGameMode: React.Dispatch<React.SetStateAction<GameMode>>
 }
 
-function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteUIProps) {
+function OptimalRouteUI({ isDailyChallenge, setGameMode }: OptimalRouteUIProps) {
     const { initializeGame } = useGame()
     const journey = useJourneyContext((state) => state.journey)
     const darkMode = useSettingsContext((state) => state.darkMode)
@@ -167,7 +167,7 @@ function OptimalRouteUI({ isDailyChallenge, setIsDailyChallenge }: OptimalRouteU
                         imageSrc={darkMode ? SUBWAY_ICON_WHITE : SUBWAY_ICON_BLACK}
                         label='Open play'
                         onClick={() => {
-                            setIsDailyChallenge(false)
+                            setGameMode(GameMode.OPEN)
                         }}
                     />
                 )}

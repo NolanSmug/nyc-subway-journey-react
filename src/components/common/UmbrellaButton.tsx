@@ -20,7 +20,7 @@ const UmbrellaButton = memo(({ openingButtonsW_B, children, below, visible }: Um
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (!(event.target instanceof Node)) return
+            if (!(event.target instanceof Node) || !isOpen) return
 
             // Conditional for handling the popup closing logic (forget this exists when you come back)
             if (

@@ -1,14 +1,21 @@
 import { useState, ReactNode, useMemo, useCallback } from 'react'
 import { useContextSelector, createContext } from 'use-context-selector'
 
+export enum GameMode {
+    CLASSIC,
+    OPEN,
+    DAILY_CHALLENGE,
+    // NEW_YORKER
+}
+
+export enum UIMode {
+    CONDUCTOR = 'conductor',
+    RIDER = 'rider',
+}
+
 export enum UpcomingStationsLayout {
     HORIZONTAL,
     VERTICAL,
-}
-
-export enum GameMode {
-    CONDUCTOR = 'conductor',
-    RIDER = 'rider',
 }
 
 export enum Gender {
@@ -21,8 +28,8 @@ interface SettingsContextProps {
     darkMode: boolean
     setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
 
-    gameMode: GameMode
-    setGameMode: React.Dispatch<React.SetStateAction<GameMode>>
+    uiMode: UIMode
+    setUIMode: React.Dispatch<React.SetStateAction<UIMode>>
 
     upcomingStationsVisible: boolean
     setUpcomingStationsVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -35,20 +42,20 @@ interface SettingsContextProps {
     setNumAdvanceStations: React.Dispatch<React.SetStateAction<number>>
     passengerGender: Gender
     setPassengerGender: React.Dispatch<React.SetStateAction<Gender>>
-    isDailyChallenge: boolean
-    setIsDailyChallenge: React.Dispatch<React.SetStateAction<boolean>>
+    gameMode: GameMode
+    setGameMode: React.Dispatch<React.SetStateAction<GameMode>>
 }
 
 const SettingsContext = createContext<SettingsContextProps | undefined>(undefined)
 
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const [darkMode, setDarkMode] = useState<boolean>(true)
+    const [gameMode, setGameMode] = useState<GameMode>(GameMode.OPEN)
+    const [uiMode, setUIMode] = useState<UIMode>(UIMode.RIDER)
     const [upcomingStationsVisible, setUpcomingStationsVisible] = useState<boolean>(true)
-    const [gameMode, setGameMode] = useState<GameMode>(GameMode.RIDER)
     const [numAdvanceStations, setNumAdvanceStations] = useState<number>(1)
     const [passengerGender, setPassengerGender] = useState<Gender>(Gender.MALE)
     const [upcomingStationsLayout, setUpcomingStationsLayout] = useState<UpcomingStationsLayout>(UpcomingStationsLayout.HORIZONTAL)
-    const [isDailyChallenge, setIsDailyChallenge] = useState<boolean>(false)
 
     const toggleUpcomingStationsLayout = useCallback(() => {
         if (!upcomingStationsVisible) return
@@ -68,24 +75,24 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
             setUpcomingStationsLayout,
             toggleUpcomingStationsLayout,
 
-            gameMode,
-            setGameMode,
+            uiMode,
+            setUIMode,
             numAdvanceStations,
             setNumAdvanceStations,
             passengerGender,
             setPassengerGender,
-            isDailyChallenge,
-            setIsDailyChallenge,
+            gameMode,
+            setGameMode,
         }),
         [
             darkMode,
-            gameMode,
+            uiMode,
             upcomingStationsVisible,
             upcomingStationsLayout,
             toggleUpcomingStationsLayout,
             numAdvanceStations,
             passengerGender,
-            isDailyChallenge,
+            gameMode,
         ]
     )
 

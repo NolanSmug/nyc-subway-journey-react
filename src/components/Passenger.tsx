@@ -1,7 +1,7 @@
 import './Passenger.css'
 import { Ref, memo } from 'react'
 
-import { GameMode, useSettingsContext } from '../contexts/SettingsContext'
+import { UIMode, useSettingsContext } from '../contexts/SettingsContext'
 import { PassengerState } from '../hooks/usePassengerAnimations'
 import { usePassengerSprite } from '../hooks/usePassengerSprite'
 
@@ -11,7 +11,7 @@ interface PassengerProps {
 }
 
 const Passenger = ({ ref, passengerState }: PassengerProps) => {
-    const activated = useSettingsContext((state) => state.gameMode === GameMode.RIDER)
+    const activated = useSettingsContext((state) => state.uiMode === UIMode.RIDER)
     const { avatarSrc, cycleGender } = usePassengerSprite()
 
     if (!activated || !ref) return null

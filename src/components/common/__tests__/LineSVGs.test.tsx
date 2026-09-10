@@ -15,7 +15,7 @@ describe('LineSVGs', () => {
 
         const images = screen.getAllByRole('img')
         expect(images).toHaveLength(3)
-        expect(images[0]).toHaveAttribute('src', getLineSVGs(MOCK_LINES))
+        expect(images[0]).toHaveAttribute('src', getLineSVGs(MOCK_LINES)[0])
     })
 
     test('applies "jiggle-animation" when isTransferMode', () => {

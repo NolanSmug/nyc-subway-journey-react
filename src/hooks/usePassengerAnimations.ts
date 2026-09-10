@@ -97,6 +97,12 @@ export function usePassengerAnimations(platformRef: RefObject<HTMLDivElement | n
 
     const boardTrain = useCallback(
         async (door: HTMLElement, direction: Direction) => {
+            const isAlreadyOnRequestedTrain =
+                (direction === Direction.DOWNTOWN && passengerState === PassengerState.DOWNTOWN_TRAIN) ||
+                (direction === Direction.UPTOWN && passengerState === PassengerState.UPTOWN_TRAIN)
+
+            if (isAlreadyOnRequestedTrain) return
+
             const pos = getRelativePosition(door)
 
             if (!pos) return
@@ -104,17 +110,18 @@ export function usePassengerAnimations(platformRef: RefObject<HTMLDivElement | n
             await walkTo(pos.x, pos.y, PassengerAction.BOARD_TRAIN)
             setPassengerState(direction === Direction.UPTOWN ? PassengerState.UPTOWN_TRAIN : PassengerState.DOWNTOWN_TRAIN)
         },
-        [walkTo, getRelativePosition]
+        [walkTo, getRelativePosition, passengerState]
     )
 
     const deboard = useCallback(async () => {
+        if (passengerState === PassengerState.TRANSFER_PLATFORM) return
+
         const platform = platformRef.current?.getBoundingClientRect()
         if (!platform) return
 
         await walkTo(platform.width / 8, platform.height / 2, PassengerAction.DEBOARD_TRAIN)
         setPassengerState(PassengerState.TRANSFER_PLATFORM)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [walkTo])
+    }, [walkTo, passengerState])
 
     const transferDownStairs = useCallback(
         async (stairsDown?: HTMLDivElement) => {

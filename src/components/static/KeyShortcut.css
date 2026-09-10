@@ -28,7 +28,7 @@ kbd {
     padding: 1px;
     min-width: 1em;
     box-shadow: 1.5px 1.5px #8b8b8b;
-    font-family: 'Helvetica', 'sans-serif';
+    font-family: 'Helvetica', 'sans-serif', monospace;
     font-size: medium;
     font-weight: 550;
 }

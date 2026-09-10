@@ -7,7 +7,7 @@ import Station from '../station/Station'
 import TrainCar from '../train/TrainCar'
 import TrainCarFront from '../train/mobile/TrainCarFront'
 
-import { GameMode, useSettingsContext } from '../../contexts/SettingsContext'
+import { GameMode, UIMode, useSettingsContext } from '../../contexts/SettingsContext'
 import { useUIContext } from '../../contexts/UIContext'
 
 import { LineName } from '../../logic/LineManager'
@@ -40,9 +40,9 @@ function GameOverUI({
     initializeGame,
     isDailyChallenge,
 }: GameOverUIProps) {
+    const setUIMode = useSettingsContext((state) => state.setUIMode)
     const setGameMode = useSettingsContext((state) => state.setGameMode)
-    const setIsDailyChallenge = useSettingsContext((state) => state.setIsDailyChallenge)
-    const isConductorMode = useSettingsContext((state) => state.gameMode === GameMode.CONDUCTOR)
+    const isConductorMode = useSettingsContext((state) => state.uiMode === UIMode.CONDUCTOR)
 
     const isMobile = useUIContext((state) => state.isMobile)
 
@@ -69,7 +69,7 @@ function GameOverUI({
                         label='Open play'
                         imageSrc={darkMode ? SUBWAY_ICON_WHITE : SUBWAY_ICON_BLACK}
                         onClick={() => {
-                            setIsDailyChallenge(false)
+                            setGameMode(GameMode.OPEN)
                         }}
                     />
                 )}
@@ -86,7 +86,7 @@ function GameOverUI({
                                   : CONDUCTOR_MODE_BLACK
                         }
                         onClick={() => {
-                            setGameMode(isConductorMode ? GameMode.RIDER : GameMode.CONDUCTOR)
+                            setUIMode(isConductorMode ? UIMode.RIDER : UIMode.CONDUCTOR)
                             initializeGame()
                         }}
                         wrapperClassName='line-color-border'

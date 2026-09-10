@@ -30,6 +30,9 @@ jobs:
         env:
           YARN_ENABLE_GLOBAL_CACHE: 1
 
+      - name: Test
+        run: yarn test --watchAll=false
+
       - name: Build
         run: yarn build
         env:
