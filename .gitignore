@@ -8,22 +8,18 @@
 .vscode
 .build
 .prettierrc
+.DS_Store
 gtfs_subway/
 archive/
-.DS_Store
 notes.md
 
 .yarn/*
-!.yarn/releases
-!.yarn/patches
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
 yarn-debug.log*
 yarn-error.log*
 npm-debug.log*
 
-src/components/SubwayMap.*
-notes.md
+src/components/static/SubwayMap.*
 src/logic/python/json_convert.py
+src/scripts/gtfs.db
+src/scripts/gtfs.sqbpro
 
