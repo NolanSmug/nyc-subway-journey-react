@@ -2155,6 +2155,15 @@
             "borough": "Brooklyn"
         },
         {
+            "id": "J24",
+            "name": "Alabama Av",
+            "transfers": [
+                "J_Train",
+                "Z_Train"
+            ],
+            "borough": "Brooklyn"
+        },
+        {
             "id": "J23",
             "name": "Van Siclen Av",
             "transfers": [
@@ -5948,7 +5957,8 @@
             "id": "J24",
             "name": "Alabama Av",
             "transfers": [
-                "J_Train"
+                "J_Train",
+                "Z_Train"
             ],
             "borough": "Brooklyn"
         },
