@@ -23,7 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 npm-debug.log*
 
-src/components/SubwayMap.*
 notes.md
 src/logic/python/json_convert.py
-
+src/components/static/SubwayMap.**
