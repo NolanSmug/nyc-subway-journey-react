@@ -121,6 +121,7 @@ export function usePassengerAnimations(platformRef: RefObject<HTMLDivElement | n
 
         await walkTo(platform.width / 8, platform.height / 2, PassengerAction.DEBOARD_TRAIN)
         setPassengerState(PassengerState.TRANSFER_PLATFORM)
+        // eslint-disable-next-line
     }, [walkTo, passengerState])
 
     const transferDownStairs = useCallback(
