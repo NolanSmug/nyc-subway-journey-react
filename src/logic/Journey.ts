@@ -37,7 +37,6 @@ export class Journey {
     public resetJourney(rng: () => number = Math.random): void {
         this.optimalScore = null
         this.startingLine = getRandomLine(rng)
-        // this.startingLine = LineName.Z_TRAIN
         this.isFirstTurn = true
         this.playerScore.reset()
 
