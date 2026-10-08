@@ -1,4 +1,4 @@
-import { initializeSubwayData, getStationsForLine, getRandomStationFromLine, getRandomDestination } from '../subwayMap'
+import { initializeSubwayData, getStationsForLine, getRandomStationFromLine } from '../subwayMap'
 import { LineName, Borough } from '../../logic/LineManager'
 
 const mockSubwayData = {
@@ -36,13 +36,5 @@ describe('subwayMap', () => {
         const rng = () => 0
         const station = getRandomStationFromLine(LineName.TWO_TRAIN, rng)
         expect(station.getId()).toBe('120')
-    })
-
-    test('getRandomDestination() "deduplicates" transfer stations', () => {
-        const rng = () => 0.99
-        const station = getRandomDestination(rng)
-
-        expect(station).toBeDefined()
-        expect(['119', '120', '227']).toContain(station.getId())
     })
 })

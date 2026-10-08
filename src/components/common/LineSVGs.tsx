@@ -53,6 +53,7 @@ const LineSVGs = memo<LineSVGsProps>(
                     ${vertical ? 'vertical' : ''} 
                     ${long ? 'long' : ''} 
                     ${lots ? 'lots' : ''}`}
+                data-testid='line-svgs'
             >
                 {svgPaths.map((imageSrc, index) => (
                     <img

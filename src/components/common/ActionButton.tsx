@@ -32,10 +32,10 @@ function ActionButton({
         <div className={`action-button-wrapper ${wrapperClassName || ''} ${hidden ? 'hidden' : ''} ${disabled ? 'disabled' : ''} `}>
             <div className='action-button-container'>
                 <button
-                    className={`action-button  ${noImage ? 'no-image' : ''} ${pulse ? 'pulse' : ''}`}
+                    className={`action-button ${noImage ? 'no-image' : ''} ${pulse ? 'pulse' : ''}`}
                     type='button'
-                    onPointerDown={!noImage ? onClick : undefined}
-                    onClick={noImage ? onClick : undefined}
+                    onPointerDown={!noImage && !disabled ? onClick : undefined}
+                    onClick={noImage && !disabled ? onClick : undefined}
                 >
                     {noImage ? (
                         <span className='button-text'>{label}</span>

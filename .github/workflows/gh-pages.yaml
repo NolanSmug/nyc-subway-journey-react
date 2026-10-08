@@ -9,6 +9,7 @@ on:
       - 'public/**'
       - 'package.json'
       - 'yarn.lock'
+      - '.github/workflows/**'
 
 jobs:
   deploy:
@@ -31,7 +32,10 @@ jobs:
           YARN_ENABLE_GLOBAL_CACHE: 1
 
       - name: Test
-        run: yarn test --watchAll=false
+        run: yarn test:ci
+      
+      - name: Line
+        run: yarn lint
 
       - name: Build
         run: yarn build

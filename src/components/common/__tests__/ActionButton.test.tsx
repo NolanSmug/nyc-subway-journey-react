@@ -36,8 +36,12 @@ describe('ActionButton', () => {
         const handleClick = jest.fn()
         render(<ActionButton label='Disabled' disabled onClick={handleClick} />)
 
-        const wrapper: HTMLElement | null = screen.getByText('Disabled').closest('.action-button-wrapper')
+        const button = screen.getByRole('button', { name: 'Disabled' })
 
-        expect(wrapper).toHaveClass('disabled')
+        fireEvent.pointerDown(button)
+        fireEvent.pointerUp(button)
+        fireEvent.click(button)
+
+        expect(handleClick).not.toHaveBeenCalled()
     })
 })
